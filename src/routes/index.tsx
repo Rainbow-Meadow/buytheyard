@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
-import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import gardenPetunias from "@/assets/garden-petunias.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
