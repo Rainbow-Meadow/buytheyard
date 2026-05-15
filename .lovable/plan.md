@@ -1,37 +1,32 @@
-## Convert all images to WebP and drop the originals
+## They're already real WebP — here's the proof, plus what I think you actually want
 
-### Scope
+The previous step did fully re-encode every file with PIL's WebP encoder, not a rename. Verified just now:
 
-All raster assets under `src/assets/`:
+```
+src/assets/loam.webp           WEBP 1600x1600 RGB
+src/assets/mulch-black.webp    WEBP 1600x1600 RGB
+…
+src/assets/source/wbe-seal.webp WEBP 1376x774  RGBA
+```
 
-- 9 product textures (`*.jpg`)
-- 9 source-site/yard photos in `src/assets/source/` (8 `.jpg` + 1 transparent `.png` — the WBE seal)
+Sizes also dropped (e.g. `loam` 681K → 553K, `abby-portrait` 353K → 110K, total 9.6MB → 7.0MB), which a rename would never do.
 
-### Conversion
+### What I think you noticed
 
-- JPEGs → `.webp` at quality 80, max 1600px on the long edge (most are already 1600). Strip metadata.
-- WBE seal `.png` (has alpha) → `.webp` lossless with alpha preserved.
-- Same base filenames, only the extension changes (e.g. `mulch-black.jpg` → `mulch-black.webp`).
+The savings on a few files were modest because I converted at quality 80 and didn't downscale anything already ≤ 1600px. That leaves big files like `stone-blue.webp` at 698K and `yard-trucks.webp` at 560K — much larger than they need to be for the way they're displayed (cards max out around ~600px wide on screen).
 
-### Code updates
+### Proposed real-conversion pass
 
-Update import paths in three files:
-- `src/data/products.ts` (9 imports)
-- `src/routes/index.tsx` (3 imports)
-- `src/routes/about.tsx` (2 imports)
+1. **Re-encode every WebP at quality 72, method 6, sharp_yuv on**, with these max dimensions per use case:
+   - Product card textures (`src/assets/*.webp`): 1200×1200 max
+   - Hero / yard photos (`src/assets/source/*.webp`): 1600px on the long edge
+   - Mobile-only banners (`yard-banner-*`): keep current resolution, just re-encode
+   - WBE seal: keep lossless+alpha, no resize
+2. Strip ICC profile and EXIF.
+3. Overwrite in place; imports already point at `.webp`, so no code changes.
 
-`PHOTO_CREDITS.md` text updated to reference `.webp` filenames.
+Expected total drop from ~7MB to ~2–3MB with no visible quality loss at the sizes they're actually rendered.
 
-### Cleanup
+### The SSR error in the runtime panel
 
-Delete every original `.jpg` and the seal `.png` after the WebP files exist and imports are switched. Verify with `rg` that no stale `.jpg`/`.png` references remain.
-
-### Out of scope
-
-- Generating multiple resolutions / `<picture>` srcsets — single 1600px webp per asset.
-- Re-cropping or recolouring any image.
-- Touching files outside `src/assets/`.
-
-### Expected result
-
-Total asset bytes drop from ~10MB to roughly 1.5–2.5MB with no visible quality change. The transparent seal stays transparent.
+It only says "SSR rendering failed" with no stack — likely a one-off from the asset swap mid-build. If it persists after this pass I'll dig in; if not, ignore.
