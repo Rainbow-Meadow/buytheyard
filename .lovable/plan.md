@@ -1,39 +1,32 @@
-# Replace remaining AI product photos with real stock
+## Replace product photos with Abby's real photos
 
-## What needs replacing
+Map the 7 uploaded photos to the existing asset filenames so no component imports change.
 
-9 AI-generated material textures in `src/assets/`:
-`mulch-black.jpg`, `mulch-hemlock.jpg`, `mulch-pine.jpg`, `loam.jpg`, `sand.jpg`, `stone-blue.jpg`, `stone-lava.jpg`, `stone-pea.jpg`, `stone-river.jpg`
+| Upload | Replaces | Product |
+| --- | --- | --- |
+| `IMG_3718.jpeg` (red lava rock close-up) | `src/assets/stone-lava.jpg` | Red Lava Rock |
+| `IMG_3716.jpeg` (dark screened soil) | `src/assets/loam.jpg` | Screened Loam |
+| `IMG_3711.jpeg` (black shredded mulch) | `src/assets/mulch-black.jpg` | Premium Black Mulch |
+| `IMG_3714.jpeg` (reddish-brown bark) | `src/assets/mulch-hemlock.jpg` | Hemlock Mulch |
+| `IMG_3717.jpeg` (sand in hand) | `src/assets/sand.jpg` | Mason Sand |
+| `IMG_3710.jpeg` (yard piles, wide) | `src/assets/source/yard-piles.jpg` | Yard photo on About / homepage |
 
-(Source-site photos for hero, yard, Abby, WBE seal are already real and stay.)
+**One open question — `IMG_3715.jpeg`** (dark chocolate-brown mulch): this doesn't match the current "Pine Bark Mulch" card (pine bark is light golden). Two options:
+- **A.** Use it as **Pine Bark Mulch** anyway (rename label to "Brown Mulch" since this is what Abby actually sells).
+- **B.** Add it as a **new product** ("Brown Mulch" or "Dark Brown Mulch") alongside black/hemlock/pine.
+- **C.** Skip it — leave the current pine bark stock photo in place.
 
-## Plan
+I'll ask this in the next step before writing files.
 
-1. **Source one real photograph per material** from Unsplash / Pexels (both license-free for commercial use, no attribution required). For each product I'll pick a tight, well-lit close-up that matches the material:
-   - Black mulch — dark dyed bark close-up
-   - Hemlock mulch — reddish-brown bark
-   - Pine mulch — light golden pine bark
-   - Loam — dark screened topsoil pile/texture
-   - Sand — masonry/concrete sand texture
-   - Pea stone — small rounded pebbles
-   - River stone — larger smooth river rock mix
-   - Blue stone — crushed bluestone gravel
-   - Lava stone — red volcanic lava rock
+### Processing
 
-2. **Download** each at ~1600px wide, square-crop to 1:1, compress to ~80% JPEG quality, and save into `src/assets/` under the same filenames so no component imports change.
+For each upload: copy from `user-uploads://`, resize to max 1600px on the long edge, square-crop center, JPEG quality ~82, write to the target path. Yard pile photo stays landscape (no square crop).
 
-3. **Verify** by viewing the resulting images and checking they read correctly as the named material (no mismatches like "river stone" that's actually sand).
+### Credits update
 
-4. **Add a `PHOTO_CREDITS.md`** in `src/assets/` listing the source URL for each photo (good practice even when attribution isn't required, makes future swaps easy).
+Update `src/assets/PHOTO_CREDITS.md` to mark these 6 (or 7) files as "© Buy The Yard Materials — supplied by owner" and remove the Pexels rows for the replaced files.
 
-5. **Delete** any leftover AI assets not referenced anywhere.
+### Out of scope
 
-## Out of scope
-
-- Re-shooting hero/yard/Abby photos (already real from source site)
-- Adding multiple gallery shots per product (one hero shot per card, like today)
-- A photo lightbox / zoom UI
-
-## Risk
-
-Stock photos won't perfectly match Abby's actual piles. They're an honest "representative photo" stand-in until she supplies her own. I'll keep filenames identical so swapping later is a one-file drop-in per product.
+- Changing card layouts, copy, or adding a gallery/lightbox.
+- Touching the remaining stock photos (`mulch-pine`, `stone-blue`, `stone-pea`, `stone-river`) unless option A/B above changes pine.
