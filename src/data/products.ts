@@ -1,12 +1,12 @@
-import mulchBlack from "@/assets/mulch-black.jpg";
-import mulchHemlock from "@/assets/mulch-hemlock.jpg";
-import mulchPine from "@/assets/mulch-pine.jpg";
-import loam from "@/assets/loam.jpg";
-import sand from "@/assets/sand.jpg";
-import stoneBlue from "@/assets/stone-blue.jpg";
-import stoneRiver from "@/assets/stone-river.jpg";
-import stoneLava from "@/assets/stone-lava.jpg";
-import stonePea from "@/assets/stone-pea.jpg";
+import mulchBlack from "@/assets/mulch-black.webp";
+import mulchHemlock from "@/assets/mulch-hemlock.webp";
+import mulchPine from "@/assets/mulch-pine.webp";
+import loam from "@/assets/loam.webp";
+import sand from "@/assets/sand.webp";
+import stoneBlue from "@/assets/stone-blue.webp";
+import stoneRiver from "@/assets/stone-river.webp";
+import stoneLava from "@/assets/stone-lava.webp";
+import stonePea from "@/assets/stone-pea.webp";
 
 export type Product = {
   name: string;

@@ -1,23 +1,37 @@
-## Show the full pile photo on mobile
+## Convert all images to WebP and drop the originals
 
-The hero image (`IMG_3710`, the three mulch piles) is landscape (~2.4:1), but the hero frame is locked to `aspect-[4/5]` portrait with `object-cover`. On mobile that crops out the left and right piles, leaving only the middle one visible.
+### Scope
 
-### Fix
+All raster assets under `src/assets/`:
 
-In `src/routes/index.tsx`, change the image frame so the full photo is visible on mobile, and keep the existing tall composition on desktop where it shares space with the headline column:
+- 9 product textures (`*.jpg`)
+- 9 source-site/yard photos in `src/assets/source/` (8 `.jpg` + 1 transparent `.png` — the WBE seal)
 
-- Mobile (`< lg`): `aspect-[16/9]` + `object-contain` on a neutral backdrop, so all three piles fit edge-to-edge with no cropping.
-- Desktop (`lg+`): keep `aspect-[4/5]` + `object-cover` so the column still feels grounded next to the headline.
+### Conversion
 
-Tailwind sketch:
-```
-<div class="w-full aspect-[16/9] lg:aspect-[4/5] overflow-hidden rounded-md ring-1 ring-white/5 bg-zinc-900">
-  <img class="w-full h-full object-contain lg:object-cover" ... />
-</div>
-```
+- JPEGs → `.webp` at quality 80, max 1600px on the long edge (most are already 1600). Strip metadata.
+- WBE seal `.png` (has alpha) → `.webp` lossless with alpha preserved.
+- Same base filenames, only the extension changes (e.g. `mulch-black.jpg` → `mulch-black.webp`).
 
-That's the only change. No new assets, no copy edits, no layout changes outside the hero image frame.
+### Code updates
 
-### Verification
+Update import paths in three files:
+- `src/data/products.ts` (9 imports)
+- `src/routes/index.tsx` (3 imports)
+- `src/routes/about.tsx` (2 imports)
 
-Screenshot at 414×896 (mobile) and 1280×720 (desktop) and confirm: mobile shows all three piles, desktop still shows the tall cropped composition.
+`PHOTO_CREDITS.md` text updated to reference `.webp` filenames.
+
+### Cleanup
+
+Delete every original `.jpg` and the seal `.png` after the WebP files exist and imports are switched. Verify with `rg` that no stale `.jpg`/`.png` references remain.
+
+### Out of scope
+
+- Generating multiple resolutions / `<picture>` srcsets — single 1600px webp per asset.
+- Re-cropping or recolouring any image.
+- Touching files outside `src/assets/`.
+
+### Expected result
+
+Total asset bytes drop from ~10MB to roughly 1.5–2.5MB with no visible quality change. The transparent seal stays transparent.
