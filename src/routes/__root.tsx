@@ -81,9 +81,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Bulk mulch, loam, sand, and stone. Pickup or delivery in Central Mass." },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Buy The Yard" },
+      { property: "og:image", content: "/brandmark.png" },
+      { name: "twitter:image", content: "/brandmark.png" },
       { name: "twitter:card", content: "summary" },
     ],
     links: [
+      { rel: "icon", type: "image/png", href: "/brandmark.png" },
       {
         rel: "stylesheet",
         href: appCss,

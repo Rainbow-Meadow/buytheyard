@@ -1,17 +1,21 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Star } from "lucide-react";
+import brandmark from "@/assets/brandmark.png";
 
 export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="md:col-span-1">
-          <p className="font-display text-3xl uppercase tracking-tighter leading-none">
-            Buy The <span className="text-brand">Yard</span>
-          </p>
-          <p className="mt-3 text-xs uppercase tracking-widest text-zinc-500">
-            Mulch · Loam · Sand · Stone
-          </p>
+          <img
+            src={brandmark}
+            alt="Buy The Yard — Mulch · Loam · Sand · Stone"
+            width={240}
+            height={120}
+            className="h-24 w-auto"
+            loading="lazy"
+            decoding="async"
+          />
           <a
             href="tel:5085799897"
             className="mt-6 inline-block font-display text-2xl text-brand hover:opacity-80"

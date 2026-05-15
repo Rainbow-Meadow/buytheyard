@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
+import brandmark from "@/assets/brandmark.png";
 
 const NAV = [
   { to: "/products", label: "Products" },
@@ -19,10 +20,17 @@ export function SiteHeader() {
         <div className="flex items-center gap-12">
           <Link
             to="/"
-            className="font-display text-3xl tracking-tighter text-surface-foreground uppercase leading-none"
+            className="flex items-center leading-none"
+            aria-label="Buy The Yard — home"
             onClick={() => setOpen(false)}
           >
-            Buy The <span className="text-brand">Yard</span>
+            <img
+              src={brandmark}
+              alt="Buy The Yard"
+              width={160}
+              height={60}
+              className="h-12 w-auto"
+            />
           </Link>
           <nav className="hidden md:flex gap-8">
             {NAV.map((item) => (
