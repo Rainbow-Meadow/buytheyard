@@ -129,9 +129,9 @@ function HomePage() {
                 <img
                   src={wbeSeal}
                   alt=""
-                  width={36}
-                  height={36}
-                  className="size-9 object-contain bg-white p-0.5 ring-1 ring-zinc-300"
+                  width={88}
+                  height={56}
+                  className="h-12 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
@@ -313,9 +313,9 @@ function HomePage() {
             <img
               src={wbeSeal}
               alt="Massachusetts WBE certified seal"
-              width={96}
-              height={96}
-              className="size-20 object-contain bg-white p-1 ring-1 ring-zinc-300"
+              width={160}
+              height={100}
+              className="h-20 w-auto object-contain"
               loading="lazy"
               decoding="async"
             />

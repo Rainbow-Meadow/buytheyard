@@ -53,9 +53,9 @@ function AboutPage() {
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
-                width={64}
-                height={64}
-                className="size-14 object-contain bg-white p-1 shrink-0 ring-1 ring-zinc-300"
+                width={112}
+                height={72}
+                className="h-14 w-auto object-contain shrink-0"
                 loading="lazy"
                 decoding="async"
               />
