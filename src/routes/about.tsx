@@ -70,32 +70,41 @@ function AboutPage() {
 
           <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed">
             <p>
-              Abby graduated Wachusett Regional High School in 2016. By 2018, she'd added
-              a degree in Entrepreneurship and Small Business — and was already building
-              one of her own.
+              Here's the thing about landscape supply.
             </p>
             <p>
-              She grew up outside. Trucks. Equipment. Mulch in the backyard with her father.
-              A career in construction was never really a question — just a matter of when.
+              Most yards treat you like a ticket number. Loaded fast. Out the gate. Next.
+            </p>
+            <p>
+              I built this one different.
+            </p>
+            <p>
+              I grew up outside. Trucks. Equipment. Mulch in the backyard with my dad. So
+              construction was never really a question — just a matter of when.
+            </p>
+            <p>
+              I graduated Wachusett Regional in 2016. Opened the yard the same year.
+              Added an Entrepreneurship and Small Business degree by 2018 — already running
+              one of my own.
             </p>
             <blockquote className="border-l-4 border-brand pl-6 py-2 my-10 font-display text-2xl md:text-3xl uppercase text-zinc-900 leading-tight">
-              "Opening this business was the perfect way to get into the industry. I can
-              proudly say I found something that's not just a job — it's something I can take
-              pride in and enjoy coming to work every day."
+              "This isn't just a job. It's something I take pride in and actually enjoy
+              showing up for every day."
             </blockquote>
             <p>
-              Three years in, she made it official: Buy The Yard became a Certified
+              Three years in? Made it official. Buy The Yard became a Certified
               Woman-Owned Enterprise.
             </p>
             <p>
-              2026 is the yard's <strong>10th season</strong> serving Central
-              Massachusetts — from the first spring mulch run through winter salt.
-              Office manager: <strong>Charlie</strong>, the yard dog. He handles greetings.
+              2026 is our <strong>11th season</strong>. From the first spring mulch run
+              through winter salt. Same yard. Same answer when you call.
             </p>
             <p>
-              "Stop by the yard at <strong>2264 Main St. in Jefferson, MA</strong>. We're
-              always happy to help with questions — and to give you the kind of service
-              that's hard to find anymore."
+              Office manager: <strong>Charlie</strong>. He's a dog. He handles greetings.
+            </p>
+            <p>
+              Stop by — <strong>2264 Main St., Jefferson, MA</strong>. Ask anything.
+              We'll give you a real answer.
             </p>
             <p className="font-display text-2xl uppercase text-zinc-900">— Abby</p>
 
