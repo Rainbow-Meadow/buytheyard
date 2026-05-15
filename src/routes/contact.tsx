@@ -1,5 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Clock, Mail, MapPin, Phone, Facebook, Star } from "lucide-react";
+import {
+  ArrowRight,
+  ClipboardList,
+  Clock,
+  Mail,
+  MapPin,
+  Phone,
+  Facebook,
+  Star,
+} from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -8,7 +17,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Call 508-579-9897, email abby@btymaterial.com, or visit Buy The Yard at 2264 Main St., Jefferson, MA 01522. In-season: Mon–Fri 8a–5p, Sat 8a–3p.",
+          "Call 508-579-9897 or get a quote online. Visit Buy The Yard at 2264 Main St., Jefferson, MA 01522. In-season: Mon–Fri 8a–5p, Sat 8a–3p.",
       },
       { property: "og:title", content: "Contact — Buy The Yard" },
       { property: "og:description", content: "Phone, address, hours, and map for the Jefferson, MA yard." },
@@ -55,26 +64,53 @@ function ContactPage() {
             Contact
           </p>
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
-            Best way to reach us? <span className="text-brand">Call.</span>
+            Get in <span className="text-brand">touch.</span>
           </h1>
-          <a
-            href="tel:5085799897"
-            className="mt-10 inline-flex items-center gap-3 font-display text-5xl md:text-6xl uppercase text-brand hover:opacity-80 transition-opacity"
-          >
-            <Phone className="size-10" strokeWidth={2.5} />
-            508.579.9897
-          </a>
-          <p className="mt-6 text-zinc-400 max-w-[60ch]">
-            Calling is the fastest way to get answers about pricing, availability, and
-            delivery scheduling. For non-urgent questions, email{" "}
+          <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
+            Two equally good ways to reach us — call the yard for a quick answer,
+            or send a quote request and Abby will get back with pricing and a
+            delivery window.
+          </p>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
+            <a
+              href="tel:5085799897"
+              className="group flex items-center gap-4 bg-brand text-brand-foreground px-6 py-6 rounded-md hover:opacity-90 transition-opacity"
+            >
+              <Phone className="size-8 shrink-0" strokeWidth={2.5} />
+              <span className="flex flex-col leading-tight">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">
+                  Call
+                </span>
+                <span className="font-display text-3xl md:text-4xl uppercase">
+                  508.579.9897
+                </span>
+              </span>
+            </a>
+            <Link
+              to="/quote"
+              className="group flex items-center gap-4 bg-brand text-brand-foreground px-6 py-6 rounded-md hover:opacity-90 transition-opacity"
+            >
+              <ClipboardList className="size-8 shrink-0" strokeWidth={2.5} />
+              <span className="flex flex-col leading-tight flex-1">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">
+                  Online
+                </span>
+                <span className="font-display text-3xl md:text-4xl uppercase">
+                  Get a quote
+                </span>
+              </span>
+              <ArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+          <p className="mt-6 text-sm text-zinc-400 max-w-[60ch]">
+            For non-urgent questions, email{" "}
             <a
               href="mailto:abby@btymaterial.com"
               className="text-zinc-100 underline underline-offset-4 hover:text-brand"
             >
               abby@btymaterial.com
             </a>
-            . The chat widget on the old site isn't monitored in real time — calling beats it
-            every time.
+            . The chat widget on the old site isn't monitored in real time.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <a
@@ -94,26 +130,26 @@ function ContactPage() {
               <Star className="size-4" /> Yelp
             </a>
           </div>
-          <div className="mt-10 p-5 bg-white/5 rounded-md ring-1 ring-white/10 max-w-[60ch]">
-            <p className="text-xs uppercase tracking-widest text-zinc-400 mb-2">
-              Prefer to write it out?
-            </p>
-            <p className="text-sm text-zinc-200 mb-3">
-              Build a quote brief in under a minute and send it straight to
-              Abby — by email or text.
-            </p>
-            <Link
-              to="/quote"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand hover:opacity-80"
-            >
-              Build a quote brief <ArrowRight className="size-4" />
-            </Link>
-          </div>
         </div>
       </section>
 
       <section className="py-20 bg-base">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
+            <ClipboardList className="size-7 text-brand mb-4" />
+            <h2 className="font-display text-2xl uppercase mb-2">Get a Quote</h2>
+            <p className="text-sm text-zinc-700 mb-3">
+              Send your materials list, delivery town, and timing — Abby gets
+              back with pricing fast.
+            </p>
+            <Link
+              to="/quote"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-brand font-semibold hover:opacity-80"
+            >
+              Start a request <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <Phone className="size-7 text-brand mb-4" />
             <h2 className="font-display text-2xl uppercase mb-2">Phone &amp; Email</h2>

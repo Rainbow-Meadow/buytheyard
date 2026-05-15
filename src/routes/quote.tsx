@@ -35,7 +35,7 @@ export const Route = createFileRoute("/quote")({
       {
         name: "description",
         content:
-          "Build a quote brief in under a minute and send it straight to Abby by email or text. Pickup or delivery in Central MA.",
+          "Request a quote in under a minute and send it straight to Abby by email or text. Pickup or delivery in Central MA.",
       },
       { property: "og:title", content: "Get a Quote — Buy The Yard" },
       {
@@ -115,8 +115,8 @@ function QuotePage() {
             Tell us what you need.
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Fill this out in under a minute. We'll build a clean brief you can
-            send straight to Abby — by email or text — so she has everything
+            Fill this out in under a minute. We'll format your request so you
+            can send it straight to Abby — by email or text — with everything
             she needs to quote you back fast.
           </p>
         </div>
@@ -511,7 +511,7 @@ function QuotePage() {
 
           <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="text-xs text-zinc-600 max-w-[40ch]">
-              Next: we'll show you the brief and give you one tap to email or
+              Next: we'll show your request and give you one tap to email or
               text it to Abby. By submitting, you agree to our{" "}
               <Link to="/privacy" className="underline hover:text-zinc-900">
                 Privacy &amp; Terms
@@ -522,7 +522,7 @@ function QuotePage() {
               type="submit"
               className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90 disabled:opacity-50"
             >
-              Build my brief
+              Send my request
             </button>
           </div>
         </form>
@@ -585,13 +585,13 @@ function SuccessView({
       <section className="bg-surface text-surface-foreground">
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4 inline-flex items-center gap-2">
-            <Check className="size-3.5" /> Brief ready
+            <Check className="size-3.5" /> Request ready
           </p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
             Send it to <span className="text-brand">Abby.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            One tap opens your mail app or messages with the full brief
+            One tap opens your mail app or messages with your request
             pre-filled. No attachments, no extra steps — just hit send.
           </p>
         </div>
@@ -623,7 +623,7 @@ function SuccessView({
                 </>
               ) : (
                 <>
-                  <Copy className="size-4" /> Copy brief
+                  <Copy className="size-4" /> Copy request
                 </>
               )}
             </button>
