@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -8,7 +8,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Call 508-579-9897 or visit Buy The Yard at 2264 Main St., Jefferson, MA 01522. Mon–Fri 8a–5p, Sat 8a–3p.",
+          "Call 508-579-9897, email abby@cmscllc.com, or visit Buy The Yard at 2264 Main St., Jefferson, MA 01522. Spring/summer: Mon–Fri 7a–4p, Sat 8a–12p.",
       },
       { property: "og:title", content: "Contact — Buy The Yard" },
       { property: "og:description", content: "Phone, address, hours, and map for the Jefferson, MA yard." },
@@ -22,6 +22,8 @@ export const Route = createFileRoute("/contact")({
           "@type": "LocalBusiness",
           name: "Buy The Yard",
           telephone: "+1-508-579-9897",
+          email: "abby@cmscllc.com",
+          sameAs: ["https://www.facebook.com/BuyTheYardOutdoorProducts"],
           address: {
             "@type": "PostalAddress",
             streetAddress: "2264 Main St.",
@@ -31,8 +33,8 @@ export const Route = createFileRoute("/contact")({
             addressCountry: "US",
           },
           openingHoursSpecification: [
-            { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "08:00", closes: "17:00" },
-            { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "15:00" },
+            { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "07:00", closes: "16:00" },
+            { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "12:00" },
           ],
         }),
       },
@@ -61,7 +63,14 @@ function ContactPage() {
           </a>
           <p className="mt-6 text-zinc-400 max-w-[60ch]">
             Calling is the fastest way to get answers about pricing, availability, and
-            delivery scheduling.
+            delivery scheduling. For non-urgent questions, email{" "}
+            <a
+              href="mailto:abby@cmscllc.com"
+              className="text-zinc-100 underline underline-offset-4 hover:text-brand"
+            >
+              abby@cmscllc.com
+            </a>
+            .
           </p>
         </div>
       </section>
@@ -70,9 +79,15 @@ function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <Phone className="size-7 text-brand mb-4" />
-            <h2 className="font-display text-2xl uppercase mb-2">Phone</h2>
+            <h2 className="font-display text-2xl uppercase mb-2">Phone &amp; Email</h2>
             <a href="tel:5085799897" className="text-zinc-900 font-semibold hover:text-brand">
               508-579-9897
+            </a>
+            <a
+              href="mailto:abby@cmscllc.com"
+              className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-700 hover:text-brand"
+            >
+              <Mail className="size-4" /> abby@cmscllc.com
             </a>
             <p className="text-xs text-zinc-600 mt-2">
               Cell signal at the yard isn't perfect. If we miss you, leave a message.
@@ -100,13 +115,18 @@ function ContactPage() {
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <Clock className="size-7 text-brand mb-4" />
             <h2 className="font-display text-2xl uppercase mb-2">Hours</h2>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-brand mb-2">
+              Spring &amp; summer
+            </p>
             <ul className="text-sm text-zinc-900 space-y-1">
-              <li className="flex justify-between gap-4"><span>Mon–Fri</span><span>8a – 5p</span></li>
-              <li className="flex justify-between gap-4"><span>Saturday</span><span>8a – 3p</span></li>
+              <li className="flex justify-between gap-4"><span>Mon–Fri</span><span>7a – 4p</span></li>
+              <li className="flex justify-between gap-4"><span>Saturday</span><span>8a – 12p</span></li>
               <li className="flex justify-between gap-4"><span>Sunday</span><span className="text-zinc-500">Closed</span></li>
             </ul>
-            <p className="text-xs text-zinc-600 mt-3">
-              Winter salt &amp; ice melt: call for pickup hours.
+            <p className="text-xs text-zinc-600 mt-3 leading-relaxed">
+              Aug 1 onward: weekend pickup &amp; delivery by appointment. Closed 6/28–7/6
+              (appointment only). Winter salt: call for hours. Hours follow the season —
+              call to confirm.
             </p>
           </div>
         </div>
