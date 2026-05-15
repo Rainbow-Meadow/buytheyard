@@ -78,7 +78,7 @@ function HomePage() {
               chips, and winter salt. Loaded by hand, ready for pickup or delivery.
             </p>
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-10">
-              Family-run · Serving Central MA since 2016
+              Family-run · Serving Central MA since 2019 · Opening 4/1/26
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

@@ -53,10 +53,10 @@ function DeliveryPage() {
             </p>
             <div className="space-y-2 text-sm text-zinc-700">
               <p><strong>Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
-              <p><strong>Hours (spring/summer):</strong> Mon–Fri 7a–4p · Sat 8a–12p · Sun closed</p>
+              <p><strong>Hours (4/1 – 8/1):</strong> Mon–Fri 8a–5p · Sat 8a–3p · Sun closed</p>
               <p className="text-xs text-zinc-500 pt-2">
-                Aug+: weekends by appointment. Closed 6/28–7/6 (appointment only).
-                Open year-round — winter salt available, call for pickup hours.
+                Opening for the 2026 season on April 1. After 8/1: by appointment.
+                Open year-round — winter salt &amp; ice melt available, call for pickup hours.
               </p>
             </div>
           </div>

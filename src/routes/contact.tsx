@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Facebook, Star } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -8,7 +8,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Call 508-579-9897, email abby@cmscllc.com, or visit Buy The Yard at 2264 Main St., Jefferson, MA 01522. Spring/summer: Mon–Fri 7a–4p, Sat 8a–12p.",
+          "Call 508-579-9897, email abby@btymaterial.com, or visit Buy The Yard at 2264 Main St., Jefferson, MA 01522. In-season: Mon–Fri 8a–5p, Sat 8a–3p.",
       },
       { property: "og:title", content: "Contact — Buy The Yard" },
       { property: "og:description", content: "Phone, address, hours, and map for the Jefferson, MA yard." },
@@ -22,8 +22,11 @@ export const Route = createFileRoute("/contact")({
           "@type": "LocalBusiness",
           name: "Buy The Yard",
           telephone: "+1-508-579-9897",
-          email: "abby@cmscllc.com",
-          sameAs: ["https://www.facebook.com/BuyTheYardOutdoorProducts"],
+          email: "abby@btymaterial.com",
+          sameAs: [
+            "https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/",
+            "https://www.yelp.com/biz/buy-the-yard-holden",
+          ],
           address: {
             "@type": "PostalAddress",
             streetAddress: "2264 Main St.",
@@ -33,8 +36,8 @@ export const Route = createFileRoute("/contact")({
             addressCountry: "US",
           },
           openingHoursSpecification: [
-            { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "07:00", closes: "16:00" },
-            { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "12:00" },
+            { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "08:00", closes: "17:00" },
+            { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "15:00" },
           ],
         }),
       },
@@ -65,13 +68,32 @@ function ContactPage() {
             Calling is the fastest way to get answers about pricing, availability, and
             delivery scheduling. For non-urgent questions, email{" "}
             <a
-              href="mailto:abby@cmscllc.com"
+              href="mailto:abby@btymaterial.com"
               className="text-zinc-100 underline underline-offset-4 hover:text-brand"
             >
-              abby@cmscllc.com
+              abby@btymaterial.com
             </a>
-            .
+            . The chat widget on the old site isn't monitored in real time — calling beats it
+            every time.
           </p>
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <a
+              href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-300 hover:text-brand"
+            >
+              <Facebook className="size-4" /> Facebook
+            </a>
+            <a
+              href="https://www.yelp.com/biz/buy-the-yard-holden"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-300 hover:text-brand"
+            >
+              <Star className="size-4" /> Yelp
+            </a>
+          </div>
         </div>
       </section>
 
@@ -84,10 +106,10 @@ function ContactPage() {
               508-579-9897
             </a>
             <a
-              href="mailto:abby@cmscllc.com"
+              href="mailto:abby@btymaterial.com"
               className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-700 hover:text-brand"
             >
-              <Mail className="size-4" /> abby@cmscllc.com
+              <Mail className="size-4" /> abby@btymaterial.com
             </a>
             <p className="text-xs text-zinc-600 mt-2">
               Cell signal at the yard isn't perfect. If we miss you, leave a message.
@@ -116,17 +138,17 @@ function ContactPage() {
             <Clock className="size-7 text-brand mb-4" />
             <h2 className="font-display text-2xl uppercase mb-2">Hours</h2>
             <p className="text-[10px] font-bold uppercase tracking-widest text-brand mb-2">
-              Spring &amp; summer
+              In-season (4/1 – 8/1)
             </p>
             <ul className="text-sm text-zinc-900 space-y-1">
-              <li className="flex justify-between gap-4"><span>Mon–Fri</span><span>7a – 4p</span></li>
-              <li className="flex justify-between gap-4"><span>Saturday</span><span>8a – 12p</span></li>
+              <li className="flex justify-between gap-4"><span>Mon–Fri</span><span>8a – 5p</span></li>
+              <li className="flex justify-between gap-4"><span>Saturday</span><span>8a – 3p</span></li>
               <li className="flex justify-between gap-4"><span>Sunday</span><span className="text-zinc-500">Closed</span></li>
             </ul>
             <p className="text-xs text-zinc-600 mt-3 leading-relaxed">
-              Aug 1 onward: weekend pickup &amp; delivery by appointment. Closed 6/28–7/6
-              (appointment only). Winter salt: call for hours. Hours follow the season —
-              call to confirm.
+              Opening for the 2026 season on <strong>April 1</strong>. After 8/1: pickup &amp;
+              delivery by appointment. Winter salt &amp; ice melt available year-round —
+              call for loading hours.
             </p>
           </div>
         </div>
