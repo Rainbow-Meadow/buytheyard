@@ -107,7 +107,7 @@ function HomePage() {
             <div className="w-full aspect-[16/9] overflow-hidden rounded-md ring-1 ring-white/5 bg-zinc-900">
               <img
                 src={heroImg}
-                alt="Dump truck unloading dark hemlock mulch at the Buy The Yard supply yard"
+                alt="Buy The Yard supply yard in Jefferson, MA — mulch piles, loader, and the Mulch · Loam · Sand · Stone · Gravel sign with annual flowers in the foreground"
                 width={1600}
                 height={700}
                 fetchPriority="high"
