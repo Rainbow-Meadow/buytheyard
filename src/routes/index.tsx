@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Phone, Truck } from "lucide-react";
 import heroImg from "@/assets/source/yard-piles.jpg";
 import yardWide from "@/assets/source/yard-trucks.jpg";
-import wbeSeal from "@/assets/source/wbe-seal.jpg";
+import wbeSeal from "@/assets/source/wbe-seal.png";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import abbyPortrait from "@/assets/source/abby-portrait.jpg";
-import wbeSeal from "@/assets/source/wbe-seal.jpg";
+import wbeSeal from "@/assets/source/wbe-seal.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
