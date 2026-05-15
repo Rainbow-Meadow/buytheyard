@@ -88,6 +88,12 @@ function HomePage() {
                 View Materials
                 <ArrowRight className="size-4" />
               </Link>
+              <Link
+                to="/quote"
+                className="inline-flex items-center gap-2 bg-white/10 text-white px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:bg-white/20 transition-colors"
+              >
+                Get a Quote
+              </Link>
               <a
                 href="tel:5085799897"
                 className="inline-flex items-center gap-2 border border-white/20 text-white px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:bg-white/5 transition-colors"

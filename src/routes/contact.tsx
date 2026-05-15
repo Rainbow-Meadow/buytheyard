@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Mail, MapPin, Phone, Facebook, Star } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Clock, Mail, MapPin, Phone, Facebook, Star } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -93,6 +93,21 @@ function ContactPage() {
             >
               <Star className="size-4" /> Yelp
             </a>
+          </div>
+          <div className="mt-10 p-5 bg-white/5 rounded-md ring-1 ring-white/10 max-w-[60ch]">
+            <p className="text-xs uppercase tracking-widest text-zinc-400 mb-2">
+              Prefer to write it out?
+            </p>
+            <p className="text-sm text-zinc-200 mb-3">
+              Build a quote brief in under a minute and send it straight to
+              Abby — by email or text.
+            </p>
+            <Link
+              to="/quote"
+              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand hover:opacity-80"
+            >
+              Build a quote brief <ArrowRight className="size-4" />
+            </Link>
           </div>
         </div>
       </section>
