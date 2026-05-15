@@ -8,6 +8,8 @@ import stoneRiver from "@/assets/stone-river.webp";
 import stoneLava from "@/assets/stone-lava.webp";
 import stonePea from "@/assets/stone-pea.webp";
 import gardenBaskets from "@/assets/garden-baskets.webp";
+import gardenPetunias from "@/assets/garden-petunias.webp";
+import playgroundChips from "@/assets/playground-chips.webp";
 
 export type Product = {
   name: string;
@@ -92,7 +94,7 @@ export const products: Product[] = [
     category: "Garden Center",
     description:
       "Hydrangeas, dahlias, and seasonal favorites in nursery pots. Hydrangeas from $22, dahlias from $18 — selection rotates with what's in bloom.",
-    image: gardenBaskets,
+    image: gardenPetunias,
   },
   {
     name: "Plant Mix & Compost",
@@ -106,6 +108,7 @@ export const products: Product[] = [
     category: "Specialty",
     description:
       "Engineered wood-fiber surfacing produced to playground safety specs. ASTM F1292 fall impact, F2075 metals-free, F1951 wheelchair accessible.",
+    image: playgroundChips,
     badge: "ASTM Certified",
   },
 ];
