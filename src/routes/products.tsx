@@ -10,7 +10,7 @@ export const Route = createFileRoute("/products")({
       {
         name: "description",
         content:
-          "Browse the full catalog: premium mulches, screened loam, mason sand, crushed stone, river stone, lava rock and more. Pickup or delivery from Jefferson, MA.",
+          "Full catalog: premium mulches, screened loam, mason sand, crushed and decorative stone, hanging baskets, annuals, plant mix and compost, plus ASTM-certified playground chips. Pickup or delivery from Jefferson, MA.",
       },
       { property: "og:title", content: "Products — Buy The Yard" },
       {
@@ -74,8 +74,9 @@ function ProductsPage() {
             Don't see what you need?
           </h2>
           <p className="text-zinc-700 mb-8">
-            We stock more than what's listed here, including seasonal salt and ice melt.
-            Give us a call — we'll tell you straight.
+            We stock more than what's listed here — bulk salt and ice melt all winter,
+            specialty bagged products, and seasonal one-offs. Give us a call — we'll
+            tell you straight.
           </p>
           <a
             href="tel:5085799897"

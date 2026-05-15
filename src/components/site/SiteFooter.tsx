@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Facebook } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -9,13 +10,27 @@ export function SiteFooter() {
             Buy The <span className="text-brand">Yard</span>
           </p>
           <p className="mt-3 text-xs uppercase tracking-widest text-zinc-500">
-            Premium Outdoor Products
+            Mulch · Loam · Sand · Stone
           </p>
           <a
             href="tel:5085799897"
             className="mt-6 inline-block font-display text-2xl text-brand hover:opacity-80"
           >
             508.579.9897
+          </a>
+          <a
+            href="mailto:abby@cmscllc.com"
+            className="mt-2 block text-sm text-zinc-300 hover:text-zinc-100"
+          >
+            abby@cmscllc.com
+          </a>
+          <a
+            href="https://www.facebook.com/BuyTheYardOutdoorProducts"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-brand"
+          >
+            <Facebook className="size-4" /> Follow on Facebook
           </a>
         </div>
         <div className="space-y-3">
@@ -33,14 +48,15 @@ export function SiteFooter() {
             Hours
           </h4>
           <p className="text-zinc-200 text-sm leading-relaxed">
-            Mon – Fri: 8:00am – 5:00pm
+            Mon – Fri: 7:00am – 4:00pm
             <br />
-            Saturday: 8:00am – 3:00pm
+            Saturday: 8:00am – 12:00pm
             <br />
             Sunday: Closed
           </p>
-          <p className="text-xs text-zinc-500">
-            Winter salt &amp; ice melt: call for hours.
+          <p className="text-xs text-zinc-500 leading-relaxed">
+            Aug+: weekends by appointment.<br />
+            Open year-round — winter salt available, call for hours.
           </p>
         </div>
         <div className="space-y-3">

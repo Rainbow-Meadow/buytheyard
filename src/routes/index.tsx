@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Phone, Truck } from "lucide-react";
+import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
 import heroImg from "@/assets/source/yard-piles.webp";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
@@ -13,12 +13,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Woman-owned bulk landscape supply yard in Jefferson, MA. Premium mulch, loam, sand, gravel, and specialty stone for pickup or delivery. Call 508-579-9897.",
+          "Woman-owned bulk landscape yard and plant nursery in Jefferson, MA. Mulch, loam, sand, stone, hanging baskets, annuals, and ASTM playground chips. Now in our 10th season. Call 508-579-9897.",
       },
       { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
       {
         property: "og:description",
-        content: "Bulk mulch, loam, sand, and stone. Pickup or delivery in Central Mass.",
+        content: "Bulk mulch, loam, sand, stone, and a full plant nursery. Pickup or delivery in Central Mass.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -30,7 +30,34 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const featured = products.slice(0, 6);
+  const featured = [
+    "Premium Black Mulch",
+    "Hemlock Mulch",
+    "Screened Loam",
+    "3/4\" Crushed Blue Stone",
+    "Hanging Baskets",
+    "ASTM Playground Chips",
+  ]
+    .map((n) => products.find((p) => p.name === n))
+    .filter((p): p is (typeof products)[number] => Boolean(p));
+
+  const updates = [
+    {
+      title: "Yard fully stocked",
+      body: "Hanging baskets $25 while supplies last. Dahlias $18, hydrangeas $22. Mulch, loam, plant mix, compost, and stone ready for pickup or delivery.",
+      tag: "This week",
+    },
+    {
+      title: "Win 4 WooSox tickets",
+      body: "Every Friday in May we draw a winner. Buy 5+ yards of mulch and you're entered automatically — pickup or delivery counts.",
+      tag: "Promo · May",
+    },
+    {
+      title: "Now hiring seasonal drivers",
+      body: "Yard help and delivery drivers wanted for the spring/summer push. Must be 18+. Call Abby directly at 508-579-9897.",
+      tag: "Hiring",
+    },
+  ];
 
   return (
     <>
@@ -40,14 +67,18 @@ function HomePage() {
           <div className="lg:col-span-7">
             <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-6">
               <span className="size-1.5 rounded-full bg-brand" />
-              Jefferson, MA · Woman-Owned · WBE Certified
+              Jefferson, MA · Woman-Owned · 10th Season · WBE Certified
             </span>
             <h1 className="font-display text-6xl md:text-8xl leading-[0.9] uppercase text-balance mb-8">
               The Backbone of <span className="text-brand">Central Mass</span> Landscapes.
             </h1>
-            <p className="text-zinc-400 text-lg md:text-xl max-w-[48ch] mb-10 text-pretty">
-              Bulk mulch, loam, sand, gravel, and specialty stone — sourced locally,
-              loaded by hand, ready for pickup or delivery.
+            <p className="text-zinc-400 text-lg md:text-xl max-w-[52ch] mb-6 text-pretty">
+              <span className="text-zinc-200 font-semibold">Mulch · Loam · Sand · Stone</span>{" "}
+              — and a full plant nursery. Hanging baskets, annuals, compost, ASTM playground
+              chips, and winter salt. Loaded by hand, ready for pickup or delivery.
+            </p>
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-10">
+              Family-run · Serving Central MA since 2016
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -86,9 +117,9 @@ function HomePage() {
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {[
-            { k: "9+ years", v: "Serving Central MA" },
+            { k: "10th", v: "Season in business" },
             { k: "WBE", v: "Certified Woman-Owned" },
-            { k: "Pickup", v: "& curbside delivery" },
+            { k: "820+", v: "Followers on Facebook" },
             { k: "1 yard", v: "Minimum delivery" },
           ].map((s) => (
             <div key={s.k}>
@@ -105,7 +136,7 @@ function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
-                Bulk materials
+                Bulk materials &amp; garden center
               </p>
               <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
                 Real material, by the yard.
@@ -124,6 +155,51 @@ function HomePage() {
               <ProductCard key={p.name} product={p} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Latest from the yard */}
+      <section className="py-20 md:py-24 bg-kraft border-y border-zinc-300/60">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
+                <Flower2 className="size-3.5" />
+                Latest from the yard
+              </p>
+              <h2 className="font-display text-4xl md:text-5xl uppercase leading-[0.95] text-zinc-900 max-w-[20ch]">
+                What's happening this week.
+              </h2>
+            </div>
+            <a
+              href="https://www.facebook.com/BuyTheYardOutdoorProducts"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+            >
+              <Facebook className="size-4" />
+              Follow on Facebook
+            </a>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {updates.map((u) => (
+              <article
+                key={u.title}
+                className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
+              >
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand mb-3">
+                  {u.tag}
+                </span>
+                <h3 className="font-display text-2xl uppercase text-zinc-900 leading-tight mb-3">
+                  {u.title}
+                </h3>
+                <p className="text-sm text-zinc-700 leading-relaxed flex-1">{u.body}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
+            820+ followers · daily yard updates, weather closures, and seasonal stock posted on Facebook.
+          </p>
         </div>
       </section>
 

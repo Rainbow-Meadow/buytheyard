@@ -88,6 +88,12 @@ function AboutPage() {
               a Certified Woman Owned Enterprise.
             </p>
             <p>
+              2026 marks the yard's <strong>10th season</strong> serving Central
+              Massachusetts — from spring mulch deliveries through winter salt. The
+              office manager is <strong>Charlie</strong>, the yard dog, who handles
+              greetings.
+            </p>
+            <p>
               "Stop by the yard at <strong>2264 Main St. in Jefferson, MA</strong> for a
               visit. We're always happy to help with any questions and to provide top-notch
               customer service."

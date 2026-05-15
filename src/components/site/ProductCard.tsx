@@ -24,6 +24,11 @@ export function ProductCard({ product }: { product: Product }) {
         </span>
       </div>
       <p className="text-sm text-zinc-600 mb-5 flex-1">{product.description}</p>
+      {product.badge && (
+        <span className="inline-flex self-start mb-3 items-center gap-1.5 px-2 py-1 bg-brand/10 text-brand text-[10px] font-bold uppercase tracking-widest rounded-sm">
+          {product.badge}
+        </span>
+      )}
       <div className="flex items-center gap-3 pt-3 border-t border-zinc-300/60">
         <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
           Available:

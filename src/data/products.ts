@@ -7,12 +7,24 @@ import stoneBlue from "@/assets/stone-blue.webp";
 import stoneRiver from "@/assets/stone-river.webp";
 import stoneLava from "@/assets/stone-lava.webp";
 import stonePea from "@/assets/stone-pea.webp";
+import gardenBaskets from "@/assets/garden-baskets.webp";
+import gardenAnnuals from "@/assets/garden-annuals.webp";
+import gardenSoil from "@/assets/garden-soil.webp";
+import playgroundChips from "@/assets/playground-chips.webp";
 
 export type Product = {
   name: string;
-  category: "Mulch" | "Loam" | "Sand" | "Gravel" | "Specialty Stone";
+  category:
+    | "Mulch"
+    | "Loam"
+    | "Sand"
+    | "Gravel"
+    | "Specialty Stone"
+    | "Garden Center"
+    | "Specialty";
   description: string;
   image: string;
+  badge?: string;
 };
 
 export const products: Product[] = [
@@ -70,6 +82,36 @@ export const products: Product[] = [
     description: "Bold red volcanic stone. Holds color for years and adds dramatic accent to landscaping.",
     image: stoneLava,
   },
+  {
+    name: "Hanging Baskets",
+    category: "Garden Center",
+    description:
+      "Lush hanging baskets bursting with petunias and trailing greenery. Built on-site at the flower wagon — switched out fresh as the season turns.",
+    image: gardenBaskets,
+    badge: "Seasonal · $25",
+  },
+  {
+    name: "Annuals & Perennials",
+    category: "Garden Center",
+    description:
+      "Hydrangeas, dahlias, and seasonal favorites in nursery pots. Hydrangeas from $22, dahlias from $18 — selection rotates with what's in bloom.",
+    image: gardenAnnuals,
+  },
+  {
+    name: "Plant Mix & Compost",
+    category: "Garden Center",
+    description:
+      "Rich, organic plant mix and bulk compost for raised beds, vegetable gardens, and tired soil. Sold by the yard, scoop, or bucket.",
+    image: gardenSoil,
+  },
+  {
+    name: "ASTM Playground Chips",
+    category: "Specialty",
+    description:
+      "Engineered wood-fiber surfacing produced to playground safety specs. ASTM F1292 fall impact, F2075 metals-free, F1951 wheelchair accessible.",
+    image: playgroundChips,
+    badge: "ASTM Certified",
+  },
 ];
 
 export const categories = [
@@ -78,4 +120,6 @@ export const categories = [
   "Sand",
   "Gravel",
   "Specialty Stone",
+  "Garden Center",
+  "Specialty",
 ] as const;
