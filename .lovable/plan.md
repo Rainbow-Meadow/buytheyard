@@ -1,32 +1,26 @@
-## They're already real WebP — here's the proof, plus what I think you actually want
+## Image loading optimization pass
 
-The previous step did fully re-encode every file with PIL's WebP encoder, not a rename. Verified just now:
+Six `<img>` tags across three files. Current state: hero is eager (good) but missing `fetchpriority`; below-the-fold images are lazy (good); a couple have wrong intrinsic dimensions which causes layout shift; nothing preloads the LCP image.
 
-```
-src/assets/loam.webp           WEBP 1600x1600 RGB
-src/assets/mulch-black.webp    WEBP 1600x1600 RGB
-…
-src/assets/source/wbe-seal.webp WEBP 1376x774  RGBA
-```
+### Changes (no new deps)
 
-Sizes also dropped (e.g. `loam` 681K → 553K, `abby-portrait` 353K → 110K, total 9.6MB → 7.0MB), which a rename would never do.
+1. **Preload the LCP hero** in `src/routes/index.tsx`'s `head().links`:
+   ```ts
+   { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" }
+   ```
+2. **Hero `<img>`** (`index.tsx`):
+   - `fetchpriority="high"`, `decoding="async"`.
+   - Fix `width`/`height` from the stale `1080×1350` to the actual `1600×700` so the reserved box matches the photo and no CLS happens between SSR and image-load.
+3. **Yard background in delivery callout** (`index.tsx`): add `decoding="async"`. Already `loading="lazy"`. Add `aria-hidden="true"` (it's decorative; alt is already empty).
+4. **WBE seal — index strip & about**: add `decoding="async"`. Dims already correct.
+5. **Abby portrait** (`about.tsx`): add `decoding="async"`. Fix dims to actual `1232×1600`.
+6. **`ProductCard`**: add `width={1200} height={1200}`, `decoding="async"`, `sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"`. The card grid renders three across desktop, two on tablet, one on mobile — `sizes` lets the browser hint the layout cost even without a srcset.
 
-### What I think you noticed
+### Out of scope (call out, don't do)
 
-The savings on a few files were modest because I converted at quality 80 and didn't downscale anything already ≤ 1600px. That leaves big files like `stone-blue.webp` at 698K and `yard-trucks.webp` at 560K — much larger than they need to be for the way they're displayed (cards max out around ~600px wide on screen).
+- Multi-resolution `srcset` / AVIF variants via `vite-imagetools`. Real win, but it adds a build dep and ~30 generated files. Happy to do as a follow-up if you want.
+- A server-side image transformer route. Overkill for a static-asset site.
 
-### Proposed real-conversion pass
+### Verification
 
-1. **Re-encode every WebP at quality 72, method 6, sharp_yuv on**, with these max dimensions per use case:
-   - Product card textures (`src/assets/*.webp`): 1200×1200 max
-   - Hero / yard photos (`src/assets/source/*.webp`): 1600px on the long edge
-   - Mobile-only banners (`yard-banner-*`): keep current resolution, just re-encode
-   - WBE seal: keep lossless+alpha, no resize
-2. Strip ICC profile and EXIF.
-3. Overwrite in place; imports already point at `.webp`, so no code changes.
-
-Expected total drop from ~7MB to ~2–3MB with no visible quality loss at the sizes they're actually rendered.
-
-### The SSR error in the runtime panel
-
-It only says "SSR rendering failed" with no stack — likely a one-off from the asset swap mid-build. If it persists after this pass I'll dig in; if not, ignore.
+Reload the homepage in the browser tool, check the Network panel: hero should be `fetchpriority: high` and start loading in the first wave; below-the-fold (yard-trucks, products) should defer until scroll. No CLS in the hero box.
