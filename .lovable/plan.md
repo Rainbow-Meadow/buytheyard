@@ -1,42 +1,39 @@
-# Pull source images from btymaterial.com
+# Replace remaining AI product photos with real stock
 
-## What's actually on the source site
+## What needs replacing
 
-The site is a single-page Wix site (no product subpages). I scraped 12 unique images:
+9 AI-generated material textures in `src/assets/`:
+`mulch-black.jpg`, `mulch-hemlock.jpg`, `mulch-pine.jpg`, `loam.jpg`, `sand.jpg`, `stone-blue.jpg`, `stone-lava.jpg`, `stone-pea.jpg`, `stone-river.jpg`
 
-1. **Hero / facility wide shots** — large yard photos with trucks/piles (3–4 variants)
-2. **Abby's portrait** — `Abby.jpeg` (owner headshot)
-3. **WBE Seal** — `WBE_Seal_BLACK.jpg` (certification badge)
-4. **Truck / loading shot** — `432099447_..._edited.jpg`
-5. **Misc yard banners** — wide pile/equipment photos used as section dividers
-
-There are **no per-material texture close-ups** on the source site (no separate black-mulch, hemlock, pine, loam, sand, pea-stone, river-stone, blue-stone, lava-stone shots).
+(Source-site photos for hero, yard, Abby, WBE seal are already real and stay.)
 
 ## Plan
 
-1. **Download** all 12 source images at full resolution into `src/assets/source/` with descriptive filenames:
-   - `hero-yard-source.jpg` (the largest hero/facility photo)
-   - `yard-trucks.jpg`, `yard-piles.jpg`, `yard-banner-1.jpg`, `yard-banner-2.jpg`
-   - `abby-portrait.jpg`
-   - `wbe-seal.jpg`
-   - `loading-truck.jpg`
-   - plus remaining yard variants
+1. **Source one real photograph per material** from Unsplash / Pexels (both license-free for commercial use, no attribution required). For each product I'll pick a tight, well-lit close-up that matches the material:
+   - Black mulch — dark dyed bark close-up
+   - Hemlock mulch — reddish-brown bark
+   - Pine mulch — light golden pine bark
+   - Loam — dark screened topsoil pile/texture
+   - Sand — masonry/concrete sand texture
+   - Pea stone — small rounded pebbles
+   - River stone — larger smooth river rock mix
+   - Blue stone — crushed bluestone gravel
+   - Lava stone — red volcanic lava rock
 
-2. **Replace AI-generated images with real ones where a match exists:**
-   - Hero on `/` → real hero yard photo
-   - About page portrait → real `abby-portrait.jpg`
-   - WBE strip on `/` and `/about` → real `wbe-seal.jpg` (proper certification mark, not invented)
-   - Delivery / yard sections → real truck + facility photos
-   - Footer / contact backgrounds → real wide yard banners
+2. **Download** each at ~1600px wide, square-crop to 1:1, compress to ~80% JPEG quality, and save into `src/assets/` under the same filenames so no component imports change.
 
-3. **Keep AI-generated textures for individual product cards** (mulch-black, mulch-hemlock, mulch-pine, loam, sand, stone-pea, stone-river, stone-blue, stone-lava) since the source has no equivalents. These are macro texture shots that work as honest product placeholders until Abby supplies real ones.
+3. **Verify** by viewing the resulting images and checking they read correctly as the named material (no mismatches like "river stone" that's actually sand).
 
-4. **Delete unused generated assets**: `hero-yard.jpg` and `yard-wide.jpg` (replaced by source).
+4. **Add a `PHOTO_CREDITS.md`** in `src/assets/` listing the source URL for each photo (good practice even when attribution isn't required, makes future swaps easy).
 
-5. **Add a short note in `/about` or footer** crediting the photos as supplied by Buy The Yard (so it's clear they're real, not stock).
+5. **Delete** any leftover AI assets not referenced anywhere.
 
 ## Out of scope
 
-- Generating new AI textures (already have them, keeping them)
-- Scraping social media (Facebook/Instagram) for more product photos — can do later if you want
-- Asking Abby for higher-res originals — recommend as a follow-up
+- Re-shooting hero/yard/Abby photos (already real from source site)
+- Adding multiple gallery shots per product (one hero shot per card, like today)
+- A photo lightbox / zoom UI
+
+## Risk
+
+Stock photos won't perfectly match Abby's actual piles. They're an honest "representative photo" stand-in until she supplies her own. I'll keep filenames identical so swapping later is a one-file drop-in per product.
