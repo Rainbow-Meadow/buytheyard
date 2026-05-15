@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Award, Phone, Truck } from "lucide-react";
-import heroImg from "@/assets/hero-yard.jpg";
-import yardWide from "@/assets/yard-wide.jpg";
+import { ArrowRight, Phone, Truck } from "lucide-react";
+import heroImg from "@/assets/source/hero-yard-source.jpg";
+import yardWide from "@/assets/source/yard-trucks.jpg";
+import wbeSeal from "@/assets/source/wbe-seal.jpg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 
@@ -168,9 +169,14 @@ function HomePage() {
       <section className="bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-8 justify-between">
           <div className="flex items-center gap-5">
-            <span className="size-16 rounded-full bg-surface text-brand flex items-center justify-center">
-              <Award className="size-8" />
-            </span>
+            <img
+              src={wbeSeal}
+              alt="Massachusetts WBE certified seal"
+              width={96}
+              height={96}
+              className="size-20 object-contain bg-white p-1 ring-1 ring-zinc-300"
+              loading="lazy"
+            />
             <div>
               <p className="font-display text-2xl uppercase">Certified Woman-Owned</p>
               <p className="text-sm text-zinc-600">A Massachusetts WBE since year three.</p>
