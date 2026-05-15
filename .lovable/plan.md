@@ -1,32 +1,65 @@
 
-## Plan: Wire in the official brandmark
+## Plan: Swap in Abby's real photos, retire AI/stock imagery
 
-Add the uploaded brandmark (arched "BUY THE YARD" + "BTY" monogram + "MULCH · LOAM · SAND · STONE" + sprout) as the official logo across the site.
+### Audit — what's currently in the project
 
-### Asset
+Per `src/assets/PHOTO_CREDITS.md`, these existing files are AI-generated (not Abby's, not stock):
+- `garden-baskets.webp`, `garden-annuals.webp`, `garden-soil.webp`, `playground-chips.webp`
 
-- Copy `user-uploads://IMG_3734.png` → `src/assets/brandmark.png` (imported via ES module so it's hashed/cached).
-- Also copy to `public/brandmark.png` for use as favicon / OG image meta tags.
+Stock (Pexels, not AI but not Abby's either):
+- `stone-pea.webp`, `stone-river.webp`, `stone-blue.webp`
 
-### Where it gets used
+Owner-supplied (keep):
+- `mulch-black.webp`, `mulch-hemlock.webp`, `mulch-pine.webp`, `loam.webp`, `sand.webp`, `stone-lava.webp`, all `source/*` photos.
 
-Brandmark is white + brand red on a transparent background, so it only reads on **dark surfaces**. Plan accordingly:
+### Mapping the 9 new uploads
 
-1. **SiteHeader** (`src/components/site/SiteHeader.tsx`) — dark surface ✓
-   - Replace the current "Buy The **Yard**" text wordmark with `<img src={brandmark} alt="Buy The Yard" />`, sized ~40px tall, preserving the click-to-home `<Link>`.
+| Upload | New file | Used where |
+|---|---|---|
+| IMG_3735 (pergola of hanging baskets) | `garden-baskets.webp` ⟵ replaces AI | Products grid + home featured |
+| IMG_3738 (yard wide w/ mulch piles, loader, MULCH·LOAM·SAND·STONE·GRAVEL sign, flowers in foreground) | `source/yard-piles.webp` ⟵ replaces current hero | **Home hero** (preloaded) |
+| IMG_3740 (dump truck unloading by huge red mulch pile, BTY truck door visible) | `source/yard-trucks.webp` ⟵ replaces current delivery photo | Home "Need it delivered?" backdrop |
+| IMG_3724 (loader dumping mulch into DumperDogg pickup) | `source/loading-truck.webp` ⟵ replaces existing | Used on delivery page (already wired) |
+| IMG_3722 (dark brown mulch pile) | `mulch-pine.webp` ⟵ refresh "Dark Brown Mulch" tile | Products grid (closer crop than current) |
+| IMG_3721 (black mulch pile) | `mulch-black.webp` ⟵ refresh | Products grid |
+| IMG_3720 (red hemlock pile) | `mulch-hemlock.webp` ⟵ refresh | Products grid |
+| IMG_3736 (Adirondack patio + OPEN flag + umbrellas) | `source/yard-banner-5.webp` (new) | Add to About page as a "the yard" lifestyle shot |
+| IMG_3739 (chocolate lab in Carhartt harness at the window) | `source/yard-dog.webp` (new) | Add to About page as a small "yard dog" portrait |
 
-2. **SiteFooter** (`src/components/site/SiteFooter.tsx`) — dark surface ✓
-   - Replace the text wordmark + "Mulch · Loam · Sand · Stone" tagline in the first column with the brandmark (~96px tall). The brandmark already contains the tagline, so the separate `<p>` line gets removed.
+### What gets removed / replaced (AI imagery purge)
 
-3. **Favicon + social share** (`src/routes/__root.tsx`)
-   - Add `<link rel="icon" href="/brandmark.png">` and `og:image` / `twitter:image` pointing at `/brandmark.png` so link previews use the official mark.
+- **`garden-baskets.webp`** — overwrite with IMG_3735 (real). ✓ no AI.
+- **`garden-annuals.webp`** — none of the new uploads is a clean annuals/perennials shot. Two options (need your call below):
+  1. **Drop the "Annuals & Perennials" tile** from the Products grid until Abby sends a photo.
+  2. **Reuse IMG_3735** (it shows annuals too) — same image as baskets.
+- **`garden-soil.webp` (Plant Mix & Compost)** — no new compost photo. Same options:
+  1. Drop the tile, or
+  2. Reuse `loam.webp` (Abby's real bulk pile, close enough visually).
+- **`playground-chips.webp` (ASTM Playground Chips)** — no new photo. Same options:
+  1. Drop the tile, or
+  2. Replace tile with a text-only "spec sheet" card (no image), since playground chips are a niche B2B item.
+- **`stone-pea.webp`, `stone-river.webp`, `stone-blue.webp`** — Pexels stock, not AI. **My read:** keep them (your "no AI" rule doesn't bar real stock photos of literally just gravel). Flag if you want them yanked too — would need either drop-tiles or new uploads.
 
-### Out of scope (flagging for a follow-up)
+### Files I'll edit
 
-- The hero (`src/routes/index.tsx`) keeps its current text H1 — overlaying the brandmark on top of the hero photo would compete with the headline, and the brand asset is white-on-transparent (won't work on the kraft/white sections of other pages either).
-- No new dark-on-light variant is created. If you want the logo to appear on light backgrounds (e.g., the kraft strip, product pages), that needs a separate dark-color version of the artwork — let me know and I'll request it.
+1. **Asset swaps** (binary file replacements via `code--copy`, no code change required — same filenames):
+   - `src/assets/garden-baskets.webp`
+   - `src/assets/source/yard-piles.webp`
+   - `src/assets/source/yard-trucks.webp`
+   - `src/assets/source/loading-truck.webp`
+   - `src/assets/mulch-pine.webp`, `mulch-black.webp`, `mulch-hemlock.webp`
+2. **New asset files**: `src/assets/source/yard-banner-5.webp`, `src/assets/source/yard-dog.webp`
+3. **`src/routes/about.tsx`** — wire in the new lifestyle + dog photos (small, captioned).
+4. **`src/data/products.ts`** + **`src/routes/index.tsx`** — depending on your answers below, either drop the annuals/compost/playground tiles or repoint them to existing real photos.
+5. **`src/assets/PHOTO_CREDITS.md`** — update credits, remove Pexels rows if you want them gone, mark new files as © Buy The Yard.
+6. **`src/routes/index.tsx`** — update hero `alt` text to match the new image (yard wide shot with sign + flowers, not "dump truck unloading hemlock").
 
-### Technical notes
+### Decisions I need from you (1 question, 3 sub-choices)
 
-- All three target spots already sit on `bg-surface` (near-black), so the white logo has proper contrast.
-- Image will be imported as an ES module in components (`import brandmark from "@/assets/brandmark.png"`) for Vite hashing; the `public/` copy is only for static `<link>` / meta tags that can't use module imports.
+For the three product tiles with no real-photo replacement (Annuals & Perennials, Plant Mix & Compost, ASTM Playground Chips), and the 3 Pexels gravel photos — pick one:
+
+A. **Drop the AI tiles + keep Pexels gravel** (purges all AI; gravel shots stay since they're real photos, just not Abby's).
+B. **Drop the AI tiles + drop the Pexels tiles** (only Abby's photos appear anywhere; site loses 6 product tiles until she sends more).
+C. **Reuse nearest real photo** for AI tiles (annuals→baskets shot, compost→loam, playground→no image / text card) + keep Pexels.
+
+I'll ask this as a single choice question right after this plan.
