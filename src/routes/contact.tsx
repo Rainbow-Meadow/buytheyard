@@ -17,10 +17,10 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Call 508-579-9897 or get a quote online. Visit Buy The Yard at 2264 Main St., Jefferson, MA 01522. In-season: Mon–Fri 8a–5p, Sat 8a–3p.",
+          "Call 508-579-9897 or send a quote online. Stop by Buy The Yard at 2264 Main St., Jefferson, MA 01522. In-season: Mon–Fri 8a–5p, Sat 8a–3p.",
       },
       { property: "og:title", content: "Contact — Buy The Yard" },
-      { property: "og:description", content: "Phone, address, hours, and map for the Jefferson, MA yard." },
+      { property: "og:description", content: "Phone, address, hours, and the map. Jefferson, MA." },
       { property: "og:url", content: "/contact" },
     ],
     scripts: [
@@ -67,9 +67,8 @@ function ContactPage() {
             Get in <span className="text-brand">touch.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Two equally good ways to reach us — call the yard for a quick answer,
-            or send a quote request and Abby will get back with pricing and a
-            delivery window.
+            Two equally good ways. Call the yard for a fast answer. Or send a quote
+            request — Abby comes back with pricing and a delivery window.
           </p>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
             <a
@@ -103,7 +102,7 @@ function ContactPage() {
             </Link>
           </div>
           <p className="mt-6 text-sm text-zinc-400 max-w-[60ch]">
-            For non-urgent questions, email{" "}
+            For non-urgent stuff, email{" "}
             <a
               href="mailto:abby@btymaterial.com"
               className="text-zinc-100 underline underline-offset-4 hover:text-brand"
@@ -139,8 +138,7 @@ function ContactPage() {
             <ClipboardList className="size-7 text-brand mb-4" />
             <h2 className="font-display text-2xl uppercase mb-2">Get a Quote</h2>
             <p className="text-sm text-zinc-700 mb-3">
-              Send your materials list, delivery town, and timing — Abby gets
-              back with pricing fast.
+              Send your materials list, town, and timing. Abby comes back with pricing — fast.
             </p>
             <Link
               to="/quote"
@@ -163,7 +161,7 @@ function ContactPage() {
               <Mail className="size-4" /> abby@btymaterial.com
             </a>
             <p className="text-xs text-zinc-600 mt-2">
-              Cell signal at the yard isn't perfect. If we miss you, leave a message.
+              Cell signal at the yard isn't perfect. Miss us? Leave a message — we call back.
             </p>
           </div>
 
@@ -197,9 +195,9 @@ function ContactPage() {
               <li className="flex justify-between gap-4"><span>Sunday</span><span className="text-zinc-500">Closed</span></li>
             </ul>
             <p className="text-xs text-zinc-600 mt-3 leading-relaxed">
-              Opening for the 2026 season on <strong>April 1</strong>. After 8/1: pickup &amp;
-              delivery by appointment. Winter salt &amp; ice melt available year-round —
-              call for loading hours.
+              We open the 2026 season on <strong>April 1</strong>. After 8/1, pickup &amp;
+              delivery are by appointment. Salt &amp; ice melt run year-round — call for
+              loading hours.
             </p>
           </div>
         </div>
