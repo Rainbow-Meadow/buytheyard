@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
-import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import gardenPetunias from "@/assets/garden-petunias.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
@@ -24,7 +23,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [
-      { rel: "preload", as: "image", href: abbyPortrait, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: gardenPetunias, fetchpriority: "high" },
     ],
   }),
   component: HomePage,
@@ -65,31 +64,17 @@ function HomePage() {
       {/* Hero */}
       <section className="relative bg-kraft text-zinc-900 overflow-hidden border-b border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Mobile-first: portrait first so Abby's face leads */}
           <div className="order-1 lg:order-2 lg:col-span-5">
-            <div className="relative">
-              <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04),0_20px_40px_-24px_rgba(0,0,0,0.25)]">
-                <img
-                  src={abbyPortrait}
-                  alt="Abby, owner of Buy The Yard, at her yard in Jefferson, MA"
-                  width={1232}
-                  height={1540}
-                  fetchPriority="high"
-                  decoding="async"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="hidden sm:block absolute -bottom-8 -left-8 w-[58%] aspect-[16/11] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)]">
-                <img
-                  src={gardenPetunias}
-                  alt="Hanging basket of petunias from the Buy The Yard flower wagon"
-                  width={900}
-                  height={620}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04),0_20px_40px_-24px_rgba(0,0,0,0.25)]">
+              <img
+                src={gardenPetunias}
+                alt="Hanging basket of petunias from the Buy The Yard flower wagon"
+                width={1232}
+                height={1540}
+                fetchPriority="high"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
 
