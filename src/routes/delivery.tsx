@@ -37,8 +37,11 @@ function DeliveryPage() {
             Delivery &amp; Pickup
           </p>
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
-            Two ways to get your <span className="text-brand">material.</span>
+            You call. We load. <span className="text-brand">It shows up.</span>
           </h1>
+          <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
+            Two ways to get your material. Both are simple.
+          </p>
         </div>
       </section>
 
@@ -48,8 +51,9 @@ function DeliveryPage() {
             <Warehouse className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">Pick it up</h2>
             <p className="text-zinc-700 mb-6">
-              Got a truck or trailer? Pull in during business hours. We'll load you up.
-              No appointment needed.
+              Got a truck? Got a trailer? Pull in. We load you up.
+              <br />
+              No appointment. No paperwork. Just material.
             </p>
             <div className="space-y-2 text-sm text-zinc-700">
               <p><strong>Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
@@ -65,8 +69,9 @@ function DeliveryPage() {
             <Truck className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">We deliver</h2>
             <p className="text-zinc-300 mb-6">
-              Curbside delivery across Central Massachusetts. Call to confirm your area
-              and book a time.
+              Curbside, all over Central Mass.
+              <br />
+              Call. We confirm the area. We book the truck. Done.
             </p>
             <a
               href="tel:5085799897"
@@ -81,7 +86,7 @@ function DeliveryPage() {
       <section className="py-16 md:py-20 bg-kraft border-y border-zinc-300">
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="font-display text-4xl md:text-5xl uppercase mb-10">
-            Delivery policy
+            Read this before we roll.
           </h2>
           <ul className="divide-y divide-zinc-300">
             {POLICIES.map(([k, v], i) => (
@@ -106,11 +111,12 @@ function DeliveryPage() {
           <CreditCard className="size-10 text-brand shrink-0" />
           <div>
             <h3 className="font-display text-2xl uppercase mb-2">
-              Heads up: card convenience fee
+              One last thing. The card fee.
             </h3>
             <p className="text-zinc-300">
-              We pass through a 4% fee on card transactions to keep material prices honest.
-              Cash or check skips it.
+              4% on card transactions. That's the processor's cut, not ours.
+              <br />
+              Cash or check? Skip it.
             </p>
           </div>
         </div>

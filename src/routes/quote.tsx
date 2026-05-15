@@ -112,11 +112,11 @@ function QuotePage() {
             Get a quote
           </p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
-            Tell us what you need.
+            Tell us what you need. <span className="text-brand">We'll tell you what it costs.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            One minute. We'll format your request so you can fire it straight to Abby —
-            by email or text — with everything she needs to quote you back fast.
+            Takes a minute. We package it up. You fire it to Abby — email or text.
+            She comes back with pricing. No games.
           </p>
         </div>
       </section>

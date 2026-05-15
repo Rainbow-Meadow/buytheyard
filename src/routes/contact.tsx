@@ -64,11 +64,11 @@ function ContactPage() {
             Contact
           </p>
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
-            Get in <span className="text-brand">touch.</span>
+            Call. Text. Email. <span className="text-brand">We answer.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Two equally good ways. Call the yard for a fast answer. Or send a quote
-            request — Abby comes back with pricing and a delivery window.
+            Two ways. Phone gets a fast answer. The quote form gets you pricing
+            and a delivery window. Pick one.
           </p>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
             <a

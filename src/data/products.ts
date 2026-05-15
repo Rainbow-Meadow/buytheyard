@@ -85,29 +85,29 @@ export const products: Product[] = [
     name: "Hanging Baskets",
     category: "Garden Center",
     description:
-      "Built on-site at the flower wagon. Petunias, trailing greens. We swap them out fresh as the season turns.",
+      "Built on the flower wagon. Full. Vibrant. The kind of basket that makes a porch.",
     image: gardenBaskets,
-    badge: "Seasonal · $25",
+    badge: "$40 ea · 2 for $70",
   },
   {
     name: "Annuals & Perennials",
     category: "Garden Center",
     description:
-      "Hydrangeas, dahlias, and whatever's in bloom. Hydrangeas from $22. Dahlias from $18. Selection rotates with the season.",
+      "Whatever's blooming, that's what we've got. Hydrangeas from $22. Dahlias from $18.",
     image: gardenPetunias,
   },
   {
     name: "Plant Mix & Compost",
     category: "Garden Center",
     description:
-      "Organic plant mix and bulk compost. For raised beds, vegetable gardens, and tired soil. By the yard, the scoop, or the bucket.",
+      "Organic plant mix. Bulk compost. Raised beds love it. Tired soil needs it.",
     image: loam,
   },
   {
     name: "ASTM Playground Chips",
     category: "Specialty",
     description:
-      "Engineered wood-fiber surfacing, built to playground spec. ASTM F1292 fall impact. F2075 metals-free. F1951 wheelchair accessible.",
+      "Built to playground spec. ASTM F1292 fall impact. F2075 metals-free. F1951 wheelchair accessible. The real thing.",
     image: playgroundChips,
     badge: "ASTM Certified",
   },

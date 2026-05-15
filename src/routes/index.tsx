@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Woman-owned bulk landscape yard in Jefferson, MA. Mulch, loam, sand, stone, hanging baskets, annuals, and ASTM playground chips. 10th season. Call 508-579-9897.",
+          "Bulk mulch, loam, sand, stone. Plus a flower wagon. Woman-owned, Jefferson MA. 11th season. Call 508-579-9897.",
       },
       { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
       {
@@ -44,19 +44,19 @@ function HomePage() {
 
   const updates = [
     {
-      title: "Yard fully stocked",
-      body: "Hanging baskets are in. $25, while they last. Dahlias $18. Hydrangeas $22. Mulch, loam, plant mix, compost, and stone — ready to load.",
-      tag: "This week",
+      title: "Mother's Day baskets are in.",
+      body: "$40 each. Or 2 for $70. Built fresh on the wagon. Mom's gonna love it. Grab one before they're gone — 508-579-9897.",
+      tag: "Mother's Day",
     },
     {
-      title: "Win 4 WooSox tickets",
-      body: "Every Friday in May, we draw a name. Buy 5 yards of mulch (or more) and you're in. Pickup or delivery — both count.",
+      title: "Buy 5 yards of mulch. Win WooSox tickets.",
+      body: "Every 5+ yard mulch order in May puts you in the hat. We pull 4 tickets every Friday. That's it. Pickup or delivery — both count.",
       tag: "Promo · May",
     },
     {
-      title: "Now hiring seasonal drivers",
-      body: "Spring and summer push starts soon. Looking for yard help and delivery drivers. 18+. Call Abby — 508-579-9897.",
-      tag: "Hiring",
+      title: "Call before noon. Get it today.",
+      body: "Same-day delivery isn't a marketing line. It's the truck in the yard. If we've got a window, you're on it.",
+      tag: "How it works",
     },
   ];
 
@@ -89,11 +89,14 @@ function HomePage() {
                   />
                 </svg>
               </span>{" "}
-              since 2017.
+              since 2016.
             </h1>
             <p className="text-zinc-700 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              Mulch, loam, sand, stone — and a flower wagon full of hanging baskets.
-              Loaded by hand. Pickup or delivery, anywhere in Central Mass.
+              Mulch by the yard. Loaded by hand.
+              <br />
+              Pickup at the yard. Or we bring it to your driveway.
+              <br />
+              No upsells. No runaround.
             </p>
 
             <div className="aspect-[4/5] max-w-md overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04),0_20px_40px_-24px_rgba(0,0,0,0.25)] mb-9">
@@ -125,7 +128,7 @@ function HomePage() {
               </span>
               <span className="hidden sm:inline-block h-6 w-px bg-zinc-400/50" />
               <span className="text-xs uppercase tracking-[0.18em] font-semibold">
-                10th season · 2026
+                11th season · Est. 2015
               </span>
             </div>
 
@@ -159,7 +162,7 @@ function HomePage() {
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {[
-            { k: "10th", v: "Season in business" },
+            { k: "11th", v: "Season in business" },
             { k: "WBE", v: "Certified Woman-Owned" },
             { k: "820+", v: "Followers on Facebook" },
             { k: "1 yard", v: "Minimum delivery" },
@@ -180,9 +183,9 @@ function HomePage() {
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                 Bulk materials &amp; garden center
               </p>
-              <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
-                Real material, by the yard.
-              </h2>
+            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
+              Real material. By the yard.
+            </h2>
             </div>
             <Link
               to="/products"
@@ -259,11 +262,11 @@ function HomePage() {
           <div>
             <Truck className="size-10 text-brand mb-6" />
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] mb-6">
-              Need it delivered? <span className="text-brand">We'll bring it.</span>
+              You call. We load. <span className="text-brand">It shows up.</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery across Central Massachusetts. One-yard minimum.
-              48 hours notice gets you on the truck.
+              Curbside delivery, all over Central Mass. One yard minimum.
+              48 hours notice puts you on the truck. Done.
             </p>
             <Link
               to="/delivery"
@@ -312,7 +315,7 @@ function HomePage() {
             />
             <div>
               <p className="font-display text-2xl uppercase">Certified Woman-Owned</p>
-              <p className="text-sm text-zinc-600">A Massachusetts WBE since year three.</p>
+              <p className="text-sm text-zinc-600">Massachusetts WBE certified since year three.</p>
             </div>
           </div>
           <Link
