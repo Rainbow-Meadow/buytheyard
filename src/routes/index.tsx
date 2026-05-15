@@ -64,13 +64,13 @@ function HomePage() {
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="w-full aspect-[16/9] lg:aspect-[4/5] overflow-hidden rounded-md ring-1 ring-white/5 bg-zinc-900">
+            <div className="w-full aspect-[16/9] overflow-hidden rounded-md ring-1 ring-white/5 bg-zinc-900">
               <img
                 src={heroImg}
                 alt="Dump truck unloading dark hemlock mulch at the Buy The Yard supply yard"
                 width={1080}
                 height={1350}
-                className="w-full h-full object-contain lg:object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
