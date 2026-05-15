@@ -29,9 +29,9 @@ export const products: Product[] = [
     image: mulchHemlock,
   },
   {
-    name: "Pine Bark Mulch",
+    name: "Dark Brown Mulch",
     category: "Mulch",
-    description: "Chunky, natural pine bark. Long-lasting cover that breaks down slowly and feeds the soil.",
+    description: "Rich, deep-brown shredded mulch. Holds color through the season and frames beds with a clean, finished look.",
     image: mulchPine,
   },
   {
