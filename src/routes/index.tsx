@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
-import gardenPetunias from "@/assets/garden-petunias.webp";
+import btyTruck from "@/assets/bty-truck.png";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [
-      { rel: "preload", as: "image", href: gardenPetunias, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: btyTruck, fetchpriority: "high" },
     ],
   }),
   component: HomePage,
@@ -64,21 +64,19 @@ function HomePage() {
       {/* Hero */}
       <section className="relative bg-kraft text-zinc-900 overflow-hidden border-b border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div className="order-1 lg:order-2 lg:col-span-5">
-            <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04),0_20px_40px_-24px_rgba(0,0,0,0.25)]">
-              <img
-                src={gardenPetunias}
-                alt="Hanging basket of petunias from the Buy The Yard flower wagon"
-                width={1232}
-                height={1540}
-                fetchPriority="high"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="order-2 lg:col-span-5">
+            <img
+              src={btyTruck}
+              alt="Buy The Yard dump truck — driver giving a thumbs up"
+              width={1920}
+              height={1440}
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-auto max-h-[560px] object-contain"
+            />
           </div>
 
-          <div className="order-2 lg:order-1 lg:col-span-7">
+          <div className="order-1 lg:col-span-7">
             <p className="inline-flex items-center text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-700 mb-5 pb-2 border-b border-zinc-400/50">
               Hi, I'm Abby — owner, Buy The Yard · Jefferson, MA
             </p>
