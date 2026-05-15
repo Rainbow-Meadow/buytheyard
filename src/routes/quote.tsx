@@ -512,7 +512,11 @@ function QuotePage() {
           <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="text-xs text-zinc-600 max-w-[40ch]">
               Next: we'll show you the brief and give you one tap to email or
-              text it to Abby.
+              text it to Abby. By submitting, you agree to our{" "}
+              <Link to="/privacy" className="underline hover:text-zinc-900">
+                Privacy &amp; Terms
+              </Link>
+              .
             </p>
             <button
               type="submit"

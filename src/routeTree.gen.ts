@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -24,6 +25,11 @@ const QuoteRoute = QuoteRouteImport.update({
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeliveryRoute = DeliveryRouteImport.update({
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
 }
@@ -69,20 +77,36 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/delivery' | '/products' | '/quote'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/delivery'
+    | '/privacy'
+    | '/products'
+    | '/quote'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/delivery' | '/products' | '/quote'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/delivery'
+    | '/privacy'
+    | '/products'
+    | '/quote'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/contact'
     | '/delivery'
+    | '/privacy'
     | '/products'
     | '/quote'
   fileRoutesById: FileRoutesById
@@ -92,6 +116,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   DeliveryRoute: typeof DeliveryRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProductsRoute: typeof ProductsRoute
   QuoteRoute: typeof QuoteRoute
 }
@@ -110,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/products'
       fullPath: '/products'
       preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/delivery': {
@@ -148,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   DeliveryRoute: DeliveryRoute,
+  PrivacyRoute: PrivacyRoute,
   ProductsRoute: ProductsRoute,
   QuoteRoute: QuoteRoute,
 }
