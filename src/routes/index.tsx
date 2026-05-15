@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Award, Phone, Truck } from "lucide-react";
+import { ArrowRight, Phone, Truck } from "lucide-react";
 import heroImg from "@/assets/source/hero-yard-source.jpg";
 import yardWide from "@/assets/source/yard-trucks.jpg";
 import wbeSeal from "@/assets/source/wbe-seal.jpg";
