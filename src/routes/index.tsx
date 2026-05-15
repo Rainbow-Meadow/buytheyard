@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
-import heroImg from "@/assets/source/yard-piles.webp";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
+import abbyPortrait from "@/assets/source/abby-portrait.webp";
+import gardenPetunias from "@/assets/garden-petunias.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [
-      { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: abbyPortrait, fetchpriority: "high" },
     ],
   }),
   component: HomePage,
@@ -62,58 +63,109 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-surface text-surface-foreground overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7">
-            <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-6">
-              <span className="size-1.5 rounded-full bg-brand" />
-              Jefferson, MA · Woman-Owned · 10th Season · WBE Certified
-            </span>
-            <h1 className="font-display text-6xl md:text-8xl leading-[0.9] uppercase text-balance mb-8">
-              The Backbone of <span className="text-brand">Central Mass</span> Landscapes.
+      <section className="relative bg-kraft text-zinc-900 overflow-hidden border-b border-zinc-300/60">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Mobile-first: portrait first so Abby's face leads */}
+          <div className="order-1 lg:order-2 lg:col-span-5">
+            <div className="relative">
+              <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04),0_20px_40px_-24px_rgba(0,0,0,0.25)]">
+                <img
+                  src={abbyPortrait}
+                  alt="Abby, owner of Buy The Yard, at her yard in Jefferson, MA"
+                  width={1232}
+                  height={1540}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="hidden sm:block absolute -bottom-8 -left-8 w-[58%] aspect-[16/11] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)]">
+                <img
+                  src={gardenPetunias}
+                  alt="Hanging basket of petunias from the Buy The Yard flower wagon"
+                  width={900}
+                  height={620}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="order-2 lg:order-1 lg:col-span-7">
+            <p className="inline-flex items-center text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-700 mb-5 pb-2 border-b border-zinc-400/50">
+              Hi, I'm Abby — owner, Buy The Yard · Jefferson, MA
+            </p>
+            <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance mb-7">
+              A small yard,{" "}
+              <span className="text-brand">built by hand</span>, run by{" "}
+              <span className="relative inline-block text-brand">
+                Abby
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 200 14"
+                  preserveAspectRatio="none"
+                  className="absolute left-0 -bottom-1 w-full h-2 text-brand"
+                >
+                  <path
+                    d="M2 9 C 50 2, 110 2, 198 8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>{" "}
+              since 2017.
             </h1>
-            <p className="text-zinc-400 text-lg md:text-xl max-w-[52ch] mb-6 text-pretty">
-              <span className="text-zinc-200 font-semibold">Mulch · Loam · Sand · Stone</span>{" "}
-              — and a full plant nursery. Hanging baskets, annuals, compost, ASTM playground
-              chips, and winter salt. Loaded by hand, ready for pickup or delivery.
+            <p className="text-zinc-700 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
+              Mulch, loam, sand, stone, and a flower wagon full of hanging baskets.
+              Loaded by hand. Pickup or delivery anywhere in Central Mass.
             </p>
-            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-10">
-              Family-run · Serving Central MA since 2019 · Opening 4/1/26
-            </p>
-            <div className="flex flex-wrap gap-4">
+
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-700">
+              <span className="inline-flex items-center gap-2.5">
+                <img
+                  src={wbeSeal}
+                  alt=""
+                  width={36}
+                  height={36}
+                  className="size-9 object-contain bg-white p-0.5 ring-1 ring-zinc-300"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="text-xs uppercase tracking-[0.18em] font-semibold">
+                  Mass. WBE Certified
+                </span>
+              </span>
+              <span className="hidden sm:inline-block h-6 w-px bg-zinc-400/50" />
+              <span className="text-xs uppercase tracking-[0.18em] font-semibold">
+                10th season · 2026
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4">
               <Link
                 to="/products"
                 className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90 transition-opacity"
               >
-                View Materials
+                Shop materials
                 <ArrowRight className="size-4" />
               </Link>
               <Link
                 to="/quote"
-                className="inline-flex items-center gap-2 bg-white/10 text-white px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:bg-white/20 transition-colors"
+                className="inline-flex items-center gap-2 border border-zinc-900 text-zinc-900 px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:bg-zinc-900 hover:text-white transition-colors"
               >
-                Get a Quote
+                Get a quote
               </Link>
               <a
                 href="tel:5085799897"
-                className="inline-flex items-center gap-2 border border-white/20 text-white px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:bg-white/5 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors h-12 px-1"
               >
                 <Phone className="size-4" />
-                508.579.9897
+                Call Abby · 508.579.9897
               </a>
-            </div>
-          </div>
-          <div className="lg:col-span-5">
-            <div className="w-full aspect-[16/9] overflow-hidden rounded-md ring-1 ring-white/5 bg-zinc-900">
-              <img
-                src={heroImg}
-                alt="Buy The Yard supply yard in Jefferson, MA — mulch piles, loader, and the Mulch · Loam · Sand · Stone · Gravel sign with annual flowers in the foreground"
-                width={1600}
-                height={700}
-                fetchPriority="high"
-                decoding="async"
-                className="w-full h-full object-contain"
-              />
             </div>
           </div>
         </div>
