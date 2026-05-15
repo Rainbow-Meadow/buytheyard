@@ -22,6 +22,9 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:url", content: "/" },
     ],
+    links: [
+      { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" },
+    ],
   }),
   component: HomePage,
 });
@@ -68,8 +71,10 @@ function HomePage() {
               <img
                 src={heroImg}
                 alt="Dump truck unloading dark hemlock mulch at the Buy The Yard supply yard"
-                width={1080}
-                height={1350}
+                width={1600}
+                height={700}
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-contain"
               />
             </div>
@@ -127,7 +132,9 @@ function HomePage() {
         <img
           src={yardWide}
           alt=""
+          aria-hidden="true"
           loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-25"
         />
         <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -176,6 +183,7 @@ function HomePage() {
               height={96}
               className="size-20 object-contain bg-white p-1 ring-1 ring-zinc-300"
               loading="lazy"
+              decoding="async"
             />
             <div>
               <p className="font-display text-2xl uppercase">Certified Woman-Owned</p>

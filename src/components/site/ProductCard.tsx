@@ -7,7 +7,11 @@ export function ProductCard({ product }: { product: Product }) {
         <img
           src={product.image}
           alt={product.name}
+          width={1200}
+          height={1200}
           loading="lazy"
+          decoding="async"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>

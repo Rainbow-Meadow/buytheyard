@@ -40,9 +40,10 @@ function AboutPage() {
               <img
                 src={abbyPortrait}
                 alt="Abby, owner of Buy The Yard, in Jefferson, MA"
-                width={1200}
-                height={1500}
+                width={1232}
+                height={1600}
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -54,6 +55,7 @@ function AboutPage() {
                 height={64}
                 className="size-14 object-contain bg-white p-1 shrink-0 ring-1 ring-zinc-300"
                 loading="lazy"
+                decoding="async"
               />
               <div>
                 <p className="font-display text-xl uppercase leading-none">WBE Certified</p>
