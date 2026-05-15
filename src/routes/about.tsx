@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Award } from "lucide-react";
-import yardWide from "@/assets/yard-wide.jpg";
+import abbyPortrait from "@/assets/source/abby-portrait.jpg";
+import wbeSeal from "@/assets/source/wbe-seal.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -38,8 +38,8 @@ function AboutPage() {
           <div className="lg:col-span-5">
             <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-kraft">
               <img
-                src={yardWide}
-                alt="Buy The Yard supply yard in Jefferson, MA"
+                src={abbyPortrait}
+                alt="Abby, owner of Buy The Yard, in Jefferson, MA"
                 width={1200}
                 height={1500}
                 loading="lazy"
@@ -47,9 +47,14 @@ function AboutPage() {
               />
             </div>
             <div className="mt-6 flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
-              <span className="size-12 rounded-full bg-surface text-brand flex items-center justify-center shrink-0">
-                <Award className="size-6" />
-              </span>
+              <img
+                src={wbeSeal}
+                alt="Massachusetts WBE certified seal"
+                width={64}
+                height={64}
+                className="size-14 object-contain bg-white p-1 shrink-0 ring-1 ring-zinc-300"
+                loading="lazy"
+              />
               <div>
                 <p className="font-display text-xl uppercase leading-none">WBE Certified</p>
                 <p className="text-xs text-zinc-600 mt-1">
