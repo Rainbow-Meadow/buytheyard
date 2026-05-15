@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [
-      { rel: "preload", as: "image", href: abbyPortrait, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: btyTruck, fetchpriority: "high" },
     ],
   }),
   component: HomePage,
@@ -101,10 +101,8 @@ function HomePage() {
 
             <div className="aspect-[4/5] max-w-md overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04),0_20px_40px_-24px_rgba(0,0,0,0.25)] mb-9">
               <img
-                src={abbyPortrait}
-                alt="Abby, owner of Buy The Yard"
-                width={1232}
-                height={1540}
+                src={btyTruck}
+                alt="Buy The Yard delivery truck"
                 fetchPriority="high"
                 decoding="async"
                 className="w-full h-full object-cover"
@@ -277,8 +275,8 @@ function HomePage() {
           </div>
           <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm rounded-md">
             <img
-              src={btyTruck}
-              alt="Buy The Yard delivery truck"
+              src={abbyPortrait}
+              alt="Abby, owner of Buy The Yard"
               loading="lazy"
               decoding="async"
               className="w-full h-auto max-h-48 object-contain mb-4 pb-4 border-b border-white/10"
