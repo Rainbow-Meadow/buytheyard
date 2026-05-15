@@ -10,12 +10,12 @@ export const Route = createFileRoute("/products")({
       {
         name: "description",
         content:
-          "Full catalog: premium mulches, screened loam, mason sand, crushed and decorative stone, hanging baskets, annuals, plant mix and compost, plus ASTM-certified playground chips. Pickup or delivery from Jefferson, MA.",
+          "The full catalog. Mulches, screened loam, mason sand, crushed and decorative stone, hanging baskets, annuals, plant mix and compost, ASTM playground chips. Pickup or delivery from Jefferson, MA.",
       },
       { property: "og:title", content: "Products — Buy The Yard" },
       {
         property: "og:description",
-        content: "Bulk landscape materials by the yard. Pickup or delivery in Central Mass.",
+        content: "Bulk landscape materials. By the yard. Pickup or delivery in Central Mass.",
       },
       { property: "og:url", content: "/products" },
     ],
@@ -35,11 +35,11 @@ function ProductsPage() {
             Materials, by the <span className="text-brand">yard</span>.
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Pricing shifts seasonally and by quantity. Call{" "}
+            Pricing moves with the season — and with how much you need. Call{" "}
             <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
               508-579-9897
             </a>{" "}
-            for current rates and availability.
+            for today's number.
           </p>
         </div>
       </section>
@@ -74,9 +74,8 @@ function ProductsPage() {
             Don't see what you need?
           </h2>
           <p className="text-zinc-700 mb-8">
-            We stock more than what's listed here — bulk salt and ice melt all winter,
-            specialty bagged products, and seasonal one-offs. Give us a call — we'll
-            tell you straight.
+            We carry more than what's listed. Bulk salt and ice melt all winter.
+            Specialty bagged stuff. Seasonal one-offs. Pick up the phone — we'll tell you straight.
           </p>
           <a
             href="tel:5085799897"
