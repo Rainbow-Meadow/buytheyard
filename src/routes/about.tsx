@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
+import yardPatio from "@/assets/source/yard-banner-5.webp";
+import yardDog from "@/assets/source/yard-dog.webp";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -109,6 +111,43 @@ function AboutPage() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="pb-20 md:pb-28 bg-base">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <figure className="md:col-span-2 rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
+            <div className="aspect-[4/3] overflow-hidden">
+              <img
+                src={yardPatio}
+                alt="The Buy The Yard sit-and-stay area — Adirondack chairs, umbrellas, and an OPEN flag at the edge of the yard"
+                width={1500}
+                height={2000}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <figcaption className="p-5 text-xs uppercase tracking-widest text-zinc-600">
+              The sit-and-stay corner — coffee, umbrellas, and the OPEN flag.
+            </figcaption>
+          </figure>
+          <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
+            <div className="aspect-[4/5] overflow-hidden">
+              <img
+                src={yardDog}
+                alt="Charlie, the Buy The Yard office manager, watching the lot from the office window"
+                width={1500}
+                height={2000}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <figcaption className="p-5 text-xs uppercase tracking-widest text-zinc-600">
+              Charlie · office manager · accepts treats and pets.
+            </figcaption>
+          </figure>
         </div>
       </section>
     </>
