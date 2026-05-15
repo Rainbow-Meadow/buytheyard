@@ -11,7 +11,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Buy The Yard is a Massachusetts WBE-certified, woman-owned landscape supply yard founded by Abby in Jefferson, MA. Meet the owner.",
+          "Buy The Yard is a Massachusetts WBE-certified, woman-owned landscape supply yard in Jefferson, MA — built by Abby. Read her story.",
       },
       { property: "og:title", content: "Meet The Owner — Buy The Yard" },
       { property: "og:description", content: "Abby's story and the WBE-certified yard she built in Jefferson, MA." },
@@ -70,15 +70,13 @@ function AboutPage() {
 
           <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed">
             <p>
-              Abby graduated in 2016 from Wachusett Regional High School and went on to earn
-              an Entrepreneurship and Small Business degree in 2018. While in college, she
-              started applying what she was learning to build a real business.
+              Abby graduated Wachusett Regional High School in 2016. By 2018, she'd added
+              a degree in Entrepreneurship and Small Business — and was already building
+              one of her own.
             </p>
             <p>
-              Growing up, Abby was always outside, working alongside her father around trucks
-              and equipment — or just spreading mulch in the backyard at home. It was no
-              surprise when she decided that a career in the construction industry was going
-              to be her passion.
+              She grew up outside. Trucks. Equipment. Mulch in the backyard with her father.
+              A career in construction was never really a question — just a matter of when.
             </p>
             <blockquote className="border-l-4 border-brand pl-6 py-2 my-10 font-display text-2xl md:text-3xl uppercase text-zinc-900 leading-tight">
               "Opening this business was the perfect way to get into the industry. I can
@@ -86,19 +84,18 @@ function AboutPage() {
               pride in and enjoy coming to work every day."
             </blockquote>
             <p>
-              After three years in business, Abby made it possible for Buy The Yard to become
-              a Certified Woman Owned Enterprise.
+              Three years in, she made it official: Buy The Yard became a Certified
+              Woman-Owned Enterprise.
             </p>
             <p>
-              2026 marks the yard's <strong>10th season</strong> serving Central
-              Massachusetts — from spring mulch deliveries through winter salt. The
-              office manager is <strong>Charlie</strong>, the yard dog, who handles
-              greetings.
+              2026 is the yard's <strong>10th season</strong> serving Central
+              Massachusetts — from the first spring mulch run through winter salt.
+              Office manager: <strong>Charlie</strong>, the yard dog. He handles greetings.
             </p>
             <p>
-              "Stop by the yard at <strong>2264 Main St. in Jefferson, MA</strong> for a
-              visit. We're always happy to help with any questions and to provide top-notch
-              customer service."
+              "Stop by the yard at <strong>2264 Main St. in Jefferson, MA</strong>. We're
+              always happy to help with questions — and to give you the kind of service
+              that's hard to find anymore."
             </p>
             <p className="font-display text-2xl uppercase text-zinc-900">— Abby</p>
 

@@ -35,12 +35,12 @@ export const Route = createFileRoute("/quote")({
       {
         name: "description",
         content:
-          "Request a quote in under a minute and send it straight to Abby by email or text. Pickup or delivery in Central MA.",
+          "Build a quote in under a minute. Send it straight to Abby — by email or text. Pickup or delivery in Central MA.",
       },
       { property: "og:title", content: "Get a Quote — Buy The Yard" },
       {
         property: "og:description",
-        content: "Tell us what you need and we'll get back with pricing and a delivery window.",
+        content: "Tell us what you need. We come back with pricing and a delivery window.",
       },
       { property: "og:url", content: "/quote" },
     ],
@@ -115,9 +115,8 @@ function QuotePage() {
             Tell us what you need.
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Fill this out in under a minute. We'll format your request so you
-            can send it straight to Abby — by email or text — with everything
-            she needs to quote you back fast.
+            One minute. We'll format your request so you can fire it straight to Abby —
+            by email or text — with everything she needs to quote you back fast.
           </p>
         </div>
       </section>
@@ -134,8 +133,7 @@ function QuotePage() {
               <span className="text-brand">01.</span> What do you need?
             </legend>
             <p className="text-sm text-zinc-600 mb-6">
-              Add a row for each material. Quantities can be approximate — we'll
-              confirm.
+              One row per material. Quantities can be approximate — we'll lock them in.
             </p>
 
             <div className="space-y-4">
@@ -304,7 +302,7 @@ function QuotePage() {
                   >
                     {opt === "Pickup"
                       ? "I'll come to the yard with my truck or trailer."
-                      : "Bring it to my address (Central MA)."}
+                      : "Bring it to me. (Central MA.)"}
                   </p>
                 </label>
               ))}
@@ -501,7 +499,7 @@ function QuotePage() {
               <span className="text-brand">04.</span> Anything else?
             </legend>
             <p className="text-sm text-zinc-600 mb-3">
-              Optional — special instructions, access notes, or questions.
+              Optional. Special instructions, access notes, questions — anything Abby should know.
             </p>
             <NotesField register={register} watch={watch} />
             {formState.errors.notes && (
@@ -511,8 +509,8 @@ function QuotePage() {
 
           <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="text-xs text-zinc-600 max-w-[40ch]">
-              Next: we'll show your request and give you one tap to email or
-              text it to Abby. By submitting, you agree to our{" "}
+              Next: we show your request, you tap once to send. By submitting, you agree
+              to our{" "}
               <Link to="/privacy" className="underline hover:text-zinc-900">
                 Privacy &amp; Terms
               </Link>
@@ -591,8 +589,8 @@ function SuccessView({
             Send it to <span className="text-brand">Abby.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            One tap opens your mail app or messages with your request
-            pre-filled. No attachments, no extra steps — just hit send.
+            One tap opens your mail or messages, with the request pre-filled.
+            No attachments. No extra steps. Hit send.
           </p>
         </div>
       </section>

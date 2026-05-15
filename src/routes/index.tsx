@@ -14,12 +14,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Woman-owned bulk landscape yard and plant nursery in Jefferson, MA. Mulch, loam, sand, stone, hanging baskets, annuals, and ASTM playground chips. Now in our 10th season. Call 508-579-9897.",
+          "Woman-owned bulk landscape yard in Jefferson, MA. Mulch, loam, sand, stone, hanging baskets, annuals, and ASTM playground chips. 10th season. Call 508-579-9897.",
       },
       { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
       {
         property: "og:description",
-        content: "Bulk mulch, loam, sand, stone, and a full plant nursery. Pickup or delivery in Central Mass.",
+        content: "Bulk mulch, loam, sand, stone — and a full plant nursery. Pickup or delivery in Central Mass.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -45,17 +45,17 @@ function HomePage() {
   const updates = [
     {
       title: "Yard fully stocked",
-      body: "Hanging baskets $25 while supplies last. Dahlias $18, hydrangeas $22. Mulch, loam, plant mix, compost, and stone ready for pickup or delivery.",
+      body: "Hanging baskets are in. $25, while they last. Dahlias $18. Hydrangeas $22. Mulch, loam, plant mix, compost, and stone — ready to load.",
       tag: "This week",
     },
     {
       title: "Win 4 WooSox tickets",
-      body: "Every Friday in May we draw a winner. Buy 5+ yards of mulch and you're entered automatically — pickup or delivery counts.",
+      body: "Every Friday in May, we draw a name. Buy 5 yards of mulch (or more) and you're in. Pickup or delivery — both count.",
       tag: "Promo · May",
     },
     {
       title: "Now hiring seasonal drivers",
-      body: "Yard help and delivery drivers wanted for the spring/summer push. Must be 18+. Call Abby directly at 508-579-9897.",
+      body: "Spring and summer push starts soon. Looking for yard help and delivery drivers. 18+. Call Abby — 508-579-9897.",
       tag: "Hiring",
     },
   ];
@@ -92,8 +92,8 @@ function HomePage() {
               since 2017.
             </h1>
             <p className="text-zinc-700 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              Mulch, loam, sand, stone, and a flower wagon full of hanging baskets.
-              Loaded by hand. Pickup or delivery anywhere in Central Mass.
+              Mulch, loam, sand, stone — and a flower wagon full of hanging baskets.
+              Loaded by hand. Pickup or delivery, anywhere in Central Mass.
             </p>
 
             <div className="aspect-[4/5] max-w-md overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04),0_20px_40px_-24px_rgba(0,0,0,0.25)] mb-9">
@@ -240,7 +240,7 @@ function HomePage() {
             ))}
           </div>
           <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
-            820+ followers · daily yard updates, weather closures, and seasonal stock posted on Facebook.
+            820+ followers. Daily yard updates, weather closures, and what just rolled in — all on Facebook.
           </p>
         </div>
       </section>
@@ -262,8 +262,8 @@ function HomePage() {
               Need it delivered? <span className="text-brand">We'll bring it.</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Driveway-to-curbside delivery throughout Central Massachusetts. One-yard
-              minimum, 48-hour notice gets you on the schedule.
+              Curbside delivery across Central Massachusetts. One-yard minimum.
+              48 hours notice gets you on the truck.
             </p>
             <Link
               to="/delivery"
@@ -282,10 +282,10 @@ function HomePage() {
             />
             <ul className="divide-y divide-white/10">
               {[
-                ["Driveway-to-curb only", "We don't drive on lawns — protects turf & utilities."],
-                ["1 yard minimum", "Allow 48 hours for scheduling."],
-                ["Mark your spot", "Leave a tarp, cone, or note where to dump."],
-                ["4% card fee", "Avoidable with cash or check."],
+                ["Driveway-to-curb only", "We don't drive on lawns. Protects your turf and the utilities under it."],
+                ["1 yard minimum", "48 hours notice to lock in a spot."],
+                ["Mark your spot", "Tarp, cone, note — anything that says \"dump here.\""],
+                ["4% card fee", "Cash or check skips it."],
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="font-display text-xl uppercase">{k}</p>

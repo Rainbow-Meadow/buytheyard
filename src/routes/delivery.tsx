@@ -8,12 +8,12 @@ export const Route = createFileRoute("/delivery")({
       {
         name: "description",
         content:
-          "Pick up bulk material with your own truck, or schedule curbside delivery throughout Central MA. 1-yard minimum, 48-hour notice. Call 508-579-9897.",
+          "Pick up bulk material with your own truck, or get curbside delivery across Central MA. 1-yard minimum. 48-hour notice. Call 508-579-9897.",
       },
       { property: "og:title", content: "Delivery & Pickup — Buy The Yard" },
       {
         property: "og:description",
-        content: "How pickup and delivery work at the Jefferson, MA yard.",
+        content: "Two ways to get your material from the Jefferson, MA yard.",
       },
       { property: "og:url", content: "/delivery" },
     ],
@@ -22,10 +22,10 @@ export const Route = createFileRoute("/delivery")({
 });
 
 const POLICIES = [
-  ["Driveway-to-curbline only", "We don't put a loaded truck on a lawn — that's how property and underground utilities get damaged."],
-  ["1 yard minimum", "Allow 48 hours for delivery scheduling."],
-  ["Mark your spot", "Leave a tarp, bucket, cone, or note showing exactly where you want material dumped."],
-  ["Be home or be specific", "If you can't be there, written/photo instructions help us get it right the first time."],
+  ["Driveway-to-curbline only", "We don't put a loaded truck on a lawn. That's how property — and the utilities under it — get damaged."],
+  ["1 yard minimum", "48 hours notice to lock in a spot."],
+  ["Mark your spot", "Tarp, bucket, cone, note — anything that says exactly where to dump."],
+  ["Be home or be specific", "Can't be there? A photo or a written note keeps us from guessing."],
 ] as const;
 
 function DeliveryPage() {
@@ -48,8 +48,8 @@ function DeliveryPage() {
             <Warehouse className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">Pick it up</h2>
             <p className="text-zinc-700 mb-6">
-              Have your own truck or trailer? Stop by the yard during regular business hours
-              and we'll load you up. No appointment needed.
+              Got a truck or trailer? Pull in during business hours. We'll load you up.
+              No appointment needed.
             </p>
             <div className="space-y-2 text-sm text-zinc-700">
               <p><strong>Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
@@ -65,7 +65,7 @@ function DeliveryPage() {
             <Truck className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">We deliver</h2>
             <p className="text-zinc-300 mb-6">
-              Curbside delivery throughout Central Massachusetts. Call to confirm your area
+              Curbside delivery across Central Massachusetts. Call to confirm your area
               and book a time.
             </p>
             <a
@@ -109,8 +109,8 @@ function DeliveryPage() {
               Heads up: card convenience fee
             </h3>
             <p className="text-zinc-300">
-              To keep material costs down for our customers, there's a 4% convenience fee on
-              all card transactions. You can avoid it with cash or check.
+              We pass through a 4% fee on card transactions to keep material prices honest.
+              Cash or check skips it.
             </p>
           </div>
         </div>
