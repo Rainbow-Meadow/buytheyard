@@ -1,64 +1,31 @@
-## Enrichment pass #2 — reconciling with btymaterial.com
+## Add Privacy Policy & Terms
 
-The scrape surfaced facts that **conflict with or extend** what we currently have on the site. Most important: the FB-derived hours we put in last pass are wrong, and we missed a major trust signal (WBE certification).
+Abby's current site has a single combined page at `/privacy-policy` covering both Privacy Policy and Terms & Conditions (focused on SMS consent). I scraped it via Firecrawl — content is short and will port over verbatim, lightly cleaned for typos and formatting.
 
-### Authoritative facts found
+### What to build
 
-| Fact | Source says | Our site currently |
-|---|---|---|
-| **Hours (in-season 4/1–8/1)** | Mon–Fri **8a–5p**, Sat **8a–3p**, Sun closed | Mon–Fri 7a–4p, Sat 8a–12p ❌ |
-| **Season opens** | 4/1/26 | Generic "Spring" ❌ |
-| **WBE certification** | Certified Woman-Owned Enterprise (after year 3) | Not mentioned ❌ |
-| **Owner bio** | WRHS '16 grad, Entrepreneurship degree '18, grew up around her dad's trucks/equipment | Generic ❌ |
-| **Email** | `abby@btymaterial.com` | `abby@cmscllc.com` (from FB) ❌ |
-| **Established** | 2019 (©2019 by abby) | Not mentioned |
-| **Yelp** | `yelp.com/biz/buy-the-yard-holden` | Missing |
-| **Delivery policy** | Driveway-to-curbline only, 1 yd min, 48hr lead, leave a marker | Partial |
-| **Payment** | 4% card convenience fee, cash/check avoids it | Missing |
-| **Winter ops** | Salt & ice melt — call for pickup hours | Mentioned generally |
-| **Contact preference** | "Best way to contact us is CALL" — chat is not instant | Not emphasized |
+**New route:** `src/routes/privacy.tsx` → `/privacy`
+- Single page with two sections: "Privacy Policy" and "Terms & Conditions" (matches her current structure)
+- Uses existing site layout (SiteHeader / SiteFooter), prose styling consistent with About/Delivery
+- `head()` metadata: title "Privacy Policy & Terms — Buy The Yard Materials", matching description, og:title/og:description
 
-### Changes to apply
+**Content (cleaned, faithful to source):**
 
-**Hours / seasonal block** (`contact.tsx`, `delivery.tsx`, `SiteFooter.tsx`)
-- Replace 7–4/8–12 with **Mon–Fri 8a–5p, Sat 8a–3p**
-- "Opening for the 2026 season on **April 1**"
-- Keep summer-appointment + 6/28–7/6 closure notes from FB pass (those are still real)
-- Add winter salt/ice-melt note: call 508-579-9897 for loading hours
+> **Privacy Policy**
+> Personal information such as phone number and address provided in the "Let's Chat" section are used for business communication purposes only — quotes, answers to questions, and material delivery. Due to the nature of our services, address and phone number are necessary to provide delivery. We will not share your information for any reason; it can only be accessed by Buy The Yard personnel. SMS consent is not shared with third parties or affiliates for marketing purposes.
+>
+> **Terms & Conditions (SMS)**
+> - Messaging frequency may vary
+> - Message and data rates may apply
+> - To opt out at any time, text STOP
+> - For assistance, text HELP or visit btymaterial.com
+> - By opting into SMS from a web form or other medium, you agree to receive SMS messages from Buy The Yard, LLC. This includes messages for delivery scheduling, messages pertaining to existing orders, and responses to inquiries.
 
-**About page** (`about.tsx`)
-- Rewrite owner section with the real bio (Wachusett Regional '16, Entrepreneurship & Small Business '18, grew up working alongside her dad)
-- Add the actual quote: *"Opening this business was the perfect way to get involved in a career in this industry…"*
-- Keep Charlie reference
+**Footer link update:** `src/components/site/SiteFooter.tsx` — add a "Privacy & Terms" link pointing to `/privacy` in the existing footer link group.
 
-**WBE trust badge** — new
-- Add to Home hero stats strip and About page
-- "Certified Woman-Owned Business Enterprise (WBE)" — meaningful for municipal/commercial buyers (procurement set-asides)
-
-**Delivery page** (`delivery.tsx`)
-- Driveway-to-curbline-only policy (with the why: "large trucks on lawns damage turf and underground utilities")
-- 1 cubic yard minimum
-- 48-hour lead time
-- "Leave a tarp, bucket, or cone where you want it dumped"
-- 4% card fee disclosure / cash-or-check option
-
-**Contact page** (`contact.tsx`)
-- Fix email to `abby@btymaterial.com`
-- Add Yelp link alongside Facebook
-- Lead with "Call 508-579-9897 — fastest response"
-- Keep `abby@cmscllc.com` as a secondary "billing/admin" contact only if useful, otherwise drop
-
-**Footer** (`SiteFooter.tsx`)
-- Email fix, Yelp icon, "Est. 2019" microcopy, WBE badge
-
-**Homepage** (`index.tsx`)
-- Swap one of the stat cards to "WBE Certified" (replaces "820+ Followers" or sits alongside)
-- Update "10th Season" subhead to tie to "opening 4/1/26"
+**Quote form note:** Add a single line under the quote form submit ("By submitting, you agree to our [Privacy & Terms](/privacy).") in `src/routes/quote.tsx` since the form collects phone/address — mirrors her policy intent.
 
 ### Out of scope
-- No new products (this pass is content correction, not catalog)
-- Not touching the garden-center additions from last pass — those came from FB and are still valid
-- Not scraping `btymaterial.com/privacy-policy` unless you want it mirrored
-
-### Open question
-The old site says **Mon–Fri 8a–5p, Sat 8a–3p**, but Facebook posts said **Mon–Fri 7a–4p, Sat 8a–12p**. The FB posts are more recent activity, but the website is the official statement. **Which do you want as the published hours?** (Default: trust the website, since FB post hours can be one-off summer adjustments.)
+- No separate `/terms` route (her site doesn't split them; one page is faithful to source and easier for her to maintain mentally)
+- No new legal copy beyond what's on her current site
+- No header nav link (footer-only, standard for legal pages)
