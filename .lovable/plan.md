@@ -1,32 +1,23 @@
-## Replace product photos with Abby's real photos
+## Show the full pile photo on mobile
 
-Map the 7 uploaded photos to the existing asset filenames so no component imports change.
+The hero image (`IMG_3710`, the three mulch piles) is landscape (~2.4:1), but the hero frame is locked to `aspect-[4/5]` portrait with `object-cover`. On mobile that crops out the left and right piles, leaving only the middle one visible.
 
-| Upload | Replaces | Product |
-| --- | --- | --- |
-| `IMG_3718.jpeg` (red lava rock close-up) | `src/assets/stone-lava.jpg` | Red Lava Rock |
-| `IMG_3716.jpeg` (dark screened soil) | `src/assets/loam.jpg` | Screened Loam |
-| `IMG_3711.jpeg` (black shredded mulch) | `src/assets/mulch-black.jpg` | Premium Black Mulch |
-| `IMG_3714.jpeg` (reddish-brown bark) | `src/assets/mulch-hemlock.jpg` | Hemlock Mulch |
-| `IMG_3717.jpeg` (sand in hand) | `src/assets/sand.jpg` | Mason Sand |
-| `IMG_3710.jpeg` (yard piles, wide) | `src/assets/source/yard-piles.jpg` | Yard photo on About / homepage |
+### Fix
 
-**One open question — `IMG_3715.jpeg`** (dark chocolate-brown mulch): this doesn't match the current "Pine Bark Mulch" card (pine bark is light golden). Two options:
-- **A.** Use it as **Pine Bark Mulch** anyway (rename label to "Brown Mulch" since this is what Abby actually sells).
-- **B.** Add it as a **new product** ("Brown Mulch" or "Dark Brown Mulch") alongside black/hemlock/pine.
-- **C.** Skip it — leave the current pine bark stock photo in place.
+In `src/routes/index.tsx`, change the image frame so the full photo is visible on mobile, and keep the existing tall composition on desktop where it shares space with the headline column:
 
-I'll ask this in the next step before writing files.
+- Mobile (`< lg`): `aspect-[16/9]` + `object-contain` on a neutral backdrop, so all three piles fit edge-to-edge with no cropping.
+- Desktop (`lg+`): keep `aspect-[4/5]` + `object-cover` so the column still feels grounded next to the headline.
 
-### Processing
+Tailwind sketch:
+```
+<div class="w-full aspect-[16/9] lg:aspect-[4/5] overflow-hidden rounded-md ring-1 ring-white/5 bg-zinc-900">
+  <img class="w-full h-full object-contain lg:object-cover" ... />
+</div>
+```
 
-For each upload: copy from `user-uploads://`, resize to max 1600px on the long edge, square-crop center, JPEG quality ~82, write to the target path. Yard pile photo stays landscape (no square crop).
+That's the only change. No new assets, no copy edits, no layout changes outside the hero image frame.
 
-### Credits update
+### Verification
 
-Update `src/assets/PHOTO_CREDITS.md` to mark these 6 (or 7) files as "© Buy The Yard Materials — supplied by owner" and remove the Pexels rows for the replaced files.
-
-### Out of scope
-
-- Changing card layouts, copy, or adding a gallery/lightbox.
-- Touching the remaining stock photos (`mulch-pine`, `stone-blue`, `stone-pea`, `stone-river`) unless option A/B above changes pine.
+Screenshot at 414×896 (mobile) and 1280×720 (desktop) and confirm: mobile shows all three piles, desktop still shows the tall cropped composition.
