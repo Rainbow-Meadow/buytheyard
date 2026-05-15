@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook } from "lucide-react";
+import { Facebook, Star } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -19,19 +19,32 @@ export function SiteFooter() {
             508.579.9897
           </a>
           <a
-            href="mailto:abby@cmscllc.com"
+            href="mailto:abby@btymaterial.com"
             className="mt-2 block text-sm text-zinc-300 hover:text-zinc-100"
           >
-            abby@cmscllc.com
+            abby@btymaterial.com
           </a>
-          <a
-            href="https://www.facebook.com/BuyTheYardOutdoorProducts"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-brand"
-          >
-            <Facebook className="size-4" /> Follow on Facebook
-          </a>
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <a
+              href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-brand"
+            >
+              <Facebook className="size-4" /> Facebook
+            </a>
+            <a
+              href="https://www.yelp.com/biz/buy-the-yard-holden"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-brand"
+            >
+              <Star className="size-4" /> Yelp
+            </a>
+          </div>
+          <p className="mt-4 text-[10px] uppercase tracking-widest text-zinc-500">
+            Est. 2019 · WBE Certified
+          </p>
         </div>
         <div className="space-y-3">
           <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
@@ -48,14 +61,15 @@ export function SiteFooter() {
             Hours
           </h4>
           <p className="text-zinc-200 text-sm leading-relaxed">
-            Mon – Fri: 7:00am – 4:00pm
+            Mon – Fri: 8:00am – 5:00pm
             <br />
-            Saturday: 8:00am – 12:00pm
+            Saturday: 8:00am – 3:00pm
             <br />
             Sunday: Closed
           </p>
           <p className="text-xs text-zinc-500 leading-relaxed">
-            Aug+: weekends by appointment.<br />
+            In-season 4/1 – 8/1. Opening 4/1/26.<br />
+            Aug+: by appointment.<br />
             Open year-round — winter salt available, call for hours.
           </p>
         </div>
