@@ -90,6 +90,47 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Buy The Yard — Mulch, Loam, Sand & Stone in Jefferson, MA" },
       { name: "twitter:description", content: "Woman-owned bulk landscape supply yard in Jefferson, MA. Premium mulch, loam, sand, gravel, and specialty stone for pickup or delivery. Call 508-579-9897." },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://buytheyard.lovable.app/#website",
+              url: "https://buytheyard.lovable.app/",
+              name: "Buy The Yard",
+              publisher: { "@id": "https://buytheyard.lovable.app/#organization" },
+            },
+            {
+              "@type": "LocalBusiness",
+              "@id": "https://buytheyard.lovable.app/#organization",
+              name: "Buy The Yard",
+              url: "https://buytheyard.lovable.app/",
+              telephone: "+1-508-579-9897",
+              email: "abby@btymaterial.com",
+              image: "https://buytheyard.lovable.app/og/og-home.jpg",
+              logo: "https://buytheyard.lovable.app/brandmark.png",
+              priceRange: "$$",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "2264 Main St.",
+                addressLocality: "Jefferson",
+                addressRegion: "MA",
+                postalCode: "01522",
+                addressCountry: "US",
+              },
+              areaServed: "Central Massachusetts",
+              sameAs: [
+                "https://www.facebook.com/BuyTheYardOutdoorProducts",
+                "https://www.yelp.com/biz/buy-the-yard-holden",
+              ],
+            },
+          ],
+        }),
+      },
+    ],
     links: [
       { rel: "icon", type: "image/png", href: "/brandmark.png" },
       {
