@@ -277,7 +277,7 @@ function HomePage() {
                 Latest from the yard
               </p>
               <h2 className="font-display text-4xl md:text-5xl uppercase leading-[0.95] text-zinc-900 max-w-[20ch]">
-                What's happening this week.
+                What's actually on the yard this week.
               </h2>
             </div>
             <a
@@ -307,7 +307,7 @@ function HomePage() {
             ))}
           </div>
           <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
-            820+ followers. Daily yard updates, weather closures, and what just rolled in — all on Facebook.
+            820+ neighbors get the daily yard update on Facebook — what's freshly screened, what just rolled off the truck, and any weather days we're closed.
           </p>
         </div>
       </section>
@@ -322,11 +322,12 @@ function HomePage() {
                 2026 price list
               </p>
               <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[18ch]">
-                Honest prices, by the yard.
+                Posted. Not whispered.
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Posted, not whispered. Same price for everyone — homeowner or contractor.
-                Pickup or delivery. 1-yard minimum. Cash or check skips the 4% card fee.
+                Same number for the contractor and the homeowner. Pickup or
+                delivery. 1-yard minimum. Cash or check skips the 4% card fee —
+                that's the processor's cut, not ours.
               </p>
             </div>
             <a
@@ -361,11 +362,11 @@ function HomePage() {
           </div>
 
           <p className="mt-8 text-xs text-zinc-600">
-            Prices per cubic yard unless noted. Delivery quoted by zip — call Abby at{" "}
+            Per cubic yard unless noted. Delivery is quoted by ZIP — call Abby at{" "}
             <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
               508.579.9897
             </a>{" "}
-            for a same-day estimate. MA 6.25% sales tax applies where required.
+            and you'll have a same-day number. MA 6.25% sales tax applies where required.
           </p>
         </div>
       </section>
@@ -387,8 +388,9 @@ function HomePage() {
               You call. We load. <span className="text-brand">It shows up.</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery all over Central Mass. One-yard minimum, and
-              about 48 hours' notice is all we need to get you on the truck.
+              Curbside delivery anywhere in Central Mass. One-yard minimum.
+              Call before noon and we'll try to make it today — otherwise about
+              48 hours puts you on the truck.
             </p>
             <Link
               to="/delivery"
@@ -407,10 +409,10 @@ function HomePage() {
             />
             <ul className="divide-y divide-white/10">
               {[
-                ["Driveway-to-curb only", "We stay off lawns — it keeps your grass (and the lines underneath) in good shape."],
-                ["1 yard minimum", "About 48 hours' notice to lock in a spot."],
-                ["Mark your spot", "A tarp, cone, or quick note works great — just lets us know exactly where to drop it."],
-                ["4% card fee", "That's the processor's cut, not ours. Cash or check skips it."],
+                ["Driveway-to-curb only", "Your grass — and the gas line under it — stays where it should."],
+                ["1 yard minimum", "Call before noon today, or give us about 48 hours."],
+                ["Mark your spot", "A tarp, a cone, even a sticky note. Tells us exactly where to drop it."],
+                ["4% card fee", "Processor's cut, not ours. Cash or check skips it entirely."],
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="font-display text-xl uppercase">{k}</p>
@@ -437,7 +439,7 @@ function HomePage() {
             />
             <div>
               <p className="font-display text-2xl uppercase">Certified Woman-Owned</p>
-              <p className="text-sm text-zinc-600">Massachusetts WBE certified since year three.</p>
+              <p className="text-sm text-zinc-600">Massachusetts WBE since year three. Same Abby, every season.</p>
             </div>
           </div>
           <Link
