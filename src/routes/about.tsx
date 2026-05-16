@@ -73,18 +73,18 @@ function AboutPage() {
               Here's the thing about landscape supply.
             </p>
             <p>
-              Most yards treat you like a ticket number. Loaded fast. Out the gate. Next.
+              A lot of yards run you through like a ticket number — loaded fast, out the gate, on to the next one.
             </p>
             <p>
-              I built this one different.
+              I wanted this one to feel a little different.
             </p>
             <p>
-              I grew up outside. Trucks. Equipment. Mulch in the backyard with my dad. So
-              construction was never really a question — just a matter of when.
+              I grew up outside — trucks, equipment, mulch piles in the backyard with my dad. So
+              construction was never really a question, just a matter of when.
             </p>
             <p>
               I graduated Wachusett Regional in 2016. Opened the yard the same year.
-              Added an Entrepreneurship and Small Business degree by 2018 — already running
+              Added an Entrepreneurship and Small Business degree by 2018 — while already running
               one of my own.
             </p>
             <blockquote className="border-l-4 border-brand pl-6 py-2 my-10 font-display text-2xl md:text-3xl uppercase text-zinc-900 leading-tight">
@@ -92,19 +92,19 @@ function AboutPage() {
               showing up for every day."
             </blockquote>
             <p>
-              Three years in? Made it official. Buy The Yard became a Certified
+              Three years in, we made it official — Buy The Yard became a Certified
               Woman-Owned Enterprise.
             </p>
             <p>
               2026 is our <strong>10th season</strong>. From the first spring mulch run
-              through winter salt. Same yard. Same answer when you call.
+              through winter salt. Same yard, same friendly voice when you call.
             </p>
             <p>
-              Office manager: <strong>Charlie</strong>. He's a dog. He handles greetings.
+              Office manager: <strong>Charlie</strong>. He's a dog, and he handles all the greetings.
             </p>
             <p>
-              Stop by — <strong>2264 Main St., Jefferson, MA</strong>. Ask anything.
-              We'll give you a real answer.
+              Stop by anytime — <strong>2264 Main St., Jefferson, MA</strong>. Ask us anything;
+              we're always happy to talk it through.
             </p>
             <p className="font-display text-2xl uppercase text-zinc-900">— Abby</p>
 
