@@ -5,8 +5,8 @@ import brandmark from "@/assets/brandmark.png";
 export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 py-10 md:py-16 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 md:gap-12">
-        <div className="col-span-2 md:col-span-1 flex flex-col items-center text-center md:items-start md:text-left">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 text-center md:text-left">
+        <div className="md:col-span-1 flex flex-col items-center md:items-start">
           <img
             src={brandmark}
             alt="Buy The Yard — Mulch · Loam · Sand · Stone"
@@ -50,7 +50,7 @@ export function SiteFooter() {
             Est. 2016 · WBE Certified
           </p>
         </div>
-        <div className="space-y-2 md:space-y-3 order-2">
+        <div className="space-y-2 md:space-y-3 flex flex-col items-center md:items-start">
           <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
             Visit
           </h4>
@@ -60,19 +60,7 @@ export function SiteFooter() {
             Jefferson, MA 01522
           </p>
         </div>
-        <div className="space-y-2 md:space-y-3 order-3 md:order-4">
-          <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
-            Site
-          </h4>
-          <ul className="space-y-1.5 md:space-y-2 text-sm text-zinc-300">
-            <li><Link to="/products" className="hover:text-zinc-100">Products</Link></li>
-            <li><Link to="/about" className="hover:text-zinc-100">About</Link></li>
-            <li><Link to="/delivery" className="hover:text-zinc-100">Delivery &amp; Pickup</Link></li>
-            <li><Link to="/contact" className="hover:text-zinc-100">Contact</Link></li>
-            <li><Link to="/privacy" className="hover:text-zinc-100">Privacy &amp; Terms</Link></li>
-          </ul>
-        </div>
-        <div className="col-span-2 md:col-span-1 space-y-2 md:space-y-3 order-4 md:order-3">
+        <div className="space-y-2 md:space-y-3 flex flex-col items-center md:items-start order-last md:order-none">
           <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
             Hours
           </h4>
@@ -83,11 +71,23 @@ export function SiteFooter() {
             <br />
             Sunday: Closed
           </p>
-          <p className="text-xs text-zinc-500 leading-relaxed">
+          <p className="text-xs text-zinc-500 leading-relaxed max-w-[34ch]">
             In-season 4/1 – 8/1. Opening 4/1/26.<br />
             Aug+: by appointment.<br />
             Open year-round — winter salt available, call for hours.
           </p>
+        </div>
+        <div className="space-y-2 md:space-y-3 flex flex-col items-center md:items-start">
+          <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
+            Site
+          </h4>
+          <ul className="space-y-1.5 md:space-y-2 text-sm text-zinc-300">
+            <li><Link to="/products" className="hover:text-zinc-100">Products</Link></li>
+            <li><Link to="/about" className="hover:text-zinc-100">About</Link></li>
+            <li><Link to="/delivery" className="hover:text-zinc-100">Delivery &amp; Pickup</Link></li>
+            <li><Link to="/contact" className="hover:text-zinc-100">Contact</Link></li>
+            <li><Link to="/privacy" className="hover:text-zinc-100">Privacy &amp; Terms</Link></li>
+          </ul>
         </div>
       </div>
       <div className="border-t border-white/5">
