@@ -72,41 +72,36 @@ function AboutPage() {
 
           <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed">
             <p>
-              Here's the thing about landscape supply.
+              Most landscape yards treat you like a ticket number. Loaded fast, out the gate, on to the next one.
             </p>
             <p>
-              A lot of yards run you through like a ticket number — loaded fast, out the gate, on to the next one.
+              I built this one to feel like the opposite.
             </p>
             <p>
-              I wanted this one to feel a little different.
+              I grew up outside — trucks, equipment, mulch piles in the backyard with my dad.
+              Construction was never the question. Only when.
             </p>
             <p>
-              I grew up outside — trucks, equipment, mulch piles in the backyard with my dad. So
-              construction was never really a question, just a matter of when.
-            </p>
-            <p>
-              I graduated Wachusett Regional in 2016. Opened the yard the same year.
-              Added an Entrepreneurship and Small Business degree by 2018 — while already running
-              one of my own.
+              I graduated Wachusett Regional in 2016 and opened the yard that same spring.
+              Two years later I finished my Entrepreneurship and Small Business degree —
+              while already running one of my own.
             </p>
             <blockquote className="border-l-4 border-brand pl-6 py-2 my-10 font-display text-2xl md:text-3xl uppercase text-zinc-900 leading-tight">
-              "This isn't just a job. It's something I take pride in and actually enjoy
-              showing up for every day."
+              "If you call this number, I pick up. That's the whole business model."
             </blockquote>
             <p>
-              Three years in, we made it official — Buy The Yard became a Certified
-              Woman-Owned Enterprise.
+              Year three, we made it official: Massachusetts Certified Woman-Owned Enterprise.
             </p>
             <p>
-              2026 is our <strong>10th season</strong>. From the first spring mulch run
-              through winter salt. Same yard, same friendly voice when you call.
+              2026 is our <strong>10th season</strong> — first spring mulch run through
+              winter salt, same yard, same voice on the phone.
             </p>
             <p>
-              Office manager: <strong>Charlie</strong>. He's a dog, and he handles all the greetings.
+              Office manager: <strong>Charlie</strong>. He's a dog. He handles the greetings.
             </p>
             <p>
-              Stop by anytime — <strong>2264 Main St., Jefferson, MA</strong>. Ask us anything;
-              we're always happy to talk it through.
+              Come by — <strong>2264 Main St., Jefferson, MA</strong>. Bring your questions,
+              even the "how much do I need?" ones. Especially those.
             </p>
             <p className="font-display text-2xl uppercase text-zinc-900">— Abby</p>
 
