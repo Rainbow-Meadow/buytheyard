@@ -1,12 +1,16 @@
-Replace the mobile hero image on the home page with the newly uploaded photo (Adirondack chairs around the fire pit with the yard and flag in the background).
+Replace the desktop hero collage on the home page with the newly uploaded wide photo (loader, mulch piles, OPEN flag, Adirondack chairs, flowers).
 
 ## Steps
 
-1. Copy `user-uploads://0F93C1CA-06CB-403B-AE1B-4EB6D68CB40B.png` to `src/assets/source/hero-mobile-firepit.webp` (keep PNG extension if conversion isn't trivial — use `.png`).
+1. Copy `user-uploads://B21354B8-1C82-42BD-B638-37901FFEF993.png` to `src/assets/source/hero-desktop-yard.png`.
 2. In `src/routes/index.tsx`:
-   - Replace the `dumpTruckMobile` import with the new asset.
-   - Update the `<img>` `alt` text to describe the new scene (e.g. "Adirondack chairs around a fire pit at the Buy The Yard yard with mulch piles and flag in background").
-   - Update the `<link rel="preload">` for mobile to point to the new image.
-3. Leave desktop hero collage unchanged.
+   - Add a `heroDesktop` import for the new image.
+   - Remove the now-unused imports `yardWide`, `yardPiles`, `loadingTruck` from the hero (keep `yardWide` only if still used in the Delivery callout — it is, so leave that import).
+   - Replace the 3-column collage `<div className="hidden md:grid ...">` with a single full-bleed `<img>` using `heroDesktop`, `object-cover`, `fetchPriority="high"`, eager load, with descriptive alt text.
+   - Update the desktop `<link rel="preload">` to point to `heroDesktop` instead of `yardWide`.
+3. Leave mobile hero (fire-pit image) and the rest of the page unchanged.
 
-No other files affected.
+## Technical notes
+
+- `yardWide` is still referenced by the Delivery callout background — keep that import.
+- `yardPiles` and `loadingTruck` imports become unused after removing the collage; delete them to keep the build clean.
