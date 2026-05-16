@@ -48,6 +48,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href="tel:5085799897"
+            aria-label="Call Buy The Yard at 508-579-9897"
             className="inline-flex items-center gap-2 bg-brand text-brand-foreground py-2 pr-3 pl-2 rounded-sm hover:opacity-90 transition-opacity"
           >
             <span className="p-1 bg-white/15 rounded-xs shrink-0">
