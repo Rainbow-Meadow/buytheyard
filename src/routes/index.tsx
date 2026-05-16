@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
-import yardPiles from "@/assets/source/yard-piles.webp";
-import loadingTruck from "@/assets/source/loading-truck.webp";
 import heroMobile from "@/assets/source/hero-mobile-firepit.png";
+import heroDesktop from "@/assets/source/hero-desktop-yard.png";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
@@ -28,7 +27,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "preload", as: "image", href: heroMobile, fetchpriority: "high", media: "(max-width: 767px)" },
-      { rel: "preload", as: "image", href: yardWide, fetchpriority: "high", media: "(min-width: 768px)" },
+      { rel: "preload", as: "image", href: heroDesktop, fetchpriority: "high", media: "(min-width: 768px)" },
     ],
   }),
   component: HomePage,
@@ -77,31 +76,15 @@ function HomePage() {
           decoding="async"
           className="md:hidden absolute inset-0 w-full h-full object-cover object-center"
         />
-        {/* Desktop collage background — 3 cols */}
-        <div className="hidden md:grid absolute inset-0 grid-cols-3 grid-rows-2 gap-[2px] bg-zinc-950">
-          <img
-            src={yardWide}
-            alt="The Buy The Yard yard with trucks and bulk material bins"
-            fetchPriority="high"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover col-span-2 row-span-2"
-          />
-          <img
-            src={yardPiles}
-            alt="Mulch piles at the yard"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover"
-          />
-          <img
-            src={loadingTruck}
-            alt="Loader filling a delivery truck with mulch"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover"
-          />
-        </div>
+        {/* Desktop hero background */}
+        <img
+          src={heroDesktop}
+          alt="The Buy The Yard yard with a loader, mulch and stone piles, OPEN flag, and Adirondack chairs by the flower beds"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover"
+        />
         {/* Scrim */}
         <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
         {/* Extra mobile scrim for headline contrast over the photo */}
