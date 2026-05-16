@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
-import { categories, products } from "@/data/products";
+import { categories, categoryPricing, products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/products")({
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/products")({
       {
         name: "description",
         content:
-          "The full catalog. Mulches, screened loam, mason sand, crushed and decorative stone, hanging baskets, annuals, plant mix and compost, ASTM playground chips. Pickup or delivery from Jefferson, MA.",
+          "Bulk mulch, loam, sand, gravel, specialty stone, plus garden center and ASTM playground chips. Pickup or delivery from Jefferson, MA.",
       },
       { property: "og:title", content: "Products — Buy The Yard" },
       {
@@ -20,6 +20,42 @@ export const Route = createFileRoute("/products")({
       { property: "og:url", content: "/products" },
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://buytheyard.lovable.app/products" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Buy The Yard — Materials Catalog",
+          itemListElement: products.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Product",
+              name: p.name,
+              description: p.description,
+              category: p.category,
+              brand: { "@type": "Brand", name: "Buy The Yard" },
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "USD",
+                priceSpecification: {
+                  "@type": "PriceSpecification",
+                  price: categoryPricing[p.category].range,
+                  priceCurrency: "USD",
+                  unitText: categoryPricing[p.category].unit,
+                },
+                availability: "https://schema.org/InStock",
+                seller: { "@type": "LocalBusiness", name: "Buy The Yard" },
+              },
+            },
+          })),
+        }),
+      },
     ],
   }),
   component: ProductsPage,
