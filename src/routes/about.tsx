@@ -74,6 +74,9 @@ function AboutPage() {
           </div>
 
           <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed">
+            <h2 className="font-display text-3xl md:text-4xl uppercase text-zinc-900 leading-tight">
+              Our Story
+            </h2>
             <p>
               Most landscape yards treat you like a ticket number. Loaded fast, out the gate, on to the next one.
             </p>
@@ -122,6 +125,9 @@ function AboutPage() {
 
       <section className="pb-20 md:pb-28 bg-base">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <h2 className="md:col-span-3 font-display text-3xl md:text-4xl uppercase text-zinc-900 leading-tight">
+            Around the Yard
+          </h2>
           <figure className="md:col-span-2 rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
             <div className="aspect-[4/3] overflow-hidden">
               <img
