@@ -25,6 +25,9 @@ export const Route = createFileRoute("/contact")({
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
     ],
+    links: [
+      { rel: "canonical", href: "https://buytheyard.lovable.app/contact" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
