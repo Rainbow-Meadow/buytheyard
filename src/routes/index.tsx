@@ -291,7 +291,7 @@ function HomePage() {
       {/* Product preview */}
       <section className="py-20 md:py-28 bg-base">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-14">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                 Bulk materials &amp; garden center
@@ -302,17 +302,30 @@ function HomePage() {
             </div>
             <Link
               to="/products"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
             >
               See full catalog <ArrowRight className="size-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featured.map((p) => (
-              <ProductCard key={p.name} product={p} />
-            ))}
-          </div>
+          <MobileCollapse
+            id="featured-products"
+            open={productsOpen}
+            onToggle={() => setProductsOpen((v) => !v)}
+            label="6 featured products"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featured.map((p) => (
+                <ProductCard key={p.name} product={p} />
+              ))}
+            </div>
+            <Link
+              to="/products"
+              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+            >
+              See full catalog <ArrowRight className="size-4" />
+            </Link>
+          </MobileCollapse>
         </div>
       </section>
 
