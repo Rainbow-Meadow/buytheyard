@@ -504,17 +504,18 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    Posted by category, right above this section. Mulch runs
-                    $48–$50/yd, loam and compost $45–$55/yd, sand and gravel $55/yd,
-                    specialty stone $135–$185/yd. One-yard minimum, same number for
-                    contractor and homeowner.
+                    Pricing is posted by category in the section above. Mulch
+                    runs $48–$50/yd, loam and compost $45–$55/yd, sand and
+                    gravel $55/yd, and specialty stone $135–$185/yd. One-yard
+                    minimum, with the same pricing for contractors and
+                    homeowners.
                   </p>
                   <p className="mt-3">
-                    Want today's exact number for your project?{" "}
+                    For an exact quote on your project, please{" "}
                     <a href="tel:5085799897" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
-                      Call 508-579-9897
-                    </a>{" "}
-                    — Abby picks up.
+                      call 508-579-9897
+                    </a>
+                    .
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -525,13 +526,15 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    Curbside delivery across Central Massachusetts out of Jefferson.
-                    Holden, Princeton, Sterling, Rutland, West Boylston, Paxton,
-                    Worcester, Leominster — and plenty of towns in between.
+                    We offer curbside delivery throughout Central Massachusetts
+                    from our Jefferson yard, including Holden, Princeton,
+                    Sterling, Rutland, West Boylston, Paxton, Worcester,
+                    Leominster, and surrounding towns.
                   </p>
                   <p className="mt-3">
-                    Delivery is priced by ZIP. One quick call confirms the area and
-                    locks in the number before the truck moves. See full details on{" "}
+                    Delivery is priced by ZIP code. A brief call confirms your
+                    service area and final price before your order is
+                    dispatched. Full details are available on{" "}
                     <Link to="/delivery" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
                       the delivery page
                     </Link>
@@ -546,9 +549,10 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    It's the processor's cut — we don't see a dime of it. Cash or
-                    check skips it completely. Same posted price either way, no
-                    surprises at the gate.
+                    The 4% surcharge is passed through directly from our
+                    payment processor. Cash and check payments are accepted
+                    with no additional fee. Posted pricing remains the same
+                    regardless of payment method.
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -559,17 +563,18 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    Call before noon and if there's a window left on today's route,
-                    you're on it. Otherwise about 48 hours puts you on the schedule.
+                    Same-day delivery may be available when you call before
+                    noon, depending on the day's route. Otherwise, please
+                    allow approximately 48 hours.
                   </p>
                   <p className="mt-3">
-                    Delivery is driveway-to-curb only. Mark the spot with a tarp,
-                    cone, or sticky note and we'll drop the pile exactly there.
-                    Have a list ready?{" "}
+                    Delivery is made to the driveway or curbline only. Please
+                    mark your preferred drop location so we can place the
+                    material accurately. To submit a material list,{" "}
                     <Link to="/quote" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
-                      Start a quote
+                      start a quote
                     </Link>{" "}
-                    and Abby comes back same-day.
+                    and we'll respond the same day.
                   </p>
                 </AccordionContent>
               </AccordionItem>
