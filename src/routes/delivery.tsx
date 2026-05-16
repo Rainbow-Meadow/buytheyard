@@ -24,10 +24,10 @@ export const Route = createFileRoute("/delivery")({
 });
 
 const POLICIES = [
-  ["Driveway-to-curbline only", "Your grass — and the gas, water, and irrigation lines running under it — stay where they should. Loaded trucks are heavy. Lawns are not."],
-  ["1 yard minimum", "Call before noon and we try to make it today. Otherwise about 48 hours puts you on the schedule."],
-  ["Mark your spot", "A tarp, a bucket, a cone, a sticky note. Anything that tells us where the pile goes so you don't end up moving it twice."],
-  ["Be home or be specific", "Can't be there? Send a photo and a sentence. Saves us guessing, saves you a do-over."],
+  ["Driveway-to-curbline only", "Deliveries are made to the driveway or curbline only. This protects your lawn and any gas, water, or irrigation lines beneath it."],
+  ["1 yard minimum", "Call before noon for same-day delivery when available; otherwise, please allow approximately 48 hours."],
+  ["Mark your spot", "Please mark your preferred drop location with a tarp, bucket, cone, or similar marker so we can place the material accurately."],
+  ["Be home or be specific", "If you can't be present at delivery, please send a photo and a brief note describing where the material should be placed."],
 ] as const;
 
 function DeliveryPage() {
