@@ -64,11 +64,11 @@ function MobileCollapse({
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Buy The Yard — Mulch, Loam, Sand & Stone | Jefferson, MA" },
+      { title: "Mulch, Loam, Sand & Stone — Jefferson, MA | Central MA Delivery" },
       {
         name: "description",
         content:
-          "Bulk mulch, loam, sand, and stone — plus a little flower wagon. Woman-owned, in Jefferson, MA. 10th season and happy to help. Call 508-579-9897.",
+          "Bulk mulch, loam, sand & stone from our Jefferson, MA yard. Delivery to Holden, Worcester, Princeton, Sterling, Rutland & all of Central Mass. Call 508-579-9897.",
       },
       { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
       {
