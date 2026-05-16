@@ -377,7 +377,7 @@ function HomePage() {
       {/* Pricing */}
       <section className="py-20 md:py-28 bg-base">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-12">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
                 <Tag className="size-3.5" />
@@ -394,42 +394,57 @@ function HomePage() {
             </div>
             <a
               href="tel:5085799897"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
             >
               <Phone className="size-4" />
               Call for a quote
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {priceGroups.map((group) => (
-              <div
-                key={group.heading}
-                className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
-              >
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
-                  {group.heading}
-                </p>
-                <p className="font-display text-5xl uppercase text-zinc-950 leading-none mb-2">
-                  {group.range}
-                </p>
-                <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-4">
-                  {group.unit}
-                </p>
-                <p className="text-sm text-zinc-700 mt-auto pt-4 border-t border-zinc-200">
-                  {group.includes}
-                </p>
-              </div>
-            ))}
-          </div>
+          <MobileCollapse
+            id="pricing-grid"
+            open={pricingOpen}
+            onToggle={() => setPricingOpen((v) => !v)}
+            label="full price list"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {priceGroups.map((group) => (
+                <div
+                  key={group.heading}
+                  className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
+                    {group.heading}
+                  </p>
+                  <p className="font-display text-5xl uppercase text-zinc-950 leading-none mb-2">
+                    {group.range}
+                  </p>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-4">
+                    {group.unit}
+                  </p>
+                  <p className="text-sm text-zinc-700 mt-auto pt-4 border-t border-zinc-200">
+                    {group.includes}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-          <p className="mt-8 text-xs text-zinc-600">
-            Per cubic yard unless noted. Delivery is quoted by ZIP — call Abby at{" "}
-            <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
-              508.579.9897
-            </a>{" "}
-            and you'll have a same-day number. MA 6.25% sales tax applies where required.
-          </p>
+            <p className="mt-8 text-xs text-zinc-600">
+              Per cubic yard unless noted. Delivery is quoted by ZIP — call Abby at{" "}
+              <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
+                508.579.9897
+              </a>{" "}
+              and you'll have a same-day number. MA 6.25% sales tax applies where required.
+            </p>
+
+            <a
+              href="tel:5085799897"
+              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+            >
+              <Phone className="size-4" />
+              Call for a quote
+            </a>
+          </MobileCollapse>
         </div>
       </section>
 
