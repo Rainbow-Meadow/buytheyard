@@ -91,12 +91,12 @@ export function ChatWidget() {
             <div className="flex-1 min-w-0">
               <p className="font-display text-base uppercase leading-none">BTY Helper</p>
               <p className="text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
-                Powered by AI · Replies are not from Abby
+                AI assistant · not Abby
               </p>
             </div>
             <a
               href={buildMailto(messages)}
-              className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-brand hover:text-brand/80"
+              className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-brand-foreground bg-brand hover:opacity-90 px-2.5 py-1.5 rounded shrink-0"
               title="Email Abby with the chat transcript"
             >
               Talk to Abby
