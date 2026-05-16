@@ -52,54 +52,54 @@ function HomePage() {
       heading: "Mulch",
       range: "$48–$50",
       unit: "per yard",
-      includes: "Premium Black · Hemlock · Dark Brown",
+      includes: "Premium Black for the wow factor. Hemlock for the classics. Dark Brown for everything in between.",
     },
     {
       heading: "Loam, Compost & Plant Mix",
       range: "$45–$55",
       unit: "per yard",
-      includes: "Screened Loam · Plant Mix · Bulk Compost",
+      includes: "Screened loam for new lawns. Plant mix and compost for beds that need a reset.",
     },
     {
       heading: "Sand & Gravel",
       range: "$55",
       unit: "per yard",
-      includes: "Mason Sand · 3/4\" Crushed Blue · 3/8\" Pea Stone",
+      includes: "Mason sand, 3/4\" crushed blue for drives and drainage, 3/8\" pea for paths.",
     },
     {
       heading: "Specialty Stone",
       range: "$135–$185",
       unit: "per yard",
-      includes: "River Stone · Red Lava Rock",
+      includes: "Tumbled river stone and bold red lava — the bed dressings that get noticed.",
     },
     {
       heading: "Playground Chips",
       range: "$60",
       unit: "per yard · ASTM certified",
-      includes: "F1292 · F2075 · F1951",
+      includes: "ASTM F1292, F2075, and F1951 — the spec your inspector is actually looking for.",
     },
     {
       heading: "Garden Center",
       range: "From $18",
       unit: "per item",
-      includes: "Annuals · Perennials · Hanging Baskets ($40 ea · 2 for $70)",
+      includes: "Annuals and perennials from $18. Hanging baskets $40 each, or 2 for $70.",
     },
   ];
 
   const updates = [
     {
-      title: "Mother's Day baskets are in.",
-      body: "$40 each, or 2 for $70 — built fresh on the wagon. They tend to go quick, so swing by or give us a call at 508-579-9897 and we'll set one aside.",
+      title: "Mother's Day baskets are on the wagon.",
+      body: "Built this morning. $40 each, or 2 for $70. They walk off fast — call 508-579-9897 and we'll hold one with your name on it.",
       tag: "Mother's Day",
     },
     {
-      title: "Buy 5 yards of mulch, win WooSox tickets.",
-      body: "Every mulch order of 5 yards or more in May goes in the hat. We pull 4 winners every Friday — pickup or delivery, both count. Good luck!",
+      title: "5 yards of mulch = a shot at WooSox tickets.",
+      body: "Every May order of 5 yards or more goes in the hat. Four winners pulled every Friday. Pickup or delivery — both count the same.",
       tag: "Promo · May",
     },
     {
-      title: "Call before noon, get it today.",
-      body: "Same-day delivery isn't a slogan — it's the truck out in the yard. Give us a ring before noon and if we have a window open, we'll get you on the route.",
+      title: "Call before noon. We try to deliver today.",
+      body: "Not a slogan — that's the truck sitting out in the yard. Ring us before noon and if there's a window left on the route, you're on it.",
       tag: "How it works",
     },
   ];
