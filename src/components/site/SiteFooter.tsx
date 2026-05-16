@@ -5,7 +5,7 @@ import brandmark from "@/assets/brandmark.png";
 export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-14 md:gap-12">
         <div className="md:col-span-1 flex flex-col items-center text-center md:items-start md:text-left">
           <img
             src={brandmark}
@@ -18,17 +18,17 @@ export function SiteFooter() {
           />
           <a
             href="tel:5085799897"
-            className="mt-6 inline-block font-display text-2xl text-brand hover:opacity-80"
+            className="mt-8 md:mt-6 inline-block font-display text-2xl text-brand hover:opacity-80"
           >
             508.579.9897
           </a>
           <a
             href="mailto:abby@btymaterial.com"
-            className="mt-2 block text-sm text-zinc-300 hover:text-zinc-100"
+            className="mt-3 md:mt-2 block text-sm text-zinc-300 hover:text-zinc-100"
           >
             abby@btymaterial.com
           </a>
-          <div className="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2">
+          <div className="mt-6 md:mt-4 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-3">
             <a
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
@@ -46,7 +46,7 @@ export function SiteFooter() {
               <Star className="size-4" /> Yelp
             </a>
           </div>
-          <p className="mt-4 text-[10px] uppercase tracking-widest text-zinc-500">
+          <p className="mt-6 md:mt-4 text-[10px] uppercase tracking-widest text-zinc-500">
             Est. 2016 · WBE Certified
           </p>
         </div>
