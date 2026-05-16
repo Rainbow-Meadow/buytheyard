@@ -48,17 +48,17 @@ function HomePage() {
   const updates = [
     {
       title: "Mother's Day baskets are in.",
-      body: "$40 each. Or 2 for $70. Built fresh on the wagon. Mom's gonna love it. Grab one before they're gone — 508-579-9897.",
+      body: "$40 each, or 2 for $70 — built fresh on the wagon. They tend to go quick, so swing by or give us a call at 508-579-9897 and we'll set one aside.",
       tag: "Mother's Day",
     },
     {
-      title: "Buy 5 yards of mulch. Win WooSox tickets.",
-      body: "Every 5+ yard mulch order in May puts you in the hat. We pull 4 tickets every Friday. That's it. Pickup or delivery — both count.",
+      title: "Buy 5 yards of mulch, win WooSox tickets.",
+      body: "Every mulch order of 5 yards or more in May goes in the hat. We pull 4 winners every Friday — pickup or delivery, both count. Good luck!",
       tag: "Promo · May",
     },
     {
-      title: "Call before noon. Get it today.",
-      body: "Same-day delivery isn't a marketing line. It's the truck in the yard. If we've got a window, you're on it.",
+      title: "Call before noon, get it today.",
+      body: "Same-day delivery isn't a slogan — it's the truck out in the yard. Give us a ring before noon and if we have a window open, we'll get you on the route.",
       tag: "How it works",
     },
   ];
