@@ -7,6 +7,8 @@ import heroDesktop from "@/assets/source/hero-desktop-yard.png";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
+import promoMothersDay from "@/assets/promo-mothers-day-baskets.jpg";
+import promoWooSox from "@/assets/promo-woosox-raffle.jpg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import {
@@ -189,18 +191,30 @@ function HomePage() {
       title: "Mother's Day baskets are on the wagon.",
       body: "Hanging baskets are available now at $40 each, or 2 for $70. Quantities are limited — call 508-579-9897 to reserve one in advance.",
       tag: "Mother's Day",
+      image: promoMothersDay,
+      imageAlt:
+        "Mother's Day hanging baskets at Buy The Yard — $40 each or 2 for $70.",
     },
     {
       title: "5 yards of mulch = a shot at WooSox tickets.",
       body: "May orders of 5 yards or more are automatically entered into our weekly WooSox ticket drawing. Four winners are selected each Friday. Pickup and delivery orders both qualify.",
       tag: "Promo · May",
+      image: promoWooSox,
+      imageAlt:
+        "Buy 5 yards or more of mulch in May and get entered to win WooSox tickets — drawings every Friday.",
     },
     {
       title: "Call before noon. We try to deliver today.",
       body: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours.",
       tag: "How it works",
     },
-  ];
+  ] as Array<{
+    title: string;
+    body: string;
+    tag: string;
+    image?: string;
+    imageAlt?: string;
+  }>;
 
   return (
     <>
@@ -401,15 +415,28 @@ function HomePage() {
               {updates.map((u) => (
                 <article
                   key={u.title}
-                  className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
+                  className="bg-white rounded-md ring-1 ring-zinc-300/70 flex flex-col overflow-hidden"
                 >
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-brand mb-3">
-                    {u.tag}
-                  </span>
-                  <h3 className="font-display text-2xl uppercase text-zinc-900 leading-tight mb-3">
-                    {u.title}
-                  </h3>
-                  <p className="text-sm text-zinc-700 leading-relaxed flex-1">{u.body}</p>
+                  {u.image && (
+                    <div className="w-full aspect-[4/3] overflow-hidden bg-zinc-100">
+                      <img
+                        src={u.image}
+                        alt={u.imageAlt ?? ""}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="p-7 flex flex-col flex-1">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand mb-3">
+                      {u.tag}
+                    </span>
+                    <h3 className="font-display text-2xl uppercase text-zinc-900 leading-tight mb-3">
+                      {u.title}
+                    </h3>
+                    <p className="text-sm text-zinc-700 leading-relaxed flex-1">{u.body}</p>
+                  </div>
                 </article>
               ))}
             </div>
