@@ -90,8 +90,8 @@ export function ChatWidget() {
             </span>
             <div className="flex-1 min-w-0">
               <p className="font-display text-base uppercase leading-none">BTY Helper</p>
-              <p className="text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
-                AI assistant · not Abby
+              <p className="text-[10px] uppercase tracking-widest text-zinc-400 mt-1 truncate">
+                AI assistant
               </p>
             </div>
             <a
