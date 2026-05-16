@@ -90,6 +90,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const [productsOpen, setProductsOpen] = useState(false);
   const [pricingOpen, setPricingOpen] = useState(false);
+  const [updatesOpen, setUpdatesOpen] = useState(false);
 
   const featured = [
     "Premium Black Mulch",
@@ -338,7 +339,7 @@ function HomePage() {
       {/* Latest from the yard */}
       <section className="py-20 md:py-24 bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:mb-12">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
                 <Flower2 className="size-3.5" />
@@ -352,31 +353,47 @@ function HomePage() {
               href="https://www.facebook.com/BuyTheYardOutdoorProducts"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
             >
               <Facebook className="size-4" />
               Follow on Facebook
             </a>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {updates.map((u) => (
-              <article
-                key={u.title}
-                className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
-              >
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand mb-3">
-                  {u.tag}
-                </span>
-                <h3 className="font-display text-2xl uppercase text-zinc-900 leading-tight mb-3">
-                  {u.title}
-                </h3>
-                <p className="text-sm text-zinc-700 leading-relaxed flex-1">{u.body}</p>
-              </article>
-            ))}
-          </div>
-          <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
-            820+ neighbors get the daily yard update on Facebook — what's freshly screened, what just rolled off the truck, and any weather days we're closed.
-          </p>
+          <MobileCollapse
+            id="yard-updates"
+            open={updatesOpen}
+            onToggle={() => setUpdatesOpen((v) => !v)}
+            label="3 weekly updates"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {updates.map((u) => (
+                <article
+                  key={u.title}
+                  className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
+                >
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-brand mb-3">
+                    {u.tag}
+                  </span>
+                  <h3 className="font-display text-2xl uppercase text-zinc-900 leading-tight mb-3">
+                    {u.title}
+                  </h3>
+                  <p className="text-sm text-zinc-700 leading-relaxed flex-1">{u.body}</p>
+                </article>
+              ))}
+            </div>
+            <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
+              820+ neighbors get the daily yard update on Facebook — what's freshly screened, what just rolled off the truck, and any weather days we're closed.
+            </p>
+            <a
+              href="https://www.facebook.com/BuyTheYardOutdoorProducts"
+              target="_blank"
+              rel="noreferrer"
+              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+            >
+              <Facebook className="size-4" />
+              Follow on Facebook
+            </a>
+          </MobileCollapse>
         </div>
       </section>
 
