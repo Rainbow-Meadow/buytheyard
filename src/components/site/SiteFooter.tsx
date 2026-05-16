@@ -47,7 +47,7 @@ export function SiteFooter() {
             </a>
           </div>
           <p className="mt-4 text-[10px] uppercase tracking-widest text-zinc-500">
-            Est. 2015 · WBE Certified
+            Est. 2016 · WBE Certified
           </p>
         </div>
         <div className="space-y-3">

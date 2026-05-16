@@ -96,7 +96,7 @@ function AboutPage() {
               Woman-Owned Enterprise.
             </p>
             <p>
-              2026 is our <strong>11th season</strong>. From the first spring mulch run
+              2026 is our <strong>10th season</strong>. From the first spring mulch run
               through winter salt. Same yard. Same answer when you call.
             </p>
             <p>

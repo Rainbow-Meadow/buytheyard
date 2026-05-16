@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Bulk mulch, loam, sand, stone. Plus a flower wagon. Woman-owned, Jefferson MA. 11th season. Call 508-579-9897.",
+          "Bulk mulch, loam, sand, stone. Plus a flower wagon. Woman-owned, Jefferson MA. 10th season. Call 508-579-9897.",
       },
       { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
       {
@@ -168,7 +168,7 @@ function HomePage() {
               </span>
               <span className="hidden sm:inline-block h-6 w-px bg-white/30" />
               <span className="text-xs uppercase tracking-[0.18em] font-semibold">
-                11th season · Est. 2015
+                10th season · Est. 2016
               </span>
             </div>
 
@@ -202,7 +202,7 @@ function HomePage() {
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {[
-            { k: "11th", v: "Season in business" },
+            { k: "10th", v: "Season in business" },
             { k: "WBE", v: "Certified Woman-Owned" },
             { k: "820+", v: "Followers on Facebook" },
             { k: "1 yard", v: "Minimum delivery" },
