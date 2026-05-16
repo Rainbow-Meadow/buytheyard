@@ -1,43 +1,63 @@
-## Updates
+## Hero redesign — full-bleed yard collage, Abby moves to byline
 
-**1. Fix the founding date everywhere**
-- "Est. 2015" in footer (already correct? verify)
-- First season = 2016 → 2026 is the **11th season** (not 10th). Update hero strip + about page references from "10th season" → "11th season" and confirm "Since 2015".
+### What changes (visual)
 
-**2. Replace the two `updates` cards on home with the real promos**
+Replace the current centered, text-first hero (with the 4:5 Abby portrait card) with a **full-bleed image hero** where the image is a **3-tile collage** of the yard/operation. Headline + sub + CTAs sit on top of the image with a dark gradient scrim for legibility. Abby becomes a tiny circular avatar inline with the "Hi, I'm Abby" eyebrow line.
 
-Card A — Mother's Day Hanging Baskets:
-- Title: "Mother's Day baskets are here"
-- Body: "$40 each. Or 2 for $70. Mom's gonna love it. Pick yours up — 508-579-9897."
+### Layout
 
-Card B — WooSox Raffle (May):
-- Title: "Buy 5 yards of mulch. Win WooSox tickets."
-- Body: "Every 5+ yard mulch order in May = one entry. We draw 4 tickets every Friday. That's it. That's the deal."
+```text
+┌────────────────────────────────────────────────────────┐
+│  [collage: yard-trucks  | mulch piles | loading truck] │
+│  ░░ dark gradient scrim from bottom-left ░░            │
+│                                                        │
+│  ◉ Hi, I'm Abby — owner · Jefferson, MA                │
+│                                                        │
+│  A SMALL YARD,                                         │
+│  BUILT BY HAND,                                        │
+│  RUN BY ABBY SINCE 2016.                               │
+│                                                        │
+│  Mulch by the yard. Loaded by hand.                    │
+│  Pickup at the yard, or we bring it.                   │
+│                                                        │
+│  [ Shop materials → ]  [ Get a quote ]  📞 508.579…    │
+│                                                        │
+│  ─────────────────────────────────────────────         │
+│  WBE seal · 11th season · Est. 2015                    │
+└────────────────────────────────────────────────────────┘
+```
 
-(Third card stays or gets cut depending on layout — keeping 3-card grid, so add a third evergreen one: "Same-day delivery if you call before noon" or similar punchy fact.)
+- **Desktop**: collage is 3 tiles in a row (large left, two stacked right, ~16:9 overall band, min-height ~640px).
+- **Mobile (440px)**: collapses to a single full-bleed image (`yard-trucks.webp`) — collage hidden, scrim stays, text reflows.
+- **Scrim**: `bg-gradient-to-tr from-zinc-950/85 via-zinc-950/55 to-transparent` so the bottom-left text is readable while the top-right of the photos breathes.
+- **Headline + body**: white/zinc-100 on the scrim. Brand orange accent on "built by hand" and "Abby" stays. Underline squiggle stays.
+- **Abby byline**: ~28px circular avatar (`abby-portrait.webp`, `object-cover`, `rounded-full ring-1 ring-white/40`) inline-left of the eyebrow text. This is her only appearance on the home page (still featured on `/about`).
+- **WBE strip**: stays below as its own section — no change there.
 
-**3. Go full Kyle on the rest of the copy**
+### Collage composition
 
-Push every page from "Kyle-lite" → "Full Kyle":
-- Shorter sentences. More fragments. More line breaks.
-- Hooks with curiosity gaps and specific numbers.
-- Direct "you" throughout. Punchy openers.
-- Examples:
-  - Hero subhead → something like: "Mulch by the yard. Delivered to your driveway. No upsells, no runaround."
-  - About opener → "Here's the thing about landscape supply..."
-  - Products intro → "Six products. That's it. Each one picked because it works."
-  - Delivery → "You call. We load. It shows up. Done."
-  - Contact → "Call. Text. Email. We answer."
-  - Quote → "Tell us what you need. We'll tell you what it costs. No games."
+Using existing assets in `src/assets/source/`:
+- **Tile A (large, left, ~2/3 width)**: `yard-trucks.webp` — wide yard shot, anchors the operation.
+- **Tile B (top-right)**: `yard-piles.webp` — mulch piles, shows product.
+- **Tile C (bottom-right)**: `loading-truck.webp` — the truck being loaded, reinforces delivery.
 
-**4. Files touched**
-- `src/routes/index.tsx` — hero subhead, season strip ("11th season"), `updates` array (both promos), delivery callout copy, meta
-- `src/routes/about.tsx` — full Kyle pass on Abby's story, fix "2015 / 2016 first season / 11th season" facts
-- `src/routes/products.tsx` — intro copy
-- `src/routes/delivery.tsx` — full Kyle pass
-- `src/routes/quote.tsx` — full Kyle pass
-- `src/routes/contact.tsx` — full Kyle pass
-- `src/data/products.ts` — tighten product blurbs further (full Kyle)
-- `src/components/SiteFooter.tsx` — confirm "Est. 2015"
+Thin 2px gaps between tiles using a `bg-zinc-950` grid container (creates a clean editorial seam, not rounded). Each tile `object-cover`. No new assets needed.
 
-No layout, no component, no asset changes. Copy + dates only.
+### Files touched
+
+- `src/routes/index.tsx` — replace the `<section>` containing the hero only. Update preload `link` from `abbyPortrait` → `yardWide` (`yard-trucks.webp`) since that's now LCP. Keep all other sections untouched.
+- No changes to: stats strip, product preview, updates, delivery callout, WBE strip, footer, products data, or any other route.
+
+### Technical notes
+
+- LCP: the large left tile is the LCP candidate. Set `fetchPriority="high"` and `loading="eager"` on it; the two smaller tiles get `loading="lazy"`.
+- Preload swap: replace the existing `<link rel="preload" as="image" href={abbyPortrait}>` with the yard image to keep LCP fast.
+- Accessibility: alt text on each tile describes the scene; the avatar gets `alt="Abby"`.
+- Responsive: collage uses CSS grid (`grid-cols-3 grid-rows-2` desktop; single image on `<md`). Headline keeps its current scale.
+- og:image stays as-is for now (still fine to update in a follow-up if you want the yard shot as the share image).
+
+### Out of scope
+
+- No copy rewrites — headline, sub, CTAs, eyebrow text remain the current Kyle-style strings.
+- No new photography or AI imagery.
+- No changes to other pages.
