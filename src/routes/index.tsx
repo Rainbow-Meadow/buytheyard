@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Bulk mulch, loam, sand, stone. Plus a flower wagon. Woman-owned, Jefferson MA. 10th season. Call 508-579-9897.",
+          "Bulk mulch, loam, sand, and stone — plus a little flower wagon. Woman-owned, in Jefferson, MA. 10th season and happy to help. Call 508-579-9897.",
       },
       { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
       {
@@ -48,17 +48,17 @@ function HomePage() {
   const updates = [
     {
       title: "Mother's Day baskets are in.",
-      body: "$40 each. Or 2 for $70. Built fresh on the wagon. Mom's gonna love it. Grab one before they're gone — 508-579-9897.",
+      body: "$40 each, or 2 for $70 — built fresh on the wagon. They tend to go quick, so swing by or give us a call at 508-579-9897 and we'll set one aside.",
       tag: "Mother's Day",
     },
     {
-      title: "Buy 5 yards of mulch. Win WooSox tickets.",
-      body: "Every 5+ yard mulch order in May puts you in the hat. We pull 4 tickets every Friday. That's it. Pickup or delivery — both count.",
+      title: "Buy 5 yards of mulch, win WooSox tickets.",
+      body: "Every mulch order of 5 yards or more in May goes in the hat. We pull 4 winners every Friday — pickup or delivery, both count. Good luck!",
       tag: "Promo · May",
     },
     {
-      title: "Call before noon. Get it today.",
-      body: "Same-day delivery isn't a marketing line. It's the truck in the yard. If we've got a window, you're on it.",
+      title: "Call before noon, get it today.",
+      body: "Same-day delivery isn't a slogan — it's the truck out in the yard. Give us a ring before noon and if we have a window open, we'll get you on the route.",
       tag: "How it works",
     },
   ];
@@ -127,11 +127,11 @@ function HomePage() {
               since 2016.
             </h1>
             <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              Mulch by the yard. Loaded by hand.
+              Mulch by the yard, loaded by hand.
               <br />
-              Pickup at the yard. Or we bring it to your driveway.
+              Pick up at the yard, or we'll bring it to your driveway.
               <br />
-              No upsells. No runaround.
+              Real prices, real people — happy to help you figure out what you need.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">
@@ -288,8 +288,8 @@ function HomePage() {
               You call. We load. <span className="text-brand">It shows up.</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery, all over Central Mass. One yard minimum.
-              48 hours notice puts you on the truck. Done.
+              Curbside delivery all over Central Mass. One-yard minimum, and
+              about 48 hours' notice is all we need to get you on the truck.
             </p>
             <Link
               to="/delivery"
@@ -308,10 +308,10 @@ function HomePage() {
             />
             <ul className="divide-y divide-white/10">
               {[
-                ["Driveway-to-curb only", "We don't drive on lawns. Protects your turf and the utilities under it."],
-                ["1 yard minimum", "48 hours notice to lock in a spot."],
-                ["Mark your spot", "Tarp, cone, note — anything that says \"dump here.\""],
-                ["4% card fee", "Cash or check skips it."],
+                ["Driveway-to-curb only", "We stay off lawns — it keeps your grass (and the lines underneath) in good shape."],
+                ["1 yard minimum", "About 48 hours' notice to lock in a spot."],
+                ["Mark your spot", "A tarp, cone, or quick note works great — just lets us know exactly where to drop it."],
+                ["4% card fee", "That's the processor's cut, not ours. Cash or check skips it."],
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="font-display text-xl uppercase">{k}</p>

@@ -67,8 +67,9 @@ function ContactPage() {
             Call. Text. Email. <span className="text-brand">We answer.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Two ways. Phone gets a fast answer. The quote form gets you pricing
-            and a delivery window. Pick one.
+            A couple of easy ways to reach us. Phone is fastest, and the quote
+            form is a great way to share your list — we'll come back with pricing
+            and a delivery window.
           </p>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
             <a
@@ -102,14 +103,14 @@ function ContactPage() {
             </Link>
           </div>
           <p className="mt-6 text-sm text-zinc-400 max-w-[60ch]">
-            For non-urgent stuff, email{" "}
+            For anything that's not urgent, feel free to email{" "}
             <a
               href="mailto:abby@btymaterial.com"
               className="text-zinc-100 underline underline-offset-4 hover:text-brand"
             >
               abby@btymaterial.com
             </a>
-            . The chat widget on the old site isn't monitored in real time.
+            . Just a heads up — the chat widget on the old site isn't checked in real time.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <a
@@ -138,7 +139,7 @@ function ContactPage() {
             <ClipboardList className="size-7 text-brand mb-4" />
             <h2 className="font-display text-2xl uppercase mb-2">Get a Quote</h2>
             <p className="text-sm text-zinc-700 mb-3">
-              Send your materials list, town, and timing. Abby comes back with pricing — fast.
+              Share your materials list, town, and timing, and Abby will get back to you with pricing.
             </p>
             <Link
               to="/quote"
@@ -161,7 +162,7 @@ function ContactPage() {
               <Mail className="size-4" /> abby@btymaterial.com
             </a>
             <p className="text-xs text-zinc-600 mt-2">
-              Cell signal at the yard isn't perfect. Miss us? Leave a message — we call back.
+              Cell signal at the yard can be spotty. If we miss you, leave a message and we'll call you right back.
             </p>
           </div>
 
