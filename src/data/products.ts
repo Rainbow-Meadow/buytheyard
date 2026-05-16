@@ -108,7 +108,7 @@ export const products: Product[] = [
   },
   {
     name: "Plant Mix & Compost",
-    category: "Garden Center",
+    category: "Loam",
     description:
       "Organic plant mix. Bulk compost. Raised beds love it. Tired soil needs it.",
     image: loam,
