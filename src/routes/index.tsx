@@ -82,6 +82,50 @@ export const Route = createFileRoute("/")({
     links: [
       { rel: "preload", as: "image", href: heroMobile, fetchpriority: "high", media: "(max-width: 767px)" },
       { rel: "preload", as: "image", href: heroDesktop, fetchpriority: "high", media: "(min-width: 768px)" },
+      { rel: "canonical", href: "https://buytheyard.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "How much does material cost?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Pricing is posted by category. Mulch runs $48–$50/yd, loam and compost $45–$55/yd, sand and gravel $55/yd, and specialty stone $135–$185/yd. One-yard minimum, with the same pricing for contractors and homeowners. For an exact quote, call 508-579-9897.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Do you deliver to my town?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "We offer curbside delivery throughout Central Massachusetts from our Jefferson yard, including Holden, Princeton, Sterling, Rutland, West Boylston, Paxton, Worcester, Leominster, and surrounding towns. Delivery is priced by ZIP code; a brief call confirms your service area and final price before your order is dispatched.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "What's the 4% card fee about?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee. Posted pricing remains the same regardless of payment method.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "How fast can I get a delivery?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours. Delivery is made to the driveway or curbline only.",
+              },
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: HomePage,
