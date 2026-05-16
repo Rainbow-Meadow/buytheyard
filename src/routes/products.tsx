@@ -35,13 +35,13 @@ function ProductsPage() {
             Materials. By the <span className="text-brand">yard</span>.
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Prices move with the season. And with how much you need.
+            Prices shift a little with the season and with how much you need.
             <br />
-            Want today's number? Call{" "}
+            For today's number, just give us a call at{" "}
             <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
               508-579-9897
             </a>
-            . We'll tell you straight.
+            — happy to share it.
           </p>
         </div>
       </section>
@@ -76,10 +76,10 @@ function ProductsPage() {
             Don't see it? Ask.
           </h2>
           <p className="text-zinc-700 mb-8">
-            We carry more than what's on this page. Bulk salt and ice melt all winter.
-            Bagged soils and amendments. Seasonal one-offs.
+            We carry a bit more than what's on this page — bulk salt and ice melt
+            all winter, bagged soils and amendments, plus the occasional seasonal one-off.
             <br />
-            Call. We'll tell you if we've got it.
+            Give us a call and we'll let you know if we have it on hand.
           </p>
           <a
             href="tel:5085799897"
