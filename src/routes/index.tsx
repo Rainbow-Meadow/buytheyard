@@ -82,6 +82,9 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [pricingOpen, setPricingOpen] = useState(false);
+
   const featured = [
     "Premium Black Mulch",
     "Hemlock Mulch",
