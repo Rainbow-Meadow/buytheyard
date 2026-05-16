@@ -1,34 +1,25 @@
+# Plan: Use the uploaded flyers in their matching promo cards
 
-# Plan: Sitewide "Leave us a review" card
+The home page already has two cards that describe these exact promotions in the "In Stock This Week" grid (`src/routes/index.tsx`, the `updates` array):
 
-## What I'll build
-A compact review card placed in `src/components/site/SiteFooter.tsx`, rendering as a thin band **above** the existing 4-column footer grid (still inside `<footer>`, so it appears on every page). It will contain:
+1. **Mother's Day baskets are on the wagon** → matches `IMG_3755-2.jpeg` (BTY Mother's Day Hanging Baskets, $40 / 2 for $70).
+2. **5 yards of mulch = a shot at WooSox tickets** → matches `IMG_3754-2.jpeg` (May mulch WooSox raffle).
 
-- A short prompt: "Liked working with us? Leave a Google review."
-- One sentence: "Reviews from Central Mass neighbors help other folks find the yard — and they mean a lot to Abby."
-- A primary button "Write a Google review" → opens your Google review link in a new tab (`target="_blank" rel="noreferrer"`).
-- A small Google "G" mark on the button for visual recognition (inline SVG, no new dependency).
+Right now those cards are text-only. I'll attach the flyers as the visual for each card.
 
-Styled to match the existing footer (dark `bg-surface`, brand orange CTA, same typography), with a top border separating it from the column grid below.
+## Changes
 
-## Google review link
-You didn't provide one. I'll wire the button to a **placeholder constant** at the top of the file:
+1. Save the uploads as project assets:
+   - `src/assets/promo-mothers-day-baskets.jpg`
+   - `src/assets/promo-woosox-raffle.jpg`
 
-```ts
-const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=REPLACE_ME";
-```
+2. In `src/routes/index.tsx`:
+   - Import both images.
+   - Add an optional `image` + `alt` field on the two relevant entries in the `updates` array (leave the third "Call before noon" card text-only).
+   - Update the card JSX so cards with an image render the flyer at the top of the card (full-width, `aspect-[4/5]` for the square Mother's Day flyer and `aspect-[3/2]` for the landscape WooSox flyer — actually use a single shared `aspect-[4/3]` with `object-cover` for grid consistency), followed by the existing tag/title/body. Cards without an image render unchanged.
+   - Use `loading="lazy"`, `decoding="async"`, and descriptive alt text ("Mother's Day hanging baskets — $40 each or 2 for $70 at Buy The Yard", "Buy 5+ yards of mulch in May, get entered to win WooSox tickets").
 
-Once you paste your real link, swap that one string. To get it:
-1. Go to your Google Business Profile dashboard.
-2. Click "Ask for reviews" → copy the short link (looks like `https://g.page/r/...`).
-3. Reply with the link and I'll drop it in.
-
-## Files to change
-- `src/components/site/SiteFooter.tsx` — add the review card section above the existing grid.
-
-No new routes, no new dependencies, no schema changes.
-
-## Out of scope
-- An in-app review form (Google reviews must be posted on Google directly; on-site forms don't count for SEO).
-- A "thank you" page after submission (Google handles that on their side).
-- Yelp/Facebook buttons (you chose Google only — those are still in the footer's social row).
+## Not changing
+- No copy edits to the card text — the flyers reinforce what's already written.
+- No new section, route, or hero placement. The flyers are promo art and belong inside the existing promo cards, not the hero.
+- Footer, About, Products, etc. untouched.
