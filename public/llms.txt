@@ -1,0 +1,16 @@
+# Buy The Yard
+
+> Woman-owned bulk landscape supply yard in Jefferson, MA. Premium mulch, loam, sand, gravel, specialty stone, playground chips, and a small garden center. Pickup or curbside delivery across Central Massachusetts. Call 508-579-9897.
+
+## Pages
+
+- [Home](/): Overview, featured materials, weekly updates, posted pricing, FAQ.
+- [Products](/products): Full catalog — mulches, loam, sand, gravel, specialty stone, garden center, ASTM playground chips.
+- [Delivery & Pickup](/delivery): Pickup hours, delivery zones, scheduling, and policies.
+- [About](/about): Owner's story and Massachusetts WBE certification.
+- [Contact](/contact): Phone, email, address, hours, and map.
+- [Get a Quote](/quote): Online quote builder for material lists.
+
+## Optional
+
+- [Privacy & Terms](/privacy): Privacy policy and SMS terms.
