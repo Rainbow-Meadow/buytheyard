@@ -4,11 +4,11 @@ import { CreditCard, Phone, Truck, Warehouse } from "lucide-react";
 export const Route = createFileRoute("/delivery")({
   head: () => ({
     meta: [
-      { title: "Delivery & Pickup — Buy The Yard | Jefferson, MA" },
+      { title: "Mulch & Loam Delivery — Holden, Worcester, Princeton, Sterling | Buy The Yard" },
       {
         name: "description",
         content:
-          "Pick up bulk material with your own truck, or get curbside delivery across Central MA. 1-yard minimum. 48-hour notice. Call 508-579-9897.",
+          "Curbside bulk delivery from Jefferson, MA to Holden, Worcester, Princeton, Sterling, Rutland, Paxton, West Boylston, Leominster & nearby. 1-yard minimum. Call 508-579-9897.",
       },
       { property: "og:title", content: "Delivery & Pickup — Buy The Yard" },
       {
@@ -44,10 +44,20 @@ function DeliveryPage() {
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
             You call. We load. <span className="text-brand">It shows up.</span>
           </h1>
-          <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Call before noon for same-day delivery when available; otherwise,
-            please allow approximately 48 hours. All orders are handled
-            directly by the owner.
+          <p className="mt-6 text-zinc-400 max-w-[62ch] text-lg">
+            Curbside delivery from our Jefferson yard across Central
+            Massachusetts — Holden, Worcester, Princeton, Sterling,
+            Rutland, Paxton, West Boylston, Boylston, Leominster, and
+            surrounding towns. Call before noon for same-day delivery
+            when available; otherwise, please allow approximately 48
+            hours. All orders are handled directly by the owner.
+          </p>
+          <p className="mt-4 text-sm text-zinc-500">
+            See the full list of towns on our{" "}
+            <a href="/service-area" className="underline underline-offset-4 hover:text-brand">
+              service area page
+            </a>
+            .
           </p>
         </div>
       </section>

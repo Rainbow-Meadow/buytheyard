@@ -7,6 +7,7 @@
 - [Home](/): Overview, featured materials, weekly updates, posted pricing, FAQ.
 - [Products](/products): Full catalog — mulches, loam, sand, gravel, specialty stone, garden center, ASTM playground chips.
 - [Delivery & Pickup](/delivery): Pickup hours, delivery zones, scheduling, and policies.
+- [Service Area](/service-area): Towns we deliver to across Central Massachusetts — Jefferson, Holden, Worcester, Princeton, Sterling, and more.
 - [About](/about): Owner's story and Massachusetts WBE certification.
 - [Contact](/contact): Phone, email, address, hours, and map.
 - [Get a Quote](/quote): Online quote builder for material lists.

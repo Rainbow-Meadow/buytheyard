@@ -64,11 +64,11 @@ function MobileCollapse({
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Buy The Yard — Mulch, Loam, Sand & Stone | Jefferson, MA" },
+      { title: "Mulch, Loam, Sand & Stone — Jefferson, MA | Central MA Delivery" },
       {
         name: "description",
         content:
-          "Bulk mulch, loam, sand, and stone — plus a little flower wagon. Woman-owned, in Jefferson, MA. 10th season and happy to help. Call 508-579-9897.",
+          "Bulk mulch, loam, sand & stone from our Jefferson, MA yard. Delivery to Holden, Worcester, Princeton, Sterling, Rutland & all of Central Mass. Call 508-579-9897.",
       },
       { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
       {
@@ -640,9 +640,11 @@ function HomePage() {
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery throughout Central Massachusetts. One-yard
-              minimum. Call before noon for same-day delivery when available;
-              otherwise, please allow approximately 48 hours.
+              Curbside delivery to Holden, Worcester, Princeton, Sterling,
+              Rutland, Paxton, West Boylston, Leominster, and the rest of
+              Central Mass. One-yard minimum. Call before noon for same-day
+              delivery when available; otherwise, please allow approximately
+              48 hours.
             </p>
             <Link
               to="/delivery"
