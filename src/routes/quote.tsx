@@ -46,6 +46,9 @@ export const Route = createFileRoute("/quote")({
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-quote.jpg" },
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-quote.jpg" },
     ],
+    links: [
+      { rel: "canonical", href: "https://buytheyard.lovable.app/quote" },
+    ],
   }),
   component: QuotePage,
 });
