@@ -454,6 +454,120 @@ function HomePage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="py-20 md:py-28 bg-kraft border-y border-zinc-300/60">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
+          <div className="md:col-span-5">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
+              <HelpCircle className="size-3.5" />
+              Before you call
+            </p>
+            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
+              The four we get most.
+            </h2>
+            <p className="mt-5 text-zinc-700 max-w-[42ch] text-pretty">
+              Quick answers on price, area, the card fee, and how soon a truck can
+              be in your driveway. Anything else, Abby's a phone call away.
+            </p>
+            <a
+              href="tel:5085799897"
+              className="mt-6 hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+            >
+              <Phone className="size-4" />
+              508.579.9897
+            </a>
+          </div>
+
+          <div className="md:col-span-7">
+            <Accordion type="single" collapsible className="bg-white rounded-md ring-1 ring-zinc-300/70 px-2 md:px-4">
+              <AccordionItem value="pricing" className="border-zinc-200 last:border-0">
+                <AccordionTrigger className="font-display text-lg md:text-xl uppercase tracking-tight text-zinc-950 py-5 hover:no-underline">
+                  How much does material cost?
+                </AccordionTrigger>
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                  <p>
+                    Posted by category, right above this section. Mulch runs
+                    $48–$50/yd, loam and compost $45–$55/yd, sand and gravel $55/yd,
+                    specialty stone $135–$185/yd. One-yard minimum, same number for
+                    contractor and homeowner.
+                  </p>
+                  <p className="mt-3">
+                    Want today's exact number for your project?{" "}
+                    <a href="tel:5085799897" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                      Call 508-579-9897
+                    </a>{" "}
+                    — Abby picks up.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="delivery-area" className="border-zinc-200 last:border-0">
+                <AccordionTrigger className="font-display text-lg md:text-xl uppercase tracking-tight text-zinc-950 py-5 hover:no-underline">
+                  Do you deliver to my town?
+                </AccordionTrigger>
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                  <p>
+                    Curbside delivery across Central Massachusetts out of Jefferson.
+                    Holden, Princeton, Sterling, Rutland, West Boylston, Paxton,
+                    Worcester, Leominster — and plenty of towns in between.
+                  </p>
+                  <p className="mt-3">
+                    Delivery is priced by ZIP. One quick call confirms the area and
+                    locks in the number before the truck moves. See full details on{" "}
+                    <Link to="/delivery" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                      the delivery page
+                    </Link>
+                    .
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="card-fee" className="border-zinc-200 last:border-0">
+                <AccordionTrigger className="font-display text-lg md:text-xl uppercase tracking-tight text-zinc-950 py-5 hover:no-underline">
+                  What's the 4% card fee about?
+                </AccordionTrigger>
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                  <p>
+                    It's the processor's cut — we don't see a dime of it. Cash or
+                    check skips it completely. Same posted price either way, no
+                    surprises at the gate.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="timing" className="border-zinc-200 last:border-0">
+                <AccordionTrigger className="font-display text-lg md:text-xl uppercase tracking-tight text-zinc-950 py-5 hover:no-underline">
+                  How fast can I get a delivery?
+                </AccordionTrigger>
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                  <p>
+                    Call before noon and if there's a window left on today's route,
+                    you're on it. Otherwise about 48 hours puts you on the schedule.
+                  </p>
+                  <p className="mt-3">
+                    Delivery is driveway-to-curb only. Mark the spot with a tarp,
+                    cone, or sticky note and we'll drop the pile exactly there.
+                    Have a list ready?{" "}
+                    <Link to="/quote" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                      Start a quote
+                    </Link>{" "}
+                    and Abby comes back same-day.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+
+            <a
+              href="tel:5085799897"
+              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+            >
+              <Phone className="size-4" />
+              508.579.9897
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Delivery callout */}
       <section className="relative bg-surface text-surface-foreground overflow-hidden">
         <img
