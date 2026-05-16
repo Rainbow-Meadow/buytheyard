@@ -65,36 +65,36 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 min-h-[640px] md:min-h-[720px] flex">
-        {/* Collage background */}
-        <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-[2px] bg-zinc-950">
+      <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[720px] md:flex">
+        {/* Collage background — desktop only */}
+        <div className="hidden md:grid absolute inset-0 grid-cols-3 grid-rows-2 gap-[2px] bg-zinc-950">
           <img
             src={yardWide}
             alt="The Buy The Yard yard with trucks and bulk material bins"
             fetchPriority="high"
             loading="eager"
             decoding="async"
-            className="w-full h-full object-cover md:col-span-2 md:row-span-2"
+            className="w-full h-full object-cover col-span-2 row-span-2"
           />
           <img
             src={yardPiles}
             alt="Mulch piles at the yard"
             loading="lazy"
             decoding="async"
-            className="hidden md:block w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
           <img
             src={loadingTruck}
             alt="Loader filling a delivery truck with mulch"
             loading="lazy"
             decoding="async"
-            className="hidden md:block w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
-        {/* Scrim */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
+        {/* Scrim — desktop only */}
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
 
-        <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-6 py-16 md:py-24 self-center w-full">
+        <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-6 py-14 md:py-24 md:self-center w-full">
           <div>
             <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-200 mb-5 pb-2 border-b border-white/30">
               <img
@@ -182,6 +182,31 @@ function HomePage() {
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Mobile collage — stacked below text */}
+        <div className="md:hidden grid grid-cols-2 grid-rows-2 gap-[2px] bg-zinc-950 h-[60vw] min-h-[280px] max-h-[360px]">
+          <img
+            src={yardWide}
+            alt="The Buy The Yard yard with trucks and bulk material bins"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover row-span-2"
+          />
+          <img
+            src={yardPiles}
+            alt="Mulch piles at the yard"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+          <img
+            src={loadingTruck}
+            alt="Loader filling a delivery truck with mulch"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
         </div>
       </section>
 
