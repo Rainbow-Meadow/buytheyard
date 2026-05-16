@@ -23,7 +23,9 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Bulk mulch, loam, sand, stone — and a full plant nursery. Pickup or delivery in Central Mass.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://buytheyard.lovable.app/" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
     ],
     links: [
       { rel: "preload", as: "image", href: heroMobile, fetchpriority: "high", media: "(max-width: 767px)" },
