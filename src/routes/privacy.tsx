@@ -16,6 +16,9 @@ export const Route = createFileRoute("/privacy")({
       },
       { property: "og:url", content: "/privacy" },
     ],
+    links: [
+      { rel: "canonical", href: "https://buytheyard.lovable.app/privacy" },
+    ],
   }),
   component: PrivacyPage,
 });
