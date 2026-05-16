@@ -321,7 +321,7 @@ function HomePage() {
               alt="Buy The Yard delivery truck"
               loading="lazy"
               decoding="async"
-              className="w-full h-auto max-h-48 object-contain mb-4 pb-4 border-b border-white/10"
+              className="w-full h-auto max-h-48 object-contain mb-4 pb-4 border-b border-white/10 -scale-x-100"
             />
             <ul className="divide-y divide-white/10">
               {[
