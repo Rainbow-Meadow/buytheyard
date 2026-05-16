@@ -19,6 +19,9 @@ export const Route = createFileRoute("/delivery")({
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-delivery.jpg" },
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-delivery.jpg" },
     ],
+    links: [
+      { rel: "canonical", href: "https://buytheyard.lovable.app/delivery" },
+    ],
   }),
   component: DeliveryPage,
 });
