@@ -37,13 +37,12 @@ function ProductsPage() {
             Materials. By the <span className="text-brand">yard</span>.
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Prices shift a little with the season and with how much you need.
-            <br />
-            For today's number, just give us a call at{" "}
+            Posted prices on every category. Not sure how many yards your project
+            needs? One call to{" "}
             <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
               508-579-9897
-            </a>
-            — happy to share it.
+            </a>{" "}
+            and we'll figure it out together — no math homework on your end.
           </p>
         </div>
       </section>
@@ -75,13 +74,13 @@ function ProductsPage() {
       <section className="bg-kraft py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display text-4xl uppercase mb-4">
-            Don't see it? Ask.
+            Don't see it on the page? Ask anyway.
           </h2>
           <p className="text-zinc-700 mb-8">
-            We carry a bit more than what's on this page — bulk salt and ice melt
-            all winter, bagged soils and amendments, plus the occasional seasonal one-off.
-            <br />
-            Give us a call and we'll let you know if we have it on hand.
+            What's on this catalog is the regular lineup. The yard also runs
+            bulk salt and ice melt all winter, bagged soils and amendments
+            year-round, and the occasional seasonal one-off. One call and you'll
+            know if it's on hand.
           </p>
           <a
             href="tel:5085799897"

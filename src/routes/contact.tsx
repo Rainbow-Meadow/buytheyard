@@ -69,9 +69,9 @@ function ContactPage() {
             Call. Text. Email. <span className="text-brand">We answer.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            A couple of easy ways to reach us. Phone is fastest, and the quote
-            form is a great way to share your list — we'll come back with pricing
-            and a delivery window.
+            Phone is fastest — Abby picks up. Got a list of materials? The quote
+            form sends it over clean and comes back with a price and a window. Email
+            for anything that isn't urgent.
           </p>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
             <a
@@ -105,14 +105,14 @@ function ContactPage() {
             </Link>
           </div>
           <p className="mt-6 text-sm text-zinc-400 max-w-[60ch]">
-            For anything that's not urgent, feel free to email{" "}
+            For non-urgent stuff, email{" "}
             <a
               href="mailto:abby@btymaterial.com"
               className="text-zinc-100 underline underline-offset-4 hover:text-brand"
             >
               abby@btymaterial.com
             </a>
-            . Just a heads up — the chat widget on the old site isn't checked in real time.
+            . Heads up: the chat widget on the old site isn't monitored.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <a
@@ -141,7 +141,7 @@ function ContactPage() {
             <ClipboardList className="size-7 text-brand mb-4" />
             <h2 className="font-display text-2xl uppercase mb-2">Get a Quote</h2>
             <p className="text-sm text-zinc-700 mb-3">
-              Share your materials list, town, and timing, and Abby will get back to you with pricing.
+              Best for material lists. Drop your products, town, and timing — Abby comes back with the number.
             </p>
             <Link
               to="/quote"
@@ -164,7 +164,7 @@ function ContactPage() {
               <Mail className="size-4" /> abby@btymaterial.com
             </a>
             <p className="text-xs text-zinc-600 mt-2">
-              Cell signal at the yard can be spotty. If we miss you, leave a message and we'll call you right back.
+              Signal at the yard is spotty. Leave a voicemail — we call back the same day.
             </p>
           </div>
 
@@ -198,9 +198,8 @@ function ContactPage() {
               <li className="flex justify-between gap-4"><span>Sunday</span><span className="text-zinc-500">Closed</span></li>
             </ul>
             <p className="text-xs text-zinc-600 mt-3 leading-relaxed">
-              We open the 2026 season on <strong>April 1</strong>. After 8/1, pickup &amp;
-              delivery are by appointment. Salt &amp; ice melt run year-round — call for
-              loading hours.
+              2026 season opens <strong>April 1</strong>. After 8/1, pickup and
+              delivery go by appointment. Salt and ice melt run year-round — call for loading hours.
             </p>
           </div>
         </div>

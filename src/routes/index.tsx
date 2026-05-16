@@ -52,54 +52,54 @@ function HomePage() {
       heading: "Mulch",
       range: "$48–$50",
       unit: "per yard",
-      includes: "Premium Black · Hemlock · Dark Brown",
+      includes: "Premium Black for the wow factor. Hemlock for the classics. Dark Brown for everything in between.",
     },
     {
       heading: "Loam, Compost & Plant Mix",
       range: "$45–$55",
       unit: "per yard",
-      includes: "Screened Loam · Plant Mix · Bulk Compost",
+      includes: "Screened loam for new lawns. Plant mix and compost for beds that need a reset.",
     },
     {
       heading: "Sand & Gravel",
       range: "$55",
       unit: "per yard",
-      includes: "Mason Sand · 3/4\" Crushed Blue · 3/8\" Pea Stone",
+      includes: "Mason sand, 3/4\" crushed blue for drives and drainage, 3/8\" pea for paths.",
     },
     {
       heading: "Specialty Stone",
       range: "$135–$185",
       unit: "per yard",
-      includes: "River Stone · Red Lava Rock",
+      includes: "Tumbled river stone and bold red lava — the bed dressings that get noticed.",
     },
     {
       heading: "Playground Chips",
       range: "$60",
       unit: "per yard · ASTM certified",
-      includes: "F1292 · F2075 · F1951",
+      includes: "ASTM F1292, F2075, and F1951 — the spec your inspector is actually looking for.",
     },
     {
       heading: "Garden Center",
       range: "From $18",
       unit: "per item",
-      includes: "Annuals · Perennials · Hanging Baskets ($40 ea · 2 for $70)",
+      includes: "Annuals and perennials from $18. Hanging baskets $40 each, or 2 for $70.",
     },
   ];
 
   const updates = [
     {
-      title: "Mother's Day baskets are in.",
-      body: "$40 each, or 2 for $70 — built fresh on the wagon. They tend to go quick, so swing by or give us a call at 508-579-9897 and we'll set one aside.",
+      title: "Mother's Day baskets are on the wagon.",
+      body: "Built this morning. $40 each, or 2 for $70. They walk off fast — call 508-579-9897 and we'll hold one with your name on it.",
       tag: "Mother's Day",
     },
     {
-      title: "Buy 5 yards of mulch, win WooSox tickets.",
-      body: "Every mulch order of 5 yards or more in May goes in the hat. We pull 4 winners every Friday — pickup or delivery, both count. Good luck!",
+      title: "5 yards of mulch = a shot at WooSox tickets.",
+      body: "Every May order of 5 yards or more goes in the hat. Four winners pulled every Friday. Pickup or delivery — both count the same.",
       tag: "Promo · May",
     },
     {
-      title: "Call before noon, get it today.",
-      body: "Same-day delivery isn't a slogan — it's the truck out in the yard. Give us a ring before noon and if we have a window open, we'll get you on the route.",
+      title: "Call before noon. We try to deliver today.",
+      body: "Not a slogan — that's the truck sitting out in the yard. Ring us before noon and if there's a window left on the route, you're on it.",
       tag: "How it works",
     },
   ];
@@ -168,11 +168,11 @@ function HomePage() {
               since 2016.
             </h1>
             <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              Mulch by the yard, loaded by hand.
+              Call before noon and we'll try to put it in your driveway today.
               <br />
-              Pick up at the yard, or we'll bring it to your driveway.
+              Posted prices — same number for the contractor and the homeowner.
               <br />
-              Real prices, real people — happy to help you figure out what you need.
+              Not sure how much you need? That's why you call. We'll work it out together.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">
@@ -226,10 +226,10 @@ function HomePage() {
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {[
-            { k: "10th", v: "Season in business" },
-            { k: "WBE", v: "Certified Woman-Owned" },
-            { k: "820+", v: "Followers on Facebook" },
-            { k: "1 yard", v: "Minimum delivery" },
+            { k: "10th", v: "Season answering our own phone" },
+            { k: "WBE", v: "Certified woman-owned in Mass." },
+            { k: "820+", v: "Neighbors following on Facebook" },
+            { k: "1 yard", v: "Smallest delivery we'll send" },
           ].map((s) => (
             <div key={s.k}>
               <p className="font-display text-3xl text-brand uppercase leading-none">{s.k}</p>
@@ -248,7 +248,7 @@ function HomePage() {
                 Bulk materials &amp; garden center
               </p>
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
-              Real material. By the yard.
+              What Abby would load for you.
             </h2>
             </div>
             <Link
@@ -277,7 +277,7 @@ function HomePage() {
                 Latest from the yard
               </p>
               <h2 className="font-display text-4xl md:text-5xl uppercase leading-[0.95] text-zinc-900 max-w-[20ch]">
-                What's happening this week.
+                What's actually on the yard this week.
               </h2>
             </div>
             <a
@@ -307,7 +307,7 @@ function HomePage() {
             ))}
           </div>
           <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
-            820+ followers. Daily yard updates, weather closures, and what just rolled in — all on Facebook.
+            820+ neighbors get the daily yard update on Facebook — what's freshly screened, what just rolled off the truck, and any weather days we're closed.
           </p>
         </div>
       </section>
@@ -322,11 +322,12 @@ function HomePage() {
                 2026 price list
               </p>
               <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[18ch]">
-                Honest prices, by the yard.
+                Posted. Not whispered.
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Posted, not whispered. Same price for everyone — homeowner or contractor.
-                Pickup or delivery. 1-yard minimum. Cash or check skips the 4% card fee.
+                Same number for the contractor and the homeowner. Pickup or
+                delivery. 1-yard minimum. Cash or check skips the 4% card fee —
+                that's the processor's cut, not ours.
               </p>
             </div>
             <a
@@ -361,11 +362,11 @@ function HomePage() {
           </div>
 
           <p className="mt-8 text-xs text-zinc-600">
-            Prices per cubic yard unless noted. Delivery quoted by zip — call Abby at{" "}
+            Per cubic yard unless noted. Delivery is quoted by ZIP — call Abby at{" "}
             <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
               508.579.9897
             </a>{" "}
-            for a same-day estimate. MA 6.25% sales tax applies where required.
+            and you'll have a same-day number. MA 6.25% sales tax applies where required.
           </p>
         </div>
       </section>
@@ -387,8 +388,9 @@ function HomePage() {
               You call. We load. <span className="text-brand">It shows up.</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery all over Central Mass. One-yard minimum, and
-              about 48 hours' notice is all we need to get you on the truck.
+              Curbside delivery anywhere in Central Mass. One-yard minimum.
+              Call before noon and we'll try to make it today — otherwise about
+              48 hours puts you on the truck.
             </p>
             <Link
               to="/delivery"
@@ -407,10 +409,10 @@ function HomePage() {
             />
             <ul className="divide-y divide-white/10">
               {[
-                ["Driveway-to-curb only", "We stay off lawns — it keeps your grass (and the lines underneath) in good shape."],
-                ["1 yard minimum", "About 48 hours' notice to lock in a spot."],
-                ["Mark your spot", "A tarp, cone, or quick note works great — just lets us know exactly where to drop it."],
-                ["4% card fee", "That's the processor's cut, not ours. Cash or check skips it."],
+                ["Driveway-to-curb only", "Your grass — and the gas line under it — stays where it should."],
+                ["1 yard minimum", "Call before noon today, or give us about 48 hours."],
+                ["Mark your spot", "A tarp, a cone, even a sticky note. Tells us exactly where to drop it."],
+                ["4% card fee", "Processor's cut, not ours. Cash or check skips it entirely."],
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="font-display text-xl uppercase">{k}</p>
@@ -437,7 +439,7 @@ function HomePage() {
             />
             <div>
               <p className="font-display text-2xl uppercase">Certified Woman-Owned</p>
-              <p className="text-sm text-zinc-600">Massachusetts WBE certified since year three.</p>
+              <p className="text-sm text-zinc-600">Massachusetts WBE since year three. Same Abby, every season.</p>
             </div>
           </div>
           <Link
