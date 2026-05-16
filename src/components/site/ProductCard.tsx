@@ -55,7 +55,7 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
       )}
-      <div className="flex items-center gap-3 pt-3 border-t border-zinc-300/60">
+      <div className="flex items-center gap-3">
         <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
           Available:
         </span>
