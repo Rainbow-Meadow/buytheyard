@@ -3,7 +3,7 @@ import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import yardPiles from "@/assets/source/yard-piles.webp";
 import loadingTruck from "@/assets/source/loading-truck.webp";
-import dumpTruckMobile from "@/assets/source/dump-truck-mobile.png";
+import heroMobile from "@/assets/source/hero-mobile-firepit.png";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [
-      { rel: "preload", as: "image", href: dumpTruckMobile, fetchpriority: "high", media: "(max-width: 767px)" },
+      { rel: "preload", as: "image", href: heroMobile, fetchpriority: "high", media: "(max-width: 767px)" },
       { rel: "preload", as: "image", href: yardWide, fetchpriority: "high", media: "(min-width: 768px)" },
     ],
   }),
@@ -70,8 +70,8 @@ function HomePage() {
       <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 min-h-[640px] md:min-h-[720px] flex">
         {/* Mobile single hero image */}
         <img
-          src={dumpTruckMobile}
-          alt="Buy The Yard delivery truck dumping a mound of mulch"
+          src={heroMobile}
+          alt="Adirondack chairs around a fire pit at the Buy The Yard yard with mulch piles, flowers, and American flag in the background"
           fetchPriority="high"
           loading="eager"
           decoding="async"
