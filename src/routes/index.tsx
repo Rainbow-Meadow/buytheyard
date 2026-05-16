@@ -382,7 +382,7 @@ function HomePage() {
               ))}
             </div>
             <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
-              820+ neighbors get the daily yard update on Facebook — what's freshly screened, what just rolled off the truck, and any weather days we're closed.
+              Follow us on Facebook for daily inventory updates, new arrivals, and weather-related closures. Over 820 local customers already do.
             </p>
             <a
               href="https://www.facebook.com/BuyTheYardOutdoorProducts"
@@ -410,9 +410,10 @@ function HomePage() {
                 Straightforward Pricing
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Same number for the contractor and the homeowner. Pickup or
-                delivery. 1-yard minimum. Cash or check skips the 4% card fee —
-                that's the processor's cut, not ours.
+                Transparent, per-yard pricing for both contractors and
+                homeowners. One-yard minimum on all bulk orders, available for
+                pickup or delivery. Cash and check payments avoid the 4% credit
+                card processing fee.
               </p>
             </div>
             <a
@@ -483,8 +484,8 @@ function HomePage() {
               Frequently Asked Questions
             </h2>
             <p className="mt-5 text-zinc-700 max-w-[42ch] text-pretty">
-              Quick answers on price, area, the card fee, and how soon a truck can
-              be in your driveway. Anything else, Abby's a phone call away.
+              Quick answers about pricing, delivery areas, payment, and
+              scheduling. For anything not covered here, please give us a call.
             </p>
             <a
               href="tel:5085799897"
