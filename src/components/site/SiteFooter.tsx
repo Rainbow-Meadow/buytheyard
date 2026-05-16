@@ -44,7 +44,7 @@ export function SiteFooter() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-brand"
             >
-              <Star className="size-4" /> Yelp
+            <YelpLogo className="size-4" /> Yelp
             </a>
           </div>
           <p className="mt-4 text-[10px] uppercase tracking-widest text-zinc-500">
