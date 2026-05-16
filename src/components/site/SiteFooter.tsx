@@ -73,9 +73,9 @@ export function SiteFooter() {
             Sunday: Closed
           </p>
           <p className="text-xs text-zinc-500 leading-relaxed max-w-[34ch]">
-            In-season 4/1 – 8/1. Opening 4/1/26.<br />
-            Aug+: by appointment.<br />
-            Open year-round — winter salt available, call for hours.
+            In-season 4/1 – 8/1. 2026 opens 4/1.<br />
+            After 8/1: by appointment.<br />
+            Winter salt year-round — call for loading hours.
           </p>
         </div>
         <div className="space-y-2 md:space-y-3 flex flex-col items-center md:items-start">
