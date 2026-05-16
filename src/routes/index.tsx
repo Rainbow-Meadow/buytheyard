@@ -640,9 +640,11 @@ function HomePage() {
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery throughout Central Massachusetts. One-yard
-              minimum. Call before noon for same-day delivery when available;
-              otherwise, please allow approximately 48 hours.
+              Curbside delivery to Holden, Worcester, Princeton, Sterling,
+              Rutland, Paxton, West Boylston, Leominster, and the rest of
+              Central Mass. One-yard minimum. Call before noon for same-day
+              delivery when available; otherwise, please allow approximately
+              48 hours.
             </p>
             <Link
               to="/delivery"
