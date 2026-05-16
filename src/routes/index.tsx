@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, Facebook, Flower2, Phone, Tag, Truck } from "lucide-react";
+import { ArrowRight, ChevronDown, Facebook, Flower2, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import heroMobile from "@/assets/source/hero-mobile-firepit.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.png";
@@ -9,6 +9,12 @@ import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 function MobileCollapse({
   id,
