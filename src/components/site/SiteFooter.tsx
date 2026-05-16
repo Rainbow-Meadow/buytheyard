@@ -50,7 +50,7 @@ export function SiteFooter() {
             Est. 2016 · WBE Certified
           </p>
         </div>
-        <div className="space-y-2 md:space-y-3">
+        <div className="space-y-2 md:space-y-3 order-2">
           <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
             Visit
           </h4>
@@ -60,7 +60,7 @@ export function SiteFooter() {
             Jefferson, MA 01522
           </p>
         </div>
-        <div className="space-y-2 md:space-y-3">
+        <div className="space-y-2 md:space-y-3 order-3 md:order-4">
           <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
             Site
           </h4>
@@ -72,7 +72,7 @@ export function SiteFooter() {
             <li><Link to="/privacy" className="hover:text-zinc-100">Privacy &amp; Terms</Link></li>
           </ul>
         </div>
-        <div className="col-span-2 md:col-span-1 space-y-2 md:space-y-3">
+        <div className="col-span-2 md:col-span-1 space-y-2 md:space-y-3 order-4 md:order-3">
           <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
             Hours
           </h4>
