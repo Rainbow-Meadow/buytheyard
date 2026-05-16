@@ -74,7 +74,7 @@ function ProductsPage() {
       <section className="bg-kraft py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display text-4xl uppercase mb-4">
-            Don't see it on the page? Ask anyway.
+            Looking for Something Else?
           </h2>
           <p className="text-zinc-700 mb-8">
             What's on this catalog is the regular lineup. The yard also runs
