@@ -69,7 +69,7 @@ function DeliveryPage() {
 
           <div className="bg-surface text-surface-foreground p-8 md:p-10 rounded-md">
             <Truck className="size-10 text-brand mb-6" />
-            <h2 className="font-display text-4xl uppercase mb-4">We deliver</h2>
+            <h2 className="font-display text-4xl uppercase mb-4">Delivery</h2>
             <p className="text-zinc-300 mb-6">
               Curbside, anywhere in Central Mass. One call confirms your ZIP,
               your window, and the price — before the truck ever leaves the yard.
@@ -87,7 +87,7 @@ function DeliveryPage() {
       <section className="py-16 md:py-20 bg-kraft border-y border-zinc-300">
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="font-display text-4xl md:text-5xl uppercase mb-10">
-            Four things worth knowing before the truck rolls.
+            What to Know Before Delivery
           </h2>
           <ul className="divide-y divide-zinc-300">
             {POLICIES.map(([k, v], i) => (
@@ -112,7 +112,7 @@ function DeliveryPage() {
           <CreditCard className="size-10 text-brand shrink-0" />
           <div>
             <h3 className="font-display text-2xl uppercase mb-2">
-              About that 4% card fee.
+              Card Processing Fee
             </h3>
             <p className="text-zinc-300">
               It's the processor's cut, not ours — we don't see a dime of it.

@@ -304,7 +304,7 @@ function HomePage() {
                 Bulk materials &amp; garden center
               </p>
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
-              What Abby would load for you.
+              Featured Materials
             </h2>
             </div>
             <Link
@@ -346,7 +346,7 @@ function HomePage() {
                 Latest from the yard
               </p>
               <h2 className="font-display text-4xl md:text-5xl uppercase leading-[0.95] text-zinc-900 max-w-[20ch]">
-                What's actually on the yard this week.
+                In Stock This Week
               </h2>
             </div>
             <a
@@ -407,7 +407,7 @@ function HomePage() {
                 2026 price list
               </p>
               <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[18ch]">
-                Posted. Not whispered.
+                Straightforward Pricing
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
                 Same number for the contractor and the homeowner. Pickup or
@@ -480,7 +480,7 @@ function HomePage() {
               Before you call
             </p>
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
-              The four we get most.
+              Frequently Asked Questions
             </h2>
             <p className="mt-5 text-zinc-700 max-w-[42ch] text-pretty">
               Quick answers on price, area, the card fee, and how soon a truck can
@@ -599,7 +599,7 @@ function HomePage() {
           <div>
             <Truck className="size-10 text-brand mb-6" />
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] mb-6">
-              You call. We load. <span className="text-brand">It shows up.</span>
+              Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
               Curbside delivery anywhere in Central Mass. One-yard minimum.
