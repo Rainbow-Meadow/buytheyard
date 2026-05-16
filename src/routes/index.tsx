@@ -288,8 +288,8 @@ function HomePage() {
               You call. We load. <span className="text-brand">It shows up.</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery, all over Central Mass. One yard minimum.
-              48 hours notice puts you on the truck. Done.
+              Curbside delivery all over Central Mass. One-yard minimum, and
+              about 48 hours' notice is all we need to get you on the truck.
             </p>
             <Link
               to="/delivery"
@@ -308,10 +308,10 @@ function HomePage() {
             />
             <ul className="divide-y divide-white/10">
               {[
-                ["Driveway-to-curb only", "We don't drive on lawns. Protects your turf and the utilities under it."],
-                ["1 yard minimum", "48 hours notice to lock in a spot."],
-                ["Mark your spot", "Tarp, cone, note — anything that says \"dump here.\""],
-                ["4% card fee", "Cash or check skips it."],
+                ["Driveway-to-curb only", "We stay off lawns — it keeps your grass (and the lines underneath) in good shape."],
+                ["1 yard minimum", "About 48 hours' notice to lock in a spot."],
+                ["Mark your spot", "A tarp, cone, or quick note works great — just lets us know exactly where to drop it."],
+                ["4% card fee", "That's the processor's cut, not ours. Cash or check skips it."],
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="font-display text-xl uppercase">{k}</p>
