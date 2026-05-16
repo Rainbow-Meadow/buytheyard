@@ -1,32 +1,37 @@
 
-# Mobile-only collapsible sections on the landing page
+# FAQ accordion on the landing page
 
-Make the **Featured products** grid and the **Pricing** grid collapse on mobile, both **closed by default**. Desktop layout stays exactly as it is today.
+Add a short FAQ section to `src/routes/index.tsx` answering the four most-asked questions: pricing, delivery area/cost, the 4% card fee, and how soon delivery happens.
 
-## Behavior
+## Placement
 
-- Below the `md` breakpoint (≤767px): the section heading row becomes a tappable disclosure button. The grid underneath is hidden until tapped, then slides open.
-- At `md` and up: no button, no toggling — the grid is always visible, identical to today.
-- State is component-local (`useState`). No URL hash, no persistence.
-- Each toggle: full-width tap target, chevron icon that rotates 180° when open, `aria-expanded` + `aria-controls` for screen readers, and `prefers-reduced-motion` respected (no height animation if the user opts out).
-- Smooth height transition using a grid-rows `1fr / 0fr` trick (no JS measuring, no layout jank).
+Insert as a new `<section>` between the existing **Pricing** section and the **Delivery callout**. That order keeps it as the natural "before you call" reassurance step.
 
-## Visual
+## Markup
 
-- The existing headings (`"What Abby would load for you."` / `"Posted. Not whispered."`) stay as the visible label. On mobile they sit inside a button row with a small `+` / `−` (or chevron) on the right and a hairline underline so the section reads as collapsed.
-- The "See full catalog →" link and "Call for a quote" link currently in those section headers move *inside* the expanded region on mobile (so a collapsed section is just heading + chevron, nothing else). Desktop keeps them in their current top-right position.
-- Eyebrow, intro paragraph, and the pricing footnote stay outside the collapse so the section still reads as scannable when closed. (If you'd rather hide those too, say the word — happy to fold them in.)
+- Use the existing `Accordion` primitives from `src/components/ui/accordion.tsx` (shadcn/Radix). No new dependencies.
+- `Accordion` with `type="single"`, `collapsible`, no item open by default.
+- Wrapper styled to match the surrounding sections: `bg-kraft`, `border-y border-zinc-300/60`, eyebrow + display headline on the left, the accordion in a single-column max-w-3xl block on the right (stacks on mobile, two-column from `md:`).
+- `HelpCircle` icon (lucide) on the eyebrow.
+- Trigger text in `font-display uppercase` to match the rest of the page; content in body type with one or two short paragraphs each.
+- Each answer ends with a relevant inline link (call, /delivery, /quote) so the section converts, not just informs.
 
-## Files
+## The four questions and answers
 
-- `src/routes/index.tsx` — wrap the two section bodies in a new local component (defined in the same file) that renders a `<details>`-style toggle on mobile and a plain container on `md+`. Tailwind handles the responsive switch via `md:` variants; no new dependencies.
+1. **How much does material cost?** → Posted ranges per category, restate the 1-yard minimum, point to the price list above and the phone number for a same-day quote.
+2. **Do you deliver to my town?** → Curbside across Central MA. ZIP-priced. Call to confirm the area and the number before the truck moves.
+3. **What's the 4% card fee about?** → Processor's cut, not ours. Cash or check skips it. Same posted price either way.
+4. **How fast can I get a delivery?** → Call before noon → we try to make it today. Otherwise ~48 hours. Driveway-to-curb only; mark the spot.
 
 ## Out of scope
 
-- "Latest from the yard" and the delivery details box stay as they are.
-- No changes to the data, no changes to `ProductCard`, no changes to other routes.
-- No accordion library (Radix/shadcn `Accordion` is overkill for two one-shot sections and would add wrapping markup).
+- No FAQ schema JSON-LD this pass (can add later if SEO wants it — easy bolt-on).
+- No new route, no separate `/faq` page.
+- No changes to existing sections beyond inserting the new one.
+- Mobile collapse pattern for *other* sections is unchanged; the accordion itself is naturally collapsible at every breakpoint.
 
 ## Verification
 
-After the edit I'll check the mobile preview (440px): both sections render as a single heading row with a chevron, tapping expands them, tapping again collapses. Then resize check to confirm desktop is unchanged.
+- Mobile preview (440px): section renders, items collapsed by default, expanding one closes the previous.
+- Desktop: two-column layout with the headline column left, accordion right.
+- All four trigger labels readable, all answers visible without horizontal scroll, inline links work.
