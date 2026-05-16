@@ -16,6 +16,8 @@ export const Route = createFileRoute("/delivery")({
         content: "Two ways to get your material from the Jefferson, MA yard.",
       },
       { property: "og:url", content: "/delivery" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-delivery.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-delivery.jpg" },
     ],
   }),
   component: DeliveryPage,
