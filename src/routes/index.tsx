@@ -47,49 +47,42 @@ function HomePage() {
     .map((n) => products.find((p) => p.name === n))
     .filter((p): p is (typeof products)[number] => Boolean(p));
 
-  const priceGroups: { heading: string; items: { name: string; price: string; note?: string }[] }[] = [
+  const priceGroups: { heading: string; range: string; unit: string; includes: string }[] = [
     {
       heading: "Mulch",
-      items: [
-        { name: "Premium Black", price: "$48", note: "/ yd" },
-        { name: "Hemlock", price: "$50", note: "/ yd" },
-        { name: "Dark Brown", price: "$48", note: "/ yd" },
-      ],
+      range: "$48–$50",
+      unit: "per yard",
+      includes: "Premium Black · Hemlock · Dark Brown",
     },
     {
-      heading: "Soil & Compost",
-      items: [
-        { name: "Screened Loam", price: "$45", note: "/ yd" },
-        { name: "Plant Mix & Compost", price: "$55", note: "/ yd" },
-      ],
+      heading: "Loam, Compost & Plant Mix",
+      range: "$45–$55",
+      unit: "per yard",
+      includes: "Screened Loam · Plant Mix · Bulk Compost",
     },
     {
       heading: "Sand & Gravel",
-      items: [
-        { name: "Mason Sand", price: "$55", note: "/ yd" },
-        { name: "3/4\" Crushed Blue Stone", price: "$55", note: "/ yd" },
-        { name: "3/8\" Pea Stone", price: "$55", note: "/ yd" },
-      ],
+      range: "$55",
+      unit: "per yard",
+      includes: "Mason Sand · 3/4\" Crushed Blue · 3/8\" Pea Stone",
     },
     {
       heading: "Specialty Stone",
-      items: [
-        { name: "River Stone", price: "$135", note: "/ yd" },
-        { name: "Red Lava Rock", price: "$185", note: "/ yd" },
-      ],
+      range: "$135–$185",
+      unit: "per yard",
+      includes: "River Stone · Red Lava Rock",
     },
     {
-      heading: "Specialty",
-      items: [
-        { name: "ASTM Playground Chips", price: "$60", note: "/ yd · certified" },
-      ],
+      heading: "Playground Chips",
+      range: "$60",
+      unit: "per yard · ASTM certified",
+      includes: "F1292 · F2075 · F1951",
     },
     {
       heading: "Garden Center",
-      items: [
-        { name: "Hanging Baskets", price: "$40", note: "ea · 2 for $70" },
-        { name: "Annuals & Perennials", price: "From $18", note: "per plant" },
-      ],
+      range: "From $18",
+      unit: "per item",
+      includes: "Annuals · Perennials · Hanging Baskets ($40 ea · 2 for $70)",
     },
   ];
 
@@ -349,28 +342,20 @@ function HomePage() {
             {priceGroups.map((group) => (
               <div
                 key={group.heading}
-                className="bg-white p-6 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
+                className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
               >
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                   {group.heading}
                 </p>
-                <ul className="divide-y divide-zinc-200">
-                  {group.items.map((item) => (
-                    <li key={item.name} className="py-3 first:pt-0 last:pb-0 flex items-baseline justify-between gap-4">
-                      <span className="text-sm text-zinc-800">{item.name}</span>
-                      <span className="text-right shrink-0">
-                        <span className="font-display text-xl uppercase text-zinc-950 leading-none">
-                          {item.price}
-                        </span>
-                        {item.note && (
-                          <span className="block mt-1 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                            {item.note}
-                          </span>
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="font-display text-5xl uppercase text-zinc-950 leading-none mb-2">
+                  {group.range}
+                </p>
+                <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-4">
+                  {group.unit}
+                </p>
+                <p className="text-sm text-zinc-700 mt-auto pt-4 border-t border-zinc-200">
+                  {group.includes}
+                </p>
               </div>
             ))}
           </div>
