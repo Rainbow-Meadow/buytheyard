@@ -19,6 +19,9 @@ export const Route = createFileRoute("/about")({
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-about.jpg" },
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-about.jpg" },
     ],
+    links: [
+      { rel: "canonical", href: "https://buytheyard.lovable.app/about" },
+    ],
   }),
   component: AboutPage,
 });
