@@ -6,13 +6,13 @@ export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div className="md:col-span-1">
+        <div className="md:col-span-1 flex flex-col items-center text-center md:items-start md:text-left">
           <img
             src={brandmark}
             alt="Buy The Yard — Mulch · Loam · Sand · Stone"
             width={240}
             height={120}
-            className="h-24 w-auto"
+            className="h-24 w-auto mx-auto md:mx-0"
             loading="lazy"
             decoding="async"
           />
@@ -28,7 +28,7 @@ export function SiteFooter() {
           >
             abby@btymaterial.com
           </a>
-          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <div className="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2">
             <a
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
