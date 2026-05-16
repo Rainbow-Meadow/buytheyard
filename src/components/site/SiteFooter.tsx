@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Star } from "lucide-react";
+import { Facebook } from "lucide-react";
 import brandmark from "@/assets/brandmark.png";
+import { YelpLogo } from "@/components/site/YelpLogo";
 
 export function SiteFooter() {
   return (

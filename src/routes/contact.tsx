@@ -7,8 +7,8 @@ import {
   MapPin,
   Phone,
   Facebook,
-  Star,
 } from "lucide-react";
+import { YelpLogo } from "@/components/site/YelpLogo";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
