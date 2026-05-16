@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Bulk mulch, loam, sand, stone. Plus a flower wagon. Woman-owned, Jefferson MA. 10th season. Call 508-579-9897.",
+          "Bulk mulch, loam, sand, and stone — plus a little flower wagon. Woman-owned, in Jefferson, MA. 10th season and happy to help. Call 508-579-9897.",
       },
       { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
       {
