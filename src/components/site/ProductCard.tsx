@@ -1,6 +1,7 @@
-import type { Product } from "@/data/products";
+import { categoryPricing, type Product } from "@/data/products";
 
 export function ProductCard({ product }: { product: Product }) {
+  const pricing = categoryPricing[product.category];
   return (
     <div className="group bg-kraft/60 ring-1 ring-black/5 p-4 rounded-md flex flex-col">
       <div className="w-full aspect-[4/3] overflow-hidden rounded-sm mb-5 bg-zinc-200">
@@ -43,18 +44,14 @@ export function ProductCard({ product }: { product: Product }) {
           {product.badge}
         </span>
       )}
-      {product.price && (
-        <div className="flex items-baseline justify-between gap-3 pt-3 mb-2 border-t border-zinc-300/60">
-          <span className="font-display text-2xl uppercase text-zinc-900 leading-none">
-            {product.price}
-          </span>
-          {product.priceNote && (
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-              {product.priceNote}
-            </span>
-          )}
-        </div>
-      )}
+      <div className="flex items-baseline justify-between gap-3 pt-3 mb-2 border-t border-zinc-300/60">
+        <span className="font-display text-2xl uppercase text-zinc-900 leading-none">
+          {pricing.range}
+        </span>
+        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+          {pricing.unit} · {product.category} range
+        </span>
+      </div>
       <div className="flex items-center gap-3">
         <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
           Available:
