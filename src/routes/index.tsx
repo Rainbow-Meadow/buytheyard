@@ -608,9 +608,9 @@ function HomePage() {
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery anywhere in Central Mass. One-yard minimum.
-              Call before noon and we'll try to make it today — otherwise about
-              48 hours puts you on the truck.
+              Curbside delivery throughout Central Massachusetts. One-yard
+              minimum. Call before noon for same-day delivery when available;
+              otherwise, please allow approximately 48 hours.
             </p>
             <Link
               to="/delivery"
@@ -629,10 +629,10 @@ function HomePage() {
             />
             <ul className="divide-y divide-white/10">
               {[
-                ["Driveway-to-curb only", "Your grass — and the gas line under it — stays where it should."],
-                ["1 yard minimum", "Call before noon today, or give us about 48 hours."],
-                ["Mark your spot", "A tarp, a cone, even a sticky note. Tells us exactly where to drop it."],
-                ["4% card fee", "Processor's cut, not ours. Cash or check skips it entirely."],
+                ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
+                ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
+                ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
+                ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="font-display text-xl uppercase">{k}</p>
@@ -659,7 +659,7 @@ function HomePage() {
             />
             <div>
               <p className="font-display text-2xl uppercase">Certified Woman-Owned</p>
-              <p className="text-sm text-zinc-600">Massachusetts WBE since year three. Same Abby, every season.</p>
+              <p className="text-sm text-zinc-600">Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.</p>
             </div>
           </div>
           <Link
