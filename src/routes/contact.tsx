@@ -151,12 +151,12 @@ function ContactPage() {
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <Phone className="size-7 text-brand mb-4" />
             <h2 className="font-display text-2xl uppercase mb-2">Phone &amp; Email</h2>
-            <a href="tel:5085799897" className="text-zinc-900 font-semibold hover:text-brand">
+            <a href="tel:5085799897" className="block text-zinc-900 font-semibold hover:text-brand">
               508-579-9897
             </a>
             <a
               href="mailto:abby@btymaterial.com"
-              className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-700 hover:text-brand"
+              className="mt-2 flex items-center gap-2 text-sm text-zinc-700 hover:text-brand"
             >
               <Mail className="size-4" /> abby@btymaterial.com
             </a>
