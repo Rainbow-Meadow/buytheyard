@@ -282,10 +282,10 @@ function HomePage() {
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {[
-            { k: "10th", v: "Season answering our own phone" },
-            { k: "WBE", v: "Certified woman-owned in Mass." },
-            { k: "820+", v: "Neighbors following on Facebook" },
-            { k: "1 yard", v: "Smallest delivery we'll send" },
+            { k: "10th", v: "Years in business" },
+            { k: "WBE", v: "Massachusetts WBE certified" },
+            { k: "820+", v: "Facebook followers" },
+            { k: "1 yard", v: "Minimum order size" },
           ].map((s) => (
             <div key={s.k}>
               <p className="font-display text-3xl text-brand uppercase leading-none">{s.k}</p>
