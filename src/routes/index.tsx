@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
+import yardPiles from "@/assets/source/yard-piles.webp";
+import loadingTruck from "@/assets/source/loading-truck.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
@@ -24,7 +26,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [
-      { rel: "preload", as: "image", href: abbyPortrait, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: yardWide, fetchpriority: "high" },
     ],
   }),
   component: HomePage,
@@ -63,13 +65,50 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-kraft text-zinc-900 overflow-hidden border-b border-zinc-300/60">
-        <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
+      <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 min-h-[640px] md:min-h-[720px] flex">
+        {/* Collage background */}
+        <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-[2px] bg-zinc-950">
+          <img
+            src={yardWide}
+            alt="The Buy The Yard yard with trucks and bulk material bins"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            className="w-full h-full object-cover md:col-span-2 md:row-span-2"
+          />
+          <img
+            src={yardPiles}
+            alt="Mulch piles at the yard"
+            loading="lazy"
+            decoding="async"
+            className="hidden md:block w-full h-full object-cover"
+          />
+          <img
+            src={loadingTruck}
+            alt="Loader filling a delivery truck with mulch"
+            loading="lazy"
+            decoding="async"
+            className="hidden md:block w-full h-full object-cover"
+          />
+        </div>
+        {/* Scrim */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
+
+        <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-6 py-16 md:py-24 self-center w-full">
           <div>
-            <p className="inline-flex items-center text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-700 mb-5 pb-2 border-b border-zinc-400/50">
+            <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-200 mb-5 pb-2 border-b border-white/30">
+              <img
+                src={abbyPortrait}
+                alt="Abby"
+                width={28}
+                height={28}
+                loading="lazy"
+                decoding="async"
+                className="size-7 rounded-full object-cover ring-1 ring-white/40"
+              />
               Hi, I'm Abby — owner, Buy The Yard · Jefferson, MA
             </p>
-            <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance mb-7">
+            <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance mb-7 text-white">
               A small yard,{" "}
               <span className="text-brand">built by hand</span>, run by{" "}
               <span className="relative inline-block text-brand">
@@ -91,7 +130,7 @@ function HomePage() {
               </span>{" "}
               since 2016.
             </h1>
-            <p className="text-zinc-700 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
+            <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
               Mulch by the yard. Loaded by hand.
               <br />
               Pickup at the yard. Or we bring it to your driveway.
@@ -99,26 +138,14 @@ function HomePage() {
               No upsells. No runaround.
             </p>
 
-            <div className="aspect-[4/5] max-w-md overflow-hidden rounded-md ring-1 ring-zinc-300 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04),0_20px_40px_-24px_rgba(0,0,0,0.25)] mb-9">
-              <img
-                src={abbyPortrait}
-                alt="Abby, owner of Buy The Yard"
-                width={1232}
-                height={1540}
-                fetchPriority="high"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-700">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">
               <span className="inline-flex items-center gap-2.5">
                 <img
                   src={wbeSeal}
                   alt=""
                   width={88}
                   height={56}
-                  className="h-12 w-auto object-contain"
+                  className="h-12 w-auto object-contain bg-white/90 rounded-sm p-1"
                   loading="lazy"
                   decoding="async"
                 />
@@ -126,7 +153,7 @@ function HomePage() {
                   Mass. WBE Certified
                 </span>
               </span>
-              <span className="hidden sm:inline-block h-6 w-px bg-zinc-400/50" />
+              <span className="hidden sm:inline-block h-6 w-px bg-white/30" />
               <span className="text-xs uppercase tracking-[0.18em] font-semibold">
                 11th season · Est. 2015
               </span>
@@ -142,13 +169,13 @@ function HomePage() {
               </Link>
               <Link
                 to="/quote"
-                className="inline-flex items-center gap-2 border border-zinc-900 text-zinc-900 px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:bg-zinc-900 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 border border-white text-white px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:bg-white hover:text-zinc-900 transition-colors"
               >
                 Get a quote
               </Link>
               <a
                 href="tel:5085799897"
-                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors h-12 px-1"
+                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white hover:text-brand transition-colors h-12 px-1"
               >
                 <Phone className="size-4" />
                 Call Abby · 508.579.9897
