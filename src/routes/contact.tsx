@@ -7,8 +7,8 @@ import {
   MapPin,
   Phone,
   Facebook,
-  Star,
 } from "lucide-react";
+import { YelpLogo } from "@/components/site/YelpLogo";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -126,7 +126,7 @@ function ContactPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-300 hover:text-brand"
             >
-              <Star className="size-4" /> Yelp
+              <YelpLogo className="size-4" /> Yelp
             </a>
           </div>
         </div>
