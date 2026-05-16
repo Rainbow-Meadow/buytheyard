@@ -234,7 +234,7 @@ function HomePage() {
             <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-200 mb-5 pb-2 border-b border-white/30">
               <img
                 src={abbyPortrait}
-                alt="Abby"
+                alt="Abby, owner of Buy The Yard, standing in front of the yard in Jefferson, MA"
                 width={28}
                 height={28}
                 loading="lazy"
