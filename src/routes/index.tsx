@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
+import { ArrowRight, Facebook, Flower2, Phone, Tag, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import heroMobile from "@/assets/source/hero-mobile-firepit.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.png";
@@ -46,6 +46,52 @@ function HomePage() {
   ]
     .map((n) => products.find((p) => p.name === n))
     .filter((p): p is (typeof products)[number] => Boolean(p));
+
+  const priceGroups: { heading: string; items: { name: string; price: string; note?: string }[] }[] = [
+    {
+      heading: "Mulch",
+      items: [
+        { name: "Premium Black", price: "$48", note: "/ yd" },
+        { name: "Hemlock", price: "$50", note: "/ yd" },
+        { name: "Dark Brown", price: "$48", note: "/ yd" },
+      ],
+    },
+    {
+      heading: "Soil & Compost",
+      items: [
+        { name: "Screened Loam", price: "$45", note: "/ yd" },
+        { name: "Plant Mix & Compost", price: "$55", note: "/ yd" },
+      ],
+    },
+    {
+      heading: "Sand & Gravel",
+      items: [
+        { name: "Mason Sand", price: "$55", note: "/ yd" },
+        { name: "3/4\" Crushed Blue Stone", price: "$55", note: "/ yd" },
+        { name: "3/8\" Pea Stone", price: "$55", note: "/ yd" },
+      ],
+    },
+    {
+      heading: "Specialty Stone",
+      items: [
+        { name: "River Stone", price: "$135", note: "/ yd" },
+        { name: "Red Lava Rock", price: "$185", note: "/ yd" },
+      ],
+    },
+    {
+      heading: "Specialty",
+      items: [
+        { name: "ASTM Playground Chips", price: "$60", note: "/ yd · certified" },
+      ],
+    },
+    {
+      heading: "Garden Center",
+      items: [
+        { name: "Hanging Baskets", price: "$40", note: "ea · 2 for $70" },
+        { name: "Annuals & Perennials", price: "From $18", note: "per plant" },
+      ],
+    },
+  ];
 
   const updates = [
     {
@@ -269,6 +315,72 @@ function HomePage() {
           </div>
           <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
             820+ followers. Daily yard updates, weather closures, and what just rolled in — all on Facebook.
+          </p>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="py-20 md:py-28 bg-base">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
+                <Tag className="size-3.5" />
+                2026 price list
+              </p>
+              <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[18ch]">
+                Honest prices, by the yard.
+              </h2>
+              <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
+                Posted, not whispered. Same price for everyone — homeowner or contractor.
+                Pickup or delivery. 1-yard minimum. Cash or check skips the 4% card fee.
+              </p>
+            </div>
+            <a
+              href="tel:5085799897"
+              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+            >
+              <Phone className="size-4" />
+              Call for a quote
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {priceGroups.map((group) => (
+              <div
+                key={group.heading}
+                className="bg-white p-6 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
+                  {group.heading}
+                </p>
+                <ul className="divide-y divide-zinc-200">
+                  {group.items.map((item) => (
+                    <li key={item.name} className="py-3 first:pt-0 last:pb-0 flex items-baseline justify-between gap-4">
+                      <span className="text-sm text-zinc-800">{item.name}</span>
+                      <span className="text-right shrink-0">
+                        <span className="font-display text-xl uppercase text-zinc-950 leading-none">
+                          {item.price}
+                        </span>
+                        {item.note && (
+                          <span className="block mt-1 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                            {item.note}
+                          </span>
+                        )}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 text-xs text-zinc-600">
+            Prices per cubic yard unless noted. Delivery quoted by zip — call Abby at{" "}
+            <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
+              508.579.9897
+            </a>{" "}
+            for a same-day estimate. MA 6.25% sales tax applies where required.
           </p>
         </div>
       </section>
