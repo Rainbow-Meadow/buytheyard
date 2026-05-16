@@ -115,8 +115,8 @@ function QuotePage() {
             Tell us what you need. <span className="text-brand">We'll tell you what it costs.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Takes a minute. We package it up. You fire it to Abby — email or text.
-            She comes back with pricing. No games.
+            It only takes a minute. We'll package everything up for you to send
+            over to Abby by email or text, and she'll come back with pricing.
           </p>
         </div>
       </section>
@@ -133,7 +133,7 @@ function QuotePage() {
               <span className="text-brand">01.</span> What do you need?
             </legend>
             <p className="text-sm text-zinc-600 mb-6">
-              One row per material. Quantities can be approximate — we'll lock them in.
+              One row per material. No need to be exact on quantities — we can fine-tune them together.
             </p>
 
             <div className="space-y-4">
@@ -301,8 +301,8 @@ function QuotePage() {
                     className={`text-sm mt-2 ${fulfillment === opt ? "text-zinc-300" : "text-zinc-600"}`}
                   >
                     {opt === "Pickup"
-                      ? "I'll come to the yard with my truck or trailer."
-                      : "Bring it to me. (Central MA.)"}
+                      ? "I'll swing by the yard with my truck or trailer."
+                      : "Please bring it out to me (Central MA)."}
                   </p>
                 </label>
               ))}
@@ -499,7 +499,7 @@ function QuotePage() {
               <span className="text-brand">04.</span> Anything else?
             </legend>
             <p className="text-sm text-zinc-600 mb-3">
-              Optional. Special instructions, access notes, questions — anything Abby should know.
+              Totally optional — any access notes, special instructions, or questions Abby should know about.
             </p>
             <NotesField register={register} watch={watch} />
             {formState.errors.notes && (
@@ -509,8 +509,8 @@ function QuotePage() {
 
           <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="text-xs text-zinc-600 max-w-[40ch]">
-              Next: we show your request, you tap once to send. By submitting, you agree
-              to our{" "}
+              Next, we'll show your request so you can send it with one tap. By submitting,
+              you agree to our{" "}
               <Link to="/privacy" className="underline hover:text-zinc-900">
                 Privacy &amp; Terms
               </Link>
@@ -589,8 +589,8 @@ function SuccessView({
             Send it to <span className="text-brand">Abby.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            One tap opens your mail or messages, with the request pre-filled.
-            No attachments. No extra steps. Hit send.
+            One tap opens your mail or messages with the request already filled in —
+            no attachments, no extra steps. Just hit send.
           </p>
         </div>
       </section>
