@@ -168,11 +168,11 @@ function HomePage() {
               since 2016.
             </h1>
             <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              Mulch by the yard, loaded by hand.
+              Call before noon and we'll try to put it in your driveway today.
               <br />
-              Pick up at the yard, or we'll bring it to your driveway.
+              Posted prices — same number for the contractor and the homeowner.
               <br />
-              Real prices, real people — happy to help you figure out what you need.
+              Not sure how much you need? That's why you call. We'll work it out together.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">
@@ -226,10 +226,10 @@ function HomePage() {
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {[
-            { k: "10th", v: "Season in business" },
-            { k: "WBE", v: "Certified Woman-Owned" },
-            { k: "820+", v: "Followers on Facebook" },
-            { k: "1 yard", v: "Minimum delivery" },
+            { k: "10th", v: "Season answering our own phone" },
+            { k: "WBE", v: "Certified woman-owned in Mass." },
+            { k: "820+", v: "Neighbors following on Facebook" },
+            { k: "1 yard", v: "Smallest delivery we'll send" },
           ].map((s) => (
             <div key={s.k}>
               <p className="font-display text-3xl text-brand uppercase leading-none">{s.k}</p>
@@ -248,7 +248,7 @@ function HomePage() {
                 Bulk materials &amp; garden center
               </p>
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
-              Real material. By the yard.
+              What Abby would load for you.
             </h2>
             </div>
             <Link
