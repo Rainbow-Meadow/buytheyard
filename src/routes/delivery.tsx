@@ -24,10 +24,10 @@ export const Route = createFileRoute("/delivery")({
 });
 
 const POLICIES = [
-  ["Driveway-to-curbline only", "Your grass — and the gas, water, and irrigation lines running under it — stay where they should. Loaded trucks are heavy. Lawns are not."],
-  ["1 yard minimum", "Call before noon and we try to make it today. Otherwise about 48 hours puts you on the schedule."],
-  ["Mark your spot", "A tarp, a bucket, a cone, a sticky note. Anything that tells us where the pile goes so you don't end up moving it twice."],
-  ["Be home or be specific", "Can't be there? Send a photo and a sentence. Saves us guessing, saves you a do-over."],
+  ["Driveway-to-curbline only", "Deliveries are made to the driveway or curbline only. This protects your lawn and any gas, water, or irrigation lines beneath it."],
+  ["1 yard minimum", "Call before noon for same-day delivery when available; otherwise, please allow approximately 48 hours."],
+  ["Mark your spot", "Please mark your preferred drop location with a tarp, bucket, cone, or similar marker so we can place the material accurately."],
+  ["Be home or be specific", "If you can't be present at delivery, please send a photo and a brief note describing where the material should be placed."],
 ] as const;
 
 function DeliveryPage() {
@@ -42,8 +42,9 @@ function DeliveryPage() {
             You call. We load. <span className="text-brand">It shows up.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Call before noon — we'll try to deliver today. Otherwise, about 48 hours.
-            Either way, you talk to Abby, not a dispatcher.
+            Call before noon for same-day delivery when available; otherwise,
+            please allow approximately 48 hours. All orders are handled
+            directly by the owner.
           </p>
         </div>
       </section>
@@ -54,8 +55,8 @@ function DeliveryPage() {
             <Warehouse className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">Pick it up</h2>
             <p className="text-zinc-700 mb-6">
-              Truck or trailer? Pull right in. No appointment, no paperwork,
-              no waiting in a line of contractors. We load you, you go.
+              Bring a truck or trailer during business hours — no appointment
+              necessary. We'll load you on arrival.
             </p>
             <div className="space-y-2 text-sm text-zinc-700">
               <p><strong>Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
@@ -71,8 +72,9 @@ function DeliveryPage() {
             <Truck className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">Delivery</h2>
             <p className="text-zinc-300 mb-6">
-              Curbside, anywhere in Central Mass. One call confirms your ZIP,
-              your window, and the price — before the truck ever leaves the yard.
+              Curbside delivery throughout Central Massachusetts. Call to
+              confirm your delivery zone, scheduling window, and final price
+              before your order is dispatched.
             </p>
             <a
               href="tel:5085799897"
@@ -115,8 +117,9 @@ function DeliveryPage() {
               Card Processing Fee
             </h3>
             <p className="text-zinc-300">
-              It's the processor's cut, not ours — we don't see a dime of it.
-              Cash or check skips it completely.
+              The 4% surcharge is passed through directly from our payment
+              processor. Cash and check payments are accepted with no
+              additional fee.
             </p>
           </div>
         </div>

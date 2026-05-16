@@ -145,17 +145,17 @@ function HomePage() {
   const updates = [
     {
       title: "Mother's Day baskets are on the wagon.",
-      body: "Built this morning. $40 each, or 2 for $70. They walk off fast — call 508-579-9897 and we'll hold one with your name on it.",
+      body: "Hanging baskets are available now at $40 each, or 2 for $70. Quantities are limited — call 508-579-9897 to reserve one in advance.",
       tag: "Mother's Day",
     },
     {
       title: "5 yards of mulch = a shot at WooSox tickets.",
-      body: "Every May order of 5 yards or more goes in the hat. Four winners pulled every Friday. Pickup or delivery — both count the same.",
+      body: "May orders of 5 yards or more are automatically entered into our weekly WooSox ticket drawing. Four winners are selected each Friday. Pickup and delivery orders both qualify.",
       tag: "Promo · May",
     },
     {
       title: "Call before noon. We try to deliver today.",
-      body: "Not a slogan — that's the truck sitting out in the yard. Ring us before noon and if there's a window left on the route, you're on it.",
+      body: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours.",
       tag: "How it works",
     },
   ];
@@ -282,10 +282,10 @@ function HomePage() {
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {[
-            { k: "10th", v: "Season answering our own phone" },
-            { k: "WBE", v: "Certified woman-owned in Mass." },
-            { k: "820+", v: "Neighbors following on Facebook" },
-            { k: "1 yard", v: "Smallest delivery we'll send" },
+            { k: "10th", v: "Years in business" },
+            { k: "WBE", v: "Massachusetts WBE certified" },
+            { k: "820+", v: "Facebook followers" },
+            { k: "1 yard", v: "Minimum order size" },
           ].map((s) => (
             <div key={s.k}>
               <p className="font-display text-3xl text-brand uppercase leading-none">{s.k}</p>
@@ -382,7 +382,7 @@ function HomePage() {
               ))}
             </div>
             <p className="mt-8 text-xs text-zinc-600 text-center md:text-left">
-              820+ neighbors get the daily yard update on Facebook — what's freshly screened, what just rolled off the truck, and any weather days we're closed.
+              Follow us on Facebook for daily inventory updates, new arrivals, and weather-related closures. Over 820 local customers already do.
             </p>
             <a
               href="https://www.facebook.com/BuyTheYardOutdoorProducts"
@@ -410,9 +410,10 @@ function HomePage() {
                 Straightforward Pricing
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Same number for the contractor and the homeowner. Pickup or
-                delivery. 1-yard minimum. Cash or check skips the 4% card fee —
-                that's the processor's cut, not ours.
+                Transparent, per-yard pricing for both contractors and
+                homeowners. One-yard minimum on all bulk orders, available for
+                pickup or delivery. Cash and check payments avoid the 4% credit
+                card processing fee.
               </p>
             </div>
             <a
@@ -483,8 +484,8 @@ function HomePage() {
               Frequently Asked Questions
             </h2>
             <p className="mt-5 text-zinc-700 max-w-[42ch] text-pretty">
-              Quick answers on price, area, the card fee, and how soon a truck can
-              be in your driveway. Anything else, Abby's a phone call away.
+              Quick answers about pricing, delivery areas, payment, and
+              scheduling. For anything not covered here, please give us a call.
             </p>
             <a
               href="tel:5085799897"
@@ -503,17 +504,18 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    Posted by category, right above this section. Mulch runs
-                    $48–$50/yd, loam and compost $45–$55/yd, sand and gravel $55/yd,
-                    specialty stone $135–$185/yd. One-yard minimum, same number for
-                    contractor and homeowner.
+                    Pricing is posted by category in the section above. Mulch
+                    runs $48–$50/yd, loam and compost $45–$55/yd, sand and
+                    gravel $55/yd, and specialty stone $135–$185/yd. One-yard
+                    minimum, with the same pricing for contractors and
+                    homeowners.
                   </p>
                   <p className="mt-3">
-                    Want today's exact number for your project?{" "}
+                    For an exact quote on your project, please{" "}
                     <a href="tel:5085799897" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
-                      Call 508-579-9897
-                    </a>{" "}
-                    — Abby picks up.
+                      call 508-579-9897
+                    </a>
+                    .
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -524,13 +526,15 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    Curbside delivery across Central Massachusetts out of Jefferson.
-                    Holden, Princeton, Sterling, Rutland, West Boylston, Paxton,
-                    Worcester, Leominster — and plenty of towns in between.
+                    We offer curbside delivery throughout Central Massachusetts
+                    from our Jefferson yard, including Holden, Princeton,
+                    Sterling, Rutland, West Boylston, Paxton, Worcester,
+                    Leominster, and surrounding towns.
                   </p>
                   <p className="mt-3">
-                    Delivery is priced by ZIP. One quick call confirms the area and
-                    locks in the number before the truck moves. See full details on{" "}
+                    Delivery is priced by ZIP code. A brief call confirms your
+                    service area and final price before your order is
+                    dispatched. Full details are available on{" "}
                     <Link to="/delivery" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
                       the delivery page
                     </Link>
@@ -545,9 +549,10 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    It's the processor's cut — we don't see a dime of it. Cash or
-                    check skips it completely. Same posted price either way, no
-                    surprises at the gate.
+                    The 4% surcharge is passed through directly from our
+                    payment processor. Cash and check payments are accepted
+                    with no additional fee. Posted pricing remains the same
+                    regardless of payment method.
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -558,17 +563,18 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    Call before noon and if there's a window left on today's route,
-                    you're on it. Otherwise about 48 hours puts you on the schedule.
+                    Same-day delivery may be available when you call before
+                    noon, depending on the day's route. Otherwise, please
+                    allow approximately 48 hours.
                   </p>
                   <p className="mt-3">
-                    Delivery is driveway-to-curb only. Mark the spot with a tarp,
-                    cone, or sticky note and we'll drop the pile exactly there.
-                    Have a list ready?{" "}
+                    Delivery is made to the driveway or curbline only. Please
+                    mark your preferred drop location so we can place the
+                    material accurately. To submit a material list,{" "}
                     <Link to="/quote" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
-                      Start a quote
+                      start a quote
                     </Link>{" "}
-                    and Abby comes back same-day.
+                    and we'll respond the same day.
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -602,9 +608,9 @@ function HomePage() {
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery anywhere in Central Mass. One-yard minimum.
-              Call before noon and we'll try to make it today — otherwise about
-              48 hours puts you on the truck.
+              Curbside delivery throughout Central Massachusetts. One-yard
+              minimum. Call before noon for same-day delivery when available;
+              otherwise, please allow approximately 48 hours.
             </p>
             <Link
               to="/delivery"
@@ -623,10 +629,10 @@ function HomePage() {
             />
             <ul className="divide-y divide-white/10">
               {[
-                ["Driveway-to-curb only", "Your grass — and the gas line under it — stays where it should."],
-                ["1 yard minimum", "Call before noon today, or give us about 48 hours."],
-                ["Mark your spot", "A tarp, a cone, even a sticky note. Tells us exactly where to drop it."],
-                ["4% card fee", "Processor's cut, not ours. Cash or check skips it entirely."],
+                ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
+                ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
+                ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
+                ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="font-display text-xl uppercase">{k}</p>
@@ -653,7 +659,7 @@ function HomePage() {
             />
             <div>
               <p className="font-display text-2xl uppercase">Certified Woman-Owned</p>
-              <p className="text-sm text-zinc-600">Massachusetts WBE since year three. Same Abby, every season.</p>
+              <p className="text-sm text-zinc-600">Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.</p>
             </div>
           </div>
           <Link
