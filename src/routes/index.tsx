@@ -357,12 +357,7 @@ function HomePage() {
             </Link>
           </div>
 
-          <MobileCollapse
-            id="featured-products"
-            open={productsOpen}
-            onToggle={() => setProductsOpen((v) => !v)}
-            label="6 featured products"
-          >
+          <div className="mt-8 md:mt-0">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featured.map((p) => (
                 <ProductCard key={p.name} product={p} />
@@ -374,7 +369,7 @@ function HomePage() {
             >
               See full catalog <ArrowRight className="size-4" />
             </Link>
-          </MobileCollapse>
+          </div>
         </div>
       </section>
 
@@ -401,12 +396,7 @@ function HomePage() {
               Follow on Facebook
             </a>
           </div>
-          <MobileCollapse
-            id="yard-updates"
-            open={updatesOpen}
-            onToggle={() => setUpdatesOpen((v) => !v)}
-            label="3 weekly updates"
-          >
+          <div className="mt-8 md:mt-0">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {updates.map((u) => (
                 <article
@@ -435,7 +425,7 @@ function HomePage() {
               <Facebook className="size-4" />
               Follow on Facebook
             </a>
-          </MobileCollapse>
+          </div>
         </div>
       </section>
 
