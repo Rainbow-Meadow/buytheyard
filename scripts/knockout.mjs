@@ -15,11 +15,11 @@ const px = Buffer.from(data); // mutable copy
 // eat the white truck cab — the cab is bounded by red pinstripes which the
 // fill will stop at.
 const isBgColor = (r, g, b) => {
-  // near-white: high luma, low saturation
+  // Strict near-white: only the diffuse photo sky, not the painted cab or badge.
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   const sat = max - min;
-  return max >= 225 && sat <= 18;
+  return max >= 242 && sat <= 10;
 };
 
 const stack = [];
