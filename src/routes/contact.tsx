@@ -22,6 +22,8 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact — Buy The Yard" },
       { property: "og:description", content: "Phone, address, hours, and the map. Jefferson, MA." },
       { property: "og:url", content: "/contact" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
     ],
     scripts: [
       {

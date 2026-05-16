@@ -18,6 +18,8 @@ export const Route = createFileRoute("/products")({
         content: "Bulk landscape materials. By the yard. Pickup or delivery in Central Mass.",
       },
       { property: "og:url", content: "/products" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
     ],
   }),
   component: ProductsPage,

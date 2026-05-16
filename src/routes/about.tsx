@@ -16,6 +16,8 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "Meet The Owner — Buy The Yard" },
       { property: "og:description", content: "Abby's story and the WBE-certified yard she built in Jefferson, MA." },
       { property: "og:url", content: "/about" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-about.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-about.jpg" },
     ],
   }),
   component: AboutPage,

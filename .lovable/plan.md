@@ -1,55 +1,48 @@
-Soften the site copy across every page. Keep the same layout, sections, and structure — just rewrite the words to feel warmer, more approachable, and more small-town friendly. Less staccato/punchy, more "Abby chatting at the counter."
+## Goal
 
-## Tone shift
+Give every route a unique, on-brand Open Graph image so links shared on social/iMessage/Slack show the right scene for that page, with the Buy The Yard brandmark consistently overlaid.
 
-- Keep: first-person Abby voice, plain language, specifics (1-yard min, 48 hrs, prices, address).
-- Soften: trade clipped one-word sentences ("Done.", "Next.", "No games.") for short conversational ones. Drop slightly defensive lines ("No upsells. No runaround.", "That's it.").
-- Add: small friendly touches — "happy to", "glad to help", "stop by anytime", "we'll figure it out together".
-- Avoid: fluff, emojis, exclamation overload, corporate phrases ("solutions", "premier provider"), and losing the existing wit.
+## Approach
 
-## Files & specific edits
+For each route, composite the **brandmark** (`src/assets/brandmark.png`) onto a **landscape photo already in the repo** that matches the page topic. Render at **1200×630** (standard OG size, also good for Twitter `summary_large_image`), save as `.jpg` under `src/assets/og/`, and wire into each route's `head()` as absolute URLs via the existing `getRequestOrigin` pattern (already used elsewhere in the project per the head-meta knowledge).
 
-### `src/routes/index.tsx`
-- Hero subhead: replace "No upsells. No runaround." block with a warmer 3-line version (e.g. "Mulch by the yard, loaded by hand. / Pick up at the yard or we'll bring it to your driveway. / Real prices, real people — happy to help you figure out what you need.").
-- Update updates[] cards:
-  - Mother's Day: soften "Mom's gonna love it. Grab one before they're gone" → friendlier nudge.
-  - WooSox promo: rewrite "That's it. Pickup or delivery — both count." with warmer phrasing.
-  - "Call before noon. Get it today.": rewrite to feel inviting rather than terse.
-- Delivery callout: soften "You call. We load. It shows up." subtext and the 4 list items (e.g. "Driveway-to-curb only", card-fee line).
-- Update head() description to match new tone.
+Compositing is done with a small Node/Sharp script (no AI generation needed — we already own appropriate photography). Brandmark sits bottom-left on a subtle dark gradient scrim so it's legible over any photo.
 
-### `src/routes/about.tsx`
-- Opening "Here's the thing about landscape supply. / Most yards treat you like a ticket number…" — keep the contrast but warmer and less combative.
-- Closing line "We'll give you a real answer." → "We're always happy to talk it through."
-- Keep Charlie + WBE + 10th-season specifics intact.
+## Per-page image mapping
 
-### `src/routes/delivery.tsx`
-- H1 stays "You call. We load. It shows up." (it's a signature line) but soften the subhead "Two ways to get your material. Both are simple." → friendlier.
-- POLICIES copy: soften the 4 entries — keep the rules, lose the bluntness ("That's how property — and the utilities under it — get damaged." → gentler explanation).
-- "Read this before we roll." heading → softer ("A few things to know before delivery day.").
-- Card-fee section "One last thing. The card fee." → friendlier framing.
+| Route | Source photo | Why |
+| --- | --- | --- |
+| `/` (index) | `source/hero-desktop-yard.png` | Matches the new desktop hero — yard overview |
+| `/about` | `source/abby-portrait.webp` | Abby's story — owner portrait |
+| `/products` | `source/yard-piles.webp` | Material piles = catalog |
+| `/delivery` | `source/loading-truck.webp` | Truck loading = delivery/pickup |
+| `/contact` | `source/yard-banner-5.webp` | Sit-and-stay corner with OPEN flag — "come say hi" |
+| `/quote` | `source/yard-trucks.webp` | Trucks ready to roll = "tell us what you need" |
+| `/privacy` | reuse `/` image | Low-priority page, no need for unique asset |
 
-### `src/routes/contact.tsx`
-- H1 "Call. Text. Email. We answer." stays.
-- Subhead "Two ways. Phone gets a fast answer… Pick one." → warmer.
-- Card descriptions: soften "Abby comes back with pricing — fast.", "Miss us? Leave a message — we call back."
+Output files:
+- `src/assets/og/og-home.jpg`
+- `src/assets/og/og-about.jpg`
+- `src/assets/og/og-products.jpg`
+- `src/assets/og/og-delivery.jpg`
+- `src/assets/og/og-contact.jpg`
+- `src/assets/og/og-quote.jpg`
 
-### `src/routes/products.tsx`
-- Hero subhead "Prices move with the season… We'll tell you straight." → friendlier ("…just give us a call and we'll share today's number.").
-- "Don't see it? Ask." section: keep the heading, soften body copy.
+## Implementation steps
 
-### `src/routes/quote.tsx`
-- H1 "Tell us what you need. We'll tell you what it costs." — keep.
-- Subhead "Takes a minute. We package it up… No games." → soften, drop "No games."
-- Step legends (01/02/03) and helper text: light pass for warmth.
-- Pickup/Delivery radio descriptions: small softening.
+1. **Composite script** (one-off, run via `code--exec`): Sharp-based Node script that takes each source photo, resizes/crops to 1200×630 cover, adds a bottom-left dark gradient scrim, overlays the brandmark at ~220px wide with 48px padding, exports JPEG q85.
+2. **Import + wire** each generated image into its route's `head()`:
+   - Add `import ogImage from "@/assets/og/og-<page>.jpg"` at top of route file.
+   - In `head()`, derive absolute URL from `loaderData.origin` (add tiny loader calling existing `getRequestOrigin` server fn if route doesn't already have one).
+   - Set `og:image`, `og:image:width` (1200), `og:image:height` (630), and `twitter:image` + `twitter:card: summary_large_image`.
+3. **QA**: Run `code--exec` to render each output PNG, eyeball that brandmark is legible and crop is sensible on all 6.
 
 ## Out of scope
 
-- Layout, spacing, components, images — unchanged.
-- Product names, prices, schema/SEO structure, form logic — unchanged.
-- Header/footer nav labels — unchanged.
+- New photography or AI-generated imagery.
+- Changing existing route copy, layouts, or other meta tags.
+- Generating an OG image for `/privacy` (reuses home image).
 
-## Verification
+## Open question
 
-After edits, re-screenshot the home and About pages at desktop + mobile to confirm copy still fits the existing layout (no overflow, no broken line breaks).
+Brandmark placement — default plan is **bottom-left over a dark scrim**, matching how brandmarks usually appear in OG cards. Want me to do bottom-center instead, or add the wordmark "Buy The Yard — Jefferson, MA" next to it? Happy to go either way.

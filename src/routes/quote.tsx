@@ -43,6 +43,8 @@ export const Route = createFileRoute("/quote")({
         content: "Tell us what you need. We come back with pricing and a delivery window.",
       },
       { property: "og:url", content: "/quote" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-quote.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-quote.jpg" },
     ],
   }),
   component: QuotePage,
