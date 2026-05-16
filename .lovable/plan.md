@@ -1,54 +1,35 @@
-## Before/After Portfolio PDF
+# Revised Before/After Portfolio PDF
 
-A single PDF saved to `/mnt/documents/buytheyard-before-after.pdf` comparing the existing live site (`btymaterial.com`) against the new build for all 5 main pages, at both desktop and mobile widths.
+## Structure change
 
-### Pages covered
+Drop the side-by-side per-page comparison. New flow:
 
-1. Home
-2. Products
-3. Delivery & Pickup
-4. About
-5. Contact
+1. **Cover page** — title, date, both URLs
+2. **"Before" section** — 2–3 pages showing the old `btymaterial.com` site (desktop + mobile of the single long page). Brief caption noting it's a single-page Wix site.
+3. **"After" section** — the bulk of the PDF, one page per route showcasing the new site:
+   - Home, Products, Delivery, About, Contact
+   - Each page shows desktop screenshot prominent + mobile screenshot alongside
+   - Page title + short caption
 
-For each page, I'll find the closest matching URL on the old site (the legacy site doesn't have the exact same routes — e.g. it may use `/delivery-pickup` or merge About into Home). If no equivalent exists I'll note it as "No equivalent page" instead of skipping.
+## Re-capture new-site screenshots
 
-### Screenshot capture
+Re-shoot all 10 new-site screenshots (5 routes × desktop 1440×900 + mobile 390×844) against `https://buytheyard.lovable.app`. For each:
 
-Use the headless browser to capture **full-page** screenshots at two viewports:
-- Desktop: 1440 × 900
-- Mobile: 390 × 844
+1. `browser--navigate_to_url` to the route
+2. Wait for load: poll-loop with `browser--screenshot` + small delays, or use a fixed 3–4s wait via `project_debug--sleep` after navigation to let images/fonts settle
+3. Scroll to bottom and back to top to trigger any lazy-loaded images, then sleep 2s
+4. `browser--screenshot` with `full_page: true`
 
-That's 4 captures per page × 5 pages = **20 screenshots** total, saved to `/tmp/portfolio/`.
+Old-site screenshots can be reused from the previous run (no changes there).
 
-### PDF layout
+## PDF assembly
 
-Landscape US Letter (11" × 8.5"), one page per site-page. Structure per PDF page:
+- `reportlab` landscape US Letter
+- Cover → Before section (2 pages: desktop + mobile of old site) → After section (5 route pages)
+- After-page layout: route name as header, desktop screenshot ~70% width centered, mobile thumbnail to the side or below
+- Save to `/mnt/documents/buytheyard-portfolio-v2.pdf`
+- QA via `pdftoppm` then read each page image to verify no clipping/blank areas
 
-```text
-┌──────────────────────────────────────────────────────────┐
-│  HOME                                  Buy The Yard      │
-│  ────────────────────────────────────────────────────    │
-│  BEFORE (btymaterial.com)        AFTER (new build)       │
-│  ┌──────────────┐ ┌──┐           ┌──────────────┐ ┌──┐   │
-│  │              │ │  │           │              │ │  │   │
-│  │  desktop     │ │mb│           │  desktop     │ │mb│   │
-│  │              │ │  │           │              │ │  │   │
-│  └──────────────┘ └──┘           └──────────────┘ └──┘   │
-│  Captured 2026-05-16 · btymaterial.com vs preview URL    │
-└──────────────────────────────────────────────────────────┘
-```
+## Deliverable
 
-Each side gets a wide desktop thumbnail with a narrow mobile thumbnail tucked beside it, scaled to fit while preserving aspect ratio. Long full-page screenshots are scaled down to fit within their box.
-
-Cover page: project title, date, URLs of both sites, list of pages compared.
-
-### Technical details
-
-- Use `browser--navigate_to_url` + `browser--screenshot` with `full_page: true` for each capture. Set viewport with `browser--set_viewport_size` before each shot.
-- Old-site URLs discovered by visiting `btymaterial.com` first and mapping its nav to our 5 pages.
-- Build the PDF with Python `reportlab` (Pillow for image sizing). Embed images at native resolution scaled down — no path references.
-- Visual QA: convert the finished PDF to JPEGs with `pdftoppm` and inspect each page to confirm no clipped images, label overlap, or blank screenshots. Re-render if anything is off.
-
-### Deliverable
-
-`/mnt/documents/buytheyard-before-after.pdf` shown via a `presentation-artifact` tag for download.
+`<presentation-artifact path="buytheyard-portfolio-v2.pdf" mime_type="application/pdf"></presentation-artifact>`
