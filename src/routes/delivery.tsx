@@ -42,8 +42,9 @@ function DeliveryPage() {
             You call. We load. <span className="text-brand">It shows up.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Call before noon — we'll try to deliver today. Otherwise, about 48 hours.
-            Either way, you talk to Abby, not a dispatcher.
+            Call before noon for same-day delivery when available; otherwise,
+            please allow approximately 48 hours. All orders are handled
+            directly by the owner.
           </p>
         </div>
       </section>
@@ -54,8 +55,8 @@ function DeliveryPage() {
             <Warehouse className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">Pick it up</h2>
             <p className="text-zinc-700 mb-6">
-              Truck or trailer? Pull right in. No appointment, no paperwork,
-              no waiting in a line of contractors. We load you, you go.
+              Bring a truck or trailer during business hours — no appointment
+              necessary. We'll load you on arrival.
             </p>
             <div className="space-y-2 text-sm text-zinc-700">
               <p><strong>Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
@@ -71,8 +72,9 @@ function DeliveryPage() {
             <Truck className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">Delivery</h2>
             <p className="text-zinc-300 mb-6">
-              Curbside, anywhere in Central Mass. One call confirms your ZIP,
-              your window, and the price — before the truck ever leaves the yard.
+              Curbside delivery throughout Central Massachusetts. Call to
+              confirm your delivery zone, scheduling window, and final price
+              before your order is dispatched.
             </p>
             <a
               href="tel:5085799897"
@@ -115,8 +117,9 @@ function DeliveryPage() {
               Card Processing Fee
             </h3>
             <p className="text-zinc-300">
-              It's the processor's cut, not ours — we don't see a dime of it.
-              Cash or check skips it completely.
+              The 4% surcharge is passed through directly from our payment
+              processor. Cash and check payments are accepted with no
+              additional fee.
             </p>
           </div>
         </div>
