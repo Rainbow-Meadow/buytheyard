@@ -1,56 +1,32 @@
-## Mobile hero collage — show all 3 tiles, keep headline readable
+## Mobile hero — overlay text on top of the 3-tile collage
 
-### Current state (mobile, <768px)
-- Only `yard-trucks.webp` shows; the two smaller tiles are `hidden md:block`.
-- Headline sits on a single full-bleed image with a tr-direction scrim. On a 440px viewport the photo competes with the type and the right side of the headline ("RUN BY ABBY SINCE 2016") loses contrast against the lighter top-right of the scrim.
+### What changes
+Keep the mobile 3-tile collage exactly as it crops now (left tile spanning two rows, `yard-piles` top-right, `loading-truck` bottom-right). Move the headline + sub + CTAs back on top of it as an overlay, the same way desktop does — instead of stacking the text above the photo band.
 
-### Goal
-1. All three photos visible on mobile.
-2. Headline + subhead + CTAs stay clearly readable.
-
-### Layout change
-
-Split the hero on mobile into two stacked bands inside the same `<section>`:
-
+### Layout
 ```text
 ┌──────────────────────────────┐
-│  ░ solid zinc-950 band ░     │
-│                              │
+│  ░ collage + scrim ░         │
 │  ◉ Hi, I'm Abby — owner…     │
 │  A SMALL YARD,               │
 │  BUILT BY HAND,              │
 │  RUN BY ABBY SINCE 2016.     │
-│  Mulch by the yard… (sub)    │
+│  Mulch by the yard…          │
 │  [Shop materials] [Quote]    │
 │  📞 Call Abby                │
-│  ─────────────                │
 │  WBE · 11th season           │
-├──────────────────────────────┤
-│ ┌────────────┬─────────────┐ │
-│ │            │  yard-piles │ │
-│ │ yard-trucks├─────────────┤ │
-│ │            │ loading-tr. │ │
-│ └────────────┴─────────────┘ │
-│   collage band, ~16:10       │
 └──────────────────────────────┘
 ```
 
-- **Above md**: keep the current full-bleed collage-behind-text layout exactly as is (no regression on desktop).
-- **Below md**: text band on top (solid `bg-zinc-950`, no image behind), collage band below it (~h-[60vw], min 280px, max 360px) with the same 3-tile grid (left tile `col-span-1 row-span-2`, two stacked tiles on the right). Thin 2px gaps. All three images render.
+### Implementation (single file: `src/routes/index.tsx`, hero section only)
 
-### Why this works
-- Headline gets a clean, high-contrast surface — no scrim juggling on small screens.
-- All three photos still appear, each with enough crop area to read (the left tile gets ~half the band height × full vertical, the two right tiles are landscape-ish thumbnails — fine for `yard-piles` and `loading-truck` which both read well at small size).
-- Section overall height on mobile drops slightly, which is good for above-the-fold.
+- Remove the `md:hidden` wrappers on the collage grid and scrim → both render at all breakpoints. The current desktop grid template (`grid-cols-3 grid-rows-2`, large left tile spanning `col-span-2 row-span-2`) is the same crop as the mobile collage I just added, so reusing it preserves the crop.
+- Delete the separate mobile collage block at the bottom of the section (no longer needed).
+- Restore the section to `flex` (not `md:flex`) and `min-h-[640px] md:min-h-[720px]` so the section has a proper height on mobile for the overlay to sit inside.
+- Restore the text container to `self-center` (no `md:self-center` qualifier) so it vertically centers on mobile too.
+- Scrim already uses `from-zinc-950/90 via-zinc-950/65 to-zinc-950/20`. On mobile that bottom-left-heavy gradient leaves the top-right of the collage visible while keeping headline contrast — same behavior as desktop.
 
-### Implementation notes (single file)
-
-`src/routes/index.tsx`, hero `<section>` only:
-- Wrap in a flex column on mobile, keep current absolute-positioned overlay on `md+`.
-- Mobile content block: remove the absolute scrim and absolute image grid for the `<md` case; render text in a normal flow div with `bg-zinc-950 px-6 py-14`.
-- Mobile collage: new `<div className="md:hidden grid grid-cols-2 grid-rows-2 gap-[2px] bg-zinc-950 h-[60vw] min-h-[280px] max-h-[360px]">` with the 3 `<img>` tags (`yard-trucks` spanning `row-span-2`, then `yard-piles`, then `loading-truck`). Drop the `hidden md:block` from those two images and instead render them twice — once inside the mobile grid (md:hidden) and once inside the desktop overlay grid (hidden md:block) — or, cleaner, factor the desktop overlay grid into `hidden md:grid` and add the separate mobile grid below.
-- Headline color stays white on mobile (against solid zinc-950) — same classes work.
-- LCP: on mobile the LCP becomes the headline text; the preload of `yard-trucks` is still useful because it's the largest tile in the collage band right below. Keep the preload as-is.
-- Avatar, WBE seal styling, CTAs: no changes needed; they already work on a dark surface.
-
-No other files touched. No copy changes. No new assets.
+### Out of scope
+- No copy changes.
+- No asset changes.
+- Desktop layout: unchanged.
