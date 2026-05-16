@@ -127,11 +127,11 @@ function HomePage() {
               since 2016.
             </h1>
             <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              Mulch by the yard. Loaded by hand.
+              Mulch by the yard, loaded by hand.
               <br />
-              Pickup at the yard. Or we bring it to your driveway.
+              Pick up at the yard, or we'll bring it to your driveway.
               <br />
-              No upsells. No runaround.
+              Real prices, real people — happy to help you figure out what you need.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">
