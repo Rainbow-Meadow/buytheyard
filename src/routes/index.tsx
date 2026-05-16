@@ -145,17 +145,17 @@ function HomePage() {
   const updates = [
     {
       title: "Mother's Day baskets are on the wagon.",
-      body: "Built this morning. $40 each, or 2 for $70. They walk off fast — call 508-579-9897 and we'll hold one with your name on it.",
+      body: "Hanging baskets are available now at $40 each, or 2 for $70. Quantities are limited — call 508-579-9897 to reserve one in advance.",
       tag: "Mother's Day",
     },
     {
       title: "5 yards of mulch = a shot at WooSox tickets.",
-      body: "Every May order of 5 yards or more goes in the hat. Four winners pulled every Friday. Pickup or delivery — both count the same.",
+      body: "May orders of 5 yards or more are automatically entered into our weekly WooSox ticket drawing. Four winners are selected each Friday. Pickup and delivery orders both qualify.",
       tag: "Promo · May",
     },
     {
       title: "Call before noon. We try to deliver today.",
-      body: "Not a slogan — that's the truck sitting out in the yard. Ring us before noon and if there's a window left on the route, you're on it.",
+      body: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours.",
       tag: "How it works",
     },
   ];
