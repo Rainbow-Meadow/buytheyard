@@ -5,30 +5,30 @@ import brandmark from "@/assets/brandmark.png";
 export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-14 md:gap-12">
-        <div className="md:col-span-1 flex flex-col items-center text-center md:items-start md:text-left">
+      <div className="max-w-7xl mx-auto px-6 py-10 md:py-16 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 md:gap-12">
+        <div className="col-span-2 md:col-span-1 flex flex-col items-center text-center md:items-start md:text-left">
           <img
             src={brandmark}
             alt="Buy The Yard — Mulch · Loam · Sand · Stone"
             width={240}
             height={120}
-            className="h-24 w-auto mx-auto md:mx-0"
+            className="h-20 md:h-24 w-auto mx-auto md:mx-0"
             loading="lazy"
             decoding="async"
           />
           <a
             href="tel:5085799897"
-            className="mt-8 md:mt-6 inline-block font-display text-2xl text-brand hover:opacity-80"
+            className="mt-5 md:mt-6 inline-block font-display text-2xl text-brand hover:opacity-80"
           >
             508.579.9897
           </a>
           <a
             href="mailto:abby@btymaterial.com"
-            className="mt-3 md:mt-2 block text-sm text-zinc-300 hover:text-zinc-100"
+            className="mt-2 block text-sm text-zinc-300 hover:text-zinc-100"
           >
             abby@btymaterial.com
           </a>
-          <div className="mt-6 md:mt-4 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-3">
+          <div className="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2">
             <a
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
@@ -46,11 +46,11 @@ export function SiteFooter() {
               <Star className="size-4" /> Yelp
             </a>
           </div>
-          <p className="mt-6 md:mt-4 text-[10px] uppercase tracking-widest text-zinc-500">
+          <p className="mt-4 text-[10px] uppercase tracking-widest text-zinc-500">
             Est. 2016 · WBE Certified
           </p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2 md:space-y-3">
           <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
             Visit
           </h4>
@@ -60,7 +60,19 @@ export function SiteFooter() {
             Jefferson, MA 01522
           </p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2 md:space-y-3">
+          <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
+            Site
+          </h4>
+          <ul className="space-y-1.5 md:space-y-2 text-sm text-zinc-300">
+            <li><Link to="/products" className="hover:text-zinc-100">Products</Link></li>
+            <li><Link to="/about" className="hover:text-zinc-100">About</Link></li>
+            <li><Link to="/delivery" className="hover:text-zinc-100">Delivery &amp; Pickup</Link></li>
+            <li><Link to="/contact" className="hover:text-zinc-100">Contact</Link></li>
+            <li><Link to="/privacy" className="hover:text-zinc-100">Privacy &amp; Terms</Link></li>
+          </ul>
+        </div>
+        <div className="col-span-2 md:col-span-1 space-y-2 md:space-y-3">
           <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
             Hours
           </h4>
@@ -77,21 +89,9 @@ export function SiteFooter() {
             Open year-round — winter salt available, call for hours.
           </p>
         </div>
-        <div className="space-y-3">
-          <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
-            Site
-          </h4>
-          <ul className="space-y-2 text-sm text-zinc-300">
-            <li><Link to="/products" className="hover:text-zinc-100">Products</Link></li>
-            <li><Link to="/about" className="hover:text-zinc-100">About</Link></li>
-            <li><Link to="/delivery" className="hover:text-zinc-100">Delivery &amp; Pickup</Link></li>
-            <li><Link to="/contact" className="hover:text-zinc-100">Contact</Link></li>
-            <li><Link to="/privacy" className="hover:text-zinc-100">Privacy &amp; Terms</Link></li>
-          </ul>
-        </div>
       </div>
       <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-zinc-500">
+        <div className="max-w-7xl mx-auto px-6 py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-3 text-xs text-zinc-500 text-center">
           <span>&copy; {new Date().getFullYear()} Buy The Yard Material. WBE Certified.</span>
           <span className="uppercase tracking-widest">Jefferson, MA</span>
         </div>
