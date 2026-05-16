@@ -1,65 +1,32 @@
 
-# Rewrite site copy with the RMBC method
+# Mobile-only collapsible sections on the landing page
 
-Apply Stefan Georgi's RMBC framework to every piece of marketing copy on the site. **The homepage hero H1 stays exactly as-is** ("A small yard, built by hand, run by Abby since 2016."). Everything else around it is fair game.
+Make the **Featured products** grid and the **Pricing** grid collapse on mobile, both **closed by default**. Desktop layout stays exactly as it is today.
 
-## RMBC applied to a local landscape-supply site
+## Behavior
 
-- **Research** — the audience is Central-MA homeowners (mostly), small contractors, and weekend DIYers. Their hesitations: getting upsold, feeling dumb asking "how much do I need," waiting days for a callback, surprise card fees, big-yard impersonality. Proof assets we already own: 10th season, WBE certification, 820+ FB followers, same-day-if-before-noon delivery, posted prices, Abby-answers-the-phone, Charlie the office dog.
-- **Message** — Big Idea: *"The small yard that treats you like a neighbor, not a ticket number."* Every page leads with one specific promise tied to a real objection, then proves it.
-- **Build** — restructure each page around: specific lead → promise → proof → bullet "fascinations" → soft CTA. Cut throat-clearing intros. Front-load the most concrete sentence.
-- **Compile** — tighten every sentence: cut adjectives, swap vague verbs for specific ones, keep cadence varied (short. short. longer one that breathes.), one idea per line in CTAs.
+- Below the `md` breakpoint (≤767px): the section heading row becomes a tappable disclosure button. The grid underneath is hidden until tapped, then slides open.
+- At `md` and up: no button, no toggling — the grid is always visible, identical to today.
+- State is component-local (`useState`). No URL hash, no persistence.
+- Each toggle: full-width tap target, chevron icon that rotates 180° when open, `aria-expanded` + `aria-controls` for screen readers, and `prefers-reduced-motion` respected (no height animation if the user opts out).
+- Smooth height transition using a grid-rows `1fr / 0fr` trick (no JS measuring, no layout jank).
 
-## Files to update
+## Visual
 
-### `src/routes/index.tsx`
-- **Hero H1** — unchanged.
-- Hero eyebrow + sub-paragraph: rewrite as a specific lead ("Call before noon today, mulch hits your driveway tomorrow morning") instead of a description.
-- Stats strip labels: make each stat earn its spot ("10th" → "Seasons answering our own phone").
-- "Real material. By the yard." section eyebrow + heading + intro: replace with a benefit-led promise (e.g. "What you'd order if Abby was loading your truck").
-- Latest-from-the-yard intro + 3 update cards: rewrite the three update cards using fascination-style hooks ("The $40 basket that's already sold out twice this week").
-- Pricing section eyebrow, H2, intro, footer note: lead with the unique mechanism ("Posted. Not whispered. Same number for the contractor and the homeowner."). Tighten each of the 6 group descriptions.
-- Delivery callout H2 + paragraph + 4 bullets: rewrite bullets as benefit + reason ("Driveway-to-curb only — your grass (and the gas line under it) stays where it should").
-- WBE strip copy: tighter, less corporate.
+- The existing headings (`"What Abby would load for you."` / `"Posted. Not whispered."`) stay as the visible label. On mobile they sit inside a button row with a small `+` / `−` (or chevron) on the right and a hairline underline so the section reads as collapsed.
+- The "See full catalog →" link and "Call for a quote" link currently in those section headers move *inside* the expanded region on mobile (so a collapsed section is just heading + chevron, nothing else). Desktop keeps them in their current top-right position.
+- Eyebrow, intro paragraph, and the pricing footnote stay outside the collapse so the section still reads as scannable when closed. (If you'd rather hide those too, say the word — happy to fold them in.)
 
-### `src/routes/about.tsx`
-- Eyebrow + H1 stay structurally (H1 is fine: "Built by Abby.").
-- Rewrite the long-form story using RMBC story beats: hook → tension → turn → proof → invitation. Keep Abby's voice, kill any line that doesn't earn its place. Re-cast the pull-quote so it carries a real "why."
+## Files
 
-### `src/routes/delivery.tsx`
-- Hero H1 ("You call. We load. It shows up.") — keep, it's already strong.
-- Eyebrow + sub-paragraph: replace with the one-sentence promise ("Same-day if you call before noon. Otherwise, ~48 hours.").
-- "Pick it up" + "We deliver" cards: rewrite each as objection → answer.
-- Rewrite the 4 numbered policies as benefit-led (currently feature-led).
-- Card-fee note: keep the honesty, sharpen the line.
-
-### `src/routes/products.tsx`
-- Eyebrow, H1, intro: rewrite intro to remove apologetic "prices shift" framing — instead frame the call as the fastest way to get the right number for *your* yard size.
-- "Don't see it? Ask." section: tighten, keep the warm tone, add one concrete proof of range (salt, ice melt, bagged amendments, seasonal one-offs).
-- **`src/data/products.ts`** — rewrite the 12 product `description` strings to RMBC-tight one-liners: each opens with the most concrete fact, then the use case. (Most already lean this way; we'll sharpen them and remove fluff.)
-
-### `src/routes/quote.tsx`
-- Hero eyebrow, H1, sub-paragraph: lead with the time promise ("60 seconds. Then you're done — Abby takes it from there.").
-- Section legends (01/02/03) and helper microcopy: trim to a single clear instruction each.
-- The two fulfillment radio descriptions: tighten.
-- Success view headline + body (further down the file): rewrite to confirm + set the next expectation.
-
-### `src/routes/contact.tsx`
-- Eyebrow + H1 ("Call. Text. Email. We answer.") — keep H1.
-- Sub-paragraph + the email/Facebook/Yelp note: rewrite with RMBC clarity (phone = fastest, quote = best for lists, email = non-urgent).
-- The four cards (Get a Quote / Phone & Email / Address / Hours): tighten body copy in each; same information, fewer words, more rhythm.
-
-### `src/components/site/SiteFooter.tsx`
-- Hours footnote and alt text: small tightening pass, no structural change.
+- `src/routes/index.tsx` — wrap the two section bodies in a new local component (defined in the same file) that renders a `<details>`-style toggle on mobile and a plain container on `md+`. Tailwind handles the responsive switch via `md:` variants; no new dependencies.
 
 ## Out of scope
 
-- No layout, component structure, routing, or styling changes.
-- No new sections or removed sections.
-- No changes to `SiteHeader.tsx` (nav labels stay).
-- No image swaps. No data-model changes beyond `description` strings in `products.ts`.
-- The homepage hero H1 is explicitly preserved verbatim.
+- "Latest from the yard" and the delivery details box stay as they are.
+- No changes to the data, no changes to `ProductCard`, no changes to other routes.
+- No accordion library (Radix/shadcn `Accordion` is overkill for two one-shot sections and would add wrapping markup).
 
-## How I'll verify
+## Verification
 
-After edits, re-read each route file end-to-end and confirm: (1) hero H1 on `/` is byte-identical, (2) no JSX/structure changes slipped in, (3) every page still has exactly one H1, (4) no broken links or removed CTAs.
+After the edit I'll check the mobile preview (440px): both sections render as a single heading row with a chevron, tapping expands them, tapping again collapses. Then resize check to confirm desktop is unchanged.

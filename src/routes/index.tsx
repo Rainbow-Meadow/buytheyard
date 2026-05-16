@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Facebook, Flower2, Phone, Tag, Truck } from "lucide-react";
+import { useState, type ReactNode } from "react";
+import { ArrowRight, ChevronDown, Facebook, Flower2, Phone, Tag, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import heroMobile from "@/assets/source/hero-mobile-firepit.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.png";
@@ -8,6 +9,51 @@ import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
+
+function MobileCollapse({
+  id,
+  open,
+  onToggle,
+  label,
+  children,
+}: {
+  id: string;
+  open: boolean;
+  onToggle: () => void;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={id}
+        className="md:hidden w-full flex items-center justify-between gap-4 py-4 mt-2 text-left border-y border-zinc-300/70"
+      >
+        <span className="text-xs font-bold uppercase tracking-widest text-zinc-900">
+          {open ? `Hide ${label}` : `Show ${label}`}
+        </span>
+        <ChevronDown
+          className={`size-5 text-zinc-700 transition-transform duration-300 motion-reduce:transition-none ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <div
+        id={id}
+        className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none md:!grid-rows-[1fr] ${
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="overflow-hidden md:overflow-visible">
+          <div className="pt-6 md:pt-0">{children}</div>
+        </div>
+      </div>
+    </>
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,6 +82,9 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [pricingOpen, setPricingOpen] = useState(false);
+
   const featured = [
     "Premium Black Mulch",
     "Hemlock Mulch",
@@ -242,7 +291,7 @@ function HomePage() {
       {/* Product preview */}
       <section className="py-20 md:py-28 bg-base">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-14">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                 Bulk materials &amp; garden center
@@ -253,17 +302,30 @@ function HomePage() {
             </div>
             <Link
               to="/products"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
             >
               See full catalog <ArrowRight className="size-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featured.map((p) => (
-              <ProductCard key={p.name} product={p} />
-            ))}
-          </div>
+          <MobileCollapse
+            id="featured-products"
+            open={productsOpen}
+            onToggle={() => setProductsOpen((v) => !v)}
+            label="6 featured products"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featured.map((p) => (
+                <ProductCard key={p.name} product={p} />
+              ))}
+            </div>
+            <Link
+              to="/products"
+              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+            >
+              See full catalog <ArrowRight className="size-4" />
+            </Link>
+          </MobileCollapse>
         </div>
       </section>
 
@@ -315,7 +377,7 @@ function HomePage() {
       {/* Pricing */}
       <section className="py-20 md:py-28 bg-base">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-12">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
                 <Tag className="size-3.5" />
@@ -332,42 +394,57 @@ function HomePage() {
             </div>
             <a
               href="tel:5085799897"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
             >
               <Phone className="size-4" />
               Call for a quote
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {priceGroups.map((group) => (
-              <div
-                key={group.heading}
-                className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
-              >
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
-                  {group.heading}
-                </p>
-                <p className="font-display text-5xl uppercase text-zinc-950 leading-none mb-2">
-                  {group.range}
-                </p>
-                <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-4">
-                  {group.unit}
-                </p>
-                <p className="text-sm text-zinc-700 mt-auto pt-4 border-t border-zinc-200">
-                  {group.includes}
-                </p>
-              </div>
-            ))}
-          </div>
+          <MobileCollapse
+            id="pricing-grid"
+            open={pricingOpen}
+            onToggle={() => setPricingOpen((v) => !v)}
+            label="full price list"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {priceGroups.map((group) => (
+                <div
+                  key={group.heading}
+                  className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
+                    {group.heading}
+                  </p>
+                  <p className="font-display text-5xl uppercase text-zinc-950 leading-none mb-2">
+                    {group.range}
+                  </p>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-4">
+                    {group.unit}
+                  </p>
+                  <p className="text-sm text-zinc-700 mt-auto pt-4 border-t border-zinc-200">
+                    {group.includes}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-          <p className="mt-8 text-xs text-zinc-600">
-            Per cubic yard unless noted. Delivery is quoted by ZIP — call Abby at{" "}
-            <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
-              508.579.9897
-            </a>{" "}
-            and you'll have a same-day number. MA 6.25% sales tax applies where required.
-          </p>
+            <p className="mt-8 text-xs text-zinc-600">
+              Per cubic yard unless noted. Delivery is quoted by ZIP — call Abby at{" "}
+              <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
+                508.579.9897
+              </a>{" "}
+              and you'll have a same-day number. MA 6.25% sales tax applies where required.
+            </p>
+
+            <a
+              href="tel:5085799897"
+              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+            >
+              <Phone className="size-4" />
+              Call for a quote
+            </a>
+          </MobileCollapse>
         </div>
       </section>
 
