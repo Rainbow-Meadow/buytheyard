@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Facebook, Flower2, Phone, Tag, Truck } from "lucide-react";
+import { useState, type ReactNode } from "react";
+import { ArrowRight, ChevronDown, Facebook, Flower2, Phone, Tag, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import heroMobile from "@/assets/source/hero-mobile-firepit.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.png";
@@ -8,6 +9,51 @@ import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
+
+function MobileCollapse({
+  id,
+  open,
+  onToggle,
+  label,
+  children,
+}: {
+  id: string;
+  open: boolean;
+  onToggle: () => void;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={id}
+        className="md:hidden w-full flex items-center justify-between gap-4 py-4 mt-2 text-left border-y border-zinc-300/70"
+      >
+        <span className="text-xs font-bold uppercase tracking-widest text-zinc-900">
+          {open ? `Hide ${label}` : `Show ${label}`}
+        </span>
+        <ChevronDown
+          className={`size-5 text-zinc-700 transition-transform duration-300 motion-reduce:transition-none ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <div
+        id={id}
+        className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none md:!grid-rows-[1fr] ${
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="overflow-hidden md:overflow-visible">
+          <div className="pt-6 md:pt-0">{children}</div>
+        </div>
+      </div>
+    </>
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
