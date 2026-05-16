@@ -3,6 +3,7 @@ import { ArrowRight, Facebook, Flower2, Phone, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import yardPiles from "@/assets/source/yard-piles.webp";
 import loadingTruck from "@/assets/source/loading-truck.webp";
+import dumpTruckMobile from "@/assets/source/dump-truck-mobile.png";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
@@ -26,7 +27,8 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [
-      { rel: "preload", as: "image", href: yardWide, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: dumpTruckMobile, fetchpriority: "high", media: "(max-width: 767px)" },
+      { rel: "preload", as: "image", href: yardWide, fetchpriority: "high", media: "(min-width: 768px)" },
     ],
   }),
   component: HomePage,
@@ -66,31 +68,15 @@ function HomePage() {
     <>
       {/* Hero */}
       <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 min-h-[640px] md:min-h-[720px] flex">
-        {/* Mobile collage background — 2 cols, behind text */}
-        <div className="md:hidden absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px] bg-zinc-950">
-          <img
-            src={yardWide}
-            alt="The Buy The Yard yard with trucks and bulk material bins"
-            fetchPriority="high"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover row-span-2"
-          />
-          <img
-            src={yardPiles}
-            alt="Mulch piles at the yard"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover"
-          />
-          <img
-            src={loadingTruck}
-            alt="Loader filling a delivery truck with mulch"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover"
-          />
-        </div>
+        {/* Mobile single hero image */}
+        <img
+          src={dumpTruckMobile}
+          alt="Buy The Yard delivery truck dumping a mound of mulch"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          className="md:hidden absolute inset-0 w-full h-full object-cover object-center"
+        />
         {/* Desktop collage background — 3 cols */}
         <div className="hidden md:grid absolute inset-0 grid-cols-3 grid-rows-2 gap-[2px] bg-zinc-950">
           <img
@@ -118,6 +104,8 @@ function HomePage() {
         </div>
         {/* Scrim */}
         <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
+        {/* Extra mobile scrim for headline contrast over the photo */}
+        <div className="md:hidden absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-zinc-950/25" />
 
         <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-6 py-16 md:py-24 self-center w-full">
           <div>
