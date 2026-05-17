@@ -1,14 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, Facebook, Flower2, HelpCircle, Phone, Tag, Truck } from "lucide-react";
+import { ArrowRight, ChevronDown, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import heroMobile from "@/assets/source/hero-mobile-firepit.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.png";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
-import promoMothersDay from "@/assets/promo-mothers-day-baskets.jpg";
-import promoWooSox from "@/assets/promo-woosox-raffle.jpg";
 import facebookPagePreview from "@/assets/facebook-page-preview.jpg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
@@ -186,36 +184,6 @@ function HomePage() {
       includes: "Annuals and perennials from $18. Hanging baskets $40 each, or 2 for $70.",
     },
   ];
-
-  const updates = [
-    {
-      title: "Mother's Day baskets are on the wagon.",
-      body: "Hanging baskets are available now at $40 each, or 2 for $70. Quantities are limited — call 508-579-9897 to reserve one in advance.",
-      tag: "Mother's Day",
-      image: promoMothersDay,
-      imageAlt:
-        "Mother's Day hanging baskets at Buy The Yard — $40 each or 2 for $70.",
-    },
-    {
-      title: "5 yards of mulch = a shot at WooSox tickets.",
-      body: "May orders of 5 yards or more are automatically entered into our weekly WooSox ticket drawing. Four winners are selected each Friday. Pickup and delivery orders both qualify.",
-      tag: "Promo · May",
-      image: promoWooSox,
-      imageAlt:
-        "Buy 5 yards or more of mulch in May and get entered to win WooSox tickets — drawings every Friday.",
-    },
-    {
-      title: "Call before noon. We try to deliver today.",
-      body: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours.",
-      tag: "How it works",
-    },
-  ] as Array<{
-    title: string;
-    body: string;
-    tag: string;
-    image?: string;
-    imageAlt?: string;
-  }>;
 
   return (
     <>
