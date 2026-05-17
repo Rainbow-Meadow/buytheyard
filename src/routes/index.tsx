@@ -458,10 +458,6 @@ function HomePage() {
 
       {/* Pricing */}
       <section className="py-20 md:py-28 bg-base">
-      {/* Facebook spotlight */}
-      <FacebookSpotlight />
-
-      {/* Pricing */}
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-12">
             <div>
