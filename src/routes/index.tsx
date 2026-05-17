@@ -456,6 +456,117 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Facebook spotlight */}
+      <section className="py-20 md:py-28 bg-surface text-surface-foreground border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Faux Facebook page card */}
+          <div className="bg-white text-zinc-900 rounded-lg ring-1 ring-zinc-300/70 shadow-2xl overflow-hidden order-2 lg:order-1">
+            <div className="bg-[#1877F2] text-white px-4 h-11 flex items-center gap-2">
+              <span className="inline-flex items-center justify-center size-7 rounded-full bg-white text-[#1877F2] font-bold text-base leading-none">
+                f
+              </span>
+              <span className="text-sm font-semibold">facebook</span>
+              <span className="ml-auto text-xs opacity-80 hidden sm:inline">
+                facebook.com/BuyTheYardOutdoorProducts
+              </span>
+            </div>
+            <div className="relative aspect-[2.5/1] bg-zinc-100 overflow-hidden">
+              <img
+                src={yardWide}
+                alt="Buy The Yard yard with trucks, mulch piles, and the OPEN flag"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="px-5 sm:px-6 pt-4 pb-5 relative">
+              <img
+                src={abbyPortrait}
+                alt="Abby, owner of Buy The Yard"
+                width={80}
+                height={80}
+                loading="lazy"
+                decoding="async"
+                className="absolute -top-10 left-5 sm:left-6 size-20 rounded-full object-cover ring-4 ring-white shadow-md"
+              />
+              <div className="pl-24 min-h-[64px]">
+                <h3 className="font-display text-xl sm:text-2xl uppercase leading-tight">
+                  Buy The Yard Outdoor Products
+                </h3>
+                <p className="text-xs text-zinc-600 mt-1">
+                  820+ followers · Jefferson, MA · Landscape Supply
+                </p>
+              </div>
+            </div>
+            <div className="border-t border-zinc-200 px-5 sm:px-6 py-5">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="inline-flex items-center justify-center size-9 rounded-full bg-zinc-100 text-zinc-700">
+                  <Facebook className="size-4" />
+                </span>
+                <div className="leading-tight">
+                  <p className="text-sm font-semibold">Buy The Yard Outdoor Products</p>
+                  <p className="text-[11px] text-zinc-500">Posted this week</p>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-800 leading-relaxed">
+                Fresh hemlock just dropped — dark, fragrant, and ready to load. Call <span className="font-semibold">508-579-9897</span> before noon for same-day delivery.
+              </p>
+              <div className="mt-4 flex items-center gap-5 text-[11px] text-zinc-500 uppercase tracking-widest">
+                <span>Like</span>
+                <span>Comment</span>
+                <span>Share</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Copy + CTA */}
+          <div className="order-1 lg:order-2">
+            <p className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-brand mb-4">
+              <Facebook className="size-3.5" />
+              On Facebook
+            </p>
+            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-white max-w-[16ch]">
+              Where the yard <span className="text-brand">lives day-to-day.</span>
+            </h2>
+            <p className="mt-6 text-zinc-300 text-lg leading-relaxed max-w-[52ch]">
+              Most of our daily back-and-forth happens on Facebook — fresh
+              loads, new arrivals at the garden center, weather closures, and
+              quick photos of what's on the lot. Over 820 Central Mass
+              neighbors already follow along.
+            </p>
+            <ul className="mt-6 space-y-2 text-sm text-zinc-300">
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
+                Daily inventory and restock photos
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
+                Weather-related closures and hours changes
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
+                Seasonal promos and WooSox ticket drawings
+              </li>
+            </ul>
+            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <a
+                href="https://www.facebook.com/BuyTheYardOutdoorProducts"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2.5 bg-[#1877F2] text-white px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90 transition-opacity rounded-sm"
+              >
+                <Facebook className="size-4" />
+                Follow on Facebook
+                <ArrowRight className="size-4" />
+              </a>
+              <span className="text-xs text-zinc-500 break-all">
+                facebook.com/BuyTheYardOutdoorProducts
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section className="py-20 md:py-28 bg-base">
         <div className="max-w-7xl mx-auto px-6">
