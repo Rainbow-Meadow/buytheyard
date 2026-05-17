@@ -1,60 +1,67 @@
 ## Goal
 
-Replace the chat widget's `mailto:` handoff with a real server-sent transcript email, then do a visual QA pass on the widget at mobile (440px) and desktop widths.
+Feature Buy The Yard's Facebook page (where Abby does a lot of business) prominently on the homepage with a visually rich promo card — not just a small text link.
 
-## 1. Real email handoff
+## What to add
 
-**Recipient default:** `abby@btymaterial.com` (no staff list provided — easy to add later by editing one constant).
+A new full-width section on `src/routes/index.tsx`, placed **between "Latest from the yard" and the existing pricing/FAQ blocks**. This puts it in a high-attention spot right after the weekly updates (which already nod to Facebook), turning that nod into a real CTA.
 
-**Sender domain note:** The only verified email domain on this workspace is `notify.photobrief.ai` (from another project). Emails will send from `notify.photobrief.ai` with a friendly From name like `"BTY Helper <helper@notify.photobrief.ai>"`. If you'd rather emails come from a `buytheyard`-branded domain, we'd need to add and verify one — say the word and I'll kick off domain setup instead.
+### Section layout (desktop: 2-col, mobile: stacked)
 
-**Flow:**
-1. Visitor chats with AI, taps **Talk to Abby**.
-2. Inline form appears in the panel: Name, Phone (optional), Email (optional), "What you need" (optional, prefilled). Submitting POSTs the form + full transcript to a new server route.
-3. Server route validates with Zod, then enqueues a transactional email to Abby. AI confirms in-chat: "Got it — Abby will follow up shortly."
-4. Same form, on success, also clears the panel back to a thank-you state.
+```text
+┌──────────────────────────────────────────────────────────┐
+│  LEFT  (preview card)         │  RIGHT  (copy + CTA)     │
+│  ┌────────────────────────┐  │  Eyebrow: ON FACEBOOK    │
+│  │ [Facebook header bar]  │  │                          │
+│  │  • BTY profile photo   │  │  H2: "Where the yard     │
+│  │  • "Buy The Yard"      │  │      lives day-to-day."  │
+│  │  • 820+ followers      │  │                          │
+│  │ ──────────────────────  │  │  Body: Daily inventory,  │
+│  │ [Cover photo / yard    │  │  fresh loads, weather    │
+│  │  collage image]        │  │  closures, behind-the-   │
+│  │                        │  │  scenes from Abby.       │
+│  │ "Latest post" stub:    │  │                          │
+│  │  📷 Fresh hemlock just │  │  [Follow on Facebook →]  │
+│  │     dropped — come get │  │  (primary brand button)  │
+│  │     it while it's wet) │  │                          │
+│  └────────────────────────┘  │  Secondary: "facebook.   │
+│                              │   com/BuyTheYard…"       │
+└──────────────────────────────────────────────────────────┘
+```
 
-**Server-side pieces (auto-set-up via Lovable Emails):**
-- Email infrastructure (queue, suppression, etc.) provisioned via the managed setup.
-- One transactional template `chat-handoff` rendered as a React Email component: shows visitor name/phone/email/need + a clean transcript block. White body, BTY brand accents.
-- One TanStack server route `src/routes/api/public/chat-handoff.ts` (public, Zod-validated, rate-limit-friendly) that calls the internal `send-transactional-email` route using the service role key. Public path is used because the visitor isn't logged in.
+The "preview card" is a hand-built mock of a Facebook page card (not a live FB embed — embeds are heavy, require third-party scripts, and often look broken). It uses:
+- Facebook-blue header strip with the FB `f` mark + "Buy The Yard Outdoor Products" + "820+ followers · Jefferson, MA"
+- A cover image (reuse an existing yard photo from `src/assets/source/` — `yard-trucks.webp` or the hero desktop image)
+- A small profile avatar overlap (reuse `abbyPortrait` or brandmark)
+- One faux "latest post" snippet with a calendar/time stamp and a short caption line, to suggest the page is active
 
-**Client-side pieces:**
-- New `src/components/chat/HandoffForm.tsx` shown inside the existing panel when "Talk to Abby" is tapped.
-- `ChatWidget.tsx`: replace the two `mailto:` anchors with buttons that toggle the handoff form; remove `buildMailto`.
+All styled with Tailwind + existing semantic tokens. No external scripts, no iframe.
 
-**Recipient config:** single constant `HANDOFF_RECIPIENTS = ["abby@btymaterial.com"]` in the server route — edit the array to add staff later.
+### CTA
 
-## 2. Visual QA pass on the widget
+Primary button: `Follow on Facebook` → `https://www.facebook.com/BuyTheYardOutdoorProducts` (target=_blank, rel=noreferrer), styled with the brand color used elsewhere on the homepage.
+Secondary line under it: plain-text URL for trust.
 
-Check at the user's current mobile viewport (440×798) and a desktop width:
-- Bubble position / safe-area on mobile (currently `bottom-6 right-6` — verify it doesn't collide with iOS home indicator on smaller phones).
-- Panel layout at 440px: header truncation of "BTY Helper", quick-prompt buttons wrapping, composer textarea growing, footer row not overflowing.
-- Desktop 380×560 panel: scroll behavior, message bubble max-width, "Talk to Abby" link visibility.
-- New handoff form: field stacking, button states (idle / submitting / success / error), keyboard focus.
-- Fix any issues found (Tailwind-only tweaks, no behavior changes).
+### Background
 
-## Files
+Dark `bg-surface` band (matching the footer's dark zone) so the section visually breaks from the cream/kraft tones above and below, giving the Facebook card visual weight.
 
-**New**
-- `src/components/chat/HandoffForm.tsx`
-- `src/routes/api/public/chat-handoff.ts`
-- `src/lib/email-templates/chat-handoff.tsx` (+ register in `registry.ts`)
-- `src/lib/email/send.ts` (server-side helper to invoke send-transactional-email with service-role auth)
+## Scope of edits
 
-**Edited**
-- `src/components/chat/ChatWidget.tsx` — swap mailto for form toggle, remove `buildMailto`/`ABBY_EMAIL` constants
-- `src/lib/email-templates/registry.ts` — register `chat-handoff`
-
-**Auto-managed (don't hand-edit)**
-- Email infra migration + queue cron via the email setup tools
-- `src/routes/lovable/email/*` server routes scaffolded by the email tools
+- **Edit** `src/routes/index.tsx`:
+  - Insert one new `<section>` between the "Latest from the yard" block (ends ~line 470) and whatever follows it.
+  - Reuse the already-imported `Facebook` icon from `lucide-react`.
+  - Reuse an existing image asset (no new image generation).
+- **No** new components, no new routes, no dependencies, no backend changes.
+- **No** changes to header, footer, or other pages — the user picked "Homepage section only".
 
 ## Out of scope
 
-- Adding a `buytheyard.com`-branded sender domain (ask if you want this).
-- Storing chat history in the database.
-- Multi-staff recipient UI — for now it's a one-line array edit.
-- Live operator takeover.
+- Live Facebook post embed / Meta SDK
+- Header nav Facebook icon
+- New imagery (we'll reuse existing yard photos)
+- Changes to the existing footer Facebook link or contact page
 
-Approve to proceed.
+## Files touched
+
+- `src/routes/index.tsx` (single section insertion)
