@@ -9,6 +9,7 @@ import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import promoMothersDay from "@/assets/promo-mothers-day-baskets.jpg";
 import promoWooSox from "@/assets/promo-woosox-raffle.jpg";
+import facebookPagePreview from "@/assets/facebook-page-preview.jpg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import {
