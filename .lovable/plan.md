@@ -1,128 +1,65 @@
 ## Goal
 
-Generate a 3-page PDF pitch Patrick can attach to his email to Abby. Professional but casual, brand-matched to Buy The Yard.
+Fix the PDF: real layout overlap is happening (not just a QA artifact), add a QR code to the preview site, and use only the front yard photo.
 
-Output: `/mnt/documents/buy-the-yard-offer.pdf`
+## Root cause of the "overlap" — confirmed bug
 
-## Page 1 — Cover + pitch
-
-```text
-A PROPOSAL FOR BUY THE YARD
-From Patrick Berthiaume · Oakham, MA · Spring 2026
-
-Big headline:
-"A fresh website for the yard —
- in trade for a great yard."
-
-Intro (short paragraphs):
-- Local repeat customer, one town over in Oakham
-- Loves the woman-owned, family-run story
-- Builds websites for a living
-- Put together a working preview at
-  buytheyard.lovable.app — not a mockup, a real site
-
-Small "What's inside" list at the bottom:
-1. Before & after
-2. What the new site gives you
-3. The trade
+`pdftotext -layout` output shows:
+```
+W ha t y ou get.          B uilt t o b e f o u n d .
+• C l e a n e r m o b i l e l a y o u t...
 ```
 
-## Page 2 — Before/after + what she gets
+Every body/heading rendered AFTER a `tracked()` call inherits extra character spacing. In PDF, the `Tc` (character spacing) operator is a **text state parameter that persists across BT/ET blocks**. The `tracked()` helper sets `Tc` inside a text object but never resets it, so every subsequent `drawString` inherits the tracking. ReportLab calculates wrap widths assuming Tc=0, so wrapped text overflows columns and collides with neighbors.
 
-```text
-─── BEFORE / AFTER ───
-┌──────────────┐   ┌──────────────┐
-│  BEFORE      │   │  AFTER       │
-│ btymaterial  │   │ buytheyard   │
-│ [screenshot] │   │ [screenshot] │
-└──────────────┘   └──────────────┘
-Caption: same business, sharper storefront.
+## Fixes
 
-WHAT THE NEW SITE GIVES YOU
-• Cleaner mobile layout (most of your visitors)
-• Organized product catalog with posted pricing
-• Tap-to-call buttons on every screen
-• Simple quote request form
-• Pickup & delivery info up front
-• Your story (Abby + Charlie) featured
+### 1. Reset character spacing after every tracked call
+Inside `tracked()`, append `t.setCharSpace(0)` before `c.drawText(t)` so Tc returns to 0 in the text state.
 
-BUILT TO BE FOUND (SEO)
-• Proper page titles, meta descriptions,
-  and structured data on every page
-• Local SEO: Jefferson, MA + service-area
-  pages so Google maps you to nearby searches
-• Fast load + mobile-first (both ranking factors)
-• Clean sitemap submitted to Google
-• Image alt text and semantic HTML throughout
+### 2. Re-QA every page
+- Render each page to JPG at 150 DPI
+- Visually inspect: column collisions, text overflow, baseline alignment, photo aspect
+- Cross-check `pdftotext -layout` — columns should align cleanly once Tc is fixed
+- Iterate until clean
 
-CONNECTED TO YOUR CHANNELS
-• Facebook page featured on the homepage —
-  since that's where so much of your business
-  already lives
-• Easy to link Instagram, Google Business,
-  Yelp, or anything else you want surfaced
-• Tap-to-call, tap-to-email, and map links
-  wired in so customers reach you in one tap
+### 3. Add a QR code
+- New dep: `qrcode[pil]` (pure-Python, no native)
+- Target URL: `https://buytheyard.lovable.app`
+- Placement: bottom-right of page 3, inside the dark "NEXT STEP" strip. Layout:
+
+```
+┌──────────────────────────────────────────────┐
+│  NEXT STEP                       PREVIEW     │
+│  Patrick Berthiaume                  ┌────┐  │
+│  112 N Brookfield Rd · Oakham MA     │ QR │  │
+│  508-735-3232 · prberthi…@gmail.com  └────┘  │
+│                          buytheyard.lovable.app │
+└──────────────────────────────────────────────┘
+```
+- Render QR at ~0.9" square, dark modules on cream background for contrast, generated to a temp PNG and dropped via `drawImage`
+- Keep the `buytheyard.lovable.app` text under the QR
+
+### 4. Drop back yard photo — front yard only
+On page 3, replace the two-column photo grid with a single, larger front yard photo:
+
+```
+┌──────────────────────────────────────────────────┐
+│  [ Front yard photo — wide, ~3.5" tall ]         │
+└──────────────────────────────────────────────────┘
+FRONT YARD · 112 N Brookfield Rd, Oakham
 ```
 
-## Page 3 — The trade + Patrick's yard + contact
+- Drop the back-yard image copy step
+- Single full-width image, ~4.5" wide × ~2.8" tall to keep proportions
+- One caption line under it
 
-```text
-THE TRADE
-I finish & launch the site, migrate from Wix,
-keep your existing email working, hand you the
-keys so you can edit it yourself, and stay on
-for support after launch.
-
-In exchange: materials for my Oakham yard
-project this spring/summer —
-   • Premium black mulch
-   • Screened loam
-   • 3/4" crushed blue stone
-
-MY YARD PROJECT
-┌──────────────┐   ┌──────────────┐
-│ [IMG_3707]   │   │ [IMG_3708]   │
-│ front lawn   │   │ back lawn    │
-└──────────────┘   └──────────────┘
-Plan:
-• A long berm running the property line
-• Mulched perimeter beds around the yard
-• A gravel main path connecting the two
-
-NEXT STEP
-Take a look at buytheyard.lovable.app when
-you have a chance. Happy to stop by the yard
-and walk you through it — or to tweak anything
-you want changed before launch.
-
-──────────────────────────────────────
-Patrick Berthiaume
-112 N Brookfield Rd · Oakham, MA 01068
-508-735-3232 · prberthiaume1989@gmail.com
-Preview: buytheyard.lovable.app
-```
-
-## Visual design
-
-- US Letter, ~0.6" margins
-- Palette sampled from the live site: kraft cream background, charcoal text, Buy The Yard blue accent, warm rule lines
-- Bold condensed/uppercase headlines (Helvetica-Bold as the safe PDF stand-in for the site's display face), regular sans body, tracked-out small caps for eyebrows ("THE TRADE", "BUILT TO BE FOUND", etc.)
-- Photos with rounded corners + thin border in 2-col grids
-- Thin horizontal rules between sections — no boxes-everywhere clutter
-
-## How it's built (technical)
-
-1. **Capture before/after screenshots** with `browser--navigate_to_url` + `browser--screenshot` at desktop width:
-   - `https://btymaterial.com` → `/tmp/before-home.png`
-   - `https://buytheyard.lovable.app` → `/tmp/after-home.png`
-2. **Copy yard photos** from `user-uploads://IMG_3707.png` and `user-uploads://IMG_3708.jpeg` into `/tmp/`.
-3. **Generate the PDF** with ReportLab in `/tmp/build_offer.py` — Platypus flowables for body, `drawImage` for the 2-col image grids.
-4. **QA** every page with `pdftoppm -r 150` → inspect for overflow/clipping → iterate until clean. Discard QA images.
-5. **Deliver** via `<presentation-artifact>` so Patrick can download `buy-the-yard-offer.pdf` directly.
+### 5. Minor polish while in there
+- Tighten page 1 spacing between intro and the bottom card
+- Re-check page 3 trade text + materials card don't collide
 
 ## Out of scope
 
-- No edits to the live preview site
-- No new images generated (real screenshots + Patrick's photos only)
-- No separate cover letter — the email already covers that
+- No content rewrites
+- No new screenshots
+- No changes to the live preview site
