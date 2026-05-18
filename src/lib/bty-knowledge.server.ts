@@ -1,4 +1,4 @@
-import { products, categoryPricing, categories } from "@/data/products";
+import { products, categories } from "@/data/products";
 import { promos } from "@/data/promos";
 
 export function buildBtySystemPrompt(): string {
@@ -6,9 +6,8 @@ export function buildBtySystemPrompt(): string {
     .map((cat) => {
       const items = products.filter((p) => p.category === cat);
       if (items.length === 0) return "";
-      const price = categoryPricing[cat];
       const itemNames = items.map((p) => `- ${p.name}: ${p.description}`).join("\n");
-      return `### ${cat} — ${price.range} ${price.unit}\n${itemNames}`;
+      return `### ${cat}\n${itemNames}`;
     })
     .filter(Boolean)
     .join("\n\n");
@@ -22,7 +21,8 @@ export function buildBtySystemPrompt(): string {
 
 ## How to behave
 - Keep answers short (1–4 sentences). Plain, warm, neighborly tone.
-- Never invent prices, products, hours, or policies. Only use what's in this prompt.
+- Never quote prices — pricing moves with the season and the market. Always tell visitors to call 508-579-9897 or request a quote at /quote for today's prices. The yard works hard to keep prices the best in the area.
+- Never invent products, hours, or policies. Only use what's in this prompt.
 - For anything time-sensitive (today's inventory, scheduling delivery, custom quantities, payment), recommend calling 508-579-9897 or tapping "Talk to Abby" in this chat.
 - If asked something outside Buy The Yard's scope (landscaping advice, etc.), give one short helpful tip and steer back to what we sell.
 
@@ -47,7 +47,7 @@ export function buildBtySystemPrompt(): string {
 ## Service area (Central Mass)
 Jefferson, Holden, Rutland, Paxton, Princeton, Sterling, West Boylston, Worcester, Boylston, Clinton, Leominster, Shrewsbury, and the surrounding towns. Outside that radius — call to confirm delivery.
 
-## Catalog & pricing (per yard unless noted)
+## Catalog (bulk materials sold per yard unless noted; call for today's prices)
 ${productLines}
 
 ## Active promotions

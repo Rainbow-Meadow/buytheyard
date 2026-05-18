@@ -97,7 +97,7 @@ export const Route = createFileRoute("/")({
               name: "How much does material cost?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Pricing is posted by category. Mulch runs $48–$50/yd, loam and compost $45–$55/yd, sand and gravel $55/yd, and specialty stone $135–$185/yd. One-yard minimum, with the same pricing for contractors and homeowners. For an exact quote, call 508-579-9897.",
+                text: "Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number — same price for contractors and homeowners, one-yard minimum on all bulk orders.",
               },
             },
             {
@@ -113,7 +113,7 @@ export const Route = createFileRoute("/")({
               name: "What's the 4% card fee about?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee. Posted pricing remains the same regardless of payment method.",
+              text: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee. Your quoted price is the same regardless of payment method.",
               },
             },
             {
@@ -146,42 +146,36 @@ function HomePage() {
     .map((n) => products.find((p) => p.name === n))
     .filter((p): p is (typeof products)[number] => Boolean(p));
 
-  const priceGroups: { heading: string; range: string; unit: string; includes: string }[] = [
+  const priceGroups: { heading: string; unit: string; includes: string }[] = [
     {
       heading: "Mulch",
-      range: "$48–$50",
-      unit: "per yard",
+      unit: "Per yard · call for today's price",
       includes: "Premium Black for the wow factor. Hemlock for the classics. Dark Brown for everything in between.",
     },
     {
       heading: "Loam, Compost & Plant Mix",
-      range: "$45–$55",
-      unit: "per yard",
+      unit: "Per yard · call for today's price",
       includes: "Screened loam for new lawns. Plant mix and compost for beds that need a reset.",
     },
     {
       heading: "Sand & Gravel",
-      range: "$55",
-      unit: "per yard",
+      unit: "Per yard · call for today's price",
       includes: "Mason sand, 3/4\" crushed blue for drives and drainage, 3/8\" pea for paths.",
     },
     {
       heading: "Specialty Stone",
-      range: "$135–$185",
-      unit: "per yard",
+      unit: "Per yard · call for today's price",
       includes: "Tumbled river stone and bold red lava — the bed dressings that get noticed.",
     },
     {
       heading: "Playground Chips",
-      range: "$60",
-      unit: "per yard · ASTM certified",
+      unit: "Per yard · ASTM certified · call for today's price",
       includes: "ASTM F1292, F2075, and F1951 — the spec your inspector is actually looking for.",
     },
     {
       heading: "Garden Center",
-      range: "From $18",
-      unit: "per item",
-      includes: "Annuals and perennials from $18. Hanging baskets $40 each, or 2 for $70.",
+      unit: "Per item · call for today's price",
+      includes: "Annuals, perennials, and hand-built hanging baskets on the wagon out front.",
     },
   ];
 
@@ -439,16 +433,17 @@ function HomePage() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
                 <Tag className="size-3.5" />
-                2026 price list
+              Today's prices by phone
               </p>
               <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[18ch]">
-                Straightforward Pricing
+                Call for Today's Prices
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Transparent, per-yard pricing for both contractors and
-                homeowners. One-yard minimum on all bulk orders, available for
-                pickup or delivery. Cash and check payments avoid the 4% credit
-                card processing fee.
+                Material prices shift with the season and the market, so we
+                quote by phone — and we work hard to keep them the best in the
+                area. Same number for contractors and homeowners, one-yard
+                minimum on all bulk orders, pickup or delivery. Cash and check
+                payments avoid the 4% card processing fee.
               </p>
             </div>
             <a
@@ -475,8 +470,8 @@ function HomePage() {
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                     {group.heading}
                   </p>
-                  <p className="font-display text-5xl uppercase text-zinc-950 leading-none mb-2">
-                    {group.range}
+                  <p className="font-display text-3xl uppercase text-zinc-950 leading-tight mb-2">
+                    Call for today's price
                   </p>
                   <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-4">
                     {group.unit}
@@ -489,10 +484,14 @@ function HomePage() {
             </div>
 
             <p className="mt-8 text-xs text-zinc-600">
-              Per cubic yard unless noted. Delivery is quoted by ZIP — call Abby at{" "}
+              Material and delivery both quoted live — call Abby at{" "}
               <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
                 508.579.9897
               </a>{" "}
+              or{" "}
+              <Link to="/quote" className="font-semibold text-zinc-900 hover:text-brand">
+                request a quote online
+              </Link>{" "}
               and you'll have a same-day number. MA 6.25% sales tax applies where required.
             </p>
 
@@ -539,17 +538,20 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    Pricing is posted by category in the section above. Mulch
-                    runs $48–$50/yd, loam and compost $45–$55/yd, sand and
-                    gravel $55/yd, and specialty stone $135–$185/yd. One-yard
-                    minimum, with the same pricing for contractors and
-                    homeowners.
+                    Prices move with the season and the market, so we quote
+                    today's number by phone — and we work to keep them the
+                    best in the area. Same price for contractors and
+                    homeowners, one-yard minimum on all bulk orders.
                   </p>
                   <p className="mt-3">
-                    For an exact quote on your project, please{" "}
+                    For your project, please{" "}
                     <a href="tel:5085799897" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
                       call 508-579-9897
-                    </a>
+                    </a>{" "}
+                    or{" "}
+                    <Link to="/quote" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                      request a quote online
+                    </Link>
                     .
                   </p>
                 </AccordionContent>
@@ -586,7 +588,7 @@ function HomePage() {
                   <p>
                     The 4% surcharge is passed through directly from our
                     payment processor. Cash and check payments are accepted
-                    with no additional fee. Posted pricing remains the same
+                    with no additional fee. Your quoted price stays the same
                     regardless of payment method.
                   </p>
                 </AccordionContent>
