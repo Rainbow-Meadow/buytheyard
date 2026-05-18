@@ -538,17 +538,20 @@ function HomePage() {
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
                   <p>
-                    Pricing is posted by category in the section above. Mulch
-                    runs $48–$50/yd, loam and compost $45–$55/yd, sand and
-                    gravel $55/yd, and specialty stone $135–$185/yd. One-yard
-                    minimum, with the same pricing for contractors and
-                    homeowners.
+                    Prices move with the season and the market, so we quote
+                    today's number by phone — and we work to keep them the
+                    best in the area. Same price for contractors and
+                    homeowners, one-yard minimum on all bulk orders.
                   </p>
                   <p className="mt-3">
-                    For an exact quote on your project, please{" "}
+                    For your project, please{" "}
                     <a href="tel:5085799897" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
                       call 508-579-9897
-                    </a>
+                    </a>{" "}
+                    or{" "}
+                    <Link to="/quote" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                      request a quote online
+                    </Link>
                     .
                   </p>
                 </AccordionContent>
@@ -585,7 +588,7 @@ function HomePage() {
                   <p>
                     The 4% surcharge is passed through directly from our
                     payment processor. Cash and check payments are accepted
-                    with no additional fee. Posted pricing remains the same
+                    with no additional fee. Your quoted price stays the same
                     regardless of payment method.
                   </p>
                 </AccordionContent>
