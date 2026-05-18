@@ -27,13 +27,13 @@ export type Product = {
 };
 
 export const categoryPricing: Record<Product["category"], { range: string; unit: string }> = {
-  Mulch: { range: "$48–$50", unit: "/ yd" },
-  Loam: { range: "$45–$55", unit: "/ yd" },
-  Sand: { range: "$55", unit: "/ yd" },
-  Gravel: { range: "$55", unit: "/ yd" },
-  "Specialty Stone": { range: "$135–$185", unit: "/ yd" },
-  Specialty: { range: "$60", unit: "/ yd" },
-  "Garden Center": { range: "From $18", unit: "per item" },
+  Mulch: { range: "Call for today's price", unit: "per yard" },
+  Loam: { range: "Call for today's price", unit: "per yard" },
+  Sand: { range: "Call for today's price", unit: "per yard" },
+  Gravel: { range: "Call for today's price", unit: "per yard" },
+  "Specialty Stone": { range: "Call for today's price", unit: "per yard" },
+  Specialty: { range: "Call for today's price", unit: "per yard" },
+  "Garden Center": { range: "Call for today's price", unit: "per item" },
 };
 
 export const products: Product[] = [
@@ -97,13 +97,13 @@ export const products: Product[] = [
     description:
       "Built by hand on the flower wagon out front. Full, heavy, ready-to-hang — the kind of basket the neighbors ask about.",
     image: gardenBaskets,
-    badge: "$40 ea · 2 for $70",
+    badge: "Call to reserve",
   },
   {
     name: "Annuals & Perennials",
     category: "Garden Center",
     description:
-      "Whatever's blooming this week is what's on the wagon. Hydrangeas from $22, dahlias from $18 — call ahead if you're after something specific.",
+      "Whatever's blooming this week is what's on the wagon. Hydrangeas, dahlias and more — call ahead if you're after something specific.",
     image: gardenPetunias,
   },
   {
