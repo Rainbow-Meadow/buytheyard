@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
-import { categories, categoryPricing, products } from "@/data/products";
+import { categories, products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/products")({
@@ -42,15 +42,12 @@ export const Route = createFileRoute("/products")({
               brand: { "@type": "Brand", name: "Buy The Yard" },
               offers: {
                 "@type": "Offer",
-                priceCurrency: "USD",
-                priceSpecification: {
-                  "@type": "PriceSpecification",
-                  price: categoryPricing[p.category].range,
-                  priceCurrency: "USD",
-                  unitText: categoryPricing[p.category].unit,
-                },
                 availability: "https://schema.org/InStock",
                 seller: { "@type": "LocalBusiness", name: "Buy The Yard" },
+                priceSpecification: {
+                  "@type": "PriceSpecification",
+                  description: "Call 508-579-9897 for today's price",
+                },
               },
             },
           })),
@@ -73,12 +70,12 @@ function ProductsPage() {
             Materials. By the <span className="text-brand">yard</span>.
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Posted pricing on every category. If you're not sure how much
-            material your project needs, call{" "}
+            Prices move with the season — call{" "}
             <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
               508-579-9897
             </a>{" "}
-            and we'll help you size it.
+            for today's number, and we'll help you size your project while
+            we're on the phone.
           </p>
         </div>
       </section>
