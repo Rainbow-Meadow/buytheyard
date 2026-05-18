@@ -224,13 +224,13 @@ function HomePage() {
                 decoding="async"
                 className="size-7 rounded-full object-cover ring-1 ring-white/40"
               />
-              Hi, I'm Abby — owner, Buy The Yard · Jefferson, MA
+              Hi, I'm Abby — owner · Jefferson, MA
             </p>
             <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance mb-7 text-white">
-              A small yard,{" "}
-              <span className="text-brand">built by hand</span>, run by{" "}
+              Mulch, loam, sand &amp; stone —{" "}
+              <span className="text-brand">by the yard</span>, from our lot in{" "}
               <span className="relative inline-block text-brand">
-                Abby
+                Jefferson, MA
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 200 14"
@@ -245,15 +245,14 @@ function HomePage() {
                     strokeLinecap="round"
                   />
                 </svg>
-              </span>{" "}
-              since 2016.
+              </span>.
             </h1>
             <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              Call before noon and we'll try to put it in your driveway today.
+              Bulk landscape supply for Holden, Princeton, Sterling, Rutland, Worcester &amp; all of Central Mass.
               <br />
-              Posted prices — same number for the contractor and the homeowner.
+              Best prices in the area — same number for the contractor and the homeowner.
               <br />
-              Not sure how much you need? That's why you call. We'll work it out together.
+              Pickup at 2264 Main St., or call before noon and we'll try to put it in your driveway today.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">

@@ -1,65 +1,47 @@
 ## Goal
 
-Fix the PDF: real layout overlap is happening (not just a QA artifact), add a QR code to the preview site, and use only the front yard photo.
+Rewrite the homepage hero so a first-time visitor knows, in one glance, exactly **what** Buy The Yard sells, **where** it sells from, and **who** runs it. No clever wordplay, no ambiguity. No specific prices — just a clear "best prices around" signal.
 
-## Root cause of the "overlap" — confirmed bug
+## What's wrong today
 
-`pdftotext -layout` output shows:
-```
-W ha t y ou get.          B uilt t o b e f o u n d .
-• C l e a n e r m o b i l e l a y o u t...
-```
+Current headline:
+> "A small yard, built by hand, run by Abby since 2016."
 
-Every body/heading rendered AFTER a `tracked()` call inherits extra character spacing. In PDF, the `Tc` (character spacing) operator is a **text state parameter that persists across BT/ET blocks**. The `tracked()` helper sets `Tc` inside a text object but never resets it, so every subsequent `drawString` inherits the tracking. ReportLab calculates wrap widths assuming Tc=0, so wrapped text overflows columns and collides with neighbors.
+Problems:
+- "Yard" alone is ambiguous — could be a junkyard, scrap yard, salvage yard, dog daycare, fabric shop.
+- No mention of mulch / loam / sand / stone in the H1.
+- "Jefferson, MA" is buried in the eyebrow line in small caps. Locals don't see their town anchored in the hero.
 
-## Fixes
+## New hero copy
 
-### 1. Reset character spacing after every tracked call
-Inside `tracked()`, append `t.setCharSpace(0)` before `c.drawText(t)` so Tc returns to 0 in the text state.
+**Eyebrow** (slightly tightened):
+`Hi, I'm Abby — owner · Jefferson, MA`
 
-### 2. Re-QA every page
-- Render each page to JPG at 150 DPI
-- Visually inspect: column collisions, text overflow, baseline alignment, photo aspect
-- Cross-check `pdftotext -layout` — columns should align cleanly once Tc is fixed
-- Iterate until clean
+**H1** (names the product + the town, keeps the brand-orange accent and the hand-drawn underline on the town):
+> Mulch, loam, sand & stone — **by the yard**, from our lot in <u>Jefferson, MA</u>.
 
-### 3. Add a QR code
-- New dep: `qrcode[pil]` (pure-Python, no native)
-- Target URL: `https://buytheyard.lovable.app`
-- Placement: bottom-right of page 3, inside the dark "NEXT STEP" strip. Layout:
+- "by the yard" stays in brand orange (doubles as the brand pun, but only after the product list, so meaning is locked in first).
+- "Jefferson, MA" gets the existing hand-drawn underline SVG.
 
-```
-┌──────────────────────────────────────────────┐
-│  NEXT STEP                       PREVIEW     │
-│  Patrick Berthiaume                  ┌────┐  │
-│  112 N Brookfield Rd · Oakham MA     │ QR │  │
-│  508-735-3232 · prberthi…@gmail.com  └────┘  │
-│                          buytheyard.lovable.app │
-└──────────────────────────────────────────────┘
-```
-- Render QR at ~0.9" square, dark modules on cream background for contrast, generated to a temp PNG and dropped via `drawImage`
-- Keep the `buytheyard.lovable.app` text under the QR
+**Sub-copy** (3 lines, each anchors a different proof point — local, best-priced, neighborly). No dollar amounts, no "contractor vs. homeowner" pricing line:
+> Bulk landscape supply for Holden, Princeton, Sterling, Rutland, Worcester & all of Central Mass.
+> Best prices in the area — same number for the contractor and the homeowner.
+> Pickup at 2264 Main St., or call before noon and we'll try to put it in your driveway today.
 
-### 4. Drop back yard photo — front yard only
-On page 3, replace the two-column photo grid with a single, larger front yard photo:
+## Why this works
 
-```
-┌──────────────────────────────────────────────────┐
-│  [ Front yard photo — wide, ~3.5" tall ]         │
-└──────────────────────────────────────────────────┘
-FRONT YARD · 112 N Brookfield Rd, Oakham
-```
+- **Business type**: "Mulch, loam, sand & stone" + "Bulk landscape supply" leaves zero doubt.
+- **Local**: town in the H1, neighboring towns in line 1, street address in line 3.
+- **Value signal without numbers**: "Best prices in the area" carries the message; no posted figures.
+- **Owner-run feel** preserved via the eyebrow and the "same number for the contractor and the homeowner" phrasing.
+- Keeps the existing visual structure (eyebrow → H1 with brand-color span + underline → 3-line sub-copy → WBE/season strip → CTAs). No layout changes, no image swaps.
 
-- Drop the back-yard image copy step
-- Single full-width image, ~4.5" wide × ~2.8" tall to keep proportions
-- One caption line under it
+## Files
 
-### 5. Minor polish while in there
-- Tighten page 1 spacing between intro and the bottom card
-- Re-check page 3 trade text + materials card don't collide
+- `src/routes/index.tsx` — hero `<h1>` (~line 229) and the `<p>` sub-copy (~line 251). Everything else stays.
 
 ## Out of scope
 
-- No content rewrites
-- No new screenshots
-- No changes to the live preview site
+- Page `<title>` / meta description (already strong and local).
+- WBE / season strip, CTAs, hero images, scrim.
+- Any other section on the homepage or other routes.
