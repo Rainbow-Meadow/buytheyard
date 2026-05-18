@@ -433,16 +433,17 @@ function HomePage() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
                 <Tag className="size-3.5" />
-                2026 price list
+              Today's prices by phone
               </p>
               <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[18ch]">
-                Straightforward Pricing
+                Call for Today's Prices
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Transparent, per-yard pricing for both contractors and
-                homeowners. One-yard minimum on all bulk orders, available for
-                pickup or delivery. Cash and check payments avoid the 4% credit
-                card processing fee.
+                Material prices shift with the season and the market, so we
+                quote by phone — and we work hard to keep them the best in the
+                area. Same number for contractors and homeowners, one-yard
+                minimum on all bulk orders, pickup or delivery. Cash and check
+                payments avoid the 4% card processing fee.
               </p>
             </div>
             <a
@@ -469,8 +470,8 @@ function HomePage() {
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                     {group.heading}
                   </p>
-                  <p className="font-display text-5xl uppercase text-zinc-950 leading-none mb-2">
-                    {group.range}
+                  <p className="font-display text-3xl uppercase text-zinc-950 leading-tight mb-2">
+                    Call for today's price
                   </p>
                   <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-4">
                     {group.unit}
@@ -483,10 +484,14 @@ function HomePage() {
             </div>
 
             <p className="mt-8 text-xs text-zinc-600">
-              Per cubic yard unless noted. Delivery is quoted by ZIP — call Abby at{" "}
+              Material and delivery both quoted live — call Abby at{" "}
               <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
                 508.579.9897
               </a>{" "}
+              or{" "}
+              <Link to="/quote" className="font-semibold text-zinc-900 hover:text-brand">
+                request a quote online
+              </Link>{" "}
               and you'll have a same-day number. MA 6.25% sales tax applies where required.
             </p>
 
