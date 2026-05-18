@@ -97,7 +97,7 @@ export const Route = createFileRoute("/")({
               name: "How much does material cost?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Pricing is posted by category. Mulch runs $48–$50/yd, loam and compost $45–$55/yd, sand and gravel $55/yd, and specialty stone $135–$185/yd. One-yard minimum, with the same pricing for contractors and homeowners. For an exact quote, call 508-579-9897.",
+                text: "Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number — same price for contractors and homeowners, one-yard minimum on all bulk orders.",
               },
             },
             {
@@ -113,7 +113,7 @@ export const Route = createFileRoute("/")({
               name: "What's the 4% card fee about?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee. Posted pricing remains the same regardless of payment method.",
+              text: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee. Your quoted price is the same regardless of payment method.",
               },
             },
             {
