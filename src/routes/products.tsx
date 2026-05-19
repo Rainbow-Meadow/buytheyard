@@ -83,10 +83,10 @@ function ProductsPage() {
         const items = products.filter((p) => p.category === cat);
         if (items.length === 0) return null;
         return (
-          <section key={cat} className="section bg-base border-b border-zinc-200 last:border-0">
+          <section key={cat} className="section bg-base border-b border-white/10 last:border-0">
             <div className="max-w-7xl mx-auto px-5 md:px-6">
-              <div className="flex items-end justify-between mb-5 md:mb-10 border-b-2 border-zinc-900 pb-4">
-                <h2 className="display-4 leading-none text-zinc-900">
+              <div className="flex items-end justify-between mb-5 md:mb-10 border-b border-white/15 pb-4">
+                <h2 className="display-4 leading-none text-white">
                   {cat}
                 </h2>
                 <span className="label text-zinc-500">
@@ -103,12 +103,12 @@ function ProductsPage() {
         );
       })}
 
-      <section className="bg-kraft section">
+      <section className="bg-surface section">
         <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
           <h2 className="display-3 mb-4">
             Looking for Something Else?
           </h2>
-          <p className="text-zinc-700 mb-4 md:mb-8">
+          <p className="text-zinc-300 mb-4 md:mb-8">
             Our regular lineup. Bulk salt and ice melt in winter, bagged soils year-round, plus seasonal specials. Call to confirm stock.
           </p>
           <a

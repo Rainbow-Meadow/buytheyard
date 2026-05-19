@@ -54,9 +54,9 @@ export const Route = createFileRoute("/quote")({
 });
 
 const inputCls =
-  "w-full bg-white text-zinc-900 px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-brand placeholder:text-zinc-400";
+  "w-full bg-white text-white px-3 h-11 ring-1 ring-white/10 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-brand placeholder:text-zinc-400";
 const labelCls =
-  "eyebrow text-zinc-700 mb-2 block";
+  "eyebrow text-zinc-300 mb-2 block";
 const errorCls = "text-xs text-red-700 mt-1";
 
 const sortedProducts = [...products].sort((a, b) => {
@@ -136,7 +136,7 @@ function QuotePage() {
             <legend className="display-4 mb-2">
               <span className="text-brand">01.</span> What do you need?
             </legend>
-            <p className="text-sm text-zinc-600 mb-3 md:mb-6">
+            <p className="text-sm text-zinc-400 mb-3 md:mb-6">
               One row per material. Ballpark the quantity — we'll dial it in on the phone.
             </p>
 
@@ -147,7 +147,7 @@ function QuotePage() {
                 return (
                   <div
                     key={field.id}
-                    className="bg-kraft p-4 md:p-5 rounded-md ring-1 ring-zinc-300"
+                    className="bg-surface p-4 md:p-5 rounded-md ring-1 ring-white/10"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 items-end">
                       <div>
@@ -194,11 +194,11 @@ function QuotePage() {
                           control={control}
                           name={`items.${idx}.quantity`}
                           render={({ field: f }) => (
-                            <div className="flex items-center ring-1 ring-zinc-300 rounded-sm bg-white h-11">
+                            <div className="flex items-center ring-1 ring-white/10 rounded-sm bg-white h-11">
                               <button
                                 type="button"
                                 aria-label="Decrease quantity"
-                                className="px-3 h-full text-zinc-600 hover:text-brand"
+                                className="px-3 h-full text-zinc-400 hover:text-brand"
                                 onClick={() =>
                                   f.onChange(Math.max(1, Number(f.value) - 1))
                                 }
@@ -218,12 +218,12 @@ function QuotePage() {
                                       : Math.max(1, Number(e.target.value)),
                                   )
                                 }
-                                className="w-14 text-center bg-transparent text-zinc-900 text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                className="w-14 text-center bg-transparent text-white text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                               />
                               <button
                                 type="button"
                                 aria-label="Increase quantity"
-                                className="px-3 h-full text-zinc-600 hover:text-brand"
+                                className="px-3 h-full text-zinc-400 hover:text-brand"
                                 onClick={() =>
                                   f.onChange(Math.min(999, Number(f.value) + 1))
                                 }
@@ -270,7 +270,7 @@ function QuotePage() {
               onClick={() =>
                 items.append({ product: "", quantity: 1, unit: "cu yd" })
               }
-              className="mt-4 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
+              className="mt-4 inline-flex items-center gap-2 label text-white hover:text-brand"
             >
               <Plus className="size-4" /> Add another product
             </button>
@@ -289,7 +289,7 @@ function QuotePage() {
                   className={`cursor-pointer rounded-md p-5 ring-1 transition-colors ${
                     fulfillment === opt
                       ? "bg-surface text-surface-foreground ring-brand"
-                      : "bg-kraft text-zinc-900 ring-zinc-300 hover:ring-zinc-500"
+                      : "bg-surface text-white ring-white/10 hover:ring-zinc-500"
                   }`}
                 >
                   <input
@@ -302,7 +302,7 @@ function QuotePage() {
                     {opt}
                   </p>
                   <p
-                    className={`text-sm mt-2 ${fulfillment === opt ? "text-zinc-300" : "text-zinc-600"}`}
+                    className={`text-sm mt-2 ${fulfillment === opt ? "text-zinc-300" : "text-zinc-400"}`}
                   >
                     {opt === "Pickup"
                       ? "I've got a truck or trailer and I'll come grab it."
@@ -313,7 +313,7 @@ function QuotePage() {
             </div>
 
             {fulfillment === "Delivery" && (
-              <div className="mt-3 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
+              <div className="mt-3 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-surface p-5 md:p-6 rounded-md ring-1 ring-white/10">
                 <div>
                   <label className={labelCls}>Town</label>
                   <select className={inputCls} {...register("town")}>
@@ -352,7 +352,7 @@ function QuotePage() {
                     {DROP_SPOTS.map((d) => (
                       <label
                         key={d}
-                        className="flex items-center gap-3 bg-white px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2"
+                        className="flex items-center gap-3 bg-white px-3 h-11 ring-1 ring-white/10 rounded-sm text-sm cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2"
                       >
                         <input
                           type="radio"
@@ -360,7 +360,7 @@ function QuotePage() {
                           {...register("dropSpot")}
                           className="accent-[var(--brand)]"
                         />
-                        <span className="text-zinc-900">{d}</span>
+                        <span className="text-white">{d}</span>
                       </label>
                     ))}
                   </div>
@@ -377,7 +377,7 @@ function QuotePage() {
                     {TIMING.map((t) => (
                       <label
                         key={t}
-                        className="flex items-center justify-center text-center bg-white px-2 h-11 ring-1 ring-zinc-300 rounded-sm text-xs font-semibold cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900 uppercase tracking-wide"
+                        className="flex items-center justify-center text-center bg-white px-2 h-11 ring-1 ring-white/10 rounded-sm text-xs font-semibold cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-white uppercase tracking-wide"
                       >
                         <input
                           type="radio"
@@ -408,7 +408,7 @@ function QuotePage() {
                   )}
                 </div>
 
-                <label className="md:col-span-2 flex items-start gap-3 text-sm text-zinc-800 cursor-pointer">
+                <label className="md:col-span-2 flex items-start gap-3 text-sm text-zinc-100 cursor-pointer">
                   <input
                     type="checkbox"
                     {...register("acknowledged")}
@@ -481,7 +481,7 @@ function QuotePage() {
                   {CONTACT_METHODS.map((m) => (
                     <label
                       key={m}
-                      className="flex items-center justify-center bg-kraft px-2 h-11 ring-1 ring-zinc-300 rounded-sm label cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900"
+                      className="flex items-center justify-center bg-surface px-2 h-11 ring-1 ring-white/10 rounded-sm label cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-white"
                     >
                       <input
                         type="radio"
@@ -502,7 +502,7 @@ function QuotePage() {
             <legend className="display-4 mb-2">
               <span className="text-brand">04.</span> Anything else?
             </legend>
-            <p className="text-sm text-zinc-600 mb-3">
+            <p className="text-sm text-zinc-400 mb-3">
               Optional. Steep driveway, gate code, "leave it by the rhododendron" — anything Abby should know.
             </p>
             <NotesField register={register} watch={watch} />
@@ -511,10 +511,10 @@ function QuotePage() {
             )}
           </fieldset>
 
-          <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="text-xs text-zinc-600 max-w-[40ch]">
+          <div className="pt-4 border-t border-white/10/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <p className="text-xs text-zinc-400 max-w-[40ch]">
               Next screen previews your request so you can send it in one tap. Submitting means you agree to our{" "}
-              <Link to="/privacy" className="underline hover:text-zinc-900">
+              <Link to="/privacy" className="underline hover:text-white">
                 Privacy &amp; Terms
               </Link>
               .
@@ -615,7 +615,7 @@ function SuccessView({
             <button
               type="button"
               onClick={onCopy}
-              className="inline-flex items-center justify-center gap-2 bg-kraft text-zinc-900 ring-1 ring-zinc-300 h-14 label hover:ring-zinc-500 rounded-sm"
+              className="inline-flex items-center justify-center gap-2 bg-surface text-white ring-1 ring-white/10 h-14 label hover:ring-zinc-500 rounded-sm"
             >
               {copied ? (
                 <>
@@ -629,20 +629,20 @@ function SuccessView({
             </button>
           </div>
 
-          <div className="bg-kraft rounded-md ring-1 ring-zinc-300 overflow-hidden">
-            <div className="px-5 py-3 border-b border-zinc-300/70 flex items-center justify-between">
-              <p className="eyebrow text-zinc-700">
+          <div className="bg-surface rounded-md ring-1 ring-white/10 overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/10/70 flex items-center justify-between">
+              <p className="eyebrow text-zinc-300">
                 Preview
               </p>
               <button
                 type="button"
                 onClick={onEdit}
-                className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
+                className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
               >
                 <Pencil className="size-3.5" /> Edit
               </button>
             </div>
-            <pre className="px-5 py-5 text-xs md:text-sm text-zinc-900 whitespace-pre-wrap font-mono leading-relaxed">
+            <pre className="px-5 py-5 text-xs md:text-sm text-white whitespace-pre-wrap font-mono leading-relaxed">
               {brief}
             </pre>
           </div>
@@ -651,7 +651,7 @@ function SuccessView({
             <button
               type="button"
               onClick={onEdit}
-              className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
             >
               <ArrowLeft className="size-4" /> Edit my request
             </button>

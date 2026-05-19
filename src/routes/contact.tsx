@@ -138,10 +138,10 @@ function ContactPage() {
 
       <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
+          <div className="bg-surface p-8 rounded-md ring-1 ring-white/10">
             <ClipboardList className="size-7 text-brand mb-4" />
             <h2 className="display-4 mb-2">Get a Quote</h2>
-            <p className="text-sm text-zinc-700 mb-3">
+            <p className="text-sm text-zinc-300 mb-3">
               Best for material lists. Submit your products, town, and project
               timing, and we'll respond with pricing.
             </p>
@@ -153,28 +153,28 @@ function ContactPage() {
             </Link>
           </div>
 
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
+          <div className="bg-surface p-8 rounded-md ring-1 ring-white/10">
             <Phone className="size-7 text-brand mb-4" />
             <h2 className="display-4 mb-2">Phone &amp; Email</h2>
-            <a href="tel:5085799897" className="block text-zinc-900 font-semibold hover:text-brand">
+            <a href="tel:5085799897" className="block text-white font-semibold hover:text-brand">
               508-579-9897
             </a>
             <a
               href="mailto:abby@btymaterial.com"
-              className="mt-2 flex items-center gap-2 text-sm text-zinc-700 hover:text-brand"
+              className="mt-2 flex items-center gap-2 text-sm text-zinc-300 hover:text-brand"
             >
               <Mail className="size-4" /> abby@btymaterial.com
             </a>
-            <p className="text-xs text-zinc-600 mt-2">
+            <p className="text-xs text-zinc-400 mt-2">
               Cell coverage at the yard can be limited. If we don't pick up,
               please leave a voicemail — we return calls the same day.
             </p>
           </div>
 
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
+          <div className="bg-surface p-8 rounded-md ring-1 ring-white/10">
             <MapPin className="size-7 text-brand mb-4" />
             <h2 className="display-4 mb-2">Address</h2>
-            <p className="text-zinc-900">
+            <p className="text-white">
               2264 Main St.
               <br />
               Jefferson, MA 01522
@@ -189,18 +189,18 @@ function ContactPage() {
             </a>
           </div>
 
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
+          <div className="bg-surface p-8 rounded-md ring-1 ring-white/10">
             <Clock className="size-7 text-brand mb-4" />
             <h2 className="display-4 mb-2">Hours</h2>
             <p className="eyebrow text-brand mb-2">
               In-season (4/1 – 8/1)
             </p>
-            <ul className="text-sm text-zinc-900 space-y-1">
+            <ul className="text-sm text-white space-y-1">
               <li className="flex justify-between gap-4"><span>Mon–Fri</span><span>8a – 5p</span></li>
               <li className="flex justify-between gap-4"><span>Saturday</span><span>8a – 3p</span></li>
               <li className="flex justify-between gap-4"><span>Sunday</span><span className="text-zinc-500">Closed</span></li>
             </ul>
-            <p className="text-xs text-zinc-600 mt-3 leading-relaxed">
+            <p className="text-xs text-zinc-400 mt-3 leading-relaxed">
               Our 2026 season opens <strong>April 1</strong>. After August 1,
               pickup and delivery are by appointment. Salt and ice melt are
               available year-round; call for winter loading hours.
@@ -211,7 +211,7 @@ function ContactPage() {
 
       <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden rounded-md ring-1 ring-zinc-300">
+          <div className="aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden rounded-md ring-1 ring-white/10">
             <iframe
               title="Buy The Yard location map"
               src="https://www.google.com/maps?q=2264+Main+St,+Jefferson,+MA+01522&output=embed"
