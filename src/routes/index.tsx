@@ -334,7 +334,7 @@ function HomePage() {
               <span aria-hidden="true" className="text-white/40">·</span>
               <span>Woman-owned <span className="text-brand">(WBE)</span></span>
             </p>
-            <h1 className="display-2 leading-[0.95] text-balance mb-4 md:mb-7 text-white">
+            <h1 className="display-2 leading-[0.95] text-balance text-white">
               Mulch. Loam. Sand.{" "}
               <span className="relative inline-block text-brand">
                 Stone.
@@ -354,11 +354,11 @@ function HomePage() {
                 </svg>
               </span>
             </h1>
-            <p className="lead text-zinc-200 max-w-[54ch] mb-4 md:mb-8 text-pretty">
+            <p className="lead text-zinc-200 max-w-[54ch] mt-4 md:mt-6 text-pretty">
               By the yard, from our Jefferson, MA lot. Best prices in Central Mass.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="mt-5 md:mt-8 flex flex-wrap items-center gap-4">
               <Link
                 to="/products"
                 className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
@@ -414,7 +414,7 @@ function HomePage() {
               <p className="eyebrow text-brand mb-3">
                 Bulk materials &amp; garden center
               </p>
-            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch]">
+            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch] mt-4 md:mt-6">
               Featured Materials
             </h2>
             </div>
