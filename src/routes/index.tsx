@@ -365,8 +365,6 @@ function HomePage() {
               </span>
               <span aria-hidden="true" className="text-white/40">·</span>
               <span>Woman-owned <span className="text-brand">(WBE)</span></span>
-              <span aria-hidden="true" className="text-white/40">·</span>
-              <span>Jefferson, MA</span>
             </p>
             <h1 className="display-2 leading-[0.95] text-balance mb-4 md:mb-7 text-white">
               Mulch. Loam. Sand.{" "}
