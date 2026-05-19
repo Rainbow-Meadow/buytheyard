@@ -249,7 +249,7 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 min-h-[640px] md:min-h-[720px] flex">
+      <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[720px] flex">
         {/* Mobile single hero image */}
         <img
           src={heroMobile}
