@@ -12,11 +12,11 @@
   --color-m-bg: #0d0d0d;
   --color-m-surface: #161616;
   --color-m-surface-2: #1d1d1d;
-  --color-m-line: rgba(201, 168, 76, 0.22);
+  --color-m-line: rgba(176, 32, 46, 0.24);
   --color-m-text: #f8f8f8;
   --color-m-muted: rgba(248, 248, 248, 0.62);
-  --color-m-gold: #c9a84c;
-  --color-m-gold-light: #f0d78c;
+  --color-m-gold: #b0202e;
+  --color-m-gold-light: #d94254;
   --font-m-display: "Space Grotesk", system-ui, sans-serif;
   --font-m-sans: "DM Sans", system-ui, sans-serif;
 }
@@ -96,7 +96,7 @@
   background:
     repeating-linear-gradient(
       45deg,
-      rgba(201, 168, 76, 0.08) 0 12px,
+      rgba(176, 32, 46, 0.10) 0 12px,
       transparent 12px 24px
     ),
     var(--color-m-surface-2);

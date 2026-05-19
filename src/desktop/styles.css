@@ -11,12 +11,12 @@
   --color-d-bg: #0d0d0d;
   --color-d-surface: #151515;
   --color-d-surface-2: #1a1a1a;
-  --color-d-line: rgba(201, 168, 76, 0.18);
-  --color-d-line-strong: rgba(201, 168, 76, 0.45);
+  --color-d-line: rgba(176, 32, 46, 0.20);
+  --color-d-line-strong: rgba(176, 32, 46, 0.50);
   --color-d-text: #f8f8f8;
   --color-d-muted: rgba(248, 248, 248, 0.55);
-  --color-d-gold: #c9a84c;
-  --color-d-gold-light: #f0d78c;
+  --color-d-gold: #b0202e;
+  --color-d-gold-light: #d94254;
   --font-d-display: "DM Serif Display", Georgia, serif;
   --font-d-sans: "Fira Sans", system-ui, sans-serif;
 }
