@@ -37,7 +37,7 @@ function DeliveryPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Delivery &amp; Pickup
           </p>
@@ -58,7 +58,7 @@ function DeliveryPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-kraft p-8 md:p-10 rounded-md ring-1 ring-zinc-300">
             <Warehouse className="size-10 text-brand mb-6" />
             <h2 className="font-display text-4xl uppercase mb-4">Pick it up</h2>
@@ -95,7 +95,7 @@ function DeliveryPage() {
       </section>
 
       <section className="section bg-kraft border-y border-zinc-300">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-5 md:px-6">
           <h2 className="font-display text-4xl md:text-5xl uppercase mb-10">
             What to Know Before Delivery
           </h2>
@@ -118,7 +118,7 @@ function DeliveryPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-6 flex flex-col md:flex-row items-start gap-6 p-8 bg-surface text-surface-foreground rounded-md">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 flex flex-col md:flex-row items-start gap-6 p-8 bg-surface text-surface-foreground rounded-md">
           <CreditCard className="size-10 text-brand shrink-0" />
           <div>
             <h3 className="font-display text-2xl uppercase mb-2">

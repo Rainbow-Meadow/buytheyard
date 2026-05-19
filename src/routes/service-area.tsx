@@ -67,7 +67,7 @@ function ServiceAreaPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Service Area
           </p>
@@ -95,7 +95,7 @@ function ServiceAreaPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex items-center gap-3 mb-10">
             <Truck className="size-6 text-brand" />
             <h2 className="font-display text-4xl md:text-5xl uppercase text-zinc-950">
@@ -132,7 +132,7 @@ function ServiceAreaPage() {
       </section>
 
       <section className="section bg-kraft border-t border-zinc-300">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
           <h2 className="font-display text-4xl uppercase mb-4">
             Ready to schedule a delivery?
           </h2>

@@ -12,7 +12,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground border-t border-white/5">
       <div className="border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-6 md:py-10 flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 md:flex-1">
             <span className="inline-flex items-center justify-center size-12 rounded-full bg-brand/15 text-brand shrink-0">
               <Star className="size-6 fill-brand" strokeWidth={1.5} />
@@ -47,7 +47,7 @@ export function SiteFooter() {
           </a>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 text-center md:text-left">
+      <div className="max-w-7xl mx-auto px-5 md:px-6 section grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 text-center md:text-left">
         <div className="md:col-span-1 flex flex-col items-center md:items-start">
           <img
             src={brandmark}
@@ -134,7 +134,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-3 text-xs text-zinc-500 text-center">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-3 text-xs text-zinc-500 text-center">
           <span>&copy; {new Date().getFullYear()} Buy The Yard Material. WBE Certified.</span>
           <span className="uppercase tracking-widest">Jefferson, MA</span>
         </div>

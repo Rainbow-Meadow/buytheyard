@@ -62,7 +62,7 @@ function ProductsPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Catalog
           </p>
@@ -84,7 +84,7 @@ function ProductsPage() {
         if (items.length === 0) return null;
         return (
           <section key={cat} className="section bg-base border-b border-zinc-200 last:border-0">
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-7xl mx-auto px-5 md:px-6">
               <div className="flex items-end justify-between mb-10 border-b-2 border-zinc-900 pb-4">
                 <h2 className="font-display text-3xl md:text-4xl uppercase leading-none text-zinc-900">
                   {cat}
@@ -104,7 +104,7 @@ function ProductsPage() {
       })}
 
       <section className="bg-kraft section">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
           <h2 className="font-display text-4xl uppercase mb-4">
             Looking for Something Else?
           </h2>

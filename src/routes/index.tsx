@@ -274,7 +274,7 @@ function HomePage() {
         {/* Extra mobile scrim for headline contrast over the photo */}
         <div className="md:hidden absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-zinc-950/25" />
 
-        <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-6 py-16 md:py-24 self-center w-full">
+        <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-6 section-loose self-center w-full">
           <div>
             <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-200 mb-5 pb-2 border-b border-white/30">
               <img
@@ -361,7 +361,7 @@ function HomePage() {
 
       {/* Stats strip */}
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 section-tight grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           {[
             { k: "10", v: "Years in business" },
             { k: "WBE", v: "Massachusetts WBE certified" },
@@ -378,7 +378,7 @@ function HomePage() {
 
       {/* Product preview */}
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-10">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
@@ -442,7 +442,7 @@ function HomePage() {
 
       {/* Facebook spotlight */}
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Facebook page card — real screenshot wrapped in a faux browser chrome */}
           <a
             href="https://www.facebook.com/BuyTheYardOutdoorProducts"
@@ -516,7 +516,7 @@ function HomePage() {
 
       {/* Reviews from Facebook */}
       <section className="section bg-base border-t border-zinc-200">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
             <Facebook className="size-3.5" />
             From Facebook · real customers, real posts
@@ -570,7 +570,7 @@ function HomePage() {
 
       {/* Pricing */}
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-12">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
@@ -646,7 +646,7 @@ function HomePage() {
 
       {/* FAQ */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
           <div className="md:col-span-5">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
               <HelpCircle className="size-3.5" />
@@ -775,7 +775,7 @@ function HomePage() {
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-25"
         />
-        <div className="relative max-w-7xl mx-auto px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <Truck className="size-10 text-brand mb-6" />
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] mb-6">
@@ -818,7 +818,7 @@ function HomePage() {
 
       {/* WBE strip */}
       <section className="bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-6 section-tight flex flex-col md:flex-row items-center gap-8 justify-between">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-8 justify-between">
           <div className="flex items-center gap-5">
             <img
               src={wbeSeal}

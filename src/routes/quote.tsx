@@ -112,7 +112,7 @@ function QuotePage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Get a quote
           </p>
@@ -128,7 +128,7 @@ function QuotePage() {
       <section className="section bg-base">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-3xl mx-auto px-6 space-y-12"
+          className="max-w-3xl mx-auto px-5 md:px-6 space-y-12"
           noValidate
         >
           {/* PRODUCTS */}
@@ -584,7 +584,7 @@ function SuccessView({
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4 inline-flex items-center gap-2">
             <Check className="size-3.5" /> Request ready
           </p>
@@ -598,7 +598,7 @@ function SuccessView({
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-6 space-y-8">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 space-y-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a
               href={mailto}
