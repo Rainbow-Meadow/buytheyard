@@ -1,36 +1,20 @@
-## Remove all AI-generated imagery — real photos only
+## Match the brandmark crimson
 
-Audit found these AI-generated files that need to go, and existing owner-supplied photos that will replace them.
+Sampled the brandmark — the red mountain peak and the dot separators are **#931024** (a deep crimson, not the orange-red currently in use). One file changes.
 
-### Files to delete
+### Token update — `src/styles.css`
 
-- `src/assets/hero/reel-01-mulch.mp4.asset.json` … `reel-05-dusk.mp4.asset.json` (the 5 hero video clips)
-- `src/assets/abby-portrait.jpg` (AI portrait at repo root — duplicate of the real `source/abby-portrait.webp`)
-- `src/assets/outcome-beds.jpg`, `outcome-playground.jpg`, `outcome-walkway.jpg`
-- `src/components/site/HeroReel.tsx` (no longer needed)
+```css
+--brand:        oklch(0.42 0.17 26);   /* #931024 — brandmark crimson */
+--brand-foreground: oklch(0.99 0 0);   /* white — contrast still passes */
+--brand-glow:   oklch(0.55 0.20 28);   /* lifted crimson for glows */
+--ring:         oklch(0.42 0.17 26);
+```
 
-### Replacements (all owner-supplied, already in `src/assets/source/`)
+Every component already reads from `var(--brand)` / `var(--brand-glow)` / `var(--ring)`, so the hero radial glow, `.ember-dot`, `.btn-ember`, `.stat-shine`, ticker accents, and all CTAs pick up the new red automatically.
 
-- **Hero**: swap the cinematic reel for a real photo hero using `hero-desktop-yard-2026.png` on md+ and `hero-mobile-piles-mulch-sand-stone-2026.png` on small screens. Same dark veil + grain overlay as before, same headline + CTAs + ticker — only the media changes.
-- **Story strip portrait**: `source/abby-portrait.webp` (was already used on /about — same image).
-- **Outcomes section**: replace the three AI outcome shots with real yard photos:
-  - `source/yard-piles.webp` → "Bulk materials, by the yard."
-  - `source/loading-truck.webp` → "Loaded on arrival."
-  - `source/yard-banner-5.webp` → "Sit-and-stay corner."
-  (Outcome titles/copy adjusted to fit the actual photos, since the AI shots showed finished landscaping we don't have real photos of.)
+### Notes
 
-### Code edits
-
-- `src/routes/index.tsx`:
-  - Remove the three `outcome-*.jpg` imports and the `abby-portrait.jpg` import.
-  - Import the real photos listed above.
-  - Replace `<HeroReel />` with a `<HeroStill />` block (inline in the same file, or a small new component `src/components/site/HeroStill.tsx`) — `<picture>` with mobile/desktop sources, same `hero-veil` / `grid-noir` overlays, same caption markers removed.
-  - Update the outcomes array entries to match the new photos.
-- Remove `HeroReel` import.
-
-### Out of scope
-
-- Product catalog photos (`mulch-*`, `loam`, `sand`, `stone-*`, etc.) — all owner-supplied, kept as is.
-- The `/about` and other inner routes — they already use real photography only.
-
-After implementation the site contains zero AI imagery, matching `PHOTO_CREDITS.md`.
+- `--brand-foreground` stays white — contrast on #931024 is ~7:1.
+- No component or route edits needed.
+- Utility class names `.ember-dot` / `.btn-ember` remain (renaming would touch every route for cosmetic gain).
