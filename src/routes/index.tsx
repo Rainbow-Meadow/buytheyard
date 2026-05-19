@@ -548,7 +548,7 @@ function HomePage() {
       </section>
 
       {/* Reviews from Facebook */}
-      <section className="section bg-base border-t border-zinc-200">
+      <section className="section bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 md:max-w-2xl">
             <div>
