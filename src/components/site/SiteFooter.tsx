@@ -24,8 +24,7 @@ export function SiteFooter() {
         {/* Row 1: Google review | Logo | WBE */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-stretch md:min-h-[20rem] md:divide-x md:divide-white/10">
           {/* Google review */}
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
+          <div className="flex flex-col items-center text-center px-4 md:px-8">
               <h2 className="display-5 text-white">
                 Leave a <span className="text-brand">Google review.</span>
               </h2>
@@ -68,12 +67,10 @@ export function SiteFooter() {
                   <YelpLogo className="size-4" /> Yelp
                 </a>
               </div>
-            </div>
           </div>
 
           {/* Logo centerpiece */}
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center text-center w-full max-w-[20rem]">
+          <div className="flex flex-col items-center text-center px-4 md:px-8">
               <img
                 src={brandmark}
                 alt="Buy The Yard — Mulch · Loam · Sand · Stone"
@@ -86,12 +83,10 @@ export function SiteFooter() {
               <p className="mt-4 meta text-zinc-500">
                 Est. 2016 · WBE Certified
               </p>
-            </div>
           </div>
 
           {/* WBE */}
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center text-center space-y-5 w-full max-w-[18rem]">
+          <div className="flex flex-col items-center text-center space-y-5 px-4 md:px-8">
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
@@ -113,19 +108,17 @@ export function SiteFooter() {
               >
                 Meet Abby <ArrowRight className="size-4" />
               </Link>
-            </div>
           </div>
         </div>
 
         {/* Row 2: Hours | Visit (map) | Site */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-stretch md:min-h-[20rem] md:divide-x md:divide-white/10">
           {/* Hours */}
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
+          <div className="flex flex-col items-center text-center px-4 md:px-8">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
                 Hours
               </h3>
-              <ul className="body-sm space-y-1.5 w-full max-w-[28ch]">
+              <ul className="body-sm space-y-1.5 w-full max-w-[28ch] mx-auto">
                 <li className="flex justify-between gap-4">
                   <span className="text-zinc-500">Mon – Fri</span>
                   <span className="text-zinc-200">8:00am – 5:00pm</span>
@@ -156,12 +149,10 @@ export function SiteFooter() {
                   abby@btymaterial.com
                 </a>
               </div>
-            </div>
           </div>
 
           {/* Visit + map */}
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center text-center w-full max-w-[20rem]">
+          <div className="flex flex-col items-center text-center px-4 md:px-8">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
                 Visit
               </h3>
@@ -170,7 +161,7 @@ export function SiteFooter() {
                 <br />
                 Jefferson, MA 01522
               </address>
-              <div className="w-full aspect-video border border-white/10 overflow-hidden">
+              <div className="w-full max-w-[20rem] aspect-video border border-white/10 overflow-hidden">
                 <iframe
                   src={MAP_EMBED_URL}
                   title="Buy The Yard Material — 2264 Main St, Jefferson, MA"
@@ -188,12 +179,10 @@ export function SiteFooter() {
               >
                 Get directions <ArrowRight className="size-4" />
               </a>
-            </div>
           </div>
 
           {/* Site */}
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
+          <div className="flex flex-col items-center text-center px-4 md:px-8">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
                 Site
               </h3>
@@ -212,7 +201,6 @@ export function SiteFooter() {
                   Cookie settings
                 </button>
               </nav>
-            </div>
           </div>
         </div>
 
