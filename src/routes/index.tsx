@@ -384,7 +384,7 @@ function HomePage() {
       </section>
 
       {/* Stats strip */}
-      <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
+      <section className="bg-zinc-950 text-zinc-200 border-y border-white/20">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center md:text-left">
           {[
             { k: "10", v: "Years in business" },
