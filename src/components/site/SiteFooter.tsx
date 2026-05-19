@@ -10,8 +10,8 @@ const GOOGLE_REVIEW_URL =
 
 export function SiteFooter() {
   return (
-    <footer className="bg-surface text-surface-foreground border-t border-white/5">
-      <div className="border-b border-white/5">
+    <footer className="bg-surface text-surface-foreground">
+      <div>
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-3 md:gap-8 text-center md:text-left">
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 md:flex-1">
             <span className="inline-flex items-center justify-center size-12 rounded-full bg-brand/15 text-brand shrink-0">
