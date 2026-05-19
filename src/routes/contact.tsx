@@ -64,7 +64,7 @@ function ContactPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Contact
           </p>
@@ -138,7 +138,7 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-base">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <ClipboardList className="size-7 text-brand mb-4" />
@@ -211,7 +211,7 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-base pb-20">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-6">
           <div className="aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden rounded-md ring-1 ring-zinc-300">
             <iframe

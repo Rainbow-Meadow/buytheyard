@@ -37,7 +37,7 @@ function DeliveryPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Delivery &amp; Pickup
           </p>
@@ -62,7 +62,7 @@ function DeliveryPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-base">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-kraft p-8 md:p-10 rounded-md ring-1 ring-zinc-300">
             <Warehouse className="size-10 text-brand mb-6" />
@@ -99,7 +99,7 @@ function DeliveryPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-kraft border-y border-zinc-300">
+      <section className="section bg-kraft border-y border-zinc-300">
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="font-display text-4xl md:text-5xl uppercase mb-10">
             What to Know Before Delivery
@@ -122,7 +122,7 @@ function DeliveryPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-base">
+      <section className="section bg-base">
         <div className="max-w-3xl mx-auto px-6 flex flex-col md:flex-row items-start gap-6 p-8 bg-surface text-surface-foreground rounded-md">
           <CreditCard className="size-10 text-brand shrink-0" />
           <div>
