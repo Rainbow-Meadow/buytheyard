@@ -16,7 +16,6 @@ import { Route as MIndexRouteImport } from './routes/m.index'
 import { Route as DesktopIndexRouteImport } from './routes/_desktop.index'
 import { Route as MShopRouteImport } from './routes/m.shop'
 import { Route as MContactRouteImport } from './routes/m.contact'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as DesktopQuoteRouteImport } from './routes/_desktop.quote'
 import { Route as DesktopProductsRouteImport } from './routes/_desktop.products'
 import { Route as DesktopDeliveryRouteImport } from './routes/_desktop.delivery'
@@ -57,11 +56,6 @@ const MContactRoute = MContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => MRoute,
 } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DesktopQuoteRoute = DesktopQuoteRouteImport.update({
   id: '/quote',
   path: '/quote',
@@ -97,7 +91,6 @@ export interface FileRoutesByFullPath {
   '/delivery': typeof DesktopDeliveryRoute
   '/products': typeof DesktopProductsRoute
   '/quote': typeof DesktopQuoteRoute
-  '/api/chat': typeof ApiChatRoute
   '/m/contact': typeof MContactRoute
   '/m/shop': typeof MShopRoute
   '/m/': typeof MIndexRoute
@@ -109,7 +102,6 @@ export interface FileRoutesByTo {
   '/delivery': typeof DesktopDeliveryRoute
   '/products': typeof DesktopProductsRoute
   '/quote': typeof DesktopQuoteRoute
-  '/api/chat': typeof ApiChatRoute
   '/m/contact': typeof MContactRoute
   '/m/shop': typeof MShopRoute
   '/': typeof DesktopIndexRoute
@@ -125,7 +117,6 @@ export interface FileRoutesById {
   '/_desktop/delivery': typeof DesktopDeliveryRoute
   '/_desktop/products': typeof DesktopProductsRoute
   '/_desktop/quote': typeof DesktopQuoteRoute
-  '/api/chat': typeof ApiChatRoute
   '/m/contact': typeof MContactRoute
   '/m/shop': typeof MShopRoute
   '/_desktop/': typeof DesktopIndexRoute
@@ -142,7 +133,6 @@ export interface FileRouteTypes {
     | '/delivery'
     | '/products'
     | '/quote'
-    | '/api/chat'
     | '/m/contact'
     | '/m/shop'
     | '/m/'
@@ -154,7 +144,6 @@ export interface FileRouteTypes {
     | '/delivery'
     | '/products'
     | '/quote'
-    | '/api/chat'
     | '/m/contact'
     | '/m/shop'
     | '/'
@@ -169,7 +158,6 @@ export interface FileRouteTypes {
     | '/_desktop/delivery'
     | '/_desktop/products'
     | '/_desktop/quote'
-    | '/api/chat'
     | '/m/contact'
     | '/m/shop'
     | '/_desktop/'
@@ -180,7 +168,6 @@ export interface RootRouteChildren {
   DesktopRoute: typeof DesktopRouteWithChildren
   MRoute: typeof MRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -233,13 +220,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/m/contact'
       preLoaderRoute: typeof MContactRouteImport
       parentRoute: typeof MRoute
-    }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/_desktop/quote': {
       id: '/_desktop/quote'
@@ -318,8 +298,17 @@ const rootRouteChildren: RootRouteChildren = {
   DesktopRoute: DesktopRouteWithChildren,
   MRoute: MRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
