@@ -519,8 +519,8 @@ function HomePage() {
 
       {/* Reviews from Facebook */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 md:max-w-2xl">
+        <div className="max-w-3xl mx-auto px-5 md:px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
             <div>
               <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                 <Facebook className="size-3.5" />
@@ -552,7 +552,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="mt-6 md:mt-12 md:max-w-2xl">
+          <div className="mt-6 md:mt-12">
             <div
               ref={reviewsRailRef}
               className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
@@ -585,8 +585,8 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="mt-5 md:mt-10 border-t border-zinc-300/60 pt-8">
-            <p className="eyebrow text-zinc-500 mb-5">
+          <div className="mt-8 md:mt-12 border-t border-zinc-300/60 pt-8">
+            <p className="eyebrow text-zinc-500 mb-3">
               Community
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
