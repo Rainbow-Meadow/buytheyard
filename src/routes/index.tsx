@@ -289,10 +289,9 @@ function HomePage() {
               Hi, I'm Abby — owner · Jefferson, MA
             </p>
             <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance mb-7 text-white">
-              Mulch, loam, sand &amp; stone —{" "}
-              <span className="text-brand">by the yard</span>, from our lot in{" "}
+              Mulch. Loam. Sand.{" "}
               <span className="relative inline-block text-brand">
-                Jefferson, MA
+                Stone.
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 200 14"
@@ -307,14 +306,10 @@ function HomePage() {
                     strokeLinecap="round"
                   />
                 </svg>
-              </span>.
+              </span>
             </h1>
             <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              Bulk landscape supply for Holden, Princeton, Sterling, Rutland, Worcester &amp; all of Central Mass.
-              <br />
-              Best prices in the area — same number for the contractor and the homeowner.
-              <br />
-              Pickup at 2264 Main St., or call before noon and we'll try to put it in your driveway today.
+              By the yard, from our Jefferson, MA lot. Best prices in Central Mass — same number for the contractor and the homeowner.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">
@@ -481,13 +476,10 @@ function HomePage() {
               On Facebook
             </p>
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-white max-w-[16ch]">
-              Where the yard <span className="text-brand">lives day-to-day.</span>
+              Where the yard <span className="text-brand">lives.</span>
             </h2>
             <p className="mt-6 text-zinc-300 text-lg leading-relaxed max-w-[52ch]">
-              Most of our daily back-and-forth happens on Facebook — fresh
-              loads, new arrivals at the garden center, weather closures, and
-              quick photos of what's on the lot. Over 800 Central Mass
-              neighbors already follow along.
+              Daily back-and-forth happens on Facebook — fresh loads, restocks, weather closures, and lot photos.
             </p>
             <ul className="mt-6 space-y-2 text-sm text-zinc-300">
               <li className="flex items-start gap-2">
@@ -530,7 +522,7 @@ function HomePage() {
             From Facebook · real customers, real posts
           </p>
           <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[20ch]">
-            What the neighbors are saying.
+            What neighbors say.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
@@ -589,11 +581,7 @@ function HomePage() {
                 Call for Today's Prices
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Material prices shift with the season and the market, so we
-                quote by phone — and we work hard to keep them the best in the
-                area. Same number for contractors and homeowners, one-yard
-                minimum on all bulk orders, pickup or delivery. Cash and check
-                payments avoid the 4% card processing fee.
+                Prices shift with the season, so we quote by phone — same number for contractors and homeowners. Cash and check avoid the 4% card fee.
               </p>
             </div>
             <a
@@ -795,11 +783,7 @@ function HomePage() {
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery to Holden, Worcester, Princeton, Sterling,
-              Rutland, Paxton, West Boylston, Leominster, and the rest of
-              Central Mass. One-yard minimum. Call before noon for same-day
-              delivery when available; otherwise, please allow approximately
-              48 hours.
+              Curbside delivery across Central Mass — Holden, Worcester, Princeton, Sterling, and more. Call before noon for same-day when available.
             </p>
             <Link
               to="/delivery"
