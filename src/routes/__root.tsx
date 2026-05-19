@@ -6,14 +6,10 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  redirect,
 } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
-import { SiteHeader } from "@/components/site/SiteHeader";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { ChatWidget } from "@/components/chat/ChatWidget";
-import { CookieConsent } from "@/components/site/CookieConsent";
-import { SmoothScroll } from "@/lib/lenis";
+import { getCookie, getRequestHeader, setCookie } from "@tanstack/react-start/server";
+import { createServerFn } from "@tanstack/react-start";
 
 function NotFoundComponent() {
   return (
@@ -72,12 +68,81 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+// Server fn: read UA + cookie + optional ?view= override.
+// Returns a target path if the request should be redirected, otherwise null.
+const resolveDevice = createServerFn({ method: "GET" })
+  .inputValidator((input: { path: string; search: string }) => input)
+  .handler(async ({ data }) => {
+    const ua = (getRequestHeader("user-agent") ?? "").toLowerCase();
+    const isMobileUA = /mobi|iphone|ipod|android.*mobile|blackberry|iemobile|opera mini/i.test(ua);
+
+    // Honor ?view= override; persist in cookie.
+    const url = new URL(`http://x${data.path}${data.search}`);
+    const override = url.searchParams.get("view");
+    if (override === "mobile" || override === "desktop") {
+      setCookie("bty-view", override, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365,
+        sameSite: "lax",
+      });
+      url.searchParams.delete("view");
+      const cleanPath = url.pathname + (url.search === "?" ? "" : url.search);
+      return { redirect: cleanPath };
+    }
+
+    const pinned = getCookie("bty-view");
+    const want: "mobile" | "desktop" = pinned === "mobile" || pinned === "desktop"
+      ? (pinned as "mobile" | "desktop")
+      : isMobileUA ? "mobile" : "desktop";
+
+    const onMobileRoute = data.path === "/m" || data.path.startsWith("/m/");
+
+    if (want === "mobile" && !onMobileRoute) {
+      // Map known desktop URLs to mobile equivalents.
+      const map: Record<string, string> = {
+        "/": "/m",
+        "/products": "/m/shop",
+        "/contact": "/m/contact",
+        "/quote": "/m/contact",
+        "/about": "/m",
+        "/delivery": "/m",
+      };
+      return { redirect: map[data.path] ?? "/m" };
+    }
+    if (want === "desktop" && onMobileRoute) {
+      const map: Record<string, string> = {
+        "/m": "/",
+        "/m/shop": "/products",
+        "/m/contact": "/contact",
+      };
+      return { redirect: map[data.path] ?? "/" };
+    }
+    return { redirect: null };
+  });
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  beforeLoad: async ({ location }) => {
+    // Skip device routing for API routes, sitemap, assets.
+    if (
+      location.pathname.startsWith("/api/") ||
+      location.pathname.startsWith("/_") ||
+      location.pathname === "/sitemap.xml" ||
+      location.pathname.includes(".")
+    ) {
+      return;
+    }
+    const result = await resolveDevice({
+      data: { path: location.pathname, search: location.searchStr ?? "" },
+    });
+    if (result.redirect && result.redirect !== location.pathname) {
+      throw redirect({ href: result.redirect });
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "theme-color", content: "#1a1a1a" },
+      { name: "theme-color", content: "#0d0d0d" },
       { title: "Buy The Yard — Mulch, Loam, Sand & Stone in Jefferson, MA" },
       { name: "description", content: "Woman-owned bulk landscape supply yard in Jefferson, MA. Premium mulch, loam, sand, gravel, and specialty stone for pickup or delivery. Call 508-579-9897." },
       { name: "author", content: "Buy The Yard" },
@@ -181,10 +246,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", href: "/brandmark.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
     ],
   }),
   shellComponent: RootShell,
@@ -212,16 +273,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col bg-base text-foreground">
-        <SmoothScroll />
-        <SiteHeader />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <SiteFooter />
-        <ChatWidget />
-        <CookieConsent />
-      </div>
+      <Outlet />
     </QueryClientProvider>
   );
 }
