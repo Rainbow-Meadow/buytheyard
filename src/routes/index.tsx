@@ -638,6 +638,52 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Delivery callout */}
+      <section className="relative bg-surface text-surface-foreground overflow-hidden">
+        <picture aria-hidden="true">
+          <source media="(min-width: 768px)" srcSet={yardWide} />
+          <img
+            src={deliveryMobileBg}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover opacity-25"
+          />
+        </picture>
+        <div className="relative max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
+          <div>
+            <Truck className="size-10 text-brand mb-3 md:mb-6" />
+            <h2 className="display-3 leading-[0.95] mb-3 md:mb-6">
+              Delivery Across <span className="text-brand">Central Mass</span>
+            </h2>
+            <p className="text-zinc-300 text-lg max-w-[48ch] mb-4 md:mb-8">
+              Curbside delivery across Central Mass. Call before noon for same-day when available.
+            </p>
+            <Link
+              to="/delivery"
+              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
+            >
+              Delivery details <ArrowRight className="size-4" />
+            </Link>
+          </div>
+          <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm rounded-md">
+            <ul className="divide-y divide-white/10">
+              {[
+                ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
+                ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
+                ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
+                ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
+              ].map(([k, v]) => (
+                <li key={k} className="py-4 first:pt-0 last:pb-0">
+                  <p className="display-5">{k}</p>
+                  <p className="text-sm text-zinc-400 mt-1">{v}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section className="section bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
@@ -831,52 +877,6 @@ function HomePage() {
               <Phone className="size-4" />
               508.579.9897
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Delivery callout */}
-      <section className="relative bg-surface text-surface-foreground overflow-hidden">
-        <picture aria-hidden="true">
-          <source media="(min-width: 768px)" srcSet={yardWide} />
-          <img
-            src={deliveryMobileBg}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover opacity-25"
-          />
-        </picture>
-        <div className="relative max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
-          <div>
-            <Truck className="size-10 text-brand mb-3 md:mb-6" />
-            <h2 className="display-3 leading-[0.95] mb-3 md:mb-6">
-              Delivery Across <span className="text-brand">Central Mass</span>
-            </h2>
-            <p className="text-zinc-300 text-lg max-w-[48ch] mb-4 md:mb-8">
-              Curbside delivery across Central Mass. Call before noon for same-day when available.
-            </p>
-            <Link
-              to="/delivery"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
-            >
-              Delivery details <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm rounded-md">
-            <ul className="divide-y divide-white/10">
-              {[
-                ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
-                ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
-                ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
-                ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
-              ].map(([k, v]) => (
-                <li key={k} className="py-4 first:pt-0 last:pb-0">
-                  <p className="display-5">{k}</p>
-                  <p className="text-sm text-zinc-400 mt-1">{v}</p>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
