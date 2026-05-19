@@ -467,6 +467,60 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Reviews from Facebook */}
+      <section className="py-20 md:py-28 bg-base border-t border-zinc-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
+            <Facebook className="size-3.5" />
+            From Facebook · real customers, real posts
+          </p>
+          <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[20ch]">
+            What the neighbors are saying.
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+            {reviews.map((r) => (
+              <figure
+                key={r.name}
+                className="bg-white border border-zinc-200 p-6 flex flex-col h-full"
+              >
+                <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
+                  <Facebook className="size-3.5 text-[#1877F2]" />
+                  <span className="font-semibold text-zinc-900">{r.name}</span>
+                  <span>·</span>
+                  <span>{r.date}</span>
+                </div>
+                <blockquote className="font-display text-xl leading-snug text-zinc-900 flex-1">
+                  &ldquo;{r.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-5 text-[10px] font-bold uppercase tracking-[0.18em] text-brand">
+                  Recommends Buy The Yard
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div className="mt-10 border-t border-zinc-300/70 pt-8">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-5">
+              Community
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {communityPosts.map((p) => (
+                <div key={p.org} className="flex flex-col">
+                  <p className="text-zinc-800 leading-relaxed">
+                    &ldquo;{p.quote}&rdquo;
+                  </p>
+                  <p className="mt-3 text-xs text-zinc-500">
+                    <span className="font-semibold text-zinc-900">{p.org}</span>{" "}
+                    · {p.date}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section className="py-20 md:py-28 bg-base">
         <div className="max-w-7xl mx-auto px-6">
