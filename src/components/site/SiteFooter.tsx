@@ -50,6 +50,24 @@ export function SiteFooter() {
                 </svg>
                 Write a Google review
               </a>
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+                <a
+                  href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 label text-zinc-400 hover:text-white transition-colors"
+                >
+                  <Facebook className="size-4" /> Facebook
+                </a>
+                <a
+                  href="https://www.yelp.com/biz/buy-the-yard-holden"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 label text-zinc-400 hover:text-white transition-colors"
+                >
+                  <YelpLogo className="size-4" /> Yelp
+                </a>
+              </div>
             </div>
           </div>
 
@@ -74,6 +92,20 @@ export function SiteFooter() {
           {/* Hours */}
           <div className="flex justify-center">
             <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
+              <div className="space-y-1 mb-6">
+                <a
+                  href="tel:5085799897"
+                  className="block display-5 text-brand hover:text-white transition-colors"
+                >
+                  508.579.9897
+                </a>
+                <a
+                  href="mailto:abby@btymaterial.com"
+                  className="block body-sm text-zinc-300 hover:text-white transition-colors"
+                >
+                  abby@btymaterial.com
+                </a>
+              </div>
               <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
                 Hours
               </h3>
@@ -117,38 +149,6 @@ export function SiteFooter() {
                 <p className="mt-1 body-sm text-zinc-300">
                   Certified by the Commonwealth of Massachusetts since 2018.
                 </p>
-              </div>
-              <div className="space-y-1">
-                <a
-                  href="tel:5085799897"
-                  className="block display-5 text-brand hover:text-white transition-colors"
-                >
-                  508.579.9897
-                </a>
-                <a
-                  href="mailto:abby@btymaterial.com"
-                  className="block body-sm text-zinc-300 hover:text-white transition-colors"
-                >
-                  abby@btymaterial.com
-                </a>
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                <a
-                  href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 label text-zinc-400 hover:text-white transition-colors"
-                >
-                  <Facebook className="size-4" /> Facebook
-                </a>
-                <a
-                  href="https://www.yelp.com/biz/buy-the-yard-holden"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 label text-zinc-400 hover:text-white transition-colors"
-                >
-                  <YelpLogo className="size-4" /> Yelp
-                </a>
               </div>
               <Link
                 to="/about"
