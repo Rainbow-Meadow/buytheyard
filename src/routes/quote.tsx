@@ -549,7 +549,7 @@ function NotesField({
         className={`${inputCls} h-auto py-3 resize-y min-h-[110px]`}
         {...register("notes")}
       />
-      <p className="text-[10px] text-zinc-500 mt-1 text-right tabular-nums">
+      <p className="meta text-zinc-500 mt-1 text-right tabular-nums">
         {value.length}/500
       </p>
     </div>

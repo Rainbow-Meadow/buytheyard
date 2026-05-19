@@ -66,7 +66,7 @@ function ProductsPage() {
           <p className="eyebrow text-brand mb-4">
             Catalog
           </p>
-          <h1 className="font-display text-6xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
+          <h1 className="display-1 leading-[0.9] max-w-[18ch]">
             Materials. By the <span className="text-brand">yard</span>.
           </h1>
           <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
