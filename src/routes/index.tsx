@@ -358,8 +358,15 @@ function HomePage() {
 
         <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-5 md:px-6 section-loose self-center w-full">
           <div>
-            <p className="eyebrow text-zinc-200 mb-5 pb-2 border-b border-white/30">
-              Hi, I'm Abby — owner · Jefferson, MA
+            <p className="eyebrow text-zinc-200 mb-5 pb-2 border-b border-white/30 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1">
+              <span className="inline-flex items-center gap-1.5">
+                <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
+                10 yrs local
+              </span>
+              <span aria-hidden="true" className="text-white/40">·</span>
+              <span>Woman-owned <span className="text-brand">(WBE)</span></span>
+              <span aria-hidden="true" className="text-white/40">·</span>
+              <span>Jefferson, MA</span>
             </p>
             <h1 className="display-2 leading-[0.95] text-balance mb-4 md:mb-7 text-white">
               Mulch. Loam. Sand.{" "}
