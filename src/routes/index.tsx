@@ -478,7 +478,7 @@ function HomePage() {
                 <Facebook className="size-3.5" />
                 On Facebook
               </p>
-              <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch]">
+              <h2 className="display-3 leading-[0.95] text-zinc-950 whitespace-nowrap">
                 Where the yard <span className="text-brand">lives.</span>
               </h2>
               <p className="lead mt-4 md:mt-6 text-zinc-700 max-w-[52ch]">
