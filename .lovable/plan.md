@@ -1,47 +1,59 @@
-Normalize the three footer columns so the visible content blocks have equal width and the gutters between them read as consistent.
+Center every footer column horizontally within its cell, center content vertically within each row, and align the two rows so they read as the same height.
 
-## Problem
+## Column alignment — center everything
 
-The grid uses `grid-cols-3` (equal cells), but each cell's content has a different intrinsic width — Google CTA + copy ~310px, map ~370px, Site nav ~180px. With items aligned to cell starts, the visible blocks land at uneven horizontal positions, so the gutters between Google→Logo, Logo→Hours, WBE→Map, Map→Site all *look* different even though the cells are equal.
+Replace the current `justify-start / justify-center / justify-end` pattern. Every cell becomes:
 
-## Fix
+```
+flex justify-center
+```
 
-Lock every column's content block to the **same fixed max-width** inside its equal-width cell, and anchor each block consistently within its cell.
+And every inner content block becomes:
 
-### Shared content width
+```
+flex flex-col items-center text-center w-full max-w-[18rem]   // outer cols
+flex flex-col items-center text-center w-full max-w-[20rem]   // middle col (logo/map)
+```
 
-Add a shared content wrapper width: `w-full max-w-[18rem]` (288px) on every column's inner block. This becomes the visual column width across both rows.
+This affects:
+- Row 1 Col 1 (Google review) — was left-anchored, now centered. Button, headline, subtext all center.
+- Row 1 Col 3 (Hours) — was right-anchored, now centered. The Hours `display-5 + border-l-2 border-brand pl-3` heading still uses its left brand-rule, but the heading block itself is centered in the cell. Day/time rows stay as `flex justify-between` inside the centered 18rem block, so they remain readable.
+- Row 2 Col 1 (WBE + contact) — was left-anchored, now centered. Seal, headline, phone/email, social row, "Meet Abby" all center.
+- Row 2 Col 3 (Site nav) — was right-anchored, now centered. Nav links center vertically as a stack.
 
-### Per-column alignment within the cell
+The middle column (Logo / Visit+Map) was already centered — no change.
 
-- **Col 1 (Google review / WBE+contact)** — cell `flex justify-start`, block left-aligned
-- **Col 2 (Logo / Visit+Map)** — cell `flex justify-center`, block center-aligned (logo image, map, "Get directions" link all centered within the 288px block)
-- **Col 3 (Hours / Site)** — cell `flex justify-end`, block right-aligned at `md+`; content inside the block stays left-aligned (so list rows and nav links still read naturally)
+## Vertical alignment within each row
 
-This is the key move: right column shifts to the cell's end so the gap from middle column → right column matches the gap from left column → middle column.
+Add `items-center` to both row grids so columns vertically center against the row's tallest cell. Today the row uses `items-start`, so e.g. Hours sits flush to the top while the logo sits in the middle — they read as misaligned.
 
-### Map sizing
+```
+grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 items-center
+```
 
-Map iframe currently fills the entire middle cell (`w-full aspect-[4/3]`). After the wrapper change it fills the 288px block — `aspect-[4/3]` becomes ~288×216. That's small. Bump the middle column's `max-w` to `20rem` (320px) only — left and right stay at `18rem`. Net visual: left ~288, middle ~320, right ~288, balanced around the centered logo/map.
+## Row heights — make Row 1 and Row 2 read as equal
 
-If 320 still feels too small, alternative is `grid-cols-[1fr_1.2fr_1fr]` with the same content-wrapper caps; same end state, more breathing room for the map.
+Row 2 is currently much taller than Row 1 because of the map (`aspect-[4/3]` on a 320px wrapper → ~240px just for the map, plus heading + address + "Get directions"). Two moves:
 
-### Gap & padding
+1. **Tighten the map aspect** from `aspect-[4/3]` → `aspect-[5/4]` (~256px on a 320px wrapper) — actually slightly shorter, ~256px. Net Row 2 height drops.
 
-- Keep `gap-x-10` between cells (the cell gutter)
-- Visible gutter between content blocks = `gap-x-10` + leftover cell padding on each side. With `justify-start / center / end` anchoring, leftover space distributes symmetrically → equal visible gutters.
+   Better: switch to `aspect-video` (16/9 → ~180px on 320px). That trims ~60px off the row and matches the logo column's vertical footprint in Row 1 much more closely.
 
-### Row alignment
+2. **Set a shared minimum row height** on both row grids: `md:min-h-[20rem]`. This pads Row 1 (which is naturally shorter than Row 2) up to a floor, so even after the map shrinks, both rows feel like the same band.
 
-Add `items-start` on both row grids so columns top-align (currently Row 1 has implicit stretch; Hours and Google CTA top edges should sit on the same baseline).
+With both moves, Row 1 ≈ 320px (logo-driven), Row 2 ≈ 320px (WBE stack-driven, map fits under address comfortably). Visually they read as two equal bands.
 
-## Out of scope
+## What stays the same
 
-- No copy changes
-- No token changes
-- No new files; only `src/components/site/SiteFooter.tsx`
-- Mobile (single column) unchanged — `justify-*` only kicks in at `md+`
+- 3-col grid, `gap-x-10`, equal cells
+- Legal bar (already correct)
+- All copy, tokens, assets
+- Mobile single-column stacking (everything already center-aligned on mobile)
 
 ## Files touched
 
-- `src/components/site/SiteFooter.tsx` — wrap each column's content in a fixed-width inner block, set per-column `justify-*` on the cells, add `items-start` to both row grids.
+- `src/components/site/SiteFooter.tsx`:
+  - Row grids: add `items-center md:min-h-[20rem]`
+  - All six cells: outer wrapper `flex justify-center`, inner block `flex flex-col items-center text-center w-full max-w-[18rem|20rem]`
+  - Map iframe wrapper: `aspect-[4/3]` → `aspect-video`
+  - Drop the `md:items-start` / `md:text-left` / `md:justify-start` modifiers throughout

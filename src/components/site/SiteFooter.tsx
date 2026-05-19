@@ -22,196 +22,196 @@ export function SiteFooter() {
     <footer className="bg-surface text-surface-foreground">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
         {/* Row 1: Google review | Logo | Hours */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-center md:min-h-[20rem]">
           {/* Google review */}
-          <div className="flex justify-center md:justify-start">
-            <div className="flex flex-col items-center md:items-start text-center md:text-left w-full max-w-[18rem]">
-            <h2 className="display-5 text-white">
-              Leave a <span className="text-brand">Google review.</span>
-            </h2>
-            <p className="mt-2 body-sm text-zinc-400 max-w-[40ch]">
-              Reviews from Central Mass neighbors mean a lot to Abby.
-            </p>
-            <a
-              href={GOOGLE_REVIEW_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-5 inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-6 h-12 label hover:opacity-90 transition-opacity"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 48 48"
-                className="size-5 bg-white rounded-full p-[2px]"
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
+              <h2 className="display-5 text-white">
+                Leave a <span className="text-brand">Google review.</span>
+              </h2>
+              <p className="mt-2 body-sm text-zinc-400">
+                Reviews from Central Mass neighbors mean a lot to Abby.
+              </p>
+              <a
+                href={GOOGLE_REVIEW_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-6 h-12 label hover:opacity-90 transition-opacity"
               >
-                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-              </svg>
-              Write a Google review
-            </a>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 48 48"
+                  className="size-5 bg-white rounded-full p-[2px]"
+                >
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
+                Write a Google review
+              </a>
             </div>
           </div>
 
           {/* Logo centerpiece */}
           <div className="flex justify-center">
             <div className="flex flex-col items-center text-center w-full max-w-[20rem]">
-            <img
-              src={brandmark}
-              alt="Buy The Yard — Mulch · Loam · Sand · Stone"
-              width={320}
-              height={160}
-              className="h-24 md:h-28 w-auto"
-              loading="lazy"
-              decoding="async"
-            />
-            <p className="mt-4 meta text-zinc-500">
-              Est. 2016 · WBE Certified
-            </p>
+              <img
+                src={brandmark}
+                alt="Buy The Yard — Mulch · Loam · Sand · Stone"
+                width={320}
+                height={160}
+                className="h-24 md:h-28 w-auto"
+                loading="lazy"
+                decoding="async"
+              />
+              <p className="mt-4 meta text-zinc-500">
+                Est. 2016 · WBE Certified
+              </p>
             </div>
           </div>
 
           {/* Hours */}
-          <div className="flex justify-center md:justify-end">
-            <div className="flex flex-col items-center md:items-start w-full max-w-[18rem]">
-            <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
-              Hours
-            </h3>
-            <ul className="body-sm space-y-1.5 w-full max-w-[28ch]">
-              <li className="flex justify-between gap-4">
-                <span className="text-zinc-500">Mon – Fri</span>
-                <span className="text-zinc-200">8:00am – 5:00pm</span>
-              </li>
-              <li className="flex justify-between gap-4">
-                <span className="text-zinc-500">Saturday</span>
-                <span className="text-zinc-200">8:00am – 3:00pm</span>
-              </li>
-              <li className="flex justify-between gap-4">
-                <span className="text-zinc-500">Sunday</span>
-                <span className="text-zinc-200">Closed</span>
-              </li>
-            </ul>
-            <p className="mt-4 meta text-zinc-500 leading-relaxed max-w-[32ch] text-center md:text-left">
-              In-season 4/1 – 8/1. After 8/1: by appointment. Winter salt year-round.
-            </p>
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
+              <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
+                Hours
+              </h3>
+              <ul className="body-sm space-y-1.5 w-full max-w-[28ch]">
+                <li className="flex justify-between gap-4">
+                  <span className="text-zinc-500">Mon – Fri</span>
+                  <span className="text-zinc-200">8:00am – 5:00pm</span>
+                </li>
+                <li className="flex justify-between gap-4">
+                  <span className="text-zinc-500">Saturday</span>
+                  <span className="text-zinc-200">8:00am – 3:00pm</span>
+                </li>
+                <li className="flex justify-between gap-4">
+                  <span className="text-zinc-500">Sunday</span>
+                  <span className="text-zinc-200">Closed</span>
+                </li>
+              </ul>
+              <p className="mt-4 meta text-zinc-500 leading-relaxed">
+                In-season 4/1 – 8/1. After 8/1: by appointment. Winter salt year-round.
+              </p>
             </div>
           </div>
         </div>
 
         {/* Row 2: WBE + contact | Visit (map) | Site */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-center md:min-h-[20rem]">
           {/* WBE + contact */}
-          <div className="flex justify-center md:justify-start">
-            <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-5 w-full max-w-[18rem]">
-            <img
-              src={wbeSeal}
-              alt="Massachusetts WBE certified seal"
-              width={160}
-              height={100}
-              className="h-20 w-auto object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-            <div>
-              <p className="display-5 text-white">Certified Woman-Owned</p>
-              <p className="mt-1 body-sm text-zinc-300 max-w-[36ch]">
-                Certified by the Commonwealth of Massachusetts since 2018.
-              </p>
-            </div>
-            <div className="space-y-1">
-              <a
-                href="tel:5085799897"
-                className="block display-5 text-brand hover:text-white transition-colors"
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center text-center space-y-5 w-full max-w-[18rem]">
+              <img
+                src={wbeSeal}
+                alt="Massachusetts WBE certified seal"
+                width={160}
+                height={100}
+                className="h-20 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+              <div>
+                <p className="display-5 text-white">Certified Woman-Owned</p>
+                <p className="mt-1 body-sm text-zinc-300">
+                  Certified by the Commonwealth of Massachusetts since 2018.
+                </p>
+              </div>
+              <div className="space-y-1">
+                <a
+                  href="tel:5085799897"
+                  className="block display-5 text-brand hover:text-white transition-colors"
+                >
+                  508.579.9897
+                </a>
+                <a
+                  href="mailto:abby@btymaterial.com"
+                  className="block body-sm text-zinc-300 hover:text-white transition-colors"
+                >
+                  abby@btymaterial.com
+                </a>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+                <a
+                  href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 label text-zinc-400 hover:text-white transition-colors"
+                >
+                  <Facebook className="size-4" /> Facebook
+                </a>
+                <a
+                  href="https://www.yelp.com/biz/buy-the-yard-holden"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 label text-zinc-400 hover:text-white transition-colors"
+                >
+                  <YelpLogo className="size-4" /> Yelp
+                </a>
+              </div>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
               >
-                508.579.9897
-              </a>
-              <a
-                href="mailto:abby@btymaterial.com"
-                className="block body-sm text-zinc-300 hover:text-white transition-colors"
-              >
-                abby@btymaterial.com
-              </a>
-            </div>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2">
-              <a
-                href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 label text-zinc-400 hover:text-white transition-colors"
-              >
-                <Facebook className="size-4" /> Facebook
-              </a>
-              <a
-                href="https://www.yelp.com/biz/buy-the-yard-holden"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 label text-zinc-400 hover:text-white transition-colors"
-              >
-                <YelpLogo className="size-4" /> Yelp
-              </a>
-            </div>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
-            >
-              Meet Abby <ArrowRight className="size-4" />
-            </Link>
+                Meet Abby <ArrowRight className="size-4" />
+              </Link>
             </div>
           </div>
 
           {/* Visit + map */}
           <div className="flex justify-center">
-            <div className="flex flex-col items-center w-full max-w-[20rem]">
-            <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
-              Visit
-            </h3>
-            <address className="not-italic body-sm text-zinc-300 leading-relaxed mb-4 text-center">
-              2264 Main St.
-              <br />
-              Jefferson, MA 01522
-            </address>
-            <div className="w-full aspect-[4/3] border border-white/10 overflow-hidden">
-              <iframe
-                src={MAP_EMBED_URL}
-                title="Buy The Yard Material — 2264 Main St, Jefferson, MA"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full grayscale-[0.2] contrast-[1.05]"
-                style={{ border: 0 }}
-              />
-            </div>
-            <a
-              href={MAP_DIRECTIONS_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-flex items-center gap-2 label text-zinc-300 hover:text-white transition-colors"
-            >
-              Get directions <ArrowRight className="size-4" />
-            </a>
+            <div className="flex flex-col items-center text-center w-full max-w-[20rem]">
+              <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
+                Visit
+              </h3>
+              <address className="not-italic body-sm text-zinc-300 leading-relaxed mb-4">
+                2264 Main St.
+                <br />
+                Jefferson, MA 01522
+              </address>
+              <div className="w-full aspect-video border border-white/10 overflow-hidden">
+                <iframe
+                  src={MAP_EMBED_URL}
+                  title="Buy The Yard Material — 2264 Main St, Jefferson, MA"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full grayscale-[0.2] contrast-[1.05]"
+                  style={{ border: 0 }}
+                />
+              </div>
+              <a
+                href={MAP_DIRECTIONS_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex items-center gap-2 label text-zinc-300 hover:text-white transition-colors"
+              >
+                Get directions <ArrowRight className="size-4" />
+              </a>
             </div>
           </div>
 
           {/* Site */}
-          <div className="flex justify-center md:justify-end">
-            <div className="flex flex-col items-center md:items-start w-full max-w-[18rem]">
-            <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
-              Site
-            </h3>
-            <nav className="flex flex-col items-center md:items-start gap-y-2 body-sm">
-              <Link to="/products" className="text-zinc-300 hover:text-white transition-colors">Products</Link>
-              <Link to="/about" className="text-zinc-300 hover:text-white transition-colors">About</Link>
-              <Link to="/delivery" className="text-zinc-300 hover:text-white transition-colors">Delivery &amp; Pickup</Link>
-              <Link to="/service-area" className="text-zinc-300 hover:text-white transition-colors">Service Area</Link>
-              <Link to="/contact" className="text-zinc-300 hover:text-white transition-colors">Contact</Link>
-              <Link to="/privacy" className="mt-2 text-zinc-500 hover:text-zinc-300 transition-colors">Privacy &amp; Terms</Link>
-              <button
-                type="button"
-                onClick={openCookieSettings}
-                className="text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer text-left"
-              >
-                Cookie settings
-              </button>
-            </nav>
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
+              <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
+                Site
+              </h3>
+              <nav className="flex flex-col items-center gap-y-2 body-sm">
+                <Link to="/products" className="text-zinc-300 hover:text-white transition-colors">Products</Link>
+                <Link to="/about" className="text-zinc-300 hover:text-white transition-colors">About</Link>
+                <Link to="/delivery" className="text-zinc-300 hover:text-white transition-colors">Delivery &amp; Pickup</Link>
+                <Link to="/service-area" className="text-zinc-300 hover:text-white transition-colors">Service Area</Link>
+                <Link to="/contact" className="text-zinc-300 hover:text-white transition-colors">Contact</Link>
+                <Link to="/privacy" className="mt-2 text-zinc-500 hover:text-zinc-300 transition-colors">Privacy &amp; Terms</Link>
+                <button
+                  type="button"
+                  onClick={openCookieSettings}
+                  className="text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer"
+                >
+                  Cookie settings
+                </button>
+              </nav>
             </div>
           </div>
         </div>
