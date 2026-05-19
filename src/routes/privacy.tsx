@@ -101,19 +101,19 @@ function PrivacyPage() {
               <p className={`mt-3 ${pCls}`}>
                 We use cookies and similar browser storage in three categories:
               </p>
-              <ul className="mt-3 space-y-3 text-zinc-700 leading-relaxed list-disc pl-5">
+              <ul className="mt-3 space-y-3 text-ink-soft leading-relaxed list-disc pl-5">
                 <li>
-                  <strong className="font-semibold text-zinc-900">Essential</strong> —
+                  <strong className="font-semibold text-ink">Essential</strong> —
                   always on. Required for the site to work, including security
                   and remembering your cookie preferences.
                 </li>
                 <li>
-                  <strong className="font-semibold text-zinc-900">Analytics</strong> —
+                  <strong className="font-semibold text-ink">Analytics</strong> —
                   off by default. Helps us understand which pages are useful and
                   where visitors get stuck so we can improve the site.
                 </li>
                 <li>
-                  <strong className="font-semibold text-zinc-900">Marketing</strong> —
+                  <strong className="font-semibold text-ink">Marketing</strong> —
                   off by default. Reserved for measuring ads or personalizing
                   promotions. We do not currently run any marketing cookies.
                 </li>
@@ -128,7 +128,7 @@ function PrivacyPage() {
 
               <h3 className={h3Cls}>How we share information</h3>
               <p className={`mt-3 ${pCls}`}>
-                We do <strong className="font-semibold text-zinc-900">not</strong>{" "}
+                We do <strong className="font-semibold text-ink">not</strong>{" "}
                 sell, rent, or trade your personal information. We share it only
                 when needed to fulfill your order (for example, with a driver or
                 contractor delivering material to you) or when required by law.
@@ -188,7 +188,7 @@ function PrivacyPage() {
                 LLC related to delivery scheduling, quotes, order updates, and
                 responses to your inquiries.
               </p>
-              <ul className="mt-5 space-y-3 text-zinc-700 leading-relaxed list-disc pl-5">
+              <ul className="mt-5 space-y-3 text-ink-soft leading-relaxed list-disc pl-5">
                 <li>Message frequency varies based on your order activity.</li>
                 <li>Message and data rates may apply.</li>
                 <li>Reply <strong>STOP</strong> at any time to opt out.</li>
