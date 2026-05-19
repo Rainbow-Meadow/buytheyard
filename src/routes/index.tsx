@@ -177,6 +177,9 @@ function HomePage() {
   const railRef = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
+  const reviewsRailRef = useRef<HTMLDivElement>(null);
+  const [reviewsCanPrev, setReviewsCanPrev] = useState(false);
+  const [reviewsCanNext, setReviewsCanNext] = useState(true);
 
   useEffect(() => {
     const el = railRef.current;
@@ -201,6 +204,93 @@ function HomePage() {
     const delta = (card?.offsetWidth ?? el.clientWidth * 0.8) + 24;
     el.scrollBy({ left: delta * dir, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const el = reviewsRailRef.current;
+    if (!el) return;
+    const update = () => {
+      setReviewsCanPrev(el.scrollLeft > 4);
+      setReviewsCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+    };
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      el.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const scrollReviewsByCard = (dir: 1 | -1) => {
+    const el = reviewsRailRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-reviews-item]");
+    const delta = (card?.offsetWidth ?? el.clientWidth * 0.8) + 20;
+    el.scrollBy({ left: delta * dir, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const el = reviewsRailRef.current;
+    if (!el) return;
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mql.matches) return;
+
+    let timer: ReturnType<typeof setInterval> | null = null;
+    let resumeTimeout: ReturnType<typeof setTimeout> | null = null;
+    let paused = false;
+
+    const tick = () => {
+      if (paused || document.hidden) return;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+      if (atEnd) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        const card = el.querySelector<HTMLElement>("[data-reviews-item]");
+        const delta = (card?.offsetWidth ?? el.clientWidth * 0.8) + 20;
+        el.scrollBy({ left: delta, behavior: "smooth" });
+      }
+    };
+
+    const start = () => {
+      if (timer) return;
+      timer = setInterval(tick, 5000);
+    };
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const onEnter = () => { paused = true; stop(); };
+    const onLeave = () => { paused = false; start(); };
+    const onTouchStart = () => { paused = true; stop(); };
+    const onTouchEnd = () => {
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => { paused = false; start(); }, 2500);
+    };
+    const onVisibility = () => {
+      if (document.hidden) stop();
+      else if (!paused) start();
+    };
+
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
+    document.addEventListener("visibilitychange", onVisibility);
+    start();
+
+    return () => {
+      stop();
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchend", onTouchEnd);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, []);
 
   const featured = [
     "Premium Black Mulch",
@@ -468,34 +558,69 @@ function HomePage() {
       {/* Reviews from Facebook */}
       <section className="section bg-base border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-            <Facebook className="size-3.5" />
-            From Facebook · real customers, real posts
-          </p>
-          <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[20ch]">
-            What neighbors say.
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 mt-6 md:mt-12">
-            {reviews.map((r) => (
-              <figure
-                key={r.name}
-                className="bg-white border border-zinc-200 p-6 flex flex-col h-full"
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
+            <div>
+              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
+                <Facebook className="size-3.5" />
+                From Facebook · real customers, real posts
+              </p>
+              <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[20ch]">
+                What neighbors say.
+              </h2>
+            </div>
+            <div className="hidden md:flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Previous review"
+                onClick={() => scrollReviewsByCard(-1)}
+                disabled={!reviewsCanPrev}
+                className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
               >
-                <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
-                  <Facebook className="size-3.5 text-[#1877F2]" />
-                  <span className="font-semibold text-zinc-900">{r.name}</span>
-                  <span>·</span>
-                  <span>{r.date}</span>
+                <ChevronLeft className="size-5" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next review"
+                onClick={() => scrollReviewsByCard(1)}
+                disabled={!reviewsCanNext}
+                className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
+              >
+                <ChevronRight className="size-5" />
+              </button>
+            </div>
+          </div>
+
+          <div className="-mx-6 md:mx-0 mt-6 md:mt-12">
+            <div
+              ref={reviewsRailRef}
+              className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {reviews.map((r) => (
+                <div
+                  key={r.name}
+                  data-reviews-item
+                  className="snap-start shrink-0 basis-[85%] sm:basis-[60%] md:basis-[42%] lg:basis-[30%] flex"
+                >
+                  <figure className="bg-white border border-zinc-200 p-6 flex flex-col w-full">
+                    <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
+                      <Facebook className="size-3.5 text-[#1877F2]" />
+                      <span className="font-semibold text-zinc-900">{r.name}</span>
+                      <span>·</span>
+                      <span>{r.date}</span>
+                    </div>
+                    <blockquote className="display-5 leading-snug text-zinc-900 flex-1">
+                      &ldquo;{r.quote}&rdquo;
+                    </blockquote>
+                    <figcaption className="mt-5 eyebrow text-brand">
+                      Recommends Buy The Yard
+                    </figcaption>
+                  </figure>
                 </div>
-                <blockquote className="display-5 leading-snug text-zinc-900 flex-1">
-                  &ldquo;{r.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-5 eyebrow text-brand">
-                  Recommends Buy The Yard
-                </figcaption>
-              </figure>
-            ))}
+              ))}
+            </div>
+            <p className="md:hidden mt-3 px-6 eyebrow text-zinc-500">
+              Swipe to read more →
+            </p>
           </div>
 
           <div className="mt-5 md:mt-10 border-t border-zinc-300/70 pt-8">
