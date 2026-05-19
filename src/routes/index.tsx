@@ -610,7 +610,7 @@ function HomePage() {
       <section className="bg-base border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
           <div>
-            <Truck className="size-10 text-brand mb-3 md:mb-6" />
+            <Truck className="size-10 text-brand mb-4 md:mb-6" />
             <h2 className="display-3 leading-[0.95]">
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
@@ -634,7 +634,7 @@ function HomePage() {
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="display-5">{k}</p>
-                  <p className="text-sm text-zinc-600 mt-1">{v}</p>
+                  <p className="body-sm text-zinc-600 mt-1">{v}</p>
                 </li>
               ))}
             </ul>
@@ -644,8 +644,8 @@ function HomePage() {
 
       {/* Pricing */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="max-w-2xl">
+        <div className="max-w-3xl mx-auto px-5 md:px-6">
+          <div>
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
               <Tag className="size-3.5" />
               Today's prices by phone
