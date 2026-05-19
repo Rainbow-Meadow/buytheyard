@@ -114,7 +114,7 @@ export function SiteFooter() {
         {/* Row 2: Hours | Visit (map) | Site */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-8 pt-6 md:pt-8 items-stretch">
           {/* Hours */}
-          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-start">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Hours
               </h3>
@@ -152,7 +152,7 @@ export function SiteFooter() {
           </div>
 
           {/* Visit + map */}
-          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-start">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Visit
               </h3>
@@ -182,7 +182,7 @@ export function SiteFooter() {
           </div>
 
           {/* Site */}
-          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-start">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Site
               </h3>
