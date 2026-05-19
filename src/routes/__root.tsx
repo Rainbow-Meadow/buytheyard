@@ -13,6 +13,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ChatWidget } from "@/components/chat/ChatWidget";
 import { CookieConsent } from "@/components/site/CookieConsent";
+import { SmoothScroll } from "@/lib/lenis";
 
 function NotFoundComponent() {
   return (
@@ -212,6 +213,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen flex flex-col bg-base text-foreground">
+        <SmoothScroll />
         <SiteHeader />
         <main className="flex-1">
           <Outlet />
