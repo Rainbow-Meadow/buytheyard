@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
 import { categories, products } from "@/data/products";
-import { ProductCard } from "@/components/site/ProductCard";
+import { ClassifiedCard } from "@/components/site/ClassifiedCard";
+import { RuleBar } from "@/components/site/RuleBar";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -61,61 +62,80 @@ export const Route = createFileRoute("/products")({
 function ProductsPage() {
   return (
     <>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Catalog
-          </p>
-          <h1 className="display-1 leading-[0.9] max-w-[18ch]">
-            Materials. By the <span className="text-brand">yard</span>.
+      {/* Masthead banner */}
+      <section className="bg-newsprint paper-grain border-b-4 border-ink">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8 md:pb-10">
+          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
+            <span className="dateline text-ink-soft">CATALOG SECTION · § C</span>
+            <span className="dateline text-ink-soft hidden sm:inline">
+              ONE-YARD MINIMUM · PICKUP OR DELIVERY
+            </span>
+          </div>
+          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[20ch]">
+            The Materials Catalog,{" "}
+            <span className="text-stamp">by the yard.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="lead mt-4 md:mt-6 max-w-[60ch] text-ink-soft not-italic">
             Prices move with the season — call{" "}
-            <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
+            <a href="tel:5085799897" className="text-ink underline underline-offset-4 hover:text-stamp">
               508-579-9897
             </a>{" "}
-            for today's number, and we'll size your project on the call.
+            for today's number. We'll size your project on the call.
           </p>
         </div>
       </section>
 
-      {categories.map((cat) => {
+      {categories.map((cat, idx) => {
         const items = products.filter((p) => p.category === cat);
         if (items.length === 0) return null;
+        const sectionNo = String(idx + 1).padStart(2, "0");
+        const bg = idx % 2 === 0 ? "bg-newsprint" : "bg-newsprint-2";
         return (
-          <section key={cat} className="section bg-base border-b border-zinc-200 last:border-0">
-            <div className="max-w-7xl mx-auto px-5 md:px-6">
-              <div className="flex items-end justify-between mb-5 md:mb-10 border-b-2 border-zinc-900 pb-4">
-                <h2 className="display-4 leading-none text-zinc-900">
-                  {cat}
-                </h2>
-                <span className="label text-zinc-500">
-                  {items.length} {items.length === 1 ? "option" : "options"}
-                </span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-                {items.map((p) => (
-                  <ProductCard key={p.name} product={p} />
-                ))}
-              </div>
+          <section key={cat} className={`section ${bg}`}>
+            <div className="max-w-7xl mx-auto px-5 md:px-8">
+              <RuleBar
+                number={`§ ${sectionNo}`}
+                label={cat}
+                right={
+                  <span className="label text-ink-soft">
+                    {items.length} {items.length === 1 ? "LISTING" : "LISTINGS"}
+                  </span>
+                }
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-l border-t border-ink/15">
+                  {items.map((p, i) => (
+                    <div
+                      key={p.name}
+                      className="border-r border-b border-ink/15 -mr-px -mb-px"
+                    >
+                      <ClassifiedCard
+                        product={p}
+                        number={`№ ${sectionNo}-${String(i + 1).padStart(2, "0")}`}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </RuleBar>
             </div>
           </section>
         );
       })}
 
-      <section className="bg-kraft section">
-        <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
-          <h2 className="display-3 mb-4">
-            Looking for Something Else?
+      <section className="bg-ink text-newsprint section-loose">
+        <div className="max-w-3xl mx-auto px-5 md:px-8 text-center">
+          <p className="dateline text-newsprint/60">— END OF CATALOG —</p>
+          <h2 className="display-2 mt-4 text-balance">
+            Looking for something else?
           </h2>
-          <p className="text-zinc-700 mb-4 md:mb-8">
-            Our regular lineup. Bulk salt and ice melt in winter, bagged soils year-round, plus seasonal specials. Call to confirm stock.
+          <p className="body mt-4 text-newsprint/80 max-w-[52ch] mx-auto">
+            Bulk salt and ice melt in winter, bagged soils year-round, and seasonal
+            specials. Call to confirm stock.
           </p>
           <a
             href="tel:5085799897"
-            className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
+            className="mt-7 inline-flex items-center gap-2 bg-stamp text-newsprint label px-7 h-12 btn-press hover:bg-newsprint hover:text-ink"
           >
-            <Phone className="size-4" /> 508.579.9897
+            <Phone className="size-4" strokeWidth={2.5} /> 508.579.9897
           </a>
         </div>
       </section>
