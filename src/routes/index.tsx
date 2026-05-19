@@ -796,33 +796,6 @@ function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* WBE strip */}
-      <section className="bg-surface text-surface-foreground border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-6 md:gap-10 justify-between">
-          <div className="flex items-center gap-5">
-            <img
-              src={wbeSeal}
-              alt="Massachusetts WBE certified seal"
-              width={160}
-              height={100}
-              className="h-20 w-auto object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-            <div>
-              <p className="display-4">Certified Woman-Owned</p>
-              <p className="body-sm text-zinc-300">Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.</p>
-            </div>
-          </div>
-          <Link
-            to="/about"
-            className="inline-flex items-center gap-2 label text-white hover:text-brand"
-          >
-            Meet Abby <ArrowRight className="size-4" />
-          </Link>
-        </div>
-      </section>
     </>
   );
 }
