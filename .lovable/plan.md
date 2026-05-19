@@ -1,52 +1,35 @@
-Build the chosen "Integrated header band" direction into `src/components/site/SiteFooter.tsx`. Single file change. Replaces the broken 4-col grid that currently lets the Google review block hijack the layout.
+Move the WBENC band off the homepage and into `SiteFooter` so the footer reads as one continuous closing block on every page.
 
-## Structure (top → bottom)
+## Changes
 
-1. **Review band** — full-width row above a divider. Left: `display-4` "Leave a Google review." headline + body-sm subtext (`max-w-2xl`). Right: red CTA button with multi-color Google G (kept from existing code) + "Write a Google review" label. Bordered bottom rule.
+### 1. `src/routes/index.tsx` — remove the WBE strip
+Delete lines ~801–826 (the entire `{/* WBE strip */}` section, including its wrapping `<section>` and the inner seal + "Meet Abby" row). Also drop now-unused imports if `wbeSeal` and `ArrowRight` aren't used elsewhere in the file (check first; remove only if orphaned).
 
-2. **4-column grid** (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`, `gap-10 md:gap-12`):
-   - **Brand & contact**: brandmark image, phone (`display-4` red), email (`body-sm`), Facebook + Yelp inline (using real `Facebook` lucide icon + existing `YelpLogo` component), "Est. 2016 · WBE Certified" micro stamp.
-   - **Visit**: `display-5` "VISIT" with `border-l-2 border-brand pl-3` accent, address.
-   - **Hours**: same accented heading, day rows as `flex justify-between` muted/highlighted pairs, seasonal note as `meta` text below.
-   - **Site**: same accented heading, nav links as column (`Link` from tanstack-router for internal routes, `button` for cookie settings). Privacy + Cookie settings demoted with a small top margin and dimmer color.
+### 2. `src/components/site/SiteFooter.tsx` — add WBE band as topmost row
+Insert a new band at the very top of the footer's `max-w-7xl` container, before the existing review band. Same surface, same rail, no border above (the page hands off into it cleanly).
 
-3. **Legal bar** — top border, single row. Left: © year + Jefferson, MA + WBE Certified. Right: "Designed by Patrick Berthiaume". `micro` zinc-500.
+Structure of the new band:
+- Flex row: `flex flex-col md:flex-row items-center gap-6 md:gap-10 justify-between`
+- Left: WBE seal image (`h-16 md:h-20 w-auto`) + text block — `display-5` "Certified Woman-Owned" headline, `body-sm text-zinc-300` "Certified by the Commonwealth of Massachusetts since 2018. Owner-operated." subtext.
+- Right: `Link to="/about"` rendered as `label text-white hover:text-brand` with "Meet Abby" + `ArrowRight` icon.
+- Bottom rule: `pb-8 md:pb-10 mb-8 md:mb-10 border-b border-white/10` to separate from the review band below.
 
-## Token mapping (prototype → project)
+Imports to add: `wbeSeal from "@/assets/wbe-seal.png"` (same path the homepage uses) and `ArrowRight` added to the existing `lucide-react` import.
 
-The prototype hardcodes hex + Google fonts. Map everything to the project's existing tokens — no raw colors, no inline fonts:
+### Final footer order (top → bottom)
+1. WBE band — seal + "Certified Woman-Owned" + Meet Abby link
+2. Review band — "Leave a Google review." + CTA
+3. 4-col grid — Brand & contact / Visit / Hours / Site
+4. Legal bar — © + designer credit
 
-- `bg-[#0c0c0e]` → `bg-surface`
-- `text-[#ba1a1a]` → `text-brand`
-- `bg-[#ba1a1a]` → `bg-brand`
-- `font-['Saira_Extra_Condensed']` headings → `display-4` / `display-5` utilities (already wired to `--font-display`)
-- `font-['Inter']` body → already the default body font
-- Heading sizes `text-3xl` / `text-xl` → `display-4` / `display-5`
-- `text-sm` body → `body-sm` utility
-- `text-[10px]` / `text-[11px]` legal → `micro` / `meta`
-- `text-xs uppercase tracking-widest` social labels → `label` utility
-- `border-zinc-800/60` / `border-zinc-900` → `border-white/10`
-- Drop the `rounded-xl shadow-2xl` outer card framing — this is a real page footer, not a card demo
-- Replace the prototype's inline "BUY THE YARD" word mark with the real `brandmark-dark.png` import
-- Replace the dot-bullet social icons with the real `Facebook` lucide icon + `YelpLogo` component
-- Keep the existing multi-color Google G SVG (not the prototype's monochrome one)
-- Keep `GOOGLE_REVIEW_URL` placeholder constant + TODO comment
-- Keep `openCookieSettings` button behavior
-- Keep dynamic `new Date().getFullYear()`
+All four blocks share `max-w-7xl mx-auto px-5 md:px-6`, so every edge lines up vertically and the footer reads as one cohesive closing layout.
 
-## Mobile behavior
-
-Grid stacks `grid-cols-1` then `sm:grid-cols-2` then `lg:grid-cols-4`. Content centers under `md`, left-aligns at `md+`. The review band stacks vertically with the CTA centered on mobile. No layout regression vs current.
-
-## What does NOT change
-
-- `src/lib/cookie-consent.ts`, `src/components/site/YelpLogo.tsx`, `@/assets/brandmark-dark.png` — untouched.
-- No new routes, no new imports beyond what already exists (drop unused `Star` import).
-- No `styles.css` changes — every utility used (`display-4`, `display-5`, `body-sm`, `label`, `micro`, `meta`, `section`, `bg-surface`, `text-brand`, `border-brand`) already exists.
+### Out of scope
 - No copy changes.
+- No design-token changes.
+- No mobile-layout regression (each band already stacks on small screens).
+- WBE band will now appear globally in the footer; that's the explicit request. If the user later wants it homepage-only, they can ask.
 
-## Files touched
-
-- `src/components/site/SiteFooter.tsx` — full rewrite of the JSX (single file).
-
-After applying I'll screenshot at 1408w to confirm: review band reads as the closing CTA, the 4 utility columns sit on one shared baseline, brand block anchors the left without dominating, and the legal bar closes cleanly.
+### Files touched
+- `src/routes/index.tsx` (remove section + clean unused imports)
+- `src/components/site/SiteFooter.tsx` (add band + 2 imports)
