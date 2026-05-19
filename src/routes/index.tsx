@@ -882,7 +882,7 @@ function HomePage() {
       </section>
 
       {/* WBE strip */}
-      <section className="bg-kraft border-y border-zinc-300/60">
+      <section className="bg-surface text-surface-foreground border-y border-white/10">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-4 md:gap-8 justify-between">
           <div className="flex items-center gap-5">
             <img
@@ -896,12 +896,12 @@ function HomePage() {
             />
             <div>
               <p className="display-4">Certified Woman-Owned</p>
-              <p className="text-sm text-zinc-600">Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.</p>
+              <p className="text-sm text-zinc-300">Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.</p>
             </div>
           </div>
           <Link
             to="/about"
-            className="inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
+            className="inline-flex items-center gap-2 label text-white hover:text-brand"
           >
             Meet Abby <ArrowRight className="size-4" />
           </Link>
