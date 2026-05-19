@@ -30,7 +30,7 @@ function AboutPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Meet the owner
           </p>
@@ -41,7 +41,7 @@ function AboutPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5">
             <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-kraft">
               <img
@@ -54,7 +54,7 @@ function AboutPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="mt-6 flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
+            <div className="mt-3 md:mt-6 flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
@@ -124,7 +124,7 @@ function AboutPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
           <h2 className="md:col-span-3 font-display text-3xl md:text-4xl uppercase text-zinc-900 leading-tight">
             Around the Yard
           </h2>

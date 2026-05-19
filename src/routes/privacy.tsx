@@ -27,7 +27,7 @@ function PrivacyPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-4xl mx-auto px-6 section-loose">
+        <div className="max-w-4xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Legal
           </p>
@@ -38,7 +38,7 @@ function PrivacyPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-6 space-y-14">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 space-y-14">
           <div>
             <h2 className="font-display text-3xl md:text-4xl uppercase tracking-tight text-zinc-900">
               Privacy Policy
@@ -88,7 +88,7 @@ function PrivacyPage() {
                 to existing orders, and responses to inquiries.
               </li>
             </ul>
-            <p className="mt-6 text-sm text-zinc-600">
+            <p className="mt-3 md:mt-6 text-sm text-zinc-600">
               Questions? Email{" "}
               <a
                 href="mailto:abby@btymaterial.com"

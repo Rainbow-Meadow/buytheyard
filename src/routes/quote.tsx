@@ -112,14 +112,14 @@ function QuotePage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Get a quote
           </p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
             Tell us. <span className="text-brand">We'll price it.</span>
           </h1>
-          <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
             About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
           </p>
         </div>
@@ -128,7 +128,7 @@ function QuotePage() {
       <section className="section bg-base">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-3xl mx-auto px-6 space-y-12"
+          className="max-w-3xl mx-auto px-5 md:px-6 space-y-12"
           noValidate
         >
           {/* PRODUCTS */}
@@ -136,7 +136,7 @@ function QuotePage() {
             <legend className="font-display text-3xl uppercase mb-2">
               <span className="text-brand">01.</span> What do you need?
             </legend>
-            <p className="text-sm text-zinc-600 mb-6">
+            <p className="text-sm text-zinc-600 mb-3 md:mb-6">
               One row per material. Ballpark the quantity — we'll dial it in on the phone.
             </p>
 
@@ -278,7 +278,7 @@ function QuotePage() {
 
           {/* FULFILLMENT */}
           <fieldset>
-            <legend className="font-display text-3xl uppercase mb-6">
+            <legend className="font-display text-3xl uppercase mb-3 md:mb-6">
               <span className="text-brand">02.</span> Pickup or delivery?
             </legend>
 
@@ -313,7 +313,7 @@ function QuotePage() {
             </div>
 
             {fulfillment === "Delivery" && (
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
+              <div className="mt-3 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
                 <div>
                   <label className={labelCls}>Town</label>
                   <select className={inputCls} {...register("town")}>
@@ -431,7 +431,7 @@ function QuotePage() {
 
           {/* CONTACT */}
           <fieldset>
-            <legend className="font-display text-3xl uppercase mb-6">
+            <legend className="font-display text-3xl uppercase mb-3 md:mb-6">
               <span className="text-brand">03.</span> How do we reach you?
             </legend>
 
@@ -584,21 +584,21 @@ function SuccessView({
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4 inline-flex items-center gap-2">
             <Check className="size-3.5" /> Request ready
           </p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
             Send it to <span className="text-brand">Abby.</span>
           </h1>
-          <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
             One tap opens mail or messages with the full request typed. Hit send — she'll be back the same day.
           </p>
         </div>
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-6 space-y-8">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 space-y-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a
               href={mailto}

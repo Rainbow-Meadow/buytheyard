@@ -274,7 +274,7 @@ function HomePage() {
         {/* Extra mobile scrim for headline contrast over the photo */}
         <div className="md:hidden absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-zinc-950/25" />
 
-        <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-6 py-16 md:py-24 self-center w-full">
+        <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-5 md:px-6 section-loose self-center w-full">
           <div>
             <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-200 mb-5 pb-2 border-b border-white/30">
               <img
@@ -288,7 +288,7 @@ function HomePage() {
               />
               Hi, I'm Abby — owner · Jefferson, MA
             </p>
-            <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance mb-7 text-white">
+            <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance mb-4 md:mb-7 text-white">
               Mulch. Loam. Sand.{" "}
               <span className="relative inline-block text-brand">
                 Stone.
@@ -308,11 +308,11 @@ function HomePage() {
                 </svg>
               </span>
             </h1>
-            <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
+            <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-4 md:mb-8 text-pretty leading-relaxed">
               By the yard, from our Jefferson, MA lot. Best prices in Central Mass.
             </p>
 
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-5 md:mb-9 text-zinc-200">
               <span className="inline-flex items-center gap-2.5">
                 <img
                   src={wbeSeal}
@@ -361,7 +361,7 @@ function HomePage() {
 
       {/* Stats strip */}
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 section-tight grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center md:text-left">
           {[
             { k: "10", v: "Years in business" },
             { k: "WBE", v: "Massachusetts WBE certified" },
@@ -378,8 +378,8 @@ function HomePage() {
 
       {/* Product preview */}
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-10">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-5 md:mb-10">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                 Bulk materials &amp; garden center
@@ -421,7 +421,7 @@ function HomePage() {
           <div className="-mx-6 md:mx-0">
             <div
               ref={railRef}
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              className="flex gap-3 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
               {featured.map((p) => (
                 <div
@@ -442,7 +442,7 @@ function HomePage() {
 
       {/* Facebook spotlight */}
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-16 items-center">
           {/* Facebook page card — real screenshot wrapped in a faux browser chrome */}
           <a
             href="https://www.facebook.com/BuyTheYardOutdoorProducts"
@@ -478,10 +478,10 @@ function HomePage() {
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-white max-w-[16ch]">
               Where the yard <span className="text-brand">lives.</span>
             </h2>
-            <p className="mt-6 text-zinc-300 text-lg leading-relaxed max-w-[52ch]">
+            <p className="mt-3 md:mt-6 text-zinc-300 text-lg leading-relaxed max-w-[52ch]">
               Daily back-and-forth happens on Facebook — fresh loads, restocks, weather closures, and lot photos.
             </p>
-            <ul className="mt-6 space-y-2 text-sm text-zinc-300">
+            <ul className="mt-3 md:mt-6 space-y-2 text-sm text-zinc-300">
               <li className="flex items-start gap-2">
                 <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
                 Daily inventory and restock photos
@@ -495,7 +495,7 @@ function HomePage() {
                 Seasonal promos and WooSox ticket drawings
               </li>
             </ul>
-            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="mt-4 md:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <a
                 href="https://www.facebook.com/BuyTheYardOutdoorProducts"
                 target="_blank"
@@ -516,7 +516,7 @@ function HomePage() {
 
       {/* Reviews from Facebook */}
       <section className="section bg-base border-t border-zinc-200">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
             <Facebook className="size-3.5" />
             From Facebook · real customers, real posts
@@ -525,7 +525,7 @@ function HomePage() {
             What neighbors say.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 mt-6 md:mt-12">
             {reviews.map((r) => (
               <figure
                 key={r.name}
@@ -547,11 +547,11 @@ function HomePage() {
             ))}
           </div>
 
-          <div className="mt-10 border-t border-zinc-300/70 pt-8">
+          <div className="mt-5 md:mt-10 border-t border-zinc-300/70 pt-8">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-5">
               Community
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
               {communityPosts.map((p) => (
                 <div key={p.org} className="flex flex-col">
                   <p className="text-zinc-800 leading-relaxed">
@@ -570,8 +570,8 @@ function HomePage() {
 
       {/* Pricing */}
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-12">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 md:mb-12">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
                 <Tag className="size-3.5" />
@@ -621,7 +621,7 @@ function HomePage() {
               ))}
             </div>
 
-            <p className="mt-8 text-xs text-zinc-600">
+            <p className="mt-4 md:mt-8 text-xs text-zinc-600">
               Material and delivery both quoted live — call Abby at{" "}
               <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
                 508.579.9897
@@ -635,7 +635,7 @@ function HomePage() {
 
             <a
               href="tel:5085799897"
-              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
             >
               <Phone className="size-4" />
               Call for a quote
@@ -646,7 +646,7 @@ function HomePage() {
 
       {/* FAQ */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-16">
           <div className="md:col-span-5">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
               <HelpCircle className="size-3.5" />
@@ -661,7 +661,7 @@ function HomePage() {
             </p>
             <a
               href="tel:5085799897"
-              className="mt-6 hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              className="mt-3 md:mt-6 hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -756,7 +756,7 @@ function HomePage() {
 
             <a
               href="tel:5085799897"
-              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -775,13 +775,13 @@ function HomePage() {
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-25"
         />
-        <div className="relative max-w-7xl mx-auto px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
           <div>
-            <Truck className="size-10 text-brand mb-6" />
-            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] mb-6">
+            <Truck className="size-10 text-brand mb-3 md:mb-6" />
+            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] mb-3 md:mb-6">
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
-            <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
+            <p className="text-zinc-300 text-lg max-w-[48ch] mb-4 md:mb-8">
               Curbside delivery across Central Mass. Call before noon for same-day when available.
             </p>
             <Link
@@ -818,7 +818,7 @@ function HomePage() {
 
       {/* WBE strip */}
       <section className="bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-6 section-tight flex flex-col md:flex-row items-center gap-8 justify-between">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-4 md:gap-8 justify-between">
           <div className="flex items-center gap-5">
             <img
               src={wbeSeal}

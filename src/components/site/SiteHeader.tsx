@@ -17,7 +17,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-surface/95 backdrop-blur-sm border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-12">
+        <div className="flex items-center gap-5 md:gap-12">
           <Link
             to="/"
             className="flex items-center leading-none"
@@ -32,7 +32,7 @@ export function SiteHeader() {
               className="h-12 w-auto"
             />
           </Link>
-          <nav className="hidden md:flex gap-8">
+          <nav className="hidden md:flex gap-4 md:gap-8">
             {NAV.map((item) => (
               <Link
                 key={item.to}

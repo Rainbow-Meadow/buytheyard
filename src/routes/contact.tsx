@@ -64,17 +64,17 @@ function ContactPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 section-loose">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Contact
           </p>
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
             Call. <span className="text-brand">We answer.</span>
           </h1>
-          <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
             Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
           </p>
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
+          <div className="mt-5 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
             <a
               href="tel:5085799897"
               className="group flex items-center gap-4 bg-brand text-brand-foreground px-6 py-6 rounded-md hover:opacity-90 transition-opacity"
@@ -105,7 +105,7 @@ function ContactPage() {
               <ArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-          <p className="mt-6 text-sm text-zinc-400 max-w-[60ch]">
+          <p className="mt-3 md:mt-6 text-sm text-zinc-400 max-w-[60ch]">
             For non-urgent stuff, email{" "}
             <a
               href="mailto:abby@btymaterial.com"
@@ -115,7 +115,7 @@ function ContactPage() {
             </a>
             . Please note: the chat widget on our previous website is no longer monitored.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-5">
+          <div className="mt-4 md:mt-8 flex flex-wrap items-center gap-5">
             <a
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
@@ -137,7 +137,7 @@ function ContactPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <ClipboardList className="size-7 text-brand mb-4" />
             <h2 className="font-display text-2xl uppercase mb-2">Get a Quote</h2>
@@ -210,7 +210,7 @@ function ContactPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden rounded-md ring-1 ring-zinc-300">
             <iframe
               title="Buy The Yard location map"
