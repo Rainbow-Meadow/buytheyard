@@ -140,7 +140,7 @@ function AboutPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <figcaption className="p-5 text-xs uppercase tracking-widest text-zinc-600">
+            <figcaption className="p-5 label text-zinc-600">
               The sit-and-stay corner — coffee, umbrellas, and the OPEN flag.
             </figcaption>
           </figure>
@@ -156,7 +156,7 @@ function AboutPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <figcaption className="p-5 text-xs uppercase tracking-widest text-zinc-600">
+            <figcaption className="p-5 label text-zinc-600">
               Charlie · office manager · accepts treats and pets.
             </figcaption>
           </figure>

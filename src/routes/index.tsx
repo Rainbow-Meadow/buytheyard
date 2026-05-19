@@ -369,7 +369,7 @@ function HomePage() {
           ].map((s) => (
             <div key={s.k}>
               <p className="display-4 text-brand uppercase leading-none">{s.k}</p>
-              <p className="mt-2 text-xs uppercase tracking-widest text-zinc-500">{s.v}</p>
+              <p className="mt-2 label text-zinc-500">{s.v}</p>
             </div>
           ))}
         </div>

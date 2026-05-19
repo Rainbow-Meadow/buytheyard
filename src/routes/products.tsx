@@ -89,7 +89,7 @@ function ProductsPage() {
                 <h2 className="display-4 leading-none text-zinc-900">
                   {cat}
                 </h2>
-                <span className="text-xs uppercase tracking-widest text-zinc-500">
+                <span className="label text-zinc-500">
                   {items.length} {items.length === 1 ? "option" : "options"}
                 </span>
               </div>

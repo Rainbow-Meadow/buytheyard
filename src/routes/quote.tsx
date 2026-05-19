@@ -660,7 +660,7 @@ function SuccessView({
           <div className="text-center pt-2">
             <Link
               to="/contact"
-              className="text-xs uppercase tracking-widest text-zinc-500 hover:text-brand"
+              className="label text-zinc-500 hover:text-brand"
             >
               Or just call 508.579.9897 →
             </Link>

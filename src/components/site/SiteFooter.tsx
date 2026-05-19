@@ -75,7 +75,7 @@ export function SiteFooter() {
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-zinc-400 hover:text-brand"
             >
               <Facebook className="size-4" /> Facebook
             </a>
@@ -83,7 +83,7 @@ export function SiteFooter() {
               href="https://www.yelp.com/biz/buy-the-yard-holden"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-zinc-400 hover:text-brand"
             >
             <YelpLogo className="size-4" /> Yelp
             </a>

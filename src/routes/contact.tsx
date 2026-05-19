@@ -120,7 +120,7 @@ function ContactPage() {
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-300 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
             >
               <Facebook className="size-4" /> Facebook
             </a>
@@ -128,7 +128,7 @@ function ContactPage() {
               href="https://www.yelp.com/biz/buy-the-yard-holden"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-300 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
             >
               <YelpLogo className="size-4" /> Yelp
             </a>
@@ -147,7 +147,7 @@ function ContactPage() {
             </p>
             <Link
               to="/quote"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-brand font-semibold hover:opacity-80"
+              className="inline-flex items-center gap-2 label text-brand font-semibold hover:opacity-80"
             >
               Start a request <ArrowRight className="size-3.5" />
             </Link>
@@ -183,7 +183,7 @@ function ContactPage() {
               href="https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522"
               target="_blank"
               rel="noreferrer"
-              className="mt-3 inline-block text-xs uppercase tracking-widest text-brand font-semibold"
+              className="mt-3 inline-block label text-brand font-semibold"
             >
               Open in maps →
             </a>

@@ -114,7 +114,7 @@ function ServiceAreaPage() {
                     <p className="display-4 text-zinc-900 leading-tight">
                       {t.name}
                     </p>
-                    <p className="text-xs uppercase tracking-widest text-zinc-500 mt-1">
+                    <p className="label text-zinc-500 mt-1">
                       {t.drive}
                     </p>
                   </div>
