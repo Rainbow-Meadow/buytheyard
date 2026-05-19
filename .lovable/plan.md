@@ -1,14 +1,17 @@
-## Add dark-background brandmark variant
+## Shorten ASTM chips card description
 
-Save the uploaded mark as a second asset and use it only where the background is dark. Leave `brandmark.png` (the existing mark) untouched for any future light-background use (favicon, JSON-LD logo URL).
+The carousel cards equalize to the tallest item, and the ASTM Playground Chips card has the longest description (2 sentences, ~225 chars) — that's what's stretching the rail.
 
-### Steps
-1. Copy `user-uploads://Untitled_design_2.png` → `src/assets/brandmark-dark.png`.
-2. `src/components/site/SiteHeader.tsx` — import `brandmark-dark.png` instead of `brandmark.png` for the header logo `<img>`.
-3. `src/components/site/SiteFooter.tsx` — same swap for the footer logo `<img>`.
-4. `scripts/og.mjs` — point `BRAND` at `src/assets/brandmark-dark.png` so OG cards (which composite the mark over a dark scrim) use the dark-bg variant.
-5. Update `src/assets/PHOTO_CREDITS.md` to list `brandmark-dark.png` alongside `brandmark.png`.
+### Change
+
+`src/data/products.ts` line 124–125 — replace the description with a single sentence that stays in the same character ballpark as the other cards (~95–115 chars):
+
+```
+"Certified to ASTM F1292, F2075, and F1951 — the spec your playground inspector is actually looking for."
+```
+
+That keeps the credibility hook (the three ASTM codes + the inspector line) but drops the parenthetical decoding of each code and the "not generic mulch in a playground bag" aside, which are the bulk of the height.
 
 ### Out of scope
-- Favicon (`<link rel="icon" href="/brandmark.png">` in `__root.tsx`) and JSON-LD `logo` URL — these render on light/neutral surfaces (browser tab, Google knowledge panel), so they stay on the original mark.
-- Regenerating `public/og/*.jpg` — say the word and I'll re-run `scripts/og.mjs` so social previews pick up the new mark.
+- Pricing row copy on the homepage (line 241) — that's a separate block, not the carousel card.
+- Other cards' descriptions are already within the line budget.
