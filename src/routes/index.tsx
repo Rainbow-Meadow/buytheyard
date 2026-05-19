@@ -379,7 +379,7 @@ function HomePage() {
       {/* Product preview */}
       <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-4 md:mb-8 md:mb-5 md:mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-5 md:mb-10">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                 Bulk materials &amp; garden center
@@ -442,7 +442,7 @@ function HomePage() {
 
       {/* Facebook spotlight */}
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 lg:gap-3 md:gap-6 md:gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-16 items-center">
           {/* Facebook page card — real screenshot wrapped in a faux browser chrome */}
           <a
             href="https://www.facebook.com/BuyTheYardOutdoorProducts"
@@ -525,7 +525,7 @@ function HomePage() {
             What neighbors say.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-3 md:mt-6 md:mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 mt-6 md:mt-12">
             {reviews.map((r) => (
               <figure
                 key={r.name}
@@ -571,7 +571,7 @@ function HomePage() {
       {/* Pricing */}
       <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 md:mb-3 md:mb-6 md:mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 md:mb-12">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
                 <Tag className="size-3.5" />
@@ -646,7 +646,7 @@ function HomePage() {
 
       {/* FAQ */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 md:gap-3 md:gap-6 md:gap-16">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-16">
           <div className="md:col-span-5">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
               <HelpCircle className="size-3.5" />
