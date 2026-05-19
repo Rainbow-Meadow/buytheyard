@@ -2,7 +2,7 @@ import sharp from "sharp";
 import { readFileSync } from "fs";
 
 const W = 1200, H = 630;
-const BRAND = "src/assets/brandmark.png";
+const BRAND = "src/assets/brandmark-dark.png";
 
 const jobs = [
   ["src/assets/source/hero-desktop-yard.png", "public/og/og-home.jpg"],
