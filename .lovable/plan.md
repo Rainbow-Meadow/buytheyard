@@ -1,21 +1,26 @@
-## Cause
+## Change
 
-The hero section has `min-h-[640px] md:min-h-[720px]` plus `flex` and `self-center` on the content. On mobile, the content stack is ~560px tall but the section is forced to 640px, so the flex centering pushes everything up and leaves a big empty band of photo below the CTAs (visible in the screenshot above "Years in business").
+In `src/routes/index.tsx`, the hero currently stacks:
 
-## Fix
+1. Eyebrow (Abby)
+2. H1
+3. Subhead
+4. WBE seal + "10th season" row (lines 314–333)
+5. CTAs row: Shop materials / Get a quote / Call Abby (lines 335–356)
 
-In `src/routes/index.tsx` line 252:
+Move the WBE seal + "10th season" row (lines 314–333) to sit BELOW the CTAs row. Final order:
 
-- Remove the mobile `min-h-[640px]` and only apply the tall floor on desktop where the wide hero photo needs it: `min-h-[720px]` (md+ only).
-- Keep `flex` + `self-center` so desktop vertical centering still works.
-- Add `pt-4 pb-2` (mobile) via the existing `section-loose` container so the hero hugs its content on phones without collapsing the desktop look.
+1. Eyebrow
+2. H1
+3. Subhead
+4. CTAs (Shop / Quote / Call Abby)
+5. WBE seal + "10th season"
 
-Resulting class on the `<section>`:
-`relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[720px] flex`
-
-That's the only rule change — no copy, image, or layout edits.
+Adjust bottom margins so the spacing reads correctly:
+- Subhead `mb-4 md:mb-8` stays (it now sits above the CTAs)
+- CTAs wrapper gets `mb-5 md:mb-9` (currently has none — it was the last block)
+- WBE row drops its `mb-5 md:mb-9` (it's now the last block)
 
 ## Out of scope
 
-- No changes to desktop hero proportions, scrim, headline, or CTA styling.
-- No changes to the stats strip below.
+No copy changes, no styling changes to the seal, CTAs, or divider line.

@@ -311,28 +311,7 @@ function HomePage() {
               By the yard, from our Jefferson, MA lot. Best prices in Central Mass.
             </p>
 
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-5 md:mb-9 text-zinc-200">
-              <span className="inline-flex items-center gap-2.5">
-                <img
-                  src={wbeSeal}
-                  alt=""
-                  width={88}
-                  height={56}
-                  className="h-12 w-auto object-contain bg-white/90 rounded-sm p-1"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className="label">
-                  Mass. WBE Certified
-                </span>
-              </span>
-              <span className="hidden sm:inline-block h-6 w-px bg-white/30" />
-              <span className="label">
-                10th season · Est. 2016
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4 mb-5 md:mb-9">
               <Link
                 to="/products"
                 className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
@@ -353,6 +332,27 @@ function HomePage() {
                 <Phone className="size-4" />
                 Call Abby · 508.579.9897
               </a>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-zinc-200">
+              <span className="inline-flex items-center gap-2.5">
+                <img
+                  src={wbeSeal}
+                  alt=""
+                  width={88}
+                  height={56}
+                  className="h-12 w-auto object-contain bg-white/90 rounded-sm p-1"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="label">
+                  Mass. WBE Certified
+                </span>
+              </span>
+              <span className="hidden sm:inline-block h-6 w-px bg-white/30" />
+              <span className="label">
+                10th season · Est. 2016
+              </span>
             </div>
           </div>
         </div>
