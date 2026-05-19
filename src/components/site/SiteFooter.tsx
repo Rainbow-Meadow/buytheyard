@@ -19,7 +19,7 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-surface text-surface-foreground">
+    <footer className="bg-surface text-surface-foreground border-t border-white/10">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
         {/* Row 1: Google review | Logo | WBE */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-center md:min-h-[20rem]">
