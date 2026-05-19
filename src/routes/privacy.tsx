@@ -26,35 +26,35 @@ export const Route = createFileRoute("/privacy")({
 
 const LAST_UPDATED = "May 19, 2026";
 
-const linkCls = "text-brand underline-offset-2 hover:underline";
-const h3Cls = "display-5 text-zinc-900 mt-8";
-const pCls = "text-zinc-700 leading-relaxed";
+const linkCls = "text-stamp underline underline-offset-4 hover:text-ink";
+const h3Cls = "display-5 text-ink mt-8";
+const pCls = "body text-ink-soft leading-relaxed";
 
 function PrivacyPage() {
   return (
     <>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-4xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Legal
-          </p>
-          <h1 className="display-2 leading-[0.9]">
-            Privacy & <span className="text-brand">Terms.</span>
+      <section className="bg-newsprint paper-grain border-b-4 border-ink">
+        <div className="max-w-4xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8">
+          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
+            <span className="dateline text-ink-soft">LEGAL DESK · § L</span>
+            <span className="dateline text-ink-soft hidden sm:inline tabular">
+              LAST UPDATED · {LAST_UPDATED.toUpperCase()}
+            </span>
+          </div>
+          <h1 className="display-2 mt-5 md:mt-7 text-ink text-balance max-w-[16ch]">
+            Privacy &amp; <span className="text-stamp">Terms.</span>
           </h1>
-          <p className="mt-5 text-sm text-zinc-400">
-            Last updated: {LAST_UPDATED}
-          </p>
         </div>
       </section>
 
-      <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-5 md:px-6">
+      <section className="section bg-newsprint">
+        <div className="max-w-3xl mx-auto px-5 md:px-8">
           <nav
             aria-label="On this page"
-            className="border border-border bg-white/60 px-5 py-4 mb-12"
+            className="border-2 border-ink bg-newsprint-2 px-5 py-4 mb-12"
           >
-            <p className="eyebrow text-zinc-500 mb-3">On this page</p>
-            <ol className="space-y-1.5 text-sm text-zinc-700 list-decimal pl-5">
+            <p className="eyebrow text-stamp mb-3">CONTENTS</p>
+            <ol className="space-y-1.5 body-sm text-ink list-decimal pl-5 marker:text-ink-soft marker:font-mono">
               <li><a href="#privacy" className={linkCls}>Privacy Policy</a></li>
               <li><a href="#cookies" className={linkCls}>Cookies</a></li>
               <li><a href="#sms" className={linkCls}>SMS Terms</a></li>
@@ -66,8 +66,8 @@ function PrivacyPage() {
           <div className="space-y-14">
             {/* ---------------- Privacy ---------------- */}
             <section id="privacy" className="scroll-mt-24">
-              <h2 className="display-4 tracking-tight text-zinc-900">
-                1. Privacy Policy
+              <h2 className="display-3 text-ink rule-thick pb-3">
+                <span className="text-stamp mr-3">§ 01</span> Privacy Policy
               </h2>
               <p className={`mt-5 ${pCls}`}>
                 Buy The Yard, LLC (&ldquo;Buy The Yard,&rdquo; &ldquo;we,&rdquo;
@@ -179,8 +179,8 @@ function PrivacyPage() {
 
             {/* ---------------- SMS ---------------- */}
             <section id="sms" className="scroll-mt-24">
-              <h2 className="display-4 tracking-tight text-zinc-900">
-                2. SMS Terms
+              <h2 className="display-3 text-ink rule-thick pb-3">
+                <span className="text-stamp mr-3">§ 02</span> SMS Terms
               </h2>
               <p className={`mt-5 ${pCls}`}>
                 By opting into SMS through a form on this site, by phone, or in
@@ -214,8 +214,8 @@ function PrivacyPage() {
 
             {/* ---------------- Terms of Use ---------------- */}
             <section id="terms" className="scroll-mt-24">
-              <h2 className="display-4 tracking-tight text-zinc-900">
-                3. Website Terms of Use
+              <h2 className="display-3 text-ink rule-thick pb-3">
+                <span className="text-stamp mr-3">§ 03</span> Website Terms of Use
               </h2>
               <p className={`mt-5 ${pCls}`}>
                 By using this website you agree to these terms. If you
@@ -305,14 +305,14 @@ function PrivacyPage() {
 
             {/* ---------------- Contact ---------------- */}
             <section id="contact" className="scroll-mt-24">
-              <h2 className="display-4 tracking-tight text-zinc-900">
-                4. Contact
+              <h2 className="display-3 text-ink rule-thick pb-3">
+                <span className="text-stamp mr-3">§ 04</span> Contact
               </h2>
               <p className={`mt-5 ${pCls}`}>
                 Questions about this policy, your information, or our terms?
               </p>
-              <address className="mt-4 not-italic text-zinc-700 leading-relaxed">
-                Buy The Yard, LLC<br />
+              <address className="mt-4 not-italic body text-ink leading-relaxed border-l-4 border-ink pl-5">
+                <strong>Buy The Yard, LLC</strong><br />
                 2264 Main St.<br />
                 Jefferson, MA 01522<br />
                 <a href="mailto:abby@btymaterial.com" className={linkCls}>
