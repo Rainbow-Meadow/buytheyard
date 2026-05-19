@@ -1,57 +1,36 @@
-Desktop QA of `src/routes/index.tsx` against the typography + spacing schema in `src/styles.css`. The vertical rhythm is mostly correct now; the remaining "all over the place" feeling on desktop comes from **container-width inconsistency** and a handful of leftover raw classes. Mobile is unaffected — every change either lives behind `md:` or swaps an equivalent token.
+You're right — centering Reviews and Pricing in `max-w-3xl` fixed the empty-void problem but introduced a worse one: their left edge sits ~25% inside the page while FAQ, Featured Materials, Delivery, and Stats all start at the page gutter. The eye picks that up as constant horizontal shifting.
 
-## What's actually broken on desktop
+## Fix: one container width, left-aligned reading columns inside
 
-Looking at the live page at 1408w:
+Every section gets the same wrapper:
 
-1. **Reviews section** — `max-w-7xl` wrapper but header + rail + community grid are all clamped to `max-w-2xl`. Result: a single review card hugs the left third, ~60% of the section is empty whitespace.
-2. **Pricing section** — same pattern. `max-w-7xl` wrapper, `max-w-2xl` content. Eyebrow/H2/CTAs float in the left third with a giant empty void to the right.
-3. **WBE strip** — `justify-between` across `max-w-7xl` flings "Meet Abby" to the far right, disconnected from the seal+copy on the left.
-4. **FAQ left column** — phone link uses `mt-3 md:mt-6` (off-schema) so it sits oddly close to the intro paragraph; the accordion on the right is much taller, leaving the phone link visually orphaned in space.
-5. **Hero** — H1→intro and intro→CTA use the old `mb-4 md:mb-7` / `mb-4 md:mb-8` rhythm instead of the schema's `mt-4 md:mt-6` / `mt-5 md:mt-8`.
-6. **Delivery callout right card** — list item descriptions use raw `text-sm text-zinc-600` instead of the `body-sm` utility. Icon uses ad-hoc `mb-3 md:mb-6`.
-7. **Reviews "Community" block** — eyebrow uses `mb-5` (schema says `mb-3`). Top divider uses `mt-5 md:mt-10` (off-schema).
-8. **Featured Materials eyebrow→H2** — uses `mb-3` ✓ but H2 has no `mt-*`, then header→rail uses `mb-5 md:mb-10` which is fine.
+```
+max-w-7xl mx-auto px-5 md:px-6
+```
 
-## Container-width policy (the actual fix)
+Single-column sections (Reviews, Pricing, Facebook spotlight) keep readable line length by putting an inner `max-w-2xl` block **left-aligned** inside that wrapper — not centered. The eyebrow/H2/intro all start at the same x-coordinate as every other section's eyebrow/H2/intro, so vertical scanning down the page hits a single left rail.
 
-Lock every section to one of three patterns and apply consistently:
+The previous "empty void" complaint was about content being clamped to 1/3 width inside a 7xl wrapper with no right-side counterweight. The real fix is just left-alignment + accepting that single-column sections have whitespace on the right — that's normal and reads as breathing room, not as a broken layout, because the eyebrow column still aligns with neighboring sections.
 
-- **Wide rail / multi-column** → `max-w-7xl mx-auto px-5 md:px-6`
-  Hero, Stats, Featured Materials, Delivery callout (2-col), FAQ (2-col), WBE strip.
-- **Single-column reading** → `max-w-3xl mx-auto px-5 md:px-6` (centered)
-  Facebook spotlight ✓ already, **Reviews**, **Pricing**.
-- **No change** for Featured Materials (rail genuinely wants width).
+## Changes (all in `src/routes/index.tsx`)
 
-Switching Reviews + Pricing from `max-w-7xl` to `max-w-3xl` immediately kills the giant empty-right-column problem on both sections.
+1. **Facebook spotlight** — wrapper `max-w-3xl mx-auto` → `max-w-7xl mx-auto`. Inner content wrapped in `max-w-2xl` (left-aligned, no `mx-auto`).
 
-## Plan of changes (all in `src/routes/index.tsx`)
+2. **Reviews section** — wrapper `max-w-3xl mx-auto` → `max-w-7xl mx-auto`. Header, rail, and Community block all get `max-w-2xl` left-aligned (header keeps its `md:flex-row md:items-end justify-between` so the prev/next arrows sit at the right edge of that 2xl column, not at the page edge).
 
-1. **Hero** — replace `mb-4 md:mb-7` on H1 with `mt-4 md:mt-6` on the intro `<p>`; replace `mb-4 md:mb-8` on the intro `<p>` with `mt-5 md:mt-8` on the CTA row wrapper. Net visual difference is minimal but it aligns with the schema used everywhere else.
+3. **Pricing section** — wrapper `max-w-3xl mx-auto` → `max-w-7xl mx-auto`. Inner content wrapped in `max-w-2xl` left-aligned.
 
-2. **Reviews section** — wrapper becomes `max-w-3xl mx-auto px-5 md:px-6`. Drop the inner `md:max-w-2xl` constraints on header and rail. Header arrow buttons stay (now sit flush right of the H2 column). Community block: eyebrow `mb-5` → `mb-3`; divider gap `mt-5 md:mt-10` → `mt-8 md:mt-12` (header→content rule, since this is a sub-section divider, not a within-header gap); grid stays 2-col on `md`.
+4. **WBE strip** — wrapper `max-w-5xl mx-auto` → `max-w-7xl mx-auto` to match. Keep `justify-between` so seal+copy hug left, "Meet Abby" hugs right — same edges as Stats and FAQ above it.
 
-3. **Pricing section** — wrapper becomes `max-w-3xl mx-auto px-5 md:px-6`. Remove the inner `max-w-2xl` div (now redundant). No copy or CTA changes.
-
-4. **FAQ left column** — phone link `mt-3 md:mt-6` → `mt-5 md:mt-8` (matches schema; pulls it visually closer to the paragraph). Mobile phone link at the bottom of the right column gets the same treatment for parity.
-
-5. **Delivery callout** — icon `mb-3 md:mb-6` → `mb-4 md:mb-6` (matches H2→p schema). Right-card list descriptions `text-sm text-zinc-600` → `body-sm text-zinc-600`. List item title uses `display-5` ✓ keep.
-
-6. **WBE strip** — switch outer flex from `justify-between` to `gap-8 justify-start md:justify-between` and reduce to a sane max width on the left content so the right link is at most ~`max-w-5xl` away. Concretely: replace the wrapper with `max-w-5xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-6 md:gap-10 justify-between`. The 5xl cap (vs 7xl) pulls "Meet Abby" back toward the WBE block.
-
-7. **Featured Materials** — add `mt-4 md:mt-6` to the H2 so it sits at the same rhythm distance from the eyebrow as every other section (eyebrow `mb-3` + H2 `mt-*` keeps consistency with sections where the H2 isn't the first child).
-
-8. **Border tokens** — confirm light-section dividers all use `border-zinc-300/60`. Currently consistent; no change needed.
+No other sections need to change (Hero, Stats, Featured Materials, Delivery callout, FAQ already use `max-w-7xl`). No typography, no copy, no vertical rhythm changes — only horizontal container alignment.
 
 ## Out of scope
 
-- No copy edits.
-- No new sections, no reorder, no image swaps.
-- Mobile layout: every change is either inside `md:` breakpoints, or swaps a raw class for an equivalent utility (`text-sm` → `body-sm`) that renders the same size — mobile rendering is unchanged.
-- No `styles.css` edits — every primitive exists.
+- Mobile (every change is to `max-w-*` classes that have no effect under 768px; mobile already uses full-width padded containers).
+- No copy, no new sections, no `styles.css` edits.
 
 ## Files touched
 
-- `src/routes/index.tsx` — class-only changes.
+- `src/routes/index.tsx` — wrapper + inner container class changes on 4 sections.
 
-After applying, I'll re-screenshot at 1408w to confirm the empty-void problem on Reviews + Pricing is gone and section rhythm reads as one consistent column structure.
+After applying I'll re-screenshot at 1408w to confirm every section's eyebrow/H2 sits on the same left rail.
