@@ -1,13 +1,22 @@
 ## Change
 
-Convert the "What neighbors say" section in `src/routes/index.tsx` (~line 551) from the light base background to the medium kraft background used by the Pricing section.
+Update the `featured` array in `src/routes/index.tsx` (~line 287) so it contains exactly one product per category — 8 items total, one for each of the 8 categories defined in `src/data/products.ts`.
+
+### New featured list (one per category)
+
+1. **Mulch** — `Hemlock Mulch` (the local classic / most reordered)
+2. **Loam** — `Screened Loam`
+3. **Sand** — `Mason Sand`
+4. **Gravel** — `3/4" Crushed Blue Stone`
+5. **Specialty Stone** — `River Stone`
+6. **Garden Center** — `Hanging Baskets`
+7. **Specialty** — `ASTM Playground Chips`
+8. **Tools & Hardware** — `Hand Tools & Long Handles`
 
 ### Edits
 
-- **Section classes**: `section bg-base border-t border-zinc-200` → `section bg-kraft border-y border-zinc-300/60` (matches the Pricing section directly below).
-
-That's the only change. Review cards already use `bg-white border border-zinc-200` and remain legible on kraft; the community block divider (`border-zinc-300/70`) also reads fine on kraft, so no further adjustments are needed.
+- Replace the 6-name string array with the 8 names above. The surrounding `.map(...).filter(...)` lookup stays the same.
+- No grid, copy, layout, or styling changes — the existing responsive grid handles 8 cards.
 
 ### Out of scope
-- No copy, layout, typography, or card styling changes.
-- No changes to other sections.
+- No changes to product data, categories, or any other section.
