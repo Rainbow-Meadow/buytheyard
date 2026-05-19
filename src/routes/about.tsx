@@ -43,7 +43,7 @@ function AboutPage() {
       <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5">
-            <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-white/10 bg-surface">
+            <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-kraft">
               <img
                 src={abbyPortrait}
                 alt="Abby, owner of Buy The Yard, in Jefferson, MA"
@@ -54,7 +54,7 @@ function AboutPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="mt-3 md:mt-6 flex items-center gap-4 p-5 bg-surface rounded-md ring-1 ring-white/10">
+            <div className="mt-3 md:mt-6 flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
@@ -66,15 +66,15 @@ function AboutPage() {
               />
               <div>
                 <p className="display-5 leading-none">WBE Certified</p>
-                <p className="text-xs text-zinc-400 mt-1">
+                <p className="text-xs text-zinc-600 mt-1">
                   Massachusetts Woman Business Enterprise
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-7 space-y-6 text-zinc-300 text-lg leading-relaxed">
-            <h2 className="display-4 text-white leading-tight">
+          <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed">
+            <h2 className="display-4 text-zinc-900 leading-tight">
               Our Story
             </h2>
             <p>
@@ -92,7 +92,7 @@ function AboutPage() {
               Two years later I finished my Entrepreneurship and Small Business degree —
               while already running one of my own.
             </p>
-            <blockquote className="border-l-4 border-brand pl-6 py-2 my-10 display-4 text-white leading-tight">
+            <blockquote className="border-l-4 border-brand pl-6 py-2 my-10 display-4 text-zinc-900 leading-tight">
               "If you call this number, I pick up. That's the whole business model."
             </blockquote>
             <p>
@@ -109,7 +109,7 @@ function AboutPage() {
               Come by — <strong>2264 Main St., Jefferson, MA</strong>. Bring your questions,
               even the "how much do I need?" ones. Especially those.
             </p>
-            <p className="display-4 text-white">— Abby</p>
+            <p className="display-4 text-zinc-900">— Abby</p>
 
             <div className="pt-6">
               <Link
@@ -125,10 +125,10 @@ function AboutPage() {
 
       <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
-          <h2 className="md:col-span-3 display-4 text-white leading-tight">
+          <h2 className="md:col-span-3 display-4 text-zinc-900 leading-tight">
             Around the Yard
           </h2>
-          <figure className="md:col-span-2 rounded-md overflow-hidden ring-1 ring-white/10 bg-surface">
+          <figure className="md:col-span-2 rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
             <div className="aspect-[4/3] overflow-hidden">
               <img
                 src={yardPatio}
@@ -140,11 +140,11 @@ function AboutPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <figcaption className="p-5 label text-zinc-400">
+            <figcaption className="p-5 label text-zinc-600">
               The sit-and-stay corner — coffee, umbrellas, and the OPEN flag.
             </figcaption>
           </figure>
-          <figure className="rounded-md overflow-hidden ring-1 ring-white/10 bg-surface">
+          <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
             <div className="aspect-[4/5] overflow-hidden">
               <img
                 src={yardDog}
@@ -156,7 +156,7 @@ function AboutPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <figcaption className="p-5 label text-zinc-400">
+            <figcaption className="p-5 label text-zinc-600">
               Charlie · office manager · accepts treats and pets.
             </figcaption>
           </figure>

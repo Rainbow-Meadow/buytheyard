@@ -1,36 +1,37 @@
-## Remove all AI-generated imagery — real photos only
+## Goal
 
-Audit found these AI-generated files that need to go, and existing owner-supplied photos that will replace them.
+Add a cookie consent banner to the site with two actions — **Accept all** and **Customize** — plus a settings dialog. Records the user's choice in `localStorage` so any future analytics/marketing scripts can gate themselves on it.
 
-### Files to delete
+## What the user sees
 
-- `src/assets/hero/reel-01-mulch.mp4.asset.json` … `reel-05-dusk.mp4.asset.json` (the 5 hero video clips)
-- `src/assets/abby-portrait.jpg` (AI portrait at repo root — duplicate of the real `source/abby-portrait.webp`)
-- `src/assets/outcome-beds.jpg`, `outcome-playground.jpg`, `outcome-walkway.jpg`
-- `src/components/site/HeroReel.tsx` (no longer needed)
+1. **Banner** (fixed bottom of every page, slides in ~400ms after first visit):
+   - Short copy: "We use cookies to make the site work and to understand how visitors use it. Essential cookies are always on. See our [Privacy Policy](/privacy#cookies)."
+   - Two buttons: **Accept all** (primary, brand red) and **Customize** (outline).
+   - No dismiss/X — choice required for valid consent.
 
-### Replacements (all owner-supplied, already in `src/assets/source/`)
+2. **Customize dialog** (shadcn `Dialog` + `Switch`):
+   - **Essential** — always on, toggle disabled. "Required for the site to work (security, your cookie preferences)."
+   - **Analytics** — off by default. "Helps us understand how visitors use the site."
+   - **Marketing** — off by default. "Used to measure ads and personalize promotions. Currently unused."
+   - Footer of dialog: **Save preferences** and **Accept all**.
 
-- **Hero**: swap the cinematic reel for a real photo hero using `hero-desktop-yard-2026.png` on md+ and `hero-mobile-piles-mulch-sand-stone-2026.png` on small screens. Same dark veil + grain overlay as before, same headline + CTAs + ticker — only the media changes.
-- **Story strip portrait**: `source/abby-portrait.webp` (was already used on /about — same image).
-- **Outcomes section**: replace the three AI outcome shots with real yard photos:
-  - `source/yard-piles.webp` → "Bulk materials, by the yard."
-  - `source/loading-truck.webp` → "Loaded on arrival."
-  - `source/yard-banner-5.webp` → "Sit-and-stay corner."
-  (Outcome titles/copy adjusted to fit the actual photos, since the AI shots showed finished landscaping we don't have real photos of.)
+3. **Footer link**: "Cookie settings" in `SiteFooter` reopens the dialog any time.
 
-### Code edits
+## Implementation
 
-- `src/routes/index.tsx`:
-  - Remove the three `outcome-*.jpg` imports and the `abby-portrait.jpg` import.
-  - Import the real photos listed above.
-  - Replace `<HeroReel />` with a `<HeroStill />` block (inline in the same file, or a small new component `src/components/site/HeroStill.tsx`) — `<picture>` with mobile/desktop sources, same `hero-veil` / `grid-noir` overlays, same caption markers removed.
-  - Update the outcomes array entries to match the new photos.
-- Remove `HeroReel` import.
+New files:
+- `src/lib/cookie-consent.ts` — `getConsent()`, `setConsent(prefs)`, `subscribe(cb)`; type `ConsentPrefs = { essential: true; analytics: boolean; marketing: boolean; updatedAt: string }`. Persists to `localStorage` key `bty-cookie-consent-v1`. Dispatches `window` CustomEvent `bty:consent-change` on update.
+- `src/components/site/CookieConsent.tsx` — banner + customize dialog. Mounts after `useEffect` to avoid SSR/hydration mismatch. Listens for `bty:open-cookie-settings` so the footer can reopen the dialog.
 
-### Out of scope
+Edits:
+- `src/routes/__root.tsx` — render `<CookieConsent />` inside `RootComponent` (next to `<ChatWidget />`).
+- `src/components/site/SiteFooter.tsx` — add a "Cookie settings" button that dispatches `bty:open-cookie-settings`.
+- `src/routes/privacy.tsx` — add a `#cookies` subsection under Privacy Policy describing the three categories and how to change preferences; add it to the TOC.
 
-- Product catalog photos (`mulch-*`, `loam`, `sand`, `stone-*`, etc.) — all owner-supplied, kept as is.
-- The `/about` and other inner routes — they already use real photography only.
+Styling uses existing tokens only (`bg-surface`, `text-zinc-700`, `border-border`, brand red for primary). Banner: `fixed bottom-0 inset-x-0 z-50`, `max-w-5xl` inner container, border-top. Mobile (≤440px): stacked, full-width buttons. Accessible: `role="dialog" aria-label="Cookie consent"`, focus moves to **Accept all** on mount.
 
-After implementation the site contains zero AI imagery, matching `PHOTO_CREDITS.md`.
+## Out of scope
+
+- No analytics SDK wiring — banner only records the choice. When analytics is added later, gate init on `getConsent().analytics === true` and subscribe to `bty:consent-change`.
+- No geo detection — banner shows for everyone.
+- No server-side storage; localStorage only.

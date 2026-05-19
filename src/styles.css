@@ -2,18 +2,6 @@
 @source "../src";
 @import "tw-animate-css";
 
-/* Bundled webfonts (via @fontsource). These resolve at build time and avoid an external CDN fetch. */
-@import "@fontsource/space-grotesk/400.css";
-@import "@fontsource/space-grotesk/500.css";
-@import "@fontsource/space-grotesk/600.css";
-@import "@fontsource/space-grotesk/700.css";
-@import "@fontsource/inter-tight/400.css";
-@import "@fontsource/inter-tight/500.css";
-@import "@fontsource/inter-tight/600.css";
-@import "@fontsource/inter-tight/700.css";
-@import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/500.css";
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -21,51 +9,42 @@
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-surface-foreground: var(--surface-foreground);
-  --color-surface-2: var(--surface-2);
   --color-base: var(--base);
-  /* Legacy alias — kraft tokens now collapse onto surface-2 during the refactor.
-     Kept so old routes that still use `bg-kraft` etc. don't break. Remove
-     once every route has been migrated. */
-  --color-kraft: var(--surface-2);
+  --color-kraft: var(--kraft);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
-  --color-brand-glow: var(--brand-glow);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-sans: 'Inter Tight', 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Saira Extra Condensed', sans-serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
 :root {
-  /* Single dark theme — bold modern, charcoal + ember. */
-  --base:               oklch(0.16 0.004 60);  /* #1a1a1a charcoal */
-  --background:         oklch(0.16 0.004 60);
-  --foreground:         oklch(0.97 0 0);
-  --surface:            oklch(0.21 0.004 60);  /* #2d2d2d elevated panel */
+  --background: oklch(0.972 0.005 80);          /* #f7f5f2 base */
+  --foreground: oklch(0.18 0.005 280);
+  --surface: oklch(0.16 0.005 280);             /* near-black #0c0c0e */
   --surface-foreground: oklch(0.97 0 0);
-  --surface-2:          oklch(0.28 0.005 60);  /* #4a4a4a card */
-  --brand:              oklch(0.62 0.21 30);   /* previous red */
-  --brand-foreground:   oklch(0.99 0 0);
-  --brand-glow:         oklch(0.70 0.20 28);   /* warmer red for glow */
-  --muted:              oklch(0.24 0.004 60);
-  --muted-foreground:   oklch(0.72 0.005 60);
-  --border:             oklch(0.32 0.005 60);
-  --ring:               oklch(0.62 0.21 30);
+  --base: oklch(0.972 0.005 80);
+  --kraft: oklch(0.91 0.012 80);                /* #e8e4dc */
+  --brand: oklch(0.51 0.20 27);                 /* #ba1a1a red */
+  --brand-foreground: oklch(0.99 0 0);
+  --muted: oklch(0.91 0.012 80);
+  --muted-foreground: oklch(0.45 0.01 280);
+  --border: oklch(0.85 0.01 80);
+  --ring: oklch(0.51 0.20 27);
+}
+
+.dark {
+  --background: oklch(0.16 0.005 280);
+  --foreground: oklch(0.97 0 0);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
-  html, body { background-color: var(--color-base); color: var(--color-foreground); }
-  body {
-    font-family: var(--font-sans);
-    font-feature-settings: 'ss01', 'cv11';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  ::selection { background: var(--brand); color: var(--brand-foreground); }
+  html, body { background-color: var(--color-background); color: var(--color-foreground); }
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 }
 
 /* Shared vertical section spacing scale.
@@ -125,43 +104,42 @@
 
 @utility display-1 {
   font-family: var(--font-display);
-  font-weight: 700;
+  text-transform: uppercase;
   font-size: 3.5rem;        /* 56px */
-  line-height: 0.92;
-  letter-spacing: -0.035em;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
   @media (min-width: 768px) {
-    font-size: 6.5rem;      /* 104px */
+    font-size: 6rem;        /* 96px */
   }
 }
 
 @utility display-2 {
   font-family: var(--font-display);
-  font-weight: 700;
+  text-transform: uppercase;
   font-size: 2.75rem;       /* 44px */
   line-height: 0.95;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   @media (min-width: 768px) {
-    font-size: 4.5rem;      /* 72px */
+    font-size: 4rem;        /* 64px */
   }
 }
 
 @utility display-3 {
   font-family: var(--font-display);
-  font-weight: 600;
+  text-transform: uppercase;
   font-size: 2.25rem;       /* 36px */
-  line-height: 1;
-  letter-spacing: -0.025em;
+  line-height: 0.95;
+  letter-spacing: -0.005em;
   @media (min-width: 768px) {
-    font-size: 3.25rem;     /* 52px */
+    font-size: 3rem;        /* 48px */
   }
 }
 
 @utility display-4 {
   font-family: var(--font-display);
-  font-weight: 600;
+  text-transform: uppercase;
   font-size: 1.5rem;        /* 24px */
-  line-height: 1.1;
-  letter-spacing: -0.015em;
+  line-height: 1.05;
   @media (min-width: 768px) {
     font-size: 2rem;        /* 32px */
   }
@@ -169,32 +147,17 @@
 
 @utility display-5 {
   font-family: var(--font-display);
-  font-weight: 600;
+  text-transform: uppercase;
   font-size: 1.25rem;       /* 20px */
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
   @media (min-width: 768px) {
     font-size: 1.5rem;      /* 24px */
   }
 }
 
-@utility display-mega {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 4.5rem;        /* 72px */
-  line-height: 0.88;
-  letter-spacing: -0.045em;
-  @media (min-width: 768px) {
-    font-size: 8rem;        /* 128px */
-  }
-  @media (min-width: 1280px) {
-    font-size: 10rem;       /* 160px */
-  }
-}
-
 @utility lead {
   font-size: 1.125rem;      /* 18px */
-  line-height: 1.55;
+  line-height: 1.6;
   font-weight: 400;
   @media (min-width: 768px) {
     font-size: 1.25rem;     /* 20px */
@@ -224,7 +187,7 @@
   line-height: 1.2;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.2em;
 }
 
 @utility label {
@@ -232,7 +195,7 @@
   line-height: 1.2;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.15em;
 }
 
 @utility micro {
@@ -241,17 +204,6 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-}
-
-@utility mono {
-  font-family: var(--font-mono);
-  font-feature-settings: 'tnum';
-  letter-spacing: -0.02em;
-}
-
-/* Ember underline used to mark up brand-accent words inline. */
-@utility ember {
-  color: var(--brand);
 }
 
 @keyframes shimmer-sweep {
@@ -274,7 +226,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 18px color-mix(in oklab, var(--brand) 55%, transparent);
+  text-shadow: 0 0 14px color-mix(in oklab, var(--brand) 45%, transparent);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -282,58 +234,3 @@
     animation: shimmer-sweep 4s linear infinite;
   }
 }
-
-/* Hero gradient stack used to vignette the reel and fade into the page. */
-@utility hero-veil {
-  background-image:
-    linear-gradient(180deg,
-      color-mix(in oklab, var(--base) 35%, transparent) 0%,
-      transparent 28%,
-      transparent 52%,
-      color-mix(in oklab, var(--base) 92%, transparent) 92%,
-      var(--base) 100%),
-    linear-gradient(100deg,
-      color-mix(in oklab, var(--base) 70%, transparent) 0%,
-      transparent 45%);
-}
-
-@utility grid-noir {
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, white 4%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, white 4%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-
-/* Subtle pulse for live status dots. */
-@keyframes ember-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(1.35); }
-}
-.ember-dot {
-  display: inline-block;
-  width: 0.5rem; height: 0.5rem;
-  border-radius: 9999px;
-  background: var(--brand);
-  box-shadow: 0 0 12px var(--brand);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .ember-dot { animation: ember-pulse 2.4s ease-in-out infinite; }
-}
-
-/* Magnetic / hoverable CTA polish. */
-.btn-ember {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms;
-}
-.btn-ember::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(120deg, transparent 0%, color-mix(in oklab, white 25%, transparent) 50%, transparent 100%);
-  transform: translateX(-110%);
-  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: -1;
-}
-.btn-ember:hover::after { transform: translateX(110%); }
-.btn-ember:hover { transform: translateY(-1px); }

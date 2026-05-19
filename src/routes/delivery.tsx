@@ -59,14 +59,14 @@ function DeliveryPage() {
 
       <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
-          <div className="bg-surface p-8 md:p-10 rounded-md ring-1 ring-white/10">
+          <div className="bg-kraft p-8 md:p-10 rounded-md ring-1 ring-zinc-300">
             <Warehouse className="size-10 text-brand mb-3 md:mb-6" />
             <h2 className="display-3 mb-4">Pick it up</h2>
-            <p className="text-zinc-300 mb-3 md:mb-6">
+            <p className="text-zinc-700 mb-3 md:mb-6">
               Bring a truck or trailer during business hours — no appointment
               necessary. We'll load you on arrival.
             </p>
-            <div className="space-y-2 text-sm text-zinc-300">
+            <div className="space-y-2 text-sm text-zinc-700">
               <p><strong>Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
               <p><strong>Hours (4/1 – 8/1):</strong> Mon–Fri 8a–5p · Sat 8a–3p · Sun closed</p>
               <p className="text-xs text-zinc-500 pt-2">
@@ -94,22 +94,22 @@ function DeliveryPage() {
         </div>
       </section>
 
-      <section className="section bg-surface border-y border-white/10">
+      <section className="section bg-kraft border-y border-zinc-300">
         <div className="max-w-5xl mx-auto px-5 md:px-6">
           <h2 className="display-3 mb-5 md:mb-10">
             What to Know Before Delivery
           </h2>
-          <ul className="divide-y divide-white/10">
+          <ul className="divide-y divide-zinc-300">
             {POLICIES.map(([k, v], i) => (
               <li key={k} className="py-6 grid grid-cols-[auto_1fr] gap-3 md:gap-6 items-start">
                 <span className="display-4 text-brand w-12">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <p className="display-4 text-white leading-tight">
+                  <p className="display-4 text-zinc-900 leading-tight">
                     {k}
                   </p>
-                  <p className="text-zinc-300 mt-2">{v}</p>
+                  <p className="text-zinc-700 mt-2">{v}</p>
                 </div>
               </li>
             ))}

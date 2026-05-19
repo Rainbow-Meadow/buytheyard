@@ -86,7 +86,7 @@ function ServiceAreaPage() {
             </a>
             <Link
               to="/quote"
-              className="inline-flex items-center gap-2 border border-white/25 text-white px-7 h-12 label hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-2 border border-white text-white px-7 h-12 label hover:bg-white hover:text-zinc-900 transition-colors"
             >
               Get a quote
             </Link>
@@ -98,7 +98,7 @@ function ServiceAreaPage() {
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex items-center gap-3 mb-5 md:mb-10">
             <Truck className="size-6 text-brand" />
-            <h2 className="display-3 text-white">
+            <h2 className="display-3 text-zinc-950">
               Towns We Deliver To
             </h2>
           </div>
@@ -106,12 +106,12 @@ function ServiceAreaPage() {
             {TOWNS.map((t) => (
               <li
                 key={t.name}
-                className="bg-surface ring-1 ring-white/10 p-6 rounded-md"
+                className="bg-kraft ring-1 ring-zinc-300 p-6 rounded-md"
               >
                 <div className="flex items-start gap-2 mb-2">
                   <MapPin className="size-4 text-brand mt-1 shrink-0" />
                   <div>
-                    <p className="display-4 text-white leading-tight">
+                    <p className="display-4 text-zinc-900 leading-tight">
                       {t.name}
                     </p>
                     <p className="label text-zinc-500 mt-1">
@@ -119,11 +119,11 @@ function ServiceAreaPage() {
                     </p>
                   </div>
                 </div>
-                <p className="text-sm text-zinc-300 mt-3">{t.blurb}</p>
+                <p className="text-sm text-zinc-700 mt-3">{t.blurb}</p>
               </li>
             ))}
           </ul>
-          <p className="mt-5 md:mt-10 text-sm text-zinc-400 max-w-[60ch]">
+          <p className="mt-5 md:mt-10 text-sm text-zinc-600 max-w-[60ch]">
             Don't see your town? We deliver throughout Worcester County
             and parts of Middlesex County. Give us a call and we'll
             confirm your ZIP and final price before dispatch.
@@ -131,12 +131,12 @@ function ServiceAreaPage() {
         </div>
       </section>
 
-      <section className="section bg-surface border-t border-white/10">
+      <section className="section bg-kraft border-t border-zinc-300">
         <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
           <h2 className="display-3 mb-4">
             Ready to schedule a delivery?
           </h2>
-          <p className="text-zinc-300 mb-3 md:mb-6">
+          <p className="text-zinc-700 mb-3 md:mb-6">
             Call Abby directly — every order is handled by the owner.
           </p>
           <a
