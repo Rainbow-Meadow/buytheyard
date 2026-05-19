@@ -138,7 +138,7 @@ export const Route = createFileRoute("/")({
               name: "How much does material cost?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number — same price for contractors and homeowners, one-yard minimum on all bulk orders.",
+                text: "Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number. One-yard minimum on all bulk orders.",
               },
             },
             {
@@ -309,7 +309,7 @@ function HomePage() {
               </span>
             </h1>
             <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-8 text-pretty leading-relaxed">
-              By the yard, from our Jefferson, MA lot. Best prices in Central Mass — same number for the contractor and the homeowner.
+              By the yard, from our Jefferson, MA lot. Best prices in Central Mass.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-9 text-zinc-200">
@@ -581,7 +581,7 @@ function HomePage() {
                 Call for Today's Prices
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Prices shift with the season, so we quote by phone — same number for contractors and homeowners. Cash and check avoid the 4% card fee.
+                Prices shift with the season, so we quote by phone. Cash and check avoid the 4% card fee.
               </p>
             </div>
             <a
@@ -678,8 +678,7 @@ function HomePage() {
                   <p>
                     Prices move with the season and the market, so we quote
                     today's number by phone — and we work to keep them the
-                    best in the area. Same price for contractors and
-                    homeowners, one-yard minimum on all bulk orders.
+                    best in the area. One-yard minimum on all bulk orders.
                   </p>
                   <p className="mt-3">
                     For your project, please{" "}
