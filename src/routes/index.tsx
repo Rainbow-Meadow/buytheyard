@@ -1,10 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
+import { ArrowRight, Facebook, Phone, Truck } from "lucide-react";
 import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
 import { products } from "@/data/products";
-import { ProductCard } from "@/components/site/ProductCard";
+import { promos } from "@/data/promos";
+import { ClassifiedCard } from "@/components/site/ClassifiedCard";
+import { RuleBar, DoubleRule } from "@/components/site/RuleBar";
+import { Ticker } from "@/components/site/Ticker";
+import { PullQuote } from "@/components/site/PullQuote";
+import { Stamp } from "@/components/site/Stamp";
+import { Caption } from "@/components/site/Caption";
 import {
   Accordion,
   AccordionContent,
@@ -46,51 +51,6 @@ const communityPosts = [
       "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family.",
   },
 ];
-
-function MobileCollapse({
-  id,
-  open,
-  onToggle,
-  label,
-  children,
-}: {
-  id: string;
-  open: boolean;
-  onToggle: () => void;
-  label: string;
-  children: ReactNode;
-}) {
-  return (
-    <>
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        aria-controls={id}
-        className="md:hidden w-full flex items-center justify-between gap-4 py-4 mt-2 text-left border-y border-zinc-300/70"
-      >
-        <span className="label text-zinc-900">
-          {open ? `Hide ${label}` : `Show ${label}`}
-        </span>
-        <ChevronDown
-          className={`size-5 text-zinc-700 transition-transform duration-300 motion-reduce:transition-none ${
-            open ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-      <div
-        id={id}
-        className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none md:!grid-rows-[1fr] ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
-      >
-        <div className="overflow-hidden md:overflow-visible">
-          <div className="pt-6 md:pt-0">{children}</div>
-        </div>
-      </div>
-    </>
-  );
-}
 
 export const Route = createFileRoute("/")({
   head: () => ({
