@@ -77,3 +77,131 @@
     padding-bottom: 5.5rem;/* 88px */
   }
 }
+
+/* =========================================================================
+   Typography schema — single source of truth.
+   Hierarchy:
+     Display (Saira Extra Condensed, UPPERCASE)
+       display-1  hero H1 (home + page hero pattern)
+       display-2  inner-route page H1
+       display-3  section H2 (default)
+       display-4  card title / accordion trigger / callout H3
+       display-5  small inline display (footer column heads, stat labels)
+     Sans (Inter)
+       lead       hero subhead / intro paragraph
+       body       default paragraph
+       body-sm    secondary copy, list items, captions
+       meta       timestamps, fine print, legal
+       eyebrow    kicker above H1/H2
+       label      button & CTA labels, nav links
+       micro      tiny stamps & chips (smallest stamp only)
+   Rules:
+     - One H1 per route.
+     - At most one display tier per section.
+     - Never use raw text-[Npx] or tracking-[Nem] — extend this schema instead.
+     - Color, max-w, leading-* modifiers compose freely on top.
+   ========================================================================= */
+
+@utility display-1 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 3.5rem;        /* 56px */
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  @media (min-width: 768px) {
+    font-size: 6rem;        /* 96px */
+  }
+}
+
+@utility display-2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 2.75rem;       /* 44px */
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  @media (min-width: 768px) {
+    font-size: 4rem;        /* 64px */
+  }
+}
+
+@utility display-3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 2.25rem;       /* 36px */
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  @media (min-width: 768px) {
+    font-size: 3rem;        /* 48px */
+  }
+}
+
+@utility display-4 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.5rem;        /* 24px */
+  line-height: 1.05;
+  @media (min-width: 768px) {
+    font-size: 2rem;        /* 32px */
+  }
+}
+
+@utility display-5 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.25rem;       /* 20px */
+  line-height: 1.1;
+  @media (min-width: 768px) {
+    font-size: 1.5rem;      /* 24px */
+  }
+}
+
+@utility lead {
+  font-size: 1.125rem;      /* 18px */
+  line-height: 1.6;
+  font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 1.25rem;     /* 20px */
+  }
+}
+
+@utility body {
+  font-size: 1rem;          /* 16px */
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+@utility body-sm {
+  font-size: 0.875rem;      /* 14px */
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+@utility meta {
+  font-size: 0.75rem;       /* 12px */
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+@utility eyebrow {
+  font-size: 0.6875rem;     /* 11px */
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+@utility label {
+  font-size: 0.75rem;       /* 12px */
+  line-height: 1.2;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+@utility micro {
+  font-size: 0.625rem;      /* 10px */
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
