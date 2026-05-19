@@ -694,7 +694,7 @@ function HomePage() {
             </p>
             <a
               href="tel:5085799897"
-              className="mt-3 md:mt-6 hidden md:inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
+              className="mt-5 md:mt-8 hidden md:inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -789,7 +789,7 @@ function HomePage() {
 
             <a
               href="tel:5085799897"
-              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 label text-white hover:text-brand"
+              className="md:hidden mt-5 inline-flex items-center gap-2 label text-white hover:text-brand"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -800,7 +800,7 @@ function HomePage() {
 
       {/* WBE strip */}
       <section className="bg-surface text-surface-foreground border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-4 md:gap-8 justify-between">
+        <div className="max-w-5xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-6 md:gap-10 justify-between">
           <div className="flex items-center gap-5">
             <img
               src={wbeSeal}
