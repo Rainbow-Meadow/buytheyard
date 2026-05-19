@@ -74,10 +74,10 @@ function ServiceAreaPage() {
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[18ch]">
             Across <span className="text-brand">Central Mass.</span>
           </h1>
-          <p className="mt-6 text-zinc-400 max-w-[62ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg">
             Mulch, loam, sand, gravel, and stone delivered from Jefferson across Worcester County.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-4 md:mt-8 flex flex-wrap gap-4">
             <a
               href="tel:5085799897"
               className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90"
@@ -96,7 +96,7 @@ function ServiceAreaPage() {
 
       <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex items-center gap-3 mb-10">
+          <div className="flex items-center gap-3 mb-5 md:mb-10">
             <Truck className="size-6 text-brand" />
             <h2 className="font-display text-4xl md:text-5xl uppercase text-zinc-950">
               Towns We Deliver To
@@ -123,7 +123,7 @@ function ServiceAreaPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-10 text-sm text-zinc-600 max-w-[60ch]">
+          <p className="mt-5 md:mt-10 text-sm text-zinc-600 max-w-[60ch]">
             Don't see your town? We deliver throughout Worcester County
             and parts of Middlesex County. Give us a call and we'll
             confirm your ZIP and final price before dispatch.
@@ -136,7 +136,7 @@ function ServiceAreaPage() {
           <h2 className="font-display text-4xl uppercase mb-4">
             Ready to schedule a delivery?
           </h2>
-          <p className="text-zinc-700 mb-6">
+          <p className="text-zinc-700 mb-3 md:mb-6">
             Call Abby directly — every order is handled by the owner.
           </p>
           <a

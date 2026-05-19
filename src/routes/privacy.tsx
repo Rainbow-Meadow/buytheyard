@@ -88,7 +88,7 @@ function PrivacyPage() {
                 to existing orders, and responses to inquiries.
               </li>
             </ul>
-            <p className="mt-6 text-sm text-zinc-600">
+            <p className="mt-3 md:mt-6 text-sm text-zinc-600">
               Questions? Email{" "}
               <a
                 href="mailto:abby@btymaterial.com"

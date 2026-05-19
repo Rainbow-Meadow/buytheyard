@@ -119,7 +119,7 @@ function QuotePage() {
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
             Tell us. <span className="text-brand">We'll price it.</span>
           </h1>
-          <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
             About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
           </p>
         </div>
@@ -136,7 +136,7 @@ function QuotePage() {
             <legend className="font-display text-3xl uppercase mb-2">
               <span className="text-brand">01.</span> What do you need?
             </legend>
-            <p className="text-sm text-zinc-600 mb-6">
+            <p className="text-sm text-zinc-600 mb-3 md:mb-6">
               One row per material. Ballpark the quantity — we'll dial it in on the phone.
             </p>
 
@@ -278,7 +278,7 @@ function QuotePage() {
 
           {/* FULFILLMENT */}
           <fieldset>
-            <legend className="font-display text-3xl uppercase mb-6">
+            <legend className="font-display text-3xl uppercase mb-3 md:mb-6">
               <span className="text-brand">02.</span> Pickup or delivery?
             </legend>
 
@@ -313,7 +313,7 @@ function QuotePage() {
             </div>
 
             {fulfillment === "Delivery" && (
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
+              <div className="mt-3 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
                 <div>
                   <label className={labelCls}>Town</label>
                   <select className={inputCls} {...register("town")}>
@@ -431,7 +431,7 @@ function QuotePage() {
 
           {/* CONTACT */}
           <fieldset>
-            <legend className="font-display text-3xl uppercase mb-6">
+            <legend className="font-display text-3xl uppercase mb-3 md:mb-6">
               <span className="text-brand">03.</span> How do we reach you?
             </legend>
 
@@ -591,7 +591,7 @@ function SuccessView({
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
             Send it to <span className="text-brand">Abby.</span>
           </h1>
-          <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
             One tap opens mail or messages with the full request typed. Hit send — she'll be back the same day.
           </p>
         </div>
