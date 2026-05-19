@@ -651,8 +651,8 @@ function HomePage() {
 
       {/* Pricing */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="max-w-2xl">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+          <div className="md:col-span-7">
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
               <Tag className="size-3.5" />
               Today's prices by phone
@@ -681,6 +681,81 @@ function HomePage() {
             </div>
           </div>
 
+          {/* Hang-tag price tag (decorative) */}
+          <div
+            aria-hidden="true"
+            className="hidden md:flex md:col-span-5 items-center justify-center relative"
+          >
+            {/* Back tag for depth */}
+            <div className="absolute w-[300px] h-[400px] rotate-[7deg] translate-x-6 translate-y-3 bg-[#e2dccb] ring-1 ring-zinc-900/10 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.25)]" />
+
+            {/* Twine */}
+            <svg
+              className="absolute -top-2 left-1/2 -translate-x-[120px] -rotate-[4deg]"
+              width="80"
+              height="90"
+              viewBox="0 0 80 90"
+              fill="none"
+            >
+              <path
+                d="M 40 0 C 20 25, 60 45, 40 85"
+                stroke="#9b8b6a"
+                strokeWidth="2"
+                strokeDasharray="3 3"
+                fill="none"
+              />
+            </svg>
+
+            {/* Front tag */}
+            <div
+              className="relative -rotate-[4deg] w-[300px] h-[400px] bg-[#f1ebdc] ring-1 ring-zinc-900/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.35)] px-7 pt-14 pb-7 flex flex-col"
+              style={{
+                backgroundImage:
+                  "radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0))",
+                backgroundSize: "6px 6px, 100% 100%",
+              }}
+            >
+              {/* Punched hole */}
+              <div className="absolute top-5 left-1/2 -translate-x-1/2 size-4 rounded-full bg-zinc-900/80 ring-2 ring-[#f1ebdc] shadow-inner" />
+
+              {/* Stamps */}
+              <div className="flex items-center justify-between">
+                <span className="micro text-zinc-700">Buy The Yard</span>
+                <span className="micro text-zinc-500">Est. Agawam</span>
+              </div>
+
+              {/* Headline */}
+              <div className="mt-4">
+                <p className="display-4 text-brand leading-[0.9]">Today's</p>
+                <p className="display-4 text-brand leading-[0.9]">Price</p>
+              </div>
+
+              <div className="mt-4 border-t border-dashed border-zinc-900/20" />
+
+              {/* Category rows */}
+              <ul className="mt-4 space-y-2.5">
+                {["Mulch", "Loam", "Stone", "Garden"].map((c) => (
+                  <li key={c} className="flex items-baseline gap-2">
+                    <span className="meta text-zinc-800">{c}</span>
+                    <span className="flex-1 border-b border-dotted border-zinc-900/25 translate-y-[-3px]" />
+                    <span className="meta text-zinc-600 italic">call</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-4 border-t border-dashed border-zinc-900/20" />
+
+              {/* Phone stamp */}
+              <div className="mt-auto relative">
+                <span className="absolute inset-0 flex items-center justify-center -rotate-6 micro text-brand/20 tracking-[0.4em]">
+                  ★ TODAY ★
+                </span>
+                <p className="relative display-5 text-zinc-900 text-center">
+                  508.579.9897
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
