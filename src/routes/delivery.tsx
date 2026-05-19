@@ -38,10 +38,10 @@ function DeliveryPage() {
     <>
       <section className="bg-surface text-surface-foreground">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
+          <p className="eyebrow text-brand mb-4">
             Delivery &amp; Pickup
           </p>
-          <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
+          <h1 className="display-1 leading-[0.9] max-w-[16ch]">
             You call. <span className="text-brand">We deliver.</span>
           </h1>
           <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg">
@@ -61,7 +61,7 @@ function DeliveryPage() {
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
           <div className="bg-kraft p-8 md:p-10 rounded-md ring-1 ring-zinc-300">
             <Warehouse className="size-10 text-brand mb-3 md:mb-6" />
-            <h2 className="font-display text-4xl uppercase mb-4">Pick it up</h2>
+            <h2 className="display-3 mb-4">Pick it up</h2>
             <p className="text-zinc-700 mb-3 md:mb-6">
               Bring a truck or trailer during business hours — no appointment
               necessary. We'll load you on arrival.
@@ -78,7 +78,7 @@ function DeliveryPage() {
 
           <div className="bg-surface text-surface-foreground p-8 md:p-10 rounded-md">
             <Truck className="size-10 text-brand mb-3 md:mb-6" />
-            <h2 className="font-display text-4xl uppercase mb-4">Delivery</h2>
+            <h2 className="display-3 mb-4">Delivery</h2>
             <p className="text-zinc-300 mb-3 md:mb-6">
               Curbside delivery throughout Central Massachusetts. Call to
               confirm your delivery zone, scheduling window, and final price
@@ -86,7 +86,7 @@ function DeliveryPage() {
             </p>
             <a
               href="tel:5085799897"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 text-sm font-semibold uppercase tracking-widest hover:opacity-90"
+              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90"
             >
               <Phone className="size-4" /> 508.579.9897
             </a>
@@ -96,17 +96,17 @@ function DeliveryPage() {
 
       <section className="section bg-kraft border-y border-zinc-300">
         <div className="max-w-5xl mx-auto px-5 md:px-6">
-          <h2 className="font-display text-4xl md:text-5xl uppercase mb-5 md:mb-10">
+          <h2 className="display-3 mb-5 md:mb-10">
             What to Know Before Delivery
           </h2>
           <ul className="divide-y divide-zinc-300">
             {POLICIES.map(([k, v], i) => (
               <li key={k} className="py-6 grid grid-cols-[auto_1fr] gap-3 md:gap-6 items-start">
-                <span className="font-display text-3xl text-brand w-12">
+                <span className="display-4 text-brand w-12">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <p className="font-display text-2xl uppercase text-zinc-900 leading-tight">
+                  <p className="display-4 text-zinc-900 leading-tight">
                     {k}
                   </p>
                   <p className="text-zinc-700 mt-2">{v}</p>
@@ -121,7 +121,7 @@ function DeliveryPage() {
         <div className="max-w-3xl mx-auto px-5 md:px-6 flex flex-col md:flex-row items-start gap-3 md:gap-6 p-8 bg-surface text-surface-foreground rounded-md">
           <CreditCard className="size-10 text-brand shrink-0" />
           <div>
-            <h3 className="font-display text-2xl uppercase mb-2">
+            <h3 className="display-4 mb-2">
               Card Processing Fee
             </h3>
             <p className="text-zinc-300">

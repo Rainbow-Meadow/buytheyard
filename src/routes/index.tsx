@@ -79,7 +79,7 @@ function MobileCollapse({
         aria-controls={id}
         className="md:hidden w-full flex items-center justify-between gap-4 py-4 mt-2 text-left border-y border-zinc-300/70"
       >
-        <span className="text-xs font-bold uppercase tracking-widest text-zinc-900">
+        <span className="label text-zinc-900">
           {open ? `Hide ${label}` : `Show ${label}`}
         </span>
         <ChevronDown
@@ -275,7 +275,7 @@ function HomePage() {
 
         <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-5 md:px-6 section-loose self-center w-full">
           <div>
-            <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-200 mb-5 pb-2 border-b border-white/30">
+            <p className="inline-flex items-center gap-2.5 eyebrow text-zinc-200 mb-5 pb-2 border-b border-white/30">
               <img
                 src={abbyPortrait}
                 alt="Abby, owner of Buy The Yard, standing in front of the yard in Jefferson, MA"
@@ -287,7 +287,7 @@ function HomePage() {
               />
               Hi, I'm Abby — owner · Jefferson, MA
             </p>
-            <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance mb-4 md:mb-7 text-white">
+            <h1 className="display-2 leading-[0.95] text-balance mb-4 md:mb-7 text-white">
               Mulch. Loam. Sand.{" "}
               <span className="relative inline-block text-brand">
                 Stone.
@@ -322,12 +322,12 @@ function HomePage() {
                   loading="lazy"
                   decoding="async"
                 />
-                <span className="text-xs uppercase tracking-[0.18em] font-semibold">
+                <span className="label">
                   Mass. WBE Certified
                 </span>
               </span>
               <span className="hidden sm:inline-block h-6 w-px bg-white/30" />
-              <span className="text-xs uppercase tracking-[0.18em] font-semibold">
+              <span className="label">
                 10th season · Est. 2016
               </span>
             </div>
@@ -335,20 +335,20 @@ function HomePage() {
             <div className="flex flex-wrap items-center gap-4">
               <Link
                 to="/products"
-                className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
               >
                 Shop materials
                 <ArrowRight className="size-4" />
               </Link>
               <Link
                 to="/quote"
-                className="inline-flex items-center gap-2 border border-white text-white px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:bg-white hover:text-zinc-900 transition-colors"
+                className="inline-flex items-center gap-2 border border-white text-white px-7 h-12 label hover:bg-white hover:text-zinc-900 transition-colors"
               >
                 Get a quote
               </Link>
               <a
                 href="tel:5085799897"
-                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white hover:text-brand transition-colors h-12 px-1"
+                className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors h-12 px-1"
               >
                 <Phone className="size-4" />
                 Call Abby · 508.579.9897
@@ -368,8 +368,8 @@ function HomePage() {
             { k: "1 yard", v: "Minimum order size" },
           ].map((s) => (
             <div key={s.k}>
-              <p className="font-display text-3xl text-brand uppercase leading-none">{s.k}</p>
-              <p className="mt-2 text-xs uppercase tracking-widest text-zinc-500">{s.v}</p>
+              <p className="display-4 text-brand uppercase leading-none">{s.k}</p>
+              <p className="mt-2 label text-zinc-500">{s.v}</p>
             </div>
           ))}
         </div>
@@ -380,10 +380,10 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-5 md:mb-10">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
+              <p className="eyebrow text-brand mb-3">
                 Bulk materials &amp; garden center
               </p>
-            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
+            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch]">
               Featured Materials
             </h2>
             </div>
@@ -410,7 +410,7 @@ function HomePage() {
               </div>
               <Link
                 to="/products"
-                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+                className="inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
               >
                 See full catalog <ArrowRight className="size-4" />
               </Link>
@@ -432,7 +432,7 @@ function HomePage() {
                 </div>
               ))}
             </div>
-            <p className="md:hidden mt-3 px-6 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
+            <p className="md:hidden mt-3 px-6 eyebrow text-zinc-500">
               Swipe to browse →
             </p>
           </div>
@@ -443,11 +443,11 @@ function HomePage() {
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
         <div className="max-w-3xl mx-auto px-5 md:px-6">
           <div>
-            <p className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-brand mb-4">
+            <p className="inline-flex items-center gap-2 eyebrow text-brand mb-4">
               <Facebook className="size-3.5" />
               On Facebook
             </p>
-            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-white max-w-[16ch]">
+            <h2 className="display-3 leading-[0.95] text-white max-w-[16ch]">
               Where the yard <span className="text-brand">lives.</span>
             </h2>
             <p className="mt-3 md:mt-6 text-zinc-300 text-lg leading-relaxed max-w-[52ch]">
@@ -472,7 +472,7 @@ function HomePage() {
                 href="https://www.facebook.com/BuyTheYardOutdoorProducts"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2.5 bg-[#1877F2] text-white px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90 transition-opacity rounded-sm"
+                className="inline-flex items-center gap-2.5 bg-[#1877F2] text-white px-7 h-12 label hover:opacity-90 transition-opacity rounded-sm"
               >
                 <Facebook className="size-4" />
                 Follow on Facebook
@@ -489,11 +489,11 @@ function HomePage() {
       {/* Reviews from Facebook */}
       <section className="section bg-base border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
+          <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
             <Facebook className="size-3.5" />
             From Facebook · real customers, real posts
           </p>
-          <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[20ch]">
+          <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[20ch]">
             What neighbors say.
           </h2>
 
@@ -509,10 +509,10 @@ function HomePage() {
                   <span>·</span>
                   <span>{r.date}</span>
                 </div>
-                <blockquote className="font-display text-xl leading-snug text-zinc-900 flex-1">
+                <blockquote className="display-5 leading-snug text-zinc-900 flex-1">
                   &ldquo;{r.quote}&rdquo;
                 </blockquote>
-                <figcaption className="mt-5 text-[10px] font-bold uppercase tracking-[0.18em] text-brand">
+                <figcaption className="mt-5 eyebrow text-brand">
                   Recommends Buy The Yard
                 </figcaption>
               </figure>
@@ -520,7 +520,7 @@ function HomePage() {
           </div>
 
           <div className="mt-5 md:mt-10 border-t border-zinc-300/70 pt-8">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-5">
+            <p className="eyebrow text-zinc-500 mb-5">
               Community
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
@@ -545,11 +545,11 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 md:mb-12">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
+              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                 <Tag className="size-3.5" />
               Today's prices by phone
               </p>
-              <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[18ch]">
+              <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[18ch]">
                 Call for Today's Prices
               </h2>
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
@@ -558,7 +558,7 @@ function HomePage() {
             </div>
             <a
               href="tel:5085799897"
-              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              className="hidden md:inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
             >
               <Phone className="size-4" />
               Call for a quote
@@ -577,13 +577,13 @@ function HomePage() {
                   key={group.heading}
                   className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
                 >
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
+                  <p className="eyebrow text-brand mb-3">
                     {group.heading}
                   </p>
-                  <p className="font-display text-3xl uppercase text-zinc-950 leading-tight mb-2">
+                  <p className="display-4 text-zinc-950 leading-tight mb-2">
                     Call for today's price
                   </p>
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-4">
+                  <p className="eyebrow text-zinc-500 mb-4">
                     {group.unit}
                   </p>
                   <p className="text-sm text-zinc-700 mt-auto pt-4 border-t border-zinc-200">
@@ -607,7 +607,7 @@ function HomePage() {
 
             <a
               href="tel:5085799897"
-              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
             >
               <Phone className="size-4" />
               Call for a quote
@@ -620,11 +620,11 @@ function HomePage() {
       <section className="section bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-16">
           <div className="md:col-span-5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
+            <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
               <HelpCircle className="size-3.5" />
               Before you call
             </p>
-            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[16ch]">
+            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch]">
               Frequently Asked Questions
             </h2>
             <p className="mt-5 text-zinc-700 max-w-[42ch] text-pretty">
@@ -633,7 +633,7 @@ function HomePage() {
             </p>
             <a
               href="tel:5085799897"
-              className="mt-3 md:mt-6 hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              className="mt-3 md:mt-6 hidden md:inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -643,7 +643,7 @@ function HomePage() {
           <div className="md:col-span-7">
             <Accordion type="single" collapsible className="bg-white rounded-md ring-1 ring-zinc-300/70 px-2 md:px-4">
               <AccordionItem value="pricing" className="border-zinc-200 last:border-0">
-                <AccordionTrigger className="font-display text-lg md:text-xl uppercase tracking-tight text-zinc-950 py-5 hover:no-underline">
+                <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   How much does material cost?
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
@@ -667,7 +667,7 @@ function HomePage() {
               </AccordionItem>
 
               <AccordionItem value="delivery-area" className="border-zinc-200 last:border-0">
-                <AccordionTrigger className="font-display text-lg md:text-xl uppercase tracking-tight text-zinc-950 py-5 hover:no-underline">
+                <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   Do you deliver to my town?
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
@@ -690,7 +690,7 @@ function HomePage() {
               </AccordionItem>
 
               <AccordionItem value="card-fee" className="border-zinc-200 last:border-0">
-                <AccordionTrigger className="font-display text-lg md:text-xl uppercase tracking-tight text-zinc-950 py-5 hover:no-underline">
+                <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   What's the 4% card fee about?
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
@@ -704,7 +704,7 @@ function HomePage() {
               </AccordionItem>
 
               <AccordionItem value="timing" className="border-zinc-200 last:border-0">
-                <AccordionTrigger className="font-display text-lg md:text-xl uppercase tracking-tight text-zinc-950 py-5 hover:no-underline">
+                <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   How fast can I get a delivery?
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
@@ -728,7 +728,7 @@ function HomePage() {
 
             <a
               href="tel:5085799897"
-              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -750,7 +750,7 @@ function HomePage() {
         <div className="relative max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
           <div>
             <Truck className="size-10 text-brand mb-3 md:mb-6" />
-            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] mb-3 md:mb-6">
+            <h2 className="display-3 leading-[0.95] mb-3 md:mb-6">
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-4 md:mb-8">
@@ -758,7 +758,7 @@ function HomePage() {
             </p>
             <Link
               to="/delivery"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90"
+              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
             >
               Delivery details <ArrowRight className="size-4" />
             </Link>
@@ -779,7 +779,7 @@ function HomePage() {
                 ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
-                  <p className="font-display text-xl uppercase">{k}</p>
+                  <p className="display-5">{k}</p>
                   <p className="text-sm text-zinc-400 mt-1">{v}</p>
                 </li>
               ))}
@@ -802,13 +802,13 @@ function HomePage() {
               decoding="async"
             />
             <div>
-              <p className="font-display text-2xl uppercase">Certified Woman-Owned</p>
+              <p className="display-4">Certified Woman-Owned</p>
               <p className="text-sm text-zinc-600">Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.</p>
             </div>
           </div>
           <Link
             to="/about"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+            className="inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
           >
             Meet Abby <ArrowRight className="size-4" />
           </Link>
