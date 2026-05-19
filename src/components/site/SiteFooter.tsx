@@ -92,20 +92,6 @@ export function SiteFooter() {
           {/* Hours */}
           <div className="flex justify-center">
             <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
-              <div className="space-y-1 mb-6">
-                <a
-                  href="tel:5085799897"
-                  className="block display-5 text-brand hover:text-white transition-colors"
-                >
-                  508.579.9897
-                </a>
-                <a
-                  href="mailto:abby@btymaterial.com"
-                  className="block body-sm text-zinc-300 hover:text-white transition-colors"
-                >
-                  abby@btymaterial.com
-                </a>
-              </div>
               <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
                 Hours
               </h3>
@@ -126,6 +112,20 @@ export function SiteFooter() {
               <p className="mt-4 meta text-zinc-500 leading-relaxed">
                 In-season 4/1 – 8/1. After 8/1: by appointment. Winter salt year-round.
               </p>
+              <div className="mt-6 space-y-1">
+                <a
+                  href="tel:5085799897"
+                  className="block display-5 text-brand hover:text-white transition-colors"
+                >
+                  508.579.9897
+                </a>
+                <a
+                  href="mailto:abby@btymaterial.com"
+                  className="block body-sm text-zinc-300 hover:text-white transition-colors"
+                >
+                  abby@btymaterial.com
+                </a>
+              </div>
             </div>
           </div>
         </div>
