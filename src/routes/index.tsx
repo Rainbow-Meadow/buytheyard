@@ -333,27 +333,6 @@ function HomePage() {
                 Call Abby · 508.579.9897
               </a>
             </div>
-
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-zinc-200">
-              <span className="inline-flex items-center gap-2.5">
-                <img
-                  src={wbeSeal}
-                  alt=""
-                  width={88}
-                  height={56}
-                  className="h-10 w-auto object-contain bg-white/90 rounded-sm p-1"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className="label">
-                  Mass. WBE Certified
-                </span>
-              </span>
-              <span className="inline-block h-5 w-px bg-white/25" />
-              <span className="label">
-                10th season · Est. 2016
-              </span>
-            </div>
           </div>
         </div>
       </section>
