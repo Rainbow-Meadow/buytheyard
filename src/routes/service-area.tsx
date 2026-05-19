@@ -86,7 +86,7 @@ function ServiceAreaPage() {
             </a>
             <Link
               to="/quote"
-              className="inline-flex items-center gap-2 border border-white text-white px-7 h-12 label hover:bg-white hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 border border-white/25 text-white px-7 h-12 label hover:bg-white/10 transition-colors"
             >
               Get a quote
             </Link>
