@@ -117,11 +117,10 @@ function QuotePage() {
             Get a quote
           </p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
-            Tell us what you need. <span className="text-brand">We'll tell you what it costs.</span>
+            Tell us. <span className="text-brand">We'll price it.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            About 60 seconds of clicking. Then one tap sends it straight to Abby —
-            email or text, your call — and she comes back with the number and a window.
+            About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
           </p>
         </div>
       </section>
@@ -593,8 +592,7 @@ function SuccessView({
             Send it to <span className="text-brand">Abby.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            One tap opens your mail or messages with the whole request already typed.
-            No attachments. No extra steps. Hit send and she'll be back to you the same day.
+            One tap opens mail or messages with the full request typed. Hit send — she'll be back the same day.
           </p>
         </div>
       </section>
