@@ -54,10 +54,10 @@ export const Route = createFileRoute("/quote")({
 });
 
 const inputCls =
-  "w-full bg-newsprint text-ink px-3 h-11 border-2 border-ink/30 rounded-none font-sans text-sm focus:outline-none focus:border-stamp placeholder:text-ink-soft/60";
+  "w-full bg-white text-zinc-900 px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-brand placeholder:text-zinc-400";
 const labelCls =
-  "eyebrow text-ink mb-2 block";
-const errorCls = "meta text-stamp mt-1 normal-case";
+  "eyebrow text-zinc-700 mb-2 block";
+const errorCls = "text-xs text-red-700 mt-1";
 
 const sortedProducts = [...products].sort((a, b) => {
   const ca = categories.indexOf(a.category);
@@ -111,33 +111,32 @@ function QuotePage() {
 
   return (
     <>
-      <section className="bg-newsprint paper-grain border-b-4 border-ink">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8">
-          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
-            <span className="dateline text-ink-soft">ORDER FORM · § Q</span>
-            <span className="dateline text-ink-soft hidden sm:inline">FILE WITH ABBY · ~60 SECONDS</span>
-          </div>
-          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[18ch]">
-            Tell us. <span className="text-stamp">We'll price it.</span>
+      <section className="bg-surface text-surface-foreground">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
+          <p className="eyebrow text-brand mb-4">
+            Get a quote
+          </p>
+          <h1 className="display-2 leading-[0.9] max-w-[18ch]">
+            Tell us. <span className="text-brand">We'll price it.</span>
           </h1>
-          <p className="lead mt-4 max-w-[60ch] text-ink-soft not-italic">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
             About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
           </p>
         </div>
       </section>
 
-      <section className="section bg-newsprint-2 border-b border-rule-strong">
+      <section className="section bg-base">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-3xl mx-auto px-5 md:px-8 space-y-12"
+          className="max-w-3xl mx-auto px-5 md:px-6 space-y-12"
           noValidate
         >
           {/* PRODUCTS */}
           <fieldset>
-            <legend className="display-3 text-ink mb-2 pb-3 rule-thick w-full">
-              <span className="text-stamp mr-2">§ 01</span> What do you need?
+            <legend className="display-4 mb-2">
+              <span className="text-brand">01.</span> What do you need?
             </legend>
-            <p className="body-sm text-ink-soft mb-5 mt-3">
+            <p className="text-sm text-zinc-600 mb-3 md:mb-6">
               One row per material. Ballpark the quantity — we'll dial it in on the phone.
             </p>
 
@@ -148,11 +147,8 @@ function QuotePage() {
                 return (
                   <div
                     key={field.id}
-                    className="bg-newsprint p-4 md:p-5 border-2 border-ink/80 relative"
+                    className="bg-kraft p-4 md:p-5 rounded-md ring-1 ring-zinc-300"
                   >
-                    <span className="absolute -top-3 left-3 bg-newsprint px-2 dateline text-ink-soft">
-                      № {String(idx + 1).padStart(2, "0")}
-                    </span>
                     <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 items-end">
                       <div>
                         <label className={labelCls}>Product</label>
@@ -198,11 +194,11 @@ function QuotePage() {
                           control={control}
                           name={`items.${idx}.quantity`}
                           render={({ field: f }) => (
-                            <div className="flex items-center border-2 border-ink/30 bg-newsprint h-11">
+                            <div className="flex items-center ring-1 ring-zinc-300 rounded-sm bg-white h-11">
                               <button
                                 type="button"
                                 aria-label="Decrease quantity"
-                                className="px-3 h-full text-ink-soft hover:text-stamp"
+                                className="px-3 h-full text-zinc-600 hover:text-brand"
                                 onClick={() =>
                                   f.onChange(Math.max(1, Number(f.value) - 1))
                                 }
@@ -222,12 +218,12 @@ function QuotePage() {
                                       : Math.max(1, Number(e.target.value)),
                                   )
                                 }
-                                className="w-14 text-center bg-transparent text-ink font-mono text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                className="w-14 text-center bg-transparent text-zinc-900 text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                               />
                               <button
                                 type="button"
                                 aria-label="Increase quantity"
-                                className="px-3 h-full text-ink-soft hover:text-stamp"
+                                className="px-3 h-full text-zinc-600 hover:text-brand"
                                 onClick={() =>
                                   f.onChange(Math.min(999, Number(f.value) + 1))
                                 }
@@ -259,7 +255,7 @@ function QuotePage() {
                         aria-label="Remove product"
                         disabled={items.fields.length === 1}
                         onClick={() => items.remove(idx)}
-                        className="h-11 px-3 text-ink-soft hover:text-stamp disabled:opacity-30 disabled:cursor-not-allowed"
+                        className="h-11 px-3 text-zinc-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed"
                       >
                         <Trash2 className="size-4" />
                       </button>
@@ -274,29 +270,26 @@ function QuotePage() {
               onClick={() =>
                 items.append({ product: "", quantity: 1, unit: "cu yd" })
               }
-              className="mt-5 inline-flex items-center gap-2 label text-ink hover:text-stamp border-2 border-ink/40 px-4 h-11 hover:border-stamp"
+              className="mt-4 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
             >
-              <Plus className="size-4" /> Add another row
+              <Plus className="size-4" /> Add another product
             </button>
           </fieldset>
 
           {/* FULFILLMENT */}
           <fieldset>
-            <legend className="display-3 text-ink mb-2 pb-3 rule-thick w-full">
-              <span className="text-stamp mr-2">§ 02</span> Pickup or delivery?
+            <legend className="display-4 mb-3 md:mb-6">
+              <span className="text-brand">02.</span> Pickup or delivery?
             </legend>
-            <p className="body-sm text-ink-soft mb-5 mt-3">
-              Pickup if you've got a truck. Delivery if you don't.
-            </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {(["Pickup", "Delivery"] as const).map((opt) => (
                 <label
                   key={opt}
-                  className={`cursor-pointer p-5 border-2 transition-colors ${
+                  className={`cursor-pointer rounded-md p-5 ring-1 transition-colors ${
                     fulfillment === opt
-                      ? "bg-ink text-newsprint border-ink"
-                      : "bg-newsprint text-ink border-ink/30 hover:border-ink"
+                      ? "bg-surface text-surface-foreground ring-brand"
+                      : "bg-kraft text-zinc-900 ring-zinc-300 hover:ring-zinc-500"
                   }`}
                 >
                   <input
@@ -305,11 +298,11 @@ function QuotePage() {
                     {...register("fulfillment")}
                     className="sr-only"
                   />
-                  <p className="display-4 leading-none uppercase">
+                  <p className="display-4 leading-none">
                     {opt}
                   </p>
                   <p
-                    className={`body-sm mt-2 ${fulfillment === opt ? "text-newsprint/70" : "text-ink-soft"}`}
+                    className={`text-sm mt-2 ${fulfillment === opt ? "text-zinc-300" : "text-zinc-600"}`}
                   >
                     {opt === "Pickup"
                       ? "I've got a truck or trailer and I'll come grab it."
@@ -320,7 +313,7 @@ function QuotePage() {
             </div>
 
             {fulfillment === "Delivery" && (
-              <div className="mt-4 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-newsprint-2 p-5 md:p-6 border-2 border-ink/80">
+              <div className="mt-3 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
                 <div>
                   <label className={labelCls}>Town</label>
                   <select className={inputCls} {...register("town")}>
@@ -359,15 +352,15 @@ function QuotePage() {
                     {DROP_SPOTS.map((d) => (
                       <label
                         key={d}
-                        className="flex items-center gap-3 bg-newsprint px-3 h-11 border-2 border-ink/30 text-sm cursor-pointer hover:border-ink has-[:checked]:border-stamp has-[:checked]:bg-stamp/5"
+                        className="flex items-center gap-3 bg-white px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2"
                       >
                         <input
                           type="radio"
                           value={d}
                           {...register("dropSpot")}
-                          className="accent-[var(--stamp)]"
+                          className="accent-[var(--brand)]"
                         />
-                        <span className="text-ink">{d}</span>
+                        <span className="text-zinc-900">{d}</span>
                       </label>
                     ))}
                   </div>
@@ -384,7 +377,7 @@ function QuotePage() {
                     {TIMING.map((t) => (
                       <label
                         key={t}
-                        className="flex items-center justify-center text-center bg-newsprint px-2 h-11 border-2 border-ink/30 font-mono text-xs font-semibold cursor-pointer hover:border-ink has-[:checked]:border-stamp has-[:checked]:bg-stamp has-[:checked]:text-newsprint text-ink uppercase tracking-wide"
+                        className="flex items-center justify-center text-center bg-white px-2 h-11 ring-1 ring-zinc-300 rounded-sm text-xs font-semibold cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900 uppercase tracking-wide"
                       >
                         <input
                           type="radio"
@@ -415,11 +408,11 @@ function QuotePage() {
                   )}
                 </div>
 
-                <label className="md:col-span-2 flex items-start gap-3 body-sm text-ink cursor-pointer border-t-2 border-ink/20 pt-4">
+                <label className="md:col-span-2 flex items-start gap-3 text-sm text-zinc-800 cursor-pointer">
                   <input
                     type="checkbox"
                     {...register("acknowledged")}
-                    className="mt-1 size-4 accent-[var(--stamp)]"
+                    className="mt-1 size-4 accent-[var(--brand)]"
                   />
                   <span>
                     I understand the <strong>1-yard minimum</strong> and
@@ -438,12 +431,9 @@ function QuotePage() {
 
           {/* CONTACT */}
           <fieldset>
-            <legend className="display-3 text-ink mb-2 pb-3 rule-thick w-full">
-              <span className="text-stamp mr-2">§ 03</span> How do we reach you?
+            <legend className="display-4 mb-3 md:mb-6">
+              <span className="text-brand">03.</span> How do we reach you?
             </legend>
-            <p className="body-sm text-ink-soft mb-5 mt-3">
-              We use this once — to get back to you with the number.
-            </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -491,7 +481,7 @@ function QuotePage() {
                   {CONTACT_METHODS.map((m) => (
                     <label
                       key={m}
-                      className="flex items-center justify-center bg-newsprint px-2 h-11 border-2 border-ink/30 label cursor-pointer hover:border-ink has-[:checked]:border-stamp has-[:checked]:bg-stamp has-[:checked]:text-newsprint text-ink"
+                      className="flex items-center justify-center bg-kraft px-2 h-11 ring-1 ring-zinc-300 rounded-sm label cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900"
                     >
                       <input
                         type="radio"
@@ -509,10 +499,10 @@ function QuotePage() {
 
           {/* NOTES */}
           <fieldset>
-            <legend className="display-3 text-ink mb-2 pb-3 rule-thick w-full">
-              <span className="text-stamp mr-2">§ 04</span> Anything else?
+            <legend className="display-4 mb-2">
+              <span className="text-brand">04.</span> Anything else?
             </legend>
-            <p className="body-sm text-ink-soft mb-3 mt-3">
+            <p className="text-sm text-zinc-600 mb-3">
               Optional. Steep driveway, gate code, "leave it by the rhododendron" — anything Abby should know.
             </p>
             <NotesField register={register} watch={watch} />
@@ -521,19 +511,19 @@ function QuotePage() {
             )}
           </fieldset>
 
-          <div className="pt-6 border-t-4 border-ink flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="meta text-ink-soft max-w-[40ch] normal-case">
+          <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <p className="text-xs text-zinc-600 max-w-[40ch]">
               Next screen previews your request so you can send it in one tap. Submitting means you agree to our{" "}
-              <Link to="/privacy" className="underline hover:text-ink">
+              <Link to="/privacy" className="underline hover:text-zinc-900">
                 Privacy &amp; Terms
               </Link>
               .
             </p>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 bg-ink text-newsprint px-7 h-12 label hover:bg-stamp btn-press disabled:opacity-50"
+              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 disabled:opacity-50"
             >
-              File this request →
+              Send my request
             </button>
           </div>
         </form>
@@ -559,7 +549,7 @@ function NotesField({
         className={`${inputCls} h-auto py-3 resize-y min-h-[110px]`}
         {...register("notes")}
       />
-      <p className="meta text-ink-soft mt-1 text-right tabular-nums">
+      <p className="meta text-zinc-500 mt-1 text-right tabular-nums">
         {value.length}/500
       </p>
     </div>
@@ -593,42 +583,39 @@ function SuccessView({
 
   return (
     <>
-      <section className="bg-newsprint paper-grain border-b-4 border-ink">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8">
-          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
-            <span className="dateline text-ink-soft inline-flex items-center gap-2">
-              <Check className="size-3.5 text-stamp" /> REQUEST READY · § Q-OUT
-            </span>
-            <span className="dateline text-ink-soft hidden sm:inline">ONE TAP TO SEND</span>
-          </div>
-          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[18ch]">
-            Send it to <span className="text-stamp">Abby.</span>
+      <section className="bg-surface text-surface-foreground">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
+          <p className="eyebrow text-brand mb-4 inline-flex items-center gap-2">
+            <Check className="size-3.5" /> Request ready
+          </p>
+          <h1 className="display-2 leading-[0.9] max-w-[18ch]">
+            Send it to <span className="text-brand">Abby.</span>
           </h1>
-          <p className="lead mt-4 max-w-[60ch] text-ink-soft not-italic">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
             One tap opens mail or messages with the full request typed. Hit send — she'll be back the same day.
           </p>
         </div>
       </section>
 
-      <section className="section bg-newsprint-2 border-b border-rule-strong">
-        <div className="max-w-3xl mx-auto px-5 md:px-8 space-y-8">
+      <section className="section bg-base">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 space-y-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a
               href={mailto}
-              className="inline-flex items-center justify-center gap-2 bg-ink text-newsprint h-14 label hover:bg-stamp btn-press border-2 border-ink"
+              className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground h-14 label hover:opacity-90 rounded-sm"
             >
               <Mail className="size-4" /> Email Abby
             </a>
             <a
               href={sms}
-              className="inline-flex items-center justify-center gap-2 bg-stamp text-newsprint h-14 label hover:bg-ink btn-press border-2 border-stamp hover:border-ink"
+              className="inline-flex items-center justify-center gap-2 bg-surface text-surface-foreground h-14 label hover:opacity-90 rounded-sm"
             >
               <MessageSquare className="size-4" /> Text Abby
             </a>
             <button
               type="button"
               onClick={onCopy}
-              className="inline-flex items-center justify-center gap-2 bg-newsprint text-ink border-2 border-ink/40 h-14 label hover:border-ink btn-press"
+              className="inline-flex items-center justify-center gap-2 bg-kraft text-zinc-900 ring-1 ring-zinc-300 h-14 label hover:ring-zinc-500 rounded-sm"
             >
               {copied ? (
                 <>
@@ -642,20 +629,20 @@ function SuccessView({
             </button>
           </div>
 
-          <div className="bg-newsprint border-2 border-ink overflow-hidden">
-            <div className="px-5 py-3 border-b-2 border-ink flex items-center justify-between bg-newsprint-2">
-              <p className="dateline text-ink-soft">
-                CARBON COPY · PREVIEW
+          <div className="bg-kraft rounded-md ring-1 ring-zinc-300 overflow-hidden">
+            <div className="px-5 py-3 border-b border-zinc-300/70 flex items-center justify-between">
+              <p className="eyebrow text-zinc-700">
+                Preview
               </p>
               <button
                 type="button"
                 onClick={onEdit}
-                className="inline-flex items-center gap-2 label text-ink hover:text-stamp"
+                className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
               >
                 <Pencil className="size-3.5" /> Edit
               </button>
             </div>
-            <pre className="px-5 py-5 text-xs md:text-sm text-ink whitespace-pre-wrap font-mono leading-relaxed">
+            <pre className="px-5 py-5 text-xs md:text-sm text-zinc-900 whitespace-pre-wrap font-mono leading-relaxed">
               {brief}
             </pre>
           </div>
@@ -664,7 +651,7 @@ function SuccessView({
             <button
               type="button"
               onClick={onEdit}
-              className="inline-flex items-center gap-2 label text-ink-soft hover:text-stamp"
+              className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
             >
               <ArrowLeft className="size-4" /> Edit my request
             </button>
@@ -673,7 +660,7 @@ function SuccessView({
           <div className="text-center pt-2">
             <Link
               to="/contact"
-              className="label text-ink-soft hover:text-stamp"
+              className="label text-zinc-500 hover:text-brand"
             >
               Or just call 508.579.9897 →
             </Link>

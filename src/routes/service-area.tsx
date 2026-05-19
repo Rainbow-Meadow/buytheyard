@@ -66,28 +66,27 @@ export const Route = createFileRoute("/service-area")({
 function ServiceAreaPage() {
   return (
     <>
-      <section className="bg-newsprint paper-grain border-b-4 border-ink">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8">
-          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
-            <span className="dateline text-ink-soft">ROUTES DESK · § R</span>
-            <span className="dateline text-ink-soft hidden sm:inline">WORCESTER COUNTY &amp; BEYOND</span>
-          </div>
-          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[18ch]">
-            Across <span className="text-stamp">Central Mass.</span>
+      <section className="bg-surface text-surface-foreground">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
+          <p className="eyebrow text-brand mb-4">
+            Service Area
+          </p>
+          <h1 className="display-1 leading-[0.9] max-w-[18ch]">
+            Across <span className="text-brand">Central Mass.</span>
           </h1>
-          <p className="lead mt-4 max-w-[60ch] text-ink-soft not-italic">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg">
             Mulch, loam, sand, gravel, and stone delivered from Jefferson across Worcester County.
           </p>
-          <div className="mt-6 flex flex-wrap gap-4">
+          <div className="mt-4 md:mt-8 flex flex-wrap gap-4">
             <a
               href="tel:5085799897"
-              className="inline-flex items-center gap-2 bg-stamp text-newsprint label px-6 h-12 btn-press hover:bg-ink"
+              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
             >
-              <Phone className="size-4" strokeWidth={2.5} /> 508.579.9897
+              <Phone className="size-4" /> 508.579.9897
             </a>
             <Link
               to="/quote"
-              className="inline-flex items-center gap-2 border-2 border-ink text-ink label px-6 h-12 btn-press hover:bg-ink hover:text-newsprint"
+              className="inline-flex items-center gap-2 border border-white text-white px-7 h-12 label hover:bg-white hover:text-zinc-900 transition-colors"
             >
               Get a quote
             </Link>
@@ -95,53 +94,56 @@ function ServiceAreaPage() {
         </div>
       </section>
 
-      <section className="section bg-newsprint">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
-          <div className="flex items-end justify-between gap-4 pb-3 rule-thick">
-            <div className="flex items-center gap-3">
-              <Truck className="size-6 text-stamp" />
-              <h2 className="display-3 text-ink leading-none">Towns We Deliver To</h2>
-            </div>
-            <span className="dateline text-ink-soft hidden sm:inline">{TOWNS.length} LISTINGS</span>
+      <section className="section bg-base">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <div className="flex items-center gap-3 mb-5 md:mb-10">
+            <Truck className="size-6 text-brand" />
+            <h2 className="display-3 text-zinc-950">
+              Towns We Deliver To
+            </h2>
           </div>
-          <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border-l border-t border-ink/15">
-            {TOWNS.map((t, i) => (
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {TOWNS.map((t) => (
               <li
                 key={t.name}
-                className="bg-newsprint border-r border-b border-ink/15 p-6 -mr-px -mb-px flex flex-col"
+                className="bg-kraft ring-1 ring-zinc-300 p-6 rounded-md"
               >
-                <div className="flex items-baseline justify-between gap-3 mb-2">
-                  <span className="meta text-ink-soft tabular">№ {String(i + 1).padStart(2, "0")}</span>
-                  <span className="eyebrow text-stamp inline-flex items-center gap-1.5">
-                    <MapPin className="size-3" /> {t.drive}
-                  </span>
+                <div className="flex items-start gap-2 mb-2">
+                  <MapPin className="size-4 text-brand mt-1 shrink-0" />
+                  <div>
+                    <p className="display-4 text-zinc-900 leading-tight">
+                      {t.name}
+                    </p>
+                    <p className="label text-zinc-500 mt-1">
+                      {t.drive}
+                    </p>
+                  </div>
                 </div>
-                <p className="display-4 text-ink leading-tight">{t.name}</p>
-                <p className="body-sm text-ink-soft mt-3 flex-1">{t.blurb}</p>
+                <p className="text-sm text-zinc-700 mt-3">{t.blurb}</p>
               </li>
             ))}
           </ul>
-          <p className="mt-6 caption max-w-[60ch]">
-            Don't see your town? We deliver throughout Worcester County and parts
-            of Middlesex County. Call to confirm your ZIP and final price before dispatch.
+          <p className="mt-5 md:mt-10 text-sm text-zinc-600 max-w-[60ch]">
+            Don't see your town? We deliver throughout Worcester County
+            and parts of Middlesex County. Give us a call and we'll
+            confirm your ZIP and final price before dispatch.
           </p>
         </div>
       </section>
 
-      <section className="bg-stamp text-newsprint">
-        <div className="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16 text-center">
-          <p className="dateline text-newsprint/70">— DISPATCH —</p>
-          <h2 className="display-2 mt-4 text-balance">
+      <section className="section bg-kraft border-t border-zinc-300">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
+          <h2 className="display-3 mb-4">
             Ready to schedule a delivery?
           </h2>
-          <p className="body mt-4 text-newsprint/85 max-w-[44ch] mx-auto">
+          <p className="text-zinc-700 mb-3 md:mb-6">
             Call Abby directly — every order is handled by the owner.
           </p>
           <a
             href="tel:5085799897"
-            className="mt-6 inline-flex items-center gap-3 bg-newsprint text-ink label text-base px-7 h-14 btn-press hover:bg-ink hover:text-newsprint"
+            className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
           >
-            <Phone className="size-5" strokeWidth={2.5} /> 508.579.9897
+            <Phone className="size-4" /> 508.579.9897
           </a>
         </div>
       </section>

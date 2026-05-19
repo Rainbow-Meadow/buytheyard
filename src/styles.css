@@ -17,68 +17,34 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-newsprint: var(--newsprint);
-  --color-newsprint-2: var(--newsprint-2);
-  --color-rule: var(--rule);
-  --color-rule-strong: var(--rule-strong);
-  --color-highlight: var(--highlight);
-  --color-stamp: var(--stamp);
-  --font-display: 'Oswald', 'Impact', sans-serif;
-  --font-sans: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --font-masthead: 'Saira Extra Condensed', 'Oswald', sans-serif;
+  --font-display: 'Saira Extra Condensed', sans-serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
 :root {
-  /* Newsprint canvas */
-  --newsprint: oklch(0.965 0.012 88);            /* warm off-white paper */
-  --newsprint-2: oklch(0.925 0.018 88);          /* secondary paper panel */
-
-  /* Ink */
-  --ink: oklch(0.18 0.012 60);                   /* near-black newspaper ink */
-  --ink-soft: oklch(0.42 0.012 60);              /* secondary ink */
-
-  /* Rules */
-  --rule: oklch(0.18 0.012 60 / 0.18);
-  --rule-strong: oklch(0.18 0.012 60 / 0.92);
-
-  /* Stamp red — used sparingly */
-  --stamp: oklch(0.50 0.20 27);
-  --highlight: oklch(0.90 0.18 95);              /* highlighter yellow */
-
-  /* Compat with existing tokens (semantic remapping) */
-  --background: var(--newsprint);
-  --foreground: var(--ink);
-  --base: var(--newsprint);
-  --surface: var(--ink);                          /* dark panels remain "surface" */
-  --surface-foreground: oklch(0.97 0.005 88);
-  --kraft: var(--newsprint-2);                    /* paper panels */
-  --brand: var(--stamp);
+  --background: oklch(0.972 0.005 80);          /* #f7f5f2 base */
+  --foreground: oklch(0.18 0.005 280);
+  --surface: oklch(0.16 0.005 280);             /* near-black #0c0c0e */
+  --surface-foreground: oklch(0.97 0 0);
+  --base: oklch(0.972 0.005 80);
+  --kraft: oklch(0.91 0.012 80);                /* #e8e4dc */
+  --brand: oklch(0.51 0.20 27);                 /* #ba1a1a red */
   --brand-foreground: oklch(0.99 0 0);
-  --muted: var(--newsprint-2);
-  --muted-foreground: var(--ink-soft);
-  --border: var(--rule);
-  --ring: var(--stamp);
+  --muted: oklch(0.91 0.012 80);
+  --muted-foreground: oklch(0.45 0.01 280);
+  --border: oklch(0.85 0.01 80);
+  --ring: oklch(0.51 0.20 27);
 }
 
 .dark {
-  --background: var(--ink);
-  --foreground: oklch(0.97 0.005 88);
+  --background: oklch(0.16 0.005 280);
+  --foreground: oklch(0.97 0 0);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
   html, body { background-color: var(--color-background); color: var(--color-foreground); }
-  body {
-    font-family: var(--font-sans);
-    font-feature-settings: "kern", "liga", "onum";
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  /* Tabular numbers in tickers, prices, time */
-  .tabular { font-variant-numeric: tabular-nums; }
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 }
 
 /* Shared vertical section spacing scale.
@@ -113,27 +79,22 @@
 }
 
 /* =========================================================================
-   Typography schema — "The Yard Gazette"
+   Typography schema — single source of truth.
    Hierarchy:
-     Display (Oswald 700, UPPERCASE) — newspaper headline face
-       display-1  hero H1
+     Display (Saira Extra Condensed, UPPERCASE)
+       display-1  hero H1 (home + page hero pattern)
        display-2  inner-route page H1
        display-3  section H2 (default)
        display-4  card title / accordion trigger / callout H3
-       display-5  small inline display (column heads, stat labels)
-     Body (Source Serif 4) — long-form paper voice
+       display-5  small inline display (footer column heads, stat labels)
+     Sans (Inter)
        lead       hero subhead / intro paragraph
        body       default paragraph
-       body-sm    secondary copy, list items
-       caption    italic photo credit / fine print under figures
-     Utility (IBM Plex Mono, UPPERCASE) — labels and specs
-       meta       timestamps, legal
+       body-sm    secondary copy, list items, captions
+       meta       timestamps, fine print, legal
        eyebrow    kicker above H1/H2
        label      button & CTA labels, nav links
-       micro      tiny stamps & chips
-       dateline   masthead date / location / conditions row
-     Masthead (Saira Extra Condensed, UPPERCASE) — paper nameplate only
-       masthead   THE YARD GAZETTE nameplate
+       micro      tiny stamps & chips (smallest stamp only)
    Rules:
      - One H1 per route.
      - At most one display tier per section.
@@ -143,218 +104,106 @@
 
 @utility display-1 {
   font-family: var(--font-display);
-  font-weight: 700;
   text-transform: uppercase;
-  font-size: 3rem;          /* 48px */
-  line-height: 0.92;
+  font-size: 3.5rem;        /* 56px */
+  line-height: 0.95;
   letter-spacing: -0.01em;
   @media (min-width: 768px) {
-    font-size: 5rem;        /* 80px */
+    font-size: 6rem;        /* 96px */
   }
 }
 
 @utility display-2 {
   font-family: var(--font-display);
-  font-weight: 700;
   text-transform: uppercase;
-  font-size: 2.375rem;      /* 38px */
+  font-size: 2.75rem;       /* 44px */
   line-height: 0.95;
   letter-spacing: -0.01em;
   @media (min-width: 768px) {
-    font-size: 3.5rem;      /* 56px */
+    font-size: 4rem;        /* 64px */
   }
 }
 
 @utility display-3 {
   font-family: var(--font-display);
-  font-weight: 700;
   text-transform: uppercase;
-  font-size: 1.875rem;      /* 30px */
+  font-size: 2.25rem;       /* 36px */
   line-height: 0.95;
   letter-spacing: -0.005em;
   @media (min-width: 768px) {
-    font-size: 2.5rem;      /* 40px */
+    font-size: 3rem;        /* 48px */
   }
 }
 
 @utility display-4 {
   font-family: var(--font-display);
-  font-weight: 700;
   text-transform: uppercase;
-  font-size: 1.25rem;       /* 20px */
+  font-size: 1.5rem;        /* 24px */
   line-height: 1.05;
   @media (min-width: 768px) {
-    font-size: 1.625rem;    /* 26px */
+    font-size: 2rem;        /* 32px */
   }
 }
 
 @utility display-5 {
   font-family: var(--font-display);
-  font-weight: 700;
   text-transform: uppercase;
-  font-size: 1.0625rem;     /* 17px */
+  font-size: 1.25rem;       /* 20px */
   line-height: 1.1;
+  @media (min-width: 768px) {
+    font-size: 1.5rem;      /* 24px */
+  }
+}
+
+@utility lead {
+  font-size: 1.125rem;      /* 18px */
+  line-height: 1.6;
+  font-weight: 400;
   @media (min-width: 768px) {
     font-size: 1.25rem;     /* 20px */
   }
 }
 
-@utility lead {
-  font-family: var(--font-sans);
-  font-size: 1.125rem;      /* 18px */
-  line-height: 1.55;
-  font-weight: 400;
-  font-style: italic;
-  @media (min-width: 768px) {
-    font-size: 1.1875rem;   /* 19px */
-  }
-}
-
 @utility body {
-  font-family: var(--font-sans);
   font-size: 1rem;          /* 16px */
-  line-height: 1.62;
-  font-weight: 400;
-}
-
-@utility body-sm {
-  font-family: var(--font-sans);
-  font-size: 0.875rem;      /* 14px */
   line-height: 1.6;
   font-weight: 400;
 }
 
-@utility caption {
-  font-family: var(--font-sans);
-  font-style: italic;
-  font-size: 0.8125rem;     /* 13px */
-  line-height: 1.5;
-  color: var(--ink-soft);
+@utility body-sm {
+  font-size: 0.875rem;      /* 14px */
+  line-height: 1.55;
+  font-weight: 400;
 }
 
 @utility meta {
-  font-family: var(--font-mono);
   font-size: 0.75rem;       /* 12px */
   line-height: 1.5;
-  font-weight: 400;
-  font-variant-numeric: tabular-nums;
+  font-weight: 500;
 }
 
 @utility eyebrow {
-  font-family: var(--font-mono);
   font-size: 0.6875rem;     /* 11px */
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
 }
 
 @utility label {
-  font-family: var(--font-mono);
   font-size: 0.75rem;       /* 12px */
   line-height: 1.2;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
 }
 
 @utility micro {
-  font-family: var(--font-mono);
   font-size: 0.625rem;      /* 10px */
   line-height: 1.2;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-}
-
-@utility dateline {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;     /* 11px */
-  line-height: 1.2;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-variant-numeric: tabular-nums;
-}
-
-@utility masthead {
-  font-family: var(--font-masthead);
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 1.75rem;       /* 28px */
-  line-height: 0.9;
-  letter-spacing: -0.01em;
-  @media (min-width: 768px) {
-    font-size: 2.25rem;     /* 36px */
-  }
-}
-
-/* =========================================================================
-   Rule / divider primitives
-   ========================================================================= */
-@utility rule-thin   { border-top: 1px solid var(--rule-strong); }
-@utility rule-hair   { border-top: 1px solid var(--rule); }
-@utility rule-thick  { border-top: 3px solid var(--rule-strong); }
-
-/* =========================================================================
-   Ticker marquee
-   ========================================================================= */
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.ticker-track {
-  display: inline-flex;
-  animation: ticker-scroll 60s linear infinite;
-  will-change: transform;
-}
-.ticker-track:hover { animation-play-state: paused; }
-@media (prefers-reduced-motion: reduce) {
-  .ticker-track { animation: none; }
-}
-
-/* =========================================================================
-   Rubber stamp (rotated, slightly bled)
-   ========================================================================= */
-@keyframes stamp-settle {
-  0%   { transform: rotate(var(--stamp-rot, -4deg)) scale(1.15); opacity: 0; }
-  60%  { transform: rotate(calc(var(--stamp-rot, -4deg) + 1deg)) scale(0.97); opacity: 1; }
-  100% { transform: rotate(var(--stamp-rot, -4deg)) scale(1); opacity: 1; }
-}
-.stamp {
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--stamp);
-  border: 2px solid currentColor;
-  padding: 0.4em 0.7em;
-  display: inline-block;
-  transform: rotate(var(--stamp-rot, -4deg));
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--stamp) 35%, transparent);
-  background:
-    radial-gradient(circle at 30% 20%, transparent 0 1px, color-mix(in oklab, var(--stamp) 6%, transparent) 1px 2px, transparent 2px),
-    radial-gradient(circle at 70% 80%, transparent 0 1px, color-mix(in oklab, var(--stamp) 4%, transparent) 1px 2px, transparent 2px);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .stamp { animation: stamp-settle 0.45s cubic-bezier(0.16, 1, 0.3, 1) 1; }
-}
-
-/* Paper grain — subtle */
-.paper-grain {
-  background-image:
-    radial-gradient(rgba(28, 25, 20, 0.035) 1px, transparent 1px),
-    radial-gradient(rgba(28, 25, 20, 0.025) 1px, transparent 1px);
-  background-size: 4px 4px, 9px 9px;
-  background-position: 0 0, 2px 3px;
-}
-
-/* Hard-press button state (no shadow, ink press) */
-.btn-press {
-  transition: transform 0.05s ease-out;
-}
-.btn-press:active {
-  transform: translateY(1px);
+  letter-spacing: 0.18em;
 }
 
 @keyframes shimmer-sweep {

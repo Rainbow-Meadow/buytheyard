@@ -29,26 +29,21 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <>
-      <section className="bg-newsprint paper-grain border-b-4 border-ink">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8">
-          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
-            <span className="dateline text-ink-soft">FEATURE · § F · MEET THE OWNER</span>
-            <span className="dateline text-ink-soft hidden sm:inline">EST. 2016 · JEFFERSON, MA</span>
-          </div>
-          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[16ch]">
-            Built by <span className="text-stamp">Abby.</span>
-          </h1>
-          <p className="lead mt-4 max-w-[56ch] text-ink-soft not-italic">
-            A Massachusetts WBE-certified, woman-owned landscape supply yard —
-            ten seasons in, same voice on the phone.
+      <section className="bg-surface text-surface-foreground">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
+          <p className="eyebrow text-brand mb-4">
+            Meet the owner
           </p>
+          <h1 className="display-1 leading-[0.9] max-w-[14ch]">
+            Built by <span className="text-brand">Abby.</span>
+          </h1>
         </div>
       </section>
 
-      <section className="section bg-newsprint">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-start">
+      <section className="section bg-base">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5">
-            <div className="aspect-[4/5] overflow-hidden border-2 border-ink bg-newsprint-2">
+            <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-kraft">
               <img
                 src={abbyPortrait}
                 alt="Abby, owner of Buy The Yard, in Jefferson, MA"
@@ -56,14 +51,10 @@ function AboutPage() {
                 height={1600}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover grayscale-[0.2] contrast-[1.08]"
+                className="w-full h-full object-cover"
               />
             </div>
-            <p className="caption mt-2">
-              Abby Montalto, owner — at the lot, 2264 Main St., Jefferson.{" "}
-              <span className="text-ink-soft/70 not-italic">— Photo: The Yard.</span>
-            </p>
-            <div className="mt-5 flex items-center gap-4 p-5 bg-newsprint-2 border border-rule-strong">
+            <div className="mt-3 md:mt-6 flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
@@ -74,23 +65,22 @@ function AboutPage() {
                 decoding="async"
               />
               <div>
-                <p className="display-5 text-ink leading-none">WBE Certified</p>
-                <p className="meta text-ink-soft mt-1">
-                  MASSACHUSETTS WOMAN BUSINESS ENTERPRISE
+                <p className="display-5 leading-none">WBE Certified</p>
+                <p className="text-xs text-zinc-600 mt-1">
+                  Massachusetts Woman Business Enterprise
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-7 space-y-5 body text-ink-soft">
-            <p className="eyebrow text-stamp">— THE STORY —</p>
-            <h2 className="display-3 text-ink leading-tight">
-              Most yards treat you like a ticket number.
+          <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed">
+            <h2 className="display-4 text-zinc-900 leading-tight">
+              Our Story
             </h2>
             <p>
-              Loaded fast, out the gate, on to the next one.
+              Most landscape yards treat you like a ticket number. Loaded fast, out the gate, on to the next one.
             </p>
-            <p className="display-5 text-ink">
+            <p>
               I built this one to feel like the opposite.
             </p>
             <p>
@@ -102,29 +92,29 @@ function AboutPage() {
               Two years later I finished my Entrepreneurship and Small Business degree —
               while already running one of my own.
             </p>
-            <blockquote className="border-l-4 border-stamp pl-6 py-2 my-8 display-4 text-ink leading-tight italic font-sans">
+            <blockquote className="border-l-4 border-brand pl-6 py-2 my-10 display-4 text-zinc-900 leading-tight">
               "If you call this number, I pick up. That's the whole business model."
             </blockquote>
             <p>
               Year three, we made it official: Massachusetts Certified Woman-Owned Enterprise.
             </p>
             <p>
-              2026 is our <strong className="text-ink">10th season</strong> — first spring mulch run through
+              2026 is our <strong>10th season</strong> — first spring mulch run through
               winter salt, same yard, same voice on the phone.
             </p>
             <p>
-              Office manager: <strong className="text-ink">Charlie</strong>. He's a dog. He handles the greetings.
+              Office manager: <strong>Charlie</strong>. He's a dog. He handles the greetings.
             </p>
             <p>
-              Come by — <strong className="text-ink">2264 Main St., Jefferson, MA</strong>. Bring your questions,
+              Come by — <strong>2264 Main St., Jefferson, MA</strong>. Bring your questions,
               even the "how much do I need?" ones. Especially those.
             </p>
-            <p className="display-4 text-ink">— Abby</p>
+            <p className="display-4 text-zinc-900">— Abby</p>
 
-            <div className="pt-4">
+            <div className="pt-6">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-stamp text-newsprint label px-6 h-12 btn-press hover:bg-ink"
+                className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
               >
                 Visit the yard
               </Link>
@@ -133,14 +123,12 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="section bg-newsprint-2 border-y border-rule-strong">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
-          <div className="flex items-end justify-between gap-4 pb-3 rule-thick">
-            <h2 className="display-3 text-ink leading-none">Around the Yard</h2>
-            <span className="dateline text-ink-soft hidden sm:inline">PHOTO DESK</span>
-          </div>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          <figure className="md:col-span-2 border-2 border-ink bg-newsprint">
+      <section className="section bg-base">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
+          <h2 className="md:col-span-3 display-4 text-zinc-900 leading-tight">
+            Around the Yard
+          </h2>
+          <figure className="md:col-span-2 rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
             <div className="aspect-[4/3] overflow-hidden">
               <img
                 src={yardPatio}
@@ -149,14 +137,14 @@ function AboutPage() {
                 height={2000}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover grayscale-[0.2] contrast-[1.08]"
+                className="w-full h-full object-cover"
               />
             </div>
-            <figcaption className="p-4 caption">
+            <figcaption className="p-5 label text-zinc-600">
               The sit-and-stay corner — coffee, umbrellas, and the OPEN flag.
             </figcaption>
           </figure>
-          <figure className="border-2 border-ink bg-newsprint">
+          <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
             <div className="aspect-[4/5] overflow-hidden">
               <img
                 src={yardDog}
@@ -165,14 +153,13 @@ function AboutPage() {
                 height={2000}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover grayscale-[0.2] contrast-[1.08]"
+                className="w-full h-full object-cover"
               />
             </div>
-            <figcaption className="p-4 caption">
+            <figcaption className="p-5 label text-zinc-600">
               Charlie · office manager · accepts treats and pets.
             </figcaption>
           </figure>
-          </div>
         </div>
       </section>
     </>
