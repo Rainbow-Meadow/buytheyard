@@ -2,8 +2,8 @@ import type { Product } from "@/data/products";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="group w-full bg-kraft/60 ring-1 ring-black/5 p-4 rounded-md flex flex-col">
-      <div className="w-full aspect-[4/3] overflow-hidden rounded-sm mb-5 bg-zinc-200">
+    <div className="group w-full bg-kraft/60 ring-1 ring-black/5 p-3 md:p-4 rounded-md flex flex-col">
+      <div className="w-full aspect-[4/3] overflow-hidden rounded-sm mb-3 md:mb-5 bg-zinc-200">
         {product.image ? (
           <img
             src={product.image}
@@ -37,7 +37,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.category}
         </span>
       </div>
-      <p className="text-sm text-zinc-600 mb-5 flex-1">{product.description}</p>
+      <p className="text-sm text-zinc-600 mb-3 md:mb-5 flex-1">{product.description}</p>
       {product.badge && (
         <span className="inline-flex self-start mb-3 items-center gap-1.5 px-2 py-1 bg-brand/10 text-brand text-[10px] font-bold uppercase tracking-widest rounded-sm">
           {product.badge}
