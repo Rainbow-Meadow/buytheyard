@@ -27,7 +27,7 @@ function MHome() {
         <div className="grid grid-cols-2 gap-3">
           {mProducts.slice(0, 4).map((p) => (
             <Link to="/m/shop" key={p.name} className="m-tile">
-              <span className="m-slot absolute inset-0">{p.slot}</span>
+              <img src={p.img} alt={p.alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-m-bg to-transparent">
                 <p className="m-display text-lg">{p.name}</p>
                 <p className="text-[10px] uppercase tracking-widest text-m-muted">{p.note}</p>
