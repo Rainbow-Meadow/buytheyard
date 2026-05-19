@@ -1,44 +1,48 @@
 ## Goal
-Re-skin the 6 landing page sections to follow this rhythm:
+Fill the empty right column of the "Call for Today's Prices" section with a hang-tag price tag illustration built in pure CSS/SVG — no new assets, matches brand (kraft + brand red).
 
-| # | Section | Tone | Token |
-|---|---|---|---|
-| 1 | Featured Materials | Dark | `bg-surface text-surface-foreground` |
-| 2 | Facebook spotlight | Medium | `bg-kraft` |
-| 3 | Reviews ("What neighbors say") | Light | `bg-base` |
-| 4 | Delivery callout | Dark | `bg-surface text-surface-foreground` |
-| 5 | Pricing | Medium | `bg-kraft` (already correct) |
-| 6 | FAQ | Light | `bg-base` |
+## Scope
+Single file: `src/routes/index.tsx`, pricing section only (lines ~652–685).
 
-Token mapping (confirmed from `src/styles.css`):
-- **Dark** → `bg-surface text-surface-foreground` (near-black + light text)
-- **Medium** → `bg-kraft` (#e8e4dc warm tan)
-- **Light** → `bg-base` (#f7f5f2 off-white)
+## Layout change
+- Wrap current copy/CTA block and the new tag in a 12-col grid: `md:grid-cols-12 gap-8 md:gap-16 items-center`.
+- Left column (copy + buttons): `md:col-span-7`. Strip the inner `max-w-2xl` since the column already constrains width.
+- Right column (tag): `md:col-span-5`, centered, hidden on mobile only if it crowds — keep visible by default at a smaller scale.
 
-## Changes (single file: `src/routes/index.tsx`)
+## The hang-tag (CSS, no new assets)
+A pure HTML/CSS/SVG card styled as a classic retail price tag:
 
-### 1. Section background swaps (the wrapper class only)
-- Featured Materials: `bg-base` → `bg-surface text-surface-foreground border-y border-white/5`
-- Facebook spotlight: `bg-surface text-surface-foreground border-y border-white/5` → `bg-kraft border-y border-zinc-300/60`
-- Reviews: `bg-kraft border-y border-zinc-300/60` → `bg-base border-y border-zinc-300/60`
-- Delivery callout: `bg-base border-y border-zinc-300/60` → `bg-surface text-surface-foreground border-y border-white/5`
-- Pricing: no change
-- FAQ: `bg-surface text-surface-foreground border-t border-white/10` → `bg-base border-t border-zinc-300/60`
+```text
+   ┌─ string ─┐
+   │   ◉      │  <- punched hole + twine loop
+   │  TODAY'S │
+   │   PRICE  │  <- Saira display, brand red
+   │  ──────  │
+   │ Mulch    │
+   │ Loam     │  <- 4 category rows, right side reads "call"
+   │ Stone    │
+   │ Garden   │
+   │  ──────  │
+   │ 508.579  │
+   │  .9897   │  <- phone number stamp, rotated slightly
+   └──────────┘
+```
 
-### 2. Text/element color re-tuning inside each flipped section
-Hardcoded text colors break contrast when the background flips. For every section that changes tone, I'll re-tune child element colors so they read correctly:
+Details:
+- Container: `relative rotate-[-4deg] w-[280px] md:w-[340px] aspect-[3/4] bg-[#f1ebdc] ring-1 ring-zinc-900/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.35)]`.
+- Notched left edge made with a small absolute-positioned circle (`bg-kraft` parent color) overlapping a punched hole (`bg-zinc-900/80 rounded-full size-3`) near the top-left, plus an inline SVG twine line going up off the card.
+- Subtle paper grain via a CSS `background-image` linear-gradient + radial-gradient overlay at low opacity (no asset).
+- Top: small `eyebrow` "BUY THE YARD" + `micro` "EST. AGAWAM" stamped.
+- Headline inside: `display-4 text-brand` "TODAY'S / PRICE" stacked.
+- Divider rule (`border-t border-zinc-900/15 border-dashed`).
+- Category list (4 rows): `Mulch · Loam · Stone · Garden Center` left, dotted leader, "— call —" right in `meta text-zinc-700`.
+- Bottom: phone number `display-5 text-zinc-900` with a faint red rubber-stamp rotated `-rotate-6` behind it reading `★ TODAY ★` (`text-brand/15`).
+- Decorative second hang-tag peeking from behind, rotated `rotate-[6deg]`, smaller, `bg-[#e2dccb]`, no content, only a corner visible — adds depth.
 
-- **Featured Materials (light → DARK)**: section eyebrow, "Featured materials" heading, "See full catalog" link, and arrow buttons switch to white/zinc-200/zinc-400 palette. ProductCard internals stay as-is (cards are self-contained tiles).
-- **Facebook spotlight (DARK → medium)**: brand eyebrow stays brand; headline `text-white` → `text-zinc-950`; lead `text-zinc-300` → `text-zinc-700`; bullet text `text-zinc-300` → `text-zinc-800`; facebook URL `text-zinc-500` stays; Follow button stays (Facebook blue works on tan).
-- **Reviews (medium → LIGHT)**: section currently uses dark-on-medium; on light it stays the same — review cards stay white. Only the `border-y` shade is already correct.
-- **Delivery callout (light → DARK)**: truck icon stays brand; heading `text-zinc-900` (default) → `text-white`; lead `text-zinc-700` → `text-zinc-300`; right-side card `bg-white ring-zinc-300/60` becomes `bg-white/5 ring-white/10` with `text-white` heading + `text-zinc-300` body inside the list items; CTA stays brand.
-- **Pricing**: no change.
-- **FAQ (DARK → light)**: headline + body `text-white`/`text-zinc-300` → `text-zinc-950`/`text-zinc-700`; Accordion container `bg-white/5 border-white/10` → `bg-white border-zinc-200`; trigger/content text `text-white`/`text-zinc-300` → `text-zinc-900`/`text-zinc-700`.
-
-### 3. Adjacent section borders
-Border colors between sections will follow the new background — light/medium use `border-zinc-300/60`, dark uses `border-white/5` (already covered in step 1).
+## Accessibility / responsiveness
+- The tag is decorative: `aria-hidden="true"` on the whole right column. All real info (phone, CTA) stays in the left column.
+- On mobile (`<md`): hide the tag (`hidden md:flex`) so the section stays compact and the headline/CTAs aren't pushed down.
 
 ## Out of scope
-- Hero, stats strip, footer — unchanged.
-- No copy, layout, font, or grid-structure changes.
-- Brand color, button shapes, and CTA labels remain identical.
+- No new images, no new fonts, no copy changes to the left column.
+- No changes to other sections, tokens, or `styles.css`.
