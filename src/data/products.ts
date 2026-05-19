@@ -122,7 +122,7 @@ export const products: Product[] = [
     name: "ASTM Playground Chips",
     category: "Specialty",
     description:
-      "Certified to ASTM F1292 (fall impact), F2075 (metals-free), and F1951 (wheelchair accessible). The actual spec your inspector wants — not generic mulch in a playground bag.",
+      "Certified to ASTM F1292, F2075, and F1951 — the spec your playground inspector is actually looking for.",
     image: playgroundChips,
     badge: "ASTM Certified",
   },
