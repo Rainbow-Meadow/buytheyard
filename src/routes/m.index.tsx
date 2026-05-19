@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { mHome, mBrand, mProducts } from "../mobile/copy";
+import { mHome, mBrand, mProducts, mCategoryAccent } from "../mobile/copy";
 
 export const Route = createFileRoute("/m/")({
   head: () => ({
@@ -19,7 +19,7 @@ function MHome() {
         <h1 className="m-display text-4xl mb-4">{mHome.headline}</h1>
         <p className="text-sm text-m-muted leading-relaxed mb-6">{mHome.sub}</p>
         <a href={`tel:${mBrand.phoneTel}`} className="m-btn mb-3">{mHome.cta}</a>
-        <Link to="/m/shop" className="m-btn-ghost">{mHome.shopCta}</Link>
+        <Link to="/m/shop" className="m-btn-tan">{mHome.shopCta}</Link>
       </section>
 
       <section>
@@ -30,7 +30,7 @@ function MHome() {
               <img src={p.img} alt={p.alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-m-bg to-transparent">
                 <p className="m-display text-lg">{p.name}</p>
-                <p className="text-[10px] uppercase tracking-widest text-m-muted">{p.note}</p>
+                <p className={`text-[10px] uppercase tracking-widest ${mCategoryAccent(p.name)}`}>{p.note}</p>
               </div>
             </Link>
           ))}

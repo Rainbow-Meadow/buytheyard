@@ -8,15 +8,18 @@
 @import "@fontsource/fira-sans/600.css";
 
 @theme inline {
-  --color-d-bg: #0d0d0d;
-  --color-d-surface: #151515;
-  --color-d-surface-2: #1a1a1a;
-  --color-d-line: rgba(176, 32, 46, 0.20);
-  --color-d-line-strong: rgba(176, 32, 46, 0.50);
+  --color-d-bg: #100d0b;
+  --color-d-surface: #181410;
+  --color-d-surface-2: #1f1a15;
+  --color-d-line: rgba(138, 138, 138, 0.18);
+  --color-d-line-strong: rgba(200, 154, 107, 0.35);
   --color-d-text: #f8f8f8;
   --color-d-muted: rgba(248, 248, 248, 0.55);
   --color-d-gold: #b0202e;
   --color-d-gold-light: #d94254;
+  --color-d-tan: #c89a6b;
+  --color-d-tan-soft: #e3c39a;
+  --color-d-gray: #8a8a8a;
   --font-d-display: "DM Serif Display", Georgia, serif;
   --font-d-sans: "Fira Sans", system-ui, sans-serif;
 }
@@ -42,6 +45,20 @@
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--color-d-gold);
+}
+@utility d-eyebrow-tan {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-d-tan);
+}
+@utility d-eyebrow-gray {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-d-gray);
 }
 @utility d-label {
   font-size: 0.6875rem;
@@ -85,3 +102,46 @@
   transition: background-color 240ms ease;
 }
 .d-btn-solid:hover { background: var(--color-d-gold-light); }
+
+@utility d-btn-tan {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-d-tan);
+  color: var(--color-d-tan);
+  padding: 0.85rem 1.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+.d-btn-tan:hover { background: var(--color-d-tan); color: var(--color-d-bg); }
+@utility d-btn-solid-tan {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-d-tan);
+  color: var(--color-d-bg);
+  padding: 0.85rem 1.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background-color 240ms ease;
+}
+.d-btn-solid-tan:hover { background: var(--color-d-tan-soft); }
+@utility d-btn-gray {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-d-gray);
+  color: var(--color-d-gray);
+  padding: 0.85rem 1.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+.d-btn-gray:hover { background: var(--color-d-gray); color: var(--color-d-bg); }

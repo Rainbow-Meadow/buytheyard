@@ -26,3 +26,18 @@ export const mProducts = [
   { name: "Loam", img: loamImg, alt: "Pile of screened loam topsoil", note: "Screened · compost mix" },
   { name: "Sand", img: sandImg, alt: "Smooth pile of mason sand", note: "Mason · pool · pea" },
 ];
+
+// Brandmark palette rotation across mobile product tiles.
+export function mCategoryAccent(name: string): string {
+  switch (name) {
+    case "Mulch":
+      return "text-m-gold";
+    case "Loam":
+      return "text-m-tan";
+    case "Sand":
+      return "text-m-tan-soft";
+    case "Stone":
+    default:
+      return "text-m-gray";
+  }
+}

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { products } from "../desktop/copy";
+import { products, categoryAccent } from "../desktop/copy";
 
 export const Route = createFileRoute("/_desktop/products")({
   head: () => ({
@@ -37,8 +37,8 @@ function ProductsPage() {
         {categories.map((cat) => (
           <section key={cat}>
             <div className="flex items-baseline justify-between border-b border-d-line pb-4 mb-6">
-              <h2 className="d-serif text-3xl text-d-gold-light">{cat}</h2>
-              <span className="d-eyebrow">
+              <h2 className={`d-serif text-3xl ${categoryAccent(cat)}`}>{cat}</h2>
+              <span className={`d-eyebrow ${categoryAccent(cat)}`}>
                 {products.filter((p) => p.category === cat).length} lines
               </span>
             </div>
@@ -51,7 +51,7 @@ function ProductsPage() {
                       <h3 className="d-serif text-2xl mb-2">{p.name}</h3>
                       <p className="text-sm text-d-muted">{p.note}</p>
                     </div>
-                    <p className="d-eyebrow mt-6">Per yard · call</p>
+                    <p className={`d-eyebrow mt-6 ${categoryAccent(cat)}`}>Per yard · call</p>
                   </article>
                 ))}
             </div>
