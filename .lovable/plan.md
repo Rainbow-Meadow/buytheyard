@@ -1,24 +1,16 @@
-## Fix spacing on the Google review card
+## Save new typography rule to project memory
 
-**File:** `src/components/site/SiteFooter.tsx` (the top band of the footer, lines 14–48)
+The user has stated a global content/layout rule that should apply to every future change, not just one component. I'll persist it as a Core memory so it's always in context.
 
-**Problem on mobile (440px):** The inner star+text row is `flex` (row) at every breakpoint, so the star icon floats to the left of a centered text block, producing an off-balance gap. The button below also sits with a large gap because the outer container uses `gap-5` plus the inner row's own padding.
+### Rule to save
+- Headlines: must fit on **1 or 2 lines** (never 3+).
+- Subtext / supporting copy: must fit on **2–3 lines** (never 1, never 4+).
+- **Text size is not a lever** — keep existing font sizes. Adjust copy length, container `max-w-*`, or layout/padding to achieve the line counts.
 
-**Changes (mobile-first, desktop layout unchanged):**
+### Files
 
-1. Outer container (line 15): tighten vertical padding and gap on mobile.
-   - `py-8 md:py-10` → `py-6 md:py-10`
-   - `gap-5 md:gap-8` → `gap-4 md:gap-8`
+1. **Create** `mem://index.md` (no project memory exists yet) with a Core section containing the rule one-liner.
+2. **Create** `mem://design/headline-line-limits.md` (type: `design`) with the full rule, how to apply it, and the "don't change text size" constraint.
 
-2. Inner star+text row (line 16): stack on mobile, row on desktop, so the headline gets full width and centers cleanly under the star.
-   - `flex items-center gap-4 md:flex-1` → `flex flex-col md:flex-row items-center gap-3 md:gap-4 md:flex-1`
-
-3. Text wrapper (line 20): center text on mobile, left-align on desktop to match the new stacked layout.
-   - add `text-center md:text-left` to the `<div>`
-   - headline `text-2xl md:text-3xl` stays; tighten supporting copy spacing `mt-1` → `mt-1.5`
-
-4. CTA button (line 34): no structural change; already `shrink-0`. The reduced outer `gap-4` brings it closer to the text on mobile.
-
-**Out of scope:** No color, typography, or copy changes. No changes to the lower footer grid or copyright row. No new tokens.
-
-**Verification:** Inspect the footer at 440px and ≥768px in preview — on mobile the star sits centered above a single-column, centered headline + subcopy + button with tight, even spacing; on desktop the row layout (star+text on the left, button on the right) is unchanged.
+### Out of scope (this turn)
+No source file changes. I will not retroactively audit every page for violations in this turn — the rule will be enforced on the next edit to any affected section. If you want a one-time audit pass across all marketing pages, say the word and I'll plan that separately.
