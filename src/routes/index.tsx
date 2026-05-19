@@ -296,38 +296,6 @@ function HomePage() {
     .map((n) => products.find((p) => p.name === n))
     .filter((p): p is (typeof products)[number] => Boolean(p));
 
-  const priceGroups: { heading: string; unit: string; includes: string }[] = [
-    {
-      heading: "Mulch",
-      unit: "Per yard · call for today's price",
-      includes: "Premium Black for the wow factor. Hemlock for the classics. Dark Brown for everything in between.",
-    },
-    {
-      heading: "Loam, Compost & Plant Mix",
-      unit: "Per yard · call for today's price",
-      includes: "Screened loam for new lawns. Plant mix and compost for beds that need a reset.",
-    },
-    {
-      heading: "Sand & Gravel",
-      unit: "Per yard · call for today's price",
-      includes: "Mason sand, 3/4\" crushed blue for drives and drainage, 3/8\" pea for paths.",
-    },
-    {
-      heading: "Specialty Stone",
-      unit: "Per yard · call for today's price",
-      includes: "Tumbled river stone and bold red lava — the bed dressings that get noticed.",
-    },
-    {
-      heading: "Playground Chips",
-      unit: "Per yard · ASTM certified · call for today's price",
-      includes: "ASTM F1292, F2075, and F1951 — the spec your inspector is actually looking for.",
-    },
-    {
-      heading: "Garden Center",
-      unit: "Per item · call for today's price",
-      includes: "Annuals, perennials, and hand-built hanging baskets on the wagon out front.",
-    },
-  ];
 
   return (
     <>
