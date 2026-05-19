@@ -392,9 +392,14 @@ function HomePage() {
             { k: "WBE", v: "Massachusetts WBE certified" },
             { k: "820+", v: "Facebook followers" },
             { k: "1 yard", v: "Minimum order size" },
-          ].map((s) => (
+          ].map((s, i) => (
             <div key={s.k}>
-              <p className="display-4 text-brand uppercase leading-none">{s.k}</p>
+              <p
+                className="display-4 stat-shine uppercase leading-none"
+                style={{ animationDelay: `${i * 0.8}s` }}
+              >
+                {s.k}
+              </p>
               <p className="mt-2 label text-zinc-500">{s.v}</p>
             </div>
           ))}
