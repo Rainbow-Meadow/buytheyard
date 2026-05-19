@@ -1,43 +1,25 @@
 ## Goal
-Break the "everything is anchored to the left" rhythm on the landing page by alternating which side carries the headline / primary content in each split-column section. Today every section reads top-down as: eyebrow + H2 on the left, supporting block on the right — so the whole page feels weighted to the left edge.
+Collapse the home page's two-tone alternation (light `bg-base` ↔ medium `bg-kraft`) into a single light palette for section bands. Nested cards/panels inside sections keep `bg-kraft` so they still pop against the lighter band.
 
-## Sections on the home page that have a split layout
+## What changes (`src/routes/index.tsx` only)
 
-| # | Section (route file index.tsx) | Today: headline side | Proposed: headline side |
+Replace `bg-kraft` with `bg-base` on the two section-level elements that currently carry kraft:
+
+| Line | Section | Before | After |
 |---|---|---|---|
-| 1 | Facebook spotlight (line ~473, `bg-kraft`) | Left | **Left** (unchanged) |
-| 2 | Reviews — "What neighbors say" (line ~524, `bg-base`) | Left | **Right** (flip) |
-| 3 | Delivery callout (line ~617, `bg-surface`) | Left | **Left** (unchanged) |
-| 4 | Pricing — "Call for Today's Prices" (line ~652, `bg-kraft`) | Left | **Right** (flip) |
-| 5 | FAQ (line ~763, `bg-base`) | Left | **Left** (unchanged) |
+| 473 | Facebook spotlight | `section bg-kraft border-y border-zinc-300/60` | `section bg-base border-y border-zinc-300/60` |
+| 653 | Pricing — "Call for Today's Prices" | `section bg-kraft border-y border-zinc-300/60` | `section bg-base border-y border-zinc-300/60` |
 
-Result: the eye is led L → R → L → R → L down the page, with each colored band staggered against the next.
+The two dark `bg-surface` sections (stats strip line 409, Delivery callout line 617) stay as-is — they're the rhythm anchors and not part of the light/medium pair.
 
-Hero, stats strip, Featured Materials grid, and footer are single-column / full-width — not in scope.
+The three already-light `bg-base` sections (Reviews 524, FAQ 763, plus the new ones above) all share the same tone now, so the page reads as: dark → light → light → dark → light → light, with the dark bands doing all the contrast work.
 
-## How the flip is implemented (single file: `src/routes/index.tsx`)
+## What stays the same
+- `bg-kraft` continues to be used as an **inset color** for cards, tag panels, and quote boxes inside sections (e.g. ProductCard, the hang-tag, review cards). Those keep their contrast against the now-uniformly-light section background.
+- No changes to other routes (about, products, quote, contact, delivery, service-area, privacy) — scope is the home page only.
+- No token edits to `src/styles.css`. `--kraft` stays defined for the inset use case.
+- Section borders (`border-y border-zinc-300/60`) stay — they continue to separate adjacent light bands visually.
+- No copy, layout, column-order, or typography changes.
 
-Use Tailwind `md:order-*` utilities on the existing grid children — no markup reorder, no DOM change (preserves source order for screen readers).
-
-For each flipped section:
-- Headline column: add `md:order-2`
-- Supporting column: add `md:order-1`
-
-### Section 2 — Reviews
-- Headline + carousel block (currently `md:col-span-7`) → add `md:order-2`.
-- Community sidebar (currently `md:col-span-5`) → add `md:order-1`.
-- Flip the divider so it sits on the **right** of the community column instead of the left: `md:border-l md:pl-8` → `md:border-r md:pr-8` on the community block.
-
-### Section 4 — Pricing
-- Copy + CTAs (currently `md:col-span-7`) → add `md:order-2 md:pl-4` (small inner padding so the headline doesn't crash against the tag).
-- Hang-tag column (currently `md:col-span-5`) → add `md:order-1`; switch its inner `justify-center` to `md:justify-end md:pr-4` so the tag hugs the section's center axis instead of floating in the far-right gutter.
-
-## Things explicitly NOT changing
-- No copy edits, no token edits, no `styles.css` edits.
-- Column ratios (7/5, 6/6, etc.) stay as-is per section.
-- Mobile (`<md`) order stays identical to source order — flips only apply at `md+`.
-- The 3 unflipped sections are untouched.
-- Hang-tag internals, review carousel logic, FAQ accordion logic untouched.
-
-## Why this fixes the imbalance
-Today every section's eyebrow + H2 starts at the same X coordinate, so the page has a single strong left edge running its full length. Alternating sections 2 and 4 break that line at two points and pair each kraft band (1 & 4) with opposite-side headlines, and each light/dark band similarly — producing a balanced zig-zag without changing any content or proportions.
+## Why this works
+Today the page alternates light → medium → light → medium for its non-dark bands, which competes with the dark `bg-surface` bands for rhythm. Unifying the light bands to a single tone lets the two dark sections own the visual cadence, and the kraft cards inside still provide local contrast where it matters (product tiles, the hang-tag, review cards).

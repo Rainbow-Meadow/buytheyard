@@ -470,7 +470,7 @@ function HomePage() {
       </section>
 
       {/* Facebook spotlight */}
-      <section className="section bg-kraft border-y border-zinc-300/60">
+      <section className="section bg-base border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             <div className="md:col-span-7">
