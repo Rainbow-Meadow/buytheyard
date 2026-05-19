@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
 import heroMobile from "@/assets/source/hero-mobile-firepit.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.png";
