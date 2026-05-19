@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import brandmark from "@/assets/brandmark-dark.png";
+import { Masthead } from "@/components/site/Masthead";
 
 const NAV = [
-  { to: "/products", label: "Products" },
-  { to: "/about", label: "About" },
+  { to: "/", label: "Front Page" },
+  { to: "/products", label: "Catalog" },
   { to: "/delivery", label: "Delivery" },
-  { to: "/quote", label: "Get a Quote" },
+  { to: "/service-area", label: "Service Area" },
+  { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -15,52 +16,34 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-surface/95 backdrop-blur-sm border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-5 md:gap-12">
+    <header className="sticky top-0 z-50 bg-newsprint">
+      <Masthead />
+
+      {/* Nameplate row */}
+      <div className="bg-newsprint border-y border-rule-strong">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 py-3 md:py-4 flex items-center justify-between gap-4">
           <Link
             to="/"
-            className="flex items-center leading-none"
-            aria-label="Buy The Yard — home"
+            className="flex flex-col leading-none"
+            aria-label="The Yard Gazette — home"
             onClick={() => setOpen(false)}
           >
-            <img
-              src={brandmark}
-              alt="Buy The Yard"
-              width={160}
-              height={60}
-              className="h-12 w-auto"
-            />
+            <span className="masthead text-ink">The Yard Gazette</span>
+            <span className="meta text-ink-soft mt-1">
+              Buy The Yard Material · Est. 2016 · 508.579.9897
+            </span>
           </Link>
-          <nav className="hidden md:flex gap-4 md:gap-8">
-            {NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
-                activeProps={{ className: "text-zinc-100" }}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-        <div className="flex items-center gap-2">
           <a
             href="tel:5085799897"
             aria-label="Call Buy The Yard at 508-579-9897"
-            className="inline-flex items-center gap-2 bg-brand text-brand-foreground py-2 pr-3 pl-2 rounded-sm hover:opacity-90 transition-opacity"
+            className="hidden sm:inline-flex items-center gap-2 bg-stamp text-newsprint label px-4 py-2.5 btn-press hover:bg-ink"
           >
-            <span className="p-1 bg-white/15 rounded-xs shrink-0">
-              <Phone className="size-4" strokeWidth={2.5} />
-            </span>
-            <span className="text-sm font-semibold tracking-tight hidden sm:inline">
-              508.579.9897
-            </span>
+            <Phone className="size-4" strokeWidth={2.5} />
+            508.579.9897
           </a>
           <button
             type="button"
-            className="md:hidden p-2 text-zinc-200"
+            className="md:hidden p-2 text-ink"
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
           >
@@ -68,18 +51,49 @@ export function SiteHeader() {
           </button>
         </div>
       </div>
-      {open && (
-        <nav className="md:hidden bg-surface border-t border-white/5 px-6 py-4 flex flex-col gap-4">
+
+      {/* Nav rail */}
+      <nav className="hidden md:block bg-newsprint border-b border-rule-strong">
+        <ul className="max-w-7xl mx-auto px-5 md:px-8 flex items-stretch divide-x divide-rule">
           {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="text-base font-medium text-zinc-300 hover:text-zinc-100"
-              onClick={() => setOpen(false)}
-            >
-              {item.label}
-            </Link>
+            <li key={item.to}>
+              <Link
+                to={item.to}
+                className="block label text-ink-soft hover:text-stamp transition-colors py-3 px-5"
+                activeProps={{ className: "text-stamp" }}
+                activeOptions={{ exact: item.to === "/" }}
+              >
+                {item.label}
+              </Link>
+            </li>
           ))}
+        </ul>
+      </nav>
+
+      {/* Mobile nav */}
+      {open && (
+        <nav className="md:hidden bg-newsprint border-b border-rule-strong">
+          <ul className="px-5 py-4 flex flex-col divide-y divide-rule">
+            {NAV.map((item) => (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  className="block label text-ink py-3"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            <li className="pt-3">
+              <a
+                href="tel:5085799897"
+                className="block bg-stamp text-newsprint label py-3 text-center btn-press"
+              >
+                Call 508.579.9897
+              </a>
+            </li>
+          </ul>
         </nav>
       )}
     </header>
