@@ -75,6 +75,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#0c0c0e" },
       { title: "Buy The Yard — Mulch, Loam, Sand & Stone in Jefferson, MA" },
       { name: "description", content: "Woman-owned bulk landscape supply yard in Jefferson, MA. Premium mulch, loam, sand, gravel, and specialty stone for pickup or delivery. Call 508-579-9897." },
       { name: "author", content: "Buy The Yard" },
