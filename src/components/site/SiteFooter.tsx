@@ -76,7 +76,7 @@ export function SiteFooter() {
                 alt="Buy The Yard — Mulch · Loam · Sand · Stone"
                 width={320}
                 height={160}
-                className="h-24 md:h-28 w-auto"
+                className="h-24 md:h-28 w-auto object-fill"
                 loading="lazy"
                 decoding="async"
               />
