@@ -36,80 +36,81 @@ const POLICIES = [
 function DeliveryPage() {
   return (
     <>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Delivery &amp; Pickup
-          </p>
-          <h1 className="display-1 leading-[0.9] max-w-[16ch]">
-            You call. <span className="text-brand">We deliver.</span>
+      <section className="bg-newsprint paper-grain border-b-4 border-ink">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8">
+          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
+            <span className="dateline text-ink-soft">DELIVERY DESK · § D</span>
+            <span className="dateline text-ink-soft hidden sm:inline">SAME-DAY WHEN YOU CALL BEFORE NOON</span>
+          </div>
+          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[16ch]">
+            You call. <span className="text-stamp">We deliver.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg">
-            Curbside delivery from our Jefferson, MA yard across Central Mass. Call before noon for same-day when available.
+          <p className="lead mt-4 max-w-[60ch] text-ink-soft not-italic">
+            Curbside delivery from our Jefferson, MA yard across Central Mass.
           </p>
-          <p className="mt-4 text-sm text-zinc-500">
-            See the full list of towns on our{" "}
-            <a href="/service-area" className="underline underline-offset-4 hover:text-brand">
+          <p className="meta mt-3 text-ink-soft">
+            See the full list of towns on the{" "}
+            <a href="/service-area" className="text-ink underline underline-offset-4 hover:text-stamp">
               service area page
-            </a>
-            .
+            </a>.
           </p>
         </div>
       </section>
 
-      <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
-          <div className="bg-kraft p-8 md:p-10 rounded-md ring-1 ring-zinc-300">
-            <Warehouse className="size-10 text-brand mb-3 md:mb-6" />
-            <h2 className="display-3 mb-4">Pick it up</h2>
-            <p className="text-zinc-700 mb-3 md:mb-6">
+      <section className="section bg-newsprint">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-t border-ink/15">
+          <div className="bg-newsprint p-8 md:p-10 border-r border-b border-ink/15">
+            <Warehouse className="size-10 text-stamp mb-4" />
+            <p className="eyebrow text-ink-soft mb-2">OPTION ONE</p>
+            <h2 className="display-3 text-ink mb-4">Pick it up.</h2>
+            <p className="body text-ink-soft mb-5">
               Bring a truck or trailer during business hours — no appointment
               necessary. We'll load you on arrival.
             </p>
-            <div className="space-y-2 text-sm text-zinc-700">
-              <p><strong>Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
-              <p><strong>Hours (4/1 – 8/1):</strong> Mon–Fri 8a–5p · Sat 8a–3p · Sun closed</p>
-              <p className="text-xs text-zinc-500 pt-2">
+            <div className="space-y-2 body-sm text-ink-soft">
+              <p><strong className="text-ink">Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
+              <p><strong className="text-ink">Hours (4/1–8/1):</strong> Mon–Fri 8a–5p · Sat 8a–3p · Sun closed</p>
+              <p className="meta text-ink-soft pt-2">
                 Opening for the 2026 season on April 1. After 8/1: by appointment.
-                Open year-round — winter salt &amp; ice melt available, call for pickup hours.
+                Winter salt &amp; ice melt available year-round, call for pickup hours.
               </p>
             </div>
           </div>
 
-          <div className="bg-surface text-surface-foreground p-8 md:p-10 rounded-md">
-            <Truck className="size-10 text-brand mb-3 md:mb-6" />
-            <h2 className="display-3 mb-4">Delivery</h2>
-            <p className="text-zinc-300 mb-3 md:mb-6">
+          <div className="bg-ink text-newsprint p-8 md:p-10 border-r border-b border-ink/15">
+            <Truck className="size-10 text-stamp mb-4" />
+            <p className="eyebrow text-newsprint/60 mb-2">OPTION TWO</p>
+            <h2 className="display-3 mb-4">We bring it.</h2>
+            <p className="body text-newsprint/80 mb-5">
               Curbside delivery throughout Central Massachusetts. Call to
               confirm your delivery zone, scheduling window, and final price
               before your order is dispatched.
             </p>
             <a
               href="tel:5085799897"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90"
+              className="inline-flex items-center gap-2 bg-stamp text-newsprint label px-6 h-11 btn-press hover:bg-newsprint hover:text-ink"
             >
-              <Phone className="size-4" /> 508.579.9897
+              <Phone className="size-4" strokeWidth={2.5} /> 508.579.9897
             </a>
           </div>
         </div>
       </section>
 
-      <section className="section bg-kraft border-y border-zinc-300">
-        <div className="max-w-5xl mx-auto px-5 md:px-6">
-          <h2 className="display-3 mb-5 md:mb-10">
-            What to Know Before Delivery
-          </h2>
-          <ul className="divide-y divide-zinc-300">
+      <section className="section bg-newsprint-2 border-y border-rule-strong">
+        <div className="max-w-5xl mx-auto px-5 md:px-8">
+          <div className="flex items-end justify-between gap-4 pb-3 rule-thick">
+            <h2 className="display-3 text-ink leading-none">Before Delivery</h2>
+            <span className="dateline text-ink-soft hidden sm:inline">FOUR THINGS TO KNOW</span>
+          </div>
+          <ul className="mt-6 divide-y divide-rule-strong border-b border-rule-strong">
             {POLICIES.map(([k, v], i) => (
-              <li key={k} className="py-6 grid grid-cols-[auto_1fr] gap-3 md:gap-6 items-start">
-                <span className="display-4 text-brand w-12">
+              <li key={k} className="py-6 grid grid-cols-[auto_1fr] gap-4 md:gap-8 items-start">
+                <span className="display-3 text-stamp w-14 tabular">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <p className="display-4 text-zinc-900 leading-tight">
-                    {k}
-                  </p>
-                  <p className="text-zinc-700 mt-2">{v}</p>
+                  <p className="display-4 text-ink leading-tight">{k}</p>
+                  <p className="body mt-2 text-ink-soft">{v}</p>
                 </div>
               </li>
             ))}
@@ -117,14 +118,13 @@ function DeliveryPage() {
         </div>
       </section>
 
-      <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-5 md:px-6 flex flex-col md:flex-row items-start gap-3 md:gap-6 p-8 bg-surface text-surface-foreground rounded-md">
-          <CreditCard className="size-10 text-brand shrink-0" />
+      <section className="section bg-newsprint">
+        <div className="max-w-3xl mx-auto px-5 md:px-8 flex flex-col md:flex-row items-start gap-5 md:gap-8 p-8 bg-ink text-newsprint border-2 border-ink">
+          <CreditCard className="size-10 text-stamp shrink-0" />
           <div>
-            <h3 className="display-4 mb-2">
-              Card Processing Fee
-            </h3>
-            <p className="text-zinc-300">
+            <p className="eyebrow text-newsprint/60 mb-2">NOTICE</p>
+            <h3 className="display-4 mb-2">Card Processing Fee</h3>
+            <p className="body text-newsprint/80">
               The 4% surcharge is passed through directly from our payment
               processor. Cash and check payments are accepted with no
               additional fee.
