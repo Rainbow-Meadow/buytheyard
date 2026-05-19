@@ -145,6 +145,7 @@ export function SiteFooter() {
         <div className="max-w-7xl mx-auto px-5 md:px-6 py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-3 text-xs text-zinc-500 text-center">
           <span>&copy; {new Date().getFullYear()} Buy The Yard Material. WBE Certified.</span>
           <span className="uppercase tracking-widest">Jefferson, MA</span>
+          <span className="text-zinc-600">Designed by Patrick Berthiaume</span>
         </div>
       </div>
     </footer>
