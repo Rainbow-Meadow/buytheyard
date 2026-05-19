@@ -17,6 +17,47 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+const reviews = [
+  {
+    name: "Rob Warner",
+    date: "Apr 21",
+    quote:
+      "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product.",
+  },
+  {
+    name: "Michael Radesky",
+    date: "Aug 26, 2019",
+    quote:
+      "Wicked nice folks! Dependable, personable, and good products. We love Abby!!!",
+  },
+  {
+    name: "John Sarkisian",
+    date: "May 7, 2019",
+    quote: "Great customer service. Very professional. Prices are fair!",
+  },
+  {
+    name: "Jonathan Duff",
+    date: "May 8, 2019",
+    quote:
+      "Excellent materials for any home projects, class A customer service and great prices. Would recommend to anyone in the area looking to do their own landscaping and home decor projects.",
+  },
+];
+
+const communityPosts = [
+  {
+    org: "Central Tree Middle School",
+    date: "Jun 26, 2024",
+    quote:
+      "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way.",
+  },
+  {
+    org: "Rutland Fire Department",
+    date: "May 22, 2020",
+    quote:
+      "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family.",
+  },
+];
+
 function MobileCollapse({
   id,
   open,
