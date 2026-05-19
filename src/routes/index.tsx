@@ -761,23 +761,23 @@ function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="section bg-base border-t border-zinc-200">
+      <section className="section bg-surface text-surface-foreground border-t border-white/10">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-16">
           <div className="md:col-span-5">
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
               <HelpCircle className="size-3.5" />
               Before you call
             </p>
-            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch]">
+            <h2 className="display-3 leading-[0.95] max-w-[16ch]">
               Frequently Asked Questions
             </h2>
-            <p className="mt-5 text-zinc-700 max-w-[42ch] text-pretty">
+            <p className="mt-5 text-zinc-300 max-w-[42ch] text-pretty">
               Quick answers about pricing, delivery areas, payment, and
               scheduling. For anything not covered here, please give us a call.
             </p>
             <a
               href="tel:5085799897"
-              className="mt-3 md:mt-6 hidden md:inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
+              className="mt-3 md:mt-6 hidden md:inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -785,12 +785,12 @@ function HomePage() {
           </div>
 
           <div className="md:col-span-7">
-            <Accordion type="single" collapsible className="bg-white rounded-md ring-1 ring-zinc-300/70 px-2 md:px-4">
-              <AccordionItem value="pricing" className="border-zinc-200 last:border-0">
-                <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
+            <Accordion type="single" collapsible className="bg-white/5 border border-white/10 rounded-md backdrop-blur-sm px-2 md:px-4">
+              <AccordionItem value="pricing" className="border-white/10 last:border-0">
+                <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
                   How much does material cost?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-300 leading-relaxed pb-5 pr-6">
                   <p>
                     Prices move with the season and the market, so we quote
                     today's number by phone — and we work to keep them the
@@ -798,11 +798,11 @@ function HomePage() {
                   </p>
                   <p className="mt-3">
                     For your project, please{" "}
-                    <a href="tel:5085799897" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                    <a href="tel:5085799897" className="font-semibold text-white underline underline-offset-4 hover:text-brand">
                       call 508-579-9897
                     </a>{" "}
                     or{" "}
-                    <Link to="/quote" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                    <Link to="/quote" className="font-semibold text-white underline underline-offset-4 hover:text-brand">
                       request a quote online
                     </Link>
                     .
@@ -810,11 +810,11 @@ function HomePage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="delivery-area" className="border-zinc-200 last:border-0">
-                <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
+              <AccordionItem value="delivery-area" className="border-white/10 last:border-0">
+                <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
                   Do you deliver to my town?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-300 leading-relaxed pb-5 pr-6">
                   <p>
                     We offer curbside delivery throughout Central Massachusetts
                     from our Jefferson yard, including Holden, Princeton,
@@ -825,7 +825,7 @@ function HomePage() {
                     Delivery is priced by ZIP code. A brief call confirms your
                     service area and final price before your order is
                     dispatched. Full details are available on{" "}
-                    <Link to="/delivery" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                    <Link to="/delivery" className="font-semibold text-white underline underline-offset-4 hover:text-brand">
                       the delivery page
                     </Link>
                     .
@@ -833,11 +833,11 @@ function HomePage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="card-fee" className="border-zinc-200 last:border-0">
-                <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
+              <AccordionItem value="card-fee" className="border-white/10 last:border-0">
+                <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
                   What's the 4% card fee about?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-300 leading-relaxed pb-5 pr-6">
                   <p>
                     The 4% surcharge is passed through directly from our
                     payment processor. Cash and check payments are accepted
@@ -847,11 +847,11 @@ function HomePage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="timing" className="border-zinc-200 last:border-0">
-                <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
+              <AccordionItem value="timing" className="border-white/10 last:border-0">
+                <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
                   How fast can I get a delivery?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-300 leading-relaxed pb-5 pr-6">
                   <p>
                     Same-day delivery may be available when you call before
                     noon, depending on the day's route. Otherwise, please
@@ -861,7 +861,7 @@ function HomePage() {
                     Delivery is made to the driveway or curbline only. Please
                     mark your preferred drop location so we can place the
                     material accurately. To submit a material list,{" "}
-                    <Link to="/quote" className="font-semibold text-zinc-900 underline underline-offset-4 hover:text-brand">
+                    <Link to="/quote" className="font-semibold text-white underline underline-offset-4 hover:text-brand">
                       start a quote
                     </Link>{" "}
                     and we'll respond the same day.
@@ -872,7 +872,7 @@ function HomePage() {
 
             <a
               href="tel:5085799897"
-              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
+              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 label text-white hover:text-brand"
             >
               <Phone className="size-4" />
               508.579.9897
