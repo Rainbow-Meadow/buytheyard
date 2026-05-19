@@ -71,7 +71,7 @@ function ContactPage() {
           <h1 className="display-1 leading-[0.9] max-w-[16ch]">
             Call. <span className="text-brand">We answer.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg text-justify hyphens-auto">
             Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
           </p>
           <div className="mt-5 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
@@ -105,7 +105,7 @@ function ContactPage() {
               <ArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-          <p className="mt-3 md:mt-6 text-sm text-zinc-400 max-w-[60ch]">
+          <p className="mt-3 md:mt-6 text-sm text-zinc-400 max-w-[60ch] text-justify hyphens-auto">
             For non-urgent stuff, email{" "}
             <a
               href="mailto:abby@btymaterial.com"

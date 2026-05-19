@@ -119,7 +119,7 @@ function QuotePage() {
           <h1 className="display-2 leading-[0.9] max-w-[18ch]">
             Tell us. <span className="text-brand">We'll price it.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg text-justify hyphens-auto">
             About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
           </p>
         </div>
