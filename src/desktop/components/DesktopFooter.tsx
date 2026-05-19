@@ -1,16 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { brand } from "../copy";
+import brandmark from "@/assets/brandmark.png";
 
 export function DesktopFooter() {
   return (
     <footer className="border-t border-d-line mt-20 pt-12 pb-10">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
-          <div className="flex items-baseline gap-1 leading-none mb-4">
-            <span className="d-serif text-2xl text-d-gold-light">Buy</span>
-            <span className="d-serif text-2xl italic">The</span>
-            <span className="d-serif text-2xl text-d-gold">Yard</span>
-          </div>
+          <img src={brandmark} alt="Buy The Yard" className="h-9 w-auto mb-4" />
           <p className="text-sm text-d-muted leading-relaxed">
             Woman-owned bulk landscape supply, est. 1998. Jefferson, MA.
           </p>
