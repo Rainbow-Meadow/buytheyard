@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import brandmark from "@/assets/brandmark-dark.png";
+import { ThemedBrandmark } from "@/components/site/ThemedBrandmark";
 
 const NAV = [
   { to: "/products", label: "Products" },
@@ -24,8 +24,7 @@ export function SiteHeader() {
             aria-label="Buy The Yard — home"
             onClick={() => setOpen(false)}
           >
-            <img
-              src={brandmark}
+            <ThemedBrandmark
               alt="Buy The Yard"
               width={160}
               height={60}

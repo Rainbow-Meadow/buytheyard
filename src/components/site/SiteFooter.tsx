@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Star } from "lucide-react";
-import brandmark from "@/assets/brandmark-dark.png";
+import { ThemedBrandmark } from "@/components/site/ThemedBrandmark";
 import { YelpLogo } from "@/components/site/YelpLogo";
 
 // TODO: replace with the real Google review short link from the
@@ -49,8 +49,7 @@ export function SiteFooter() {
       </div>
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 text-center md:text-left">
         <div className="md:col-span-1 flex flex-col items-center md:items-start">
-          <img
-            src={brandmark}
+          <ThemedBrandmark
             alt="Buy The Yard — Mulch · Loam · Sand · Stone"
             width={240}
             height={120}
