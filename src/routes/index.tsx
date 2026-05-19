@@ -285,12 +285,14 @@ function HomePage() {
   }, []);
 
   const featured = [
-    "Premium Black Mulch",
     "Hemlock Mulch",
     "Screened Loam",
+    "Mason Sand",
     "3/4\" Crushed Blue Stone",
+    "River Stone",
     "Hanging Baskets",
     "ASTM Playground Chips",
+    "Hand Tools & Long Handles",
   ]
     .map((n) => products.find((p) => p.name === n))
     .filter((p): p is (typeof products)[number] => Boolean(p));
