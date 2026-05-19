@@ -12,10 +12,10 @@ export const mHome = {
   shopCta: "Shop materials",
 };
 
-import mulchImg from "./assets/m-shop-mulch.jpg";
-import stoneImg from "./assets/m-shop-stone.jpg";
-import loamImg from "./assets/m-shop-loam.jpg";
-import sandImg from "./assets/m-shop-sand.jpg";
+import mulchImg from "@/assets/mulch-hemlock.webp";
+import stoneImg from "@/assets/stone-river.webp";
+import loamImg from "@/assets/loam.webp";
+import sandImg from "@/assets/sand.webp";
 import yardImg from "./assets/m-contact-yard.jpg";
 
 export const mYardImg = yardImg;
