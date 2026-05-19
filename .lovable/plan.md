@@ -1,22 +1,19 @@
 ## Change
 
-Convert the FAQ section on `/` from light to dark, matching the existing dark "Delivery callout" section's surface treatment (`bg-surface text-surface-foreground`).
+Convert the "Delivery callout" section in `src/routes/index.tsx` (~lines 641–685) from dark + background image to the standard light section treatment used elsewhere on the page (e.g. Pricing).
 
-### Edits in `src/routes/index.tsx` (FAQ section, lines ~763–882)
+### Edits
 
-- **Section background**: `bg-base border-t border-zinc-200` → `bg-surface text-surface-foreground border-t border-white/10`.
-- **Left column**:
-  - Eyebrow stays brand red (already legible on dark).
-  - H2 `text-zinc-950` → remove the color override so it inherits `text-surface-foreground`.
-  - Intro paragraph `text-zinc-700` → `text-zinc-300`.
-  - Phone link `text-zinc-900` → `text-white`.
-- **Accordion wrapper** `bg-white rounded-md ring-1 ring-zinc-300/70 px-2 md:px-4` → `bg-white/5 border border-white/10 rounded-md backdrop-blur-sm px-2 md:px-4` (mirrors the delivery card panel).
-- **Each `AccordionItem`** `border-zinc-200` → `border-white/10`.
-- **Each `AccordionTrigger`** `text-zinc-950` → remove (inherits white). Add `[&_svg]:text-zinc-400` only if the chevron color needs nudging — verify and only adjust if it's invisible.
-- **Each `AccordionContent`** `text-zinc-700` → `text-zinc-300`. Inline link `text-zinc-900` → `text-white`.
-- **Mobile phone link** at the bottom: `text-zinc-900` → `text-white`.
+1. **Remove the background image** entirely — delete the `<picture>` block with `yardWide` / `deliveryMobileBg` (lines 643–652).
+2. **Section classes**: `relative bg-surface text-surface-foreground overflow-hidden` → `bg-base border-y border-zinc-200` (matches other light sections; drop `relative`/`overflow-hidden` since no absolutely-positioned image remains).
+3. **Inner container**: drop `relative` from the grid wrapper.
+4. **Intro paragraph**: `text-zinc-300` → `text-zinc-700`.
+5. **Right-side card** (`bg-white/5 border border-white/10 backdrop-blur-sm`) → `bg-white ring-1 ring-zinc-300/70` to match the pricing cards.
+6. **List dividers**: `divide-white/10` → `divide-zinc-200`.
+7. **List item descriptions**: `text-zinc-400` → `text-zinc-600`.
+8. **Remove unused imports** at the top of the file: `deliveryMobileBg` and (if no other usage remains) `yardWide`. Verify before removing.
 
 ### Out of scope
-- No copy, layout, accordion behavior, spacing, or typography-scale changes.
-- No changes to other sections (Pricing, Delivery, WBE, etc.).
-- No changes to the shared `Accordion` UI component — only the per-instance Tailwind class overrides above.
+- No copy, layout, spacing, or typography-scale changes.
+- No changes to the `/delivery` route, FAQ, WBE, or other sections.
+- No changes to shared components.
