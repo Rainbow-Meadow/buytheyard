@@ -69,12 +69,10 @@ function ContactPage() {
             Contact
           </p>
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
-            Call. Text. Email. <span className="text-brand">We answer.</span>
+            Call. <span className="text-brand">We answer.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Phone is the fastest way to reach us. For material lists, use the
-            online quote form and we'll respond with pricing and a delivery
-            window. For non-urgent questions, email is best.
+            Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
           </p>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
             <a

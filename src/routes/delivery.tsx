@@ -42,15 +42,10 @@ function DeliveryPage() {
             Delivery &amp; Pickup
           </p>
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
-            You call. We load. <span className="text-brand">It shows up.</span>
+            You call. <span className="text-brand">We deliver.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[62ch] text-lg">
-            Curbside delivery from our Jefferson yard across Central
-            Massachusetts — Holden, Worcester, Princeton, Sterling,
-            Rutland, Paxton, West Boylston, Boylston, Leominster, and
-            surrounding towns. Call before noon for same-day delivery
-            when available; otherwise, please allow approximately 48
-            hours. All orders are handled directly by the owner.
+            Curbside delivery from our Jefferson, MA yard across Central Mass. Call before noon for same-day when available.
           </p>
           <p className="mt-4 text-sm text-zinc-500">
             See the full list of towns on our{" "}

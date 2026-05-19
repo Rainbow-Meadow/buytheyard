@@ -19,7 +19,7 @@ export function SiteFooter() {
             </span>
             <div className="text-center md:text-left">
               <p className="font-display text-2xl md:text-3xl uppercase leading-tight">
-                Liked working with us? Leave a Google review.
+                Leave a <span className="text-brand">Google review.</span>
               </p>
               <p className="mt-1.5 text-sm text-zinc-400 max-w-[58ch]">
                 Reviews from Central Mass neighbors help other folks find the

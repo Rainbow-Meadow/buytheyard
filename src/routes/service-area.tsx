@@ -72,14 +72,10 @@ function ServiceAreaPage() {
             Service Area
           </p>
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[18ch]">
-            Bulk material delivery across <span className="text-brand">Central Mass</span>
+            Across <span className="text-brand">Central Mass.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[62ch] text-lg">
-            We deliver mulch, loam, sand, gravel, specialty stone, and
-            playground chips from our Jefferson, MA yard to towns across
-            Worcester County. One-yard minimum. Call before noon for
-            same-day delivery when available; otherwise, please allow
-            approximately 48 hours.
+            Mulch, loam, sand, gravel, and stone delivered from Jefferson across Worcester County.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
