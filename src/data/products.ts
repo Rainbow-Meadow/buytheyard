@@ -3,16 +3,16 @@ import mulchHemlock from "@/assets/mulch-hemlock.webp";
 import mulchPine from "@/assets/mulch-pine.webp";
 import loam from "@/assets/loam.webp";
 import sand from "@/assets/sand.webp";
-import stoneBlue from "@/assets/stone-blue-crushed.jpg";
-import stoneRiver from "@/assets/stone-river.jpg";
+import stoneBlue from "@/assets/stone-blue-crushed.webp";
+import stoneRiver from "@/assets/stone-river.webp";
 import stoneLava from "@/assets/stone-lava.webp";
-import stonePea from "@/assets/stone-pea-new.jpg";
+import stonePea from "@/assets/stone-pea-new.webp";
 import gardenBaskets from "@/assets/garden-baskets.webp";
-import gardenMums from "@/assets/garden-mums-fall.jpg";
+import gardenMums from "@/assets/garden-mums-fall.webp";
 import playgroundChips from "@/assets/playground-chips.webp";
-import winterSalt from "@/assets/winter-salt.jpg";
-import toolsHandheld from "@/assets/tools-handheld.jpg";
-import toolsCounter from "@/assets/tools-counter.jpg";
+import winterSalt from "@/assets/winter-salt.webp";
+import toolsHandheld from "@/assets/tools-handheld.webp";
+import toolsCounter from "@/assets/tools-counter.webp";
 
 export type Product = {
   name: string;
