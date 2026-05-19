@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.png";
-import heroDesktop from "@/assets/source/hero-desktop-yard.webp";
+import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
