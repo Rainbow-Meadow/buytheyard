@@ -307,7 +307,7 @@ function HomePage() {
                 </svg>
               </span>
             </h1>
-            <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-4 md:mb-8 text-pretty leading-relaxed">
+            <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-4 md:mb-8 leading-relaxed text-justify hyphens-auto">
               By the yard, from our Jefferson, MA lot. Best prices in Central Mass.
             </p>
 
@@ -429,7 +429,7 @@ function HomePage() {
             <h2 className="display-3 leading-[0.95] text-white max-w-[16ch]">
               Where the yard <span className="text-brand">lives.</span>
             </h2>
-            <p className="mt-3 md:mt-6 text-zinc-300 text-lg leading-relaxed max-w-[52ch]">
+            <p className="mt-3 md:mt-6 text-zinc-300 text-lg leading-relaxed max-w-[52ch] text-justify hyphens-auto">
               Daily back-and-forth happens on Facebook — fresh loads, restocks, weather closures, and lot photos.
             </p>
             <ul className="mt-3 md:mt-6 space-y-2 text-sm text-zinc-300">
@@ -505,7 +505,7 @@ function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
               {communityPosts.map((p) => (
                 <div key={p.org} className="flex flex-col">
-                  <p className="text-zinc-800 leading-relaxed">
+                  <p className="text-zinc-800 leading-relaxed text-justify hyphens-auto">
                     &ldquo;{p.quote}&rdquo;
                   </p>
                   <p className="mt-3 text-xs text-zinc-500">
@@ -531,7 +531,7 @@ function HomePage() {
               <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[18ch]">
                 Call for Today's Prices
               </h2>
-              <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
+              <p className="mt-5 text-zinc-700 max-w-[52ch] text-justify hyphens-auto">
                 Prices shift with the season, so we quote by phone. Cash and check avoid the 4% card fee.
               </p>
             </div>
@@ -606,7 +606,7 @@ function HomePage() {
             <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch]">
               Frequently Asked Questions
             </h2>
-            <p className="mt-5 text-zinc-700 max-w-[42ch] text-pretty">
+            <p className="mt-5 text-zinc-700 max-w-[42ch] text-justify hyphens-auto">
               Quick answers about pricing, delivery areas, payment, and
               scheduling. For anything not covered here, please give us a call.
             </p>
@@ -625,7 +625,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   How much does material cost?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6 text-justify hyphens-auto">
                   <p>
                     Prices move with the season and the market, so we quote
                     today's number by phone — and we work to keep them the
@@ -649,7 +649,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   Do you deliver to my town?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6 text-justify hyphens-auto">
                   <p>
                     We offer curbside delivery throughout Central Massachusetts
                     from our Jefferson yard, including Holden, Princeton,
@@ -672,7 +672,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   What's the 4% card fee about?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6 text-justify hyphens-auto">
                   <p>
                     The 4% surcharge is passed through directly from our
                     payment processor. Cash and check payments are accepted
@@ -686,7 +686,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   How fast can I get a delivery?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6 text-justify hyphens-auto">
                   <p>
                     Same-day delivery may be available when you call before
                     noon, depending on the day's route. Otherwise, please
@@ -732,7 +732,7 @@ function HomePage() {
             <h2 className="display-3 leading-[0.95] mb-3 md:mb-6">
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
-            <p className="text-zinc-300 text-lg max-w-[48ch] mb-4 md:mb-8">
+            <p className="text-zinc-300 text-lg max-w-[48ch] mb-4 md:mb-8 text-justify hyphens-auto">
               Curbside delivery across Central Mass. Call before noon for same-day when available.
             </p>
             <Link

@@ -73,7 +73,7 @@ function AboutPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed">
+          <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed text-justify hyphens-auto">
             <h2 className="display-4 text-zinc-900 leading-tight">
               Our Story
             </h2>

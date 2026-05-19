@@ -74,7 +74,7 @@ function ServiceAreaPage() {
           <h1 className="display-1 leading-[0.9] max-w-[18ch]">
             Across <span className="text-brand">Central Mass.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg text-justify hyphens-auto">
             Mulch, loam, sand, gravel, and stone delivered from Jefferson across Worcester County.
           </p>
           <div className="mt-4 md:mt-8 flex flex-wrap gap-4">
@@ -123,7 +123,7 @@ function ServiceAreaPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-5 md:mt-10 text-sm text-zinc-600 max-w-[60ch]">
+          <p className="mt-5 md:mt-10 text-sm text-zinc-600 max-w-[60ch] text-justify hyphens-auto">
             Don't see your town? We deliver throughout Worcester County
             and parts of Middlesex County. Give us a call and we'll
             confirm your ZIP and final price before dispatch.
