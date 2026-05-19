@@ -354,7 +354,7 @@ function HomePage() {
                 </svg>
               </span>
             </h1>
-            <p className="text-zinc-200 text-lg md:text-xl max-w-[54ch] mb-4 md:mb-8 text-pretty leading-relaxed">
+            <p className="lead text-zinc-200 max-w-[54ch] mb-4 md:mb-8 text-pretty">
               By the yard, from our Jefferson, MA lot. Best prices in Central Mass.
             </p>
 
@@ -386,7 +386,7 @@ function HomePage() {
 
       {/* Stats strip */}
       <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight pt-6 md:pt-10 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center md:text-left">
           {[
             { k: "10", v: "Years in business" },
             { k: "WBE", v: "Massachusetts WBE certified" },
@@ -474,17 +474,17 @@ function HomePage() {
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
         <div className="max-w-3xl mx-auto px-5 md:px-6">
           <div>
-            <p className="inline-flex items-center gap-2 eyebrow text-brand mb-4">
+            <p className="inline-flex items-center gap-2 eyebrow text-brand mb-3">
               <Facebook className="size-3.5" />
               On Facebook
             </p>
             <h2 className="display-3 leading-[0.95] text-white max-w-[16ch]">
               Where the yard <span className="text-brand">lives.</span>
             </h2>
-            <p className="mt-3 md:mt-6 text-zinc-300 text-lg leading-relaxed max-w-[52ch]">
+            <p className="lead mt-4 md:mt-6 text-zinc-300 max-w-[52ch]">
               Daily back-and-forth happens on Facebook — fresh loads, restocks, weather closures, and lot photos.
             </p>
-            <ul className="mt-3 md:mt-6 space-y-2 text-sm text-zinc-300">
+            <ul className="body-sm mt-5 md:mt-8 space-y-2 text-zinc-300">
               <li className="flex items-start gap-2">
                 <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
                 Daily inventory and restock photos
@@ -498,7 +498,7 @@ function HomePage() {
                 Seasonal promos and WooSox ticket drawings
               </li>
             </ul>
-            <div className="mt-4 md:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="mt-5 md:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <a
                 href="https://www.facebook.com/BuyTheYardOutdoorProducts"
                 target="_blank"
@@ -564,7 +564,7 @@ function HomePage() {
                   className="snap-start shrink-0 basis-full min-w-0 flex"
                 >
                   <figure className="bg-white border border-zinc-200 p-6 flex flex-col w-full min-h-[200px]">
-                    <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
+                    <div className="meta flex items-center gap-2 text-zinc-500 mb-4">
                       <Facebook className="size-3.5 text-[#1877F2]" />
                       <span className="font-semibold text-zinc-900">{r.name}</span>
                       <span>·</span>
@@ -585,17 +585,17 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="mt-5 md:mt-10 border-t border-zinc-300/70 pt-8">
+          <div className="mt-5 md:mt-10 border-t border-zinc-300/60 pt-8">
             <p className="eyebrow text-zinc-500 mb-5">
               Community
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
               {communityPosts.map((p) => (
                 <div key={p.org} className="flex flex-col">
-                  <p className="text-zinc-800 leading-relaxed">
+                  <p className="body text-zinc-800">
                     &ldquo;{p.quote}&rdquo;
                   </p>
-                  <p className="mt-3 text-xs text-zinc-500">
+                  <p className="meta mt-3 text-zinc-500">
                     <span className="font-semibold text-zinc-900">{p.org}</span>{" "}
                     · {p.date}
                   </p>
@@ -607,24 +607,24 @@ function HomePage() {
       </section>
 
       {/* Delivery callout */}
-      <section className="bg-base border-y border-zinc-200">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
+      <section className="bg-base border-y border-zinc-300/60">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
           <div>
             <Truck className="size-10 text-brand mb-3 md:mb-6" />
-            <h2 className="display-3 leading-[0.95] mb-3 md:mb-6">
+            <h2 className="display-3 leading-[0.95]">
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
-            <p className="text-zinc-700 text-lg max-w-[48ch] mb-4 md:mb-8">
+            <p className="lead mt-4 md:mt-6 text-zinc-700 max-w-[48ch]">
               Curbside delivery across Central Mass. Call before noon for same-day when available.
             </p>
             <Link
               to="/delivery"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
+              className="mt-5 md:mt-8 inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
             >
               Delivery details <ArrowRight className="size-4" />
             </Link>
           </div>
-          <div className="bg-white ring-1 ring-zinc-300/70 p-8 rounded-md">
+          <div className="bg-white ring-1 ring-zinc-300/60 p-8 rounded-md">
             <ul className="divide-y divide-zinc-200">
               {[
                 ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
@@ -645,42 +645,33 @@ function HomePage() {
       {/* Pricing */}
       <section className="section bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 md:mb-12">
-            <div>
-              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-                <Tag className="size-3.5" />
+          <div className="max-w-2xl">
+            <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
+              <Tag className="size-3.5" />
               Today's prices by phone
-              </p>
-              <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[18ch]">
-                Call for Today's Prices
-              </h2>
-              <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
-                Prices shift with the season, so we quote by phone. Cash and check avoid the 4% card fee.
-              </p>
-              <div className="mt-5 flex flex-wrap items-center gap-3">
-                <a
-                  href="tel:5085799897"
-                  className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90 transition-opacity"
-                >
-                  <Phone className="size-4" />
-                  Tap to call — 508.579.9897
-                </a>
-                <Link
-                  to="/quote"
-                  className="inline-flex items-center gap-2 border border-zinc-900 text-zinc-900 px-6 h-11 label hover:bg-zinc-900 hover:text-white transition-colors"
-                >
-                  Request a quote
-                  <ArrowRight className="size-4" />
-                </Link>
-              </div>
+            </p>
+            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[18ch]">
+              Call for Today's Prices
+            </h2>
+            <p className="body mt-4 md:mt-6 text-zinc-700 max-w-[52ch] text-pretty">
+              Prices shift with the season, so we quote by phone. Cash and check avoid the 4% card fee.
+            </p>
+            <div className="mt-5 md:mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="tel:5085799897"
+                className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
+              >
+                <Phone className="size-4" />
+                Tap to call — 508.579.9897
+              </a>
+              <Link
+                to="/quote"
+                className="inline-flex items-center gap-2 border border-zinc-900 text-zinc-900 px-7 h-12 label hover:bg-zinc-900 hover:text-white transition-colors"
+              >
+                Request a quote
+                <ArrowRight className="size-4" />
+              </Link>
             </div>
-            <a
-              href="tel:5085799897"
-              className="hidden md:inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
-            >
-              <Phone className="size-4" />
-              Call for a quote
-            </a>
           </div>
 
         </div>
@@ -697,7 +688,7 @@ function HomePage() {
             <h2 className="display-3 leading-[0.95] max-w-[16ch]">
               Frequently Asked Questions
             </h2>
-            <p className="mt-5 text-zinc-300 max-w-[42ch] text-pretty">
+            <p className="body mt-4 md:mt-6 text-zinc-300 max-w-[42ch] text-pretty">
               Quick answers about pricing, delivery areas, payment, and
               scheduling. For anything not covered here, please give us a call.
             </p>
@@ -716,7 +707,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
                   How much does material cost?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-300 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="body text-zinc-300 pb-5 pr-6">
                   <p>
                     Prices move with the season and the market, so we quote
                     today's number by phone — and we work to keep them the
@@ -740,7 +731,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
                   Do you deliver to my town?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-300 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="body text-zinc-300 pb-5 pr-6">
                   <p>
                     We offer curbside delivery throughout Central Massachusetts
                     from our Jefferson yard, including Holden, Princeton,
@@ -763,7 +754,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
                   What's the 4% card fee about?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-300 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="body text-zinc-300 pb-5 pr-6">
                   <p>
                     The 4% surcharge is passed through directly from our
                     payment processor. Cash and check payments are accepted
@@ -777,7 +768,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
                   How fast can I get a delivery?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-300 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="body text-zinc-300 pb-5 pr-6">
                   <p>
                     Same-day delivery may be available when you call before
                     noon, depending on the day's route. Otherwise, please
@@ -822,7 +813,7 @@ function HomePage() {
             />
             <div>
               <p className="display-4">Certified Woman-Owned</p>
-              <p className="text-sm text-zinc-300">Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.</p>
+              <p className="body-sm text-zinc-300">Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.</p>
             </div>
           </div>
           <Link
