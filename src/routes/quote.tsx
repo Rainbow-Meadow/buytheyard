@@ -112,7 +112,7 @@ function QuotePage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Get a quote
           </p>
@@ -126,7 +126,7 @@ function QuotePage() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20 bg-base">
+      <section className="section bg-base">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="max-w-3xl mx-auto px-6 space-y-12"
@@ -585,7 +585,7 @@ function SuccessView({
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4 inline-flex items-center gap-2">
             <Check className="size-3.5" /> Request ready
           </p>
@@ -599,7 +599,7 @@ function SuccessView({
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-base">
+      <section className="section bg-base">
         <div className="max-w-3xl mx-auto px-6 space-y-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a

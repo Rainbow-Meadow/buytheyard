@@ -30,7 +30,7 @@ function AboutPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Meet the owner
           </p>
@@ -40,7 +40,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-base">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5">
             <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-zinc-300 bg-kraft">
@@ -123,7 +123,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="pb-20 md:pb-28 bg-base">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <h2 className="md:col-span-3 font-display text-3xl md:text-4xl uppercase text-zinc-900 leading-tight">
             Around the Yard

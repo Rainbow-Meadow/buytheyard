@@ -27,7 +27,7 @@ function PrivacyPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-4xl mx-auto px-6 py-20 md:py-24">
+        <div className="max-w-4xl mx-auto px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Legal
           </p>
@@ -37,7 +37,7 @@ function PrivacyPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-base">
+      <section className="section bg-base">
         <div className="max-w-3xl mx-auto px-6 space-y-14">
           <div>
             <h2 className="font-display text-3xl md:text-4xl uppercase tracking-tight text-zinc-900">

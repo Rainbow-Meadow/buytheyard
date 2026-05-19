@@ -67,7 +67,7 @@ function ServiceAreaPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 section-loose">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
             Service Area
           </p>
@@ -98,7 +98,7 @@ function ServiceAreaPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-base">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-10">
             <Truck className="size-6 text-brand" />
@@ -135,7 +135,7 @@ function ServiceAreaPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-kraft border-t border-zinc-300">
+      <section className="section bg-kraft border-t border-zinc-300">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display text-4xl uppercase mb-4">
             Ready to schedule a delivery?
