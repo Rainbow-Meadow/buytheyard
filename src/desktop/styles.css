@@ -1,0 +1,87 @@
+@import "tailwindcss" source(none);
+@source "../../src";
+
+@import "@fontsource/dm-serif-display/400.css";
+@import "@fontsource/fira-sans/300.css";
+@import "@fontsource/fira-sans/400.css";
+@import "@fontsource/fira-sans/500.css";
+@import "@fontsource/fira-sans/600.css";
+
+@theme inline {
+  --color-d-bg: #0d0d0d;
+  --color-d-surface: #151515;
+  --color-d-surface-2: #1a1a1a;
+  --color-d-line: rgba(201, 168, 76, 0.18);
+  --color-d-line-strong: rgba(201, 168, 76, 0.45);
+  --color-d-text: #f8f8f8;
+  --color-d-muted: rgba(248, 248, 248, 0.55);
+  --color-d-gold: #c9a84c;
+  --color-d-gold-light: #f0d78c;
+  --font-d-display: "DM Serif Display", Georgia, serif;
+  --font-d-sans: "Fira Sans", system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+.d-root {
+  background: var(--color-d-bg);
+  color: var(--color-d-text);
+  font-family: var(--font-d-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+.d-root * { border-color: var(--color-d-line); }
+.d-root ::selection { background: var(--color-d-gold); color: var(--color-d-bg); }
+
+@utility d-serif { font-family: var(--font-d-display); font-weight: 400; }
+@utility d-eyebrow {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-d-gold);
+}
+@utility d-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+@utility d-card {
+  background: var(--color-d-surface);
+  border: 1px solid var(--color-d-line);
+}
+@utility d-card-2 {
+  background: var(--color-d-surface-2);
+  border: 1px solid var(--color-d-line);
+}
+@utility d-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-d-gold);
+  color: var(--color-d-gold);
+  padding: 0.85rem 1.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+.d-btn:hover { background: var(--color-d-gold); color: var(--color-d-bg); }
+@utility d-btn-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-d-gold);
+  color: var(--color-d-bg);
+  padding: 0.85rem 1.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background-color 240ms ease;
+}
+.d-btn-solid:hover { background: var(--color-d-gold-light); }
