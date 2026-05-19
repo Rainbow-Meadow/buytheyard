@@ -694,54 +694,6 @@ function HomePage() {
             </a>
           </div>
 
-          <MobileCollapse
-            id="pricing-grid"
-            open={pricingOpen}
-            onToggle={() => setPricingOpen((v) => !v)}
-            label="full price list"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {priceGroups.map((group) => (
-                <div
-                  key={group.heading}
-                  className="bg-white p-7 rounded-md ring-1 ring-zinc-300/70 flex flex-col"
-                >
-                  <p className="eyebrow text-brand mb-3">
-                    {group.heading}
-                  </p>
-                  <p className="display-4 text-zinc-950 leading-tight mb-2">
-                    Call for today's price
-                  </p>
-                  <p className="eyebrow text-zinc-500 mb-4">
-                    {group.unit}
-                  </p>
-                  <p className="text-sm text-zinc-700 mt-auto pt-4 border-t border-zinc-200">
-                    {group.includes}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <p className="mt-4 md:mt-8 text-xs text-zinc-600">
-              Material and delivery both quoted live — call Abby at{" "}
-              <a href="tel:5085799897" className="font-semibold text-zinc-900 hover:text-brand">
-                508.579.9897
-              </a>{" "}
-              or{" "}
-              <Link to="/quote" className="font-semibold text-zinc-900 hover:text-brand">
-                request a quote online
-              </Link>{" "}
-              and you'll have a same-day number. MA 6.25% sales tax applies where required.
-            </p>
-
-            <a
-              href="tel:5085799897"
-              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
-            >
-              <Phone className="size-4" />
-              Call for a quote
-            </a>
-          </MobileCollapse>
         </div>
       </section>
 
