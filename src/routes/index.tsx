@@ -1,15 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Phone, Truck, MapPin, Clock } from "lucide-react";
-import { HeroReel } from "@/components/site/HeroReel";
 import { YardTicker } from "@/components/site/YardTicker";
 import { SectionReveal } from "@/components/motion/SectionReveal";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { products } from "@/data/products";
-import outcomeBeds from "@/assets/outcome-beds.jpg";
-import outcomePlayground from "@/assets/outcome-playground.jpg";
-import outcomeWalkway from "@/assets/outcome-walkway.jpg";
-import abbyPortrait from "@/assets/abby-portrait.jpg";
+import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
+import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.png";
+import abbyPortrait from "@/assets/source/abby-portrait.webp";
+import yardPiles from "@/assets/source/yard-piles.webp";
+import loadingTruck from "@/assets/source/loading-truck.webp";
+import yardBanner from "@/assets/source/yard-banner-5.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,7 +43,20 @@ function HomePage() {
     <div className="bg-base text-foreground">
       {/* ============ HERO ============ */}
       <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
-        <HeroReel />
+        <div className="absolute inset-0 overflow-hidden bg-base">
+          <picture>
+            <source media="(min-width: 768px)" srcSet={heroDesktop} />
+            <img
+              src={heroMobile}
+              alt="The Buy The Yard yard in Jefferson, MA — piles of mulch, sand, and stone"
+              className="absolute inset-0 h-full w-full object-cover"
+              fetchPriority="high"
+            />
+          </picture>
+          <div className="absolute inset-0 hero-veil pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_120%,color-mix(in_oklab,var(--brand)_18%,transparent),transparent_55%)] pointer-events-none" />
+          <div className="absolute inset-0 grid-noir opacity-40 mix-blend-overlay pointer-events-none" />
+        </div>
 
         <div className="absolute inset-0 z-10 flex flex-col">
           <div className="flex-1 max-w-7xl w-full mx-auto px-5 md:px-6 flex flex-col justify-end pb-16 md:pb-24">
@@ -241,9 +255,9 @@ function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-3 md:gap-4">
             {[
-              { img: outcomeBeds, title: "Mulched beds", copy: "Hemlock, edged clean." },
-              { img: outcomePlayground, title: "Backyard play", copy: "ASTM certified chips." },
-              { img: outcomeWalkway, title: "Paths & walkways", copy: "Pea stone, crisp lines." },
+              { img: yardPiles, title: "Bulk, by the yard.", copy: "Mulch, loam, sand, and stone — picked over and ready." },
+              { img: loadingTruck, title: "Loaded on arrival.", copy: "Pull in, we load you, you're out." },
+              { img: yardBanner, title: "Sit-and-stay corner.", copy: "Adirondacks, coffee, and Charlie." },
             ].map((o, i) => (
               <SectionReveal key={o.title} delay={i * 0.08}>
                 <figure className="group relative overflow-hidden rounded-sm aspect-[4/5]">

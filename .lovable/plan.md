@@ -1,21 +1,36 @@
-## Replace ember orange with the previous red
+## Remove all AI-generated imagery — real photos only
 
-Single change in `src/styles.css` — swap the brand tokens. Everything across the site reads from `--brand` / `--brand-foreground` / `--brand-glow` / `--ring`, so no component edits are needed.
+Audit found these AI-generated files that need to go, and existing owner-supplied photos that will replace them.
 
-### Token changes (`:root` block)
+### Files to delete
 
-```css
---brand:        oklch(0.62 0.21 30);   /* previous red */
---brand-glow:   oklch(0.70 0.20 28);   /* warmer red for glow */
---ring:         oklch(0.62 0.21 30);
-```
+- `src/assets/hero/reel-01-mulch.mp4.asset.json` … `reel-05-dusk.mp4.asset.json` (the 5 hero video clips)
+- `src/assets/abby-portrait.jpg` (AI portrait at repo root — duplicate of the real `source/abby-portrait.webp`)
+- `src/assets/outcome-beds.jpg`, `outcome-playground.jpg`, `outcome-walkway.jpg`
+- `src/components/site/HeroReel.tsx` (no longer needed)
 
-`--brand-foreground` (white) stays the same — contrast on red is still fine.
+### Replacements (all owner-supplied, already in `src/assets/source/`)
 
-### Other touch-ups that depend on the brand hue
+- **Hero**: swap the cinematic reel for a real photo hero using `hero-desktop-yard-2026.png` on md+ and `hero-mobile-piles-mulch-sand-stone-2026.png` on small screens. Same dark veil + grain overlay as before, same headline + CTAs + ticker — only the media changes.
+- **Story strip portrait**: `source/abby-portrait.webp` (was already used on /about — same image).
+- **Outcomes section**: replace the three AI outcome shots with real yard photos:
+  - `source/yard-piles.webp` → "Bulk materials, by the yard."
+  - `source/loading-truck.webp` → "Loaded on arrival."
+  - `source/yard-banner-5.webp` → "Sit-and-stay corner."
+  (Outcome titles/copy adjusted to fit the actual photos, since the AI shots showed finished landscaping we don't have real photos of.)
 
-- `theme-color` meta tag in `src/routes/__root.tsx` is `#1a1a1a` (charcoal), unchanged.
-- Hero veil + radial glow in `src/components/site/HeroReel.tsx` references `var(--brand)` already, so it picks up the new red automatically.
-- `.stat-shine` and `.ember-dot` utilities also reference `var(--brand)`, so they update for free. The class names stay `ember-dot` / `btn-ember` (cosmetic; renaming would touch every route).
+### Code edits
 
-That's the entire change.
+- `src/routes/index.tsx`:
+  - Remove the three `outcome-*.jpg` imports and the `abby-portrait.jpg` import.
+  - Import the real photos listed above.
+  - Replace `<HeroReel />` with a `<HeroStill />` block (inline in the same file, or a small new component `src/components/site/HeroStill.tsx`) — `<picture>` with mobile/desktop sources, same `hero-veil` / `grid-noir` overlays, same caption markers removed.
+  - Update the outcomes array entries to match the new photos.
+- Remove `HeroReel` import.
+
+### Out of scope
+
+- Product catalog photos (`mulch-*`, `loam`, `sand`, `stone-*`, etc.) — all owner-supplied, kept as is.
+- The `/about` and other inner routes — they already use real photography only.
+
+After implementation the site contains zero AI imagery, matching `PHOTO_CREDITS.md`.
