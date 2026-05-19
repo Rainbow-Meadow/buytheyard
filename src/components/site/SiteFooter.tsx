@@ -73,29 +73,20 @@ export function SiteFooter() {
           </div>
 
           {/* Row 2 · Left — Logo + Visit */}
-          <div className="flex flex-col items-center md:items-start space-y-5">
+          {/* Row 2 · Left — Logo */}
+          <div className="flex items-center justify-center md:justify-start">
             <img
               src={brandmark}
               alt="Buy The Yard — Mulch · Loam · Sand · Stone"
               width={240}
               height={120}
-              className="h-20 w-auto"
+              className="w-full max-w-sm md:max-w-none h-auto"
               loading="lazy"
               decoding="async"
             />
-            <div className="flex flex-col items-center md:items-start">
-              <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-3">
-                Visit
-              </h3>
-              <address className="not-italic body-sm text-zinc-300 leading-relaxed">
-                2264 Main St.
-                <br />
-                Jefferson, MA 01522
-              </address>
-            </div>
           </div>
 
-          {/* Row 2 · Right — Contact deets */}
+          {/* Row 2 · Right — Contact + Visit */}
           <div className="flex flex-col items-center md:items-start space-y-5">
             <div className="space-y-1">
               <a
@@ -132,6 +123,16 @@ export function SiteFooter() {
             <p className="micro text-zinc-500">
               Est. 2016 · WBE Certified
             </p>
+            <div className="flex flex-col items-center md:items-start">
+              <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-3">
+                Visit
+              </h3>
+              <address className="not-italic body-sm text-zinc-300 leading-relaxed">
+                2264 Main St.
+                <br />
+                Jefferson, MA 01522
+              </address>
+            </div>
           </div>
 
           {/* Row 3 · Left — Hours */}
