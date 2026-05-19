@@ -1,76 +1,36 @@
-## Color tokens (added to both bundles)
+## Remove all AI-generated imagery — real photos only
 
-Brandmark-derived palette:
+Audit found these AI-generated files that need to go, and existing owner-supplied photos that will replace them.
 
-| Token | Hex | Role |
-|---|---|---|
-| `bg` | `#100d0b` | Warm near-black background |
-| `surface` | `#181410` | Warm dark card |
-| `surface-2` | `#1f1a15` | Warmer raised card |
-| `tan` | `#c89a6b` | Warm secondary accent (was unused) |
-| `tan-soft` | `#e3c39a` | Tan hover/lighter variant |
-| `gray` | `#8a8a8a` | Cool tertiary accent |
-| `line` | `rgba(138,138,138,0.18)` | Hairlines, default borders (now gray, not red) |
-| `line-strong` | `rgba(200,154,107,0.35)` | Card emphasis borders (tan tint) |
-| `muted` | `rgba(248,248,248,0.55)` | Body muted text (unchanged) |
-| `red` / `red-light` | `#b0202e` / `#d94254` | Primary CTA (kept; alias of current `gold` tokens) |
+### Files to delete
 
-The existing `gold` / `gold-light` token names stay as aliases for red so no component breaks. New `tan`, `tan-soft`, and `gray` tokens are additive.
+- `src/assets/hero/reel-01-mulch.mp4.asset.json` … `reel-05-dusk.mp4.asset.json` (the 5 hero video clips)
+- `src/assets/abby-portrait.jpg` (AI portrait at repo root — duplicate of the real `source/abby-portrait.webp`)
+- `src/assets/outcome-beds.jpg`, `outcome-playground.jpg`, `outcome-walkway.jpg`
+- `src/components/site/HeroReel.tsx` (no longer needed)
 
-## Desktop — `src/desktop/styles.css`
+### Replacements (all owner-supplied, already in `src/assets/source/`)
 
-1. Update `--color-d-bg`, `--color-d-surface`, `--color-d-surface-2` to warm values above.
-2. Add `--color-d-tan`, `--color-d-tan-soft`, `--color-d-gray`.
-3. Swap `--color-d-line` to gray-based rgba; `--color-d-line-strong` to tan-based rgba.
-4. Add three button utilities:
-   - `d-btn-tan` — tan border + tan text, fills tan on hover (ghost variant)
-   - `d-btn-gray` — gray border + gray text (subtle tertiary)
-   - `d-btn-solid-tan` — solid tan background (warm secondary CTA)
-5. Add eyebrow color variants: `d-eyebrow-tan`, `d-eyebrow-gray` (same typography, different `color`).
+- **Hero**: swap the cinematic reel for a real photo hero using `hero-desktop-yard-2026.png` on md+ and `hero-mobile-piles-mulch-sand-stone-2026.png` on small screens. Same dark veil + grain overlay as before, same headline + CTAs + ticker — only the media changes.
+- **Story strip portrait**: `source/abby-portrait.webp` (was already used on /about — same image).
+- **Outcomes section**: replace the three AI outcome shots with real yard photos:
+  - `source/yard-piles.webp` → "Bulk materials, by the yard."
+  - `source/loading-truck.webp` → "Loaded on arrival."
+  - `source/yard-banner-5.webp` → "Sit-and-stay corner."
+  (Outcome titles/copy adjusted to fit the actual photos, since the AI shots showed finished landscaping we don't have real photos of.)
 
-## Mobile — `src/mobile/styles.css`
+### Code edits
 
-Same treatment with `m-` prefix:
-1. Warm `--color-m-bg`, `--color-m-surface`, `--color-m-surface-2`.
-2. Add `--color-m-tan`, `--color-m-tan-soft`, `--color-m-gray`.
-3. Update `--color-m-line` to gray-tinted, add a tan-tinted strong variant.
-4. Update the `m-slot` repeating-stripe to a tan tint (instead of red) so placeholders feel warm.
-5. Add `m-btn-tan` (solid tan), `m-btn-gray-ghost` (gray outlined) alongside existing red ones.
-6. Add `m-eyebrow-tan` / `m-eyebrow-gray` variants.
+- `src/routes/index.tsx`:
+  - Remove the three `outcome-*.jpg` imports and the `abby-portrait.jpg` import.
+  - Import the real photos listed above.
+  - Replace `<HeroReel />` with a `<HeroStill />` block (inline in the same file, or a small new component `src/components/site/HeroStill.tsx`) — `<picture>` with mobile/desktop sources, same `hero-veil` / `grid-noir` overlays, same caption markers removed.
+  - Update the outcomes array entries to match the new photos.
+- Remove `HeroReel` import.
 
-## Product category tags (rotated palette)
+### Out of scope
 
-`src/desktop/copy.ts` and `src/mobile/copy.ts` already drive category labels. Wire color assignment by category — no new data structure, just a small mapping consumed where category tags render:
+- Product catalog photos (`mulch-*`, `loam`, `sand`, `stone-*`, etc.) — all owner-supplied, kept as is.
+- The `/about` and other inner routes — they already use real photography only.
 
-```text
-Mulch          → red    (d-gold / m-gold)
-Loam, Garden   → tan    (d-tan / m-tan)
-Sand, Spec.    → tan-soft
-Gravel, Stone  → gray   (d-gray / m-gray)
-Tools/Hardware → gray
-```
-
-Touched components:
-- `src/routes/_desktop.products.tsx` — category section headings + "lines" eyebrow pick color from the map.
-- `src/routes/_desktop.index.tsx` — any visible category eyebrow on the home bento adopts the same map.
-- `src/routes/m.shop.tsx` and `src/routes/m.index.tsx` — tile note line + section eyebrows use the map.
-
-Implementation: tiny helper `categoryAccent(category) → "red" | "tan" | "tan-soft" | "gray"` returning a className string, kept in `src/desktop/copy.ts` / `src/mobile/copy.ts`. No business logic moved.
-
-## Secondary buttons in place
-
-Replace **one** ghost button per primary surface so the new palette is visible without diluting hierarchy:
-- Desktop home hero secondary CTA → `d-btn-tan` (was red outline).
-- Desktop products page "Request a quote" arrow link → leave red.
-- Mobile home `shopCta` (currently `m-btn-ghost` red) → switch to `m-btn-tan` (solid tan) so the red phone CTA stays the dominant action.
-- Mobile shop "Visit the yard" → `m-btn-gray-ghost`.
-
-## Out of scope
-
-- Logo recolor, hero imagery, OG/favicons.
-- Reworking section layouts, copy, or fonts.
-- Light mode (project is dark-only).
-
-## Verification
-
-After edits, screenshot `/` (desktop) and `/m` (mobile @ 440×798) to confirm: warm bg reads, red CTA still dominates, tan + gray appear on at least one button and the category labels, no contrast regressions on muted text.
+After implementation the site contains zero AI imagery, matching `PHOTO_CREDITS.md`.

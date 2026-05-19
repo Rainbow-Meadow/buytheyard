@@ -10,164 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as MRouteImport } from './routes/m'
-import { Route as DesktopRouteImport } from './routes/_desktop'
-import { Route as MIndexRouteImport } from './routes/m.index'
-import { Route as DesktopIndexRouteImport } from './routes/_desktop.index'
-import { Route as MShopRouteImport } from './routes/m.shop'
-import { Route as MContactRouteImport } from './routes/m.contact'
-import { Route as DesktopQuoteRouteImport } from './routes/_desktop.quote'
-import { Route as DesktopProductsRouteImport } from './routes/_desktop.products'
-import { Route as DesktopDeliveryRouteImport } from './routes/_desktop.delivery'
-import { Route as DesktopContactRouteImport } from './routes/_desktop.contact'
-import { Route as DesktopAboutRouteImport } from './routes/_desktop.about'
+import { Route as ServiceAreaRouteImport } from './routes/service-area'
+import { Route as QuoteRouteImport } from './routes/quote'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as DeliveryRouteImport } from './routes/delivery'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MRoute = MRouteImport.update({
-  id: '/m',
-  path: '/m',
+const ServiceAreaRoute = ServiceAreaRouteImport.update({
+  id: '/service-area',
+  path: '/service-area',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DesktopRoute = DesktopRouteImport.update({
-  id: '/_desktop',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MIndexRoute = MIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => MRoute,
-} as any)
-const DesktopIndexRoute = DesktopIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => DesktopRoute,
-} as any)
-const MShopRoute = MShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
-  getParentRoute: () => MRoute,
-} as any)
-const MContactRoute = MContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => MRoute,
-} as any)
-const DesktopQuoteRoute = DesktopQuoteRouteImport.update({
+const QuoteRoute = QuoteRouteImport.update({
   id: '/quote',
   path: '/quote',
-  getParentRoute: () => DesktopRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const DesktopProductsRoute = DesktopProductsRouteImport.update({
+const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
-  getParentRoute: () => DesktopRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const DesktopDeliveryRoute = DesktopDeliveryRouteImport.update({
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeliveryRoute = DeliveryRouteImport.update({
   id: '/delivery',
   path: '/delivery',
-  getParentRoute: () => DesktopRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const DesktopContactRoute = DesktopContactRouteImport.update({
+const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => DesktopRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const DesktopAboutRoute = DesktopAboutRouteImport.update({
+const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => DesktopRoute,
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof DesktopIndexRoute
-  '/m': typeof MRouteWithChildren
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/delivery': typeof DeliveryRoute
+  '/privacy': typeof PrivacyRoute
+  '/products': typeof ProductsRoute
+  '/quote': typeof QuoteRoute
+  '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/about': typeof DesktopAboutRoute
-  '/contact': typeof DesktopContactRoute
-  '/delivery': typeof DesktopDeliveryRoute
-  '/products': typeof DesktopProductsRoute
-  '/quote': typeof DesktopQuoteRoute
-  '/m/contact': typeof MContactRoute
-  '/m/shop': typeof MShopRoute
-  '/m/': typeof MIndexRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/delivery': typeof DeliveryRoute
+  '/privacy': typeof PrivacyRoute
+  '/products': typeof ProductsRoute
+  '/quote': typeof QuoteRoute
+  '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/about': typeof DesktopAboutRoute
-  '/contact': typeof DesktopContactRoute
-  '/delivery': typeof DesktopDeliveryRoute
-  '/products': typeof DesktopProductsRoute
-  '/quote': typeof DesktopQuoteRoute
-  '/m/contact': typeof MContactRoute
-  '/m/shop': typeof MShopRoute
-  '/': typeof DesktopIndexRoute
-  '/m': typeof MIndexRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_desktop': typeof DesktopRouteWithChildren
-  '/m': typeof MRouteWithChildren
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/delivery': typeof DeliveryRoute
+  '/privacy': typeof PrivacyRoute
+  '/products': typeof ProductsRoute
+  '/quote': typeof QuoteRoute
+  '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/_desktop/about': typeof DesktopAboutRoute
-  '/_desktop/contact': typeof DesktopContactRoute
-  '/_desktop/delivery': typeof DesktopDeliveryRoute
-  '/_desktop/products': typeof DesktopProductsRoute
-  '/_desktop/quote': typeof DesktopQuoteRoute
-  '/m/contact': typeof MContactRoute
-  '/m/shop': typeof MShopRoute
-  '/_desktop/': typeof DesktopIndexRoute
-  '/m/': typeof MIndexRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/m'
-    | '/sitemap.xml'
     | '/about'
     | '/contact'
     | '/delivery'
+    | '/privacy'
     | '/products'
     | '/quote'
-    | '/m/contact'
-    | '/m/shop'
-    | '/m/'
+    | '/service-area'
+    | '/sitemap.xml'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/sitemap.xml'
+    | '/'
     | '/about'
     | '/contact'
     | '/delivery'
+    | '/privacy'
     | '/products'
     | '/quote'
-    | '/m/contact'
-    | '/m/shop'
-    | '/'
-    | '/m'
+    | '/service-area'
+    | '/sitemap.xml'
+    | '/api/chat'
   id:
     | '__root__'
-    | '/_desktop'
-    | '/m'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/delivery'
+    | '/privacy'
+    | '/products'
+    | '/quote'
+    | '/service-area'
     | '/sitemap.xml'
-    | '/_desktop/about'
-    | '/_desktop/contact'
-    | '/_desktop/delivery'
-    | '/_desktop/products'
-    | '/_desktop/quote'
-    | '/m/contact'
-    | '/m/shop'
-    | '/_desktop/'
-    | '/m/'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  DesktopRoute: typeof DesktopRouteWithChildren
-  MRoute: typeof MRouteWithChildren
+  IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  DeliveryRoute: typeof DeliveryRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ProductsRoute: typeof ProductsRoute
+  QuoteRoute: typeof QuoteRoute
+  ServiceAreaRoute: typeof ServiceAreaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -179,125 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/m': {
-      id: '/m'
-      path: '/m'
-      fullPath: '/m'
-      preLoaderRoute: typeof MRouteImport
+    '/service-area': {
+      id: '/service-area'
+      path: '/service-area'
+      fullPath: '/service-area'
+      preLoaderRoute: typeof ServiceAreaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_desktop': {
-      id: '/_desktop'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof DesktopRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/m/': {
-      id: '/m/'
-      path: '/'
-      fullPath: '/m/'
-      preLoaderRoute: typeof MIndexRouteImport
-      parentRoute: typeof MRoute
-    }
-    '/_desktop/': {
-      id: '/_desktop/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof DesktopIndexRouteImport
-      parentRoute: typeof DesktopRoute
-    }
-    '/m/shop': {
-      id: '/m/shop'
-      path: '/shop'
-      fullPath: '/m/shop'
-      preLoaderRoute: typeof MShopRouteImport
-      parentRoute: typeof MRoute
-    }
-    '/m/contact': {
-      id: '/m/contact'
-      path: '/contact'
-      fullPath: '/m/contact'
-      preLoaderRoute: typeof MContactRouteImport
-      parentRoute: typeof MRoute
-    }
-    '/_desktop/quote': {
-      id: '/_desktop/quote'
+    '/quote': {
+      id: '/quote'
       path: '/quote'
       fullPath: '/quote'
-      preLoaderRoute: typeof DesktopQuoteRouteImport
-      parentRoute: typeof DesktopRoute
+      preLoaderRoute: typeof QuoteRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_desktop/products': {
-      id: '/_desktop/products'
+    '/products': {
+      id: '/products'
       path: '/products'
       fullPath: '/products'
-      preLoaderRoute: typeof DesktopProductsRouteImport
-      parentRoute: typeof DesktopRoute
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_desktop/delivery': {
-      id: '/_desktop/delivery'
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/delivery': {
+      id: '/delivery'
       path: '/delivery'
       fullPath: '/delivery'
-      preLoaderRoute: typeof DesktopDeliveryRouteImport
-      parentRoute: typeof DesktopRoute
+      preLoaderRoute: typeof DeliveryRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_desktop/contact': {
-      id: '/_desktop/contact'
+    '/contact': {
+      id: '/contact'
       path: '/contact'
       fullPath: '/contact'
-      preLoaderRoute: typeof DesktopContactRouteImport
-      parentRoute: typeof DesktopRoute
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_desktop/about': {
-      id: '/_desktop/about'
+    '/about': {
+      id: '/about'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof DesktopAboutRouteImport
-      parentRoute: typeof DesktopRoute
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface DesktopRouteChildren {
-  DesktopAboutRoute: typeof DesktopAboutRoute
-  DesktopContactRoute: typeof DesktopContactRoute
-  DesktopDeliveryRoute: typeof DesktopDeliveryRoute
-  DesktopProductsRoute: typeof DesktopProductsRoute
-  DesktopQuoteRoute: typeof DesktopQuoteRoute
-  DesktopIndexRoute: typeof DesktopIndexRoute
-}
-
-const DesktopRouteChildren: DesktopRouteChildren = {
-  DesktopAboutRoute: DesktopAboutRoute,
-  DesktopContactRoute: DesktopContactRoute,
-  DesktopDeliveryRoute: DesktopDeliveryRoute,
-  DesktopProductsRoute: DesktopProductsRoute,
-  DesktopQuoteRoute: DesktopQuoteRoute,
-  DesktopIndexRoute: DesktopIndexRoute,
-}
-
-const DesktopRouteWithChildren =
-  DesktopRoute._addFileChildren(DesktopRouteChildren)
-
-interface MRouteChildren {
-  MContactRoute: typeof MContactRoute
-  MShopRoute: typeof MShopRoute
-  MIndexRoute: typeof MIndexRoute
-}
-
-const MRouteChildren: MRouteChildren = {
-  MContactRoute: MContactRoute,
-  MShopRoute: MShopRoute,
-  MIndexRoute: MIndexRoute,
-}
-
-const MRouteWithChildren = MRoute._addFileChildren(MRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
-  DesktopRoute: DesktopRouteWithChildren,
-  MRoute: MRouteWithChildren,
+  IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  DeliveryRoute: DeliveryRoute,
+  PrivacyRoute: PrivacyRoute,
+  ProductsRoute: ProductsRoute,
+  QuoteRoute: QuoteRoute,
+  ServiceAreaRoute: ServiceAreaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

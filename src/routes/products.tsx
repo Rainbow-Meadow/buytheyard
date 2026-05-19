@@ -1,0 +1,124 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Phone } from "lucide-react";
+import { categories, products } from "@/data/products";
+import { ProductCard } from "@/components/site/ProductCard";
+
+export const Route = createFileRoute("/products")({
+  head: () => ({
+    meta: [
+      { title: "Products — Mulch, Loam, Sand & Stone | Buy The Yard" },
+      {
+        name: "description",
+        content:
+          "Bulk mulch, loam, sand, gravel, specialty stone, plus garden center and ASTM playground chips. Pickup or delivery from Jefferson, MA.",
+      },
+      { property: "og:title", content: "Products — Buy The Yard" },
+      {
+        property: "og:description",
+        content: "Bulk landscape materials. By the yard. Pickup or delivery in Central Mass.",
+      },
+      { property: "og:url", content: "/products" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://buytheyard.lovable.app/products" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Buy The Yard — Materials Catalog",
+          itemListElement: products.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Product",
+              name: p.name,
+              description: p.description,
+              category: p.category,
+              brand: { "@type": "Brand", name: "Buy The Yard" },
+              offers: {
+                "@type": "Offer",
+                availability: "https://schema.org/InStock",
+                seller: { "@type": "LocalBusiness", name: "Buy The Yard" },
+                priceSpecification: {
+                  "@type": "PriceSpecification",
+                  description: "Call 508-579-9897 for today's price",
+                },
+              },
+            },
+          })),
+        }),
+      },
+    ],
+  }),
+  component: ProductsPage,
+});
+
+function ProductsPage() {
+  return (
+    <>
+      <section className="bg-surface text-surface-foreground">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
+          <p className="eyebrow text-brand mb-4">
+            Catalog
+          </p>
+          <h1 className="display-1 leading-[0.9] max-w-[18ch]">
+            Materials. By the <span className="text-brand">yard</span>.
+          </h1>
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
+            Prices move with the season — call{" "}
+            <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
+              508-579-9897
+            </a>{" "}
+            for today's number, and we'll size your project on the call.
+          </p>
+        </div>
+      </section>
+
+      {categories.map((cat) => {
+        const items = products.filter((p) => p.category === cat);
+        if (items.length === 0) return null;
+        return (
+          <section key={cat} className="section bg-base border-b border-white/10 last:border-0">
+            <div className="max-w-7xl mx-auto px-5 md:px-6">
+              <div className="flex items-end justify-between mb-5 md:mb-10 border-b border-white/15 pb-4">
+                <h2 className="display-4 leading-none text-white">
+                  {cat}
+                </h2>
+                <span className="label text-zinc-500">
+                  {items.length} {items.length === 1 ? "option" : "options"}
+                </span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+                {items.map((p) => (
+                  <ProductCard key={p.name} product={p} />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      <section className="bg-surface section">
+        <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
+          <h2 className="display-3 mb-4">
+            Looking for Something Else?
+          </h2>
+          <p className="text-zinc-300 mb-4 md:mb-8">
+            Our regular lineup. Bulk salt and ice melt in winter, bagged soils year-round, plus seasonal specials. Call to confirm stock.
+          </p>
+          <a
+            href="tel:5085799897"
+            className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
+          >
+            <Phone className="size-4" /> 508.579.9897
+          </a>
+        </div>
+      </section>
+    </>
+  );
+}

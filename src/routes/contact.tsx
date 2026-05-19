@@ -1,0 +1,230 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  ArrowRight,
+  ClipboardList,
+  Clock,
+  Mail,
+  MapPin,
+  Phone,
+  Facebook,
+} from "lucide-react";
+import { YelpLogo } from "@/components/site/YelpLogo";
+
+export const Route = createFileRoute("/contact")({
+  head: () => ({
+    meta: [
+      { title: "Contact — Buy The Yard | 508-579-9897 | Jefferson, MA" },
+      {
+        name: "description",
+        content:
+          "Call 508-579-9897 or send a quote online. Stop by Buy The Yard at 2264 Main St., Jefferson, MA 01522. In-season: Mon–Fri 8a–5p, Sat 8a–3p.",
+      },
+      { property: "og:title", content: "Contact — Buy The Yard" },
+      { property: "og:description", content: "Phone, address, hours, and the map. Jefferson, MA." },
+      { property: "og:url", content: "/contact" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://buytheyard.lovable.app/contact" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Buy The Yard",
+          telephone: "+1-508-579-9897",
+          email: "abby@btymaterial.com",
+          sameAs: [
+            "https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/",
+            "https://www.yelp.com/biz/buy-the-yard-holden",
+          ],
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "2264 Main St.",
+            addressLocality: "Jefferson",
+            addressRegion: "MA",
+            postalCode: "01522",
+            addressCountry: "US",
+          },
+          openingHoursSpecification: [
+            { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "08:00", closes: "17:00" },
+            { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "15:00" },
+          ],
+        }),
+      },
+    ],
+  }),
+  component: ContactPage,
+});
+
+function ContactPage() {
+  return (
+    <>
+      <section className="bg-surface text-surface-foreground">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
+          <p className="eyebrow text-brand mb-4">
+            Contact
+          </p>
+          <h1 className="display-1 leading-[0.9] max-w-[16ch]">
+            Call. <span className="text-brand">We answer.</span>
+          </h1>
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
+            Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
+          </p>
+          <div className="mt-5 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
+            <a
+              href="tel:5085799897"
+              className="group flex items-center gap-4 bg-brand text-brand-foreground px-6 py-6 rounded-md hover:opacity-90 transition-opacity"
+            >
+              <Phone className="size-8 shrink-0" strokeWidth={2.5} />
+              <span className="flex flex-col leading-tight">
+                <span className="eyebrow opacity-80">
+                  Call
+                </span>
+                <span className="display-4">
+                  508.579.9897
+                </span>
+              </span>
+            </a>
+            <Link
+              to="/quote"
+              className="group flex items-center gap-4 bg-brand text-brand-foreground px-6 py-6 rounded-md hover:opacity-90 transition-opacity"
+            >
+              <ClipboardList className="size-8 shrink-0" strokeWidth={2.5} />
+              <span className="flex flex-col leading-tight flex-1">
+                <span className="eyebrow opacity-80">
+                  Online
+                </span>
+                <span className="display-4">
+                  Get a quote
+                </span>
+              </span>
+              <ArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+          <p className="mt-3 md:mt-6 text-sm text-zinc-400 max-w-[60ch]">
+            For non-urgent stuff, email{" "}
+            <a
+              href="mailto:abby@btymaterial.com"
+              className="text-zinc-100 underline underline-offset-4 hover:text-brand"
+            >
+              abby@btymaterial.com
+            </a>
+            . Please note: the chat widget on our previous website is no longer monitored.
+          </p>
+          <div className="mt-4 md:mt-8 flex flex-wrap items-center gap-5">
+            <a
+              href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
+            >
+              <Facebook className="size-4" /> Facebook
+            </a>
+            <a
+              href="https://www.yelp.com/biz/buy-the-yard-holden"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
+            >
+              <YelpLogo className="size-4" /> Yelp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-base">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+          <div className="bg-surface p-8 rounded-md ring-1 ring-white/10">
+            <ClipboardList className="size-7 text-brand mb-4" />
+            <h2 className="display-4 mb-2">Get a Quote</h2>
+            <p className="text-sm text-zinc-300 mb-3">
+              Best for material lists. Submit your products, town, and project
+              timing, and we'll respond with pricing.
+            </p>
+            <Link
+              to="/quote"
+              className="inline-flex items-center gap-2 label text-brand font-semibold hover:opacity-80"
+            >
+              Start a request <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+
+          <div className="bg-surface p-8 rounded-md ring-1 ring-white/10">
+            <Phone className="size-7 text-brand mb-4" />
+            <h2 className="display-4 mb-2">Phone &amp; Email</h2>
+            <a href="tel:5085799897" className="block text-white font-semibold hover:text-brand">
+              508-579-9897
+            </a>
+            <a
+              href="mailto:abby@btymaterial.com"
+              className="mt-2 flex items-center gap-2 text-sm text-zinc-300 hover:text-brand"
+            >
+              <Mail className="size-4" /> abby@btymaterial.com
+            </a>
+            <p className="text-xs text-zinc-400 mt-2">
+              Cell coverage at the yard can be limited. If we don't pick up,
+              please leave a voicemail — we return calls the same day.
+            </p>
+          </div>
+
+          <div className="bg-surface p-8 rounded-md ring-1 ring-white/10">
+            <MapPin className="size-7 text-brand mb-4" />
+            <h2 className="display-4 mb-2">Address</h2>
+            <p className="text-white">
+              2264 Main St.
+              <br />
+              Jefferson, MA 01522
+            </p>
+            <a
+              href="https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-block label text-brand font-semibold"
+            >
+              Open in maps →
+            </a>
+          </div>
+
+          <div className="bg-surface p-8 rounded-md ring-1 ring-white/10">
+            <Clock className="size-7 text-brand mb-4" />
+            <h2 className="display-4 mb-2">Hours</h2>
+            <p className="eyebrow text-brand mb-2">
+              In-season (4/1 – 8/1)
+            </p>
+            <ul className="text-sm text-white space-y-1">
+              <li className="flex justify-between gap-4"><span>Mon–Fri</span><span>8a – 5p</span></li>
+              <li className="flex justify-between gap-4"><span>Saturday</span><span>8a – 3p</span></li>
+              <li className="flex justify-between gap-4"><span>Sunday</span><span className="text-zinc-500">Closed</span></li>
+            </ul>
+            <p className="text-xs text-zinc-400 mt-3 leading-relaxed">
+              Our 2026 season opens <strong>April 1</strong>. After August 1,
+              pickup and delivery are by appointment. Salt and ice melt are
+              available year-round; call for winter loading hours.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-base">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <div className="aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden rounded-md ring-1 ring-white/10">
+            <iframe
+              title="Buy The Yard location map"
+              src="https://www.google.com/maps?q=2264+Main+St,+Jefferson,+MA+01522&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full"
+            />
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
