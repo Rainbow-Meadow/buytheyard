@@ -384,7 +384,7 @@ function HomePage() {
       </section>
 
       {/* Stats strip */}
-      <section className="bg-zinc-950 text-zinc-200 border-y border-white/20">
+      <section className="bg-zinc-950 text-zinc-200">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center md:text-left">
           {[
             { k: "10", v: "Years in business" },
@@ -406,7 +406,7 @@ function HomePage() {
       </section>
 
       {/* Product preview */}
-      <section className="section bg-surface text-surface-foreground border-y border-white/5">
+      <section className="section bg-surface text-surface-foreground">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-5 md:mb-10">
             <div>
@@ -470,7 +470,7 @@ function HomePage() {
       </section>
 
       {/* Facebook spotlight */}
-      <section className="section bg-base border-y border-zinc-300/60">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             <div className="md:col-span-7">
@@ -521,7 +521,7 @@ function HomePage() {
       </section>
 
       {/* Reviews from Facebook */}
-      <section className="section bg-base border-y border-zinc-300/60">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
              <div className="md:col-span-7 md:order-2">
@@ -614,7 +614,7 @@ function HomePage() {
       </section>
 
       {/* Delivery callout */}
-      <section className="bg-surface text-surface-foreground border-y border-white/5">
+      <section className="bg-surface text-surface-foreground">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
           <div>
             <Truck className="size-10 text-brand mb-4 md:mb-6" />
@@ -650,7 +650,7 @@ function HomePage() {
       </section>
 
       {/* Pricing */}
-      <section className="section bg-base border-y border-zinc-300/60">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
           <div className="md:col-span-7 md:order-2 md:pl-4">
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
@@ -760,7 +760,7 @@ function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="section bg-base border-t border-zinc-300/60">
+      <section className="section bg-base">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-16">
           <div className="md:col-span-5">
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
