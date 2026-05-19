@@ -22,20 +22,20 @@ export function SiteFooter() {
     <footer className="bg-surface text-surface-foreground border-t border-white/10">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
         {/* Row 1: Google review | Logo | WBE */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-stretch md:min-h-[20rem]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-stretch md:min-h-[24rem]">
           {/* Google review */}
           <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
               <h2 className="display-5 text-white">
                 Leave a <span className="text-brand">Google review.</span>
               </h2>
-              <p className="mt-2 body-sm text-zinc-400">
+              <p className="body-sm text-zinc-400">
                 Reviews from Central Mass neighbors mean a lot to Abby.
               </p>
               <a
                 href={GOOGLE_REVIEW_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-5 inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-6 h-12 label hover:opacity-90 transition-opacity"
+                className="inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-6 h-12 label hover:opacity-90 transition-opacity"
               >
                 <svg
                   aria-hidden="true"
@@ -49,7 +49,7 @@ export function SiteFooter() {
                 </svg>
                 Write a Google review
               </a>
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
                 <a
                   href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
                   target="_blank"
@@ -76,11 +76,11 @@ export function SiteFooter() {
                 alt="Buy The Yard — Mulch · Loam · Sand · Stone"
                 width={320}
                 height={160}
-                className="h-24 md:h-28 w-auto object-fill"
+                className="h-40 md:h-56 w-auto object-fill"
                 loading="lazy"
                 decoding="async"
               />
-              <p className="mt-4 meta text-zinc-500">
+              <p className="meta text-zinc-500">
                 Est. 2016 · WBE Certified
               </p>
           </div>
@@ -115,7 +115,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-stretch md:min-h-[20rem]">
           {/* Hours */}
           <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
-              <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
+              <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Hours
               </h3>
               <ul className="body-sm space-y-1.5 w-full max-w-[28ch] mx-auto">
@@ -132,10 +132,10 @@ export function SiteFooter() {
                   <span className="text-zinc-200">Closed</span>
                 </li>
               </ul>
-              <p className="mt-4 meta text-zinc-500 leading-relaxed">
+              <p className="meta text-zinc-500 leading-relaxed">
                 In-season 4/1 – 8/1. After 8/1: by appointment. Winter salt year-round.
               </p>
-              <div className="mt-6 space-y-1">
+              <div className="space-y-1">
                 <a
                   href="tel:5085799897"
                   className="block display-5 text-brand hover:text-white transition-colors"
@@ -153,10 +153,10 @@ export function SiteFooter() {
 
           {/* Visit + map */}
           <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
-              <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
+              <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Visit
               </h3>
-              <address className="not-italic body-sm text-zinc-300 leading-relaxed mb-4">
+              <address className="not-italic body-sm text-zinc-300 leading-relaxed">
                 2264 Main St.
                 <br />
                 Jefferson, MA 01522
@@ -175,7 +175,7 @@ export function SiteFooter() {
                 href={MAP_DIRECTIONS_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 inline-flex items-center gap-2 label text-zinc-300 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 label text-zinc-300 hover:text-white transition-colors"
               >
                 Get directions <ArrowRight className="size-4" />
               </a>
@@ -183,7 +183,7 @@ export function SiteFooter() {
 
           {/* Site */}
           <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
-              <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
+              <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Site
               </h3>
               <nav className="flex flex-col items-center gap-y-2 body-sm">

@@ -1,39 +1,25 @@
-Reshuffle three small content blocks across Row 1 cells so contact info lives next to Hours and social links live next to the Google review CTA.
+## Goal
+Make all 6 footer cells equally centered (vertical + horizontal) and make the logo the visual anchor of the footer.
 
-## Moves
+## Changes (single file: `src/components/site/SiteFooter.tsx`)
 
-1. **Phone + email** — move from Row 2 Col 1 (WBE+contact) into Row 1 Col 3 (Hours), placed **above** the Hours heading as a contact stack.
-2. **Facebook + Yelp** — move from Row 2 Col 1 into Row 1 Col 1 (Google review), placed **below** the "Write a Google review" button.
-3. **WBE column (Row 2 Col 1)** — keep WBE seal, "Certified Woman-Owned" headline + subtext, and "Meet Abby →" link. Drop the phone, email, and social rows now relocated elsewhere.
+**1. Cell alignment — all 6 cells**
+Each cell already has `flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center`. That handles centering, but only works if the row gives them a shared height. Both row grids already use `items-stretch md:min-h-[20rem]` — confirmed good. No change needed to the wrapper classes.
 
-## Updated cell contents
+The issue is the WBE cell uses `space-y-5` which inherited a tighter feel, while other cells stack via natural margins. Standardize: keep `space-y-5` on all cells (already in the shared class string) and remove any redundant `mt-*` inside cells that fight the spacing. Specifically:
+- Hours cell: drop `mb-5` on heading, `mt-4` / `mt-6` on note + contact stack — let `space-y-5` handle gaps.
+- Visit cell: drop `mb-5` / `mb-4` / `mt-3` — same reason.
+- Site cell: drop `mb-5` on heading.
+- Google review cell: drop `mt-2` / `mt-5` (×2) — same.
+- Logo cell: drop `mt-4` on tagline.
+- WBE cell: already clean.
 
-**Row 1 Col 1 — Google review**
-- Headline "Leave a Google review."
-- Subtext
-- Red CTA button
-- *NEW*: Facebook + Yelp inline links underneath (existing styling: `inline-flex label text-zinc-400`)
+Result: every cell uses identical `space-y-5` rhythm and is centered both axes inside its grid track.
 
-**Row 1 Col 3 — Hours**
-- *NEW*: Phone (`display-5 text-brand`) + email (`body-sm text-zinc-300`) stack at top
-- Hours heading with brand left-rule
-- Day/time rows
-- Seasonal note
-
-**Row 2 Col 1 — WBE (slimmer)**
-- WBE seal
-- "Certified Woman-Owned" headline + subtext
-- "Meet Abby →" link
-
-## Visual consequences
-
-- Row 2 Col 1 gets shorter — fine, the row already uses `items-center md:min-h-[20rem]` so it stays centered against the map.
-- Row 1 Col 1 and Col 3 get taller — both rows already share `md:min-h-[20rem]`, this just fills them more evenly.
-- All three cells stay centered horizontally within their 18rem inner blocks (no alignment changes).
+**2. Logo dominance (Row 1 center cell)**
+Bump the brandmark from `h-24 md:h-28` to roughly `h-40 md:h-56` (≈ 2× the current size) so it visually anchors the row. Keep `w-auto object-fill`. Also bump the row min-height from `md:min-h-[20rem]` to `md:min-h-[24rem]` on Row 1 so the larger logo sits comfortably with the side cells still centered against it.
 
 ## Out of scope
-
-- No copy changes
-- No token, asset, or grid structure changes
-- No changes to Row 1 Col 2 (logo), Row 2 Col 2 (Visit+Map), Row 2 Col 3 (Site), or the legal bar
-- Only `src/components/site/SiteFooter.tsx` is touched
+- No copy, color, divider, grid-column, or typography token changes.
+- Row 2 min-height stays as-is.
+- Legal bar untouched.
