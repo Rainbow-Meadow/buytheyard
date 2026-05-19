@@ -63,145 +63,138 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   return (
     <>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Contact
-          </p>
-          <h1 className="display-1 leading-[0.9] max-w-[16ch]">
-            Call. <span className="text-brand">We answer.</span>
+      <section className="bg-newsprint paper-grain border-b-4 border-ink">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8 md:pb-10">
+          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
+            <span className="dateline text-ink-soft">CONTACT DESK · § C</span>
+            <span className="dateline text-ink-soft hidden sm:inline">PHONE IS FASTEST</span>
+          </div>
+          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[16ch]">
+            Call. <span className="text-stamp">We answer.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="lead mt-4 max-w-[60ch] text-ink-soft not-italic">
             Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
           </p>
-          <div className="mt-5 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
+          <div className="mt-7 grid grid-cols-1 md:grid-cols-2 gap-0 max-w-3xl border-l border-t border-ink/15">
             <a
               href="tel:5085799897"
-              className="group flex items-center gap-4 bg-brand text-brand-foreground px-6 py-6 rounded-md hover:opacity-90 transition-opacity"
+              className="group flex items-center gap-4 bg-stamp text-newsprint px-6 py-6 border-r border-b border-ink/15 btn-press hover:bg-ink"
             >
               <Phone className="size-8 shrink-0" strokeWidth={2.5} />
               <span className="flex flex-col leading-tight">
-                <span className="eyebrow opacity-80">
-                  Call
-                </span>
-                <span className="display-4">
-                  508.579.9897
-                </span>
+                <span className="eyebrow opacity-80">CALL THE YARD</span>
+                <span className="display-4 tabular">508.579.9897</span>
               </span>
             </a>
             <Link
               to="/quote"
-              className="group flex items-center gap-4 bg-brand text-brand-foreground px-6 py-6 rounded-md hover:opacity-90 transition-opacity"
+              className="group flex items-center gap-4 bg-ink text-newsprint px-6 py-6 border-r border-b border-ink/15 btn-press hover:bg-stamp"
             >
               <ClipboardList className="size-8 shrink-0" strokeWidth={2.5} />
               <span className="flex flex-col leading-tight flex-1">
-                <span className="eyebrow opacity-80">
-                  Online
-                </span>
-                <span className="display-4">
-                  Get a quote
-                </span>
+                <span className="eyebrow opacity-80">ONLINE FORM</span>
+                <span className="display-4">File a quote</span>
               </span>
               <ArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-          <p className="mt-3 md:mt-6 text-sm text-zinc-400 max-w-[60ch]">
+          <p className="mt-5 body-sm text-ink-soft max-w-[60ch]">
             For non-urgent stuff, email{" "}
             <a
               href="mailto:abby@btymaterial.com"
-              className="text-zinc-100 underline underline-offset-4 hover:text-brand"
+              className="text-ink underline underline-offset-4 hover:text-stamp"
             >
               abby@btymaterial.com
             </a>
             . Please note: the chat widget on our previous website is no longer monitored.
           </p>
-          <div className="mt-4 md:mt-8 flex flex-wrap items-center gap-5">
+          <div className="mt-5 flex flex-wrap items-center gap-5">
             <a
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-ink-soft hover:text-stamp"
             >
-              <Facebook className="size-4" /> Facebook
+              <Facebook className="size-4" /> FACEBOOK
             </a>
             <a
               href="https://www.yelp.com/biz/buy-the-yard-holden"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-ink-soft hover:text-stamp"
             >
-              <YelpLogo className="size-4" /> Yelp
+              <YelpLogo className="size-4" /> YELP
             </a>
           </div>
         </div>
       </section>
 
-      <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
-            <ClipboardList className="size-7 text-brand mb-4" />
-            <h2 className="display-4 mb-2">Get a Quote</h2>
-            <p className="text-sm text-zinc-700 mb-3">
+      <section className="section bg-newsprint-2 border-y border-rule-strong">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-l border-t border-ink/15">
+          <div className="bg-newsprint p-7 border-r border-b border-ink/15">
+            <ClipboardList className="size-7 text-stamp mb-4" />
+            <p className="eyebrow text-ink-soft mb-1">§ 01</p>
+            <h2 className="display-4 text-ink mb-2">Get a Quote</h2>
+            <p className="body-sm text-ink-soft mb-3">
               Best for material lists. Submit your products, town, and project
               timing, and we'll respond with pricing.
             </p>
             <Link
               to="/quote"
-              className="inline-flex items-center gap-2 label text-brand font-semibold hover:opacity-80"
+              className="inline-flex items-center gap-2 label text-stamp hover:text-ink"
             >
-              Start a request <ArrowRight className="size-3.5" />
+              START A REQUEST <ArrowRight className="size-3.5" />
             </Link>
           </div>
 
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
-            <Phone className="size-7 text-brand mb-4" />
-            <h2 className="display-4 mb-2">Phone &amp; Email</h2>
-            <a href="tel:5085799897" className="block text-zinc-900 font-semibold hover:text-brand">
+          <div className="bg-newsprint p-7 border-r border-b border-ink/15">
+            <Phone className="size-7 text-stamp mb-4" />
+            <p className="eyebrow text-ink-soft mb-1">§ 02</p>
+            <h2 className="display-4 text-ink mb-2">Phone &amp; Email</h2>
+            <a href="tel:5085799897" className="block display-5 text-ink tabular hover:text-stamp">
               508-579-9897
             </a>
             <a
               href="mailto:abby@btymaterial.com"
-              className="mt-2 flex items-center gap-2 text-sm text-zinc-700 hover:text-brand"
+              className="mt-2 inline-flex items-center gap-2 body-sm text-ink-soft hover:text-stamp"
             >
               <Mail className="size-4" /> abby@btymaterial.com
             </a>
-            <p className="text-xs text-zinc-600 mt-2">
+            <p className="meta text-ink-soft mt-3 leading-relaxed normal-case">
               Cell coverage at the yard can be limited. If we don't pick up,
               please leave a voicemail — we return calls the same day.
             </p>
           </div>
 
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
-            <MapPin className="size-7 text-brand mb-4" />
-            <h2 className="display-4 mb-2">Address</h2>
-            <p className="text-zinc-900">
-              2264 Main St.
-              <br />
-              Jefferson, MA 01522
-            </p>
+          <div className="bg-newsprint p-7 border-r border-b border-ink/15">
+            <MapPin className="size-7 text-stamp mb-4" />
+            <p className="eyebrow text-ink-soft mb-1">§ 03</p>
+            <h2 className="display-4 text-ink mb-2">Address</h2>
+            <address className="body text-ink not-italic leading-snug">
+              2264 Main St.<br />Jefferson, MA 01522
+            </address>
             <a
               href="https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522"
               target="_blank"
               rel="noreferrer"
-              className="mt-3 inline-block label text-brand font-semibold"
+              className="mt-3 inline-block label text-stamp hover:text-ink"
             >
-              Open in maps →
+              OPEN IN MAPS →
             </a>
           </div>
 
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
-            <Clock className="size-7 text-brand mb-4" />
-            <h2 className="display-4 mb-2">Hours</h2>
-            <p className="eyebrow text-brand mb-2">
-              In-season (4/1 – 8/1)
-            </p>
-            <ul className="text-sm text-zinc-900 space-y-1">
-              <li className="flex justify-between gap-4"><span>Mon–Fri</span><span>8a – 5p</span></li>
-              <li className="flex justify-between gap-4"><span>Saturday</span><span>8a – 3p</span></li>
-              <li className="flex justify-between gap-4"><span>Sunday</span><span className="text-zinc-500">Closed</span></li>
-            </ul>
-            <p className="text-xs text-zinc-600 mt-3 leading-relaxed">
-              Our 2026 season opens <strong>April 1</strong>. After August 1,
+          <div className="bg-newsprint p-7 border-r border-b border-ink/15">
+            <Clock className="size-7 text-stamp mb-4" />
+            <p className="eyebrow text-ink-soft mb-1">§ 04</p>
+            <h2 className="display-4 text-ink mb-2">Hours</h2>
+            <p className="eyebrow text-stamp mb-2">IN-SEASON (4/1–8/1)</p>
+            <dl className="meta text-ink-soft divide-y divide-rule">
+              <div className="flex justify-between py-1.5"><dt>MON–FRI</dt><dd className="text-ink tabular">8A–5P</dd></div>
+              <div className="flex justify-between py-1.5"><dt>SATURDAY</dt><dd className="text-ink tabular">8A–3P</dd></div>
+              <div className="flex justify-between py-1.5"><dt>SUNDAY</dt><dd>CLOSED</dd></div>
+            </dl>
+            <p className="meta text-ink-soft mt-3 leading-relaxed normal-case">
+              Our 2026 season opens <strong className="text-ink">April 1</strong>. After August 1,
               pickup and delivery are by appointment. Salt and ice melt are
               available year-round; call for winter loading hours.
             </p>
@@ -209,9 +202,13 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden rounded-md ring-1 ring-zinc-300">
+      <section className="section bg-newsprint">
+        <div className="max-w-7xl mx-auto px-5 md:px-8">
+          <div className="flex items-end justify-between gap-4 pb-3 rule-thick">
+            <h2 className="display-3 text-ink leading-none">The Lot</h2>
+            <span className="dateline text-ink-soft hidden sm:inline">2264 MAIN ST · JEFFERSON, MA</span>
+          </div>
+          <div className="mt-6 aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden border-2 border-ink">
             <iframe
               title="Buy The Yard location map"
               src="https://www.google.com/maps?q=2264+Main+St,+Jefferson,+MA+01522&output=embed"
@@ -220,7 +217,7 @@ function ContactPage() {
               style={{ border: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-full"
+              className="w-full h-full grayscale-[0.3] contrast-[1.05]"
             />
           </div>
         </div>

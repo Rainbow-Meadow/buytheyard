@@ -54,10 +54,10 @@ export const Route = createFileRoute("/quote")({
 });
 
 const inputCls =
-  "w-full bg-white text-zinc-900 px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-brand placeholder:text-zinc-400";
+  "w-full bg-newsprint text-ink px-3 h-11 border-2 border-ink/30 rounded-none font-sans text-sm focus:outline-none focus:border-stamp placeholder:text-ink-soft/60";
 const labelCls =
-  "eyebrow text-zinc-700 mb-2 block";
-const errorCls = "text-xs text-red-700 mt-1";
+  "eyebrow text-ink mb-2 block";
+const errorCls = "meta text-stamp mt-1 normal-case";
 
 const sortedProducts = [...products].sort((a, b) => {
   const ca = categories.indexOf(a.category);
@@ -111,32 +111,33 @@ function QuotePage() {
 
   return (
     <>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Get a quote
-          </p>
-          <h1 className="display-2 leading-[0.9] max-w-[18ch]">
-            Tell us. <span className="text-brand">We'll price it.</span>
+      <section className="bg-newsprint paper-grain border-b-4 border-ink">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8">
+          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
+            <span className="dateline text-ink-soft">ORDER FORM · § Q</span>
+            <span className="dateline text-ink-soft hidden sm:inline">FILE WITH ABBY · ~60 SECONDS</span>
+          </div>
+          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[18ch]">
+            Tell us. <span className="text-stamp">We'll price it.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="lead mt-4 max-w-[60ch] text-ink-soft not-italic">
             About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
           </p>
         </div>
       </section>
 
-      <section className="section bg-base">
+      <section className="section bg-newsprint-2 border-b border-rule-strong">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-3xl mx-auto px-5 md:px-6 space-y-12"
+          className="max-w-3xl mx-auto px-5 md:px-8 space-y-12"
           noValidate
         >
           {/* PRODUCTS */}
           <fieldset>
-            <legend className="display-4 mb-2">
-              <span className="text-brand">01.</span> What do you need?
+            <legend className="display-3 text-ink mb-2 pb-3 rule-thick w-full">
+              <span className="text-stamp mr-2">§ 01</span> What do you need?
             </legend>
-            <p className="text-sm text-zinc-600 mb-3 md:mb-6">
+            <p className="body-sm text-ink-soft mb-5 mt-3">
               One row per material. Ballpark the quantity — we'll dial it in on the phone.
             </p>
 
