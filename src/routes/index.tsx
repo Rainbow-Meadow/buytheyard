@@ -382,7 +382,7 @@ function HomePage() {
       </section>
 
       {/* Product preview */}
-      <section className="py-14 md:py-20 bg-base">
+      <section className="pt-10 md:pt-12 pb-14 md:pb-20 bg-base">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-10">
             <div>
@@ -446,7 +446,7 @@ function HomePage() {
       </section>
 
       {/* Facebook spotlight */}
-      <section className="py-20 md:py-28 bg-surface text-surface-foreground border-y border-white/5">
+      <section className="pt-12 md:pt-16 pb-20 md:pb-28 bg-surface text-surface-foreground border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Facebook page card — real screenshot wrapped in a faux browser chrome */}
           <a
@@ -523,7 +523,7 @@ function HomePage() {
       </section>
 
       {/* Reviews from Facebook */}
-      <section className="py-20 md:py-28 bg-base border-t border-zinc-200">
+      <section className="pt-12 md:pt-16 pb-20 md:pb-28 bg-base border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
             <Facebook className="size-3.5" />
@@ -577,7 +577,7 @@ function HomePage() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20 md:py-28 bg-base">
+      <section className="pt-12 md:pt-16 pb-20 md:pb-28 bg-base">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-12">
             <div>
@@ -657,7 +657,7 @@ function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 md:py-28 bg-kraft border-y border-zinc-300/60">
+      <section className="pt-12 md:pt-16 pb-20 md:pb-28 bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
           <div className="md:col-span-5">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
@@ -788,7 +788,7 @@ function HomePage() {
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-25"
         />
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-6 pt-12 md:pt-16 pb-20 md:pb-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <Truck className="size-10 text-brand mb-6" />
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] mb-6">
