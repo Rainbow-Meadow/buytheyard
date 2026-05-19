@@ -1,57 +1,82 @@
-Lock every row of the footer to the same 4-column grid rail so the WBE band, review band, and utility columns all align on the same four vertical tracks.
+Restructure `src/components/site/SiteFooter.tsx` into a 3-column × 2-row grid matching the sketch, with a logo centerpiece and an embedded map.
 
-## Grid system
-
-Use one shared grid spec for both bands and the columns:
+## Grid
 
 ```
-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 md:gap-x-10
+grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12
 ```
 
-Every row places its content into that grid via `lg:col-span-*` instead of using its own flex layout. Below `lg` everything stacks naturally.
+Two stacked grid rows inside `max-w-7xl`. A thin `border-b border-white/10` divides Row 1 from Row 2; a `border-t` legal bar sits below.
 
-## Row-by-row layout (desktop, lg+)
+## Row 1 — top band (3 cells)
 
-**Row 1 — WBE band**
-- Cols 1–3: WBE seal (left) + "Certified Woman-Owned" headline + subtext, inline `flex items-center gap-5`
-- Col 4: "Meet Abby →" link, right-aligned inside its cell
-- Bottom rule: `pb-8 border-b border-white/10`
-- Same band wrapper carries `mb-10`
+```text
+┌────────────────┬──────────────────────┬────────────────┐
+│ GOOGLE REVIEW  │        LOGO          │     HOURS      │
+└────────────────┴──────────────────────┴────────────────┘
+```
 
-**Row 2 — Review band**
-- Cols 1–3: "Leave a Google review." headline + subtext
-- Col 4: red "Write a Google review" CTA, right-aligned inside its cell
-- Bottom rule: `pb-10 border-b border-white/10`
-- Wrapper `mb-12`
+- **Col 1 — Google review CTA**
+  - `display-5` headline: "Leave a Google review."
+  - 1-line subtext (`body-sm text-zinc-400`)
+  - Red `bg-brand` button "Write a Google review" with the Google "G" icon
+  - Left-aligned at `md+`
+- **Col 2 — Logo (centerpiece)**
+  - `brandmark-dark.png` rendered larger (`h-24 md:h-28 w-auto`), centered horizontally
+  - Tagline below in `meta text-zinc-500`: "Est. 2016 · WBE Certified"
+- **Col 3 — Hours**
+  - `display-5` heading "Hours" with `border-l-2 border-brand pl-3`
+  - Day/time rows (`flex justify-between`) as today
+  - Short seasonal note in `meta text-zinc-500`
 
-**Row 3 — Utility columns**
-- Col 1: Brand & contact (brandmark, phone, email, Facebook/Yelp, "Est. 2016 · WBE Certified")
-- Col 2: Visit
-- Col 3: Hours
-- Col 4: Site nav
-- Each utility column is left-aligned at `lg+`, centered when stacked
+## Row 2 — bottom band (3 cells)
 
-**Row 4 — Legal bar**
-- Same 4-col grid, but two cells with spans:
-  - Cols 1–2: `© {year} Buy The Yard Material · Jefferson, MA · WBE Certified`
-  - Cols 3–4: `Designed by Patrick Berthiaume` (right-aligned)
-- Top rule: `pt-6 border-t border-white/10 mt-12`
+```text
+┌────────────────┬──────────────────────┬────────────────┐
+│ WBE + CONTACT  │   VISIT (+ MAP)      │      SITE      │
+└────────────────┴──────────────────────┴────────────────┘
+```
 
-## Why this works
+- **Col 1 — WBE + contact stack**
+  - WBE seal image (`h-20 w-auto`)
+  - `display-5` "Certified Woman-Owned" + 1-line subtext
+  - Phone (`display-5 text-brand`) and email (`body-sm`)
+  - Facebook + Yelp inline links (existing icons)
+  - "Meet Abby →" link (carries over the previous CTA)
+- **Col 2 — Visit (with embedded map)**
+  - `display-5` heading "Visit" with `border-l-2 border-brand pl-3`
+  - Address block (`not-italic body-sm`)
+  - **Embedded map** below: Google Maps iframe pinned to `2264 Main St, Jefferson, MA 01522`, `w-full aspect-[4/3]`, `rounded-none border border-white/10`, `loading="lazy"`, `referrerpolicy="no-referrer-when-downgrade"`, `title="Buy The Yard Material — 2264 Main St, Jefferson, MA"`
+  - Small "Get directions →" link under the map opening Google Maps in a new tab
+- **Col 3 — Site nav**
+  - `display-5` "Site" with brand left rule
+  - Vertical nav: Products, About, Delivery & Pickup, Service Area, Contact
+  - Secondary: Privacy & Terms, Cookie settings (muted)
 
-Right now the WBE band and review band use their own `justify-between` flex layouts, so the seal/headline/CTA edges land wherever flex puts them — not on the column gutters used by Brand/Visit/Hours/Site. Forcing both bands into the same `grid-cols-4` makes the CTA + "Meet Abby" link sit exactly above the Site column, the WBE text aligns with the Brand+Visit+Hours columns, and the review headline aligns the same way. The whole footer reads as one consistent 4-column system top to bottom.
+## Row 3 — legal bar
 
-## Mobile behavior
+Unchanged structure, single `border-t border-white/10` strip:
+- Left: `© {year} Buy The Yard Material · Jefferson, MA · WBE Certified`
+- Right: `Designed by Patrick Berthiaume`
 
-Unchanged feel — `grid-cols-1` (and `sm:grid-cols-2` for the utility row) means everything stacks vertically below `lg`. Right-aligned cells (Meet Abby, CTA, designer credit) become centered when stacked.
+## Responsive behavior
+
+- `md+`: 3 columns as drawn
+- `<md`: single column stack in the order Google → Logo → Hours → WBE/Contact → Visit+Map → Site → Legal
+- Map keeps `aspect-[4/3]` at all sizes; everything else stays centered when stacked
+
+## Visual notes
+
+- Keep existing tokens: `bg-surface`, `text-brand`, `border-white/10`, `display-5`, `body-sm`, `meta`, `micro`
+- All three column headings (`Hours`, `Visit`, `Site`) share the same `display-5 + border-l-2 border-brand pl-3` treatment for symmetry
+- Logo column is intentionally the only centered column to read as the visual anchor
 
 ## Out of scope
 
-- No copy changes.
-- No design-token changes.
-- No new assets, no new imports beyond what's already there.
-- Mobile keeps current stacking — only `lg+` alignment is touched.
+- No copy changes beyond removing the old standalone "Meet Abby" right-rail cell (it folds into the WBE block)
+- No new design tokens, no new assets (map is an iframe, not an image)
+- No changes outside `src/components/site/SiteFooter.tsx`
 
 ## Files touched
 
-- `src/components/site/SiteFooter.tsx` — restructure the three bands' wrappers to use the shared 4-col grid; remove the per-band `flex justify-between` containers.
+- `src/components/site/SiteFooter.tsx` — full restructure into the 3×2 grid + map iframe
