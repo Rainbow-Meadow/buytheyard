@@ -1,36 +1,26 @@
 ## Goal
 
-Turn the "What neighbors say" review grid into a horizontal sliding carousel that **auto-advances**, matching the existing Featured Materials rail visually but with an autoplay loop on top.
+Make the reviews carousel a single-card-at-a-time, narrower lane — not a full-width 3-up rail.
 
-## Changes in `src/routes/index.tsx`
+## Changes in `src/routes/index.tsx` (reviews section)
 
-1. **State + refs (top of `IndexPage`, alongside the existing `railRef`):**
-   - Add `reviewsRailRef`, `reviewsCanPrev`, `reviewsCanNext`, plus the same scroll listener / `scrollReviewsByCard(dir)` helper used by Featured Materials, scoped to the new ref.
+1. **Narrow the rail container.** Wrap the header row + rail in a centered max-width:
+   - Change `<div className="-mx-6 md:mx-0 mt-6 md:mt-12">` to `<div className="-mx-6 md:mx-0 mt-6 md:mt-12 md:max-w-2xl">` (≈672px). Header row gets the same `md:max-w-2xl` so the prev/next arrows align with the rail edge.
 
-2. **Section header (around lines 471–477):**
-   - Wrap eyebrow + headline in a flex row with `md:` prev/next arrow buttons on the right (mirrors Featured Materials). Arrows hidden on mobile.
+2. **One card per slide at every breakpoint.** Change each rail item from
+   `basis-[85%] sm:basis-[60%] md:basis-[42%] lg:basis-[30%]`
+   to
+   `basis-full` (with `min-w-0` so the figure fills the lane). Drop the small "peek" — single full-width card snaps cleanly.
 
-3. **Replace the grid (lines 479–499) with a snap rail:**
-   - Outer `<div className="-mx-6 md:mx-0 mt-6 md:mt-12">`
-   - Inner rail `<div ref={reviewsRailRef} className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">`
-   - Each review wrapped in `<div data-rail-item className="snap-start shrink-0 basis-[85%] sm:basis-[60%] md:basis-[42%] lg:basis-[30%] flex">`.
-   - Each `<figure>` unchanged inside the rail item.
-   - Mobile hint below: `Swipe to read more →`.
+3. **Tighten the card height for a single-card view.** The figure stays `bg-white border border-zinc-200 p-6` but gets a `min-h-[280px] md:min-h-[260px]` so quote length variance doesn't make the rail jump when autoplay advances.
 
-4. **Autoplay loop (new `useEffect` in `IndexPage`):**
-   - Interval every **5s**: advance the reviews rail by one card via `scrollReviewsByCard(1)`; if it's already at the end (`!reviewsCanNext`), smoothly scroll back to `scrollLeft = 0` instead.
-   - **Pause autoplay** when:
-     - the user hovers the rail (`mouseenter` → clear interval; `mouseleave` → restart),
-     - the user touches/drags it (`touchstart` → clear; `touchend` → restart after a short idle),
-     - the tab is hidden (`document.visibilitychange`),
-     - the `prefers-reduced-motion: reduce` media query matches — in which case autoplay never starts.
-   - Cleanup interval + listeners on unmount.
+4. **Mobile hint copy** stays `Swipe to read more →`.
 
-5. **Community posts block below (lines 501–518):** unchanged.
+Autoplay, pause-on-hover/touch, reduced-motion, and the arrow buttons all stay as-is — they already operate per card.
 
 ## Out of scope
 
 - No copy changes.
-- No change to card styling, typography, or the community posts grid.
-- No new dependency (no Embla / shadcn carousel) — reuse the proven in-file scroll-snap pattern.
-- No dot indicators or progress bar (can add later if requested).
+- No change to card typography or colors.
+- No change to the community posts block below.
+- No dot indicators (can add separately if wanted).

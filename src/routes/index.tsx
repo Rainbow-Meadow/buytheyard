@@ -558,7 +558,7 @@ function HomePage() {
       {/* Reviews from Facebook */}
       <section className="section bg-base border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 md:max-w-2xl">
             <div>
               <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                 <Facebook className="size-3.5" />
@@ -590,7 +590,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="-mx-6 md:mx-0 mt-6 md:mt-12">
+          <div className="-mx-6 md:mx-0 mt-6 md:mt-12 md:max-w-2xl">
             <div
               ref={reviewsRailRef}
               className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
@@ -599,9 +599,9 @@ function HomePage() {
                 <div
                   key={r.name}
                   data-reviews-item
-                  className="snap-start shrink-0 basis-[85%] sm:basis-[60%] md:basis-[42%] lg:basis-[30%] flex"
+                  className="snap-start shrink-0 basis-full min-w-0 flex"
                 >
-                  <figure className="bg-white border border-zinc-200 p-6 flex flex-col w-full">
+                  <figure className="bg-white border border-zinc-200 p-6 flex flex-col w-full min-h-[280px] md:min-h-[260px]">
                     <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
                       <Facebook className="size-3.5 text-[#1877F2]" />
                       <span className="font-semibold text-zinc-900">{r.name}</span>
