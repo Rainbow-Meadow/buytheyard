@@ -10,56 +10,32 @@ import { openCookieSettings } from "@/lib/cookie-consent";
 const GOOGLE_REVIEW_URL =
   "https://search.google.com/local/writereview?placeid=REPLACE_ME";
 
+const MAP_EMBED_URL =
+  "https://www.google.com/maps?q=2264+Main+St,+Jefferson,+MA+01522&output=embed";
+const MAP_DIRECTIONS_URL =
+  "https://www.google.com/maps/dir/?api=1&destination=2264+Main+St,+Jefferson,+MA+01522";
+
 export function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-surface text-surface-foreground">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
-        {/* WBE band — 4-col rail */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-6 items-center pb-8 md:pb-10 mb-10 md:mb-12 border-b border-white/10 text-center md:text-left">
-          <div className="lg:col-span-3 flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-5">
-            <img
-              src={wbeSeal}
-              alt="Massachusetts WBE certified seal"
-              width={160}
-              height={100}
-              className="h-16 md:h-20 w-auto object-contain shrink-0"
-              loading="lazy"
-              decoding="async"
-            />
-            <div>
-              <p className="display-5 text-white">Certified Woman-Owned</p>
-              <p className="mt-1 body-sm text-zinc-300">
-                Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.
-              </p>
-            </div>
-          </div>
-          <div className="lg:col-span-1 flex justify-center lg:justify-end">
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
-            >
-              Meet Abby <ArrowRight className="size-4" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Review band — 4-col rail */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-6 items-center pb-10 md:pb-12 mb-10 md:mb-14 border-b border-white/10 text-center md:text-left">
-          <div className="lg:col-span-3">
-            <h2 className="display-4 text-white">
+        {/* Row 1: Google review | Logo | Hours */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10">
+          {/* Google review */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h2 className="display-5 text-white">
               Leave a <span className="text-brand">Google review.</span>
             </h2>
-            <p className="mt-2 body-sm text-zinc-400 max-w-[58ch] mx-auto md:mx-0">
-              Reviews from Central Mass neighbors help other folks find the
-              yard — and they mean a lot to Abby.
+            <p className="mt-2 body-sm text-zinc-400 max-w-[40ch]">
+              Reviews from Central Mass neighbors mean a lot to Abby.
             </p>
-          </div>
-          <div className="lg:col-span-1 flex justify-center lg:justify-end">
             <a
               href={GOOGLE_REVIEW_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
+              className="mt-5 inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-6 h-12 label hover:opacity-90 transition-opacity"
             >
               <svg
                 aria-hidden="true"
@@ -74,25 +50,71 @@ export function SiteFooter() {
               Write a Google review
             </a>
           </div>
-        </div>
 
-        {/* Main 4-col grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-10 text-center md:text-left">
-          {/* Brand & contact */}
-          <div className="flex flex-col items-center md:items-start space-y-5">
+          {/* Logo centerpiece */}
+          <div className="flex flex-col items-center justify-center text-center">
             <img
               src={brandmark}
               alt="Buy The Yard — Mulch · Loam · Sand · Stone"
-              width={240}
-              height={120}
-              className="h-20 w-auto"
+              width={320}
+              height={160}
+              className="h-24 md:h-28 w-auto"
               loading="lazy"
               decoding="async"
             />
+            <p className="mt-4 meta text-zinc-500">
+              Est. 2016 · WBE Certified
+            </p>
+          </div>
+
+          {/* Hours */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
+              Hours
+            </h3>
+            <ul className="body-sm space-y-1.5 w-full max-w-[28ch]">
+              <li className="flex justify-between gap-4">
+                <span className="text-zinc-500">Mon – Fri</span>
+                <span className="text-zinc-200">8:00am – 5:00pm</span>
+              </li>
+              <li className="flex justify-between gap-4">
+                <span className="text-zinc-500">Saturday</span>
+                <span className="text-zinc-200">8:00am – 3:00pm</span>
+              </li>
+              <li className="flex justify-between gap-4">
+                <span className="text-zinc-500">Sunday</span>
+                <span className="text-zinc-200">Closed</span>
+              </li>
+            </ul>
+            <p className="mt-4 meta text-zinc-500 leading-relaxed max-w-[32ch] text-center md:text-left">
+              In-season 4/1 – 8/1. After 8/1: by appointment. Winter salt year-round.
+            </p>
+          </div>
+        </div>
+
+        {/* Row 2: WBE + contact | Visit (map) | Site */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14">
+          {/* WBE + contact */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-5">
+            <img
+              src={wbeSeal}
+              alt="Massachusetts WBE certified seal"
+              width={160}
+              height={100}
+              className="h-20 w-auto object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <p className="display-5 text-white">Certified Woman-Owned</p>
+              <p className="mt-1 body-sm text-zinc-300 max-w-[36ch]">
+                Certified by the Commonwealth of Massachusetts since 2018.
+              </p>
+            </div>
             <div className="space-y-1">
               <a
                 href="tel:5085799897"
-                className="block display-4 text-brand hover:text-white transition-colors"
+                className="block display-5 text-brand hover:text-white transition-colors"
               >
                 508.579.9897
               </a>
@@ -121,46 +143,42 @@ export function SiteFooter() {
                 <YelpLogo className="size-4" /> Yelp
               </a>
             </div>
-            <p className="micro text-zinc-500">
-              Est. 2016 · WBE Certified
-            </p>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
+            >
+              Meet Abby <ArrowRight className="size-4" />
+            </Link>
           </div>
 
-          {/* Visit */}
+          {/* Visit + map */}
           <div className="flex flex-col items-center md:items-start">
             <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
               Visit
             </h3>
-            <address className="not-italic body-sm text-zinc-300 leading-relaxed">
+            <address className="not-italic body-sm text-zinc-300 leading-relaxed mb-4 text-center md:text-left">
               2264 Main St.
               <br />
               Jefferson, MA 01522
             </address>
-          </div>
-
-          {/* Hours */}
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
-              Hours
-            </h3>
-            <ul className="body-sm space-y-1.5 w-full max-w-[28ch]">
-              <li className="flex justify-between gap-4">
-                <span className="text-zinc-500">Mon – Fri</span>
-                <span className="text-zinc-200">8:00am – 5:00pm</span>
-              </li>
-              <li className="flex justify-between gap-4">
-                <span className="text-zinc-500">Saturday</span>
-                <span className="text-zinc-200">8:00am – 3:00pm</span>
-              </li>
-              <li className="flex justify-between gap-4">
-                <span className="text-zinc-500">Sunday</span>
-                <span className="text-zinc-200">Closed</span>
-              </li>
-            </ul>
-            <p className="mt-4 meta text-zinc-500 leading-relaxed max-w-[32ch] text-center md:text-left">
-              In-season 4/1 – 8/1. 2026 opens 4/1. After 8/1: by appointment.
-              Winter salt year-round — call for loading hours.
-            </p>
+            <div className="w-full aspect-[4/3] border border-white/10 overflow-hidden">
+              <iframe
+                src={MAP_EMBED_URL}
+                title="Buy The Yard Material — 2264 Main St, Jefferson, MA"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full grayscale-[0.2] contrast-[1.05]"
+                style={{ border: 0 }}
+              />
+            </div>
+            <a
+              href={MAP_DIRECTIONS_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-flex items-center gap-2 label text-zinc-300 hover:text-white transition-colors"
+            >
+              Get directions <ArrowRight className="size-4" />
+            </a>
           </div>
 
           {/* Site */}
@@ -186,12 +204,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Legal bar — 4-col rail */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-3 items-center mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/10 micro text-zinc-500 text-center md:text-left">
-          <span className="lg:col-span-3">
-            &copy; {new Date().getFullYear()} Buy The Yard Material · Jefferson, MA · WBE Certified
+        {/* Legal bar */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 items-center mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/10 micro text-zinc-500 text-center md:text-left">
+          <span>
+            &copy; {year} Buy The Yard Material · Jefferson, MA · WBE Certified
           </span>
-          <span className="lg:col-span-1 text-zinc-600 text-center lg:text-right">
+          <span className="text-zinc-600 text-center md:text-right">
             Designed by Patrick Berthiaume
           </span>
         </div>
