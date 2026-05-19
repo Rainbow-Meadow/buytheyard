@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
-import yardWide from "@/assets/source/yard-trucks.webp";
-import deliveryMobileBg from "@/assets/delivery-mobile-bg.webp";
 import heroMobile from "@/assets/source/hero-mobile-firepit.webp";
 import heroDesktop from "@/assets/source/hero-desktop-yard.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
@@ -639,24 +637,14 @@ function HomePage() {
       </section>
 
       {/* Delivery callout */}
-      <section className="relative bg-surface text-surface-foreground overflow-hidden">
-        <picture aria-hidden="true">
-          <source media="(min-width: 768px)" srcSet={yardWide} />
-          <img
-            src={deliveryMobileBg}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover opacity-25"
-          />
-        </picture>
-        <div className="relative max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
+      <section className="bg-base border-y border-zinc-200">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
           <div>
             <Truck className="size-10 text-brand mb-3 md:mb-6" />
             <h2 className="display-3 leading-[0.95] mb-3 md:mb-6">
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
-            <p className="text-zinc-300 text-lg max-w-[48ch] mb-4 md:mb-8">
+            <p className="text-zinc-700 text-lg max-w-[48ch] mb-4 md:mb-8">
               Curbside delivery across Central Mass. Call before noon for same-day when available.
             </p>
             <Link
@@ -666,8 +654,8 @@ function HomePage() {
               Delivery details <ArrowRight className="size-4" />
             </Link>
           </div>
-          <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm rounded-md">
-            <ul className="divide-y divide-white/10">
+          <div className="bg-white ring-1 ring-zinc-300/70 p-8 rounded-md">
+            <ul className="divide-y divide-zinc-200">
               {[
                 ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
                 ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
@@ -676,7 +664,7 @@ function HomePage() {
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="display-5">{k}</p>
-                  <p className="text-sm text-zinc-400 mt-1">{v}</p>
+                  <p className="text-sm text-zinc-600 mt-1">{v}</p>
                 </li>
               ))}
             </ul>
