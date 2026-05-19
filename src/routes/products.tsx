@@ -63,7 +63,7 @@ function ProductsPage() {
     <>
       <section className="bg-surface text-surface-foreground">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
+          <p className="eyebrow text-brand mb-4">
             Catalog
           </p>
           <h1 className="font-display text-6xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
@@ -86,7 +86,7 @@ function ProductsPage() {
           <section key={cat} className="section bg-base border-b border-zinc-200 last:border-0">
             <div className="max-w-7xl mx-auto px-5 md:px-6">
               <div className="flex items-end justify-between mb-5 md:mb-10 border-b-2 border-zinc-900 pb-4">
-                <h2 className="font-display text-3xl md:text-4xl uppercase leading-none text-zinc-900">
+                <h2 className="display-4 leading-none text-zinc-900">
                   {cat}
                 </h2>
                 <span className="text-xs uppercase tracking-widest text-zinc-500">
@@ -105,7 +105,7 @@ function ProductsPage() {
 
       <section className="bg-kraft section">
         <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
-          <h2 className="font-display text-4xl uppercase mb-4">
+          <h2 className="display-3 mb-4">
             Looking for Something Else?
           </h2>
           <p className="text-zinc-700 mb-4 md:mb-8">
@@ -113,7 +113,7 @@ function ProductsPage() {
           </p>
           <a
             href="tel:5085799897"
-            className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90"
+            className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
           >
             <Phone className="size-4" /> 508.579.9897
           </a>

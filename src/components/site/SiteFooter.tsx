@@ -18,7 +18,7 @@ export function SiteFooter() {
               <Star className="size-6 fill-brand" strokeWidth={1.5} />
             </span>
             <div className="text-center md:text-left">
-              <p className="font-display text-2xl md:text-3xl uppercase leading-tight">
+              <p className="display-4 leading-tight">
                 Leave a <span className="text-brand">Google review.</span>
               </p>
               <p className="mt-1.5 text-sm text-zinc-400 max-w-[58ch]">
@@ -31,7 +31,7 @@ export function SiteFooter() {
             href={GOOGLE_REVIEW_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2.5 bg-brand text-brand-foreground px-6 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90 transition-opacity shrink-0"
+            className="inline-flex items-center gap-2.5 bg-brand text-brand-foreground px-6 h-12 label hover:opacity-90 transition-opacity shrink-0"
           >
             <svg
               aria-hidden="true"
@@ -60,7 +60,7 @@ export function SiteFooter() {
           />
           <a
             href="tel:5085799897"
-            className="mt-3 md:mt-6 inline-block font-display text-2xl text-brand hover:opacity-80"
+            className="mt-3 md:mt-6 inline-block display-4 text-brand hover:opacity-80"
           >
             508.579.9897
           </a>
@@ -88,12 +88,12 @@ export function SiteFooter() {
             <YelpLogo className="size-4" /> Yelp
             </a>
           </div>
-          <p className="mt-4 text-[10px] uppercase tracking-widest text-zinc-500">
+          <p className="mt-4 micro text-zinc-500">
             Est. 2016 · WBE Certified
           </p>
         </div>
         <div className="space-y-2 md:space-y-3 flex flex-col items-center md:items-start">
-          <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
+          <h4 className="text-zinc-500 display-5 tracking-widest">
             Visit
           </h4>
           <p className="text-zinc-200 text-sm leading-relaxed">
@@ -103,7 +103,7 @@ export function SiteFooter() {
           </p>
         </div>
         <div className="space-y-2 md:space-y-3 flex flex-col items-center md:items-start order-last md:order-none">
-          <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
+          <h4 className="text-zinc-500 display-5 tracking-widest">
             Hours
           </h4>
           <p className="text-zinc-200 text-sm leading-relaxed">
@@ -120,7 +120,7 @@ export function SiteFooter() {
           </p>
         </div>
         <div className="space-y-2 md:space-y-3 flex flex-col items-center md:items-start">
-          <h4 className="text-zinc-500 font-display text-lg uppercase tracking-widest">
+          <h4 className="text-zinc-500 display-5 tracking-widest">
             Site
           </h4>
           <ul className="space-y-1.5 md:space-y-2 text-sm text-zinc-300">

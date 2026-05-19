@@ -65,10 +65,10 @@ function ContactPage() {
     <>
       <section className="bg-surface text-surface-foreground">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
+          <p className="eyebrow text-brand mb-4">
             Contact
           </p>
-          <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.9] max-w-[16ch]">
+          <h1 className="display-1 leading-[0.9] max-w-[16ch]">
             Call. <span className="text-brand">We answer.</span>
           </h1>
           <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
@@ -81,10 +81,10 @@ function ContactPage() {
             >
               <Phone className="size-8 shrink-0" strokeWidth={2.5} />
               <span className="flex flex-col leading-tight">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">
+                <span className="eyebrow opacity-80">
                   Call
                 </span>
-                <span className="font-display text-3xl md:text-4xl uppercase">
+                <span className="display-4">
                   508.579.9897
                 </span>
               </span>
@@ -95,10 +95,10 @@ function ContactPage() {
             >
               <ClipboardList className="size-8 shrink-0" strokeWidth={2.5} />
               <span className="flex flex-col leading-tight flex-1">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">
+                <span className="eyebrow opacity-80">
                   Online
                 </span>
-                <span className="font-display text-3xl md:text-4xl uppercase">
+                <span className="display-4">
                   Get a quote
                 </span>
               </span>
@@ -140,7 +140,7 @@ function ContactPage() {
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <ClipboardList className="size-7 text-brand mb-4" />
-            <h2 className="font-display text-2xl uppercase mb-2">Get a Quote</h2>
+            <h2 className="display-4 mb-2">Get a Quote</h2>
             <p className="text-sm text-zinc-700 mb-3">
               Best for material lists. Submit your products, town, and project
               timing, and we'll respond with pricing.
@@ -155,7 +155,7 @@ function ContactPage() {
 
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <Phone className="size-7 text-brand mb-4" />
-            <h2 className="font-display text-2xl uppercase mb-2">Phone &amp; Email</h2>
+            <h2 className="display-4 mb-2">Phone &amp; Email</h2>
             <a href="tel:5085799897" className="block text-zinc-900 font-semibold hover:text-brand">
               508-579-9897
             </a>
@@ -173,7 +173,7 @@ function ContactPage() {
 
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <MapPin className="size-7 text-brand mb-4" />
-            <h2 className="font-display text-2xl uppercase mb-2">Address</h2>
+            <h2 className="display-4 mb-2">Address</h2>
             <p className="text-zinc-900">
               2264 Main St.
               <br />
@@ -191,8 +191,8 @@ function ContactPage() {
 
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <Clock className="size-7 text-brand mb-4" />
-            <h2 className="font-display text-2xl uppercase mb-2">Hours</h2>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-brand mb-2">
+            <h2 className="display-4 mb-2">Hours</h2>
+            <p className="eyebrow text-brand mb-2">
               In-season (4/1 – 8/1)
             </p>
             <ul className="text-sm text-zinc-900 space-y-1">

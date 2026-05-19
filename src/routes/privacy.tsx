@@ -28,10 +28,10 @@ function PrivacyPage() {
     <>
       <section className="bg-surface text-surface-foreground">
         <div className="max-w-4xl mx-auto px-5 md:px-6 section-loose">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
+          <p className="eyebrow text-brand mb-4">
             Legal
           </p>
-          <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9]">
+          <h1 className="display-2 leading-[0.9]">
             Privacy & <span className="text-brand">Terms.</span>
           </h1>
         </div>
@@ -40,7 +40,7 @@ function PrivacyPage() {
       <section className="section bg-base">
         <div className="max-w-3xl mx-auto px-5 md:px-6 space-y-14">
           <div>
-            <h2 className="font-display text-3xl md:text-4xl uppercase tracking-tight text-zinc-900">
+            <h2 className="display-4 tracking-tight text-zinc-900">
               Privacy Policy
             </h2>
             <div className="mt-5 space-y-4 text-zinc-700 leading-relaxed">
@@ -64,7 +64,7 @@ function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-3xl md:text-4xl uppercase tracking-tight text-zinc-900">
+            <h2 className="display-4 tracking-tight text-zinc-900">
               Terms &amp; Conditions (SMS)
             </h2>
             <ul className="mt-5 space-y-3 text-zinc-700 leading-relaxed list-disc pl-5">

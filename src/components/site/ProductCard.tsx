@@ -17,37 +17,37 @@ export function ProductCard({ product }: { product: Product }) {
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center bg-surface text-surface-foreground p-6 text-center">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-2">
+            <span className="eyebrow text-brand mb-2">
               Spec sheet
             </span>
-            <span className="font-display text-3xl uppercase leading-[0.95]">
+            <span className="display-4 leading-[0.95]">
               {product.name}
             </span>
-            <span className="mt-3 text-[10px] uppercase tracking-widest text-zinc-400">
+            <span className="mt-3 micro text-zinc-400">
               Photo on request
             </span>
           </div>
         )}
       </div>
       <div className="flex items-baseline justify-between gap-3 mb-2">
-        <h3 className="font-display text-2xl uppercase text-zinc-900 leading-tight">
+        <h3 className="display-4 text-zinc-900 leading-tight">
           {product.name}
         </h3>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-brand shrink-0">
+        <span className="eyebrow text-brand shrink-0">
           {product.category}
         </span>
       </div>
       <p className="text-sm text-zinc-600 mb-3 md:mb-5 flex-1">{product.description}</p>
       {product.badge && (
-        <span className="inline-flex self-start mb-3 items-center gap-1.5 px-2 py-1 bg-brand/10 text-brand text-[10px] font-bold uppercase tracking-widest rounded-sm">
+        <span className="inline-flex self-start mb-3 items-center gap-1.5 px-2 py-1 bg-brand/10 text-brand eyebrow rounded-sm">
           {product.badge}
         </span>
       )}
       <div className="flex items-center gap-3 pt-3 border-t border-zinc-300/60">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+        <span className="eyebrow text-zinc-500">
           Available:
         </span>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-900">
+        <span className="eyebrow text-zinc-900">
           Pickup &amp; Delivery
         </span>
       </div>

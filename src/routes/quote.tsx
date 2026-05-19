@@ -56,7 +56,7 @@ export const Route = createFileRoute("/quote")({
 const inputCls =
   "w-full bg-white text-zinc-900 px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-brand placeholder:text-zinc-400";
 const labelCls =
-  "text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-700 mb-2 block";
+  "eyebrow text-zinc-700 mb-2 block";
 const errorCls = "text-xs text-red-700 mt-1";
 
 const sortedProducts = [...products].sort((a, b) => {
@@ -113,10 +113,10 @@ function QuotePage() {
     <>
       <section className="bg-surface text-surface-foreground">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4">
+          <p className="eyebrow text-brand mb-4">
             Get a quote
           </p>
-          <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
+          <h1 className="display-2 leading-[0.9] max-w-[18ch]">
             Tell us. <span className="text-brand">We'll price it.</span>
           </h1>
           <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
@@ -133,7 +133,7 @@ function QuotePage() {
         >
           {/* PRODUCTS */}
           <fieldset>
-            <legend className="font-display text-3xl uppercase mb-2">
+            <legend className="display-4 mb-2">
               <span className="text-brand">01.</span> What do you need?
             </legend>
             <p className="text-sm text-zinc-600 mb-3 md:mb-6">
@@ -270,7 +270,7 @@ function QuotePage() {
               onClick={() =>
                 items.append({ product: "", quantity: 1, unit: "cu yd" })
               }
-              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
+              className="mt-4 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
             >
               <Plus className="size-4" /> Add another product
             </button>
@@ -278,7 +278,7 @@ function QuotePage() {
 
           {/* FULFILLMENT */}
           <fieldset>
-            <legend className="font-display text-3xl uppercase mb-3 md:mb-6">
+            <legend className="display-4 mb-3 md:mb-6">
               <span className="text-brand">02.</span> Pickup or delivery?
             </legend>
 
@@ -298,7 +298,7 @@ function QuotePage() {
                     {...register("fulfillment")}
                     className="sr-only"
                   />
-                  <p className="font-display text-2xl uppercase leading-none">
+                  <p className="display-4 leading-none">
                     {opt}
                   </p>
                   <p
@@ -431,7 +431,7 @@ function QuotePage() {
 
           {/* CONTACT */}
           <fieldset>
-            <legend className="font-display text-3xl uppercase mb-3 md:mb-6">
+            <legend className="display-4 mb-3 md:mb-6">
               <span className="text-brand">03.</span> How do we reach you?
             </legend>
 
@@ -481,7 +481,7 @@ function QuotePage() {
                   {CONTACT_METHODS.map((m) => (
                     <label
                       key={m}
-                      className="flex items-center justify-center bg-kraft px-2 h-11 ring-1 ring-zinc-300 rounded-sm text-xs font-semibold uppercase tracking-widest cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900"
+                      className="flex items-center justify-center bg-kraft px-2 h-11 ring-1 ring-zinc-300 rounded-sm label cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900"
                     >
                       <input
                         type="radio"
@@ -499,7 +499,7 @@ function QuotePage() {
 
           {/* NOTES */}
           <fieldset>
-            <legend className="font-display text-3xl uppercase mb-2">
+            <legend className="display-4 mb-2">
               <span className="text-brand">04.</span> Anything else?
             </legend>
             <p className="text-sm text-zinc-600 mb-3">
@@ -521,7 +521,7 @@ function QuotePage() {
             </p>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 text-sm font-semibold uppercase tracking-widest hover:opacity-90 disabled:opacity-50"
+              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 disabled:opacity-50"
             >
               Send my request
             </button>
@@ -585,10 +585,10 @@ function SuccessView({
     <>
       <section className="bg-surface text-surface-foreground">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-4 inline-flex items-center gap-2">
+          <p className="eyebrow text-brand mb-4 inline-flex items-center gap-2">
             <Check className="size-3.5" /> Request ready
           </p>
-          <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
+          <h1 className="display-2 leading-[0.9] max-w-[18ch]">
             Send it to <span className="text-brand">Abby.</span>
           </h1>
           <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
@@ -602,20 +602,20 @@ function SuccessView({
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a
               href={mailto}
-              className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground h-14 text-sm font-semibold uppercase tracking-widest hover:opacity-90 rounded-sm"
+              className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground h-14 label hover:opacity-90 rounded-sm"
             >
               <Mail className="size-4" /> Email Abby
             </a>
             <a
               href={sms}
-              className="inline-flex items-center justify-center gap-2 bg-surface text-surface-foreground h-14 text-sm font-semibold uppercase tracking-widest hover:opacity-90 rounded-sm"
+              className="inline-flex items-center justify-center gap-2 bg-surface text-surface-foreground h-14 label hover:opacity-90 rounded-sm"
             >
               <MessageSquare className="size-4" /> Text Abby
             </a>
             <button
               type="button"
               onClick={onCopy}
-              className="inline-flex items-center justify-center gap-2 bg-kraft text-zinc-900 ring-1 ring-zinc-300 h-14 text-sm font-semibold uppercase tracking-widest hover:ring-zinc-500 rounded-sm"
+              className="inline-flex items-center justify-center gap-2 bg-kraft text-zinc-900 ring-1 ring-zinc-300 h-14 label hover:ring-zinc-500 rounded-sm"
             >
               {copied ? (
                 <>
@@ -631,13 +631,13 @@ function SuccessView({
 
           <div className="bg-kraft rounded-md ring-1 ring-zinc-300 overflow-hidden">
             <div className="px-5 py-3 border-b border-zinc-300/70 flex items-center justify-between">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-700">
+              <p className="eyebrow text-zinc-700">
                 Preview
               </p>
               <button
                 type="button"
                 onClick={onEdit}
-                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-700 hover:text-brand"
+                className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
               >
                 <Pencil className="size-3.5" /> Edit
               </button>
@@ -651,7 +651,7 @@ function SuccessView({
             <button
               type="button"
               onClick={onEdit}
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-700 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
             >
               <ArrowLeft className="size-4" /> Edit my request
             </button>
