@@ -649,7 +649,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   Do you deliver to my town?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6 text-justify hyphens-auto">
                   <p>
                     We offer curbside delivery throughout Central Massachusetts
                     from our Jefferson yard, including Holden, Princeton,
@@ -672,7 +672,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   What's the 4% card fee about?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6 text-justify hyphens-auto">
                   <p>
                     The 4% surcharge is passed through directly from our
                     payment processor. Cash and check payments are accepted
@@ -686,7 +686,7 @@ function HomePage() {
                 <AccordionTrigger className="display-5 tracking-tight text-zinc-950 py-5 hover:no-underline">
                   How fast can I get a delivery?
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6">
+                <AccordionContent className="text-base text-zinc-700 leading-relaxed pb-5 pr-6 text-justify hyphens-auto">
                   <p>
                     Same-day delivery may be available when you call before
                     noon, depending on the day's route. Otherwise, please
