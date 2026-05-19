@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
-import heroMobile from "@/assets/source/hero-mobile-yard-chairs-2026.jpeg";
+import heroMobile from "@/assets/source/hero-mobile-product-piles-2026.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
@@ -337,7 +337,7 @@ function HomePage() {
         {/* Mobile single hero image */}
         <img
           src={heroMobile}
-          alt="Adirondack chairs around a fire pit at the Buy The Yard yard with mulch piles, flowers, and American flag in the background"
+          alt="Illustration of red, tan, and gray landscape material piles"
           fetchPriority="high"
           loading="eager"
           decoding="async"
