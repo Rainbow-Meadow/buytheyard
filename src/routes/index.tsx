@@ -17,6 +17,47 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+const reviews = [
+  {
+    name: "Rob Warner",
+    date: "Apr 21",
+    quote:
+      "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product.",
+  },
+  {
+    name: "Michael Radesky",
+    date: "Aug 26, 2019",
+    quote:
+      "Wicked nice folks! Dependable, personable, and good products. We love Abby!!!",
+  },
+  {
+    name: "John Sarkisian",
+    date: "May 7, 2019",
+    quote: "Great customer service. Very professional. Prices are fair!",
+  },
+  {
+    name: "Jonathan Duff",
+    date: "May 8, 2019",
+    quote:
+      "Excellent materials for any home projects, class A customer service and great prices. Would recommend to anyone in the area looking to do their own landscaping and home decor projects.",
+  },
+];
+
+const communityPosts = [
+  {
+    org: "Central Tree Middle School",
+    date: "Jun 26, 2024",
+    quote:
+      "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way.",
+  },
+  {
+    org: "Rutland Fire Department",
+    date: "May 22, 2020",
+    quote:
+      "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family.",
+  },
+];
+
 function MobileCollapse({
   id,
   open,
@@ -421,6 +462,60 @@ function HomePage() {
               <span className="text-xs text-zinc-500 break-all">
                 facebook.com/BuyTheYardOutdoorProducts
               </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews from Facebook */}
+      <section className="py-20 md:py-28 bg-base border-t border-zinc-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3 inline-flex items-center gap-2">
+            <Facebook className="size-3.5" />
+            From Facebook · real customers, real posts
+          </p>
+          <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.95] text-zinc-950 max-w-[20ch]">
+            What the neighbors are saying.
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+            {reviews.map((r) => (
+              <figure
+                key={r.name}
+                className="bg-white border border-zinc-200 p-6 flex flex-col h-full"
+              >
+                <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
+                  <Facebook className="size-3.5 text-[#1877F2]" />
+                  <span className="font-semibold text-zinc-900">{r.name}</span>
+                  <span>·</span>
+                  <span>{r.date}</span>
+                </div>
+                <blockquote className="font-display text-xl leading-snug text-zinc-900 flex-1">
+                  &ldquo;{r.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-5 text-[10px] font-bold uppercase tracking-[0.18em] text-brand">
+                  Recommends Buy The Yard
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div className="mt-10 border-t border-zinc-300/70 pt-8">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-5">
+              Community
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {communityPosts.map((p) => (
+                <div key={p.org} className="flex flex-col">
+                  <p className="text-zinc-800 leading-relaxed">
+                    &ldquo;{p.quote}&rdquo;
+                  </p>
+                  <p className="mt-3 text-xs text-zinc-500">
+                    <span className="font-semibold text-zinc-900">{p.org}</span>{" "}
+                    · {p.date}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

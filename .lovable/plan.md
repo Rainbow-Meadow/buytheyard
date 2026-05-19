@@ -1,47 +1,37 @@
 ## Goal
 
-Rewrite the homepage hero so a first-time visitor knows, in one glance, exactly **what** Buy The Yard sells, **where** it sells from, and **who** runs it. No clever wordplay, no ambiguity. No specific prices — just a clear "best prices around" signal.
+Add a "What neighbors say" section to the homepage with the six real Facebook posts/reviews the user uploaded. No invented copy — quotes verbatim, attribution preserved, dates kept so it reads as a Facebook scrape rather than marketing fluff.
 
-## What's wrong today
+## The six items (verbatim)
 
-Current headline:
-> "A small yard, built by hand, run by Abby since 2016."
+1. **Rob Warner** · Apr 21 — "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product."
+2. **Michael Radesky** · Aug 26, 2019 — "Wicked nice folks! Dependable, personable, and good products. We love Abby!!!"
+3. **John Sarkisian** · May 7, 2019 — "Great customer service. Very professional. Prices are fair!"
+4. **Jonathan Duff** · May 8, 2019 — "Excellent materials for any home projects, class A customer service and great prices. Would recommend to anyone in the area looking to do their own landscaping and home decor projects."
+5. **Central Tree Middle School** · Jun 26, 2024 — "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way." (tagged as community / school post, not a "review")
+6. **Rutland Fire Department** · May 22, 2020 — "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family." (tagged as community)
 
-Problems:
-- "Yard" alone is ambiguous — could be a junkyard, scrap yard, salvage yard, dog daycare, fabric shop.
-- No mention of mulch / loam / sand / stone in the H1.
-- "Jefferson, MA" is buried in the eyebrow line in small caps. Locals don't see their town anchored in the hero.
+Items 1–4 render as customer reviews. Items 5–6 render as a smaller "from around town" strip underneath, since they're community shout-outs, not product reviews — but they're the strongest local-trust signal on the page.
 
-## New hero copy
+## Section design
 
-**Eyebrow** (slightly tightened):
-`Hi, I'm Abby — owner · Jefferson, MA`
+Inserted as a new `<section>` between the "Trusted by neighbors / Facebook preview" block (~L353–427) and the "Call for today's prices" block (~L430). On `bg-base` to break up the dark-to-dark rhythm.
 
-**H1** (names the product + the town, keeps the brand-orange accent and the hand-drawn underline on the town):
-> Mulch, loam, sand & stone — **by the yard**, from our lot in <u>Jefferson, MA</u>.
-
-- "by the yard" stays in brand orange (doubles as the brand pun, but only after the product list, so meaning is locked in first).
-- "Jefferson, MA" gets the existing hand-drawn underline SVG.
-
-**Sub-copy** (3 lines, each anchors a different proof point — local, best-priced, neighborly). No dollar amounts, no "contractor vs. homeowner" pricing line:
-> Bulk landscape supply for Holden, Princeton, Sterling, Rutland, Worcester & all of Central Mass.
-> Best prices in the area — same number for the contractor and the homeowner.
-> Pickup at 2264 Main St., or call before noon and we'll try to put it in your driveway today.
-
-## Why this works
-
-- **Business type**: "Mulch, loam, sand & stone" + "Bulk landscape supply" leaves zero doubt.
-- **Local**: town in the H1, neighboring towns in line 1, street address in line 3.
-- **Value signal without numbers**: "Best prices in the area" carries the message; no posted figures.
-- **Owner-run feel** preserved via the eyebrow and the "same number for the contractor and the homeowner" phrasing.
-- Keeps the existing visual structure (eyebrow → H1 with brand-color span + underline → 3-line sub-copy → WBE/season strip → CTAs). No layout changes, no image swaps.
+Layout:
+- Eyebrow: `From Facebook · real customers, real posts`
+- H2: `What the neighbors are saying.`
+- 4 review cards in a 1/2/4 grid (mobile/tablet/desktop). Each card: small Facebook "f" glyph + name + date in muted text, then the quote in larger serif/display weight, then a tiny "recommends Buy The Yard" line in brand orange.
+- Below the grid, a single full-width strip with the two community posts (school + fire dept), each as a one-liner with the org name bolded and the date in muted text. Headed by a small `Community` label.
+- No star ratings (Facebook recommendations don't use stars and inventing them would be dishonest).
+- No avatars or screenshots embedded — keeps the page fast and avoids re-hosting Facebook profile photos.
 
 ## Files
 
-- `src/routes/index.tsx` — hero `<h1>` (~line 229) and the `<p>` sub-copy (~line 251). Everything else stays.
+- `src/routes/index.tsx` — add the new `<section>` after the Facebook-preview section (~L427). Define the `reviews` and `communityPosts` arrays at module scope above the component (next to existing data arrays).
 
 ## Out of scope
 
-- Page `<title>` / meta description (already strong and local).
-- WBE / season strip, CTAs, hero images, scrim.
-- Any other section on the homepage or other routes.
+- No new route, no `/reviews` page.
+- No JSON-LD Review schema (we don't have verifiable star ratings, and fabricating `reviewRating` for schema would risk a Google manual action).
+- No changes to existing sections, images, copy, or pricing language.
+- No new dependencies; uses existing Tailwind tokens (`bg-base`, `text-brand`, `font-display`, `kraft`).
