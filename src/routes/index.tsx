@@ -4,7 +4,6 @@ import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircl
 import heroMobile from "@/assets/source/hero-mobile-product-piles-2026.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
-import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import {
@@ -359,16 +358,7 @@ function HomePage() {
 
         <div className="relative z-10 max-w-3xl mx-auto md:mx-0 md:ml-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] px-5 md:px-6 section-loose self-center w-full">
           <div>
-            <p className="inline-flex items-center gap-2.5 eyebrow text-zinc-200 mb-5 pb-2 border-b border-white/30">
-              <img
-                src={abbyPortrait}
-                alt="Abby, owner of Buy The Yard, standing in front of the yard in Jefferson, MA"
-                width={28}
-                height={28}
-                loading="lazy"
-                decoding="async"
-                className="size-7 rounded-full object-cover ring-1 ring-white/40"
-              />
+            <p className="eyebrow text-zinc-200 mb-5 pb-2 border-b border-white/30">
               Hi, I'm Abby — owner · Jefferson, MA
             </p>
             <h1 className="display-2 leading-[0.95] text-balance mb-4 md:mb-7 text-white">
