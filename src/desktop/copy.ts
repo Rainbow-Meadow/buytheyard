@@ -42,3 +42,23 @@ export const deliveryZones = [
   "Paxton", "West Boylston", "Boylston", "Leominster", "Clinton", "Lancaster",
   "Spencer", "Auburn", "Shrewsbury",
 ];
+
+// Brandmark palette rotation across product categories.
+// Returns a Tailwind text-color class keyed off the design tokens.
+export function categoryAccent(category: string): string {
+  switch (category) {
+    case "Mulch":
+      return "text-d-gold";
+    case "Loam":
+    case "Garden Center":
+      return "text-d-tan";
+    case "Sand":
+    case "Specialty":
+      return "text-d-tan-soft";
+    case "Gravel":
+    case "Specialty Stone":
+    case "Tools & Hardware":
+    default:
+      return "text-d-gray";
+  }
+}
