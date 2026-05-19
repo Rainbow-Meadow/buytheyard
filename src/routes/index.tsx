@@ -472,8 +472,8 @@ function HomePage() {
 
       {/* Facebook spotlight */}
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
-        <div className="max-w-3xl mx-auto px-5 md:px-6">
-          <div>
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <div className="max-w-2xl">
             <p className="inline-flex items-center gap-2 eyebrow text-brand mb-3">
               <Facebook className="size-3.5" />
               On Facebook
@@ -519,8 +519,8 @@ function HomePage() {
 
       {/* Reviews from Facebook */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-3xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <div className="max-w-2xl flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
             <div>
               <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                 <Facebook className="size-3.5" />
@@ -552,7 +552,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="mt-6 md:mt-12">
+          <div className="mt-6 md:mt-12 max-w-2xl">
             <div
               ref={reviewsRailRef}
               className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
@@ -585,7 +585,7 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="mt-8 md:mt-12 border-t border-zinc-300/60 pt-8">
+          <div className="mt-8 md:mt-12 max-w-2xl border-t border-zinc-300/60 pt-8">
             <p className="eyebrow text-zinc-500 mb-3">
               Community
             </p>
@@ -644,8 +644,8 @@ function HomePage() {
 
       {/* Pricing */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-3xl mx-auto px-5 md:px-6">
-          <div>
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <div className="max-w-2xl">
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
               <Tag className="size-3.5" />
               Today's prices by phone
@@ -800,7 +800,7 @@ function HomePage() {
 
       {/* WBE strip */}
       <section className="bg-surface text-surface-foreground border-y border-white/10">
-        <div className="max-w-5xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-6 md:gap-10 justify-between">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-6 md:gap-10 justify-between">
           <div className="flex items-center gap-5">
             <img
               src={wbeSeal}
