@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
-import heroMobile from "@/assets/source/hero-mobile-firepit.webp";
+import heroMobile from "@/assets/source/hero-mobile-yard-chairs-2026.jpeg";
 import heroDesktop from "@/assets/source/hero-desktop-yard.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
