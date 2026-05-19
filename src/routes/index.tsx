@@ -652,13 +652,22 @@ function HomePage() {
               <p className="mt-5 text-zinc-700 max-w-[52ch] text-pretty">
                 Prices shift with the season, so we quote by phone. Cash and check avoid the 4% card fee.
               </p>
-              <a
-                href="tel:5085799897"
-                className="mt-5 inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90 transition-opacity"
-              >
-                <Phone className="size-4" />
-                Tap to call — 508.579.9897
-              </a>
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <a
+                  href="tel:5085799897"
+                  className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90 transition-opacity"
+                >
+                  <Phone className="size-4" />
+                  Tap to call — 508.579.9897
+                </a>
+                <Link
+                  to="/quote"
+                  className="inline-flex items-center gap-2 border border-zinc-900 text-zinc-900 px-6 h-11 label hover:bg-zinc-900 hover:text-white transition-colors"
+                >
+                  Request a quote
+                  <ArrowRight className="size-4" />
+                </Link>
+              </div>
             </div>
             <a
               href="tel:5085799897"
