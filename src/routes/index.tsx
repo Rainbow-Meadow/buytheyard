@@ -164,7 +164,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const [pricingOpen, setPricingOpen] = useState(false);
+  
   const railRef = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
