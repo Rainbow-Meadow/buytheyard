@@ -1,37 +1,47 @@
 ## Goal
+Use the 8 newly uploaded photos to improve the catalog: replace four existing product images with sharper owner photos, add one new product (Bulk Winter Salt), and add a new **Tools & Hardware** category with two tiles.
 
-Add a "What neighbors say" section to the homepage with the six real Facebook posts/reviews the user uploaded. No invented copy — quotes verbatim, attribution preserved, dates kept so it reads as a Facebook scrape rather than marketing fluff.
+## Asset work
+Copy uploads into `src/assets/` as `.webp`-named files (kept as `.jpeg` extension is fine; bundler handles it, but to stay consistent with the rest of the catalog I'll save as `.jpg`):
 
-## The six items (verbatim)
+- `user-uploads://IMG_3794.jpeg` → `src/assets/garden-mums-fall.jpg` (mums + pumpkins)
+- `user-uploads://IMG_3798.jpeg` → `src/assets/stone-river.jpg` (replaces current Pexels `stone-river.webp` reference — owner-supplied beats stock)
+- `user-uploads://IMG_3795.jpeg` → `src/assets/stone-blue-crushed.jpg` (replaces `stone-blue.webp`)
+- `user-uploads://IMG_3796.jpeg` → `src/assets/stone-pea.jpg` (replaces `stone-pea.webp`)
+- `user-uploads://IMG_3799.jpeg` → `src/assets/stone-gray-crushed.jpg` (used on Crushed Blue Stone card as secondary, OR kept for a possible 3/8" crushed variant — see Decision below)
+- `user-uploads://IMG_3793.jpeg` → `src/assets/winter-salt.jpg` (new Bulk Winter Salt)
+- `user-uploads://IMG_3800.jpeg` → `src/assets/tools-handheld.jpg` (shovels, rakes, sprayers wall)
+- `user-uploads://IMG_3801.jpeg` → `src/assets/tools-counter.jpg` (tape measures, gloves, glasses, knives, flashlights)
 
-1. **Rob Warner** · Apr 21 — "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product."
-2. **Michael Radesky** · Aug 26, 2019 — "Wicked nice folks! Dependable, personable, and good products. We love Abby!!!"
-3. **John Sarkisian** · May 7, 2019 — "Great customer service. Very professional. Prices are fair!"
-4. **Jonathan Duff** · May 8, 2019 — "Excellent materials for any home projects, class A customer service and great prices. Would recommend to anyone in the area looking to do their own landscaping and home decor projects."
-5. **Central Tree Middle School** · Jun 26, 2024 — "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way." (tagged as community / school post, not a "review")
-6. **Rutland Fire Department** · May 22, 2020 — "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family." (tagged as community)
+**Decision on IMG_3799**: it's clearly angular gray crushed stone — visually the strongest "driveway crush" shot of the bunch. I'll use **IMG_3795 for the Crushed Blue Stone tile** (the bluer cast) and **keep IMG_3799 as a swap candidate**; I'll drop it into the new Tools & Hardware category section as decorative background only if needed, otherwise leave it unused for now to avoid duplicate-looking tiles. (Confirm if you'd rather I add a second crushed-stone product.)
 
-Items 1–4 render as customer reviews. Items 5–6 render as a smaller "from around town" strip underneath, since they're community shout-outs, not product reviews — but they're the strongest local-trust signal on the page.
+## Data changes — `src/data/products.ts`
 
-## Section design
+1. Extend the `Product["category"]` union with `"Tools & Hardware"`.
+2. Add to `categoryPricing`:
+   - `"Tools & Hardware": { range: "Call for today's price", unit: "per item" }`
+3. Update image imports and product entries:
+   - `Annuals & Perennials` → image: `garden-mums-fall.jpg`, refresh description to mention fall mums, pumpkins, hay bales in season.
+   - `River Stone`, `3/4" Crushed Blue Stone`, `3/8" Pea Stone` → swap to the new owner-supplied images.
+4. Add new products:
+   - **Bulk Winter Salt** (category `Specialty`, image `winter-salt.jpg`, badge "Year-round"). Description: rock salt + treated blend for driveways and lots; loading available — call for hours.
+   - **Hand Tools & Long Handles** (category `Tools & Hardware`, image `tools-handheld.jpg`). Description: shovels, rakes, forks, garden sprayers, marking paint — the basics for the job in your truck before you leave.
+   - **Counter Pickups** (category `Tools & Hardware`, image `tools-counter.jpg`). Description: tape measures, work gloves, safety glasses, utility knives, Mini Maglites — the small stuff you forgot at home.
+5. Append `"Tools & Hardware"` to the `categories` tuple (after `"Specialty"`).
 
-Inserted as a new `<section>` between the "Trusted by neighbors / Facebook preview" block (~L353–427) and the "Call for today's prices" block (~L430). On `bg-base` to break up the dark-to-dark rhythm.
+## Photo credits — `src/assets/PHOTO_CREDITS.md`
+- Add the 8 new files to the owner-supplied list.
+- Remove the Pexels `stone-river.webp` row (now owner-supplied).
+- Note Pea Stone and Crushed Blue Stone photos refreshed.
 
-Layout:
-- Eyebrow: `From Facebook · real customers, real posts`
-- H2: `What the neighbors are saying.`
-- 4 review cards in a 1/2/4 grid (mobile/tablet/desktop). Each card: small Facebook "f" glyph + name + date in muted text, then the quote in larger serif/display weight, then a tiny "recommends Buy The Yard" line in brand orange.
-- Below the grid, a single full-width strip with the two community posts (school + fire dept), each as a one-liner with the org name bolded and the date in muted text. Headed by a small `Community` label.
-- No star ratings (Facebook recommendations don't use stars and inventing them would be dishonest).
-- No avatars or screenshots embedded — keeps the page fast and avoids re-hosting Facebook profile photos.
-
-## Files
-
-- `src/routes/index.tsx` — add the new `<section>` after the Facebook-preview section (~L427). Define the `reviews` and `communityPosts` arrays at module scope above the component (next to existing data arrays).
+## No other code edits needed
+`src/routes/products.tsx` already iterates `categories` and renders any non-empty group, so the new Tools & Hardware section appears automatically. `ProductCard` already handles images. `src/routes/index.tsx` priceGroups/featured product blocks are unaffected (they don't enumerate by category).
 
 ## Out of scope
+- No hero/landing copy changes.
+- No new route, no JSON-LD per-category schema changes (the existing ItemList on `/products` will pick up the new products automatically).
+- No pricing references — all new entries use "Call for today's price" per existing rule.
 
-- No new route, no `/reviews` page.
-- No JSON-LD Review schema (we don't have verifiable star ratings, and fabricating `reviewRating` for schema would risk a Google manual action).
-- No changes to existing sections, images, copy, or pricing language.
-- No new dependencies; uses existing Tailwind tokens (`bg-base`, `text-brand`, `font-display`, `kraft`).
+## Verification
+- `rg "stone-river\\.webp|stone-blue\\.webp|stone-pea\\.webp"` to confirm no stale references after rename.
+- Visit `/products` in preview: confirm 4 swapped photos render, Bulk Winter Salt appears under Specialty, and a new "Tools & Hardware" section renders at the bottom with 2 tiles.

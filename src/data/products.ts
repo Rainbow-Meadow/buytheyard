@@ -3,13 +3,16 @@ import mulchHemlock from "@/assets/mulch-hemlock.webp";
 import mulchPine from "@/assets/mulch-pine.webp";
 import loam from "@/assets/loam.webp";
 import sand from "@/assets/sand.webp";
-import stoneBlue from "@/assets/stone-blue.webp";
-import stoneRiver from "@/assets/stone-river.webp";
+import stoneBlue from "@/assets/stone-blue-crushed.jpg";
+import stoneRiver from "@/assets/stone-river.jpg";
 import stoneLava from "@/assets/stone-lava.webp";
-import stonePea from "@/assets/stone-pea.webp";
+import stonePea from "@/assets/stone-pea-new.jpg";
 import gardenBaskets from "@/assets/garden-baskets.webp";
-import gardenPetunias from "@/assets/garden-petunias.webp";
+import gardenMums from "@/assets/garden-mums-fall.jpg";
 import playgroundChips from "@/assets/playground-chips.webp";
+import winterSalt from "@/assets/winter-salt.jpg";
+import toolsHandheld from "@/assets/tools-handheld.jpg";
+import toolsCounter from "@/assets/tools-counter.jpg";
 
 export type Product = {
   name: string;
@@ -20,7 +23,8 @@ export type Product = {
     | "Gravel"
     | "Specialty Stone"
     | "Garden Center"
-    | "Specialty";
+    | "Specialty"
+    | "Tools & Hardware";
   description: string;
   image?: string;
   badge?: string;
@@ -34,6 +38,7 @@ export const categoryPricing: Record<Product["category"], { range: string; unit:
   "Specialty Stone": { range: "Call for today's price", unit: "per yard" },
   Specialty: { range: "Call for today's price", unit: "per yard" },
   "Garden Center": { range: "Call for today's price", unit: "per item" },
+  "Tools & Hardware": { range: "Call for today's price", unit: "per item" },
 };
 
 export const products: Product[] = [
@@ -103,8 +108,8 @@ export const products: Product[] = [
     name: "Annuals & Perennials",
     category: "Garden Center",
     description:
-      "Whatever's blooming this week is what's on the wagon. Hydrangeas, dahlias and more — call ahead if you're after something specific.",
-    image: gardenPetunias,
+      "Whatever's in season is what's on the wagon — spring annuals and perennials, summer hydrangeas and dahlias, fall mums and pumpkins on the hay bales. Call ahead if you're after something specific.",
+    image: gardenMums,
   },
   {
     name: "Plant Mix & Compost",
@@ -121,6 +126,28 @@ export const products: Product[] = [
     image: playgroundChips,
     badge: "ASTM Certified",
   },
+  {
+    name: "Bulk Winter Salt",
+    category: "Specialty",
+    description:
+      "Rock salt and treated salt blend for driveways, walkways, and parking lots. Stocked year-round — call for loading hours.",
+    image: winterSalt,
+    badge: "Year-round",
+  },
+  {
+    name: "Hand Tools & Long Handles",
+    category: "Tools & Hardware",
+    description:
+      "Shovels, rakes, manure forks, garden sprayers, marking paint — the basics so you can throw it in the truck before you head to the job.",
+    image: toolsHandheld,
+  },
+  {
+    name: "Counter Pickups",
+    category: "Tools & Hardware",
+    description:
+      "Tape measures, work gloves, safety glasses, utility knives, Mini Maglites — the small stuff you forgot at home, right by the register.",
+    image: toolsCounter,
+  },
 ];
 
 export const categories = [
@@ -131,4 +158,5 @@ export const categories = [
   "Specialty Stone",
   "Garden Center",
   "Specialty",
+  "Tools & Hardware",
 ] as const;
