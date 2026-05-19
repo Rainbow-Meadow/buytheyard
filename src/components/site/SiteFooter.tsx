@@ -20,11 +20,11 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-surface text-surface-foreground border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-5 md:px-6 section">
+      <div className="max-w-7xl mx-auto px-5 md:px-6 py-8 md:py-10">
         {/* Row 1: Google review | Logo | WBE */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-stretch md:min-h-[24rem]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-8 pb-6 md:pb-8 border-b border-white/10 items-stretch">
           {/* Google review */}
-          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
               <h2 className="display-5 text-white">
                 Leave a <span className="text-brand">Google review.</span>
               </h2>
@@ -35,7 +35,7 @@ export function SiteFooter() {
                 href={GOOGLE_REVIEW_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-6 h-12 label hover:opacity-90 transition-opacity"
+                className="inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-6 h-10 label hover:opacity-90 transition-opacity"
               >
                 <svg
                   aria-hidden="true"
@@ -49,7 +49,7 @@ export function SiteFooter() {
                 </svg>
                 Write a Google review
               </a>
-              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
                 <a
                   href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
                   target="_blank"
@@ -70,13 +70,13 @@ export function SiteFooter() {
           </div>
 
           {/* Logo centerpiece */}
-          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
               <img
                 src={brandmark}
                 alt="Buy The Yard — Mulch · Loam · Sand · Stone"
                 width={320}
                 height={160}
-                className="h-40 md:h-56 w-auto object-fill"
+                className="h-32 md:h-44 w-auto object-fill"
                 loading="lazy"
                 decoding="async"
               />
@@ -86,13 +86,13 @@ export function SiteFooter() {
           </div>
 
           {/* WBE */}
-          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
                 width={160}
                 height={100}
-                className="h-20 w-auto object-contain"
+                className="h-16 w-auto object-contain"
                 loading="lazy"
                 decoding="async"
               />
@@ -112,13 +112,13 @@ export function SiteFooter() {
         </div>
 
         {/* Row 2: Hours | Visit (map) | Site */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-stretch md:min-h-[20rem]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-8 pt-6 md:pt-8 items-stretch">
           {/* Hours */}
-          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Hours
               </h3>
-              <ul className="body-sm space-y-1.5 w-full max-w-[28ch] mx-auto">
+              <ul className="body-sm space-y-1 w-full max-w-[28ch] mx-auto">
                 <li className="flex justify-between gap-4">
                   <span className="text-zinc-500">Mon – Fri</span>
                   <span className="text-zinc-200">8:00am – 5:00pm</span>
@@ -152,7 +152,7 @@ export function SiteFooter() {
           </div>
 
           {/* Visit + map */}
-          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Visit
               </h3>
@@ -161,7 +161,7 @@ export function SiteFooter() {
                 <br />
                 Jefferson, MA 01522
               </address>
-              <div className="w-full max-w-[20rem] aspect-video border border-white/10 overflow-hidden">
+              <div className="w-full max-w-[16rem] aspect-video border border-white/10 overflow-hidden">
                 <iframe
                   src={MAP_EMBED_URL}
                   title="Buy The Yard Material — 2264 Main St, Jefferson, MA"
@@ -182,11 +182,11 @@ export function SiteFooter() {
           </div>
 
           {/* Site */}
-          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
+          <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1">
                 Site
               </h3>
-              <nav className="flex flex-col items-center gap-y-2 body-sm">
+              <nav className="flex flex-col items-center gap-y-1 body-sm">
                 <Link to="/products" className="text-zinc-300 hover:text-white transition-colors">Products</Link>
                 <Link to="/about" className="text-zinc-300 hover:text-white transition-colors">About</Link>
                 <Link to="/delivery" className="text-zinc-300 hover:text-white transition-colors">Delivery &amp; Pickup</Link>
@@ -205,7 +205,7 @@ export function SiteFooter() {
         </div>
 
         {/* Legal bar */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 items-center mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/10 micro text-zinc-500 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 items-center mt-6 md:mt-8 pt-4 md:pt-5 border-t border-white/10 micro text-zinc-500 text-center md:text-left">
           <span>
             &copy; {year} Buy The Yard Material · Jefferson, MA · WBE Certified
           </span>
