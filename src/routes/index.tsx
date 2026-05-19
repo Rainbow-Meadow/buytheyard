@@ -299,7 +299,7 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-zinc-950 text-white overflow-hidden md:min-h-[560px] md:pb-24 flex">
+      <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[504px] flex">
         {/* Mobile single hero image */}
         <img
           src={heroMobile}
@@ -383,31 +383,25 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Stats strip — frosted glass overlapping hero on desktop */}
-      <section className="relative bg-zinc-950 text-zinc-200 border-t border-white/5 md:bg-transparent md:border-0 md:-mt-20 md:z-20">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight md:py-0">
-          <div className="relative md:rounded-2xl md:bg-white/10 md:backdrop-blur-2xl md:backdrop-saturate-150 md:ring-1 md:ring-white/15 md:shadow-[0_20px_60px_-20px_rgba(0,0,0,0.7)] md:px-8 md:py-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 text-center md:text-left">
-            <span aria-hidden="true" className="hidden md:block pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-            {[
+      {/* Stats strip */}
+      <section className="bg-zinc-950 text-zinc-200 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center md:text-left">
+          {[
             { k: "10", v: "Years in business" },
             { k: "WBE", v: "Massachusetts WBE certified" },
             { k: "820+", v: "Facebook followers" },
             { k: "5★", v: "Google & Facebook rated" },
           ].map((s, i) => (
-            <div
-              key={s.k}
-              className="md:px-6 md:first:pl-0 md:last:pr-0 md:[&:not(:first-child)]:border-l md:border-white/10"
-            >
+            <div key={s.k}>
               <p
                 className="display-4 stat-shine uppercase leading-none"
                 style={{ animationDelay: `${i * 0.8}s` }}
               >
                 {s.k}
               </p>
-              <p className="mt-2 label text-zinc-500 md:text-zinc-300">{s.v}</p>
+              <p className="mt-2 label text-zinc-500">{s.v}</p>
             </div>
           ))}
-          </div>
         </div>
       </section>
 

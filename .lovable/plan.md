@@ -1,36 +1,44 @@
 ## Goal
-Turn the dark stats strip below the hero ("10 / WBE / 820+ / 5★") into a frosted-glass panel that reads as part of the hero — so the hero photo bleeds through and gives the strip real visual interest.
+Re-skin the 6 landing page sections to follow this rhythm:
 
-## File
-`src/routes/index.tsx` only (stats strip section, lines ~386–406). No copy, layout, or token changes elsewhere.
+| # | Section | Tone | Token |
+|---|---|---|---|
+| 1 | Featured Materials | Dark | `bg-surface text-surface-foreground` |
+| 2 | Facebook spotlight | Medium | `bg-kraft` |
+| 3 | Reviews ("What neighbors say") | Light | `bg-base` |
+| 4 | Delivery callout | Dark | `bg-surface text-surface-foreground` |
+| 5 | Pricing | Medium | `bg-kraft` (already correct) |
+| 6 | FAQ | Light | `bg-base` |
 
-## Changes
+Token mapping (confirmed from `src/styles.css`):
+- **Dark** → `bg-surface text-surface-foreground` (near-black + light text)
+- **Medium** → `bg-kraft` (#e8e4dc warm tan)
+- **Light** → `bg-base` (#f7f5f2 off-white)
 
-### 1. Float the strip over the hero
-- Remove the hero's bottom border (`border-b border-zinc-300/60` on the `<section>` at line 302) so the glass meets the photo cleanly.
-- Wrap the stats `<section>` so the inner container lifts up onto the hero with a negative top margin on `md:` (about `-mt-16`) and keeps its current placement on mobile. This lets the hero image show *behind* the glass on desktop where the effect matters; on mobile it stays a flat strip (backdrop-blur on a busy mobile photo hurts contrast).
-- Add bottom padding to the hero on desktop (`md:pb-24`) so headline copy isn't covered by the overlap.
+## Changes (single file: `src/routes/index.tsx`)
 
-### 2. Glass surface (desktop only)
-Replace the strip's wrapper classes:
-- From: `bg-zinc-950 text-zinc-200 border-t border-white/5`
-- To (mobile keeps current solid dark; desktop becomes glass):
-  - container: `relative md:bg-transparent md:border-0 bg-zinc-950 text-zinc-200 border-t border-white/5`
-  - inner card (new div inside `max-w-7xl`): `rounded-2xl md:bg-white/8 md:backdrop-blur-2xl md:backdrop-saturate-150 md:ring-1 md:ring-white/15 md:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] md:px-8 md:py-6`
-  - subtle top highlight: an absolutely-positioned `::before`-style div with `bg-gradient-to-b from-white/20 to-transparent h-px` along the top edge of the card (rendered as a child `<span aria-hidden>`).
+### 1. Section background swaps (the wrapper class only)
+- Featured Materials: `bg-base` → `bg-surface text-surface-foreground border-y border-white/5`
+- Facebook spotlight: `bg-surface text-surface-foreground border-y border-white/5` → `bg-kraft border-y border-zinc-300/60`
+- Reviews: `bg-kraft border-y border-zinc-300/60` → `bg-base border-y border-zinc-300/60`
+- Delivery callout: `bg-base border-y border-zinc-300/60` → `bg-surface text-surface-foreground border-y border-white/5`
+- Pricing: no change
+- FAQ: `bg-surface text-surface-foreground border-t border-white/10` → `bg-base border-t border-zinc-300/60`
 
-### 3. Cell dividers
-Inside the glass card, replace the plain grid gap with hairline white dividers on desktop so the four stats feel like one continuous panel:
-- Each `<div key={s.k}>` gets `md:px-6 md:first:pl-0 md:last:pr-0 md:[&:not(:first-child)]:border-l md:border-white/10`.
+### 2. Text/element color re-tuning inside each flipped section
+Hardcoded text colors break contrast when the background flips. For every section that changes tone, I'll re-tune child element colors so they read correctly:
 
-### 4. Text tuning for glass
-- Keep `stat-shine` numbers — they already glow.
-- Bump labels from `text-zinc-500` to `text-zinc-300` so they read on the lighter glass.
+- **Featured Materials (light → DARK)**: section eyebrow, "Featured materials" heading, "See full catalog" link, and arrow buttons switch to white/zinc-200/zinc-400 palette. ProductCard internals stay as-is (cards are self-contained tiles).
+- **Facebook spotlight (DARK → medium)**: brand eyebrow stays brand; headline `text-white` → `text-zinc-950`; lead `text-zinc-300` → `text-zinc-700`; bullet text `text-zinc-300` → `text-zinc-800`; facebook URL `text-zinc-500` stays; Follow button stays (Facebook blue works on tan).
+- **Reviews (medium → LIGHT)**: section currently uses dark-on-medium; on light it stays the same — review cards stay white. Only the `border-y` shade is already correct.
+- **Delivery callout (light → DARK)**: truck icon stays brand; heading `text-zinc-900` (default) → `text-white`; lead `text-zinc-700` → `text-zinc-300`; right-side card `bg-white ring-zinc-300/60` becomes `bg-white/5 ring-white/10` with `text-white` heading + `text-zinc-300` body inside the list items; CTA stays brand.
+- **Pricing**: no change.
+- **FAQ (DARK → light)**: headline + body `text-white`/`text-zinc-300` → `text-zinc-950`/`text-zinc-700`; Accordion container `bg-white/5 border-white/10` → `bg-white border-zinc-200`; trigger/content text `text-white`/`text-zinc-300` → `text-zinc-900`/`text-zinc-700`.
+
+### 3. Adjacent section borders
+Border colors between sections will follow the new background — light/medium use `border-zinc-300/60`, dark uses `border-white/5` (already covered in step 1).
 
 ## Out of scope
-- Mobile keeps the current solid dark strip (glass over the busy mobile hero photo would hurt legibility).
-- No changes to hero copy, buttons, or any other section.
-- No new dependencies; pure Tailwind utilities already available in v4.
-
-## Visual outcome
-On desktop, the strip becomes a frosted panel sitting on the bottom edge of the hero, with the yard photo softly visible through it, glowing red numbers, hairline dividers, and a thin top highlight — a single "liquid glass" element that ties the hero to the page below.
+- Hero, stats strip, footer — unchanged.
+- No copy, layout, font, or grid-structure changes.
+- Brand color, button shapes, and CTA labels remain identical.
