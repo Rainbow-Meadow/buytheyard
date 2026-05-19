@@ -34,12 +34,6 @@ const reviews = [
     date: "May 7, 2019",
     quote: "Great customer service. Very professional. Prices are fair!",
   },
-  {
-    name: "Jonathan Duff",
-    date: "May 8, 2019",
-    quote:
-      "Excellent materials for any home projects, class A customer service and great prices. Would recommend to anyone in the area looking to do their own landscaping and home decor projects.",
-  },
 ];
 
 const communityPosts = [
@@ -601,7 +595,7 @@ function HomePage() {
                   data-reviews-item
                   className="snap-start shrink-0 basis-full min-w-0 flex"
                 >
-                  <figure className="bg-white border border-zinc-200 p-6 flex flex-col w-full min-h-[280px] md:min-h-[260px]">
+                  <figure className="bg-white border border-zinc-200 p-6 flex flex-col w-full min-h-[200px]">
                     <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
                       <Facebook className="size-3.5 text-[#1877F2]" />
                       <span className="font-semibold text-zinc-900">{r.name}</span>
