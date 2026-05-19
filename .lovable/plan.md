@@ -1,52 +1,57 @@
-QA pass on the desktop landing page (`src/routes/index.tsx`). Audited against the existing `section` / `section-tight` / `section-loose` utilities and the `display-*` / `lead` / `body` / `body-sm` / `meta` / `eyebrow` / `label` typography schema in `src/styles.css`. Several sections drift from those primitives. Fixes below are presentation-only — no copy, no layout structure changes beyond what's needed to restore rhythm.
+Desktop QA of `src/routes/index.tsx` against the typography + spacing schema in `src/styles.css`. The vertical rhythm is mostly correct now; the remaining "all over the place" feeling on desktop comes from **container-width inconsistency** and a handful of leftover raw classes. Mobile is unaffected — every change either lives behind `md:` or swaps an equivalent token.
 
-## Findings → fixes
+## What's actually broken on desktop
 
-### 1. Section vertical rhythm
-Today (desktop py): Hero `section-loose` (64/88), Stats `section-tight` + raw `pt-6 md:pt-10` override (40/32), Featured `section` (40/56), Facebook `section` (40/56), Reviews `section` (40/56), **Delivery `section-loose` (64/88) — odd one out**, Pricing `section` (40/56), FAQ `section` (40/56), WBE `section-tight` (24/32).
+Looking at the live page at 1408w:
 
-- Delivery callout: switch `section-loose` → `section` so it matches the surrounding feature-section cadence.
-- Stats strip: drop the raw `pt-6 md:pt-10` override; let `section-tight` define both top and bottom. The override is what makes the dark band feel oversized after the hero.
+1. **Reviews section** — `max-w-7xl` wrapper but header + rail + community grid are all clamped to `max-w-2xl`. Result: a single review card hugs the left third, ~60% of the section is empty whitespace.
+2. **Pricing section** — same pattern. `max-w-7xl` wrapper, `max-w-2xl` content. Eyebrow/H2/CTAs float in the left third with a giant empty void to the right.
+3. **WBE strip** — `justify-between` across `max-w-7xl` flings "Meet Abby" to the far right, disconnected from the seal+copy on the left.
+4. **FAQ left column** — phone link uses `mt-3 md:mt-6` (off-schema) so it sits oddly close to the intro paragraph; the accordion on the right is much taller, leaving the phone link visually orphaned in space.
+5. **Hero** — H1→intro and intro→CTA use the old `mb-4 md:mb-7` / `mb-4 md:mb-8` rhythm instead of the schema's `mt-4 md:mt-6` / `mt-5 md:mt-8`.
+6. **Delivery callout right card** — list item descriptions use raw `text-sm text-zinc-600` instead of the `body-sm` utility. Icon uses ad-hoc `mb-3 md:mb-6`.
+7. **Reviews "Community" block** — eyebrow uses `mb-5` (schema says `mb-3`). Top divider uses `mt-5 md:mt-10` (off-schema).
+8. **Featured Materials eyebrow→H2** — uses `mb-3` ✓ but H2 has no `mt-*`, then header→rail uses `mb-5 md:mb-10` which is fine.
 
-### 2. Eyebrow → H2 → body spacing
-Each section currently invents its own gap (`mb-3`, `mb-4`, `mt-3 md:mt-6`, `mt-5`, `mt-6 md:mt-12`). Standardize to one rhythm everywhere:
+## Container-width policy (the actual fix)
 
-- eyebrow → H2: `mb-3`
-- H2 → intro paragraph: `mt-4 md:mt-6`
-- intro paragraph → CTA row / list: `mt-5 md:mt-8`
+Lock every section to one of three patterns and apply consistently:
 
-Touches: Facebook spotlight, Reviews header, Delivery callout, Pricing, FAQ. Featured Materials header `mb-5 md:mb-10` (header → rail) stays since it's header→content, not within-header.
+- **Wide rail / multi-column** → `max-w-7xl mx-auto px-5 md:px-6`
+  Hero, Stats, Featured Materials, Delivery callout (2-col), FAQ (2-col), WBE strip.
+- **Single-column reading** → `max-w-3xl mx-auto px-5 md:px-6` (centered)
+  Facebook spotlight ✓ already, **Reviews**, **Pricing**.
+- **No change** for Featured Materials (rail genuinely wants width).
 
-### 3. Typography schema compliance
-Schema requires `.lead` / `.body` / `.body-sm` / `.meta` instead of raw `text-lg` / `text-sm` / `text-xs`. Replace:
+Switching Reviews + Pricing from `max-w-7xl` to `max-w-3xl` immediately kills the giant empty-right-column problem on both sections.
 
-- Hero subhead: `text-lg md:text-xl … leading-relaxed` → `lead` (keeps `max-w-[54ch]`, `text-zinc-200`).
-- Facebook spotlight intro `text-lg leading-relaxed` → `lead`.
-- Facebook bullet list `text-sm` → `body-sm`.
-- Delivery callout intro `text-lg` → `lead`.
-- Pricing intro (no class) → `body`.
-- FAQ intro (no class) → `body`.
-- Accordion content `text-base` → `body`.
-- Reviews byline `text-xs` and Community date `text-xs` → `meta`.
-- Community quote (no class) → `body`.
-- WBE strip subtext `text-sm` → `body-sm`.
-- Featured "Swipe to browse →" already uses `.eyebrow` ✓.
+## Plan of changes (all in `src/routes/index.tsx`)
 
-### 4. Button heights
-Hero / Facebook / Delivery use `h-12`; Pricing uses `h-11`. Normalize Pricing CTAs to `h-12 px-7` so every primary CTA across the page is the same size.
+1. **Hero** — replace `mb-4 md:mb-7` on H1 with `mt-4 md:mt-6` on the intro `<p>`; replace `mb-4 md:mb-8` on the intro `<p>` with `mt-5 md:mt-8` on the CTA row wrapper. Net visual difference is minimal but it aligns with the schema used everywhere else.
 
-### 5. Pricing section layout
-The right column on desktop only holds the small "Call for a quote" link, leaving a large empty band. Drop the two-column flex header — let the eyebrow/H2/intro/CTAs stack in a single `max-w-2xl` column, the same way the Facebook spotlight reads. Removes the awkward white space without adding content.
+2. **Reviews section** — wrapper becomes `max-w-3xl mx-auto px-5 md:px-6`. Drop the inner `md:max-w-2xl` constraints on header and rail. Header arrow buttons stay (now sit flush right of the H2 column). Community block: eyebrow `mb-5` → `mb-3`; divider gap `mt-5 md:mt-10` → `mt-8 md:mt-12` (header→content rule, since this is a sub-section divider, not a within-header gap); grid stays 2-col on `md`.
 
-### 6. Border tokens
-Light sections currently mix `border-zinc-200`, `border-zinc-300/60`, `border-zinc-300/70`. Standardize all light-on-light section dividers to `border-zinc-300/60`. Dark-on-dark dividers stay `border-white/10` (with `border-white/5` only where an extra-subtle seam over the hero is desired — keep that one exception on the stats strip top).
+3. **Pricing section** — wrapper becomes `max-w-3xl mx-auto px-5 md:px-6`. Remove the inner `max-w-2xl` div (now redundant). No copy or CTA changes.
+
+4. **FAQ left column** — phone link `mt-3 md:mt-6` → `mt-5 md:mt-8` (matches schema; pulls it visually closer to the paragraph). Mobile phone link at the bottom of the right column gets the same treatment for parity.
+
+5. **Delivery callout** — icon `mb-3 md:mb-6` → `mb-4 md:mb-6` (matches H2→p schema). Right-card list descriptions `text-sm text-zinc-600` → `body-sm text-zinc-600`. List item title uses `display-5` ✓ keep.
+
+6. **WBE strip** — switch outer flex from `justify-between` to `gap-8 justify-start md:justify-between` and reduce to a sane max width on the left content so the right link is at most ~`max-w-5xl` away. Concretely: replace the wrapper with `max-w-5xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-6 md:gap-10 justify-between`. The 5xl cap (vs 7xl) pulls "Meet Abby" back toward the WBE block.
+
+7. **Featured Materials** — add `mt-4 md:mt-6` to the H2 so it sits at the same rhythm distance from the eyebrow as every other section (eyebrow `mb-3` + H2 `mt-*` keeps consistency with sections where the H2 isn't the first child).
+
+8. **Border tokens** — confirm light-section dividers all use `border-zinc-300/60`. Currently consistent; no change needed.
 
 ## Out of scope
-- No copy changes.
-- No new sections, no reordering.
-- Mobile is not re-QA'd in this pass (request was desktop). The schema utilities already encode the mobile values so changes carry over safely, but mobile-specific tuning is a separate pass if you want it.
+
+- No copy edits.
+- No new sections, no reorder, no image swaps.
+- Mobile layout: every change is either inside `md:` breakpoints, or swaps a raw class for an equivalent utility (`text-sm` → `body-sm`) that renders the same size — mobile rendering is unchanged.
+- No `styles.css` edits — every primitive exists.
 
 ## Files touched
-- `src/routes/index.tsx` — class changes only across the seven sections above.
 
-No new files, no `styles.css` changes — every primitive used already exists.
+- `src/routes/index.tsx` — class-only changes.
+
+After applying, I'll re-screenshot at 1408w to confirm the empty-void problem on Reviews + Pricing is gone and section rhythm reads as one consistent column structure.

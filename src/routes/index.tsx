@@ -334,7 +334,7 @@ function HomePage() {
               <span aria-hidden="true" className="text-white/40">·</span>
               <span>Woman-owned <span className="text-brand">(WBE)</span></span>
             </p>
-            <h1 className="display-2 leading-[0.95] text-balance mb-4 md:mb-7 text-white">
+            <h1 className="display-2 leading-[0.95] text-balance text-white">
               Mulch. Loam. Sand.{" "}
               <span className="relative inline-block text-brand">
                 Stone.
@@ -354,11 +354,11 @@ function HomePage() {
                 </svg>
               </span>
             </h1>
-            <p className="lead text-zinc-200 max-w-[54ch] mb-4 md:mb-8 text-pretty">
+            <p className="lead text-zinc-200 max-w-[54ch] mt-4 md:mt-6 text-pretty">
               By the yard, from our Jefferson, MA lot. Best prices in Central Mass.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="mt-5 md:mt-8 flex flex-wrap items-center gap-4">
               <Link
                 to="/products"
                 className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
@@ -414,7 +414,7 @@ function HomePage() {
               <p className="eyebrow text-brand mb-3">
                 Bulk materials &amp; garden center
               </p>
-            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch]">
+            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch] mt-4 md:mt-6">
               Featured Materials
             </h2>
             </div>
@@ -519,8 +519,8 @@ function HomePage() {
 
       {/* Reviews from Facebook */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 md:max-w-2xl">
+        <div className="max-w-3xl mx-auto px-5 md:px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
             <div>
               <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                 <Facebook className="size-3.5" />
@@ -552,7 +552,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="mt-6 md:mt-12 md:max-w-2xl">
+          <div className="mt-6 md:mt-12">
             <div
               ref={reviewsRailRef}
               className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
@@ -585,8 +585,8 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="mt-5 md:mt-10 border-t border-zinc-300/60 pt-8">
-            <p className="eyebrow text-zinc-500 mb-5">
+          <div className="mt-8 md:mt-12 border-t border-zinc-300/60 pt-8">
+            <p className="eyebrow text-zinc-500 mb-3">
               Community
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
@@ -610,7 +610,7 @@ function HomePage() {
       <section className="bg-base border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6 section grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
           <div>
-            <Truck className="size-10 text-brand mb-3 md:mb-6" />
+            <Truck className="size-10 text-brand mb-4 md:mb-6" />
             <h2 className="display-3 leading-[0.95]">
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
@@ -634,7 +634,7 @@ function HomePage() {
               ].map(([k, v]) => (
                 <li key={k} className="py-4 first:pt-0 last:pb-0">
                   <p className="display-5">{k}</p>
-                  <p className="text-sm text-zinc-600 mt-1">{v}</p>
+                  <p className="body-sm text-zinc-600 mt-1">{v}</p>
                 </li>
               ))}
             </ul>
@@ -644,8 +644,8 @@ function HomePage() {
 
       {/* Pricing */}
       <section className="section bg-kraft border-y border-zinc-300/60">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="max-w-2xl">
+        <div className="max-w-3xl mx-auto px-5 md:px-6">
+          <div>
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
               <Tag className="size-3.5" />
               Today's prices by phone
@@ -694,7 +694,7 @@ function HomePage() {
             </p>
             <a
               href="tel:5085799897"
-              className="mt-3 md:mt-6 hidden md:inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
+              className="mt-5 md:mt-8 hidden md:inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -789,7 +789,7 @@ function HomePage() {
 
             <a
               href="tel:5085799897"
-              className="md:hidden mt-3 md:mt-6 inline-flex items-center gap-2 label text-white hover:text-brand"
+              className="md:hidden mt-5 inline-flex items-center gap-2 label text-white hover:text-brand"
             >
               <Phone className="size-4" />
               508.579.9897
@@ -800,7 +800,7 @@ function HomePage() {
 
       {/* WBE strip */}
       <section className="bg-surface text-surface-foreground border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-4 md:gap-8 justify-between">
+        <div className="max-w-5xl mx-auto px-5 md:px-6 section-tight flex flex-col md:flex-row items-center gap-6 md:gap-10 justify-between">
           <div className="flex items-center gap-5">
             <img
               src={wbeSeal}
