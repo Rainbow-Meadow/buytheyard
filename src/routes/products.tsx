@@ -69,7 +69,7 @@ function ProductsPage() {
           <h1 className="display-1 leading-[0.9] max-w-[18ch]">
             Materials. By the <span className="text-brand">yard</span>.
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg text-justify hyphens-auto">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
             Prices move with the season — call{" "}
             <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
               508-579-9897

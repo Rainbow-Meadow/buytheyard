@@ -21,7 +21,7 @@ export function SiteFooter() {
               <p className="display-4 leading-tight">
                 Leave a <span className="text-brand">Google review.</span>
               </p>
-              <p className="mt-1.5 text-sm text-zinc-400 max-w-[58ch] text-justify hyphens-auto">
+              <p className="mt-1.5 text-sm text-zinc-400 max-w-[58ch]">
                 Reviews from Central Mass neighbors help other folks find the
                 yard — and they mean a lot to Abby.
               </p>

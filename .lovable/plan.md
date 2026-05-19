@@ -1,42 +1,24 @@
-## Goal
+## Issues in the current callout row
 
-Apply `text-align: justify` to long-form prose paragraphs across the site where it actually improves the right-edge rag — and skip anywhere it would do harm.
+Below the CTAs the WBE seal + "10th season" strip has three small problems on mobile (visible in screenshot):
 
-## Where justify is appropriate (apply it)
+1. The seal renders at `h-12` (~48px) — visually heavy next to a single line of label text.
+2. The divider between "Mass. WBE Certified" and "10th season · Est. 2016" is `hidden sm:inline-block`, so on mobile the second label drops to its own line with no visual link.
+3. `gap-x-6 gap-y-3` leaves the orphaned "10th season" line floating far from the WBE block.
 
-Multi-line narrative copy in content sections:
+## Fine-tune
 
-- `src/routes/index.tsx`
-  - Hero subhead (line 310)
-  - Dark "About / story" paragraph (432)
-  - Community testimonial quote (508)
-  - Pricing intro paragraph (534)
-  - FAQ intro paragraph (609)
-  - All four `AccordionContent` paragraphs (628, 652, 675, 689) — each has multi-sentence body
-- `src/routes/about.tsx` — narrative paragraphs (intro + body copy)
-- `src/routes/contact.tsx` — intro paragraph(s)
-- `src/routes/quote.tsx` — intro / supporting paragraph(s)
-- `src/routes/privacy.tsx` — policy body paragraphs
-- `src/routes/delivery.tsx`, `src/routes/service-area.tsx`, `src/routes/products.tsx` — multi-line intro / body paragraphs only
-- `src/components/site/SiteFooter.tsx` — only if the description blurb is 2+ lines; skip otherwise
+In `src/routes/index.tsx` (the WBE row just above `</div>` closing the hero stack):
 
-For each, add the Tailwind utilities `text-justify hyphens-auto` to the paragraph's existing className. `hyphens-auto` keeps mobile (≈40ch) from forming ugly rivers; on desktop it rarely triggers.
+- Seal: `h-12` → `h-10` (still readable, less dominant). Keep `w-auto`, padding, and white background.
+- Row gap: `gap-x-6 gap-y-3` → `gap-x-5 gap-y-2` so the wrap reads as one tight strip.
+- Divider: drop `hidden sm:inline-block` → always-visible thin rule `inline-block h-5 w-px bg-white/25`. Slightly shorter (`h-5`) and softer (`/25`) so it doesn't fight the seal.
+- "10th season" label: keep `label` typography; no copy change.
 
-Remove `text-pretty` where it's currently on the same paragraph — `text-pretty` and `text-justify` are mutually exclusive (pretty optimizes the rag, justify eliminates it).
-
-## Where justify is NOT appropriate (leave as-is)
-
-- All headlines (`display-1`…`display-5`).
-- Eyebrows, labels, micro, meta, badges, button labels, nav links.
-- Card titles and short card descriptions (1–2 short lines — justify produces gaps).
-- Price/unit lines in the Pricing grid.
-- Stats strip numbers/labels.
-- Form inputs, alerts, chat widget messages, error text.
-- `SiteHeader` and any nav.
-- Footer link columns.
+Result: seal + "Mass. WBE Certified" sit on one line, a small vertical rule, then "10th season · Est. 2016" — wraps to the next line cleanly when there isn't room, but stays tight to the WBE block.
 
 ## Out of scope
 
 - No copy changes.
-- No font / size / weight changes.
-- No new utility classes in `styles.css` — using only Tailwind built-ins (`text-justify`, `hyphens-auto`).
+- No changes to the CTA row, headline, subhead, or hero container.
+- No new colors or typography utilities.

@@ -44,7 +44,7 @@ function DeliveryPage() {
           <h1 className="display-1 leading-[0.9] max-w-[16ch]">
             You call. <span className="text-brand">We deliver.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg text-justify hyphens-auto">
+          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg">
             Curbside delivery from our Jefferson, MA yard across Central Mass. Call before noon for same-day when available.
           </p>
           <p className="mt-4 text-sm text-zinc-500">

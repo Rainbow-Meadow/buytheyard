@@ -43,7 +43,7 @@ function PrivacyPage() {
             <h2 className="display-4 tracking-tight text-zinc-900">
               Privacy Policy
             </h2>
-            <div className="mt-5 space-y-4 text-zinc-700 leading-relaxed text-justify hyphens-auto">
+            <div className="mt-5 space-y-4 text-zinc-700 leading-relaxed">
               <p>
                 Personal information such as phone number and address provided
                 in the &ldquo;Let&rsquo;s Chat&rdquo; or quote request sections
