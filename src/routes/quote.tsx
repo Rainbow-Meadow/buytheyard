@@ -148,8 +148,11 @@ function QuotePage() {
                 return (
                   <div
                     key={field.id}
-                    className="bg-kraft p-4 md:p-5 rounded-md ring-1 ring-zinc-300"
+                    className="bg-newsprint p-4 md:p-5 border-2 border-ink/80 relative"
                   >
+                    <span className="absolute -top-3 left-3 bg-newsprint px-2 dateline text-ink-soft">
+                      № {String(idx + 1).padStart(2, "0")}
+                    </span>
                     <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 items-end">
                       <div>
                         <label className={labelCls}>Product</label>
@@ -195,11 +198,11 @@ function QuotePage() {
                           control={control}
                           name={`items.${idx}.quantity`}
                           render={({ field: f }) => (
-                            <div className="flex items-center ring-1 ring-zinc-300 rounded-sm bg-white h-11">
+                            <div className="flex items-center border-2 border-ink/30 bg-newsprint h-11">
                               <button
                                 type="button"
                                 aria-label="Decrease quantity"
-                                className="px-3 h-full text-zinc-600 hover:text-brand"
+                                className="px-3 h-full text-ink-soft hover:text-stamp"
                                 onClick={() =>
                                   f.onChange(Math.max(1, Number(f.value) - 1))
                                 }
@@ -219,12 +222,12 @@ function QuotePage() {
                                       : Math.max(1, Number(e.target.value)),
                                   )
                                 }
-                                className="w-14 text-center bg-transparent text-zinc-900 text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                className="w-14 text-center bg-transparent text-ink font-mono text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                               />
                               <button
                                 type="button"
                                 aria-label="Increase quantity"
-                                className="px-3 h-full text-zinc-600 hover:text-brand"
+                                className="px-3 h-full text-ink-soft hover:text-stamp"
                                 onClick={() =>
                                   f.onChange(Math.min(999, Number(f.value) + 1))
                                 }
@@ -256,7 +259,7 @@ function QuotePage() {
                         aria-label="Remove product"
                         disabled={items.fields.length === 1}
                         onClick={() => items.remove(idx)}
-                        className="h-11 px-3 text-zinc-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                        className="h-11 px-3 text-ink-soft hover:text-stamp disabled:opacity-30 disabled:cursor-not-allowed"
                       >
                         <Trash2 className="size-4" />
                       </button>
@@ -271,26 +274,29 @@ function QuotePage() {
               onClick={() =>
                 items.append({ product: "", quantity: 1, unit: "cu yd" })
               }
-              className="mt-4 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
+              className="mt-5 inline-flex items-center gap-2 label text-ink hover:text-stamp border-2 border-ink/40 px-4 h-11 hover:border-stamp"
             >
-              <Plus className="size-4" /> Add another product
+              <Plus className="size-4" /> Add another row
             </button>
           </fieldset>
 
           {/* FULFILLMENT */}
           <fieldset>
-            <legend className="display-4 mb-3 md:mb-6">
-              <span className="text-brand">02.</span> Pickup or delivery?
+            <legend className="display-3 text-ink mb-2 pb-3 rule-thick w-full">
+              <span className="text-stamp mr-2">§ 02</span> Pickup or delivery?
             </legend>
+            <p className="body-sm text-ink-soft mb-5 mt-3">
+              Pickup if you've got a truck. Delivery if you don't.
+            </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {(["Pickup", "Delivery"] as const).map((opt) => (
                 <label
                   key={opt}
-                  className={`cursor-pointer rounded-md p-5 ring-1 transition-colors ${
+                  className={`cursor-pointer p-5 border-2 transition-colors ${
                     fulfillment === opt
-                      ? "bg-surface text-surface-foreground ring-brand"
-                      : "bg-kraft text-zinc-900 ring-zinc-300 hover:ring-zinc-500"
+                      ? "bg-ink text-newsprint border-ink"
+                      : "bg-newsprint text-ink border-ink/30 hover:border-ink"
                   }`}
                 >
                   <input
@@ -299,11 +305,11 @@ function QuotePage() {
                     {...register("fulfillment")}
                     className="sr-only"
                   />
-                  <p className="display-4 leading-none">
+                  <p className="display-4 leading-none uppercase">
                     {opt}
                   </p>
                   <p
-                    className={`text-sm mt-2 ${fulfillment === opt ? "text-zinc-300" : "text-zinc-600"}`}
+                    className={`body-sm mt-2 ${fulfillment === opt ? "text-newsprint/70" : "text-ink-soft"}`}
                   >
                     {opt === "Pickup"
                       ? "I've got a truck or trailer and I'll come grab it."
@@ -314,7 +320,7 @@ function QuotePage() {
             </div>
 
             {fulfillment === "Delivery" && (
-              <div className="mt-3 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
+              <div className="mt-4 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-newsprint-2 p-5 md:p-6 border-2 border-ink/80">
                 <div>
                   <label className={labelCls}>Town</label>
                   <select className={inputCls} {...register("town")}>
@@ -353,15 +359,15 @@ function QuotePage() {
                     {DROP_SPOTS.map((d) => (
                       <label
                         key={d}
-                        className="flex items-center gap-3 bg-white px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2"
+                        className="flex items-center gap-3 bg-newsprint px-3 h-11 border-2 border-ink/30 text-sm cursor-pointer hover:border-ink has-[:checked]:border-stamp has-[:checked]:bg-stamp/5"
                       >
                         <input
                           type="radio"
                           value={d}
                           {...register("dropSpot")}
-                          className="accent-[var(--brand)]"
+                          className="accent-[var(--stamp)]"
                         />
-                        <span className="text-zinc-900">{d}</span>
+                        <span className="text-ink">{d}</span>
                       </label>
                     ))}
                   </div>
@@ -378,7 +384,7 @@ function QuotePage() {
                     {TIMING.map((t) => (
                       <label
                         key={t}
-                        className="flex items-center justify-center text-center bg-white px-2 h-11 ring-1 ring-zinc-300 rounded-sm text-xs font-semibold cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900 uppercase tracking-wide"
+                        className="flex items-center justify-center text-center bg-newsprint px-2 h-11 border-2 border-ink/30 font-mono text-xs font-semibold cursor-pointer hover:border-ink has-[:checked]:border-stamp has-[:checked]:bg-stamp has-[:checked]:text-newsprint text-ink uppercase tracking-wide"
                       >
                         <input
                           type="radio"
@@ -409,11 +415,11 @@ function QuotePage() {
                   )}
                 </div>
 
-                <label className="md:col-span-2 flex items-start gap-3 text-sm text-zinc-800 cursor-pointer">
+                <label className="md:col-span-2 flex items-start gap-3 body-sm text-ink cursor-pointer border-t-2 border-ink/20 pt-4">
                   <input
                     type="checkbox"
                     {...register("acknowledged")}
-                    className="mt-1 size-4 accent-[var(--brand)]"
+                    className="mt-1 size-4 accent-[var(--stamp)]"
                   />
                   <span>
                     I understand the <strong>1-yard minimum</strong> and
@@ -432,9 +438,12 @@ function QuotePage() {
 
           {/* CONTACT */}
           <fieldset>
-            <legend className="display-4 mb-3 md:mb-6">
-              <span className="text-brand">03.</span> How do we reach you?
+            <legend className="display-3 text-ink mb-2 pb-3 rule-thick w-full">
+              <span className="text-stamp mr-2">§ 03</span> How do we reach you?
             </legend>
+            <p className="body-sm text-ink-soft mb-5 mt-3">
+              We use this once — to get back to you with the number.
+            </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -482,7 +491,7 @@ function QuotePage() {
                   {CONTACT_METHODS.map((m) => (
                     <label
                       key={m}
-                      className="flex items-center justify-center bg-kraft px-2 h-11 ring-1 ring-zinc-300 rounded-sm label cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900"
+                      className="flex items-center justify-center bg-newsprint px-2 h-11 border-2 border-ink/30 label cursor-pointer hover:border-ink has-[:checked]:border-stamp has-[:checked]:bg-stamp has-[:checked]:text-newsprint text-ink"
                     >
                       <input
                         type="radio"
@@ -500,10 +509,10 @@ function QuotePage() {
 
           {/* NOTES */}
           <fieldset>
-            <legend className="display-4 mb-2">
-              <span className="text-brand">04.</span> Anything else?
+            <legend className="display-3 text-ink mb-2 pb-3 rule-thick w-full">
+              <span className="text-stamp mr-2">§ 04</span> Anything else?
             </legend>
-            <p className="text-sm text-zinc-600 mb-3">
+            <p className="body-sm text-ink-soft mb-3 mt-3">
               Optional. Steep driveway, gate code, "leave it by the rhododendron" — anything Abby should know.
             </p>
             <NotesField register={register} watch={watch} />
@@ -512,19 +521,19 @@ function QuotePage() {
             )}
           </fieldset>
 
-          <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="text-xs text-zinc-600 max-w-[40ch]">
+          <div className="pt-6 border-t-4 border-ink flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <p className="meta text-ink-soft max-w-[40ch] normal-case">
               Next screen previews your request so you can send it in one tap. Submitting means you agree to our{" "}
-              <Link to="/privacy" className="underline hover:text-zinc-900">
+              <Link to="/privacy" className="underline hover:text-ink">
                 Privacy &amp; Terms
               </Link>
               .
             </p>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 disabled:opacity-50"
+              className="inline-flex items-center gap-2 bg-ink text-newsprint px-7 h-12 label hover:bg-stamp btn-press disabled:opacity-50"
             >
-              Send my request
+              File this request →
             </button>
           </div>
         </form>
