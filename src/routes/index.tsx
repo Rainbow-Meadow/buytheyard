@@ -472,45 +472,49 @@ function HomePage() {
       {/* Facebook spotlight */}
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="max-w-2xl">
-            <p className="inline-flex items-center gap-2 eyebrow text-brand mb-3">
-              <Facebook className="size-3.5" />
-              On Facebook
-            </p>
-            <h2 className="display-3 leading-[0.95] text-white max-w-[16ch]">
-              Where the yard <span className="text-brand">lives.</span>
-            </h2>
-            <p className="lead mt-4 md:mt-6 text-zinc-300 max-w-[52ch]">
-              Daily back-and-forth happens on Facebook — fresh loads, restocks, weather closures, and lot photos.
-            </p>
-            <ul className="body-sm mt-5 md:mt-8 space-y-2 text-zinc-300">
-              <li className="flex items-start gap-2">
-                <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
-                Daily inventory and restock photos
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
-                Weather-related closures and hours changes
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
-                Seasonal promos and WooSox ticket drawings
-              </li>
-            </ul>
-            <div className="mt-5 md:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <a
-                href="https://www.facebook.com/BuyTheYardOutdoorProducts"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2.5 bg-[#1877F2] text-white px-7 h-12 label hover:opacity-90 transition-opacity rounded-sm"
-              >
-                <Facebook className="size-4" />
-                Follow on Facebook
-                <ArrowRight className="size-4" />
-              </a>
-              <span className="text-xs text-zinc-500 break-all">
-                facebook.com/BuyTheYardOutdoorProducts
-              </span>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div className="md:col-span-7">
+              <p className="inline-flex items-center gap-2 eyebrow text-brand mb-3">
+                <Facebook className="size-3.5" />
+                On Facebook
+              </p>
+              <h2 className="display-3 leading-[0.95] text-white max-w-[16ch]">
+                Where the yard <span className="text-brand">lives.</span>
+              </h2>
+              <p className="lead mt-4 md:mt-6 text-zinc-300 max-w-[52ch]">
+                Daily back-and-forth happens on Facebook — fresh loads, restocks, weather closures, and lot photos.
+              </p>
+            </div>
+            <div className="md:col-span-5">
+              <ul className="body-sm space-y-2 text-zinc-300">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
+                  Daily inventory and restock photos
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
+                  Weather-related closures and hours changes
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
+                  Seasonal promos and WooSox ticket drawings
+                </li>
+              </ul>
+              <div className="mt-5 md:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <a
+                  href="https://www.facebook.com/BuyTheYardOutdoorProducts"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2.5 bg-[#1877F2] text-white px-7 h-12 label hover:opacity-90 transition-opacity rounded-sm"
+                >
+                  <Facebook className="size-4" />
+                  Follow on Facebook
+                  <ArrowRight className="size-4" />
+                </a>
+                <span className="text-xs text-zinc-500 break-all">
+                  facebook.com/BuyTheYardOutdoorProducts
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -519,87 +523,91 @@ function HomePage() {
       {/* Reviews from Facebook */}
       <section className="section bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="max-w-2xl flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
-            <div>
-              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-                <Facebook className="size-3.5" />
-                From Facebook · real customers, real posts
-              </p>
-              <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[20ch]">
-                What neighbors say.
-              </h2>
-            </div>
-            <div className="hidden md:flex items-center gap-2">
-              <button
-                type="button"
-                aria-label="Previous review"
-                onClick={() => scrollReviewsByCard(-1)}
-                disabled={!reviewsCanPrev}
-                className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
-              >
-                <ChevronLeft className="size-5" />
-              </button>
-              <button
-                type="button"
-                aria-label="Next review"
-                onClick={() => scrollReviewsByCard(1)}
-                disabled={!reviewsCanNext}
-                className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
-              >
-                <ChevronRight className="size-5" />
-              </button>
-            </div>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div className="md:col-span-7">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
+                <div>
+                  <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
+                    <Facebook className="size-3.5" />
+                    From Facebook · real customers, real posts
+                  </p>
+                  <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[20ch]">
+                    What neighbors say.
+                  </h2>
+                </div>
+                <div className="hidden md:flex items-center gap-2">
+                  <button
+                    type="button"
+                    aria-label="Previous review"
+                    onClick={() => scrollReviewsByCard(-1)}
+                    disabled={!reviewsCanPrev}
+                    className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
+                  >
+                    <ChevronLeft className="size-5" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next review"
+                    onClick={() => scrollReviewsByCard(1)}
+                    disabled={!reviewsCanNext}
+                    className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
+                  >
+                    <ChevronRight className="size-5" />
+                  </button>
+                </div>
+              </div>
 
-          <div className="mt-6 md:mt-12 max-w-2xl">
-            <div
-              ref={reviewsRailRef}
-              className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {reviews.map((r) => (
+              <div className="mt-6 md:mt-12">
                 <div
-                  key={r.name}
-                  data-reviews-item
-                  className="snap-start shrink-0 basis-full min-w-0 flex"
+                  ref={reviewsRailRef}
+                  className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
                 >
-                  <figure className="bg-white border border-zinc-200 p-6 flex flex-col w-full min-h-[200px]">
-                    <div className="meta flex items-center gap-2 text-zinc-500 mb-4">
-                      <Facebook className="size-3.5 text-[#1877F2]" />
-                      <span className="font-semibold text-zinc-900">{r.name}</span>
-                      <span>·</span>
-                      <span>{r.date}</span>
+                  {reviews.map((r) => (
+                    <div
+                      key={r.name}
+                      data-reviews-item
+                      className="snap-start shrink-0 basis-full min-w-0 flex"
+                    >
+                      <figure className="bg-white border border-zinc-200 p-6 flex flex-col w-full min-h-[200px]">
+                        <div className="meta flex items-center gap-2 text-zinc-500 mb-4">
+                          <Facebook className="size-3.5 text-[#1877F2]" />
+                          <span className="font-semibold text-zinc-900">{r.name}</span>
+                          <span>·</span>
+                          <span>{r.date}</span>
+                        </div>
+                        <blockquote className="display-5 leading-snug text-zinc-900 flex-1">
+                          &ldquo;{r.quote}&rdquo;
+                        </blockquote>
+                        <figcaption className="mt-5 eyebrow text-brand">
+                          Recommends Buy The Yard
+                        </figcaption>
+                      </figure>
                     </div>
-                    <blockquote className="display-5 leading-snug text-zinc-900 flex-1">
-                      &ldquo;{r.quote}&rdquo;
-                    </blockquote>
-                    <figcaption className="mt-5 eyebrow text-brand">
-                      Recommends Buy The Yard
-                    </figcaption>
-                  </figure>
+                  ))}
                 </div>
-              ))}
+                <p className="md:hidden mt-3 eyebrow text-zinc-500">
+                  Swipe to read more →
+                </p>
+              </div>
             </div>
-            <p className="md:hidden mt-3 eyebrow text-zinc-500">
-              Swipe to read more →
-            </p>
-          </div>
 
-          <div className="mt-8 md:mt-12 max-w-2xl border-t border-zinc-300/60 pt-8">
-            <p className="eyebrow text-zinc-500 mb-3">
-              Community
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
-              {communityPosts.map((p) => (
-                <div key={p.org} className="flex flex-col">
-                  <p className="body text-zinc-800">
-                    &ldquo;{p.quote}&rdquo;
-                  </p>
-                  <p className="meta mt-3 text-zinc-500">
-                    <span className="font-semibold text-zinc-900">{p.org}</span>{" "}
-                    · {p.date}
-                  </p>
-                </div>
-              ))}
+            <div className="md:col-span-5 mt-8 md:mt-0 border-t md:border-t-0 md:border-l border-zinc-300/60 pt-8 md:pt-0 md:pl-8">
+              <p className="eyebrow text-zinc-500 mb-3">
+                Community
+              </p>
+              <div className="flex flex-col gap-6">
+                {communityPosts.map((p) => (
+                  <div key={p.org} className="flex flex-col">
+                    <p className="body text-zinc-800">
+                      &ldquo;{p.quote}&rdquo;
+                    </p>
+                    <p className="meta mt-3 text-zinc-500">
+                      <span className="font-semibold text-zinc-900">{p.org}</span>{" "}
+                      · {p.date}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
