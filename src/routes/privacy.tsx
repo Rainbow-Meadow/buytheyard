@@ -56,6 +56,7 @@ function PrivacyPage() {
             <p className="eyebrow text-zinc-500 mb-3">On this page</p>
             <ol className="space-y-1.5 text-sm text-zinc-700 list-decimal pl-5">
               <li><a href="#privacy" className={linkCls}>Privacy Policy</a></li>
+              <li><a href="#cookies" className={linkCls}>Cookies</a></li>
               <li><a href="#sms" className={linkCls}>SMS Terms</a></li>
               <li><a href="#terms" className={linkCls}>Website Terms of Use</a></li>
               <li><a href="#contact" className={linkCls}>Contact</a></li>
@@ -96,12 +97,33 @@ function PrivacyPage() {
                 identify you personally.
               </p>
 
-              <h3 className={h3Cls}>Cookies</h3>
+              <h3 id="cookies" className={`${h3Cls} scroll-mt-24`}>Cookies</h3>
               <p className={`mt-3 ${pCls}`}>
-                We may use cookies and similar technologies to remember
-                preferences and measure site usage. You can disable cookies in
-                your browser settings; some parts of the site may not work as
-                expected if you do.
+                We use cookies and similar browser storage in three categories:
+              </p>
+              <ul className="mt-3 space-y-3 text-zinc-700 leading-relaxed list-disc pl-5">
+                <li>
+                  <strong className="font-semibold text-zinc-900">Essential</strong> —
+                  always on. Required for the site to work, including security
+                  and remembering your cookie preferences.
+                </li>
+                <li>
+                  <strong className="font-semibold text-zinc-900">Analytics</strong> —
+                  off by default. Helps us understand which pages are useful and
+                  where visitors get stuck so we can improve the site.
+                </li>
+                <li>
+                  <strong className="font-semibold text-zinc-900">Marketing</strong> —
+                  off by default. Reserved for measuring ads or personalizing
+                  promotions. We do not currently run any marketing cookies.
+                </li>
+              </ul>
+              <p className={`mt-3 ${pCls}`}>
+                You can accept all cookies or customize your choice from the
+                banner on your first visit, and you can change your preferences
+                any time from the &ldquo;Cookie settings&rdquo; link in the
+                footer. You can also disable cookies in your browser settings;
+                some parts of the site may not work as expected if you do.
               </p>
 
               <h3 className={h3Cls}>How we share information</h3>
