@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { CookieConsent } from "@/components/site/CookieConsent";
 
 function NotFoundComponent() {
   return (
@@ -230,6 +231,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
         <ChatWidget />
+        <CookieConsent />
       </div>
     </QueryClientProvider>
   );

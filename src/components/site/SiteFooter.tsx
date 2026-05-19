@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Facebook, Star } from "lucide-react";
 import brandmark from "@/assets/brandmark-dark.png";
 import { YelpLogo } from "@/components/site/YelpLogo";
+import { openCookieSettings } from "@/lib/cookie-consent";
 
 // TODO: replace with the real Google review short link from the
 // Google Business Profile dashboard (looks like https://g.page/r/...).
@@ -128,6 +129,15 @@ export function SiteFooter() {
             <li><Link to="/service-area" className="hover:text-zinc-100">Service Area</Link></li>
             <li><Link to="/contact" className="hover:text-zinc-100">Contact</Link></li>
             <li><Link to="/privacy" className="hover:text-zinc-100">Privacy &amp; Terms</Link></li>
+            <li>
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="hover:text-zinc-100 cursor-pointer"
+              >
+                Cookie settings
+              </button>
+            </li>
           </ul>
         </div>
       </div>
