@@ -289,7 +289,7 @@ function HomePage() {
     "Screened Loam",
     "Mason Sand",
     "3/4\" Crushed Blue Stone",
-    "River Stone",
+    "Red Lava Rock",
     "Hanging Baskets",
     "ASTM Playground Chips",
     "Hand Tools & Long Handles",
