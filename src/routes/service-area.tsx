@@ -75,7 +75,7 @@ function ServiceAreaPage() {
             Across <span className="text-brand">Central Mass.</span>
           </h1>
           <p className="mt-6 text-zinc-400 max-w-[62ch] text-lg">
-            Mulch, loam, sand, gravel, stone, and playground chips delivered from Jefferson, MA across Worcester County. One-yard minimum.
+            Mulch, loam, sand, gravel, and stone delivered from Jefferson across Worcester County.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
