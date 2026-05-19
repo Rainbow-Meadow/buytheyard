@@ -441,35 +441,8 @@ function HomePage() {
 
       {/* Facebook spotlight */}
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-16 items-center">
-          {/* Facebook page card — real screenshot wrapped in a faux browser chrome */}
-          <a
-            href="https://www.facebook.com/BuyTheYardOutdoorProducts"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Open Buy The Yard on Facebook"
-            className="group block bg-white text-zinc-900 rounded-lg ring-1 ring-zinc-300/70 shadow-2xl overflow-hidden order-2 lg:order-1 transition-transform hover:-translate-y-1"
-          >
-            <div className="bg-[#1877F2] text-white px-4 h-11 flex items-center gap-2">
-              <span className="inline-flex items-center justify-center size-7 rounded-full bg-white text-[#1877F2] font-bold text-base leading-none">
-                f
-              </span>
-              <span className="text-sm font-semibold">facebook</span>
-              <span className="ml-auto text-xs opacity-80 hidden sm:inline">
-                facebook.com/BuyTheYardOutdoorProducts
-              </span>
-            </div>
-            <img
-              src={facebookPagePreview}
-              alt="Buy The Yard Outdoor Products on Facebook — 822 followers, 268 posts, Garden Center, +1 508-579-9897"
-              loading="lazy"
-              decoding="async"
-              className="block w-full h-auto"
-            />
-          </a>
-
-          {/* Copy + CTA */}
-          <div className="order-1 lg:order-2">
+        <div className="max-w-3xl mx-auto px-5 md:px-6">
+          <div>
             <p className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-brand mb-4">
               <Facebook className="size-3.5" />
               On Facebook
