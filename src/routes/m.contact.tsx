@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { mBrand } from "../mobile/copy";
+import { mBrand, mYardImg } from "../mobile/copy";
 
 export const Route = createFileRoute("/m/contact")({
   head: () => ({
@@ -11,6 +11,9 @@ export const Route = createFileRoute("/m/contact")({
 function MContact() {
   return (
     <div className="px-5 py-6 space-y-4">
+      <div className="m-tile !aspect-[4/3] mb-2">
+        <img src={mYardImg} alt="Buy The Yard supply yard at golden hour" className="absolute inset-0 w-full h-full object-cover" />
+      </div>
       <p className="m-eyebrow">Reach us</p>
       <h1 className="m-display text-3xl mb-2">Hours, phone, map.</h1>
 
