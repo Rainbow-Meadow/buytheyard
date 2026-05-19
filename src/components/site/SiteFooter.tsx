@@ -22,7 +22,7 @@ export function SiteFooter() {
     <footer className="bg-surface text-surface-foreground border-t border-white/10">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
         {/* Row 1: Google review | Logo | WBE */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-stretch md:min-h-[20rem] md:divide-x md:divide-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-stretch md:min-h-[20rem]">
           {/* Google review */}
           <div className="flex flex-col items-center text-center px-4 md:px-8">
               <h2 className="display-5 text-white">
@@ -112,7 +112,7 @@ export function SiteFooter() {
         </div>
 
         {/* Row 2: Hours | Visit (map) | Site */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-stretch md:min-h-[20rem] md:divide-x md:divide-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-stretch md:min-h-[20rem]">
           {/* Hours */}
           <div className="flex flex-col items-center text-center px-4 md:px-8">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
