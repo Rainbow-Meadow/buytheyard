@@ -17,34 +17,68 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --font-display: 'Saira Extra Condensed', sans-serif;
-  --font-sans: 'Inter', sans-serif;
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-newsprint: var(--newsprint);
+  --color-newsprint-2: var(--newsprint-2);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-highlight: var(--highlight);
+  --color-stamp: var(--stamp);
+  --font-display: 'Oswald', 'Impact', sans-serif;
+  --font-sans: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-masthead: 'Saira Extra Condensed', 'Oswald', sans-serif;
 }
 
 :root {
-  --background: oklch(0.972 0.005 80);          /* #f7f5f2 base */
-  --foreground: oklch(0.18 0.005 280);
-  --surface: oklch(0.16 0.005 280);             /* near-black #0c0c0e */
-  --surface-foreground: oklch(0.97 0 0);
-  --base: oklch(0.972 0.005 80);
-  --kraft: oklch(0.91 0.012 80);                /* #e8e4dc */
-  --brand: oklch(0.51 0.20 27);                 /* #ba1a1a red */
+  /* Newsprint canvas */
+  --newsprint: oklch(0.965 0.012 88);            /* warm off-white paper */
+  --newsprint-2: oklch(0.925 0.018 88);          /* secondary paper panel */
+
+  /* Ink */
+  --ink: oklch(0.18 0.012 60);                   /* near-black newspaper ink */
+  --ink-soft: oklch(0.42 0.012 60);              /* secondary ink */
+
+  /* Rules */
+  --rule: oklch(0.18 0.012 60 / 0.18);
+  --rule-strong: oklch(0.18 0.012 60 / 0.92);
+
+  /* Stamp red — used sparingly */
+  --stamp: oklch(0.50 0.20 27);
+  --highlight: oklch(0.90 0.18 95);              /* highlighter yellow */
+
+  /* Compat with existing tokens (semantic remapping) */
+  --background: var(--newsprint);
+  --foreground: var(--ink);
+  --base: var(--newsprint);
+  --surface: var(--ink);                          /* dark panels remain "surface" */
+  --surface-foreground: oklch(0.97 0.005 88);
+  --kraft: var(--newsprint-2);                    /* paper panels */
+  --brand: var(--stamp);
   --brand-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.91 0.012 80);
-  --muted-foreground: oklch(0.45 0.01 280);
-  --border: oklch(0.85 0.01 80);
-  --ring: oklch(0.51 0.20 27);
+  --muted: var(--newsprint-2);
+  --muted-foreground: var(--ink-soft);
+  --border: var(--rule);
+  --ring: var(--stamp);
 }
 
 .dark {
-  --background: oklch(0.16 0.005 280);
-  --foreground: oklch(0.97 0 0);
+  --background: var(--ink);
+  --foreground: oklch(0.97 0.005 88);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
   html, body { background-color: var(--color-background); color: var(--color-foreground); }
-  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga", "onum";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Tabular numbers in tickers, prices, time */
+  .tabular { font-variant-numeric: tabular-nums; }
 }
 
 /* Shared vertical section spacing scale.
