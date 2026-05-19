@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook } from "lucide-react";
+import { ArrowRight, Facebook } from "lucide-react";
 import brandmark from "@/assets/brandmark-dark.png";
+import wbeSeal from "@/assets/source/wbe-seal.webp";
 import { YelpLogo } from "@/components/site/YelpLogo";
 import { openCookieSettings } from "@/lib/cookie-consent";
 
@@ -13,6 +14,33 @@ export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
+        {/* WBE band */}
+        <div className="pb-8 md:pb-10 mb-10 md:mb-14 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-5">
+            <img
+              src={wbeSeal}
+              alt="Massachusetts WBE certified seal"
+              width={160}
+              height={100}
+              className="h-16 md:h-20 w-auto object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <p className="display-5 text-white">Certified Woman-Owned</p>
+              <p className="mt-1 body-sm text-zinc-300">
+                Certified by the Commonwealth of Massachusetts since 2018. Owner-operated.
+              </p>
+            </div>
+          </div>
+          <Link
+            to="/about"
+            className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors shrink-0"
+          >
+            Meet Abby <ArrowRight className="size-4" />
+          </Link>
+        </div>
+
         {/* Review band */}
         <div className="pb-8 md:pb-12 mb-10 md:mb-14 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-10 text-center md:text-left">
           <div className="max-w-2xl mx-auto md:mx-0">
