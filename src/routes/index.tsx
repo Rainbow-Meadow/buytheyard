@@ -382,9 +382,9 @@ function HomePage() {
       </section>
 
       {/* Product preview */}
-      <section className="py-20 md:py-28 bg-base">
+      <section className="py-14 md:py-20 bg-base">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-10">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">
                 Bulk materials &amp; garden center
@@ -393,26 +393,54 @@ function HomePage() {
               Featured Materials
             </h2>
             </div>
-            <Link
-              to="/products"
-              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
-            >
-              See full catalog <ArrowRight className="size-4" />
-            </Link>
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-2">
+                <button
+                  type="button"
+                  aria-label="Previous"
+                  onClick={() => scrollByCard(-1)}
+                  disabled={!canPrev}
+                  className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
+                >
+                  <ChevronLeft className="size-5" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next"
+                  onClick={() => scrollByCard(1)}
+                  disabled={!canNext}
+                  className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
+                >
+                  <ChevronRight className="size-5" />
+                </button>
+              </div>
+              <Link
+                to="/products"
+                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
+              >
+                See full catalog <ArrowRight className="size-4" />
+              </Link>
+            </div>
           </div>
 
-          <div className="mt-8 md:mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="-mx-6 md:mx-0">
+            <div
+              ref={railRef}
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
               {featured.map((p) => (
-                <ProductCard key={p.name} product={p} />
+                <div
+                  key={p.name}
+                  data-rail-item
+                  className="snap-start shrink-0 basis-[78%] md:basis-[42%] lg:basis-[30%]"
+                >
+                  <ProductCard product={p} />
+                </div>
               ))}
             </div>
-            <Link
-              to="/products"
-              className="md:hidden mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-zinc-900 hover:text-brand"
-            >
-              See full catalog <ArrowRight className="size-4" />
-            </Link>
+            <p className="md:hidden mt-3 px-6 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
+              Swipe to browse →
+            </p>
           </div>
         </div>
       </section>
