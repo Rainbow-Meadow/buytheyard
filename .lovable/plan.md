@@ -1,25 +1,30 @@
 ## Goal
-Make all 6 footer cells equally centered (vertical + horizontal) and make the logo the visual anchor of the footer.
+Tighten all footer spacing — outer section padding, row gaps, cell internal rhythm, and legal bar — so the footer reads as a compact closing band instead of an airy section.
 
 ## Changes (single file: `src/components/site/SiteFooter.tsx`)
 
-**1. Cell alignment — all 6 cells**
-Each cell already has `flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center`. That handles centering, but only works if the row gives them a shared height. Both row grids already use `items-stretch md:min-h-[20rem]` — confirmed good. No change needed to the wrapper classes.
+### 1. Outer container
+- Replace `section` utility with explicit tight vertical padding: `py-8 md:py-10` on the inner wrapper.
+- Reduce horizontal padding feel by leaving `px-5 md:px-6` as-is (already tight).
 
-The issue is the WBE cell uses `space-y-5` which inherited a tighter feel, while other cells stack via natural margins. Standardize: keep `space-y-5` on all cells (already in the shared class string) and remove any redundant `mt-*` inside cells that fight the spacing. Specifically:
-- Hours cell: drop `mb-5` on heading, `mt-4` / `mt-6` on note + contact stack — let `space-y-5` handle gaps.
-- Visit cell: drop `mb-5` / `mb-4` / `mt-3` — same reason.
-- Site cell: drop `mb-5` on heading.
-- Google review cell: drop `mt-2` / `mt-5` (×2) — same.
-- Logo cell: drop `mt-4` on tagline.
-- WBE cell: already clean.
+### 2. Row grids (Row 1 + Row 2)
+- Row 1: `gap-x-10 gap-y-12 pb-12 md:pb-14` → `gap-x-6 gap-y-8 pb-6 md:pb-8`. Drop `md:min-h-[24rem]` → `md:min-h-0` (let content size it; logo still dominates via its own height).
+- Row 2: `gap-x-10 gap-y-12 pt-12 md:pt-14 md:min-h-[20rem]` → `gap-x-6 gap-y-8 pt-6 md:pt-8` (drop min-height).
 
-Result: every cell uses identical `space-y-5` rhythm and is centered both axes inside its grid track.
+### 3. Cell internal rhythm (all 6 cells)
+- Shared cell class: `space-y-5 px-4 md:px-8` → `space-y-3 px-2 md:px-4`. Tighter vertical rhythm + less side padding so dividers/content read tighter.
 
-**2. Logo dominance (Row 1 center cell)**
-Bump the brandmark from `h-24 md:h-28` to roughly `h-40 md:h-56` (≈ 2× the current size) so it visually anchors the row. Keep `w-auto object-fill`. Also bump the row min-height from `md:min-h-[20rem]` to `md:min-h-[24rem]` on Row 1 so the larger logo sits comfortably with the side cells still centered against it.
+### 4. Per-cell tightening
+- **Google review**: Button height `h-12` → `h-10`; social row gap `gap-x-5` → `gap-x-4`.
+- **Logo**: Logo height `h-40 md:h-56` → `h-32 md:h-44` (still dominant, but no longer ballooning the row).
+- **WBE**: Seal `h-20` → `h-16`; inner `<div>` already groups headline+subtext (leave `mt-1`).
+- **Hours**: List `space-y-1.5` → `space-y-1`; contact stack `space-y-1` stays.
+- **Visit**: Map `max-w-[20rem]` → `max-w-[16rem]` to match tighter scale.
+- **Site**: Nav `gap-y-2` → `gap-y-1`; the `mt-2` separator before Privacy stays (intentional visual break).
+
+### 5. Legal bar
+- `mt-12 md:mt-16 pt-6 md:pt-8` → `mt-6 md:mt-8 pt-4 md:pt-5`.
 
 ## Out of scope
-- No copy, color, divider, grid-column, or typography token changes.
-- Row 2 min-height stays as-is.
-- Legal bar untouched.
+- No color, typography token, copy, or structural (column/divider/order) changes.
+- No changes outside `SiteFooter.tsx`.
