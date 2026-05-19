@@ -1,37 +1,21 @@
-## Problem
+## Cause
 
-The home page stacks two `bg-base` sections back-to-back, breaking the section-stagger rhythm:
-
-```
-…
-Community (line 490)  bg-base
-Pricing   (line 544)  bg-base  ← same tone, no separation
-FAQ       (line 620)  bg-kraft
-```
-
-"Today's Prices" visually melts into the Community block above it.
+The hero section has `min-h-[640px] md:min-h-[720px]` plus `flex` and `self-center` on the content. On mobile, the content stack is ~560px tall but the section is forced to 640px, so the flex centering pushes everything up and leaves a big empty band of photo below the CTAs (visible in the screenshot above "Years in business").
 
 ## Fix
 
-Swap the Pricing section to `bg-kraft` so it contrasts with the Community block, and switch the FAQ section to `bg-base` so two kraft panels don't end up adjacent. Final rhythm:
+In `src/routes/index.tsx` line 252:
 
-```
-Community  bg-base
-Pricing    bg-kraft   ← changed
-FAQ        bg-base    ← changed (keeps its top/bottom borders)
-Dark CTA   bg-surface
-Footer-ish bg-kraft
-```
+- Remove the mobile `min-h-[640px]` and only apply the tall floor on desktop where the wide hero photo needs it: `min-h-[720px]` (md+ only).
+- Keep `flex` + `self-center` so desktop vertical centering still works.
+- Add `pt-4 pb-2` (mobile) via the existing `section-loose` container so the hero hugs its content on phones without collapsing the desktop look.
 
-This preserves the existing token system (no new colors) and the alternation continues cleanly into the dark CTA below.
+Resulting class on the `<section>`:
+`relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[720px] flex`
 
-### Changes
+That's the only rule change — no copy, image, or layout edits.
 
-1. `src/routes/index.tsx` line 544 — `section bg-base` → `section bg-kraft border-y border-zinc-300/60`
-2. `src/routes/index.tsx` line 620 — `section bg-kraft border-y border-zinc-300/60` → `section bg-base border-t border-zinc-200`
-3. Inside the Pricing grid (line 578), the cards are currently `bg-white` — keep as-is; white cards read well on kraft (same pattern the FAQ accordion uses today).
+## Out of scope
 
-### Out of scope
-
-- No typography, copy, or spacing changes.
-- No new color tokens — reusing existing `base` / `kraft` / `surface`.
+- No changes to desktop hero proportions, scrim, headline, or CTA styling.
+- No changes to the stats strip below.
