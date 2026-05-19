@@ -12,16 +12,16 @@ export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground border-t border-white/5">
       <div className="border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-8 md:py-10 flex flex-col md:flex-row items-center gap-5 md:gap-8 text-center md:text-left">
-          <div className="flex items-center gap-4 md:flex-1">
+        <div className="max-w-7xl mx-auto px-6 py-6 md:py-10 flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 md:flex-1">
             <span className="inline-flex items-center justify-center size-12 rounded-full bg-brand/15 text-brand shrink-0">
               <Star className="size-6 fill-brand" strokeWidth={1.5} />
             </span>
-            <div>
+            <div className="text-center md:text-left">
               <p className="font-display text-2xl md:text-3xl uppercase leading-tight">
                 Liked working with us? Leave a Google review.
               </p>
-              <p className="mt-1 text-sm text-zinc-400 max-w-[58ch]">
+              <p className="mt-1.5 text-sm text-zinc-400 max-w-[58ch]">
                 Reviews from Central Mass neighbors help other folks find the
                 yard — and they mean a lot to Abby.
               </p>
