@@ -22,9 +22,10 @@ export function SiteFooter() {
     <footer className="bg-surface text-surface-foreground">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
         {/* Row 1: Google review | Logo | Hours */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-start">
           {/* Google review */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <div className="flex justify-center md:justify-start">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left w-full max-w-[18rem]">
             <h2 className="display-5 text-white">
               Leave a <span className="text-brand">Google review.</span>
             </h2>
@@ -49,10 +50,12 @@ export function SiteFooter() {
               </svg>
               Write a Google review
             </a>
+            </div>
           </div>
 
           {/* Logo centerpiece */}
-          <div className="flex flex-col items-center justify-center text-center">
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center text-center w-full max-w-[20rem]">
             <img
               src={brandmark}
               alt="Buy The Yard — Mulch · Loam · Sand · Stone"
@@ -65,10 +68,12 @@ export function SiteFooter() {
             <p className="mt-4 meta text-zinc-500">
               Est. 2016 · WBE Certified
             </p>
+            </div>
           </div>
 
           {/* Hours */}
-          <div className="flex flex-col items-center md:items-start">
+          <div className="flex justify-center md:justify-end">
+            <div className="flex flex-col items-center md:items-start w-full max-w-[18rem]">
             <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
               Hours
             </h3>
@@ -89,13 +94,15 @@ export function SiteFooter() {
             <p className="mt-4 meta text-zinc-500 leading-relaxed max-w-[32ch] text-center md:text-left">
               In-season 4/1 – 8/1. After 8/1: by appointment. Winter salt year-round.
             </p>
+            </div>
           </div>
         </div>
 
         {/* Row 2: WBE + contact | Visit (map) | Site */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-start">
           {/* WBE + contact */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-5">
+          <div className="flex justify-center md:justify-start">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-5 w-full max-w-[18rem]">
             <img
               src={wbeSeal}
               alt="Massachusetts WBE certified seal"
@@ -149,14 +156,16 @@ export function SiteFooter() {
             >
               Meet Abby <ArrowRight className="size-4" />
             </Link>
+            </div>
           </div>
 
           {/* Visit + map */}
-          <div className="flex flex-col items-center md:items-start">
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center w-full max-w-[20rem]">
             <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
               Visit
             </h3>
-            <address className="not-italic body-sm text-zinc-300 leading-relaxed mb-4 text-center md:text-left">
+            <address className="not-italic body-sm text-zinc-300 leading-relaxed mb-4 text-center">
               2264 Main St.
               <br />
               Jefferson, MA 01522
@@ -179,10 +188,12 @@ export function SiteFooter() {
             >
               Get directions <ArrowRight className="size-4" />
             </a>
+            </div>
           </div>
 
           {/* Site */}
-          <div className="flex flex-col items-center md:items-start">
+          <div className="flex justify-center md:justify-end">
+            <div className="flex flex-col items-center md:items-start w-full max-w-[18rem]">
             <h3 className="display-5 text-white border-l-2 border-brand pl-3 mb-5">
               Site
             </h3>
@@ -201,6 +212,7 @@ export function SiteFooter() {
                 Cookie settings
               </button>
             </nav>
+            </div>
           </div>
         </div>
 

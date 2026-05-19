@@ -1,82 +1,47 @@
-Restructure `src/components/site/SiteFooter.tsx` into a 3-column × 2-row grid matching the sketch, with a logo centerpiece and an embedded map.
+Normalize the three footer columns so the visible content blocks have equal width and the gutters between them read as consistent.
 
-## Grid
+## Problem
 
-```
-grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12
-```
+The grid uses `grid-cols-3` (equal cells), but each cell's content has a different intrinsic width — Google CTA + copy ~310px, map ~370px, Site nav ~180px. With items aligned to cell starts, the visible blocks land at uneven horizontal positions, so the gutters between Google→Logo, Logo→Hours, WBE→Map, Map→Site all *look* different even though the cells are equal.
 
-Two stacked grid rows inside `max-w-7xl`. A thin `border-b border-white/10` divides Row 1 from Row 2; a `border-t` legal bar sits below.
+## Fix
 
-## Row 1 — top band (3 cells)
+Lock every column's content block to the **same fixed max-width** inside its equal-width cell, and anchor each block consistently within its cell.
 
-```text
-┌────────────────┬──────────────────────┬────────────────┐
-│ GOOGLE REVIEW  │        LOGO          │     HOURS      │
-└────────────────┴──────────────────────┴────────────────┘
-```
+### Shared content width
 
-- **Col 1 — Google review CTA**
-  - `display-5` headline: "Leave a Google review."
-  - 1-line subtext (`body-sm text-zinc-400`)
-  - Red `bg-brand` button "Write a Google review" with the Google "G" icon
-  - Left-aligned at `md+`
-- **Col 2 — Logo (centerpiece)**
-  - `brandmark-dark.png` rendered larger (`h-24 md:h-28 w-auto`), centered horizontally
-  - Tagline below in `meta text-zinc-500`: "Est. 2016 · WBE Certified"
-- **Col 3 — Hours**
-  - `display-5` heading "Hours" with `border-l-2 border-brand pl-3`
-  - Day/time rows (`flex justify-between`) as today
-  - Short seasonal note in `meta text-zinc-500`
+Add a shared content wrapper width: `w-full max-w-[18rem]` (288px) on every column's inner block. This becomes the visual column width across both rows.
 
-## Row 2 — bottom band (3 cells)
+### Per-column alignment within the cell
 
-```text
-┌────────────────┬──────────────────────┬────────────────┐
-│ WBE + CONTACT  │   VISIT (+ MAP)      │      SITE      │
-└────────────────┴──────────────────────┴────────────────┘
-```
+- **Col 1 (Google review / WBE+contact)** — cell `flex justify-start`, block left-aligned
+- **Col 2 (Logo / Visit+Map)** — cell `flex justify-center`, block center-aligned (logo image, map, "Get directions" link all centered within the 288px block)
+- **Col 3 (Hours / Site)** — cell `flex justify-end`, block right-aligned at `md+`; content inside the block stays left-aligned (so list rows and nav links still read naturally)
 
-- **Col 1 — WBE + contact stack**
-  - WBE seal image (`h-20 w-auto`)
-  - `display-5` "Certified Woman-Owned" + 1-line subtext
-  - Phone (`display-5 text-brand`) and email (`body-sm`)
-  - Facebook + Yelp inline links (existing icons)
-  - "Meet Abby →" link (carries over the previous CTA)
-- **Col 2 — Visit (with embedded map)**
-  - `display-5` heading "Visit" with `border-l-2 border-brand pl-3`
-  - Address block (`not-italic body-sm`)
-  - **Embedded map** below: Google Maps iframe pinned to `2264 Main St, Jefferson, MA 01522`, `w-full aspect-[4/3]`, `rounded-none border border-white/10`, `loading="lazy"`, `referrerpolicy="no-referrer-when-downgrade"`, `title="Buy The Yard Material — 2264 Main St, Jefferson, MA"`
-  - Small "Get directions →" link under the map opening Google Maps in a new tab
-- **Col 3 — Site nav**
-  - `display-5` "Site" with brand left rule
-  - Vertical nav: Products, About, Delivery & Pickup, Service Area, Contact
-  - Secondary: Privacy & Terms, Cookie settings (muted)
+This is the key move: right column shifts to the cell's end so the gap from middle column → right column matches the gap from left column → middle column.
 
-## Row 3 — legal bar
+### Map sizing
 
-Unchanged structure, single `border-t border-white/10` strip:
-- Left: `© {year} Buy The Yard Material · Jefferson, MA · WBE Certified`
-- Right: `Designed by Patrick Berthiaume`
+Map iframe currently fills the entire middle cell (`w-full aspect-[4/3]`). After the wrapper change it fills the 288px block — `aspect-[4/3]` becomes ~288×216. That's small. Bump the middle column's `max-w` to `20rem` (320px) only — left and right stay at `18rem`. Net visual: left ~288, middle ~320, right ~288, balanced around the centered logo/map.
 
-## Responsive behavior
+If 320 still feels too small, alternative is `grid-cols-[1fr_1.2fr_1fr]` with the same content-wrapper caps; same end state, more breathing room for the map.
 
-- `md+`: 3 columns as drawn
-- `<md`: single column stack in the order Google → Logo → Hours → WBE/Contact → Visit+Map → Site → Legal
-- Map keeps `aspect-[4/3]` at all sizes; everything else stays centered when stacked
+### Gap & padding
 
-## Visual notes
+- Keep `gap-x-10` between cells (the cell gutter)
+- Visible gutter between content blocks = `gap-x-10` + leftover cell padding on each side. With `justify-start / center / end` anchoring, leftover space distributes symmetrically → equal visible gutters.
 
-- Keep existing tokens: `bg-surface`, `text-brand`, `border-white/10`, `display-5`, `body-sm`, `meta`, `micro`
-- All three column headings (`Hours`, `Visit`, `Site`) share the same `display-5 + border-l-2 border-brand pl-3` treatment for symmetry
-- Logo column is intentionally the only centered column to read as the visual anchor
+### Row alignment
+
+Add `items-start` on both row grids so columns top-align (currently Row 1 has implicit stretch; Hours and Google CTA top edges should sit on the same baseline).
 
 ## Out of scope
 
-- No copy changes beyond removing the old standalone "Meet Abby" right-rail cell (it folds into the WBE block)
-- No new design tokens, no new assets (map is an iframe, not an image)
-- No changes outside `src/components/site/SiteFooter.tsx`
+- No copy changes
+- No token changes
+- No new files; only `src/components/site/SiteFooter.tsx`
+- Mobile (single column) unchanged — `justify-*` only kicks in at `md+`
 
 ## Files touched
 
-- `src/components/site/SiteFooter.tsx` — full restructure into the 3×2 grid + map iframe
+- `src/components/site/SiteFooter.tsx` — wrap each column's content in a fixed-width inner block, set per-column `justify-*` on the cells, add `items-start` to both row grids.
