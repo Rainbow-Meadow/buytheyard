@@ -175,8 +175,8 @@ function Row({
   return (
     <div className="flex items-start justify-between gap-4 border-b border-border pb-4 last:border-b-0 last:pb-0">
       <div className="flex-1">
-        <p className="text-sm font-semibold text-zinc-900">{title}</p>
-        <p className="mt-1 text-sm text-zinc-600 leading-relaxed">
+        <p className="text-sm font-semibold text-white">{title}</p>
+        <p className="mt-1 text-sm text-zinc-400 leading-relaxed">
           {description}
         </p>
       </div>

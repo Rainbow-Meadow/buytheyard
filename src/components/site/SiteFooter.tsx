@@ -209,7 +209,7 @@ export function SiteFooter() {
           <span>
             &copy; {year} Buy The Yard Material · Jefferson, MA · WBE Certified
           </span>
-          <span className="text-zinc-600 text-center md:text-right">
+          <span className="text-zinc-400 text-center md:text-right">
             Designed by Patrick Berthiaume
           </span>
         </div>
