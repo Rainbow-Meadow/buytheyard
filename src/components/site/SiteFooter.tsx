@@ -21,7 +21,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
-        {/* Row 1: Google review | Logo | Hours */}
+        {/* Row 1: Google review | Logo | WBE */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-center md:min-h-[20rem]">
           {/* Google review */}
           <div className="flex justify-center">
@@ -89,6 +89,36 @@ export function SiteFooter() {
             </div>
           </div>
 
+          {/* WBE */}
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center text-center space-y-5 w-full max-w-[18rem]">
+              <img
+                src={wbeSeal}
+                alt="Massachusetts WBE certified seal"
+                width={160}
+                height={100}
+                className="h-20 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+              <div>
+                <p className="display-5 text-white">Certified Woman-Owned</p>
+                <p className="mt-1 body-sm text-zinc-300">
+                  Certified by the Commonwealth of Massachusetts since 2018.
+                </p>
+              </div>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
+              >
+                Meet Abby <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2: Hours | Visit (map) | Site */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-center md:min-h-[20rem]">
           {/* Hours */}
           <div className="flex justify-center">
             <div className="flex flex-col items-center text-center w-full max-w-[18rem]">
@@ -126,36 +156,6 @@ export function SiteFooter() {
                   abby@btymaterial.com
                 </a>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Row 2: WBE + contact | Visit (map) | Site */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-center md:min-h-[20rem]">
-          {/* WBE + contact */}
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center text-center space-y-5 w-full max-w-[18rem]">
-              <img
-                src={wbeSeal}
-                alt="Massachusetts WBE certified seal"
-                width={160}
-                height={100}
-                className="h-20 w-auto object-contain"
-                loading="lazy"
-                decoding="async"
-              />
-              <div>
-                <p className="display-5 text-white">Certified Woman-Owned</p>
-                <p className="mt-1 body-sm text-zinc-300">
-                  Certified by the Commonwealth of Massachusetts since 2018.
-                </p>
-              </div>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
-              >
-                Meet Abby <ArrowRight className="size-4" />
-              </Link>
             </div>
           </div>
 
