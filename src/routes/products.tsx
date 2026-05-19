@@ -74,8 +74,7 @@ function ProductsPage() {
             <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
               508-579-9897
             </a>{" "}
-            for today's number, and we'll help you size your project while
-            we're on the phone.
+            for today's number, and we'll size your project on the call.
           </p>
         </div>
       </section>
@@ -110,10 +109,7 @@ function ProductsPage() {
             Looking for Something Else?
           </h2>
           <p className="text-zinc-700 mb-8">
-            This catalog covers our regular lineup. We also stock bulk salt
-            and ice melt throughout the winter, bagged soils and amendments
-            year-round, and seasonal specials as they become available. Call
-            to confirm what's currently in stock.
+            Our regular lineup. Bulk salt and ice melt in winter, bagged soils year-round, plus seasonal specials. Call to confirm stock.
           </p>
           <a
             href="tel:5085799897"
