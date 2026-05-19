@@ -523,8 +523,8 @@ function HomePage() {
       {/* Reviews from Facebook */}
       <section className="section bg-base border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
-            <div className="md:col-span-7">
+           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+             <div className="md:col-span-7 md:order-2">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
                 <div>
                   <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
@@ -591,7 +591,7 @@ function HomePage() {
               </div>
             </div>
 
-            <div className="md:col-span-5 mt-8 md:mt-0 border-t md:border-t-0 md:border-l border-zinc-300/60 pt-8 md:pt-0 md:pl-8">
+            <div className="md:col-span-5 md:order-1 mt-8 md:mt-0 border-t md:border-t-0 md:border-r border-zinc-300/60 pt-8 md:pt-0 md:pr-8">
               <p className="eyebrow text-zinc-500 mb-3">
                 Community
               </p>
@@ -652,7 +652,7 @@ function HomePage() {
       {/* Pricing */}
       <section className="section bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
-          <div className="md:col-span-7">
+          <div className="md:col-span-7 md:order-2 md:pl-4">
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
               <Tag className="size-3.5" />
               Today's prices by phone
@@ -684,7 +684,7 @@ function HomePage() {
           {/* Hang-tag price tag (decorative) */}
           <div
             aria-hidden="true"
-            className="hidden md:flex md:col-span-5 items-center justify-center relative"
+            className="hidden md:flex md:col-span-5 md:order-1 items-center md:justify-end md:pr-4 relative"
           >
             {/* Back tag for depth */}
             <div className="absolute w-[300px] h-[400px] rotate-[7deg] translate-x-6 translate-y-3 bg-[#e2dccb] ring-1 ring-zinc-900/10 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.25)]" />
