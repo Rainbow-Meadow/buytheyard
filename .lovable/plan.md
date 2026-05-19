@@ -1,59 +1,39 @@
-Center every footer column horizontally within its cell, center content vertically within each row, and align the two rows so they read as the same height.
+Reshuffle three small content blocks across Row 1 cells so contact info lives next to Hours and social links live next to the Google review CTA.
 
-## Column alignment — center everything
+## Moves
 
-Replace the current `justify-start / justify-center / justify-end` pattern. Every cell becomes:
+1. **Phone + email** — move from Row 2 Col 1 (WBE+contact) into Row 1 Col 3 (Hours), placed **above** the Hours heading as a contact stack.
+2. **Facebook + Yelp** — move from Row 2 Col 1 into Row 1 Col 1 (Google review), placed **below** the "Write a Google review" button.
+3. **WBE column (Row 2 Col 1)** — keep WBE seal, "Certified Woman-Owned" headline + subtext, and "Meet Abby →" link. Drop the phone, email, and social rows now relocated elsewhere.
 
-```
-flex justify-center
-```
+## Updated cell contents
 
-And every inner content block becomes:
+**Row 1 Col 1 — Google review**
+- Headline "Leave a Google review."
+- Subtext
+- Red CTA button
+- *NEW*: Facebook + Yelp inline links underneath (existing styling: `inline-flex label text-zinc-400`)
 
-```
-flex flex-col items-center text-center w-full max-w-[18rem]   // outer cols
-flex flex-col items-center text-center w-full max-w-[20rem]   // middle col (logo/map)
-```
+**Row 1 Col 3 — Hours**
+- *NEW*: Phone (`display-5 text-brand`) + email (`body-sm text-zinc-300`) stack at top
+- Hours heading with brand left-rule
+- Day/time rows
+- Seasonal note
 
-This affects:
-- Row 1 Col 1 (Google review) — was left-anchored, now centered. Button, headline, subtext all center.
-- Row 1 Col 3 (Hours) — was right-anchored, now centered. The Hours `display-5 + border-l-2 border-brand pl-3` heading still uses its left brand-rule, but the heading block itself is centered in the cell. Day/time rows stay as `flex justify-between` inside the centered 18rem block, so they remain readable.
-- Row 2 Col 1 (WBE + contact) — was left-anchored, now centered. Seal, headline, phone/email, social row, "Meet Abby" all center.
-- Row 2 Col 3 (Site nav) — was right-anchored, now centered. Nav links center vertically as a stack.
+**Row 2 Col 1 — WBE (slimmer)**
+- WBE seal
+- "Certified Woman-Owned" headline + subtext
+- "Meet Abby →" link
 
-The middle column (Logo / Visit+Map) was already centered — no change.
+## Visual consequences
 
-## Vertical alignment within each row
+- Row 2 Col 1 gets shorter — fine, the row already uses `items-center md:min-h-[20rem]` so it stays centered against the map.
+- Row 1 Col 1 and Col 3 get taller — both rows already share `md:min-h-[20rem]`, this just fills them more evenly.
+- All three cells stay centered horizontally within their 18rem inner blocks (no alignment changes).
 
-Add `items-center` to both row grids so columns vertically center against the row's tallest cell. Today the row uses `items-start`, so e.g. Hours sits flush to the top while the logo sits in the middle — they read as misaligned.
+## Out of scope
 
-```
-grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 items-center
-```
-
-## Row heights — make Row 1 and Row 2 read as equal
-
-Row 2 is currently much taller than Row 1 because of the map (`aspect-[4/3]` on a 320px wrapper → ~240px just for the map, plus heading + address + "Get directions"). Two moves:
-
-1. **Tighten the map aspect** from `aspect-[4/3]` → `aspect-[5/4]` (~256px on a 320px wrapper) — actually slightly shorter, ~256px. Net Row 2 height drops.
-
-   Better: switch to `aspect-video` (16/9 → ~180px on 320px). That trims ~60px off the row and matches the logo column's vertical footprint in Row 1 much more closely.
-
-2. **Set a shared minimum row height** on both row grids: `md:min-h-[20rem]`. This pads Row 1 (which is naturally shorter than Row 2) up to a floor, so even after the map shrinks, both rows feel like the same band.
-
-With both moves, Row 1 ≈ 320px (logo-driven), Row 2 ≈ 320px (WBE stack-driven, map fits under address comfortably). Visually they read as two equal bands.
-
-## What stays the same
-
-- 3-col grid, `gap-x-10`, equal cells
-- Legal bar (already correct)
-- All copy, tokens, assets
-- Mobile single-column stacking (everything already center-aligned on mobile)
-
-## Files touched
-
-- `src/components/site/SiteFooter.tsx`:
-  - Row grids: add `items-center md:min-h-[20rem]`
-  - All six cells: outer wrapper `flex justify-center`, inner block `flex flex-col items-center text-center w-full max-w-[18rem|20rem]`
-  - Map iframe wrapper: `aspect-[4/3]` → `aspect-video`
-  - Drop the `md:items-start` / `md:text-left` / `md:justify-start` modifiers throughout
+- No copy changes
+- No token, asset, or grid structure changes
+- No changes to Row 1 Col 2 (logo), Row 2 Col 2 (Visit+Map), Row 2 Col 3 (Site), or the legal bar
+- Only `src/components/site/SiteFooter.tsx` is touched
