@@ -205,3 +205,32 @@
   text-transform: uppercase;
   letter-spacing: 0.18em;
 }
+
+@keyframes shimmer-sweep {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.stat-shine {
+  color: transparent;
+  background-image: linear-gradient(
+    100deg,
+    var(--brand) 0%,
+    var(--brand) 40%,
+    color-mix(in oklab, #fff 75%, var(--brand)) 50%,
+    var(--brand) 60%,
+    var(--brand) 100%
+  );
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 14px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stat-shine {
+    animation: shimmer-sweep 4s linear infinite;
+  }
+}
