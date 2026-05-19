@@ -559,7 +559,7 @@ function NotesField({
         className={`${inputCls} h-auto py-3 resize-y min-h-[110px]`}
         {...register("notes")}
       />
-      <p className="meta text-zinc-500 mt-1 text-right tabular-nums">
+      <p className="meta text-ink-soft mt-1 text-right tabular-nums">
         {value.length}/500
       </p>
     </div>
@@ -593,39 +593,42 @@ function SuccessView({
 
   return (
     <>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4 inline-flex items-center gap-2">
-            <Check className="size-3.5" /> Request ready
-          </p>
-          <h1 className="display-2 leading-[0.9] max-w-[18ch]">
-            Send it to <span className="text-brand">Abby.</span>
+      <section className="bg-newsprint paper-grain border-b-4 border-ink">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-8 md:pt-12 pb-8">
+          <div className="flex items-end justify-between gap-4 pb-3 rule-thin">
+            <span className="dateline text-ink-soft inline-flex items-center gap-2">
+              <Check className="size-3.5 text-stamp" /> REQUEST READY · § Q-OUT
+            </span>
+            <span className="dateline text-ink-soft hidden sm:inline">ONE TAP TO SEND</span>
+          </div>
+          <h1 className="display-1 mt-5 md:mt-7 text-ink text-balance max-w-[18ch]">
+            Send it to <span className="text-stamp">Abby.</span>
           </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
+          <p className="lead mt-4 max-w-[60ch] text-ink-soft not-italic">
             One tap opens mail or messages with the full request typed. Hit send — she'll be back the same day.
           </p>
         </div>
       </section>
 
-      <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-5 md:px-6 space-y-8">
+      <section className="section bg-newsprint-2 border-b border-rule-strong">
+        <div className="max-w-3xl mx-auto px-5 md:px-8 space-y-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a
               href={mailto}
-              className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground h-14 label hover:opacity-90 rounded-sm"
+              className="inline-flex items-center justify-center gap-2 bg-ink text-newsprint h-14 label hover:bg-stamp btn-press border-2 border-ink"
             >
               <Mail className="size-4" /> Email Abby
             </a>
             <a
               href={sms}
-              className="inline-flex items-center justify-center gap-2 bg-surface text-surface-foreground h-14 label hover:opacity-90 rounded-sm"
+              className="inline-flex items-center justify-center gap-2 bg-stamp text-newsprint h-14 label hover:bg-ink btn-press border-2 border-stamp hover:border-ink"
             >
               <MessageSquare className="size-4" /> Text Abby
             </a>
             <button
               type="button"
               onClick={onCopy}
-              className="inline-flex items-center justify-center gap-2 bg-kraft text-zinc-900 ring-1 ring-zinc-300 h-14 label hover:ring-zinc-500 rounded-sm"
+              className="inline-flex items-center justify-center gap-2 bg-newsprint text-ink border-2 border-ink/40 h-14 label hover:border-ink btn-press"
             >
               {copied ? (
                 <>
@@ -639,20 +642,20 @@ function SuccessView({
             </button>
           </div>
 
-          <div className="bg-kraft rounded-md ring-1 ring-zinc-300 overflow-hidden">
-            <div className="px-5 py-3 border-b border-zinc-300/70 flex items-center justify-between">
-              <p className="eyebrow text-zinc-700">
-                Preview
+          <div className="bg-newsprint border-2 border-ink overflow-hidden">
+            <div className="px-5 py-3 border-b-2 border-ink flex items-center justify-between bg-newsprint-2">
+              <p className="dateline text-ink-soft">
+                CARBON COPY · PREVIEW
               </p>
               <button
                 type="button"
                 onClick={onEdit}
-                className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
+                className="inline-flex items-center gap-2 label text-ink hover:text-stamp"
               >
                 <Pencil className="size-3.5" /> Edit
               </button>
             </div>
-            <pre className="px-5 py-5 text-xs md:text-sm text-zinc-900 whitespace-pre-wrap font-mono leading-relaxed">
+            <pre className="px-5 py-5 text-xs md:text-sm text-ink whitespace-pre-wrap font-mono leading-relaxed">
               {brief}
             </pre>
           </div>
@@ -661,7 +664,7 @@ function SuccessView({
             <button
               type="button"
               onClick={onEdit}
-              className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
+              className="inline-flex items-center gap-2 label text-ink-soft hover:text-stamp"
             >
               <ArrowLeft className="size-4" /> Edit my request
             </button>
@@ -670,7 +673,7 @@ function SuccessView({
           <div className="text-center pt-2">
             <Link
               to="/contact"
-              className="label text-zinc-500 hover:text-brand"
+              className="label text-ink-soft hover:text-stamp"
             >
               Or just call 508.579.9897 →
             </Link>
