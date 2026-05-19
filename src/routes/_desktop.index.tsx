@@ -82,7 +82,7 @@ function DesktopHome() {
         <section className="md:col-span-4 d-card p-10 flex flex-col justify-between">
           <p className="d-eyebrow">Same-day pickup</p>
           <p className="d-serif text-3xl">Loaded in <span className="italic text-d-gold-light">minutes</span>, not hours.</p>
-          <Link to="/products" className="d-btn self-start mt-6">See products</Link>
+          <Link to="/products" className="d-btn-tan self-start mt-6">See products</Link>
         </section>
         <section className="md:col-span-3 bg-d-gold p-8 flex flex-col justify-between text-d-bg">
           <p className="text-[10px] uppercase tracking-[0.3em] font-bold">Call</p>
