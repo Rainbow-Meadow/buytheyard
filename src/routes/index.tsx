@@ -432,7 +432,7 @@ function HomePage() {
                 <div
                   key={p.name}
                   data-rail-item
-                  className="snap-start shrink-0 basis-[78%] md:basis-[42%] lg:basis-[30%]"
+                  className="snap-start shrink-0 basis-[78%] md:basis-[42%] lg:basis-[30%] flex"
                 >
                   <ProductCard product={p} />
                 </div>
