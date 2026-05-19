@@ -7,7 +7,6 @@ import heroDesktop from "@/assets/source/hero-desktop-yard.png";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
-import facebookPagePreview from "@/assets/facebook-page-preview.jpg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import {
