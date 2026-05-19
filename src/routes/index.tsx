@@ -584,10 +584,10 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="-mx-6 md:mx-0 mt-6 md:mt-12 md:max-w-2xl">
+          <div className="mt-6 md:mt-12 md:max-w-2xl">
             <div
               ref={reviewsRailRef}
-              className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
               {reviews.map((r) => (
                 <div
@@ -612,7 +612,7 @@ function HomePage() {
                 </div>
               ))}
             </div>
-            <p className="md:hidden mt-3 px-6 eyebrow text-zinc-500">
+            <p className="md:hidden mt-3 eyebrow text-zinc-500">
               Swipe to read more →
             </p>
           </div>
