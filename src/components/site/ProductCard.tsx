@@ -2,7 +2,7 @@ import type { Product } from "@/data/products";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="group bg-kraft/60 ring-1 ring-black/5 p-4 rounded-md flex flex-col">
+    <div className="group w-full bg-kraft/60 ring-1 ring-black/5 p-4 rounded-md flex flex-col">
       <div className="w-full aspect-[4/3] overflow-hidden rounded-sm mb-5 bg-zinc-200">
         {product.image ? (
           <img
