@@ -391,7 +391,7 @@ function HomePage() {
             { k: "10", v: "Years in business" },
             { k: "WBE", v: "Massachusetts WBE certified" },
             { k: "820+", v: "Facebook followers" },
-            { k: "1 yard", v: "Minimum order size" },
+            { k: "5★", v: "Google & Facebook rated" },
           ].map((s, i) => (
             <div key={s.k}>
               <p
