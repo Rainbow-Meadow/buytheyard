@@ -24,7 +24,7 @@ export function SiteFooter() {
         {/* Row 1: Google review | Logo | WBE */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pb-12 md:pb-14 border-b border-white/10 items-stretch md:min-h-[20rem]">
           {/* Google review */}
-          <div className="flex flex-col items-center text-center px-4 md:px-8">
+          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
               <h2 className="display-5 text-white">
                 Leave a <span className="text-brand">Google review.</span>
               </h2>
@@ -70,7 +70,7 @@ export function SiteFooter() {
           </div>
 
           {/* Logo centerpiece */}
-          <div className="flex flex-col items-center text-center px-4 md:px-8">
+          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
               <img
                 src={brandmark}
                 alt="Buy The Yard — Mulch · Loam · Sand · Stone"
@@ -86,7 +86,7 @@ export function SiteFooter() {
           </div>
 
           {/* WBE */}
-          <div className="flex flex-col items-center text-center space-y-5 px-4 md:px-8">
+          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
@@ -114,7 +114,7 @@ export function SiteFooter() {
         {/* Row 2: Hours | Visit (map) | Site */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 pt-12 md:pt-14 items-stretch md:min-h-[20rem]">
           {/* Hours */}
-          <div className="flex flex-col items-center text-center px-4 md:px-8">
+          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
                 Hours
               </h3>
@@ -152,7 +152,7 @@ export function SiteFooter() {
           </div>
 
           {/* Visit + map */}
-          <div className="flex flex-col items-center text-center px-4 md:px-8">
+          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
                 Visit
               </h3>
@@ -182,7 +182,7 @@ export function SiteFooter() {
           </div>
 
           {/* Site */}
-          <div className="flex flex-col items-center text-center px-4 md:px-8">
+          <div className="flex-col text-center space-y-5 px-4 md:px-8 flex items-center justify-center">
               <h3 className="display-5 text-white border-b-2 border-brand pb-1 mb-5">
                 Site
               </h3>
