@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Phone, X } from "lucide-react";
-import brandmark from "@/assets/brandmark-dark.png";
+import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
 
 const NAV = [
   { to: "/products", label: "Products" },
@@ -13,34 +12,48 @@ const NAV = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-surface/95 backdrop-blur-sm border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-5 md:gap-12">
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "bg-base/85 backdrop-blur-md border-b border-white/8"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-5 md:px-6 h-14 md:h-16 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-6 md:gap-12">
           <Link
             to="/"
             className="flex items-center leading-none"
             aria-label="Buy The Yard — home"
             onClick={() => setOpen(false)}
           >
-            <img
-              src={brandmark}
-              alt="Buy The Yard"
-              width={160}
-              height={60}
-              className="h-12 w-auto"
-            />
+            <span className="display-5 text-white tracking-tight">
+              Buy<span className="text-brand">/</span>The<span className="text-brand">/</span>Yard
+            </span>
           </Link>
-          <nav className="hidden md:flex gap-4 md:gap-8">
+          <nav className="hidden md:flex gap-7">
             {NAV.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
-                className="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
-                activeProps={{ className: "text-zinc-100" }}
+                className="text-sm font-medium text-zinc-400 hover:text-white transition-colors relative group"
+                activeProps={{ className: "text-white" }}
               >
                 {item.label}
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1.5 left-0 right-0 mx-auto h-px w-0 group-hover:w-full bg-brand transition-all duration-300"
+                />
               </Link>
             ))}
           </nav>
@@ -49,18 +62,19 @@ export function SiteHeader() {
           <a
             href="tel:5085799897"
             aria-label="Call Buy The Yard at 508-579-9897"
-            className="inline-flex items-center gap-2 bg-brand text-brand-foreground py-2 pr-3 pl-2 rounded-sm hover:opacity-90 transition-opacity"
+            className="btn-ember inline-flex items-center gap-2 bg-brand text-brand-foreground h-9 md:h-10 pl-2 pr-3 md:pr-4 rounded-sm"
           >
-            <span className="p-1 bg-white/15 rounded-xs shrink-0">
-              <Phone className="size-4" strokeWidth={2.5} />
+            <span className="p-1 bg-white/20 rounded-xs shrink-0">
+              <Phone className="size-3.5" strokeWidth={2.5} />
             </span>
-            <span className="text-sm font-semibold tracking-tight hidden sm:inline">
+            <span className="text-sm font-semibold tracking-tight hidden sm:inline mono">
               508.579.9897
             </span>
+            <ArrowUpRight className="size-3.5 hidden md:inline -mr-0.5 opacity-80" />
           </a>
           <button
             type="button"
-            className="md:hidden p-2 text-zinc-200"
+            className="md:hidden p-2 text-zinc-100"
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
           >
@@ -69,12 +83,12 @@ export function SiteHeader() {
         </div>
       </div>
       {open && (
-        <nav className="md:hidden bg-surface border-t border-white/5 px-6 py-4 flex flex-col gap-4">
+        <nav className="md:hidden bg-base border-t border-white/10 px-6 py-5 flex flex-col gap-4">
           {NAV.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-base font-medium text-zinc-300 hover:text-zinc-100"
+              className="display-5 text-zinc-200 hover:text-white"
               onClick={() => setOpen(false)}
             >
               {item.label}
