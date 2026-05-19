@@ -12,9 +12,17 @@ export const mHome = {
   shopCta: "Shop materials",
 };
 
+import mulchImg from "./assets/m-shop-mulch.jpg";
+import stoneImg from "./assets/m-shop-stone.jpg";
+import loamImg from "./assets/m-shop-loam.jpg";
+import sandImg from "./assets/m-shop-sand.jpg";
+import yardImg from "./assets/m-contact-yard.jpg";
+
+export const mYardImg = yardImg;
+
 export const mProducts = [
-  { name: "Mulch", slot: "m-shop-mulch.jpg", note: "Hemlock · black · brown" },
-  { name: "Stone", slot: "m-shop-stone.jpg", note: "River · lava · crushed" },
-  { name: "Loam", slot: "m-shop-loam.jpg", note: "Screened · compost mix" },
-  { name: "Sand", slot: "m-shop-sand.jpg", note: "Mason · pool · pea" },
+  { name: "Mulch", img: mulchImg, alt: "Pile of fresh dark hemlock mulch", note: "Hemlock · black · brown" },
+  { name: "Stone", img: stoneImg, alt: "Wet river and crushed stone", note: "River · lava · crushed" },
+  { name: "Loam", img: loamImg, alt: "Pile of screened loam topsoil", note: "Screened · compost mix" },
+  { name: "Sand", img: sandImg, alt: "Smooth pile of mason sand", note: "Mason · pool · pea" },
 ];
