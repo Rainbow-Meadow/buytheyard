@@ -500,7 +500,7 @@ function HomePage() {
                   Seasonal promos and WooSox ticket drawings
                 </li>
               </ul>
-              <div className="mt-5 md:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="mt-5 md:mt-8 flex flex-col items-start gap-3">
                 <a
                   href="https://www.facebook.com/BuyTheYardOutdoorProducts"
                   target="_blank"
