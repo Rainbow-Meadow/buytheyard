@@ -1,0 +1,111 @@
+@import "tailwindcss" source(none);
+@source "../../src";
+
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
+
+@theme inline {
+  --color-m-bg: #0d0d0d;
+  --color-m-surface: #161616;
+  --color-m-surface-2: #1d1d1d;
+  --color-m-line: rgba(201, 168, 76, 0.22);
+  --color-m-text: #f8f8f8;
+  --color-m-muted: rgba(248, 248, 248, 0.62);
+  --color-m-gold: #c9a84c;
+  --color-m-gold-light: #f0d78c;
+  --font-m-display: "Space Grotesk", system-ui, sans-serif;
+  --font-m-sans: "DM Sans", system-ui, sans-serif;
+}
+
+:root { color-scheme: dark; }
+
+.m-root {
+  background: var(--color-m-bg);
+  color: var(--color-m-text);
+  font-family: var(--font-m-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.m-root * { border-color: var(--color-m-line); }
+.m-root ::selection { background: var(--color-m-gold); color: var(--color-m-bg); }
+
+@utility m-display {
+  font-family: var(--font-m-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+@utility m-eyebrow {
+  font-family: var(--font-m-display);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-m-gold);
+}
+@utility m-card {
+  background: var(--color-m-surface);
+  border: 1px solid var(--color-m-line);
+  border-radius: 1rem;
+}
+@utility m-tile {
+  position: relative;
+  background: var(--color-m-surface-2);
+  border: 1px solid var(--color-m-line);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+@utility m-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-m-gold);
+  color: var(--color-m-bg);
+  font-family: var(--font-m-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  padding: 0.95rem 1.5rem;
+  width: 100%;
+}
+@utility m-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-m-gold);
+  color: var(--color-m-gold);
+  font-family: var(--font-m-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  padding: 0.85rem 1.5rem;
+  width: 100%;
+}
+
+/* Labeled placeholder slot — used until real mobile photos are uploaded. */
+@utility m-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(201, 168, 76, 0.08) 0 12px,
+      transparent 12px 24px
+    ),
+    var(--color-m-surface-2);
+  color: var(--color-m-gold);
+  font-family: var(--font-m-display);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 1rem;
+}
