@@ -2,10 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import yardWide from "@/assets/source/yard-trucks.webp";
+import deliveryMobileBg from "@/assets/delivery-mobile-bg.jpg";
 import heroMobile from "@/assets/source/hero-mobile-firepit.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard.png";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
-import btyTruck from "@/assets/bty-truck.png";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
@@ -837,14 +837,16 @@ function HomePage() {
 
       {/* Delivery callout */}
       <section className="relative bg-surface text-surface-foreground overflow-hidden">
-        <img
-          src={yardWide}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 w-full h-full object-cover opacity-25"
-        />
+        <picture aria-hidden="true">
+          <source media="(min-width: 768px)" srcSet={yardWide} />
+          <img
+            src={deliveryMobileBg}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover opacity-25"
+          />
+        </picture>
         <div className="relative max-w-7xl mx-auto px-5 md:px-6 section-loose grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12 items-center">
           <div>
             <Truck className="size-10 text-brand mb-3 md:mb-6" />
@@ -862,13 +864,6 @@ function HomePage() {
             </Link>
           </div>
           <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm rounded-md">
-            <img
-              src={btyTruck}
-              alt="Buy The Yard delivery truck"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-auto max-h-48 object-contain mb-4 pb-4 border-b border-white/10"
-            />
             <ul className="divide-y divide-white/10">
               {[
                 ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
