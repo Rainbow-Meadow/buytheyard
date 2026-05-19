@@ -9,14 +9,18 @@
 @import "@fontsource/dm-sans/600.css";
 
 @theme inline {
-  --color-m-bg: #0d0d0d;
-  --color-m-surface: #161616;
-  --color-m-surface-2: #1d1d1d;
-  --color-m-line: rgba(176, 32, 46, 0.24);
+  --color-m-bg: #100d0b;
+  --color-m-surface: #181410;
+  --color-m-surface-2: #1f1a15;
+  --color-m-line: rgba(138, 138, 138, 0.22);
+  --color-m-line-strong: rgba(200, 154, 107, 0.38);
   --color-m-text: #f8f8f8;
   --color-m-muted: rgba(248, 248, 248, 0.62);
   --color-m-gold: #b0202e;
   --color-m-gold-light: #d94254;
+  --color-m-tan: #c89a6b;
+  --color-m-tan-soft: #e3c39a;
+  --color-m-gray: #8a8a8a;
   --font-m-display: "Space Grotesk", system-ui, sans-serif;
   --font-m-sans: "DM Sans", system-ui, sans-serif;
 }
@@ -45,6 +49,22 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-m-gold);
+}
+@utility m-eyebrow-tan {
+  font-family: var(--font-m-display);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-m-tan);
+}
+@utility m-eyebrow-gray {
+  font-family: var(--font-m-display);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-m-gray);
 }
 @utility m-card {
   background: var(--color-m-surface);
@@ -87,6 +107,34 @@
   padding: 0.85rem 1.5rem;
   width: 100%;
 }
+@utility m-btn-tan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-m-tan);
+  color: var(--color-m-bg);
+  font-family: var(--font-m-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  padding: 0.95rem 1.5rem;
+  width: 100%;
+}
+@utility m-btn-gray-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-m-gray);
+  color: var(--color-m-gray);
+  font-family: var(--font-m-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  padding: 0.85rem 1.5rem;
+  width: 100%;
+}
 
 /* Labeled placeholder slot — used until real mobile photos are uploaded. */
 @utility m-slot {
@@ -96,7 +144,7 @@
   background:
     repeating-linear-gradient(
       45deg,
-      rgba(176, 32, 46, 0.10) 0 12px,
+      rgba(200, 154, 107, 0.10) 0 12px,
       transparent 12px 24px
     ),
     var(--color-m-surface-2);
