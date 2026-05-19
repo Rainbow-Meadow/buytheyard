@@ -541,7 +541,7 @@ function HomePage() {
       </section>
 
       {/* Pricing */}
-      <section className="section bg-base">
+      <section className="section bg-kraft border-y border-zinc-300/60">
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 md:mb-12">
             <div>
@@ -617,7 +617,7 @@ function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="section bg-kraft border-y border-zinc-300/60">
+      <section className="section bg-base border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-16">
           <div className="md:col-span-5">
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
