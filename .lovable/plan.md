@@ -1,26 +1,18 @@
-## Issue
+## Changes (all in `src/routes/index.tsx`, Delivery callout section ~lines 838–887)
 
-The reviews rail visibly peeks the next card on the right (see screenshot). Reason:
+### 1. Save the uploaded photo as a new asset
+Copy `user-uploads://E07992F5-7B0C-46C3-AAFF-7F19028F3DBE.png` to `src/assets/delivery-mobile-bg.jpg` (re-encoded to jpg for size) and import it alongside the existing `yardWide` import.
 
-- Rail wrapper is `-mx-6 md:mx-0` (full-bleed) with `px-6 md:px-0` padding on the inner scroller.
-- Each card is `basis-full`, so its width = scroller content-box = `viewport − 48px`.
-- `snap-start` aligns the card's left edge to the scroller's padding-left (24px from viewport left). The card therefore ends at `viewport − 24px`, leaving 24px of next-card peek on the right.
+### 2. Remove the image inside the delivery details card
+Delete the `<img src={btyTruck} … />` block (and its bottom border/padding that only existed to separate it from the list). The card becomes a clean panel with just the `<ul>` of delivery facts. The `btyTruck` import is removed if no longer used elsewhere.
 
-Mobile should snap to exactly one full card with no peek.
+### 3. Swap the section background image on mobile
+Currently a single `<img src={yardWide}>` is rendered as the section background at all sizes. Replace it with a `<picture>` so:
+- Mobile (< `md`): uses the new uploaded photo (`delivery-mobile-bg.jpg`).
+- `md` and up: keeps the existing `yardWide` image.
 
-## Fix in `src/routes/index.tsx` (reviews rail)
+Same `absolute inset-0 w-full h-full object-cover opacity-25` styling, same `aria-hidden`. No layout, copy, opacity, or card-style changes.
 
-- Drop the full-bleed on the rail wrapper:
-  `<div className="-mx-6 md:mx-0 mt-6 md:mt-12 md:max-w-2xl">` → `<div className="mt-6 md:mt-12 md:max-w-2xl">`
-- Drop the inner padding override on the scroller:
-  `flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 …` → `flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 …`
-
-With these two changes, the scroll container's width equals the section's content width, each `basis-full` card fills it exactly, and the `gap-3` between items lives outside the visible viewport between snaps — so each snap step shows exactly one full card and nothing else.
-
-No change to autoplay, arrows, card styling, or the "Swipe to read more →" hint.
-
-## Out of scope
-
-- No copy changes.
-- No change to card height, typography, or colors.
-- No change to community posts block or other rails (Featured Materials peek is intentional there).
+### Out of scope
+- No changes to copy, button, list items, typography, or spacing.
+- No changes to other sections, the `/delivery` route, or `btyTruck` usage elsewhere (verified it isn't used elsewhere before removing the import).
