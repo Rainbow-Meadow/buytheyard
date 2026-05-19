@@ -783,7 +783,7 @@ function HomePage() {
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="text-zinc-300 text-lg max-w-[48ch] mb-8">
-              Curbside delivery across Central Mass — Holden, Worcester, Princeton, Sterling, and more. Call before noon for same-day when available.
+              Curbside delivery across Central Mass. Call before noon for same-day when available.
             </p>
             <Link
               to="/delivery"
