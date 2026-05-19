@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { brand } from "../copy";
+import brandmark from "@/assets/brandmark.png";
 
 const NAV = [
   { to: "/products", label: "Products" },
@@ -11,10 +12,8 @@ const NAV = [
 export function DesktopHeader() {
   return (
     <nav className="flex justify-between items-center border-b border-d-line pb-8 mb-12">
-      <Link to="/" className="flex items-baseline gap-1 leading-none">
-        <span className="d-serif text-3xl text-d-gold-light">Buy</span>
-        <span className="d-serif text-3xl italic text-d-text">The</span>
-        <span className="d-serif text-3xl text-d-gold">Yard</span>
+      <Link to="/" className="leading-none">
+        <img src={brandmark} alt="Buy The Yard" className="h-11 w-auto" />
       </Link>
       <div className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.25em] font-medium text-d-gold-light/80">
         {NAV.map((item) => (
