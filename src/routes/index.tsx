@@ -458,7 +458,7 @@ function HomePage() {
                   data-rail-item
                   className="snap-start shrink-0 basis-[78%] md:basis-[42%] lg:basis-[30%] flex"
                 >
-                  <ProductCard product={p} />
+                  <ProductCard product={p} tone="dark" />
                 </div>
               ))}
             </div>
