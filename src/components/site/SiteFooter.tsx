@@ -14,15 +14,15 @@ export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground">
       <div className="max-w-7xl mx-auto px-5 md:px-6 section">
-        {/* WBE band */}
-        <div className="pb-8 md:pb-10 mb-10 md:mb-14 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-center md:text-left">
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-5">
+        {/* WBE band — 4-col rail */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-6 items-center pb-8 md:pb-10 mb-10 md:mb-12 border-b border-white/10 text-center md:text-left">
+          <div className="lg:col-span-3 flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-5">
             <img
               src={wbeSeal}
               alt="Massachusetts WBE certified seal"
               width={160}
               height={100}
-              className="h-16 md:h-20 w-auto object-contain"
+              className="h-16 md:h-20 w-auto object-contain shrink-0"
               loading="lazy"
               decoding="async"
             />
@@ -33,47 +33,51 @@ export function SiteFooter() {
               </p>
             </div>
           </div>
-          <Link
-            to="/about"
-            className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors shrink-0"
-          >
-            Meet Abby <ArrowRight className="size-4" />
-          </Link>
+          <div className="lg:col-span-1 flex justify-center lg:justify-end">
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors"
+            >
+              Meet Abby <ArrowRight className="size-4" />
+            </Link>
+          </div>
         </div>
 
-        {/* Review band */}
-        <div className="pb-8 md:pb-12 mb-10 md:mb-14 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-10 text-center md:text-left">
-          <div className="max-w-2xl mx-auto md:mx-0">
+        {/* Review band — 4-col rail */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-6 items-center pb-10 md:pb-12 mb-10 md:mb-14 border-b border-white/10 text-center md:text-left">
+          <div className="lg:col-span-3">
             <h2 className="display-4 text-white">
               Leave a <span className="text-brand">Google review.</span>
             </h2>
-            <p className="mt-2 body-sm text-zinc-400">
+            <p className="mt-2 body-sm text-zinc-400 max-w-[58ch] mx-auto md:mx-0">
               Reviews from Central Mass neighbors help other folks find the
               yard — and they mean a lot to Abby.
             </p>
           </div>
-          <a
-            href={GOOGLE_REVIEW_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity shrink-0 mx-auto md:mx-0"
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 48 48"
-              className="size-5 bg-white rounded-full p-[2px]"
+          <div className="lg:col-span-1 flex justify-center lg:justify-end">
+            <a
+              href={GOOGLE_REVIEW_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
             >
-              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-            </svg>
-            Write a Google review
-          </a>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 48 48"
+                className="size-5 bg-white rounded-full p-[2px]"
+              >
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              </svg>
+              Write a Google review
+            </a>
+          </div>
         </div>
 
         {/* Main 4-col grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 text-center md:text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-10 text-center md:text-left">
           {/* Brand & contact */}
           <div className="flex flex-col items-center md:items-start space-y-5">
             <img
@@ -182,10 +186,14 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Legal bar */}
-        <div className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 micro text-zinc-500 text-center">
-          <span>&copy; {new Date().getFullYear()} Buy The Yard Material · Jefferson, MA · WBE Certified</span>
-          <span className="text-zinc-600">Designed by Patrick Berthiaume</span>
+        {/* Legal bar — 4-col rail */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-3 items-center mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/10 micro text-zinc-500 text-center md:text-left">
+          <span className="lg:col-span-3">
+            &copy; {new Date().getFullYear()} Buy The Yard Material · Jefferson, MA · WBE Certified
+          </span>
+          <span className="lg:col-span-1 text-zinc-600 text-center lg:text-right">
+            Designed by Patrick Berthiaume
+          </span>
         </div>
       </div>
     </footer>
