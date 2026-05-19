@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Star } from "lucide-react";
-import brandmark from "@/assets/brandmark.png";
+import brandmark from "@/assets/brandmark-dark.png";
 import { YelpLogo } from "@/components/site/YelpLogo";
 
 // TODO: replace with the real Google review short link from the
