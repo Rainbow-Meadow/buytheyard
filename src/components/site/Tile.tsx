@@ -1,6 +1,13 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 /**
  * Data-driven Tile renderer.
@@ -130,6 +137,14 @@ export type TileBlock =
       to?: string;
       /** Optional CTA label rendered alongside the overlay text. */
       cta?: TileCta;
+      /** Optional expand-to-dialog details. When set and `to` is not, the
+       *  entire tile becomes a button that opens a dialog with the full
+       *  image plus added context (title + body). `to` wins if both are set. */
+      details?: {
+        eyebrow?: string;
+        title: string;
+        body: ReactNode;
+      };
     });
 
 const sizeCls: Record<TileSize, string> = {
@@ -487,6 +502,41 @@ function ImageTileInner({
       <Link to={block.to} className={`${imageShell} group block`}>
         {inner}
       </Link>
+    );
+  }
+  if (block.details) {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <button
+            type="button"
+            aria-label={`Open details: ${block.details.title}`}
+            className={`${imageShell} group block text-left cursor-zoom-in`}
+          >
+            {inner}
+          </button>
+        </DialogTrigger>
+        <DialogContent className="max-w-3xl p-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100">
+          <div className="bg-black">
+            <img
+              src={block.src}
+              alt={block.alt}
+              className="w-full max-h-[70vh] object-contain"
+            />
+          </div>
+          <div className="p-6 md:p-8">
+            {block.details.eyebrow && (
+              <p className="eyebrow text-brand mb-2">{block.details.eyebrow}</p>
+            )}
+            <DialogTitle className="display-4 leading-tight text-white">
+              {block.details.title}
+            </DialogTitle>
+            <DialogDescription className="body text-zinc-300 mt-3">
+              {block.details.body}
+            </DialogDescription>
+          </div>
+        </DialogContent>
+      </Dialog>
     );
   }
   return <article className={imageShell}>{inner}</article>;
