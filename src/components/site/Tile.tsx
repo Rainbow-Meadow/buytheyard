@@ -418,6 +418,7 @@ function ImageTileInner({
   const aspect = resolveAspect(block.aspect);
   const shareId = block.details?.shareId ?? block.id;
   const [dialogOpen, setDialogOpen] = useTileDeepLink(shareId);
+  const swipe = useSwipeToClose(() => setDialogOpen(false));
 
   const imageShell = [
     sizeCls[size],
@@ -514,7 +515,6 @@ function ImageTileInner({
     );
   }
   if (block.details) {
-    const swipe = useSwipeToClose(() => setDialogOpen(false));
     return (
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>
