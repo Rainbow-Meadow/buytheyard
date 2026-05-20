@@ -504,6 +504,41 @@ function ImageTileInner({
       </Link>
     );
   }
+  if (block.details) {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <button
+            type="button"
+            aria-label={`Open details: ${block.details.title}`}
+            className={`${imageShell} group block text-left cursor-zoom-in`}
+          >
+            {inner}
+          </button>
+        </DialogTrigger>
+        <DialogContent className="max-w-3xl p-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100">
+          <div className="bg-black">
+            <img
+              src={block.src}
+              alt={block.alt}
+              className="w-full max-h-[70vh] object-contain"
+            />
+          </div>
+          <div className="p-6 md:p-8">
+            {block.details.eyebrow && (
+              <p className="eyebrow text-brand mb-2">{block.details.eyebrow}</p>
+            )}
+            <DialogTitle className="display-4 leading-tight text-white">
+              {block.details.title}
+            </DialogTitle>
+            <DialogDescription className="body text-zinc-300 mt-3">
+              {block.details.body}
+            </DialogDescription>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
   return <article className={imageShell}>{inner}</article>;
 }
 
