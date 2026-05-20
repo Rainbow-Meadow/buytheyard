@@ -199,7 +199,7 @@ function ContactPage() {
               tone="gray"
               eyebrow="Heads up"
               title="Voicemail returned same day"
-              body="Cell coverage at the yard can be spotty. Leave a message and we'll call back."
+              body="Yard cell coverage is spotty — leave a message, we'll call back."
             />
           ),
         }}
