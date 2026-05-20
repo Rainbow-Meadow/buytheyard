@@ -134,7 +134,7 @@ const STORY_BLOCKS: TileBlock[] = [
       </>
     ),
     size: "md",
-    tone: "kraft",
+    tone: "surface",
   },
   {
     id: "story-gray-local",
@@ -156,7 +156,7 @@ const STORY_BLOCKS: TileBlock[] = [
     ),
     cta: { label: "Visit the yard", to: "/contact" },
     size: "md",
-    tone: "surface",
+    tone: "kraft",
   },
 ];
 
