@@ -3,6 +3,8 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
+import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
+import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
 import communityCtms from "@/assets/source/community-ctms-loam.jpg";
 import communityRutland from "@/assets/source/community-rutland-memorial.jpg";
 import { products } from "@/data/products";
@@ -136,7 +138,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "preload", as: "image", href: heroMobile, fetchpriority: "high", media: "(max-width: 767px)" },
-      { rel: "preload", as: "image", href: heroDesktop, fetchpriority: "high", media: "(min-width: 768px)" },
+      { rel: "preload", as: "image", href: heroLoopPoster, fetchpriority: "high", media: "(min-width: 768px)" },
       { rel: "canonical", href: "https://buytheyard.lovable.app/" },
     ],
     scripts: [
@@ -307,14 +309,18 @@ function HomePage() {
           className="md:hidden absolute inset-0 w-full h-full object-cover object-center"
         />
         {/* Desktop hero background */}
-        <img
-          src={heroDesktop}
-          alt="The Buy The Yard yard with a loader, mulch and stone piles, OPEN flag, and Adirondack chairs by the flower beds"
-          fetchPriority="high"
-          loading="eager"
-          decoding="async"
+        <video
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
-        />
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={heroLoopPoster}
+          aria-hidden="true"
+        >
+          <source src={heroLoopMp4} type="video/mp4" />
+        </video>
         {/* Scrim */}
         <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
         {/* Extra mobile scrim for headline contrast over the photo */}
