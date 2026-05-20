@@ -8,11 +8,11 @@ import { TileGrid, type TileBlock } from "@/components/site/Tile";
 export const Route = createFileRoute("/delivery")({
   head: () => ({
     meta: [
-      { title: "Mulch & Loam Delivery — Holden, Worcester, Princeton, Sterling | Buy The Yard" },
+      { title: "Delivery & Pickup — Central MA | Buy The Yard" },
       {
         name: "description",
         content:
-          "Curbside bulk delivery from Jefferson, MA to Holden, Worcester, Princeton, Sterling, Rutland, Paxton, West Boylston, Leominster & nearby. 1-yard minimum. Call 508-579-9897.",
+          "Curbside bulk delivery from Jefferson, MA to Holden, Worcester, Princeton, Sterling & nearby. 1-yard minimum. Call 508-579-9897.",
       },
       { property: "og:title", content: "Delivery & Pickup — Buy The Yard" },
       {

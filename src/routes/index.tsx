@@ -51,7 +51,7 @@ function kickHeroVideo(el: HTMLVideoElement | null) {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mulch, Loam, Sand & Stone — Jefferson, MA | Central MA Delivery" },
+      { title: "Mulch, Loam, Sand & Stone — Jefferson, MA" },
       {
         name: "description",
         content:

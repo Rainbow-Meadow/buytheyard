@@ -30,9 +30,9 @@ const TOWNS: Town[] = [
   { name: "Shrewsbury, MA", drive: "~25 min", blurb: "Bulk materials delivered curbside; 48-hour notice recommended." },
 ];
 
-const TITLE = "Mulch, Loam & Stone Delivery — Central MA Service Area | Buy The Yard";
+const TITLE = "Service Area — Central MA Delivery | Buy The Yard";
 const DESCRIPTION =
-  "Bulk mulch, loam, sand, and stone delivery from our Jefferson, MA yard to Holden, Worcester, Princeton, Sterling, Rutland, Paxton, West Boylston, Leominster, and more across Central Massachusetts.";
+  "Bulk mulch, loam, sand & stone delivery from our Jefferson, MA yard to Holden, Worcester, Princeton, Sterling & nearby towns across Central Massachusetts.";
 
 export const Route = createFileRoute("/service-area")({
   head: () => ({

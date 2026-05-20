@@ -118,9 +118,9 @@ function QuotePage() {
         {/* Mobile stacked hero */}
         <div className="md:hidden">
           <div className="grid grid-cols-3 gap-1">
-            <div className="aspect-square overflow-hidden"><img src={mulchHemlock} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-            <div className="aspect-square overflow-hidden"><img src={loam} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-            <div className="aspect-square overflow-hidden"><img src={stoneRiver} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={mulchHemlock} alt="Hemlock mulch piles" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={loam} alt="Screened loam" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={stoneRiver} alt="River stone" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
           </div>
           <div className="px-5 py-8">
             <p className="eyebrow text-brand mb-4">Get a quote</p>
@@ -198,13 +198,14 @@ function QuotePage() {
                   >
                     <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 items-end">
                       <div>
-                        <label className={labelCls}>Product</label>
+                        <label className={labelCls} htmlFor={`items-${idx}-product`}>Product</label>
                         <Controller
                           control={control}
                           name={`items.${idx}.product`}
                           render={({ field: f }) => (
                             <select
                               {...f}
+                              id={`items-${idx}-product`}
                               className={inputCls}
                               onChange={(e) => {
                                 f.onChange(e);
@@ -236,7 +237,7 @@ function QuotePage() {
                       </div>
 
                       <div>
-                        <label className={labelCls}>Qty</label>
+                        <label className={labelCls} htmlFor={`items-${idx}-quantity`}>Qty</label>
                         <Controller
                           control={control}
                           name={`items.${idx}.quantity`}
@@ -253,6 +254,7 @@ function QuotePage() {
                                 <Minus className="size-4" />
                               </button>
                               <input
+                                id={`items-${idx}-quantity`}
                                 type="number"
                                 inputMode="numeric"
                                 min={1}
@@ -284,8 +286,9 @@ function QuotePage() {
                       </div>
 
                       <div>
-                        <label className={labelCls}>Unit</label>
+                        <label className={labelCls} htmlFor={`items-${idx}-unit`}>Unit</label>
                         <select
+                          id={`items-${idx}-unit`}
                           className={`${inputCls} pr-2`}
                           {...register(`items.${idx}.unit` as const)}
                         >
@@ -363,8 +366,8 @@ function QuotePage() {
             {fulfillment === "Delivery" && (
               <div className="mt-3 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
                 <div>
-                  <label className={labelCls}>Town</label>
-                  <select className={inputCls} {...register("town")}>
+                  <label className={labelCls} htmlFor="quote-town">Town</label>
+                  <select id="quote-town" className={inputCls} {...register("town")}>
                     <option value="">Select town…</option>
                     {TOWNS.map((t) => (
                       <option key={t} value={t}>
@@ -379,8 +382,9 @@ function QuotePage() {
                   )}
                 </div>
                 <div>
-                  <label className={labelCls}>ZIP</label>
+                  <label className={labelCls} htmlFor="quote-zip">ZIP</label>
                   <input
+                    id="quote-zip"
                     inputMode="numeric"
                     maxLength={5}
                     placeholder="01522"
@@ -395,7 +399,7 @@ function QuotePage() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className={labelCls}>Where should we drop it?</label>
+                  <p className={labelCls}>Where should we drop it?</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {DROP_SPOTS.map((d) => (
                       <label
@@ -420,7 +424,7 @@ function QuotePage() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className={labelCls}>When?</label>
+                  <p className={labelCls}>When?</p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {TIMING.map((t) => (
                       <label
@@ -444,6 +448,7 @@ function QuotePage() {
                   )}
                   {timing === "Specific date" && (
                     <input
+                      id="quote-specific-date"
                       type="date"
                       className={`${inputCls} mt-3`}
                       {...register("specificDate")}
@@ -486,8 +491,9 @@ function QuotePage() {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className={labelCls}>Name</label>
+                <label className={labelCls} htmlFor="quote-name">Name</label>
                 <input
+                  id="quote-name"
                   className={inputCls}
                   autoComplete="name"
                   {...register("name")}
@@ -497,8 +503,9 @@ function QuotePage() {
                 )}
               </div>
               <div>
-                <label className={labelCls}>Phone</label>
+                <label className={labelCls} htmlFor="quote-phone">Phone</label>
                 <input
+                  id="quote-phone"
                   type="tel"
                   inputMode="tel"
                   autoComplete="tel"
@@ -511,8 +518,9 @@ function QuotePage() {
                 )}
               </div>
               <div className="md:col-span-2">
-                <label className={labelCls}>Email</label>
+                <label className={labelCls} htmlFor="quote-email">Email</label>
                 <input
+                  id="quote-email"
                   type="email"
                   inputMode="email"
                   autoComplete="email"
@@ -525,7 +533,7 @@ function QuotePage() {
                 )}
               </div>
               <div className="md:col-span-2">
-                <label className={labelCls}>Best way to reach me</label>
+                <p className={labelCls}>Best way to reach me</p>
                 <div className="grid grid-cols-3 gap-2">
                   {CONTACT_METHODS.map((m) => (
                     <label
@@ -591,6 +599,8 @@ function NotesField({
   return (
     <div className="relative">
       <textarea
+        id="quote-notes"
+        aria-label="Notes"
         rows={4}
         maxLength={500}
         placeholder="e.g. Please leave behind the gate if I'm not home — there's a tarp marking the spot."
@@ -623,7 +633,7 @@ function StepTile({
       <div className="md:hidden p-5 border-b border-zinc-300/70">
         <p className="display-2 leading-none text-brand">{number}</p>
         <p className="eyebrow text-zinc-600 mt-3">{eyebrow}</p>
-        <p className="display-4 mt-1 text-zinc-900">{title}</p>
+        <h2 className="display-4 mt-1 text-zinc-900">{title}</h2>
         {helper && <p className="body-sm text-zinc-600 mt-2">{helper}</p>}
       </div>
       {/* Desktop header */}
@@ -633,7 +643,7 @@ function StepTile({
         </div>
         <div className="col-span-9 p-7">
           <p className="eyebrow text-zinc-600">{eyebrow}</p>
-          <p className="display-4 mt-1 text-zinc-900">{title}</p>
+          <h2 className="display-4 mt-1 text-zinc-900">{title}</h2>
           {helper && <p className="body-sm text-zinc-600 mt-2 max-w-[55ch]">{helper}</p>}
         </div>
       </div>
