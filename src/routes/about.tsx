@@ -59,7 +59,7 @@ const STORY_BLOCKS: TileBlock[] = [
     title: "WBE",
     body: "MA Woman Business Enterprise",
     size: "sm",
-    tone: "kraft",
+    tone: "brand",
     padding: "sm",
     className: "md:hidden",
     icon: (
