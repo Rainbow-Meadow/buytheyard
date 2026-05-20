@@ -635,8 +635,8 @@ export function Tile(block: TileBlock) {
   const padding = block.padding ?? "md";
 
   const shell = [
-    sizeCls[size],
-    block.tall ? "tile-row-tall" : "",
+    block.fill ? "h-full w-full overflow-hidden" : sizeCls[size],
+    block.fill ? "" : block.tall ? "tile-row-tall" : "",
     toneCls[tone],
     paddingCls[padding],
     "rounded-md",
