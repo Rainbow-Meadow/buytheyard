@@ -391,26 +391,6 @@ function HomePage() {
             </h2>
             </div>
             <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label="Previous"
-                  onClick={() => scrollByCard(-1)}
-                  disabled={!canPrev}
-                  className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
-                >
-                  <ChevronLeft className="size-5" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Next"
-                  onClick={() => scrollByCard(1)}
-                  disabled={!canNext}
-                  className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
-                >
-                  <ChevronRight className="size-5" />
-                </button>
-              </div>
               <Link
                 to="/products"
                 className="inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
@@ -420,24 +400,21 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="-mx-6 md:mx-0">
-            <div
-              ref={railRef}
-              className="flex gap-3 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-0 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {featured.map((p) => (
-                <div
-                  key={p.name}
-                  data-rail-item
-                  className="snap-start shrink-0 basis-[78%] md:basis-[42%] lg:basis-[30%] flex"
-                >
-                  <ProductCard product={p} />
-                </div>
-              ))}
+          {/* Mobile: Gallery — 2-col image-overlay grid */}
+          <div className="md:hidden grid grid-cols-2 gap-2">
+            {featured.map((p) => (
+              <ProductCard key={p.name} product={p} variant="gallery" />
+            ))}
+          </div>
+
+          {/* Desktop: Magazine — 1 large featured + 6 supporting */}
+          <div className="hidden md:grid md:grid-cols-3 gap-6 items-start">
+            <div className="md:col-span-1 md:row-span-2 flex">
+              <ProductCard product={featured[0]} />
             </div>
-            <p className="md:hidden mt-3 px-6 eyebrow text-zinc-500">
-              Swipe to browse →
-            </p>
+            {featured.slice(1, 7).map((p) => (
+              <ProductCard key={p.name} product={p} variant="gallery" />
+            ))}
           </div>
         </div>
       </section>
