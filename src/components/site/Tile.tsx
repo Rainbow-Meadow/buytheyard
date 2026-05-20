@@ -516,19 +516,21 @@ function ImageTileInner({
             {inner}
           </button>
         </DialogTrigger>
-        <DialogContent className="max-w-3xl p-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100">
-          <div className="bg-black">
+        <DialogContent
+          className="w-[calc(100vw-2rem)] max-w-3xl max-h-[90vh] p-0 gap-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100 grid grid-rows-[minmax(0,1fr)_auto] sm:rounded-md"
+        >
+          <div className="bg-black flex items-center justify-center min-h-0">
             <img
               src={block.src}
               alt={block.alt}
-              className="w-full max-h-[70vh] object-contain"
+              className="w-full h-full max-h-[60vh] object-contain"
             />
           </div>
-          <div className="p-6 md:p-8">
+          <div className="p-5 sm:p-7 overflow-y-auto">
             {block.details.eyebrow && (
               <p className="eyebrow text-brand mb-2">{block.details.eyebrow}</p>
             )}
-            <DialogTitle className="display-4 leading-tight text-white">
+            <DialogTitle className="display-5 sm:display-4 leading-tight text-white">
               {block.details.title}
             </DialogTitle>
             <DialogDescription className="body text-zinc-300 mt-3">
