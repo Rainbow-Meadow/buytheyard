@@ -56,7 +56,7 @@ const STORY_BLOCKS: TileBlock[] = [
       "Growing up I was always outside, alongside my dad, around trucks and equipment, or spreading mulch in the backyard.",
     body: "A career in this industry was never really a question.",
     size: "feature",
-    tone: "brand",
+    tone: "surface",
     padding: "lg",
   },
   {
@@ -92,7 +92,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "04 · WBE",
     body: "After three years in business I made it official. Buy The Yard became a Massachusetts Certified Woman-Owned Enterprise.",
     size: "sm",
-    tone: "gray",
+    tone: "brand",
   },
   {
     id: "story-04-wbe-badge",
@@ -122,7 +122,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "05 · Still here",
     body: "Nearly a decade in. Same yard, same voice on the phone, and still genuinely glad to see you pull in.",
     size: "lg",
-    tone: "kraft",
+    tone: "gray",
   },
   {
     id: "story-06-office-manager",
@@ -134,7 +134,7 @@ const STORY_BLOCKS: TileBlock[] = [
       </>
     ),
     size: "md",
-    tone: "gray",
+    tone: "kraft",
   },
   {
     id: "story-07-visit",
