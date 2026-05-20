@@ -292,7 +292,7 @@ function ImageTileInner({
   tone: TileTone;
 }) {
   const [loaded, setLoaded] = useState(false);
-  const aspect = aspectCls[block.aspect ?? "square"];
+  const aspect = resolveAspect(block.aspect);
 
   const imageShell = [
     sizeCls[size],
