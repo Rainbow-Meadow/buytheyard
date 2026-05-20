@@ -115,16 +115,62 @@ function QuotePage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Get a quote
-          </p>
-          <h1 className="display-2 leading-[0.9] max-w-[18ch]">
-            Tell us. <span className="text-brand">We'll price it.</span>
-          </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
-          </p>
+        {/* Mobile stacked hero */}
+        <div className="md:hidden">
+          <div className="grid grid-cols-3 gap-1">
+            <div className="aspect-square overflow-hidden"><img src={mulchHemlock} alt="" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={loam} alt="" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={stoneRiver} alt="" className="w-full h-full object-cover" /></div>
+          </div>
+          <div className="px-5 py-8">
+            <p className="eyebrow text-brand mb-4">Get a quote</p>
+            <h1 className="display-2 leading-[0.9]">
+              Tell us. <span className="text-brand">We'll price it.</span>
+            </h1>
+            <p className="mt-4 text-zinc-300 text-base">
+              About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
+            </p>
+          </div>
+        </div>
+
+        {/* Desktop split hero */}
+        <div className="hidden md:block">
+          <div className="max-w-7xl mx-auto px-6 section-loose grid grid-cols-12 gap-8 items-center">
+            <div className="col-span-7">
+              <p className="eyebrow text-brand mb-4">Get a quote</p>
+              <h1 className="display-1 leading-[0.9] max-w-[14ch]">
+                Tell us. <span className="text-brand">We'll price it.</span>
+              </h1>
+              <p className="mt-6 text-zinc-400 max-w-[52ch] text-lg">
+                About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
+              </p>
+            </div>
+            <div className="col-span-5 grid grid-cols-2 gap-2">
+              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10 col-span-2">
+                <img src={mulchHemlock} alt="Hemlock mulch piles" className="w-full h-full object-cover" />
+              </div>
+              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10"><img src={loam} alt="Screened loam" className="w-full h-full object-cover" /></div>
+              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10"><img src={stoneRiver} alt="River stone" className="w-full h-full object-cover" /></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reassurance strip */}
+      <section className="bg-kraft border-y border-zinc-300">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 py-8 md:py-10">
+          <ul className="grid grid-cols-2 md:grid-cols-3 md:divide-x md:divide-zinc-300 gap-y-6">
+            {[
+              ["~60s", "To build a list"],
+              ["1 owner", "Abby answers"],
+              ["Same day", "Reply, in season"],
+            ].map(([v, k]) => (
+              <li key={k} className="md:px-8 first:md:pl-0 last:md:pr-0">
+                <p className="display-4 text-zinc-900 leading-none">{v}</p>
+                <p className="eyebrow text-zinc-600 mt-2">{k}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
