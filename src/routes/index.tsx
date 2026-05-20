@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.png";
-import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
 import communityCtms from "@/assets/source/community-ctms-loam.jpg";
