@@ -421,7 +421,6 @@ function HomePage() {
               icon={<HelpCircle />}
               eyebrow="Before you call"
               title="Quick answers"
-              body="Pricing & delivery FAQs."
               cta={{ label: "Start a quote", to: "/quote" }}
             />
           ),
@@ -432,8 +431,8 @@ function HomePage() {
               variant="text"
               tone="gray"
               eyebrow="01 · Pricing"
-              title="How much does material cost?"
-              body="Seasonal — quoted by phone. 1-yard minimum."
+              title="What does it cost?"
+              body="Quoted by phone. 1-yard minimum."
             />
           ),
           d: (
@@ -443,8 +442,7 @@ function HomePage() {
               variant="text"
               tone="surface"
               eyebrow="02 · Delivery area"
-              title="Deliver to my town?"
-              body="Central Mass curbside."
+              title="Deliver here?"
             />
           ),
           e: (
@@ -454,8 +452,7 @@ function HomePage() {
               variant="text"
               tone="surface"
               eyebrow="03 · Timing"
-              title="How fast can I get it?"
-              body="Same-day if by noon, else ~48h."
+              title="How soon?"
             />
           ),
         }}
