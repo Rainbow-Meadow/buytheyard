@@ -65,7 +65,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "02 · School",
     body: "I graduated Wachusett Regional in 2016 and went straight on for an Entrepreneurship and Small Business degree.",
     size: "md",
-    tone: "white",
+    tone: "kraft",
   },
   {
     id: "story-03-yard-opens",
@@ -134,7 +134,7 @@ const STORY_BLOCKS: TileBlock[] = [
       </>
     ),
     size: "md",
-    tone: "white",
+    tone: "kraft",
   },
   {
     id: "story-gray-local",
