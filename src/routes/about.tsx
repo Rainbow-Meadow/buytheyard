@@ -56,13 +56,14 @@ function YardDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button
-          type="button"
+        <div
+          role="button"
+          tabIndex={0}
           aria-label={`Open details: ${item.title}`}
-          className={`group block w-full text-left cursor-zoom-in ${className ?? ""}`}
+          className={`group block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-md ${className ?? ""}`}
         >
           {children}
-        </button>
+        </div>
       </DialogTrigger>
       <DialogContent className="max-w-3xl p-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100">
         <div className="bg-black">
