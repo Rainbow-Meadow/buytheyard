@@ -45,6 +45,10 @@ interface BaseTile {
   tall?: boolean;
   padding?: TilePadding;
   className?: string;
+  /** When true, the tile fills 100% of its parent (used inside TileScreen
+   *  grid cells where placement is owned by the outer grid). Disables the
+   *  `tile-*` column-span class and forces the article to flex `h-full w-full`. */
+  fill?: boolean;
   /** Optional leading icon — rendered at the top of text / numbered /
    *  definition / cta tiles. Typically a lucide-react `<Icon className="size-7">`. */
   icon?: ReactNode;
@@ -448,9 +452,9 @@ function ImageTileInner({
   }, [dialogOpen, nav.hasPrev, nav.hasNext, nav.prev, nav.next]);
 
   const imageShell = [
-    sizeCls[size],
-    block.tall ? "tile-row-tall" : "",
-    aspect,
+    block.fill ? "h-full w-full" : sizeCls[size],
+    block.fill ? "" : block.tall ? "tile-row-tall" : "",
+    block.fill ? "" : aspect,
     "relative overflow-hidden rounded-md ring-1",
     isLightTone(tone) ? "ring-zinc-300" : "ring-white/10",
     toneCls[tone],
@@ -631,8 +635,8 @@ export function Tile(block: TileBlock) {
   const padding = block.padding ?? "md";
 
   const shell = [
-    sizeCls[size],
-    block.tall ? "tile-row-tall" : "",
+    block.fill ? "h-full w-full overflow-hidden" : sizeCls[size],
+    block.fill ? "" : block.tall ? "tile-row-tall" : "",
     toneCls[tone],
     paddingCls[padding],
     "rounded-md",
