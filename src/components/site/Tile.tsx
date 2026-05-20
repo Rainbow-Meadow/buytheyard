@@ -155,6 +155,22 @@ const paddingCls: Record<TilePadding, string> = {
 
 export type TileAspect = "square" | "video" | "portrait" | "wide";
 
+/** Named focal anchors mapped to CSS `object-position` keywords. */
+export type TileFocalAnchor =
+  | "center"
+  | "top"
+  | "bottom"
+  | "left"
+  | "right"
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right";
+
+/** A focal point — either a named anchor or precise (0–100) percent coordinates
+ *  measured from the top-left of the image. */
+export type TileFocal = TileFocalAnchor | { x: number; y: number };
+
 const aspectCls: Record<TileAspect, string> = {
   square: "aspect-square",
   video: "aspect-video",
