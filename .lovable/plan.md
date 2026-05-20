@@ -1,163 +1,81 @@
+## Goal
 
-# Tile-only, viewport-locked page system
+Keep the viewport-locked TileScreen rule on /products, /quote, /privacy without chopping each into 3–4 sequential screens. Instead, give the Tile system two new behaviors so a single grid cell can hold more than one viewport's worth of content:
 
-## Goals
+1. **Carousel tile** — a tile whose interior pages horizontally through N "slides" (dot/arrow controls, swipe on touch). Vertical height stays locked to the cell; only the inner track moves.
+2. **Flip tile** — a card-style tile with a front face and a back face; tap/click flips it in place (CSS 3D transform). Both faces fit the cell; no scrolling.
 
-1. **Two layouts**: desktop (≥768px) and mobile (<768px). No third tier.
-2. **Every element below the header lives in a tile.** No bare text on backgrounds.
-3. **Six fixed layouts only**: 1 `page_hero` layout (hero + 4 stats) and 5 `section` layouts, each with a mobile and desktop variant. Used exactly as drawn — no improvisation on tile placement.
-4. **Each section = exactly one viewport** (`100svh` minus the header). Overflow inside a single hero tile may scroll horizontally (carousel) — never vertically inside the section.
+These compose with existing variants — a slide or a face is just another `TileBlock`-shaped payload.
 
-## Scope
+## Tile API additions
 
-All public pages: `/`, `/about`, `/products`, `/delivery`, `/quote`, `/contact`, `/service-area`, `/privacy`.
+Extend `src/components/site/Tile.tsx`:
 
-## New primitive: `TileScreen`
+```ts
+type CarouselTile = BaseTile & {
+  variant: "carousel";
+  slides: TileBlock[];          // each rendered with fill, sized to the cell
+  auto?: boolean;               // optional autoplay, pauses on hover/focus
+  controls?: "dots" | "arrows" | "both"; // default "both"
+  ariaLabel?: string;
+};
 
-A new `src/components/site/TileScreen.tsx` replaces ad-hoc `<section>` + `TileGrid` usage for tile-locked pages.
-
-```tsx
-<TileScreen layout="pageHero" tiles={{ hero: ..., a: ..., b: ..., c: ..., d: ... }} />
-<TileScreen layout="section01" tiles={{ hero: ..., a: ..., b: ..., c: ..., d: ..., e: ... }} />
+type FlipTile = BaseTile & {
+  variant: "flip";
+  front: TileBlock;             // rendered fill
+  back: TileBlock;              // rendered fill
+  trigger?: "click" | "hover";  // default "click" (mobile-friendly)
+  hint?: string;                // small "Tap to flip" affordance
+};
 ```
 
-- Outer container: `h-[calc(100svh-var(--header-h))] w-screen overflow-hidden p-2 md:p-4`.
-- CSS grid with exact row/col placements per layout (see Technical section).
-- Slot keys are typed per layout (TS literal-union enforces "use exactly this many tiles").
-- Each slot accepts a `<TileBlock>` (existing component) — keeps all visual variants (text, cta, quote, image, numbered, product).
-- One slot per layout may opt into `scroll="x"`, exposing horizontal scrolling for product/review carousels.
+Implementation notes:
+- Reuse the existing `Tile` renderer for slide/face content by recursively rendering each `TileBlock` with `fill`.
+- Carousel = `overflow-hidden` outer + `flex` track translated by `index * 100%`. Snap to slides. Arrow buttons absolutely positioned, dot row bottom-center. Keyboard: ←/→. Touch: pointer drag with threshold (reuse pattern from `useDialogGestures`).
+- Flip = container with `perspective`, inner div with `transform-style: preserve-3d` and `rotateY(0/180deg)`. Front/back use `backface-visibility: hidden`. Click toggles state; small chevron-rotate icon in corner as the affordance.
+- Both respect `prefers-reduced-motion` (carousel: instant slide change; flip: crossfade instead of rotate).
+- Add tokens to `src/styles.css` only if needed (perspective value, transition duration).
 
-## Layout assignments
+## Per-route layout
 
-### Home `/` — 4 sections
+### /products (currently 142 lines, full catalog)
 
-| # | Section | Layout | Slot map |
-|---|---|---|---|
-| 1 | Hero + Stats | `pageHero` | hero=video hero+CTAs; a/b/c/d = the 4 stats |
-| 2 | Featured materials | `section01` | hero=product carousel (scroll-x); a/b/c/d/e = 5 category quick-links |
-| 3 | Social proof (Facebook + Reviews + Community) | `section02` | hero=Facebook CTA; a=Community photo; b=review carousel; c=second community photo |
-| 4 | Logistics (Delivery + Pricing + FAQ) | `section05` | hero=Delivery (Truck, CTA); a=Pricing (Tag, "call for price"); b=4% card-fee note; c=FAQ Q1; d=FAQ Q2; e=FAQ Q3 |
+Use **section02** layout. The hero slot holds one large `carousel` tile that pages through product categories (Mulch, Loam, Sand, Stone, Decorative, Nursery). Each slide is itself a mini horizontal scroller of product image-tiles for that category (existing pattern, allowed because horizontal scroll inside a slot is already permitted by TileScreen rules).
 
-### Other routes — one `pageHero` per page + one content layout
+Side slots: 3 supporting tiles — pricing-by-phone CTA, delivery-area CTA, quote CTA.
 
-| Route | Hero layout | Content layout | Notes |
-|---|---|---|---|
-| `/about` | `pageHero` (hero=mission; stats=years/WBE/local/reviews) | `section04` | Story tiles + Charlie/team |
-| `/products` | `pageHero` (hero=intro+search; stats=4 category counts) | `section03` | Product grid uses scroll-x in hero tile of section03 |
-| `/delivery` | `pageHero` (hero=delivery promise; stats=area/min/fee/timing) | `section01` | Map tile + rule tiles |
-| `/quote` | `pageHero` (hero=form intro+phone; stats=avg response/min order/area/fee) | `section02` | Form lives in `section02` hero slot |
-| `/contact` | `pageHero` (hero=address+hours; stats=phone/fb/email/yard hrs) | `section03` | Map + directions |
-| `/service-area` | `pageHero` (hero=service intro; stats=towns/radius/min/days) | `section04` | Town tiles |
-| `/privacy` | `pageHero` (hero=privacy summary; stats=updated/contact/scope/version) | `section05` | Long copy splits across tiles (no internal scroll on body) |
+### /quote (currently 767 lines, multi-field form)
 
-## Content trimming (strict viewport rule)
+Use **pageHero** layout. Hero slot = one big `carousel` tile acting as a **multi-step form** (Step 1: contact, Step 2: material + qty, Step 3: delivery, Step 4: review/submit). Dot indicator becomes the step indicator; "Next/Back" buttons drive the carousel index. The form state lives in the parent route; each slide renders the fields for that step.
 
-- **Hero + stats**: copy already short — fits.
-- **Featured materials**: 7 products → keep all 7 in horizontal carousel inside one tile.
-- **Reviews**: 3 reviews → horizontal carousel in the review tile.
-- **FAQ on home**: only the 3 most-asked questions fit; full FAQ moves to `/delivery` and `/quote` where the 4th lives naturally.
-- **Privacy/long copy**: split into 4–6 tile-sized chunks; if a tile overflows we shorten copy, never shrink type (project memory rule).
+Side slots: phone CTA, hours/lead-time info, "prefer to talk?" tile.
 
-## Header height token
+### /privacy (currently 443 lines, legal copy)
 
-Add `--header-h: 56px` (mobile) / `64px` (desktop) to `:root` in `src/styles.css`. `TileScreen` reads it for `h-[calc(100svh-var(--header-h))]`.
+Use **section04** layout. The two text-heavy areas each become **flip tiles**:
+- Hero flip: front = "What we collect" summary card; back = full enumerated list.
+- Secondary flips: "How we use it" / "Your rights" / "Cookies" / "Contact" — front shows a one-line plain-English summary, back shows the formal legal text.
 
-## Mobile behavior
+This keeps the legalese accessible without forcing a 4-screen scroll, and rewards interaction.
 
-Each section uses the matching mobile layout of the same number. Hero tile is always full-width top; supporting tiles stack in the exact ratios shown in the screenshots.
+## Files touched
 
-## What gets deleted / merged
+- `src/components/site/Tile.tsx` — add `carousel` and `flip` variants + renderers
+- `src/styles.css` — perspective / flip-transition tokens, reduced-motion rules
+- `src/routes/products.tsx` — rewrite to a single TileScreen using carousel
+- `src/routes/quote.tsx` — rewrite to a single TileScreen with carousel-as-stepper; preserve all existing form fields, validation, and server-fn submit
+- `src/routes/privacy.tsx` — rewrite to a single TileScreen using flip tiles
 
-- Existing per-section components (`FeaturedMaterials`, `FacebookSpotlight`, `ReviewsAndCommunity`, `DeliveryAndPricing`, `FaqSection`) are rewritten as pure data passed into `TileScreen`. Mobile/desktop branching disappears — `TileScreen` handles it.
-- `TileGrid` stays available for non-tile-locked surfaces (none currently planned, but kept for product detail dialogs).
+## Risks / call-outs
 
----
+- **Quote form**: the carousel-as-stepper is a real UX change (multi-step vs. one long form). Form logic, validation, and submission stay identical — only the presentation chunks fields by step.
+- **Privacy legal completeness**: every clause currently on the page must still be reachable via a flip back-face. None gets dropped.
+- **Reduced motion**: flip animation must degrade or some users will see nothing change.
+- **Touch targets**: flip trigger needs a visible affordance; users won't discover it otherwise.
 
-## Technical: layout CSS grids
+## Sequencing
 
-All grids: `display: grid; gap: 8px (mobile) / 16px (desktop); height: 100%`.
-
-```text
-pageHero (desktop, 6 cols × 2 rows)
-  hero  cols 1-4  rows 1-2
-  a     col  5    row  1
-  b     col  6    row  1
-  c     col  5    row  2
-  d     col  6    row  2
-
-pageHero (mobile, 2 cols × 3 rows)
-  hero  cols 1-2  rows 1-2
-  a     col  1    row  3   (½ height of stat row)
-  b     col  2    row  3
-  c     col  1    row  4
-  d     col  2    row  4
-
-section01 (desktop, 6 cols × 3 rows)
-  hero  cols 1-4  rows 1-2
-  a     cols 5-6  row  1
-  b     cols 5-6  row  2
-  c     cols 1-2  row  3
-  d     cols 3-4  row  3
-  e     cols 5-6  row  3
-
-section02 (desktop, 6 cols × 3 rows)
-  hero  cols 1-4  rows 1-3
-  a     cols 5-6  row  1
-  b     col  5    rows 2-3
-  c     col  6    rows 2-3
-
-section03 (desktop, 6 cols × 2 rows)
-  hero  cols 1-4  row  1
-  a     cols 5-6  rows 1-2
-  b     cols 1-2  row  2
-  c     cols 3-4  row  2
-  d     cols 5-6  row  2   (overlaps a? no — a is cols 5-6 row 1, d is cols 5-6 row 2 — corrected: a=cols 5-6 row 1, d not used, only c spans cols 5-6 row 2)
-  → Final: hero cols 1-4 r1, a cols 5-6 rows 1-2, b cols 1-2 r2, c cols 3-4 r2
-
-section04 (desktop, 6 cols × 2 rows)
-  hero  cols 1-4  row  1
-  a     cols 5-6  rows 1-2
-  b     cols 1-2  row  2
-  c     cols 3-4  row  2
-
-section05 (desktop, 6 cols × 3 rows)
-  hero  cols 1-4  rows 1-2
-  a     cols 5-6  row  1
-  b     cols 5-6  row  2
-  c     cols 1-2  row  3
-  d     cols 3-4  row  3
-  e     cols 5-6  row  3
-```
-
-Each layout has a matching mobile grid (2 cols, 3-4 rows) following the proportions in `sections/mobile/*.png`.
-
-## Files
-
-**New**
-- `src/components/site/TileScreen.tsx` — the primitive (~200 lines).
-- `src/styles.css` — add `--header-h` and 6 `@utility tile-screen-*` grids.
-
-**Rewritten (each ~30-80 lines of data + one `<TileScreen>`)**
-- `src/routes/index.tsx`
-- `src/routes/about.tsx`
-- `src/routes/products.tsx`
-- `src/routes/delivery.tsx`
-- `src/routes/quote.tsx`
-- `src/routes/contact.tsx`
-- `src/routes/service-area.tsx`
-- `src/routes/privacy.tsx`
-
-**Updated**
-- `src/components/home/*` — keep as data modules feeding `TileScreen`; remove their own `<section>` wrappers and mobile/desktop branches.
-
-## Validation
-
-After each route is rewritten, screenshot at 1440×900 and 390×844 to confirm:
-1. No vertical scroll within a section (only page-level snap-scrolling between sections).
-2. Every tile in the layout is filled.
-3. Hero tile carousels scroll horizontally only.
-4. Header is the only non-tile element.
-
-## Open questions deferred to build
-
-- Whether to add CSS `scroll-snap-type: y mandatory` on `<html>` so each viewport section snaps cleanly. Default plan: **yes**, with `scroll-snap-align: start` on each `TileScreen`. Can disable in one line if it feels overzealous.
+1. Build `carousel` + `flip` variants in `Tile.tsx` with a minimal storybook-style test in one existing route first.
+2. Convert `/privacy` (lowest risk, pure content).
+3. Convert `/products` (medium — carousel of carousels).
+4. Convert `/quote` last (highest risk — interactive form with state).
