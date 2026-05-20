@@ -246,18 +246,12 @@ function HomePage() {
       <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[504px] flex">
         {/* Mobile single hero image */}
         <video
-          ref={(el) => {
-            if (!el) return;
-            el.muted = true;
-            el.defaultMuted = true;
-            el.play().catch(() => {});
-          }}
+          ref={kickHeroVideo}
           className="md:hidden absolute inset-0 w-full h-full object-cover"
-          autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
           poster={heroLoopMobilePoster}
           aria-hidden="true"
         >
@@ -266,18 +260,12 @@ function HomePage() {
         </video>
         {/* Desktop hero background */}
         <video
-          ref={(el) => {
-            if (!el) return;
-            el.muted = true;
-            el.defaultMuted = true;
-            el.play().catch(() => {});
-          }}
+          ref={kickHeroVideo}
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           poster={heroLoopPoster}
           aria-hidden="true"
         >
