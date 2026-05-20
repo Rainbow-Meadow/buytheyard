@@ -53,6 +53,28 @@ const STORY_BLOCKS: TileBlock[] = [
     tone: "kraft",
   },
   {
+    id: "story-04-wbe-badge",
+    variant: "text",
+    eyebrow: "Certified",
+    title: "WBE",
+    body: "MA Woman Business Enterprise",
+    size: "sm",
+    tone: "kraft",
+    padding: "sm",
+    className: "md:hidden",
+    icon: (
+      <img
+        src={wbeSeal}
+        alt=""
+        width={112}
+        height={72}
+        className="h-8 w-auto object-contain"
+        loading="lazy"
+        decoding="async"
+      />
+    ),
+  },
+  {
     id: "story-05-tenth-season",
     variant: "text",
     eyebrow: "05 · 10th season",
