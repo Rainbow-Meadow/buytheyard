@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import yardPiles from "@/assets/source/yard-piles.webp";
 
 export const Route = createFileRoute("/privacy")({
