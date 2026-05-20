@@ -605,6 +605,10 @@ function NotesField({
 }
 
 function SuccessView({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ...args
+}: never[]): never;
+function SuccessView({
   data,
   onEdit,
   copied,
