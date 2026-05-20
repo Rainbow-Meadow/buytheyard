@@ -433,7 +433,7 @@ function HomePage() {
               tone="gray"
               eyebrow="01 · Pricing"
               title="How much does material cost?"
-              body="Prices move with the season, so we quote by phone. One-yard minimum on bulk orders."
+              body="Seasonal pricing — we quote by phone. One-yard minimum."
             />
           ),
           d: (
