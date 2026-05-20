@@ -39,6 +39,7 @@ function DeliveryPage() {
         tiles={{
           hero: (
             <Tile
+              id="delivery-hero"
               fill
               variant="image"
               src={loadingTruck}
@@ -46,7 +47,6 @@ function DeliveryPage() {
               focal="center"
               loading="eager"
               fetchPriority="high"
-              to="/quote"
               overlay={{
                 eyebrow: "Delivery & pickup",
                 title: "You call. We deliver.",
@@ -56,10 +56,10 @@ function DeliveryPage() {
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
-          a: <Tile fill variant="stat" tone="surface" value="~25 mi" label="Service radius" />,
-          b: <Tile fill variant="stat" tone="brand" value="1 yd" label="Order minimum" />,
-          c: <Tile fill variant="stat" tone="kraft" value="~48 hr" label="Typical lead time" />,
-          d: <Tile fill variant="stat" tone="gray" value="Curb" label="Driveway drop" />,
+          a: <Tile id="dlv-stat-radius" fill variant="stat" tone="surface" value="~25 mi" label="Service radius" />,
+          b: <Tile id="dlv-stat-min" fill variant="stat" tone="brand" value="1 yd" label="Order minimum" />,
+          c: <Tile id="dlv-stat-lead" fill variant="stat" tone="kraft" value="~48 hr" label="Typical lead time" />,
+          d: <Tile id="dlv-stat-drop" fill variant="stat" tone="gray" value="Curb" label="Driveway drop" />,
         }}
       />
 
@@ -70,6 +70,7 @@ function DeliveryPage() {
         tiles={{
           hero: (
             <Tile
+              id="dlv-rule-1"
               fill
               variant="numbered"
               tone="surface"
@@ -83,6 +84,7 @@ function DeliveryPage() {
           ),
           a: (
             <Tile
+              id="dlv-rule-2"
               fill
               variant="numbered"
               tone="kraft"
@@ -94,6 +96,7 @@ function DeliveryPage() {
           ),
           b: (
             <Tile
+              id="dlv-rule-3"
               fill
               variant="numbered"
               tone="white"
@@ -105,6 +108,7 @@ function DeliveryPage() {
           ),
           c: (
             <Tile
+              id="dlv-pickup"
               fill
               variant="text"
               tone="gray"
@@ -116,6 +120,7 @@ function DeliveryPage() {
           ),
           d: (
             <Tile
+              id="dlv-payment"
               fill
               variant="text"
               tone="kraft"
@@ -127,6 +132,7 @@ function DeliveryPage() {
           ),
           e: (
             <Tile
+              id="dlv-cta-call"
               fill
               variant="cta"
               tone="brand"
