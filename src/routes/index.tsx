@@ -455,7 +455,7 @@ function HomePage() {
               tone="surface"
               eyebrow="03 · Timing"
               title="How fast can I get a delivery?"
-              body="Call before noon for same-day. Otherwise plan on about 48 hours."
+              body="Call before noon for same-day, else ~48 hours."
             />
           ),
         }}
