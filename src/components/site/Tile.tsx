@@ -315,7 +315,7 @@ function ImageTileInner({
       <img
         src={block.src}
         srcSet={block.srcSet}
-        sizes={block.srcSet ? block.sizes ?? defaultSizesBySize[size] : undefined}
+        sizes={block.srcSet ? block.sizes ?? sizesForSpan(size) : undefined}
         alt={block.alt}
         loading={block.loading ?? "lazy"}
         decoding="async"
