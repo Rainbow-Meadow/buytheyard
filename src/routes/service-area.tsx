@@ -4,6 +4,7 @@ import yardTrucks from "@/assets/source/yard-trucks.webp";
 import yardPiles from "@/assets/source/yard-piles.webp";
 import loadingTruck from "@/assets/source/loading-truck.webp";
 import yardDog from "@/assets/source/yard-dog.webp";
+import { TileGrid, type TileBlock } from "@/components/site/Tile";
 
 type Town = {
   name: string;
@@ -72,6 +73,82 @@ function ServiceAreaPage() {
   const secondary = TOWNS.slice(1, 4);
   const rest = TOWNS.slice(4);
   const ZONE_IMGS = [yardPiles, loadingTruck, yardDog];
+
+  const mobileTownBlocks: TileBlock[] = TOWNS.map((t, i) => ({
+    id: `town-m-${t.name}`,
+    variant: "image",
+    src: ZONE_IMGS[i % ZONE_IMGS.length],
+    alt: "",
+    aspect: "square",
+    size: "sm",
+    tone: "surface",
+    overlay: {
+      title: t.name.replace(", MA", ""),
+      body: t.drive,
+      align: "bottom-left",
+    },
+  }));
+
+  const restBlocks: TileBlock[] = rest.map((t) => ({
+    id: `town-r-${t.name}`,
+    variant: "text",
+    icon: <MapPin />,
+    title: t.name,
+    body: (
+      <>
+        <span className="label text-zinc-500 block">{t.drive}</span>
+        <span className="block mt-2">{t.blurb}</span>
+      </>
+    ),
+    size: "third",
+    tone: "kraft",
+    padding: "sm",
+  }));
+
+  const helperBlocks: TileBlock[] = [
+    {
+      id: "no-town",
+      variant: "text",
+      eyebrow: "Don't see your town?",
+      title: "Worcester & Middlesex County",
+      body: "We deliver throughout Worcester County and parts of Middlesex County. Give us a call and we'll confirm your ZIP and final price before dispatch.",
+      size: "md",
+      tone: "kraft",
+    },
+    {
+      id: "talk-to-abby",
+      variant: "cta",
+      eyebrow: "Talk to Abby",
+      title: "Confirm your ZIP & price",
+      cta: { label: "508.579.9897", href: "tel:5085799897" },
+      size: "md",
+      tone: "surface",
+    },
+  ];
+
+  const footerBlocks: TileBlock[] = [
+    {
+      id: "schedule",
+      variant: "cta",
+      eyebrow: "Ready to schedule",
+      title: "Ready to schedule a delivery?",
+      body: "Call Abby directly — every order is handled by the owner.",
+      cta: { label: "508.579.9897", href: "tel:5085799897" },
+      size: "lg",
+      tone: "surface",
+      padding: "lg",
+    },
+    {
+      id: "online-quote",
+      variant: "cta",
+      eyebrow: "Online",
+      title: "Build a material list",
+      body: "Prefer to type it out? Send a list and we'll come back with pricing and a window.",
+      cta: { label: "Get a quote", to: "/quote" },
+      size: "md",
+      tone: "white",
+    },
+  ];
 
   return (
     <>
@@ -158,22 +235,9 @@ function ServiceAreaPage() {
             </h2>
           </div>
 
-          {/* Mobile: 2-col image-overlay gallery */}
-          <div className="md:hidden grid grid-cols-2 gap-2">
-            {TOWNS.map((t, i) => (
-              <div
-                key={t.name}
-                className="relative aspect-square overflow-hidden rounded-md bg-surface text-surface-foreground"
-              >
-                <img src={ZONE_IMGS[i % ZONE_IMGS.length]} alt="" className="absolute inset-0 w-full h-full object-cover opacity-35" />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent" />
-                <div className="relative z-10 p-4 flex flex-col h-full">
-                  <MapPin className="size-5 text-brand" />
-                  <p className="display-5 text-white mt-auto leading-tight">{t.name.replace(", MA", "")}</p>
-                  <p className="micro text-zinc-300 mt-1">{t.drive}</p>
-                </div>
-              </div>
-            ))}
+          {/* Mobile: image-overlay gallery */}
+          <div className="md:hidden">
+            <TileGrid blocks={mobileTownBlocks} />
           </div>
 
           {/* Desktop: featured zone + 3-col secondary + dense rest grid */}
@@ -205,76 +269,18 @@ function ServiceAreaPage() {
                 ))}
               </div>
             </div>
-            <ul className="grid grid-cols-3 gap-4">
-              {rest.map((t) => (
-                <li key={t.name} className="bg-kraft ring-1 ring-zinc-300 p-5 rounded-md">
-                  <div className="flex items-start gap-2">
-                    <MapPin className="size-4 text-brand mt-1 shrink-0" />
-                    <div>
-                      <p className="display-5 text-zinc-900 leading-tight">{t.name}</p>
-                      <p className="label text-zinc-500 mt-1">{t.drive}</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-zinc-700 mt-3">{t.blurb}</p>
-                </li>
-              ))}
-            </ul>
+            <TileGrid blocks={restBlocks} />
           </div>
 
-          <div className="mt-6 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            <article className="bg-kraft ring-1 ring-zinc-300 p-6 md:p-7 rounded-md">
-              <p className="eyebrow text-brand mb-2">Don't see your town?</p>
-              <p className="display-5 text-zinc-900 leading-tight">Worcester &amp; Middlesex County</p>
-              <p className="body-sm text-zinc-700 mt-3">
-                We deliver throughout Worcester County and parts of Middlesex County. Give us a call and we'll confirm your ZIP and final price before dispatch.
-              </p>
-            </article>
-            <article className="bg-surface text-surface-foreground p-6 md:p-7 rounded-md flex flex-col">
-              <p className="eyebrow text-brand mb-2">Talk to Abby</p>
-              <p className="display-5 leading-tight">Confirm your ZIP &amp; price</p>
-              <a
-                href="tel:5085799897"
-                className="mt-auto pt-5 inline-flex items-center gap-2 label text-white border-b border-white/40 self-start hover:text-brand hover:border-brand"
-              >
-                <Phone className="size-4" /> 508.579.9897
-              </a>
-            </article>
+          <div className="mt-6 md:mt-10">
+            <TileGrid blocks={helperBlocks} />
           </div>
         </div>
       </section>
 
       <section className="section bg-kraft border-t border-zinc-300">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-          <article className="md:col-span-2 bg-surface text-surface-foreground p-7 md:p-10 rounded-md flex flex-col justify-between gap-6">
-            <div>
-              <p className="eyebrow text-brand mb-3">Ready to schedule</p>
-              <h2 className="display-3 leading-tight max-w-[18ch]">
-                Ready to schedule a delivery?
-              </h2>
-              <p className="body text-zinc-300 mt-4 max-w-[44ch]">
-                Call Abby directly — every order is handled by the owner.
-              </p>
-            </div>
-            <a
-              href="tel:5085799897"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 self-start"
-            >
-              <Phone className="size-4" /> 508.579.9897
-            </a>
-          </article>
-          <article className="bg-white ring-1 ring-zinc-300 p-7 rounded-md">
-            <p className="eyebrow text-brand mb-2">Online</p>
-            <p className="display-5 text-zinc-900 leading-tight">Build a material list</p>
-            <p className="body-sm text-zinc-700 mt-3">
-              Prefer to type it out? Send a list and we'll come back with pricing and a window.
-            </p>
-            <Link
-              to="/quote"
-              className="mt-4 inline-flex items-center gap-2 label text-zinc-900 border-b border-zinc-900 hover:text-brand hover:border-brand"
-            >
-              Get a quote
-            </Link>
-          </article>
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <TileGrid blocks={footerBlocks} />
         </div>
       </section>
     </>
