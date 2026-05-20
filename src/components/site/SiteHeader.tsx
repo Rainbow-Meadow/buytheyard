@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import brandmark from "@/assets/brandmark-dark.png";
+import brandmark from "@/assets/brandmark-dark.webp";
 
 const NAV = [
   { to: "/products", label: "Products" },

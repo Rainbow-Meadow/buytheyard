@@ -61,7 +61,7 @@ export function SplashScreen() {
       style={{ opacity: visible ? 1 : 0, transitionDuration: `${FADE_MS}ms` }}
     >
       <img
-        src="/brandmark.png"
+        src="/brandmark.webp"
         alt=""
         width={96}
         height={96}
