@@ -240,20 +240,6 @@ function HomePage() {
     };
   }, []);
 
-  const featured = [
-    "Hemlock Mulch",
-    "Screened Loam",
-    "Mason Sand",
-    "3/4\" Crushed Blue Stone",
-    "Red Lava Rock",
-    "Hanging Baskets",
-    "ASTM Playground Chips",
-    "Hand Tools & Long Handles",
-  ]
-    .map((n) => products.find((p) => p.name === n))
-    .filter((p): p is (typeof products)[number] => Boolean(p));
-
-
   return (
     <>
       {/* Hero */}
