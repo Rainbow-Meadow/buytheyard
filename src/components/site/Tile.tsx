@@ -100,8 +100,11 @@ export type TileBlock =
       loading?: "lazy" | "eager";
       /** Fetch priority hint. Use "high" for LCP hero tiles. */
       fetchPriority?: "high" | "low" | "auto";
-      /** Aspect ratio for the image frame. Defaults to "square". */
-      aspect?: "square" | "video" | "portrait" | "wide";
+      /** Aspect ratio for the image frame. Defaults to "square".
+       *  Pass a single value to use the same ratio at every breakpoint, or an
+       *  object to vary by breakpoint — e.g. `{ mobile: "square", desktop: "wide" }`
+       *  renders a portrait-friendly square on phones and a 5:4 frame on md+. */
+      aspect?: TileAspect | { mobile?: TileAspect; desktop?: TileAspect };
       /** Low-quality image placeholder shown (blurred) until the full image loads.
        *  Accepts a data URL (base64 tiny JPEG/PNG), a solid color (`#hex`/`rgb()`),
        *  or any CSS background value. Falls back to the tile tone when omitted. */
