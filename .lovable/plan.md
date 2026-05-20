@@ -1,52 +1,63 @@
 ## Goal
-Bring every existing tile into compliance with the TileRules matrix, and redesign content per-tile so each slot is purpose-built for its size/tone/variant/action — not generic copy stretched to fit.
 
-## Method
-For each of the 13 tile-authoring files, do a 3-pass sweep:
+On the mobile viewport, several TileScreen tiles clip body copy mid-sentence (visible in the FAQ/Delivery screen: "Prices move with the season, so we quote by phone…", "Curbside across…", "Call before noon for…"). The tile grid is viewport-locked, so each cell has a fixed pixel height — usually room for 1–2 lines of body text. The fix: rewrite each tile's `body` to land within the `SIZE_BODY_CHAR_CAP` for its slot, with extra mobile tightening where the grid row is shorter than the cap assumes. No layout changes, no expand controls.
 
-**Pass 1 — Inventory.** Read the file, list every tile with: route/section, slot (hero/a/b/c/d/e), current `{variant, size, tone, action}`, body char count, title word count, whether it has a CTA/details/flip-back.
+## What changes
 
-**Pass 2 — Diagnose.** Mark each tile against the matrix:
-- size→content fit (too much/too little copy for the slot)
-- tone→role correctness (brand reserved for CTA/stat/image; surface for hero/feature; ≤1 brand per screen)
-- variant×action validity (no flip-on-text, no carousel-on-cta, etc.)
-- overflow (body chars > SIZE_BODY_CHAR_CAP)
-- redundant chrome that the variant now owns (manual padding, custom rounded, duplicated eyebrows)
+For each TileScreen across all routes, audit every `Tile` body against the actual mobile cell height in its layout, then rewrite the copy so it fits in 2 lines without truncation. Headlines stay; eyebrows stay; only bodies (and CTA labels if too long) are tightened.
 
-**Pass 3 — Refactor.** Apply the smallest change that makes the tile right *and* purpose-built:
-- If copy fits the next size down, downsize and tighten.
-- If copy overflows, either (a) trim to the cap, (b) move overflow to `details`/flip-back, or (c) bump size and adjust the TileScreen layout slot.
-- Re-pick variant when content is wrong-shape (e.g. a 3-stat list inside a `text` tile becomes 3 `stat` tiles or a `carousel` of stats).
-- Re-pick tone using `VARIANT_DEFAULT_TONE` first; only override for hierarchy.
-- Replace lookalike action hacks with the canonical action (a `cta` tile linking out via overlay → a real `cta` variant; an image tile with title+body overlay that scrolls → an `image` tile with `details`).
-- Tailor copy to the tile: rewrite eyebrow + headline + body for that specific slot. No copy reused verbatim across tiles in the same screen.
+### Mobile cell budgets (derived from `ts-section-*` grids at 798px viewport)
 
-## Per-file scope
+| Layout | Slots | Mobile body budget per slot |
+|---|---|---|
+| pageHero | hero (large), a/b/c/d (stat, no body) | hero: 2 lines · stats: n/a |
+| section01 | hero (tall), a/b/c/d (short), e (wide) | hero: 2 lines · a/b/c/d: 1 line · e: 1 line |
+| section02 | hero (tallest), a (wide short), b/c (split) | hero: 2 lines · a: 1 line · b/c: 2 lines |
+| section03 | hero, a (wide), b/c (split) | hero: 2 lines · a: 1 line · b/c: 2 lines |
+| section04 | hero (tallest), a (wide), b/c (split) | hero: 2 lines · a: 1 line · b/c: 2 lines |
+| section05 | hero (tall), a/b (split), c (wide), d/e (split) | hero: 2 lines · a/b: 1 line · c: 2 lines · d/e: 1 line |
 
-Routes (highest visibility first):
-1. `src/routes/index.tsx` (462 lines, ~25 tiles across 6 TileScreens) — hero, featured materials, delivery+pricing recap, reviews, community, FAQ. Biggest audit.
-2. `src/routes/products.tsx` — carousel hero + side CTAs; verify slide uniformity rule.
-3. `src/routes/quote.tsx` — stepper carousel + success screen; per-step tiles + side rail.
-4. `src/routes/delivery.tsx`, `src/routes/service-area.tsx`, `src/routes/contact.tsx`, `src/routes/about.tsx` — leaner content routes.
-5. `src/routes/privacy.tsx` — already on flip tiles; verify front/back size+tone parity.
+### Per-tile rewrites (highest-impact)
 
-Shared components (used inside route TileScreens):
-6. `CommunityTiles.tsx`, `DeliveryAndPricing.tsx`, `FacebookSpotlight.tsx`, `FaqSection.tsx`, `ReviewsAndCommunity.tsx` — each gets the same 3-pass.
+`src/routes/index.tsx`, section05 (the screenshot):
+- `dp-delivery` (hero) — keep, already 2 lines.
+- `dp-call` (a, brand cta) — "Cash and check skip the 4% card fee." → keep.
+- `dp-quote` (b, kraft cta) — "Pricing, delivery, payment, scheduling." → keep.
+- `dp-faq-pricing` (c, wide text) — "Prices move with the season, so we quote by phone. One-yard minimum on bulk orders." → "Seasonal pricing — we quote by phone. One-yard minimum."
+- `dp-faq-area` (d, text) — "Curbside across Holden, Princeton, Sterling, Rutland, Worcester and surrounding towns." → "Curbside across Central Mass from our Jefferson yard."
+- `dp-faq-timing` (e, text) — "Call before noon for same-day. Otherwise plan on about 48 hours." → "Call before noon for same-day, else ~48 hours."
 
-## Deliverables per file
-- All tiles compliant (zero dev warnings in console on that route).
-- Every tile has a stable `id`.
-- Tone props removed when they match the variant default.
-- Copy rewritten so no two tiles in the same screen repeat eyebrow or headline.
-- Layout slot in the parent `TileScreen` adjusted only when the right tile size demands it.
+`src/routes/index.tsx`, section02 (reviews):
+- `reviews-fb` — "Daily restocks, weather closures, lot photos. 820+ neighbors already follow." → "Daily restocks, closures, lot photos." (cell is short on mobile)
+
+`src/routes/delivery.tsx`, section01 bottom strip — tighten:
+- `del-driveway` — "We drop on the driveway or at the curbline. Keeps your lawn safe — and any gas, water, or irrigation beneath it." → "Drop on driveway or curbline — keeps lawn and lines safe."
+
+`src/routes/service-area.tsx`, section04:
+- `sa-extended` — "Plus Boylston, Leominster, Clinton, Lancaster, Spencer, Auburn & Shrewsbury on 48-hour notice." → "Boylston, Leominster, Clinton, Spencer & more on 48-hr notice."
+
+`src/routes/contact.tsx`, section03:
+- `contact-email` — "Best for material lists — send products, town, and timing." → keep, fits.
+- `contact-phone-note` — "Cell coverage at the yard can be spotty. Leave a message and we'll call back." → "Yard cell coverage is spotty — leave a message, we'll call back."
+
+`src/routes/products.tsx`, section02 hero CTA — "Prices move with the season. One call sizes your project and locks the number." → "Seasonal pricing — one call sizes the project and locks the number." (verify fits at mobile hero height; trim further if needed)
+
+Other routes (`about.tsx`, `quote.tsx`, `privacy.tsx`) already have short bodies — verify only.
 
 ## Verification
-After each file: open the corresponding route, watch the browser console for `[Tile …]` warnings, fix until silent. Final spot-check on viewports 440 (current) + 1280.
+
+1. Walk every route at 440×798 in the preview and screenshot each TileScreen.
+2. For each tile body, confirm no trailing ellipsis or mid-word cut. Crop with `image_tools--zoom_image` where ambiguous.
+3. Walk the same routes at 1280×800 to confirm desktop wasn't regressed (desktop cells are larger so cuts there are unlikely, but spot-check the same screens).
+4. Console should remain free of `[Tile …]` warnings.
 
 ## Out of scope
-- Adding new TileScreen layouts (use existing pageHero / section01–05 set).
-- Changing the matrix itself.
-- Photography swaps or new assets — work with what's already imported.
 
-## Risk
-Medium. Visual changes are intentional and per-tile; the matrix already exists so guardrails catch regressions. The biggest risk is copy quality — mitigated by treating each tile as a discrete writing task rather than a global sed.
+- No changes to `TileRules.ts`, `Tile.tsx`, `TileScreen.tsx`, or the section grid templates.
+- No new `expand`/`flip` actions.
+- Headlines, eyebrows, and CTA destinations stay unchanged unless a label string itself overflows.
+- Mobile fallback layouts in `FaqSection.tsx`, `DeliveryAndPricing.tsx`, `FacebookSpotlight.tsx`, `ReviewsAndCommunity.tsx` (the non-TileScreen branches) are not touched — they already render full copy in stacked scroll layouts.
+
+## Memory
+
+After the rewrite, append a Core rule to `mem://index.md`: "Tile body copy fits the mobile cell at 1–2 lines without truncation — trim copy, never resize cells." Update `mem://design/tile-system` with the mobile cell-budget table above.
