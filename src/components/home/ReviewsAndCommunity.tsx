@@ -1,5 +1,5 @@
-import { lazy, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Facebook } from "lucide-react";
+import { lazy, useEffect, useRef } from "react";
+import { Facebook } from "lucide-react";
 import { LazyOnVisible } from "@/components/site/LazyOnVisible";
 import { TileGrid, type TileBlock } from "@/components/site/Tile";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
@@ -92,32 +92,6 @@ const DESKTOP_BLOCKS: TileBlock[] = [
 
 export default function ReviewsAndCommunity() {
   const reviewsRailRef = useRef<HTMLDivElement>(null);
-  const [reviewsCanPrev, setReviewsCanPrev] = useState(false);
-  const [reviewsCanNext, setReviewsCanNext] = useState(true);
-
-  useEffect(() => {
-    const el = reviewsRailRef.current;
-    if (!el) return;
-    const update = () => {
-      setReviewsCanPrev(el.scrollLeft > 4);
-      setReviewsCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
-    };
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
-  const scrollReviewsByCard = (dir: 1 | -1) => {
-    const el = reviewsRailRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-reviews-item]");
-    const delta = (card?.offsetWidth ?? el.clientWidth * 0.8) + 20;
-    el.scrollBy({ left: delta * dir, behavior: "smooth" });
-  };
 
   useEffect(() => {
     const el = reviewsRailRef.current;
