@@ -2,8 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
+import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
 import heroLoopMobileMp4 from "@/assets/video/hero-loop-mobile.mp4?url";
+import heroLoopMobileWebm from "@/assets/video/hero-loop-mobile.webm?url";
 import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
 import communityCtms from "@/assets/source/community-ctms-loam.jpg";
 import communityRutland from "@/assets/source/community-rutland-memorial.jpg";
@@ -301,19 +303,32 @@ function HomePage() {
       <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[504px] flex">
         {/* Mobile single hero image */}
         <video
+          ref={(el) => {
+            if (!el) return;
+            el.muted = true;
+            el.defaultMuted = true;
+            el.play().catch(() => {});
+          }}
           className="md:hidden absolute inset-0 w-full h-full object-cover"
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={heroLoopMobilePoster}
           aria-hidden="true"
         >
+          <source src={heroLoopMobileWebm} type="video/webm" />
           <source src={heroLoopMobileMp4} type="video/mp4" />
         </video>
         {/* Desktop hero background */}
         <video
+          ref={(el) => {
+            if (!el) return;
+            el.muted = true;
+            el.defaultMuted = true;
+            el.play().catch(() => {});
+          }}
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
           autoPlay
           muted
@@ -323,6 +338,7 @@ function HomePage() {
           poster={heroLoopPoster}
           aria-hidden="true"
         >
+          <source src={heroLoopWebm} type="video/webm" />
           <source src={heroLoopMp4} type="video/mp4" />
         </video>
         {/* Scrim */}
