@@ -128,7 +128,7 @@ function QuotePage() {
               Tell us. <span className="text-brand">We'll price it.</span>
             </h1>
             <p className="mt-4 text-zinc-300 text-base">
-              About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
+              About 60 seconds of clicking. One tap sends it to Abby. She'll come back with the number and a window.
             </p>
           </div>
         </div>
@@ -142,7 +142,7 @@ function QuotePage() {
                 Tell us. <span className="text-brand">We'll price it.</span>
               </h1>
               <p className="mt-6 text-zinc-400 max-w-[52ch] text-lg">
-                About 60 seconds of clicking. One tap sends it to Abby — she'll come back with the number and a window.
+                About 60 seconds of clicking. One tap sends it to Abby. She'll come back with the number and a window.
               </p>
             </div>
             <div className="col-span-5 grid grid-cols-2 gap-2">
@@ -185,7 +185,7 @@ function QuotePage() {
             number="01"
             eyebrow="Step 01 · Materials"
             title="What do you need?"
-            helper="One row per material. Ballpark the quantity — we'll dial it in on the phone."
+            helper="One row per material. Ballpark the quantity. We'll dial it in on the phone."
           >
             <div className="space-y-4">
               {items.fields.map((field, idx) => {
@@ -357,7 +357,7 @@ function QuotePage() {
                   >
                     {opt === "Pickup"
                       ? "I've got a truck or trailer and I'll come grab it."
-                      : "Bring it to me — I'm in Central Mass."}
+                      : "Bring it to me. I'm in Central Mass."}
                   </p>
                 </label>
               ))}
@@ -468,9 +468,9 @@ function QuotePage() {
                     className="mt-1 size-4 accent-[var(--brand)]"
                   />
                   <span>
-                    I understand the <strong>1-yard minimum</strong> and
+                    I get the <strong>1-yard minimum</strong> and the
                     <strong> 48-hour scheduling window</strong>, and that
-                    delivery is driveway-to-curbline only.
+                    delivery is driveway or curbline only.
                   </span>
                 </label>
                 {formState.errors.acknowledged && (
@@ -559,7 +559,7 @@ function QuotePage() {
             number="04"
             eyebrow="Step 04 · Notes"
             title="Anything else?"
-            helper={'Optional. Steep driveway, gate code, "leave it by the rhododendron" — anything Abby should know.'}
+            helper={'Optional. Steep driveway, gate code, "leave it by the rhododendron." Anything Abby should know.'}
           >
             <NotesField register={register} watch={watch} />
             {formState.errors.notes && (
@@ -603,7 +603,7 @@ function NotesField({
         aria-label="Notes"
         rows={4}
         maxLength={500}
-        placeholder="e.g. Please leave behind the gate if I'm not home — there's a tarp marking the spot."
+        placeholder="e.g. Leave it behind the gate if I'm not home. There's a tarp marking the spot."
         className={`${inputCls} h-auto py-3 resize-y min-h-[110px]`}
         {...register("notes")}
       />
@@ -688,7 +688,7 @@ function SuccessView({
             Send it to <span className="text-brand">Abby.</span>
           </h1>
           <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            One tap opens mail or messages with the full request typed. Hit send — she'll be back the same day.
+            One tap opens mail or messages with the full request typed up. Hit send. She'll be back the same day.
           </p>
         </div>
       </section>
