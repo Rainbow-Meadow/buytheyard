@@ -303,19 +303,32 @@ function HomePage() {
       <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[504px] flex">
         {/* Mobile single hero image */}
         <video
+          ref={(el) => {
+            if (!el) return;
+            el.muted = true;
+            el.defaultMuted = true;
+            el.play().catch(() => {});
+          }}
           className="md:hidden absolute inset-0 w-full h-full object-cover"
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={heroLoopMobilePoster}
           aria-hidden="true"
         >
+          <source src={heroLoopMobileWebm} type="video/webm" />
           <source src={heroLoopMobileMp4} type="video/mp4" />
         </video>
         {/* Desktop hero background */}
         <video
+          ref={(el) => {
+            if (!el) return;
+            el.muted = true;
+            el.defaultMuted = true;
+            el.play().catch(() => {});
+          }}
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
           autoPlay
           muted
@@ -325,6 +338,7 @@ function HomePage() {
           poster={heroLoopPoster}
           aria-hidden="true"
         >
+          <source src={heroLoopWebm} type="video/webm" />
           <source src={heroLoopMp4} type="video/mp4" />
         </video>
         {/* Scrim */}
