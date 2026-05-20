@@ -13,7 +13,6 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     body: "Our daily updates live on Facebook. Fresh loads, restocks, weather closures, lot photos.",
     size: "feature",
     tone: "surface",
-    padding: "lg",
   },
   {
     id: "fb-restocks",

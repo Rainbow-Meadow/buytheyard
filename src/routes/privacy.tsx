@@ -70,7 +70,6 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
-                padding: "sm",
                 eyebrow: "01 · What we collect",
                 title: "Name, phone, email, address.",
                 body: "Only what's needed to quote and deliver.",
@@ -78,7 +77,6 @@ function PrivacyPage() {
               back={{
                 variant: "text",
                 tone: "kraft",
-                padding: "sm",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -102,7 +100,6 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "surface",
-                padding: "sm",
                 eyebrow: "02 · Cookies",
                 title: "Essential on. Analytics & marketing off.",
                 body: "Change any time from the footer link.",
@@ -110,7 +107,6 @@ function PrivacyPage() {
               back={{
                 variant: "text",
                 tone: "surface",
-                padding: "sm",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -134,7 +130,6 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
-                padding: "sm",
                 eyebrow: "03 · Sharing",
                 title: "We don't sell your info.",
                 body: "Shared only to fulfill your order or by law.",
@@ -142,7 +137,6 @@ function PrivacyPage() {
               back={{
                 variant: "text",
                 tone: "kraft",
-                padding: "sm",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -166,7 +160,6 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "brand",
-                padding: "sm",
                 eyebrow: "04 · Your choices",
                 title: "Access, correct, delete.",
                 body: "Email abby@btymaterial.com any time.",
@@ -174,7 +167,6 @@ function PrivacyPage() {
               back={{
                 variant: "text",
                 tone: "brand",
-                padding: "sm",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -207,7 +199,6 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "surface",
-                padding: "lg",
                 eyebrow: "05 · Website terms of use",
                 title: "Use the site lawfully. Prices are estimates.",
                 body:
@@ -216,7 +207,6 @@ function PrivacyPage() {
               back={{
                 variant: "text",
                 tone: "surface",
-                padding: "lg",
                 eyebrow: "Full terms",
                 body: (
                   <Back>
@@ -241,7 +231,6 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
-                padding: "sm",
                 eyebrow: "06 · SMS terms",
                 title: "Reply STOP any time.",
                 body: "Msg & data rates may apply. Frequency varies by order activity.",
@@ -249,7 +238,6 @@ function PrivacyPage() {
               back={{
                 variant: "text",
                 tone: "kraft",
-                padding: "sm",
                 eyebrow: "Full SMS terms",
                 body: (
                   <Back>
