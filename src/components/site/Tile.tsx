@@ -156,15 +156,60 @@ const overlayAlignCls = {
   center: "items-center justify-center text-center",
 } as const;
 
-/** Default `sizes` per tile size — assumes the magazine grid:
- *  mobile = full width, desktop columns map to fractions of a ~1280px container. */
-const defaultSizesBySize: Record<TileSize, string> = {
-  sm: "(min-width: 768px) 33vw, 100vw",
-  third: "(min-width: 768px) 33vw, 100vw",
-  md: "(min-width: 768px) 50vw, 100vw",
-  lg: "(min-width: 768px) 66vw, 100vw",
-  feature: "(min-width: 768px) 66vw, 100vw",
+/** Column-span schema mirrored from `tile-grid` in styles.css.
+ *  Mobile grid = 2 cols; desktop (≥768px) grid = 6 cols. */
+const tileSpans: Record<TileSize, { mobile: number; desktop: number }> = {
+  sm:      { mobile: 1, desktop: 2 },
+  third:   { mobile: 2, desktop: 2 },
+  md:      { mobile: 2, desktop: 3 },
+  lg:      { mobile: 2, desktop: 4 },
+  feature: { mobile: 2, desktop: 6 },
 };
+
+/** Container constants — keep in sync with the page wrappers
+ *  (`max-w-7xl px-5 md:px-6`) and the `tile-grid` gaps in styles.css. */
+const CONTAINER_MAX = 1280;     // max-w-7xl
+const DESKTOP_PAD = 24 * 2;     // md:px-6 each side
+const DESKTOP_GAP = 16;         // tile-grid gap on md+
+const MOBILE_GAP = 8;           // tile-grid gap on mobile
+const MOBILE_COLS = 2;
+const DESKTOP_COLS = 6;
+const MD_BREAKPOINT = 768;
+
+/** Build an accurate `sizes` string from a tile's column span.
+ *  Produces three tiers:
+ *    1. ≥CONTAINER_MAX: fixed px from the capped container width
+ *    2. ≥MD_BREAKPOINT: vw fraction of the viewport (fluid container)
+ *    3. mobile: vw fraction of the viewport
+ */
+function sizesForSpan(size: TileSize): string {
+  const { mobile, desktop } = tileSpans[size];
+
+  // Tier 1 — container is capped. Account for desktop padding and internal gaps.
+  const contentWidth = CONTAINER_MAX - DESKTOP_PAD;
+  const desktopColWidth =
+    (contentWidth - DESKTOP_GAP * (DESKTOP_COLS - 1)) / DESKTOP_COLS;
+  const cappedPx = Math.round(
+    desktopColWidth * desktop + DESKTOP_GAP * (desktop - 1),
+  );
+
+  // Tier 2 — fluid desktop. Subtract padding from the viewport via calc().
+  const desktopFraction = desktop / DESKTOP_COLS;
+  const desktopVw = `calc((100vw - ${DESKTOP_PAD}px) * ${desktopFraction.toFixed(4)})`;
+
+  // Tier 3 — mobile. Same container has px-5 (20px) per side.
+  const mobilePad = 20 * 2;
+  const mobileFraction = mobile / MOBILE_COLS;
+  const mobileGapAdj =
+    mobile < MOBILE_COLS ? ` - ${MOBILE_GAP / 2}px` : "";
+  const mobileVw = `calc((100vw - ${mobilePad}px${mobileGapAdj}) * ${mobileFraction.toFixed(4)})`;
+
+  return [
+    `(min-width: ${CONTAINER_MAX}px) ${cappedPx}px`,
+    `(min-width: ${MD_BREAKPOINT}px) ${desktopVw}`,
+    mobileVw,
+  ].join(", ");
+}
 
 function isLightTone(tone: TileTone) {
   return tone === "kraft" || tone === "white";
@@ -270,7 +315,7 @@ function ImageTileInner({
       <img
         src={block.src}
         srcSet={block.srcSet}
-        sizes={block.srcSet ? block.sizes ?? defaultSizesBySize[size] : undefined}
+        sizes={block.srcSet ? block.sizes ?? sizesForSpan(size) : undefined}
         alt={block.alt}
         loading={block.loading ?? "lazy"}
         decoding="async"
