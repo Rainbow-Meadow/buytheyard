@@ -82,6 +82,7 @@ function ProductsPage() {
       {categories.map((cat) => {
         const items = products.filter((p) => p.category === cat);
         if (items.length === 0) return null;
+        const [featured, ...rest] = items;
         return (
           <section key={cat} className="section bg-base border-b border-zinc-200 last:border-0">
             <div className="max-w-7xl mx-auto px-5 md:px-6">
@@ -93,10 +94,24 @@ function ProductsPage() {
                   {items.length} {items.length === 1 ? "option" : "options"}
                 </span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+
+              {/* Mobile: Gallery — 2-col image-overlay thumbnails */}
+              <div className="md:hidden grid grid-cols-2 gap-2">
                 {items.map((p) => (
-                  <ProductCard key={p.name} product={p} />
+                  <ProductCard key={p.name} product={p} variant="gallery" />
                 ))}
+              </div>
+
+              {/* Desktop: Magazine — featured cover + supporting 3-col grid */}
+              <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div className="md:col-span-3 lg:col-span-3 flex">
+                  <ProductCard product={featured} />
+                </div>
+                <div className="md:col-span-3 lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6 content-start">
+                  {rest.map((p) => (
+                    <ProductCard key={p.name} product={p} variant="gallery" />
+                  ))}
+                </div>
               </div>
             </div>
           </section>
