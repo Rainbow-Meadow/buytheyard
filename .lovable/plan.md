@@ -1,66 +1,39 @@
 ## Goal
+Convert the 4 `<fieldset>` blocks in `src/routes/quote.tsx` into modular **numbered step tiles** consistent with the Magazine (desktop) / Gallery (mobile) direction already used across the site. No form logic, validation, schema, or copy changes.
 
-Push the modular Magazine/Gallery direction into every remaining text block so the entire site reads as composed tiles, not flowing prose. No copy rewrites, no palette/type changes — only structural reformatting of existing text into discrete modules.
+## Module: `StepTile`
+A local presentational component (defined in the file, no new file needed) that wraps each fieldset as a card matching the existing tile system:
 
-## Module primitives (reused across routes)
+- Outer: `<fieldset className="bg-kraft ring-1 ring-zinc-300 rounded-md overflow-hidden">`
+- Header row (desktop magazine / mobile gallery):
+  - Mobile: stacked — big numeral on top, eyebrow + title beneath, inside `p-5`
+  - Desktop: 12-col grid header inside `md:p-7` — left 3 cols = oversized `display-2 text-brand` numeral (e.g. `01`) sitting on `bg-surface text-surface-foreground` panel that bleeds to the edge of the tile; right 9 cols = eyebrow ("Step 01 · Materials"), `display-4` legend, supporting `body-sm` helper text.
+- Body: `p-5 md:p-7 border-t border-zinc-300/70` wrapping the existing controls untouched.
 
-All built with existing tokens (`bg-kraft`, `bg-surface`, `ring-1 ring-zinc-300`, `eyebrow`, `display-3..5`, `body`, `body-sm`, `label`, `meta`).
+This makes each step read as a discrete magazine tile with the numeral as a visual anchor, while mobile gets a clean stacked gallery card.
 
-1. **TextTile** — eyebrow + display-5 heading + body paragraph inside a `bg-kraft` (light) or `bg-surface` (dark) card. The base building block for prose chunks.
-2. **NumberedTile** — TextTile with a large `display-3 text-brand` numeral (01–NN) in the corner. Used for ordered policy lists and "chapters".
-3. **QuoteTile** — pull-quote card: `display-4` italicized text + small attribution row.
-4. **DefinitionTile** — `display-5` term + body-sm definition. Used for FAQ, legal definitions, hours, address.
-5. **StatTile** — already in place (value + eyebrow). Reused.
+## Per-step application
+All four fieldsets get the same `StepTile` shell; their inner controls are moved verbatim into the tile body:
 
-Composition rule: every long prose section becomes a 2- or 3-col grid (desktop) / single-column or 2-col gallery (mobile) of these primitives. Adjacent tiles must vary in size/weight so the rhythm reads as "varied modular" rather than a uniform grid:
-- 1 oversized lead tile (`md:col-span-2` or `md:row-span-2`)
-- 2–3 supporting tiles
-- 1 pull-quote break per long section
+1. **01 · Materials** — helper text "One row per material…" moves into the tile header. Product rows + "Add another product" button stay as-is inside the body.
+2. **02 · Pickup or delivery** — helper text added: "Pick one. We'll show delivery details if you need them." The 2-up Pickup/Delivery radio cards and the conditional delivery details block stay as-is in the body.
+3. **03 · Contact** — helper text added: "So Abby can come back with the number." Name/Phone/Email/Best contact grid stays as-is.
+4. **04 · Notes** — existing helper text moves into the tile header. NotesField stays as-is.
 
-## Per-route work
+The numeral color (`text-brand`) currently sits inline in each legend; that inline `<span className="text-brand">0X.</span>` is removed since the numeral now lives in the tile header.
 
-### `/about` — biggest lift
-Replace the 9-paragraph "Our Story" prose column with a modular chapter grid:
-- Desktop: 12-col grid. Left 5 cols = portrait + WBE (kept). Right 7 cols = a `grid-cols-6` of mixed-size NumberedTiles + 1 QuoteTile + 1 TextTile, each holding one of the existing paragraphs verbatim with a short eyebrow label (e.g. "01 · Origin", "02 · The yard", "Pull quote", "03 · WBE", "04 · Today", "05 · Charlie", "06 · Visit"). The big quote ("If you call this number…") becomes the featured QuoteTile spanning 6 cols.
-- Mobile: stacked single-column of NumberedTiles, plus the QuoteTile as a full-bleed card and the visit CTA as the closing tile.
-- "Around the Yard" gallery already modular — leave it.
-
-### `/delivery`
-- Replace the `<ul className="divide-y">` policy list with a 4-tile NumberedTile grid (2-col mobile, 2x2 desktop) using the existing POLICIES array verbatim.
-- Convert the standalone "Card processing fee" card into a DefinitionTile that sits in a 3-col closing row with two new tiles built from existing copy already on the page: "Mark your spot" reminder and "Be home or be specific" reminder. (Source copy reused from POLICIES — no new copy.)
-  - To avoid duplication, drop those two from the NumberedTile grid and keep them in the closing row instead, so each piece of copy appears once.
-
-### `/service-area`
-- Convert the closing "Don't see your town?" paragraph into a TextTile pair: one TextTile with that copy + one CTA tile linking to the phone. Keep the existing zone grid.
-
-### `/contact`
-- Already mostly modular. Convert the "For non-urgent stuff, email …" paragraph + social row into a single 3-tile DefinitionTile row (Email · Facebook · Yelp) using the existing copy verbatim. Sits directly under the CTA pair.
-
-### `/quote`
-- Reformat the form `<fieldset>` headings as their own NumberedTiles spanning the form column ("01 · What do you need?", "02 · Pickup or delivery?", etc.), with the helper paragraph and form controls visually sitting inside the tile.
-- The success view already uses cards — verify it reads as modular tiles and align its container styling with TextTile/DefinitionTile primitives (no structural rebuild).
-
-### `/privacy`
-- Wrap each `<h3>` subsection in a DefinitionTile (light kraft card with the subheading as eyebrow + display-5 and the paragraph(s) inside). Keep the numbered top-level sections (1. Privacy Policy, 2. SMS Terms, 3. Website Terms of Use, 4. Contact) as section headers — each followed by a `grid grid-cols-1 md:grid-cols-2` of DefinitionTiles. Bulleted lists become a tile with the list inside.
-- Keep the sticky desktop TOC and mobile chip nav.
-
-### `/` (home)
-- FAQ section: replace the Accordion with a 2x2 grid of DefinitionTiles on desktop (question as `display-5`, answer as `body-sm`), and a stacked column on mobile. Drop the Accordion dependency on this page (keep the import used elsewhere if any; if not, remove it).
-- Reviews + community already render as cards — verify uniform tile styling, no rebuild.
-- "Delivery callout" right column: the policy list already reads as stacked rows — convert to a 2x2 DefinitionTile grid so it matches the rest of the site.
+## Layout container
+The form keeps `max-w-3xl mx-auto` and `space-y-8 md:space-y-10` (down from `space-y-12`) so the tiles read as a stacked stack on mobile (gallery) and a rhythmic magazine column on desktop. Submit footer row stays unchanged.
 
 ## Invariants
-
-- No new copy, no rewrites — every word currently on the page stays. Eyebrows/labels reuse fragments that are already in the copy (e.g. POLICIES keys, FAQ question text).
-- Palette, fonts, spacing tokens, and section backgrounds unchanged.
-- Headlines stay 1–2 lines, subtext 2–3 lines — enforced via tile `max-w` not by shrinking type.
-- All SEO metadata, route files, data files, and form logic untouched.
-- Mobile keeps Gallery feel (image-led where photos exist; otherwise stacked tile column). Desktop keeps Magazine feel (asymmetric tile grids with one oversized lead per section).
-- No new dependencies. No animation rework.
+- No changes to `react-hook-form` registration, `useFieldArray`, `quoteSchema`, `defaultUnitFor`, success view, or routing.
+- No new dependencies, no new tokens, no palette shifts.
+- All existing error messages, ARIA, autoComplete, and validation behavior preserved.
+- Hero, reassurance strip, and `SuccessView` untouched.
+- Only `src/routes/quote.tsx` is edited.
 
 ## Out of scope
-
-- New copy, new colors, new fonts, new routes.
-- Form logic / validation changes on `/quote`.
-- Tablet-specific breakpoints.
-- Re-doing already-modular sections (hero splits, product galleries, zone grids, stat strips, around-the-yard).
+- Multi-step wizard behavior (tiles remain a single long form, just visually segmented).
+- Progress indicator / step nav.
+- Copy rewrites beyond the two tiny helper lines added for steps 02 and 03.
+- Tablet-specific tuning beyond existing `md:` breakpoint.
