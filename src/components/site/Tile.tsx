@@ -1,6 +1,13 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 /**
  * Data-driven Tile renderer.
@@ -130,6 +137,14 @@ export type TileBlock =
       to?: string;
       /** Optional CTA label rendered alongside the overlay text. */
       cta?: TileCta;
+      /** Optional expand-to-dialog details. When set and `to` is not, the
+       *  entire tile becomes a button that opens a dialog with the full
+       *  image plus added context (title + body). `to` wins if both are set. */
+      details?: {
+        eyebrow?: string;
+        title: string;
+        body: ReactNode;
+      };
     });
 
 const sizeCls: Record<TileSize, string> = {
