@@ -12,7 +12,10 @@ import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ChatWidget } from "@/components/chat/ChatWidget";
-import { CookieConsent } from "@/components/site/CookieConsent";
+import { lazy, Suspense } from "react";
+const CookieConsent = lazy(() =>
+  import("@/components/site/CookieConsent").then((m) => ({ default: m.CookieConsent })),
+);
 import { SplashScreen } from "@/components/site/SplashScreen";
 
 function NotFoundComponent() {
@@ -256,7 +259,9 @@ function RootComponent() {
         </main>
         <SiteFooter />
         <ChatWidget />
-        <CookieConsent />
+        <Suspense fallback={null}>
+          <CookieConsent />
+        </Suspense>
         <SplashScreen />
       </div>
     </QueryClientProvider>
