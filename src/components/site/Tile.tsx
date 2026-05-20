@@ -105,6 +105,15 @@ export type TileBlock =
        *  object to vary by breakpoint — e.g. `{ mobile: "square", desktop: "wide" }`
        *  renders a portrait-friendly square on phones and a 5:4 frame on md+. */
       aspect?: TileAspect | { mobile?: TileAspect; desktop?: TileAspect };
+      /** Focal point used by `object-position` so the visible subject stays in
+       *  frame when the aspect ratio changes between breakpoints.
+       *
+       *  Accepts a named anchor (`"center" | "top" | "bottom" | "left" | "right"
+       *  | "top-left" | "top-right" | "bottom-left" | "bottom-right"`), a
+       *  precise percentage point (`{ x: 30, y: 70 }` — 0–100 from top-left),
+       *  or a breakpoint pair (`{ mobile, desktop }` of either). Defaults to
+       *  `"center"`. */
+      focal?: TileFocal | { mobile?: TileFocal; desktop?: TileFocal };
       /** Low-quality image placeholder shown (blurred) until the full image loads.
        *  Accepts a data URL (base64 tiny JPEG/PNG), a solid color (`#hex`/`rgb()`),
        *  or any CSS background value. Falls back to the tile tone when omitted. */
@@ -146,6 +155,22 @@ const paddingCls: Record<TilePadding, string> = {
 
 export type TileAspect = "square" | "video" | "portrait" | "wide";
 
+/** Named focal anchors mapped to CSS `object-position` keywords. */
+export type TileFocalAnchor =
+  | "center"
+  | "top"
+  | "bottom"
+  | "left"
+  | "right"
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right";
+
+/** A focal point — either a named anchor or precise (0–100) percent coordinates
+ *  measured from the top-left of the image. */
+export type TileFocal = TileFocalAnchor | { x: number; y: number };
+
 const aspectCls: Record<TileAspect, string> = {
   square: "aspect-square",
   video: "aspect-video",
@@ -170,6 +195,40 @@ function resolveAspect(
   const desktop = aspect.desktop ?? aspect.mobile ?? "square";
   // Always include mobile base + md override so the desktop class wins at ≥md.
   return `${aspectCls[mobile]} ${aspectMdCls[desktop]}`;
+}
+
+const focalAnchorCss: Record<TileFocalAnchor, string> = {
+  center: "center",
+  top: "center top",
+  bottom: "center bottom",
+  left: "left center",
+  right: "right center",
+  "top-left": "left top",
+  "top-right": "right top",
+  "bottom-left": "left bottom",
+  "bottom-right": "right bottom",
+};
+
+function focalToCss(focal: TileFocal): string {
+  if (typeof focal === "string") return focalAnchorCss[focal];
+  const x = Math.max(0, Math.min(100, focal.x));
+  const y = Math.max(0, Math.min(100, focal.y));
+  return `${x}% ${y}%`;
+}
+
+/** Resolve a TileFocal-or-breakpoint-pair into inline CSS custom properties
+ *  consumed by the `.tile-focal` utility in styles.css. */
+function resolveFocalStyle(
+  focal: TileFocal | { mobile?: TileFocal; desktop?: TileFocal } | undefined,
+): React.CSSProperties | undefined {
+  if (!focal) return undefined;
+  if (typeof focal === "string" || "x" in focal) {
+    return { ["--op-mobile" as string]: focalToCss(focal as TileFocal) };
+  }
+  const style: Record<string, string> = {};
+  if (focal.mobile) style["--op-mobile"] = focalToCss(focal.mobile);
+  if (focal.desktop) style["--op-desktop"] = focalToCss(focal.desktop);
+  return style as React.CSSProperties;
 }
 
 const overlayAlignCls = {
@@ -387,7 +446,8 @@ function ImageTileInner({
         decoding="async"
         fetchPriority={block.fetchPriority ?? "auto"}
         onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+        style={resolveFocalStyle(block.focal)}
+        className={`tile-focal absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
           placeholder && !loaded ? "opacity-0" : "opacity-100"
         }`}
       />
