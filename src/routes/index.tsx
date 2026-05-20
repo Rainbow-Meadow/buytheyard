@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, CalendarDays, Facebook, FileText, Phone, Star, Tag } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
@@ -11,6 +11,9 @@ import { Tile } from "@/components/site/Tile";
 import { products } from "@/data/products";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
+import { FaqDialogTile } from "@/components/home/FaqDialogTile";
+import { ServiceAreaMapTile } from "@/components/home/ServiceAreaMapTile";
+import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
 
 const FEATURED = [
   "Hemlock Mulch",
