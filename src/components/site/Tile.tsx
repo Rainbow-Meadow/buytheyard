@@ -68,6 +68,25 @@ export type TileBlock =
       variant: "stat";
       value: string;
       label: string;
+    })
+  | (BaseTile & {
+      variant: "image";
+      src: string;
+      alt: string;
+      /** Aspect ratio for the image frame. Defaults to "square". */
+      aspect?: "square" | "video" | "portrait" | "wide";
+      /** Optional overlay content rendered on top of the image. */
+      overlay?: {
+        eyebrow?: string;
+        title?: string;
+        body?: ReactNode;
+        /** Overlay anchor inside the frame. Defaults to "bottom-left". */
+        align?: "bottom-left" | "bottom-right" | "top-left" | "top-right" | "center";
+      };
+      /** Optional link wrapping the entire tile. */
+      to?: string;
+      /** Optional CTA label rendered alongside the overlay text. */
+      cta?: { label: string; to: string };
     });
 
 const sizeCls: Record<TileSize, string> = {
@@ -89,6 +108,21 @@ const paddingCls: Record<TilePadding, string> = {
   md: "p-6 md:p-7",
   lg: "p-7 md:p-10",
 };
+
+const aspectCls = {
+  square: "aspect-square",
+  video: "aspect-video",
+  portrait: "aspect-[4/5]",
+  wide: "aspect-[5/4]",
+} as const;
+
+const overlayAlignCls = {
+  "bottom-left": "items-end justify-start text-left",
+  "bottom-right": "items-end justify-end text-right",
+  "top-left": "items-start justify-start text-left",
+  "top-right": "items-start justify-end text-right",
+  center: "items-center justify-center text-center",
+} as const;
 
 function isLightTone(tone: TileTone) {
   return tone === "kraft" || tone === "white";
