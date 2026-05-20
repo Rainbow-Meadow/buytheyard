@@ -446,7 +446,8 @@ function ImageTileInner({
         decoding="async"
         fetchPriority={block.fetchPriority ?? "auto"}
         onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+        style={resolveFocalStyle(block.focal)}
+        className={`tile-focal absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
           placeholder && !loaded ? "opacity-0" : "opacity-100"
         }`}
       />
