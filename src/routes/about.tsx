@@ -56,7 +56,7 @@ const STORY_BLOCKS: TileBlock[] = [
       "Growing up I was always outside, alongside my dad, around trucks and equipment, or spreading mulch in the backyard.",
     body: "A career in this industry was never really a question.",
     size: "feature",
-    tone: "gray",
+    tone: "kraft",
     padding: "lg",
   },
   {
@@ -65,7 +65,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "02 · School",
     body: "I graduated Wachusett Regional in 2016 and went straight on for an Entrepreneurship and Small Business degree.",
     size: "md",
-    tone: "kraft",
+    tone: "gray",
   },
   {
     id: "story-03-yard-opens",
