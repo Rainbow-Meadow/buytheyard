@@ -126,7 +126,7 @@ export default function ReviewsAndCommunity() {
               From Facebook · real customers, real posts
             </p>
             <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[20ch]">
-              What neighbors say.
+              What the neighbors say.
             </h2>
           </div>
           <div className="hidden md:flex items-center gap-2">

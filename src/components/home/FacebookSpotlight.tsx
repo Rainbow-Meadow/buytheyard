@@ -13,7 +13,7 @@ export default function FacebookSpotlight() {
             Where the yard <span className="text-brand">lives.</span>
           </h2>
           <p className="lead mt-4 md:mt-6 text-zinc-300 max-w-[52ch]">
-            Daily back-and-forth happens on Facebook — fresh loads, restocks, weather closures, and lot photos.
+            Our daily updates live on Facebook. Fresh loads, restocks, weather closures, lot photos.
           </p>
           <ul className="body-sm mt-5 md:mt-8 space-y-2 text-zinc-300">
             <li className="flex items-start gap-2">
