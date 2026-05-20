@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { lazy, useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
@@ -7,12 +7,10 @@ import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
 import heroLoopMobileMp4 from "@/assets/video/hero-loop-mobile.mp4?url";
 import heroLoopMobileWebm from "@/assets/video/hero-loop-mobile.webm?url";
 import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
-import communityCtms from "@/assets/source/community-ctms-loam.webp";
-import communityRutland from "@/assets/source/community-rutland-memorial.webp";
-import { products } from "@/data/products";
-import { ProductCard } from "@/components/site/ProductCard";
-import { ProductGroup } from "@/components/site/ProductGroup";
-import { TileGrid, type TileBlock } from "@/components/site/Tile";
+import { LazyOnVisible } from "@/components/site/LazyOnVisible";
+
+const FeaturedMaterials = lazy(() => import("@/components/home/FeaturedMaterials"));
+const CommunityTiles = lazy(() => import("@/components/home/CommunityTiles"));
 
 const reviews = [
   {
