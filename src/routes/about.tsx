@@ -163,7 +163,7 @@ function AboutPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="mt-3 md:mt-6 flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
+            <div className="mt-3 md:mt-6 hidden md:flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
