@@ -16,21 +16,11 @@ const DESKTOP_BLOCKS: TileBlock[] = [
   },
   {
     id: "faq-pricing",
-    variant: "text",
+    variant: "cta",
     eyebrow: "01 · Pricing",
     title: "How much does material cost?",
-    body: (
-      <>
-        <p>
-          Prices move with the season, so we quote today's number by phone. We work hard to keep them the best around. One-yard minimum on bulk orders.
-        </p>
-        <p className="mt-3">
-          For your project,{" "}
-          <a href="tel:5085799897" className="font-semibold text-white underline underline-offset-4 hover:text-brand">call 508-579-9897</a>{" "}or{" "}
-          <Link to="/quote" className="font-semibold text-white underline underline-offset-4 hover:text-brand">send a quote online</Link>.
-        </p>
-      </>
-    ),
+    body: "Prices move with the season — we quote today's number by phone. One-yard minimum on bulk orders.",
+    cta: { label: "Start a quote", to: "/quote" },
     size: "md",
     tone: "gray",
   },
@@ -39,9 +29,9 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     variant: "cta",
     eyebrow: "02 · Delivery area",
     title: "Do you deliver to my town?",
-    body: "Curbside across Central Mass from our Jefferson yard. Holden, Princeton, Sterling, Rutland, West Boylston, Paxton, Worcester, Leominster, and the towns around them.",
+    body: "Curbside across Central Mass from our Jefferson yard.",
     cta: { label: "Delivery details", to: "/delivery" },
-    size: "sm",
+    size: "third",
     tone: "surface",
   },
   {
@@ -49,8 +39,8 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     variant: "text",
     eyebrow: "03 · Card fee",
     title: "What's the 4% card fee?",
-    body: "Pass-through from our card processor. Cash and check skip the fee. Your quoted price doesn't change either way.",
-    size: "sm",
+    body: "Pass-through from our processor. Cash & check skip it.",
+    size: "third",
     tone: "surface",
   },
   {
@@ -58,9 +48,9 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     variant: "cta",
     eyebrow: "04 · Timing",
     title: "How fast can I get a delivery?",
-    body: "Call before noon and we'll try for same-day, depending on the route. Otherwise plan on about 48 hours. Driveway or curbline only — mark your spot.",
+    body: "Call before noon for same-day, else plan on ~48 hours.",
     cta: { label: "Start a quote", to: "/quote" },
-    size: "sm",
+    size: "third",
     tone: "surface",
   },
 ];
