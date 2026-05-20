@@ -59,7 +59,7 @@ export default function DeliveryAndPricing() {
                 className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
               >
                 <Phone className="size-4" />
-                Tap to call — 508.579.9897
+                Tap to call · 508.579.9897
               </a>
               <Link
                 to="/quote"

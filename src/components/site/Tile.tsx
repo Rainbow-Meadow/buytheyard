@@ -675,7 +675,7 @@ export function Tile(block: TileBlock) {
             &ldquo;{block.quote}&rdquo;
           </blockquote>
           {block.attribution && (
-            <p className={`${attributionToneCls(tone)} mt-5`}>— {block.attribution}</p>
+            <p className={`${attributionToneCls(tone)} mt-5`}>· {block.attribution}</p>
           )}
         </article>
       );

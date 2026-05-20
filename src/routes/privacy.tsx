@@ -94,16 +94,16 @@ const BLOCKS: Block[] = [
             <ul className="mt-3 space-y-2 list-disc pl-5">
               <li>
                 <strong className="font-semibold text-zinc-900">Essential</strong>{" "}
-                — always on. Required for the site to work, including security
+                · always on. Required for the site to work, including security
                 and remembering your cookie preferences.
               </li>
               <li>
                 <strong className="font-semibold text-zinc-900">Analytics</strong>{" "}
-                — off by default. Helps us understand which pages are useful.
+                · off by default. Helps us understand which pages are useful.
               </li>
               <li>
                 <strong className="font-semibold text-zinc-900">Marketing</strong>{" "}
-                — off by default. Reserved for measuring ads. We do not
+                · off by default. Reserved for measuring ads. We don't
                 currently run any marketing cookies.
               </li>
             </ul>
