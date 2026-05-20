@@ -20,7 +20,6 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     cta: { label: "Delivery details", to: "/delivery" },
     size: "lg",
     tone: "surface",
-    padding: "lg",
   },
   ...DELIVERY_RULES.map<TileBlock>(([k, v], i) => ({
     id: `delivery-rule-${i}`,
@@ -43,7 +42,6 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     cta: { label: "Tap to call · 508.579.9897", href: "tel:5085799897" },
     size: "feature",
     tone: "brand",
-    padding: "lg",
   },
 ];
 

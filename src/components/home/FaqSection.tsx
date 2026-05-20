@@ -13,7 +13,6 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     cta: { label: "508.579.9897", href: "tel:5085799897" },
     size: "md",
     tone: "brand",
-    padding: "lg",
   },
   {
     id: "faq-pricing",

@@ -37,7 +37,6 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     body: "Recommendations posted by people who actually pulled into the yard.",
     size: "md",
     tone: "surface",
-    padding: "lg",
   },
   ...reviews.map<TileBlock>((r, i) => ({
     id: `review-${i}`,
