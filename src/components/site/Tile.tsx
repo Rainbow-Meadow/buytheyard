@@ -144,12 +144,33 @@ const paddingCls: Record<TilePadding, string> = {
   lg: "p-7 md:p-10",
 };
 
-const aspectCls = {
+export type TileAspect = "square" | "video" | "portrait" | "wide";
+
+const aspectCls: Record<TileAspect, string> = {
   square: "aspect-square",
   video: "aspect-video",
   portrait: "aspect-[4/5]",
   wide: "aspect-[5/4]",
-} as const;
+};
+
+// Literal `md:` variants — kept as full strings so Tailwind's JIT detects them.
+const aspectMdCls: Record<TileAspect, string> = {
+  square: "md:aspect-square",
+  video: "md:aspect-video",
+  portrait: "md:aspect-[4/5]",
+  wide: "md:aspect-[5/4]",
+};
+
+function resolveAspect(
+  aspect: TileAspect | { mobile?: TileAspect; desktop?: TileAspect } | undefined,
+): string {
+  if (!aspect) return aspectCls.square;
+  if (typeof aspect === "string") return aspectCls[aspect];
+  const mobile = aspect.mobile ?? aspect.desktop ?? "square";
+  const desktop = aspect.desktop ?? aspect.mobile ?? "square";
+  // Always include mobile base + md override so the desktop class wins at ≥md.
+  return `${aspectCls[mobile]} ${aspectMdCls[desktop]}`;
+}
 
 const overlayAlignCls = {
   "bottom-left": "items-end justify-start text-left",
