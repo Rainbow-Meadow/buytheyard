@@ -45,13 +45,13 @@ export const products: Product[] = [
   {
     name: "Premium Black Mulch",
     category: "Mulch",
-    description: "Double-shredded, dyed deep black. The color that makes a tired bed look brand-new — and holds it past August.",
+    description: "Double-shredded, dyed deep black. The color that makes a tired bed look brand-new, and holds it past August.",
     image: mulchBlack,
   },
   {
     name: "Hemlock Mulch",
     category: "Mulch",
-    description: "Real hemlock bark. Red-brown, naturally aromatic, no dye. The New England classic — and what most of our repeat customers reorder.",
+    description: "Real hemlock bark. Red-brown, naturally aromatic, no dye. The New England classic, and what most of our repeat customers reorder.",
     image: mulchHemlock,
   },
   {
@@ -63,7 +63,7 @@ export const products: Product[] = [
   {
     name: "Screened Loam",
     category: "Loam",
-    description: "Topsoil screened to 1/2\" — no rocks, no roots, no surprises. Spread it for a new lawn, a raised bed, or a re-grade and you're ready to seed.",
+    description: "Topsoil screened to 1/2\". No rocks, no roots, no surprises. Spread it for a new lawn, a raised bed, or a re-grade and you're ready to seed.",
     image: loam,
   },
   {
@@ -75,7 +75,7 @@ export const products: Product[] = [
   {
     name: "3/4\" Crushed Blue Stone",
     category: "Gravel",
-    description: "Angular 3/4\" crush that locks together under a truck tire. The default pick for driveways, drainage trenches, and french drains.",
+    description: "Angular 3/4\" crush that locks together under a truck tire. The default for driveways, drainage trenches, and french drains.",
     image: stoneBlue,
   },
   {
@@ -100,7 +100,7 @@ export const products: Product[] = [
     name: "Hanging Baskets",
     category: "Garden Center",
     description:
-      "Built by hand on the flower wagon out front. Full, heavy, ready-to-hang — the kind of basket the neighbors ask about.",
+      "Built by hand on the flower wagon out front. Full, heavy, ready-to-hang. The kind of basket the neighbors ask about.",
     image: gardenBaskets,
     badge: "Call to reserve",
   },
@@ -108,7 +108,7 @@ export const products: Product[] = [
     name: "Annuals & Perennials",
     category: "Garden Center",
     description:
-      "Whatever's in season is what's on the wagon — spring annuals and perennials, summer hydrangeas and dahlias, fall mums and pumpkins on the hay bales. Call ahead if you're after something specific.",
+      "Whatever's in season is what's on the wagon. Spring annuals and perennials, summer hydrangeas and dahlias, fall mums and pumpkins on the hay bales. Call ahead if you're after something specific.",
     image: gardenMums,
   },
   {
@@ -122,7 +122,7 @@ export const products: Product[] = [
     name: "ASTM Playground Chips",
     category: "Specialty",
     description:
-      "Certified to ASTM F1292, F2075, and F1951 — the spec your playground inspector is actually looking for.",
+      "Certified to ASTM F1292, F2075, and F1951. The spec your playground inspector is actually looking for.",
     image: playgroundChips,
     badge: "ASTM Certified",
   },
@@ -138,14 +138,14 @@ export const products: Product[] = [
     name: "Hand Tools & Long Handles",
     category: "Tools & Hardware",
     description:
-      "Shovels, rakes, manure forks, garden sprayers, marking paint — the basics so you can throw it in the truck before you head to the job.",
+      "Shovels, rakes, manure forks, garden sprayers, marking paint. The basics, so you can throw it in the truck before you head to the job.",
     image: toolsHandheld,
   },
   {
     name: "Counter Pickups",
     category: "Tools & Hardware",
     description:
-      "Tape measures, work gloves, safety glasses, utility knives, Mini Maglites — the small stuff you forgot at home, right by the register.",
+      "Tape measures, work gloves, safety glasses, utility knives, Mini Maglites. The small stuff you forgot at home, right by the register.",
     image: toolsCounter,
   },
 ];

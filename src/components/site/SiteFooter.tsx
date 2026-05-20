@@ -29,7 +29,7 @@ export function SiteFooter() {
                 Leave a <span className="text-brand">Google review.</span>
               </h2>
               <p className="body-sm text-zinc-400">
-                Reviews from Central Mass neighbors mean a lot to Abby.
+                Reviews from Central Mass neighbors mean a lot to me.
               </p>
               <a
                 href={GOOGLE_REVIEW_URL}
@@ -133,7 +133,7 @@ export function SiteFooter() {
                 </li>
               </ul>
               <p className="meta text-zinc-500 leading-relaxed">
-                In-season 4/1 – 8/1. After 8/1: by appointment. Winter salt year-round.
+                In-season 4/1 to 8/1. After 8/1, by appointment. Winter salt year-round.
               </p>
               <div className="space-y-1">
                 <a
