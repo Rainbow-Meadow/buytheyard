@@ -100,8 +100,11 @@ export type TileBlock =
       loading?: "lazy" | "eager";
       /** Fetch priority hint. Use "high" for LCP hero tiles. */
       fetchPriority?: "high" | "low" | "auto";
-      /** Aspect ratio for the image frame. Defaults to "square". */
-      aspect?: "square" | "video" | "portrait" | "wide";
+      /** Aspect ratio for the image frame. Defaults to "square".
+       *  Pass a single value to use the same ratio at every breakpoint, or an
+       *  object to vary by breakpoint — e.g. `{ mobile: "square", desktop: "wide" }`
+       *  renders a portrait-friendly square on phones and a 5:4 frame on md+. */
+      aspect?: TileAspect | { mobile?: TileAspect; desktop?: TileAspect };
       /** Low-quality image placeholder shown (blurred) until the full image loads.
        *  Accepts a data URL (base64 tiny JPEG/PNG), a solid color (`#hex`/`rgb()`),
        *  or any CSS background value. Falls back to the tile tone when omitted. */
@@ -141,12 +144,33 @@ const paddingCls: Record<TilePadding, string> = {
   lg: "p-7 md:p-10",
 };
 
-const aspectCls = {
+export type TileAspect = "square" | "video" | "portrait" | "wide";
+
+const aspectCls: Record<TileAspect, string> = {
   square: "aspect-square",
   video: "aspect-video",
   portrait: "aspect-[4/5]",
   wide: "aspect-[5/4]",
-} as const;
+};
+
+// Literal `md:` variants — kept as full strings so Tailwind's JIT detects them.
+const aspectMdCls: Record<TileAspect, string> = {
+  square: "md:aspect-square",
+  video: "md:aspect-video",
+  portrait: "md:aspect-[4/5]",
+  wide: "md:aspect-[5/4]",
+};
+
+function resolveAspect(
+  aspect: TileAspect | { mobile?: TileAspect; desktop?: TileAspect } | undefined,
+): string {
+  if (!aspect) return aspectCls.square;
+  if (typeof aspect === "string") return aspectCls[aspect];
+  const mobile = aspect.mobile ?? aspect.desktop ?? "square";
+  const desktop = aspect.desktop ?? aspect.mobile ?? "square";
+  // Always include mobile base + md override so the desktop class wins at ≥md.
+  return `${aspectCls[mobile]} ${aspectMdCls[desktop]}`;
+}
 
 const overlayAlignCls = {
   "bottom-left": "items-end justify-start text-left",
@@ -268,7 +292,7 @@ function ImageTileInner({
   tone: TileTone;
 }) {
   const [loaded, setLoaded] = useState(false);
-  const aspect = aspectCls[block.aspect ?? "square"];
+  const aspect = resolveAspect(block.aspect);
 
   const imageShell = [
     sizeCls[size],
