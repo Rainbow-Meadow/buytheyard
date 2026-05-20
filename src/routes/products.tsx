@@ -94,6 +94,7 @@ function ProductsPage() {
       tiles={{
         hero: (
           <Tile
+            id="products-carousel"
             fill
             variant="carousel"
             ariaLabel="Browse materials by category"
@@ -103,6 +104,7 @@ function ProductsPage() {
         ),
         a: (
           <Tile
+            id="products-call"
             fill
             variant="cta"
             tone="brand"
@@ -116,6 +118,7 @@ function ProductsPage() {
         ),
         b: (
           <Tile
+            id="products-delivery"
             fill
             variant="cta"
             tone="surface"
@@ -128,6 +131,7 @@ function ProductsPage() {
         ),
         c: (
           <Tile
+            id="products-quote"
             fill
             variant="cta"
             tone="kraft"
