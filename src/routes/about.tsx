@@ -7,6 +7,7 @@ import { TileGrid, type TileBlock } from "@/components/site/Tile";
 
 const STORY_BLOCKS: TileBlock[] = [
   {
+    id: "story-01-origin",
     variant: "numbered",
     number: "01",
     eyebrow: "Origin",
@@ -18,6 +19,7 @@ const STORY_BLOCKS: TileBlock[] = [
     padding: "lg",
   },
   {
+    id: "story-02-background",
     variant: "text",
     eyebrow: "02 · Background",
     body: "I grew up outside — trucks, equipment, mulch piles in the backyard with my dad. Construction was never the question. Only when.",
@@ -25,6 +27,7 @@ const STORY_BLOCKS: TileBlock[] = [
     tone: "white",
   },
   {
+    id: "story-03-yard-opens",
     variant: "text",
     eyebrow: "03 · The yard opens",
     body: "I graduated Wachusett Regional in 2016 and opened the yard that same spring. Two years later I finished my Entrepreneurship and Small Business degree — while already running one of my own.",
@@ -32,6 +35,7 @@ const STORY_BLOCKS: TileBlock[] = [
     tone: "white",
   },
   {
+    id: "story-quote-model",
     variant: "quote",
     eyebrow: "The whole business model",
     quote: "If you call this number, I pick up. That's the whole business model.",
@@ -41,6 +45,7 @@ const STORY_BLOCKS: TileBlock[] = [
     padding: "lg",
   },
   {
+    id: "story-04-wbe",
     variant: "text",
     eyebrow: "04 · WBE",
     body: "Year three, we made it official: Massachusetts Certified Woman-Owned Enterprise.",
@@ -48,6 +53,7 @@ const STORY_BLOCKS: TileBlock[] = [
     tone: "kraft",
   },
   {
+    id: "story-05-tenth-season",
     variant: "text",
     eyebrow: "05 · 10th season",
     body: (
@@ -59,6 +65,7 @@ const STORY_BLOCKS: TileBlock[] = [
     tone: "white",
   },
   {
+    id: "story-06-office-manager",
     variant: "text",
     eyebrow: "06 · Office manager",
     body: (
@@ -70,6 +77,7 @@ const STORY_BLOCKS: TileBlock[] = [
     tone: "white",
   },
   {
+    id: "story-07-visit",
     variant: "cta",
     eyebrow: "07 · Visit",
     body: (
