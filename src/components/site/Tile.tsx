@@ -197,6 +197,40 @@ function resolveAspect(
   return `${aspectCls[mobile]} ${aspectMdCls[desktop]}`;
 }
 
+const focalAnchorCss: Record<TileFocalAnchor, string> = {
+  center: "center",
+  top: "center top",
+  bottom: "center bottom",
+  left: "left center",
+  right: "right center",
+  "top-left": "left top",
+  "top-right": "right top",
+  "bottom-left": "left bottom",
+  "bottom-right": "right bottom",
+};
+
+function focalToCss(focal: TileFocal): string {
+  if (typeof focal === "string") return focalAnchorCss[focal];
+  const x = Math.max(0, Math.min(100, focal.x));
+  const y = Math.max(0, Math.min(100, focal.y));
+  return `${x}% ${y}%`;
+}
+
+/** Resolve a TileFocal-or-breakpoint-pair into inline CSS custom properties
+ *  consumed by the `.tile-focal` utility in styles.css. */
+function resolveFocalStyle(
+  focal: TileFocal | { mobile?: TileFocal; desktop?: TileFocal } | undefined,
+): React.CSSProperties | undefined {
+  if (!focal) return undefined;
+  if (typeof focal === "string" || "x" in focal) {
+    return { ["--op-mobile" as string]: focalToCss(focal as TileFocal) };
+  }
+  const style: Record<string, string> = {};
+  if (focal.mobile) style["--op-mobile"] = focalToCss(focal.mobile);
+  if (focal.desktop) style["--op-desktop"] = focalToCss(focal.desktop);
+  return style as React.CSSProperties;
+}
+
 const overlayAlignCls = {
   "bottom-left": "items-end justify-start text-left",
   "bottom-right": "items-end justify-end text-right",
