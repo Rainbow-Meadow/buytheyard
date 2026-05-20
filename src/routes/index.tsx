@@ -164,36 +164,9 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   
-  const railRef = useRef<HTMLDivElement>(null);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
   const reviewsRailRef = useRef<HTMLDivElement>(null);
   const [reviewsCanPrev, setReviewsCanPrev] = useState(false);
   const [reviewsCanNext, setReviewsCanNext] = useState(true);
-
-  useEffect(() => {
-    const el = railRef.current;
-    if (!el) return;
-    const update = () => {
-      setCanPrev(el.scrollLeft > 4);
-      setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
-    };
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
-  const scrollByCard = (dir: 1 | -1) => {
-    const el = railRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-rail-item]");
-    const delta = (card?.offsetWidth ?? el.clientWidth * 0.8) + 24;
-    el.scrollBy({ left: delta * dir, behavior: "smooth" });
-  };
 
   useEffect(() => {
     const el = reviewsRailRef.current;
