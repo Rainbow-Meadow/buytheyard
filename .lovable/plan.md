@@ -1,51 +1,50 @@
-## Audit
+## Goal
 
-Most images already use `loading="lazy" decoding="async"` (ProductCard, Tile, About, Footer). The real first-paint cost on `/` mobile is:
+Make the hero container's intrinsic height match each video's native aspect ratio (9:16 mobile, 16:9 desktop) so the looping footage shows with minimal cropping, while keeping a min-height floor so the headline + CTAs always fit.
 
-1. **3.1 MB mobile hero video** with `preload="auto"` — fetched immediately, blocks bandwidth from everything else
-2. **All below-the-fold sections** (Featured products, Community, Service area, Reviews, FAQ, Final CTA) parse + execute as part of the initial route chunk
-3. **A few bare `<img>` tags** missing lazy/decoding attrs (`quote.tsx` thumbnails, `Tile.tsx` dialog full-size image)
-4. **`CookieConsent` and `SplashScreen`** imported eagerly in `__root.tsx` — they're shipped to every page
+## Measurements
 
-## Plan
+- Desktop video: 1600×900 → **16:9** (1.778). At 1440px wide, natural height ≈ 810px.
+- Mobile video: 720×1280 → **9:16** (0.5625). At 390px wide, natural height ≈ 693px; at 430px ≈ 764px.
+- Existing floor (`md:min-h-[504px]`) crops ~38% off desktop video and ~25–30% off mobile.
 
-### 1. Defer hero video bytes until after first paint (biggest win on mobile)
-- Switch both hero `<video>` tags to `preload="none"` and remove `autoPlay` from the JSX.
-- In the ref callback, kick off load + play inside `requestIdleCallback` (with `setTimeout` fallback), only on the visible video (skip the `display:none` one based on viewport width).
-- LCP remains the poster `<img>` preloaded via `head().links` — no LCP regression.
-- Expected: ~3 MB removed from mobile critical path; video starts ~300–800 ms after first paint instead of competing with it.
+## Changes (single file: `src/routes/index.tsx`)
 
-### 2. Code-split below-the-fold sections of `/`
-- Extract these sections from `src/routes/index.tsx` into their own files under `src/components/home/`:
-  - `FeaturedMaterials.tsx` (grid + ProductCard usage)
-  - `CommunitySection.tsx` (TileGrid)
-  - `ServiceAreaTeaser.tsx`
-  - `ReviewsCarousel.tsx`
-  - `FaqSection.tsx`
-  - `FinalCta.tsx`
-- Load each via `React.lazy()` wrapped in a tiny `<LazyOnVisible>` helper that uses `IntersectionObserver` with a 400 px rootMargin to start fetching the chunk just before it scrolls in. `<Suspense fallback={<div className="min-h-[200px]" />}>` to reserve layout space and avoid CLS.
-- The hero + featured-eyebrow stay in the main route chunk (above the fold).
-- This shrinks the initial `/` JS chunk and defers the product/tile asset URL strings + component code until needed.
+Update the hero `<section>` classes only — no JSX restructure, no video changes, no copy changes.
 
-### 3. Lazy-load root-level UI that isn't part of first paint
-- `CookieConsent` → `lazy()` + `Suspense` in `__root.tsx`. It only renders a banner conditionally and isn't needed for the first frame.
-- `SplashScreen` stays eager — it IS the first frame.
+Replace:
+```
+className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[504px] flex"
+```
 
-### 4. Patch the missing lazy/decoding attrs
-- `src/routes/quote.tsx` — 6 bare `<img>` thumbnails get `loading="lazy" decoding="async"`.
-- `src/components/site/Tile.tsx` line 575 (dialog full-size image) — same. (Dialog is conditionally rendered, but the image still benefits from `decoding="async"` to avoid blocking the main thread when it opens.)
+With:
+```
+className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60
+           flex
+           aspect-[9/16] min-h-[560px] max-h-[calc(100svh-4rem)]
+           md:aspect-video md:min-h-[560px] md:max-h-[820px]"
+```
 
-### 5. Verify
-- Build succeeds, typecheck clean.
-- Load `/` on the mobile viewport: confirm hero poster paints immediately, video kicks in after, below-the-fold sections render correctly when scrolled into view (no layout shift, no flash of empty state visible during normal scroll).
-- Network panel: confirm mobile hero `.webm` request fires AFTER initial document/JS/CSS, not in the first wave.
+Why each piece:
+- `aspect-[9/16]` mobile / `md:aspect-video` desktop → container's natural height matches the video, so `object-cover` stops cropping meaningful pixels.
+- `min-h-[560px]` → guarantees the headline (1–2 lines), lead (2–3 lines), and CTA row always fit, even on the narrowest phones where 9:16 would otherwise be only ~570px.
+- `max-h-[calc(100svh-4rem)]` mobile → prevents the hero from exceeding the viewport on large phones (430×932 would otherwise produce a 764px hero that pushes the stats strip below the fold).
+- `md:max-h-[820px]` → caps desktop height on ultrawide screens so the hero doesn't become absurdly tall (e.g. at 1920px wide, pure 16:9 = 1080px).
+
+No changes needed elsewhere:
+- Videos already `absolute inset-0 w-full h-full object-cover` — they fill whatever the section becomes.
+- Scrim layers, content column, eyebrow/headline/CTAs all remain untouched.
+- Stats strip below the hero is unaffected.
+
+## Verification
+
+1. Build succeeds; no typecheck/lint regressions.
+2. Mobile preview (390px and 430px): hero is taller than today, video shows ~full frame top-to-bottom, headline + CTAs still visible above the fold-ish (within `100svh`).
+3. Desktop preview (1280px and 1920px): hero is taller (~720–820px), video framing shows more sky/ground than today, content column still vertically centered via `self-center`.
+4. Confirm no horizontal scroll and no layout shift after the video loads (poster + video share the same box).
 
 ## Out of scope
-- No route-level code-split changes (TanStack already auto-splits routes).
-- No image regeneration, no copy or layout changes, no design tweaks.
-- No service worker / runtime caching changes.
 
-## Expected impact
-- Mobile transferred bytes on first load: ~3.5 MB → ~500 KB (hero video deferred + below-fold JS deferred).
-- LCP unchanged (poster JPG, already preloaded).
-- TTI/INP improves because less JS parses on first frame.
+- Video assets, poster images, encoding.
+- Copy, typography, CTA layout.
+- Anything below the hero section.
