@@ -1,30 +1,72 @@
 ## Goal
-Tighten all footer spacing — outer section padding, row gaps, cell internal rhythm, and legal bar — so the footer reads as a compact closing band instead of an airy section.
+Render every route in two structurally distinct compositions:
+- **Desktop (md+)** → **Magazine** layout: editorial featured hero + supporting grid.
+- **Mobile (<md)** → **Gallery** layout: image-led thumbnail grid, photo-first.
 
-## Changes (single file: `src/components/site/SiteFooter.tsx`)
+Same copy, same data, same red/kraft/surface palette, same typography schema. Only composition differs.
 
-### 1. Outer container
-- Replace `section` utility with explicit tight vertical padding: `py-8 md:py-10` on the inner wrapper.
-- Reduce horizontal padding feel by leaving `px-5 md:px-6` as-is (already tight).
+## Mechanic
+Each route renders two parallel section trees, swapped at the `md` breakpoint via `md:hidden` / `hidden md:block`. No JS branching, no `useIsMobile` — pure CSS so SSR works and both trees stay indexable. Shared data (products, reviews, faqs, copy strings) is hoisted to module scope so the two trees consume one source.
 
-### 2. Row grids (Row 1 + Row 2)
-- Row 1: `gap-x-10 gap-y-12 pb-12 md:pb-14` → `gap-x-6 gap-y-8 pb-6 md:pb-8`. Drop `md:min-h-[24rem]` → `md:min-h-0` (let content size it; logo still dominates via its own height).
-- Row 2: `gap-x-10 gap-y-12 pt-12 md:pt-14 md:min-h-[20rem]` → `gap-x-6 gap-y-8 pt-6 md:pt-8` (drop min-height).
+```text
+<RoutePage>
+  <section className="md:hidden"> ...Gallery composition... </section>
+  <section className="hidden md:block"> ...Magazine composition... </section>
+</RoutePage>
+```
 
-### 3. Cell internal rhythm (all 6 cells)
-- Shared cell class: `space-y-5 px-4 md:px-8` → `space-y-3 px-2 md:px-4`. Tighter vertical rhythm + less side padding so dividers/content read tighter.
+## Composition vocabulary
 
-### 4. Per-cell tightening
-- **Google review**: Button height `h-12` → `h-10`; social row gap `gap-x-5` → `gap-x-4`.
-- **Logo**: Logo height `h-40 md:h-56` → `h-32 md:h-44` (still dominant, but no longer ballooning the row).
-- **WBE**: Seal `h-20` → `h-16`; inner `<div>` already groups headline+subtext (leave `mt-1`).
-- **Hours**: List `space-y-1.5` → `space-y-1`; contact stack `space-y-1` stays.
-- **Visit**: Map `max-w-[20rem]` → `max-w-[16rem]` to match tighter scale.
-- **Site**: Nav `gap-y-2` → `gap-y-1`; the `mt-2` separator before Privacy stays (intentional visual break).
+**Gallery (mobile)** — every route opens with a thumbnail-led photo grid; copy sits in compact text blocks between bands.
+- Hero = single full-bleed photo, title overlay, CTA stack underneath.
+- Primary content = 2-column square-ish image grid with short captions; tap-to-expand for detail.
+- Secondary content (reviews, FAQ, stats) = stacked compact cards.
 
-### 5. Legal bar
-- `mt-12 md:mt-16 pt-6 md:pt-8` → `mt-6 md:mt-8 pt-4 md:pt-5`.
+**Magazine (desktop)** — every route opens with one large featured "cover" plus a supporting grid of smaller stories.
+- Hero = asymmetric split: oversized headline + eyebrow + lede in one column, large hero photo in the other.
+- Primary content = featured item at 2-col width, remaining items in a 3-col grid alongside.
+- Secondary content = editorial multi-column blocks with rule dividers.
+
+## Per-route work
+
+### `src/routes/index.tsx`
+- Hoist `reviews`, `communityPosts`, `featured` builder, FAQ items to module scope.
+- **Mobile (Gallery):** full-bleed hero photo + title overlay; 2-col tappable product thumbnail grid (image-dominant `ProductCard` variant, caption only); stats as 2×2 compact tiles; reviews as stacked cards (drop the auto-rotating rail); community + FAQ as stacked accordions.
+- **Desktop (Magazine):** split hero (text left, `heroDesktop` right at ~60/40); "Featured Materials" becomes 1 large featured card + 3-col grid of 6 supporting cards (replace horizontal scroll rail); stats as 4-col rule-divided row; reviews as 3-col editorial column with pull-quote on first; FAQ as 2-col list.
+- Remove the rail scroll logic from the desktop tree (no longer used there); keep it only if mobile still uses it — gallery grid means it's removed entirely.
+
+### `src/routes/products.tsx`
+- **Mobile (Gallery):** category sections render as 2-col square image grids; tap reveals name + short caption underneath; no spec metadata visible until tap.
+- **Desktop (Magazine):** each category opens with one featured product at 2-col width + 3-col supporting grid; category header in editorial style with rule divider and count.
+
+### `src/routes/about.tsx`, `delivery.tsx`, `service-area.tsx`, `contact.tsx`, `quote.tsx`, `privacy.tsx`
+- **Mobile (Gallery):** hero = single image with title overlay; body content = stacked image-led cards (where photos exist) or compact text blocks (privacy, quote form).
+- **Desktop (Magazine):** hero = asymmetric split (text + large photo); body sections use multi-column editorial layout with rule dividers and pulled eyebrows.
+- `quote.tsx` and `contact.tsx` keep the form intact in both trees; only surrounding chrome differs.
+- `privacy.tsx` stays primarily text — Magazine = wider measure with TOC sidebar on desktop, Gallery = single column stack on mobile.
+
+### `src/components/site/ProductCard.tsx`
+- Add a `variant?: "default" | "gallery"` prop:
+  - `default` (current) — used in Magazine trees.
+  - `gallery` — image fills card, name overlays bottom gradient, category eyebrow + description hidden, badge becomes a small corner stamp. Used in mobile Gallery grids.
+- No palette or typography token changes.
+
+### `src/components/site/SiteHeader.tsx` & `SiteFooter.tsx`
+- No structural changes (header already has mobile sheet, footer already responsive). Out of scope.
+
+## Invariants (do not change)
+- Palette: `--brand` red, kraft, surface — untouched in `src/styles.css`.
+- Typography schema: `display-1..5`, `lead/body/body-sm/meta/eyebrow/label/micro` — no new sizes.
+- Headline + subtext line-count rules from project memory still apply; adjust `max-w` per composition, never font size.
+- All copy strings, product data, FAQ answers, SEO `head()` blocks — unchanged.
+- All assets — unchanged (real photos only, no AI imagery).
 
 ## Out of scope
-- No color, typography token, copy, or structural (column/divider/order) changes.
-- No changes outside `SiteFooter.tsx`.
+- Tablet-specific composition (md breakpoint covers tablet up; user picked 2 layouts, not 3).
+- Header/footer redesign.
+- New routes, new copy, new colors, new fonts.
+- Animation rework beyond what each composition naturally implies.
+
+## Risk
+- Doubling JSX per route inflates each route file ~1.5×. Acceptable — keeps SSR single-pass and avoids client-only layout flicker.
+- Mobile Gallery grid drops the auto-rotating reviews carousel on home; reviews become a stacked card list instead. Confirming this is intended (you picked Gallery for mobile, which implies static image-led, not auto-playing).
