@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Facebook } from "lucide-react";
-import brandmark from "@/assets/brandmark-dark.png";
+import brandmark from "@/assets/brandmark-dark.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import { YelpLogo } from "@/components/site/YelpLogo";
 import { openCookieSettings } from "@/lib/cookie-consent";
