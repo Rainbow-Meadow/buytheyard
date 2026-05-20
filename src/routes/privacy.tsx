@@ -64,6 +64,7 @@ function PrivacyPage() {
           ),
           a: (
             <Tile
+              id="priv-collect"
               fill
               variant="flip"
               ariaLabel="What we collect"
@@ -94,6 +95,7 @@ function PrivacyPage() {
           ),
           b: (
             <Tile
+              id="priv-cookies"
               fill
               variant="flip"
               ariaLabel="Cookies"
@@ -124,6 +126,7 @@ function PrivacyPage() {
           ),
           c: (
             <Tile
+              id="priv-sharing"
               fill
               variant="flip"
               ariaLabel="How we share"
@@ -154,19 +157,20 @@ function PrivacyPage() {
           ),
           d: (
             <Tile
+              id="priv-choices"
               fill
               variant="flip"
               ariaLabel="Your choices"
               front={{
                 variant: "text",
-                tone: "brand",
+                tone: "kraft",
                 eyebrow: "04 · Your choices",
                 title: "Access, correct, delete.",
                 body: "Email abby@btymaterial.com any time.",
               }}
               back={{
                 variant: "text",
-                tone: "brand",
+                tone: "kraft",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -193,6 +197,7 @@ function PrivacyPage() {
         tiles={{
           hero: (
             <Tile
+              id="priv-terms"
               fill
               variant="flip"
               ariaLabel="Website terms of use"
@@ -225,6 +230,7 @@ function PrivacyPage() {
           ),
           a: (
             <Tile
+              id="priv-sms"
               fill
               variant="flip"
               ariaLabel="SMS terms"
@@ -256,6 +262,7 @@ function PrivacyPage() {
           ),
           b: (
             <Tile
+              id="priv-address"
               fill
               variant="text"
               tone="kraft"
@@ -274,6 +281,7 @@ function PrivacyPage() {
           ),
           c: (
             <Tile
+              id="priv-email"
               fill
               variant="cta"
               tone="brand"
@@ -285,6 +293,7 @@ function PrivacyPage() {
           ),
           d: (
             <Tile
+              id="priv-call"
               fill
               variant="cta"
               tone="surface"
