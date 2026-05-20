@@ -1,33 +1,63 @@
 ## Goal
 
-On mobile, the "04 · WBE" story tile is `tile-sm` (1 of 2 columns), leaving an empty cell next to it. Fill that empty cell with the WBE certification callout that currently sits in its own box below Abby's portrait. Desktop layout stays exactly as it is today (callout remains under the portrait, story grid unchanged).
+Rewrite the `STORY_BLOCKS` copy in `src/routes/about.tsx` so each tile reads like a natural paraphrase of Abby's own written bio, while keeping the existing tile structure (variants, sizes, tones, ids, order).
 
-## Changes (all in `src/routes/about.tsx`)
+## Proposed new copy, tile by tile
 
-### 1. Add a mobile-only WBE tile to `STORY_BLOCKS`
+### 01 · Origin (`story-01-origin`, numbered/feature/kraft)
+- eyebrow: `Origin`
+- title: `Growing up, I was always outside — alongside my dad, around trucks and equipment, or just spreading mulch in the backyard.`
+- body: `A career in this industry was never really a question.`
 
-Insert a new block immediately after `story-04-wbe` so it lands in the adjacent grid cell on mobile:
+### 02 · Background (`story-02-background`, text/md/white)
+- eyebrow: `02 · School`
+- body: `I graduated Wachusett Regional in 2016 and went straight on for an Entrepreneurship and Small Business degree.`
 
-- `id: "story-04-wbe-badge"`
-- `variant: "text"` with `eyebrow: "Certified"`, `title: "WBE"`, and a short body line: `"MA Woman Business Enterprise"`
-- `size: "sm"`, `tone: "kraft"`, `padding: "sm"`
-- `className: "md:hidden"` so it disappears at the md breakpoint and the desktop story grid stays untouched
-- `icon`: the existing `wbeSeal` rendered as a small `<img>` (≈32–40px) so the badge mark reads at a glance
+### 03 · The yard opens (`story-03-yard-opens`, text/md/white)
+- eyebrow: `03 · Putting it to work`
+- body: `While I was still in college I started applying what I was learning — and opened Buy The Yard before I graduated in 2018.`
 
-Keeping it `tile-sm` + `md:hidden` means: on mobile it occupies the empty 1-col slot next to the WBE story tile; on desktop it is removed from the grid entirely (no layout shift).
+### Quote — the model (`story-quote-model`, quote/feature/surface)
+Replace the fabricated quote with her own words, lightly trimmed:
+- eyebrow: `In her own words`
+- quote: `Opening this business was the perfect way to get into the industry. I can proudly say I found something that isn't just a job — it's something I take pride in and enjoy coming to every day.`
+- attribution: `Abby Montalto · Owner`
 
-### 2. Hide the standalone callout on mobile
+### 04 · WBE (`story-04-wbe`, text/sm/kraft)
+- eyebrow: `04 · WBE`
+- body: `After three years in business, I made it official — Buy The Yard became a Massachusetts Certified Woman-Owned Enterprise.`
 
-Wrap the existing "WBE Certified" callout `<div>` (the one under Abby's portrait, containing the seal + "WBE Certified" + subtext) with `hidden md:flex` so it only renders at md and up. The `mt-3 md:mt-6` spacing class is no longer needed on mobile and can stay (it's a no-op when the element is hidden).
+### 04 · WBE badge tile (`story-04-wbe-badge`, mobile-only)
+No copy change — it's just the seal + subtitle.
+
+### 05 · 10th season (`story-05-tenth-season`, text/lg/white)
+This isn't in Abby's bio. Two options:
+- **Keep, lightly grounded:** eyebrow `05 · Still here`, body: `Nearly a decade in, same yard, same voice on the phone — and still genuinely glad to see you pull in.`
+- **Remove** the tile entirely so the page stays strictly to her bio.
+
+Default in this plan: **keep with the softened copy above** so the 10th-season milestone stays visible, but flag it for your call.
+
+### 06 · Office manager (`story-06-office-manager`, text/md/white)
+Charlie is also not in her bio. Same choice:
+- **Keep, softened:** eyebrow `06 · Office manager`, body: `Charlie. He's a dog. He handles the greetings.` (no change — it's already light and doesn't pretend to be from her bio)
+- **Remove**
+
+Default: **keep as-is.**
+
+### 07 · Visit (`story-07-visit`, cta/md/brand)
+Paraphrase her closing invitation:
+- eyebrow: `07 · Visit`
+- body: `Stop by the yard at 2264 Main St., Jefferson, MA. We're always happy to answer questions and help you figure out what you need.`
+- CTA label unchanged: `Visit the yard` → `/contact`
 
 ## Out of scope
 
-- No changes to `Tile.tsx`, `styles.css`, or the tile schema.
-- Desktop layout, typography, and copy stay identical.
-- The "Around the Yard" gallery section is untouched.
+- No structural changes (tile ids, order, sizes, tones, variants, the mobile WBE badge tile, the portrait + callout column, or the "Around the Yard" gallery).
+- No changes to `Tile.tsx`, `styles.css`, route metadata, or other routes.
+- Headline/subtext line-limit rule respected (titles 1–2 lines, body copy 2–3 lines at the chosen size).
 
-## Why this approach
+## Decisions I need from you
 
-- Reuses the existing `tile-grid` layout instead of a custom mobile-only flex row — the seal sits inside the same rhythm as the surrounding tiles.
-- `className: "md:hidden"` on a TileBlock is the cleanest way to scope a tile to a single breakpoint without forking the blocks array or introducing a new prop.
-- The desktop callout keeps its current visual weight (large seal + "WBE Certified" + subtitle) since it's not constrained to a small grid cell there.
+1. **10th-season tile** — keep with the softened copy, or remove?
+2. **Charlie tile** — keep, or remove to stay strictly inside Abby's bio?
+3. **Sign-off** — her bio ends with "Thank you for your support — Abby." Want me to add a short closing tile for that, or leave the CTA tile as the final beat?
