@@ -105,6 +105,15 @@ export type TileBlock =
        *  object to vary by breakpoint — e.g. `{ mobile: "square", desktop: "wide" }`
        *  renders a portrait-friendly square on phones and a 5:4 frame on md+. */
       aspect?: TileAspect | { mobile?: TileAspect; desktop?: TileAspect };
+      /** Focal point used by `object-position` so the visible subject stays in
+       *  frame when the aspect ratio changes between breakpoints.
+       *
+       *  Accepts a named anchor (`"center" | "top" | "bottom" | "left" | "right"
+       *  | "top-left" | "top-right" | "bottom-left" | "bottom-right"`), a
+       *  precise percentage point (`{ x: 30, y: 70 }` — 0–100 from top-left),
+       *  or a breakpoint pair (`{ mobile, desktop }` of either). Defaults to
+       *  `"center"`. */
+      focal?: TileFocal | { mobile?: TileFocal; desktop?: TileFocal };
       /** Low-quality image placeholder shown (blurred) until the full image loads.
        *  Accepts a data URL (base64 tiny JPEG/PNG), a solid color (`#hex`/`rgb()`),
        *  or any CSS background value. Falls back to the tile tone when omitted. */
