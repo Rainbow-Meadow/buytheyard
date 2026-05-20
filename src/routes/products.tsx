@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
 import { categories, products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
+import { ProductGroup } from "@/components/site/ProductGroup";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -95,24 +96,26 @@ function ProductsPage() {
                 </span>
               </div>
 
-              {/* Mobile: Gallery — 2-col image-overlay thumbnails */}
-              <div className="md:hidden grid grid-cols-2 gap-2">
-                {items.map((p) => (
-                  <ProductCard key={p.name} product={p} variant="gallery" />
-                ))}
-              </div>
-
-              {/* Desktop: Magazine — featured cover + supporting 3-col grid */}
-              <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-6">
-                <div className="md:col-span-3 lg:col-span-3 flex">
-                  <ProductCard product={featured} />
-                </div>
-                <div className="md:col-span-3 lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6 content-start">
-                  {rest.map((p) => (
+              <ProductGroup products={items}>
+                {/* Mobile: Gallery — 2-col image-overlay thumbnails */}
+                <div className="md:hidden grid grid-cols-2 gap-2">
+                  {items.map((p) => (
                     <ProductCard key={p.name} product={p} variant="gallery" />
                   ))}
                 </div>
-              </div>
+
+                {/* Desktop: Magazine — featured cover + supporting 3-col grid */}
+                <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+                  <div className="md:col-span-3 lg:col-span-3 flex">
+                    <ProductCard product={featured} />
+                  </div>
+                  <div className="md:col-span-3 lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6 content-start">
+                    {rest.map((p) => (
+                      <ProductCard key={p.name} product={p} variant="gallery" />
+                    ))}
+                  </div>
+                </div>
+              </ProductGroup>
             </div>
           </section>
         );

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/data/products";
 import { productSlug } from "@/data/products";
 import {
@@ -8,7 +10,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useTileDeepLink } from "./useTileDeepLink";
-import { useSwipeToClose } from "./useSwipeToClose";
+import { useDialogGestures } from "./useDialogGestures";
+import { useTileGroupNav } from "./TileGroupContext";
 
 export function ProductCard({
   product,
@@ -19,7 +22,24 @@ export function ProductCard({
 }) {
   const shareId = `product-${productSlug(product.name)}`;
   const [open, setOpen] = useTileDeepLink(shareId);
-  const swipe = useSwipeToClose(() => setOpen(false));
+  const nav = useTileGroupNav(shareId);
+  const gestures = useDialogGestures({
+    onClose: () => setOpen(false),
+    onPrev: nav.prev,
+    onNext: nav.next,
+    hasPrev: nav.hasPrev,
+    hasNext: nav.hasNext,
+  });
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" && nav.hasPrev) nav.prev();
+      else if (e.key === "ArrowRight" && nav.hasNext) nav.next();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, nav.hasPrev, nav.hasNext, nav.prev, nav.next]);
 
   const front =
     variant === "gallery" ? (
@@ -115,13 +135,31 @@ export function ProductCard({
         </button>
       </DialogTrigger>
       <DialogContent
-        onTouchStart={swipe.onTouchStart}
-        onTouchMove={swipe.onTouchMove}
-        onTouchEnd={swipe.onTouchEnd}
-        style={swipe.style}
+        ref={gestures.ref}
+        style={gestures.style}
         className="w-[calc(100vw-2rem)] max-w-3xl max-h-[90vh] p-0 gap-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100 grid grid-rows-[minmax(0,1fr)_auto] sm:rounded-md"
       >
-        <div aria-hidden="true" className="sm:hidden absolute top-2 left-1/2 -translate-x-1/2 h-1 w-10 rounded-full bg-white/30 z-10" />
+        <div aria-hidden="true" className="sm:hidden absolute bottom-2 left-1/2 -translate-x-1/2 h-1 w-10 rounded-full bg-white/30 z-10" />
+        {nav.hasPrev && (
+          <button
+            type="button"
+            onClick={nav.prev}
+            aria-label="Previous"
+            className="hidden sm:grid absolute left-3 top-1/2 -translate-y-1/2 size-10 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+        )}
+        {nav.hasNext && (
+          <button
+            type="button"
+            onClick={nav.next}
+            aria-label="Next"
+            className="hidden sm:grid absolute right-3 top-1/2 -translate-y-1/2 size-10 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        )}
         <div className="bg-black flex items-center justify-center min-h-0">
           {product.image ? (
             <img
