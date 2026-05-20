@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 /**
@@ -101,6 +102,10 @@ export type TileBlock =
       fetchPriority?: "high" | "low" | "auto";
       /** Aspect ratio for the image frame. Defaults to "square". */
       aspect?: "square" | "video" | "portrait" | "wide";
+      /** Low-quality image placeholder shown (blurred) until the full image loads.
+       *  Accepts a data URL (base64 tiny JPEG/PNG), a solid color (`#hex`/`rgb()`),
+       *  or any CSS background value. Falls back to the tile tone when omitted. */
+      placeholder?: string;
       /** Optional overlay content rendered on top of the image. */
       overlay?: {
         eyebrow?: string;
