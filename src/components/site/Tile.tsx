@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, RotateCw } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -158,6 +158,31 @@ export type TileBlock =
          *  one URL works at any breakpoint. Falls back to `block.id`. */
         shareId?: string;
       };
+    })
+  | (BaseTile & {
+      variant: "carousel";
+      /** Each slide is a TileBlock rendered with `fill` inside the carousel
+       *  frame. The carousel itself owns the cell; slides page horizontally. */
+      slides: TileBlock[];
+      /** Autoplay slides. Pauses on hover/focus. */
+      auto?: boolean;
+      /** Autoplay interval in ms (default 5000). */
+      interval?: number;
+      /** Controls to show. Defaults to "both". */
+      controls?: "dots" | "arrows" | "both" | "none";
+      ariaLabel?: string;
+    })
+  | (BaseTile & {
+      variant: "flip";
+      /** Front face — rendered with `fill`. */
+      front: TileBlock;
+      /** Back face — rendered with `fill`. */
+      back: TileBlock;
+      /** Interaction that flips the card. Defaults to "click". */
+      trigger?: "click" | "hover";
+      /** Optional hint label rendered as a corner affordance (default "Tap to flip"). */
+      hint?: string;
+      ariaLabel?: string;
     });
 
 const sizeCls: Record<TileSize, string> = {
@@ -629,6 +654,179 @@ export function TileGrid({ blocks }: { blocks: TileBlock[] }) {
   );
 }
 
+/** Carousel tile body. Owns its cell, pages horizontally through `slides`. */
+function CarouselTileInner({
+  block,
+}: {
+  block: Extract<TileBlock, { variant: "carousel" }>;
+}) {
+  const slides = block.slides;
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const controls = block.controls ?? "both";
+  const showDots = controls === "dots" || controls === "both";
+  const showArrows = controls === "arrows" || controls === "both";
+  const count = slides.length;
+
+  useEffect(() => {
+    if (!block.auto || paused || count < 2) return;
+    const ms = block.interval ?? 5000;
+    const t = window.setInterval(() => {
+      setIndex((i) => (i + 1) % count);
+    }, ms);
+    return () => window.clearInterval(t);
+  }, [block.auto, block.interval, paused, count]);
+
+  const go = (i: number) => setIndex(((i % count) + count) % count);
+  const prev = () => go(index - 1);
+  const next = () => go(index + 1);
+
+  const shell = [
+    block.fill ? "h-full w-full" : sizeCls[block.size ?? "feature"],
+    block.fill ? "" : block.tall ? "tile-row-tall" : "",
+    "relative overflow-hidden rounded-md",
+    block.className ?? "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <section
+      className={shell}
+      aria-roledescription="carousel"
+      aria-label={block.ariaLabel ?? "Carousel"}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          prev();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          next();
+        }
+      }}
+      tabIndex={0}
+    >
+      <div
+        className="flex h-full w-full transition-transform duration-500 ease-out motion-reduce:transition-none"
+        style={{ transform: `translateX(-${index * 100}%)` }}
+      >
+        {slides.map((s, i) => (
+          <div
+            key={s.id ?? `slide-${i}`}
+            className="h-full w-full shrink-0 basis-full"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${count}`}
+            aria-hidden={i !== index}
+          >
+            <Tile {...s} fill />
+          </div>
+        ))}
+      </div>
+
+      {showArrows && count > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Previous slide"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-10 rounded-full bg-black/55 hover:bg-black/75 text-white backdrop-blur-sm"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Next slide"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-10 rounded-full bg-black/55 hover:bg-black/75 text-white backdrop-blur-sm"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        </>
+      )}
+
+      {showDots && count > 1 && (
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-sm">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              aria-current={i === index}
+              className={`size-2 rounded-full transition-all ${
+                i === index ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/** Flip tile body. Two faces; click (or hover) rotates between them. */
+function FlipTileInner({
+  block,
+}: {
+  block: Extract<TileBlock, { variant: "flip" }>;
+}) {
+  const [flipped, setFlipped] = useState(false);
+  const trigger = block.trigger ?? "click";
+  const hint = block.hint ?? "Tap to flip";
+
+  const shell = [
+    block.fill ? "h-full w-full" : sizeCls[block.size ?? "md"],
+    block.fill ? "" : block.tall ? "tile-row-tall" : "",
+    "relative rounded-md tile-flip",
+    block.className ?? "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const hoverProps =
+    trigger === "hover"
+      ? {
+          onMouseEnter: () => setFlipped(true),
+          onMouseLeave: () => setFlipped(false),
+          onFocus: () => setFlipped(true),
+          onBlur: () => setFlipped(false),
+        }
+      : {};
+
+  return (
+    <button
+      type="button"
+      aria-label={block.ariaLabel ?? "Flip card"}
+      aria-pressed={flipped}
+      onClick={trigger === "click" ? () => setFlipped((f) => !f) : undefined}
+      className={`${shell} text-left cursor-pointer`}
+      {...hoverProps}
+    >
+      <div
+        className={`tile-flip-inner ${flipped ? "is-flipped" : ""}`}
+      >
+        <div className="tile-flip-face">
+          <Tile {...block.front} fill />
+        </div>
+        <div className="tile-flip-face tile-flip-back">
+          <Tile {...block.back} fill />
+        </div>
+      </div>
+      <span
+        aria-hidden="true"
+        className="absolute top-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 text-white text-[10px] uppercase tracking-wider backdrop-blur-sm pointer-events-none"
+      >
+        <RotateCw className="size-3" />
+        {hint}
+      </span>
+    </button>
+  );
+}
+
 export function Tile(block: TileBlock) {
   const size = block.size ?? "md";
   const tone = block.tone ?? "kraft";
@@ -731,5 +929,11 @@ export function Tile(block: TileBlock) {
 
     case "image":
       return <ImageTileInner block={block} size={size} tone={tone} />;
+
+    case "carousel":
+      return <CarouselTileInner block={block} />;
+
+    case "flip":
+      return <FlipTileInner block={block} />;
   }
 }
