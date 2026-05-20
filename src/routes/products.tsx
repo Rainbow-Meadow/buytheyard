@@ -60,34 +60,32 @@ export const Route = createFileRoute("/products")({
 });
 
 function ProductsPage() {
-  const categorySlides: TileBlock[] = categories
-    .map((cat) => {
-      const items = products.filter((p) => p.category === cat);
-      if (items.length === 0) return null;
-      const featured = items.find((p) => !!p.image) ?? items[0];
-      const names = items.map((p) => p.name);
-      const preview =
-        names.length <= 4
-          ? names.join(" · ")
-          : `${names.slice(0, 3).join(" · ")} · +${names.length - 3} more`;
-      const block: TileBlock = {
-        id: `cat-${cat}`,
-        variant: "image",
-        src: featured.image ?? "",
-        alt: `${cat} — ${featured.name}`,
-        focal: "center",
-        loading: "eager",
-        overlay: {
-          eyebrow: `${cat} · ${items.length} option${items.length === 1 ? "" : "s"}`,
-          title: featured.name,
-          body: preview,
-          align: "bottom-left",
-        },
-        cta: { label: "Call for today's price", href: "tel:5085799897" },
-      };
-      return block;
-    })
-    .filter((b): b is TileBlock => b !== null);
+  const categorySlides: TileBlock[] = [];
+  for (const cat of categories) {
+    const items = products.filter((p) => p.category === cat);
+    if (items.length === 0) continue;
+    const featured = items.find((p) => !!p.image) ?? items[0];
+    const names = items.map((p) => p.name);
+    const preview =
+      names.length <= 4
+        ? names.join(" · ")
+        : `${names.slice(0, 3).join(" · ")} · +${names.length - 3} more`;
+    categorySlides.push({
+      id: `cat-${cat}`,
+      variant: "image",
+      src: featured.image ?? "",
+      alt: `${cat} — ${featured.name}`,
+      focal: "center",
+      loading: "eager",
+      overlay: {
+        eyebrow: `${cat} · ${items.length} option${items.length === 1 ? "" : "s"}`,
+        title: featured.name,
+        body: preview,
+        align: "bottom-left",
+      },
+      cta: { label: "Call for today's price", href: "tel:5085799897" },
+    });
+  }
 
   return (
     <TileScreen
