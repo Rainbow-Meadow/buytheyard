@@ -118,9 +118,9 @@ function QuotePage() {
         {/* Mobile stacked hero */}
         <div className="md:hidden">
           <div className="grid grid-cols-3 gap-1">
-            <div className="aspect-square overflow-hidden"><img src={mulchHemlock} alt="" className="w-full h-full object-cover" /></div>
-            <div className="aspect-square overflow-hidden"><img src={loam} alt="" className="w-full h-full object-cover" /></div>
-            <div className="aspect-square overflow-hidden"><img src={stoneRiver} alt="" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={mulchHemlock} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={loam} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={stoneRiver} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
           </div>
           <div className="px-5 py-8">
             <p className="eyebrow text-brand mb-4">Get a quote</p>
@@ -147,10 +147,10 @@ function QuotePage() {
             </div>
             <div className="col-span-5 grid grid-cols-2 gap-2">
               <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10 col-span-2">
-                <img src={mulchHemlock} alt="Hemlock mulch piles" className="w-full h-full object-cover" />
+                <img src={mulchHemlock} alt="Hemlock mulch piles" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
-              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10"><img src={loam} alt="Screened loam" className="w-full h-full object-cover" /></div>
-              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10"><img src={stoneRiver} alt="River stone" className="w-full h-full object-cover" /></div>
+              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10"><img src={loam} alt="Screened loam" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10"><img src={stoneRiver} alt="River stone" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
             </div>
           </div>
         </div>
