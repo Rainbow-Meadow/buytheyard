@@ -179,6 +179,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           ],
         }),
       },
+      // Attach Google Fonts stylesheet non-blockingly: preload above warms the
+      // request; this script swaps it to an applied stylesheet once parsed.
+      {
+        children:
+          "(function(){var h='https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap';var l=document.createElement('link');l.rel='stylesheet';l.href=h;l.media='print';l.onload=function(){l.media='all'};document.head.appendChild(l);})();",
+      },
     ],
     links: [
       { rel: "icon", type: "image/webp", href: "/brandmark.webp" },
@@ -230,9 +236,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
       },
     ],
-    scripts: [
-      ...((): never[] => [])(),
-    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -265,7 +268,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <SiteFooter />
-        <ChatWidget />
+        <ChatLauncher />
         <Suspense fallback={null}>
           <CookieConsent />
         </Suspense>
