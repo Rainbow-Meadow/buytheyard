@@ -71,11 +71,11 @@ function ProductsPage() {
             Materials. By the <span className="text-brand">yard</span>.
           </h1>
           <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Prices move with the season — call{" "}
+            Prices move with the season. Call{" "}
             <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
               508-579-9897
             </a>{" "}
-            for today's number, and we'll size your project on the call.
+            for today's number and we'll size your project right on the phone.
           </p>
         </div>
       </section>
@@ -124,10 +124,10 @@ function ProductsPage() {
       <section className="bg-kraft section">
         <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
           <h2 className="display-3 mb-4">
-            Looking for Something Else?
+            Looking for something else?
           </h2>
           <p className="text-zinc-700 mb-4 md:mb-8">
-            Our regular lineup. Bulk salt and ice melt in winter, bagged soils year-round, plus seasonal specials. Call to confirm stock.
+            That's our regular lineup. We also stock bulk salt and ice melt in winter, bagged soils year-round, plus seasonal specials. Call to check stock.
           </p>
           <a
             href="tel:5085799897"

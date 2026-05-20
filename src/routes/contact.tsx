@@ -77,7 +77,7 @@ function ContactPage() {
               Call. <span className="text-brand">We answer.</span>
             </h1>
             <p className="mt-4 text-zinc-300 text-base">
-              Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
+              Phone is fastest. Use the online quote form for material lists. Email works for anything that's not urgent.
             </p>
           </div>
         </div>
@@ -91,7 +91,7 @@ function ContactPage() {
                 Call. <span className="text-brand">We answer.</span>
               </h1>
               <p className="mt-6 text-zinc-400 max-w-[52ch] text-lg">
-                Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
+                Phone is fastest. Use the online quote form for material lists. Email works for anything that's not urgent.
               </p>
             </div>
             <div className="col-span-5">
@@ -218,8 +218,7 @@ function ContactPage() {
             <ClipboardList className="size-7 text-brand mb-4" />
             <h2 className="display-4 mb-2">Get a Quote</h2>
             <p className="text-sm text-zinc-700 mb-3">
-              Best for material lists. Submit your products, town, and project
-              timing, and we'll respond with pricing.
+              Best for material lists. Send your products, town, and timing, and we'll come back with pricing.
             </p>
             <Link
               to="/quote"
@@ -242,8 +241,7 @@ function ContactPage() {
               <Mail className="size-4" /> abby@btymaterial.com
             </a>
             <p className="text-xs text-zinc-600 mt-2">
-              Cell coverage at the yard can be limited. If we don't pick up,
-              please leave a voicemail — we return calls the same day.
+              Cell coverage at the yard can be spotty. If we don't pick up, leave a voicemail. We return calls the same day.
             </p>
           </div>
 
@@ -259,9 +257,7 @@ function ContactPage() {
               <li className="flex justify-between gap-4"><span>Sunday</span><span className="text-zinc-500">Closed</span></li>
             </ul>
             <p className="text-xs text-zinc-600 mt-3 leading-relaxed">
-              Our 2026 season opens <strong>April 1</strong>. After August 1,
-              pickup and delivery are by appointment. Salt and ice melt are
-              available year-round; call for winter loading hours.
+              Our 2026 season opens <strong>April 1</strong>. After August 1, pickup and delivery are by appointment. Salt and ice melt are available year-round, so call for winter loading hours.
             </p>
           </div>
           </div>
