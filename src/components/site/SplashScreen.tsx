@@ -65,7 +65,7 @@ export function SplashScreen() {
         alt=""
         width={96}
         height={96}
-        className="h-24 w-24 object-contain motion-safe:animate-[fadeIn_200ms_ease-out]"
+        className="h-24 w-24 object-contain"
       />
     </div>
   );
