@@ -160,3 +160,13 @@ export const categories = [
   "Specialty",
   "Tools & Hardware",
 ] as const;
+
+/** Stable URL-safe slug for a product name. Used by `ProductCard` to build
+ *  the `?tile=product-<slug>` deep-link param so dialogs are shareable. */
+export function productSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/["']/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
