@@ -56,7 +56,7 @@ const STORY_BLOCKS: TileBlock[] = [
       "Growing up I was always outside, alongside my dad, around trucks and equipment, or spreading mulch in the backyard.",
     body: "A career in this industry was never really a question.",
     size: "feature",
-    tone: "kraft",
+    tone: "gray",
     padding: "lg",
   },
   {
