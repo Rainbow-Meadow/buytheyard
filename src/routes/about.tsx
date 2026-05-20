@@ -235,66 +235,14 @@ function AboutPage() {
             Around the Yard
           </h2>
 
-          {/* Mobile: Gallery — square image grid, captions tucked under */}
-          <div className="md:hidden grid grid-cols-2 gap-2">
-            {YARD_ITEMS.map((item) => (
-              <YardDialog key={`m-${item.id}`} item={item}>
-                <figure className="relative aspect-square overflow-hidden rounded-sm ring-1 ring-zinc-300 bg-kraft">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    width={1500}
-                    height={1500}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 pt-8 label text-white">
-                    {item.caption}
-                  </figcaption>
-                </figure>
-              </YardDialog>
-            ))}
+          {/* Mobile: square gallery */}
+          <div className="md:hidden">
+            <TileGrid blocks={YARD_MOBILE_BLOCKS} />
           </div>
 
-          {/* Desktop: Magazine — featured large + supporting small */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6">
-            <YardDialog item={YARD_ITEMS[0]} className="md:col-span-2">
-              <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={YARD_ITEMS[0].src}
-                    alt={YARD_ITEMS[0].alt}
-                    width={1500}
-                    height={2000}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <figcaption className="p-5 label text-zinc-600">
-                  The sit-and-stay corner — coffee, umbrellas, and the OPEN flag.
-                </figcaption>
-              </figure>
-            </YardDialog>
-            <YardDialog item={YARD_ITEMS[1]}>
-              <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
-                <div className="aspect-[4/5] overflow-hidden">
-                  <img
-                    src={YARD_ITEMS[1].src}
-                    alt={YARD_ITEMS[1].alt}
-                    width={1500}
-                    height={2000}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <figcaption className="p-5 label text-zinc-600">
-                  Charlie · office manager · accepts treats and pets.
-                </figcaption>
-              </figure>
-            </YardDialog>
+          {/* Desktop: magazine — featured wide + supporting portrait */}
+          <div className="hidden md:block">
+            <TileGrid blocks={YARD_DESKTOP_BLOCKS} />
           </div>
         </div>
       </section>
