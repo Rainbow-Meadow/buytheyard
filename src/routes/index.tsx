@@ -187,7 +187,7 @@ function HomePage() {
               </span>
             </h1>
             <p className="lead text-zinc-200 max-w-[54ch] mt-4 md:mt-6 text-pretty">
-              By the yard, from our Jefferson, MA lot. Best prices in Central Mass.
+              By the yard, from our Jefferson lot. Best prices in Central Mass.
             </p>
 
             <div className="mt-5 md:mt-8 flex flex-wrap items-center gap-4">
