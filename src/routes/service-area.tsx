@@ -88,6 +88,7 @@ function ServiceAreaPage() {
       align: "bottom-left",
     },
     details: {
+      shareId: `town-${t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
       eyebrow: t.drive,
       title: t.name,
       body: t.blurb,
