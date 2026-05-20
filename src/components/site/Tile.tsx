@@ -248,5 +248,75 @@ export function Tile(block: TileBlock) {
           </p>
         </article>
       );
+
+    case "image": {
+      // Image variant gets its own shell — no padding, frame is full-bleed.
+      const aspect = aspectCls[block.aspect ?? "square"];
+      const imageShell = [
+        sizeCls[size],
+        block.tall ? "tile-row-tall" : "",
+        "relative overflow-hidden rounded-md ring-1",
+        isLightTone(tone) ? "ring-zinc-300" : "ring-white/10",
+        toneCls[tone],
+        block.className ?? "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      const hasOverlay = Boolean(block.overlay || block.cta);
+      const align = overlayAlignCls[block.overlay?.align ?? "bottom-left"];
+
+      const inner = (
+        <>
+          <img
+            src={block.src}
+            alt={block.alt}
+            loading="lazy"
+            className={`${aspect} w-full h-full object-cover ${
+              hasOverlay ? "absolute inset-0" : ""
+            }`}
+          />
+          {hasOverlay && (
+            <>
+              {/* Readability scrim — only when overlay text exists */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+              />
+              <div className={`${aspect} relative w-full h-full flex ${align} p-5 md:p-6`}>
+                <div className="text-white max-w-[34ch]">
+                  {block.overlay?.eyebrow && (
+                    <p className="eyebrow text-brand mb-2">{block.overlay.eyebrow}</p>
+                  )}
+                  {block.overlay?.title && (
+                    <p className="display-4 leading-tight">{block.overlay.title}</p>
+                  )}
+                  {block.overlay?.body && (
+                    <div className="body-sm text-zinc-200 mt-2">{block.overlay.body}</div>
+                  )}
+                  {block.cta && (
+                    <Link
+                      to={block.cta.to}
+                      className="mt-4 inline-flex items-center gap-2 label border-b border-current hover:opacity-80"
+                    >
+                      {block.cta.label}
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </>
+      );
+
+      if (block.to) {
+        return (
+          <Link to={block.to} className={`${imageShell} group block`}>
+            {inner}
+          </Link>
+        );
+      }
+      return <article className={imageShell}>{inner}</article>;
+    }
   }
 }
