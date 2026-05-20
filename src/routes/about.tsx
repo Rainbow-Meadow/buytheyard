@@ -44,14 +44,22 @@ const YARD_ITEMS: YardItem[] = [
   },
 ];
 
-function YardDialog({ item, children }: { item: YardItem; children: ReactNode }) {
+function YardDialog({
+  item,
+  children,
+  className,
+}: {
+  item: YardItem;
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <button
           type="button"
           aria-label={`Open details: ${item.title}`}
-          className="group block w-full text-left cursor-zoom-in"
+          className={`group block w-full text-left cursor-zoom-in ${className ?? ""}`}
         >
           {children}
         </button>
@@ -293,8 +301,8 @@ function AboutPage() {
 
           {/* Desktop: Magazine — featured large + supporting small */}
           <div className="hidden md:grid md:grid-cols-3 gap-6">
-            <YardDialog item={YARD_ITEMS[0]}>
-              <figure className="md:col-span-2 rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
+            <YardDialog item={YARD_ITEMS[0]} className="md:col-span-2">
+              <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={YARD_ITEMS[0].src}
