@@ -112,7 +112,7 @@ function ProductsPage() {
             icon={<Phone />}
             eyebrow="Today's price by phone"
             title="Materials. By the yard."
-            body="Prices move with the season. One call sizes your project and locks the number."
+            body="Seasonal pricing — one call sizes the project and locks the number."
             cta={{ label: "508.579.9897", href: "tel:5085799897" }}
           />
         ),
