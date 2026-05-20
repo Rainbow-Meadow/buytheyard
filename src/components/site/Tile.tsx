@@ -204,7 +204,7 @@ const TILE_METRIC_DEFAULTS = {
   mdBreakpoint: 768,
 } as const;
 
-type TileMetrics = typeof TILE_METRIC_DEFAULTS;
+type TileMetrics = { -readonly [K in keyof typeof TILE_METRIC_DEFAULTS]: number };
 
 let cachedMetrics: TileMetrics | null = null;
 
