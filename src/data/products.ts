@@ -130,7 +130,7 @@ export const products: Product[] = [
     name: "Bulk Winter Salt",
     category: "Specialty",
     description:
-      "Rock salt and treated salt blend for driveways, walkways, and parking lots. Stocked year-round — call for loading hours.",
+      "Rock salt and treated salt blend for driveways, walkways, and parking lots. Stocked year-round, so call for loading hours.",
     image: winterSalt,
     badge: "Year-round",
   },
