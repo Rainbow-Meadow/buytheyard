@@ -23,8 +23,8 @@ function buildMailto(messages: UIMessage[]): string {
   return `mailto:${ABBY_EMAIL}?subject=${subject}&body=${body}`;
 }
 
-export function ChatWidget() {
-  const [open, setOpen] = useState(false);
+export function ChatWidget({ defaultOpen = false }: { defaultOpen?: boolean } = {}) {
+  const [open, setOpen] = useState(defaultOpen);
   const taRef = useRef<HTMLTextAreaElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [input, setInput] = useState("");
