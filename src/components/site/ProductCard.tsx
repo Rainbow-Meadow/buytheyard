@@ -8,6 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useTileDeepLink } from "./useTileDeepLink";
+import { useSwipeToClose } from "./useSwipeToClose";
 
 export function ProductCard({
   product,
@@ -18,6 +19,7 @@ export function ProductCard({
 }) {
   const shareId = `product-${productSlug(product.name)}`;
   const [open, setOpen] = useTileDeepLink(shareId);
+  const swipe = useSwipeToClose(() => setOpen(false));
 
   const front =
     variant === "gallery" ? (
@@ -112,7 +114,14 @@ export function ProductCard({
           {front}
         </button>
       </DialogTrigger>
-      <DialogContent className="w-[calc(100vw-2rem)] max-w-3xl max-h-[90vh] p-0 gap-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100 grid grid-rows-[minmax(0,1fr)_auto] sm:rounded-md">
+      <DialogContent
+        onTouchStart={swipe.onTouchStart}
+        onTouchMove={swipe.onTouchMove}
+        onTouchEnd={swipe.onTouchEnd}
+        style={swipe.style}
+        className="w-[calc(100vw-2rem)] max-w-3xl max-h-[90vh] p-0 gap-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100 grid grid-rows-[minmax(0,1fr)_auto] sm:rounded-md"
+      >
+        <div aria-hidden="true" className="sm:hidden absolute top-2 left-1/2 -translate-x-1/2 h-1 w-10 rounded-full bg-white/30 z-10" />
         <div className="bg-black flex items-center justify-center min-h-0">
           {product.image ? (
             <img
