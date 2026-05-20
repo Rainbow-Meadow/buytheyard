@@ -12,7 +12,6 @@ const FEATURED_NAMES = [
   "Red Lava Rock",
   "Hanging Baskets",
   "ASTM Playground Chips",
-  "Hand Tools & Long Handles",
 ] as const;
 
 const featured = FEATURED_NAMES
@@ -50,10 +49,10 @@ export default function FeaturedMaterials() {
             ))}
           </div>
 
-          {/* Desktop: Magazine — 1 large featured + 6 supporting */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6 items-start">
-            <div className="md:col-span-1 md:row-span-2 flex">
-              <ProductCard product={featured[0]} />
+          {/* Desktop: Magazine — tall featured (3 rows) + 6 supporting (2×3) */}
+          <div className="hidden md:grid md:grid-cols-3 md:grid-rows-3 md:auto-rows-fr gap-4 items-stretch">
+            <div className="md:col-span-1 md:row-span-3 flex">
+              <ProductCard product={featured[0]} variant="featured-tall" />
             </div>
             {featured.slice(1, 7).map((p) => (
               <ProductCard key={p.name} product={p} variant="gallery" />
