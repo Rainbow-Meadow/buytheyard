@@ -12,8 +12,8 @@ const STORY_BLOCKS: TileBlock[] = [
     number: "01",
     eyebrow: "Origin",
     title:
-      "Most landscape yards treat you like a ticket number. Loaded fast, out the gate, on to the next one.",
-    body: "I built this one to feel like the opposite.",
+      "Growing up, I was always outside — alongside my dad, around trucks and equipment, or spreading mulch in the backyard.",
+    body: "A career in this industry was never really a question.",
     size: "feature",
     tone: "kraft",
     padding: "lg",
@@ -21,24 +21,25 @@ const STORY_BLOCKS: TileBlock[] = [
   {
     id: "story-02-background",
     variant: "text",
-    eyebrow: "02 · Background",
-    body: "I grew up outside — trucks, equipment, mulch piles in the backyard with my dad. Construction was never the question. Only when.",
+    eyebrow: "02 · School",
+    body: "I graduated Wachusett Regional in 2016 and went straight on for an Entrepreneurship and Small Business degree.",
     size: "md",
     tone: "white",
   },
   {
     id: "story-03-yard-opens",
     variant: "text",
-    eyebrow: "03 · The yard opens",
-    body: "I graduated Wachusett Regional in 2016 and opened the yard that same spring. Two years later I finished my Entrepreneurship and Small Business degree — while already running one of my own.",
+    eyebrow: "03 · Putting it to work",
+    body: "While I was still in college I started applying what I was learning — and opened Buy The Yard before I graduated in 2018.",
     size: "md",
     tone: "white",
   },
   {
     id: "story-quote-model",
     variant: "quote",
-    eyebrow: "The whole business model",
-    quote: "If you call this number, I pick up. That's the whole business model.",
+    eyebrow: "In her own words",
+    quote:
+      "Opening this business was the perfect way to get into the industry. I can proudly say I found something that isn't just a job — it's something I take pride in and enjoy coming to every day.",
     attribution: "Abby Montalto · Owner",
     size: "feature",
     tone: "surface",
@@ -48,7 +49,7 @@ const STORY_BLOCKS: TileBlock[] = [
     id: "story-04-wbe",
     variant: "text",
     eyebrow: "04 · WBE",
-    body: "Year three, we made it official: Massachusetts Certified Woman-Owned Enterprise.",
+    body: "After three years in business, I made it official — Buy The Yard became a Massachusetts Certified Woman-Owned Enterprise.",
     size: "sm",
     tone: "kraft",
   },
@@ -77,12 +78,8 @@ const STORY_BLOCKS: TileBlock[] = [
   {
     id: "story-05-tenth-season",
     variant: "text",
-    eyebrow: "05 · 10th season",
-    body: (
-      <>
-        2026 is our <strong className="text-zinc-900">10th season</strong> — first spring mulch run through winter salt, same yard, same voice on the phone.
-      </>
-    ),
+    eyebrow: "05 · Still here",
+    body: "Nearly a decade in, same yard, same voice on the phone — and still genuinely glad to see you pull in.",
     size: "lg",
     tone: "white",
   },
@@ -104,7 +101,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "07 · Visit",
     body: (
       <>
-        Come by — <strong>2264 Main St., Jefferson, MA</strong>. Bring your questions, even the &ldquo;how much do I need?&rdquo; ones. Especially those.
+        Stop by the yard at <strong>2264 Main St., Jefferson, MA</strong>. We&rsquo;re always happy to answer questions and help you figure out what you need.
       </>
     ),
     cta: { label: "Visit the yard", to: "/contact" },
