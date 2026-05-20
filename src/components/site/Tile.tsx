@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, RotateCw } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -158,6 +158,31 @@ export type TileBlock =
          *  one URL works at any breakpoint. Falls back to `block.id`. */
         shareId?: string;
       };
+    })
+  | (BaseTile & {
+      variant: "carousel";
+      /** Each slide is a TileBlock rendered with `fill` inside the carousel
+       *  frame. The carousel itself owns the cell; slides page horizontally. */
+      slides: TileBlock[];
+      /** Autoplay slides. Pauses on hover/focus. */
+      auto?: boolean;
+      /** Autoplay interval in ms (default 5000). */
+      interval?: number;
+      /** Controls to show. Defaults to "both". */
+      controls?: "dots" | "arrows" | "both" | "none";
+      ariaLabel?: string;
+    })
+  | (BaseTile & {
+      variant: "flip";
+      /** Front face — rendered with `fill`. */
+      front: TileBlock;
+      /** Back face — rendered with `fill`. */
+      back: TileBlock;
+      /** Interaction that flips the card. Defaults to "click". */
+      trigger?: "click" | "hover";
+      /** Optional hint label rendered as a corner affordance (default "Tap to flip"). */
+      hint?: string;
+      ariaLabel?: string;
     });
 
 const sizeCls: Record<TileSize, string> = {
