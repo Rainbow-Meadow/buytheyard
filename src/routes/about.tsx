@@ -4,88 +4,45 @@ import wbeSeal from "@/assets/source/wbe-seal.webp";
 import yardPatio from "@/assets/source/yard-banner-5.webp";
 import yardDog from "@/assets/source/yard-dog.webp";
 import { TileGrid, type TileBlock } from "@/components/site/Tile";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import type { ReactNode } from "react";
 
-type YardItem = {
-  id: string;
-  src: string;
-  alt: string;
-  caption: string;
-  eyebrow: string;
-  title: string;
-  body: ReactNode;
-};
-
-const YARD_ITEMS: YardItem[] = [
-  {
-    id: "patio",
-    src: yardPatio,
-    alt: "The Buy The Yard sit-and-stay area — Adirondack chairs, umbrellas, and an OPEN flag at the edge of the yard",
-    caption: "Sit-and-stay corner",
+const YARD_DETAILS = {
+  patio: {
     eyebrow: "The yard",
     title: "The sit-and-stay corner",
     body: "This little corner started as somewhere to plant the OPEN flag — it ended up being where half my best conversations happen. Pull up a chair, grab a coffee while we figure out your load. It's a yard, but it's kind of a front porch too.",
   },
-  {
-    id: "charlie",
-    src: yardDog,
-    alt: "Charlie, the Buy The Yard office manager, watching the lot from the office window",
-    caption: "Charlie · office manager",
+  charlie: {
     eyebrow: "Office manager",
     title: "Charlie runs the front desk",
     body: "Charlie's the unofficial office manager around here. He handles greetings, accepts treats, and supervises every delivery from the office window. If you bring a kid or a dog along, he's the first one they'll want to meet.",
   },
+} as const;
+
+const YARD_PATIO_TILE = {
+  variant: "image" as const,
+  src: yardPatio,
+  alt: "The Buy The Yard sit-and-stay area — Adirondack chairs, umbrellas, and an OPEN flag at the edge of the yard",
+  overlay: { title: "Sit-and-stay corner", align: "bottom-left" as const },
+  details: YARD_DETAILS.patio,
+};
+
+const YARD_CHARLIE_TILE = {
+  variant: "image" as const,
+  src: yardDog,
+  alt: "Charlie, the Buy The Yard office manager, watching the lot from the office window",
+  overlay: { title: "Charlie · office manager", align: "bottom-left" as const },
+  details: YARD_DETAILS.charlie,
+};
+
+const YARD_MOBILE_BLOCKS: TileBlock[] = [
+  { id: "yard-m-patio", ...YARD_PATIO_TILE, size: "sm", aspect: "square" },
+  { id: "yard-m-charlie", ...YARD_CHARLIE_TILE, size: "sm", aspect: "square" },
 ];
 
-function YardDialog({
-  item,
-  children,
-  className,
-}: {
-  item: YardItem;
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <div
-          role="button"
-          tabIndex={0}
-          aria-label={`Open details: ${item.title}`}
-          className={`group block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-md ${className ?? ""}`}
-        >
-          {children}
-        </div>
-      </DialogTrigger>
-      <DialogContent className="max-w-3xl p-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100">
-        <div className="bg-black">
-          <img
-            src={item.src}
-            alt={item.alt}
-            className="w-full max-h-[70vh] object-contain"
-          />
-        </div>
-        <div className="p-6 md:p-8">
-          <p className="eyebrow text-brand mb-2">{item.eyebrow}</p>
-          <DialogTitle className="display-4 leading-tight text-white">
-            {item.title}
-          </DialogTitle>
-          <DialogDescription className="body text-zinc-300 mt-3">
-            {item.body}
-          </DialogDescription>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
+const YARD_DESKTOP_BLOCKS: TileBlock[] = [
+  { id: "yard-d-patio", ...YARD_PATIO_TILE, size: "lg", aspect: "wide" },
+  { id: "yard-d-charlie", ...YARD_CHARLIE_TILE, size: "sm", aspect: "portrait" },
+];
 
 const STORY_BLOCKS: TileBlock[] = [
   {
@@ -278,66 +235,14 @@ function AboutPage() {
             Around the Yard
           </h2>
 
-          {/* Mobile: Gallery — square image grid, captions tucked under */}
-          <div className="md:hidden grid grid-cols-2 gap-2">
-            {YARD_ITEMS.map((item) => (
-              <YardDialog key={`m-${item.id}`} item={item}>
-                <figure className="relative aspect-square overflow-hidden rounded-sm ring-1 ring-zinc-300 bg-kraft">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    width={1500}
-                    height={1500}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 pt-8 label text-white">
-                    {item.caption}
-                  </figcaption>
-                </figure>
-              </YardDialog>
-            ))}
+          {/* Mobile: square gallery */}
+          <div className="md:hidden">
+            <TileGrid blocks={YARD_MOBILE_BLOCKS} />
           </div>
 
-          {/* Desktop: Magazine — featured large + supporting small */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6">
-            <YardDialog item={YARD_ITEMS[0]} className="md:col-span-2">
-              <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={YARD_ITEMS[0].src}
-                    alt={YARD_ITEMS[0].alt}
-                    width={1500}
-                    height={2000}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <figcaption className="p-5 label text-zinc-600">
-                  The sit-and-stay corner — coffee, umbrellas, and the OPEN flag.
-                </figcaption>
-              </figure>
-            </YardDialog>
-            <YardDialog item={YARD_ITEMS[1]}>
-              <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
-                <div className="aspect-[4/5] overflow-hidden">
-                  <img
-                    src={YARD_ITEMS[1].src}
-                    alt={YARD_ITEMS[1].alt}
-                    width={1500}
-                    height={2000}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <figcaption className="p-5 label text-zinc-600">
-                  Charlie · office manager · accepts treats and pets.
-                </figcaption>
-              </figure>
-            </YardDialog>
+          {/* Desktop: magazine — featured wide + supporting portrait */}
+          <div className="hidden md:block">
+            <TileGrid blocks={YARD_DESKTOP_BLOCKS} />
           </div>
         </div>
       </section>
