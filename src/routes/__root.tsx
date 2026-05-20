@@ -118,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               telephone: "+1-508-579-9897",
               email: "abby@btymaterial.com",
               image: "https://buytheyard.lovable.app/og/og-home.jpg",
-              logo: "https://buytheyard.lovable.app/brandmark.png",
+              logo: "https://buytheyard.lovable.app/brandmark.webp",
               priceRange: "$$",
               address: {
                 "@type": "PostalAddress",
@@ -178,7 +178,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     links: [
-      { rel: "icon", type: "image/png", href: "/brandmark.png" },
+      { rel: "icon", type: "image/webp", href: "/brandmark.webp" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
       // iOS PWA launch images (apple-touch-startup-image)
