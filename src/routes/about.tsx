@@ -134,7 +134,7 @@ const STORY_BLOCKS: TileBlock[] = [
       </>
     ),
     size: "md",
-    tone: "surface",
+    tone: "gray",
   },
   {
     id: "story-gray-local",
@@ -143,7 +143,7 @@ const STORY_BLOCKS: TileBlock[] = [
     title: "Holden, Worcester, Princeton, Sterling, Rutland.",
     body: "Curbside drops across Central Mass, dispatched from the Jefferson lot.",
     size: "md",
-    tone: "gray",
+    tone: "kraft",
   },
   {
     id: "story-07-visit",
@@ -156,7 +156,7 @@ const STORY_BLOCKS: TileBlock[] = [
     ),
     cta: { label: "Visit the yard", to: "/contact" },
     size: "md",
-    tone: "kraft",
+    tone: "surface",
   },
 ];
 
