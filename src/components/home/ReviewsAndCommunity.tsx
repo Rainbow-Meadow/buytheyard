@@ -1,6 +1,9 @@
 import { lazy, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Facebook } from "lucide-react";
 import { LazyOnVisible } from "@/components/site/LazyOnVisible";
+import { TileGrid, type TileBlock } from "@/components/site/Tile";
+import communityCtms from "@/assets/source/community-ctms-loam.webp";
+import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 
 const CommunityTiles = lazy(() => import("@/components/home/CommunityTiles"));
 
@@ -21,6 +24,69 @@ const reviews = [
     name: "John Sarkisian",
     date: "May 7, 2019",
     quote: "Great customer service. Very professional. Prices are fair!",
+  },
+];
+
+const DESKTOP_BLOCKS: TileBlock[] = [
+  {
+    id: "reviews-intro",
+    variant: "text",
+    icon: <Facebook />,
+    eyebrow: "From Facebook · real customers",
+    title: "What the neighbors say.",
+    body: "Recommendations posted by people who actually pulled into the yard.",
+    size: "md",
+    tone: "surface",
+    padding: "lg",
+  },
+  ...reviews.map<TileBlock>((r, i) => ({
+    id: `review-${i}`,
+    variant: "quote",
+    eyebrow: `${r.name} · ${r.date}`,
+    quote: r.quote,
+    attribution: "Recommends Buy The Yard",
+    size: "md",
+    tone: i === 0 ? "white" : i === 1 ? "kraft" : "white",
+  })),
+  {
+    id: "community-ctms",
+    variant: "image",
+    src: communityCtms,
+    alt: "Buy The Yard dump truck unloading a pile of dark loam at Central Tree Middle School",
+    size: "md",
+    aspect: "wide",
+    focal: "center",
+    overlay: {
+      eyebrow: "Community",
+      title: "CTMS · loam + mulch donation",
+      align: "bottom-left",
+    },
+    details: {
+      shareId: "community-ctms",
+      eyebrow: "Central Tree Middle School · Jun 26, 2024",
+      title: "Loam and mulch for CTMS",
+      body: "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way.",
+    },
+  },
+  {
+    id: "community-rutland-memorial",
+    variant: "image",
+    src: communityRutland,
+    alt: "American flags and a memorial flower bed at the Rutland Public Safety building on Memorial Day",
+    size: "md",
+    aspect: "wide",
+    focal: "center",
+    overlay: {
+      eyebrow: "Community",
+      title: "Rutland Public Safety · Memorial Day",
+      align: "bottom-left",
+    },
+    details: {
+      shareId: "community-rutland-memorial",
+      eyebrow: "Rutland Fire Department · May 22, 2020",
+      title: "Memorial Day at the public safety building",
+      body: "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family.",
+    },
   },
 ];
 
@@ -119,7 +185,13 @@ export default function ReviewsAndCommunity() {
   return (
     <section className="section bg-kraft border-y border-zinc-300/60">
       <div className="max-w-7xl mx-auto px-5 md:px-6">
-        <div className="max-w-2xl flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
+        {/* Desktop: balanced tile grid */}
+        <div className="hidden md:block">
+          <TileGrid blocks={DESKTOP_BLOCKS} />
+        </div>
+
+        {/* Mobile: existing carousel + community */}
+        <div className="md:hidden max-w-2xl flex flex-col gap-3">
           <div>
             <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
               <Facebook className="size-3.5" />
@@ -129,29 +201,8 @@ export default function ReviewsAndCommunity() {
               What the neighbors say.
             </h2>
           </div>
-          <div className="hidden md:flex items-center gap-2">
-            <button
-              type="button"
-              aria-label="Previous review"
-              onClick={() => scrollReviewsByCard(-1)}
-              disabled={!reviewsCanPrev}
-              className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
-            >
-              <ChevronLeft className="size-5" />
-            </button>
-            <button
-              type="button"
-              aria-label="Next review"
-              onClick={() => scrollReviewsByCard(1)}
-              disabled={!reviewsCanNext}
-              className="size-10 inline-flex items-center justify-center ring-1 ring-zinc-300 text-zinc-900 hover:bg-zinc-900 hover:text-white transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-900"
-            >
-              <ChevronRight className="size-5" />
-            </button>
-          </div>
-        </div>
 
-        <div className="mt-6 md:mt-12 max-w-2xl">
+          <div className="mt-3 max-w-2xl">
           <div
             ref={reviewsRailRef}
             className="flex gap-3 md:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
@@ -179,18 +230,19 @@ export default function ReviewsAndCommunity() {
               </div>
             ))}
           </div>
-          <p className="md:hidden mt-3 eyebrow text-zinc-500">
+          <p className="mt-3 eyebrow text-zinc-500">
             Swipe to read more →
           </p>
-        </div>
+          </div>
 
-        <div className="mt-8 md:mt-12 max-w-2xl border-t border-zinc-300/60 pt-8">
-          <p className="eyebrow text-zinc-500 mb-3">
-            Community
-          </p>
-          <LazyOnVisible fallback={<div style={{ minHeight: 320 }} />}>
-            <CommunityTiles />
-          </LazyOnVisible>
+          <div className="mt-8 max-w-2xl border-t border-zinc-300/60 pt-8">
+            <p className="eyebrow text-zinc-500 mb-3">
+              Community
+            </p>
+            <LazyOnVisible fallback={<div style={{ minHeight: 320 }} />}>
+              <CommunityTiles />
+            </LazyOnVisible>
+          </div>
         </div>
       </div>
     </section>
