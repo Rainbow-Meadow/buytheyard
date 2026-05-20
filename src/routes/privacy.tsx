@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import yardPiles from "@/assets/source/yard-piles.webp";
+import { TileGrid, type TileBlock } from "@/components/site/Tile";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -371,19 +372,17 @@ function PrivacyPage() {
                 {b.intro && (
                   <p className={`mb-6 max-w-[60ch] ${pCls}`}>{b.intro}</p>
                 )}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                  {b.tiles.map((t) => (
-                    <article
-                      key={t.term}
-                      className={`bg-kraft ring-1 ring-zinc-300 rounded-md p-5 md:p-6 ${
-                        t.span === 2 ? "md:col-span-2" : ""
-                      }`}
-                    >
-                      <p className="eyebrow text-brand mb-2">{t.term}</p>
-                      <div className={pCls}>{t.body}</div>
-                    </article>
-                  ))}
-                </div>
+                <TileGrid
+                  blocks={b.tiles.map<TileBlock>((t) => ({
+                    id: `${b.id}-${t.term}`,
+                    variant: "definition",
+                    term: t.term,
+                    definition: t.body,
+                    size: t.span === 2 ? "feature" : "md",
+                    tone: "kraft",
+                    padding: "sm",
+                  }))}
+                />
               </section>
             ))}
 
@@ -398,28 +397,44 @@ function PrivacyPage() {
               <p className={`mb-6 max-w-[60ch] ${pCls}`}>
                 Questions about this policy, your information, or our terms?
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                <article className="bg-kraft ring-1 ring-zinc-300 rounded-md p-5 md:p-6">
-                  <p className="eyebrow text-brand mb-2">Mailing address</p>
-                  <p className="body-sm text-zinc-700 leading-relaxed">
-                    Buy The Yard, LLC<br />
-                    2264 Main St.<br />
-                    Jefferson, MA 01522
-                  </p>
-                </article>
-                <article className="bg-surface text-surface-foreground rounded-md p-5 md:p-6">
-                  <p className="eyebrow text-brand mb-2">Direct</p>
-                  <p className="body-sm text-zinc-300 leading-relaxed">
-                    <a href="mailto:abby@btymaterial.com" className="text-white underline underline-offset-4 hover:text-brand">
-                      abby@btymaterial.com
-                    </a>
-                    <br />
-                    <a href="tel:5085799897" className="text-white underline underline-offset-4 hover:text-brand">
-                      508.579.9897
-                    </a>
-                  </p>
-                </article>
-              </div>
+              <TileGrid
+                blocks={[
+                  {
+                    id: "contact-mail",
+                    variant: "text",
+                    eyebrow: "Mailing address",
+                    body: (
+                      <>
+                        Buy The Yard, LLC<br />
+                        2264 Main St.<br />
+                        Jefferson, MA 01522
+                      </>
+                    ),
+                    size: "md",
+                    tone: "kraft",
+                    padding: "sm",
+                  },
+                  {
+                    id: "contact-direct",
+                    variant: "text",
+                    eyebrow: "Direct",
+                    body: (
+                      <>
+                        <a href="mailto:abby@btymaterial.com" className="text-white underline underline-offset-4 hover:text-brand">
+                          abby@btymaterial.com
+                        </a>
+                        <br />
+                        <a href="tel:5085799897" className="text-white underline underline-offset-4 hover:text-brand">
+                          508.579.9897
+                        </a>
+                      </>
+                    ),
+                    size: "md",
+                    tone: "surface",
+                    padding: "sm",
+                  },
+                ]}
+              />
             </section>
           </div>
         </div>

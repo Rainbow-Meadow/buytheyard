@@ -3,6 +3,7 @@ import { CreditCard, Phone, Truck, Warehouse } from "lucide-react";
 import loadingTruck from "@/assets/source/loading-truck.webp";
 import yardPiles from "@/assets/source/yard-piles.webp";
 import yardTrucks from "@/assets/source/yard-trucks.webp";
+import { TileGrid, type TileBlock } from "@/components/site/Tile";
 
 export const Route = createFileRoute("/delivery")({
   head: () => ({
@@ -35,6 +36,47 @@ const POLICIES = [
   ["Mark your spot", "Please mark your preferred drop location with a tarp, bucket, cone, or similar marker so we can place the material accurately."],
   ["Be home or be specific", "If you can't be present at delivery, please send a photo and a brief note describing where the material should be placed."],
 ] as const;
+
+const POLICY_BLOCKS: TileBlock[] = POLICIES.map(([k, v], i) => ({
+  id: `policy-${i}`,
+  variant: "numbered",
+  number: String(i + 1).padStart(2, "0"),
+  title: k,
+  body: v,
+  size: "md",
+  tone: "white",
+}));
+
+const PAYMENT_BLOCKS: TileBlock[] = [
+  {
+    id: "payment",
+    variant: "text",
+    icon: <CreditCard />,
+    eyebrow: "Payment",
+    title: "Card Processing Fee",
+    body: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee.",
+    size: "third",
+    tone: "surface",
+  },
+  {
+    id: "same-day",
+    variant: "text",
+    eyebrow: "Same day",
+    title: "Call before noon",
+    body: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise allow approximately 48 hours.",
+    size: "third",
+    tone: "kraft",
+  },
+  {
+    id: "quote-cta",
+    variant: "cta",
+    eyebrow: "Need a quote?",
+    title: "Tap to call",
+    cta: { label: "508.579.9897", href: "tel:5085799897" },
+    size: "third",
+    tone: "kraft",
+  },
+];
 
 const STATS = [
   ["~25 mi", "Service radius"],
@@ -191,50 +233,13 @@ function DeliveryPage() {
           <h2 className="display-3 mb-6 md:mb-10 max-w-[20ch]">
             What to Know Before Delivery
           </h2>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {POLICIES.map(([k, v], i) => (
-              <li
-                key={k}
-                className="bg-white ring-1 ring-zinc-300 p-6 rounded-md flex flex-col"
-              >
-                <span className="display-3 text-brand leading-none">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="display-5 text-zinc-900 leading-tight mt-5">{k}</p>
-                <p className="body-sm text-zinc-700 mt-2">{v}</p>
-              </li>
-            ))}
-          </ul>
+          <TileGrid blocks={POLICY_BLOCKS} />
         </div>
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-          <article className="bg-surface text-surface-foreground p-7 rounded-md">
-            <CreditCard className="size-7 text-brand mb-4" />
-            <p className="eyebrow text-brand mb-2">Payment</p>
-            <h3 className="display-5 mb-3">Card Processing Fee</h3>
-            <p className="body-sm text-zinc-300">
-              The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee.
-            </p>
-          </article>
-          <article className="bg-kraft ring-1 ring-zinc-300 p-7 rounded-md">
-            <p className="eyebrow text-brand mb-2">Same day</p>
-            <h3 className="display-5 mb-3">Call before noon</h3>
-            <p className="body-sm text-zinc-700">
-              Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise allow approximately 48 hours.
-            </p>
-          </article>
-          <article className="bg-kraft ring-1 ring-zinc-300 p-7 rounded-md">
-            <p className="eyebrow text-brand mb-2">Need a quote?</p>
-            <h3 className="display-5 mb-3">Tap to call</h3>
-            <a
-              href="tel:5085799897"
-              className="mt-1 inline-flex items-center gap-2 bg-brand text-brand-foreground px-5 h-11 label hover:opacity-90"
-            >
-              <Phone className="size-4" /> 508.579.9897
-            </a>
-          </article>
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <TileGrid blocks={PAYMENT_BLOCKS} />
         </div>
       </section>
     </>

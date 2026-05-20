@@ -20,7 +20,7 @@ import { Link } from "@tanstack/react-router";
  * (see styles.css tile-grid schema).
  */
 
-export type TileSize = "sm" | "md" | "lg" | "feature";
+export type TileSize = "sm" | "third" | "md" | "lg" | "feature";
 export type TileTone = "kraft" | "surface" | "brand" | "white";
 export type TilePadding = "sm" | "md" | "lg";
 
@@ -33,7 +33,20 @@ interface BaseTile {
   tall?: boolean;
   padding?: TilePadding;
   className?: string;
+  /** Optional leading icon — rendered at the top of text / numbered /
+   *  definition / cta tiles. Typically a lucide-react `<Icon className="size-7">`. */
+  icon?: ReactNode;
 }
+
+/** CTA target — internal route (`to`), external URL or tel/mailto (`href`).
+ *  Exactly one of `to` or `href` should be set. */
+export type TileCta = {
+  label: string;
+  to?: string;
+  href?: string;
+  /** Open external link in a new tab. Defaults to true when href is http(s). */
+  external?: boolean;
+};
 
 export type TileBlock =
   | (BaseTile & {
@@ -65,7 +78,7 @@ export type TileBlock =
       eyebrow?: string;
       title?: string;
       body?: ReactNode;
-      cta: { label: string; to: string };
+      cta: TileCta;
     })
   | (BaseTile & {
       variant: "stat";
@@ -89,11 +102,12 @@ export type TileBlock =
       /** Optional link wrapping the entire tile. */
       to?: string;
       /** Optional CTA label rendered alongside the overlay text. */
-      cta?: { label: string; to: string };
+      cta?: TileCta;
     });
 
 const sizeCls: Record<TileSize, string> = {
   sm: "tile-sm",
+  third: "tile-third",
   md: "tile-md",
   lg: "tile-lg",
   feature: "tile-feature",
@@ -144,6 +158,35 @@ function attributionToneCls(tone: TileTone) {
   return isLightTone(tone) ? "meta text-zinc-600" : "meta text-zinc-400";
 }
 
+function iconToneCls(tone: TileTone) {
+  return tone === "brand" ? "text-brand-foreground" : "text-brand";
+}
+
+function CtaLink({ cta, className }: { cta: TileCta; className: string }) {
+  if (cta.href) {
+    const isExternal =
+      cta.external ?? /^https?:\/\//i.test(cta.href);
+    return (
+      <a
+        href={cta.href}
+        className={className}
+        {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
+      >
+        {cta.label}
+      </a>
+    );
+  }
+  return (
+    <Link to={cta.to ?? "/"} className={className}>
+      {cta.label}
+    </Link>
+  );
+}
+
+function TileIcon({ icon, tone }: { icon: ReactNode; tone: TileTone }) {
+  return <div className={`${iconToneCls(tone)} mb-4 [&>*]:size-7`}>{icon}</div>;
+}
+
 export function TileGrid({ blocks }: { blocks: TileBlock[] }) {
   return (
     <div className="tile-grid">
@@ -174,6 +217,7 @@ export function Tile(block: TileBlock) {
     case "text":
       return (
         <article className={shell}>
+          {block.icon && <TileIcon icon={block.icon} tone={tone} />}
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>}
           {block.title && <p className="display-5 leading-snug">{block.title}</p>}
           {block.body && (
@@ -187,6 +231,7 @@ export function Tile(block: TileBlock) {
     case "numbered":
       return (
         <article className={`${shell} flex flex-col`}>
+          {block.icon && <TileIcon icon={block.icon} tone={tone} />}
           <p className="display-3 text-brand leading-none">{block.number}</p>
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mt-4`}>{block.eyebrow}</p>}
           {block.title && (
@@ -218,6 +263,7 @@ export function Tile(block: TileBlock) {
     case "definition":
       return (
         <article className={shell}>
+          {block.icon && <TileIcon icon={block.icon} tone={tone} />}
           <p className="display-5 leading-snug">{block.term}</p>
           <div className={`body-sm ${bodyToneCls(tone)} mt-2`}>{block.definition}</div>
         </article>
@@ -226,6 +272,7 @@ export function Tile(block: TileBlock) {
     case "cta":
       return (
         <article className={`${shell} flex flex-col`}>
+          {block.icon && <TileIcon icon={block.icon} tone={tone} />}
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>}
           {block.title && <p className="display-5 leading-snug">{block.title}</p>}
           {block.body && (
@@ -233,12 +280,10 @@ export function Tile(block: TileBlock) {
               {block.body}
             </div>
           )}
-          <Link
-            to={block.cta.to}
+          <CtaLink
+            cta={block.cta}
             className="mt-5 inline-flex items-center gap-2 label border-b border-current self-start hover:opacity-80"
-          >
-            {block.cta.label}
-          </Link>
+          />
         </article>
       );
 
@@ -297,12 +342,10 @@ export function Tile(block: TileBlock) {
                     <div className="body-sm text-zinc-200 mt-2">{block.overlay.body}</div>
                   )}
                   {block.cta && (
-                    <Link
-                      to={block.cta.to}
+                    <CtaLink
+                      cta={block.cta}
                       className="mt-4 inline-flex items-center gap-2 label border-b border-current hover:opacity-80"
-                    >
-                      {block.cta.label}
-                    </Link>
+                    />
                   )}
                 </div>
               </div>
