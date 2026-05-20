@@ -177,18 +177,16 @@ function QuotePage() {
       <section className="section bg-base">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-3xl mx-auto px-5 md:px-6 space-y-12"
+          className="max-w-3xl mx-auto px-5 md:px-6 space-y-8 md:space-y-10"
           noValidate
         >
           {/* PRODUCTS */}
-          <fieldset>
-            <legend className="display-4 mb-2">
-              <span className="text-brand">01.</span> What do you need?
-            </legend>
-            <p className="text-sm text-zinc-600 mb-3 md:mb-6">
-              One row per material. Ballpark the quantity — we'll dial it in on the phone.
-            </p>
-
+          <StepTile
+            number="01"
+            eyebrow="Step 01 · Materials"
+            title="What do you need?"
+            helper="One row per material. Ballpark the quantity — we'll dial it in on the phone."
+          >
             <div className="space-y-4">
               {items.fields.map((field, idx) => {
                 const productErr = formState.errors.items?.[idx]?.product;
@@ -323,14 +321,15 @@ function QuotePage() {
             >
               <Plus className="size-4" /> Add another product
             </button>
-          </fieldset>
+          </StepTile>
 
           {/* FULFILLMENT */}
-          <fieldset>
-            <legend className="display-4 mb-3 md:mb-6">
-              <span className="text-brand">02.</span> Pickup or delivery?
-            </legend>
-
+          <StepTile
+            number="02"
+            eyebrow="Step 02 · Fulfillment"
+            title="Pickup or delivery?"
+            helper="Pick one. We'll show delivery details if you need them."
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {(["Pickup", "Delivery"] as const).map((opt) => (
                 <label
@@ -476,14 +475,15 @@ function QuotePage() {
                 )}
               </div>
             )}
-          </fieldset>
+          </StepTile>
 
           {/* CONTACT */}
-          <fieldset>
-            <legend className="display-4 mb-3 md:mb-6">
-              <span className="text-brand">03.</span> How do we reach you?
-            </legend>
-
+          <StepTile
+            number="03"
+            eyebrow="Step 03 · Contact"
+            title="How do we reach you?"
+            helper="So Abby can come back with the number."
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className={labelCls}>Name</label>
@@ -544,21 +544,20 @@ function QuotePage() {
                 </div>
               </div>
             </div>
-          </fieldset>
+          </StepTile>
 
           {/* NOTES */}
-          <fieldset>
-            <legend className="display-4 mb-2">
-              <span className="text-brand">04.</span> Anything else?
-            </legend>
-            <p className="text-sm text-zinc-600 mb-3">
-              Optional. Steep driveway, gate code, "leave it by the rhododendron" — anything Abby should know.
-            </p>
+          <StepTile
+            number="04"
+            eyebrow="Step 04 · Notes"
+            title="Anything else?"
+            helper={'Optional. Steep driveway, gate code, "leave it by the rhododendron" — anything Abby should know.'}
+          >
             <NotesField register={register} watch={watch} />
             {formState.errors.notes && (
               <p className={errorCls}>{formState.errors.notes.message}</p>
             )}
-          </fieldset>
+          </StepTile>
 
           <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="text-xs text-zinc-600 max-w-[40ch]">
@@ -602,6 +601,44 @@ function NotesField({
         {value.length}/500
       </p>
     </div>
+  );
+}
+
+function StepTile({
+  number,
+  eyebrow,
+  title,
+  helper,
+  children,
+}: {
+  number: string;
+  eyebrow: string;
+  title: string;
+  helper?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <fieldset className="bg-kraft ring-1 ring-zinc-300 rounded-md overflow-hidden">
+      {/* Mobile header */}
+      <div className="md:hidden p-5 border-b border-zinc-300/70">
+        <p className="display-2 leading-none text-brand">{number}</p>
+        <p className="eyebrow text-zinc-600 mt-3">{eyebrow}</p>
+        <p className="display-4 mt-1 text-zinc-900">{title}</p>
+        {helper && <p className="body-sm text-zinc-600 mt-2">{helper}</p>}
+      </div>
+      {/* Desktop header */}
+      <div className="hidden md:grid grid-cols-12 border-b border-zinc-300/70">
+        <div className="col-span-3 bg-surface text-surface-foreground flex items-center justify-center p-6">
+          <p className="display-1 leading-none text-brand">{number}</p>
+        </div>
+        <div className="col-span-9 p-7">
+          <p className="eyebrow text-zinc-600">{eyebrow}</p>
+          <p className="display-4 mt-1 text-zinc-900">{title}</p>
+          {helper && <p className="body-sm text-zinc-600 mt-2 max-w-[55ch]">{helper}</p>}
+        </div>
+      </div>
+      <div className="p-5 md:p-7">{children}</div>
+    </fieldset>
   );
 }
 
