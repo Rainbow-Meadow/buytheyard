@@ -5,6 +5,7 @@ import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.
 import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
+import { ProductGroup } from "@/components/site/ProductGroup";
 
 const reviews = [
   {
@@ -394,22 +395,24 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Mobile: Gallery — 2-col image-overlay grid */}
-          <div className="md:hidden grid grid-cols-2 gap-2">
-            {featured.map((p) => (
-              <ProductCard key={p.name} product={p} variant="gallery" />
-            ))}
-          </div>
-
-          {/* Desktop: Magazine — 1 large featured + 6 supporting */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6 items-start">
-            <div className="md:col-span-1 md:row-span-2 flex">
-              <ProductCard product={featured[0]} />
+          <ProductGroup products={featured}>
+            {/* Mobile: Gallery — 2-col image-overlay grid */}
+            <div className="md:hidden grid grid-cols-2 gap-2">
+              {featured.map((p) => (
+                <ProductCard key={p.name} product={p} variant="gallery" />
+              ))}
             </div>
-            {featured.slice(1, 7).map((p) => (
-              <ProductCard key={p.name} product={p} variant="gallery" />
-            ))}
-          </div>
+
+            {/* Desktop: Magazine — 1 large featured + 6 supporting */}
+            <div className="hidden md:grid md:grid-cols-3 gap-6 items-start">
+              <div className="md:col-span-1 md:row-span-2 flex">
+                <ProductCard product={featured[0]} />
+              </div>
+              {featured.slice(1, 7).map((p) => (
+                <ProductCard key={p.name} product={p} variant="gallery" />
+              ))}
+            </div>
+          </ProductGroup>
         </div>
       </section>
 
