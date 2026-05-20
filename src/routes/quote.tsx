@@ -600,6 +600,7 @@ function NotesField({
     <div className="relative">
       <textarea
         id="quote-notes"
+        aria-label="Notes"
         rows={4}
         maxLength={500}
         placeholder="e.g. Please leave behind the gate if I'm not home — there's a tarp marking the spot."
