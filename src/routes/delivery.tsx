@@ -31,10 +31,10 @@ export const Route = createFileRoute("/delivery")({
 });
 
 const POLICIES = [
-  ["Driveway-to-curbline only", "Deliveries are made to the driveway or curbline only. This protects your lawn and any gas, water, or irrigation lines beneath it."],
-  ["1 yard minimum", "Call before noon for same-day delivery when available; otherwise, please allow approximately 48 hours."],
-  ["Mark your spot", "Please mark your preferred drop location with a tarp, bucket, cone, or similar marker so we can place the material accurately."],
-  ["Be home or be specific", "If you can't be present at delivery, please send a photo and a brief note describing where the material should be placed."],
+  ["Driveway-to-curbline only", "We drop on the driveway or at the curbline. Keeps your lawn safe, and any gas, water, or irrigation lines beneath it."],
+  ["1 yard minimum", "Call before noon and we'll try for same-day. Otherwise plan on about 48 hours."],
+  ["Mark your spot", "Mark the drop spot with a tarp, bucket, or cone. We'll put the pile right there."],
+  ["Be home or be specific", "If you won't be home, send a photo and a quick note on where to dump it."],
 ] as const;
 
 const POLICY_BLOCKS: TileBlock[] = POLICIES.map(([k, v], i) => ({
@@ -54,7 +54,7 @@ const PAYMENT_BLOCKS: TileBlock[] = [
     icon: <CreditCard />,
     eyebrow: "Payment",
     title: "Card Processing Fee",
-    body: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee.",
+    body: "The 4% surcharge is a pass-through from our card processor. Cash and check skip the fee.",
     size: "third",
     tone: "surface",
   },
@@ -63,7 +63,7 @@ const PAYMENT_BLOCKS: TileBlock[] = [
     variant: "text",
     eyebrow: "Same day",
     title: "Call before noon",
-    body: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise allow approximately 48 hours.",
+    body: "Call before noon and we'll try for same-day, depending on the route. Otherwise plan on about 48 hours.",
     size: "third",
     tone: "kraft",
   },
@@ -107,10 +107,10 @@ function DeliveryPage() {
               You call. <span className="text-brand">We deliver.</span>
             </h1>
             <p className="mt-4 text-zinc-300 text-base">
-              Curbside delivery from our Jefferson, MA yard across Central Mass. Call before noon for same-day when available.
+              Curbside delivery from our Jefferson yard across Central Mass. Call before noon and we'll try for same-day.
             </p>
             <p className="mt-3 text-sm text-zinc-400">
-              Full town list on our{" "}
+              Full town list is on our{" "}
               <a href="/service-area" className="underline underline-offset-4 hover:text-brand">service area page</a>.
             </p>
           </div>
@@ -125,10 +125,10 @@ function DeliveryPage() {
                 You call. <span className="text-brand">We deliver.</span>
               </h1>
               <p className="mt-6 text-zinc-400 max-w-[52ch] text-lg">
-                Curbside delivery from our Jefferson, MA yard across Central Mass. Call before noon for same-day when available.
+                Curbside delivery from our Jefferson yard across Central Mass. Call before noon and we'll try for same-day.
               </p>
               <p className="mt-4 text-sm text-zinc-500">
-                Full town list on our{" "}
+                Full town list is on our{" "}
                 <a href="/service-area" className="underline underline-offset-4 hover:text-brand">service area page</a>.
               </p>
             </div>
@@ -195,15 +195,14 @@ function DeliveryPage() {
               <Warehouse className="size-10 text-brand mb-6" />
               <h2 className="display-3 mb-4">Pick it up</h2>
               <p className="text-zinc-700 mb-6">
-                Bring a truck or trailer during business hours — no appointment
-                necessary. We'll load you on arrival.
+                Bring a truck or trailer during business hours. No appointment needed. We'll load you when you pull in.
               </p>
               <div className="space-y-2 text-sm text-zinc-700">
                 <p><strong>Address:</strong> 2264 Main St., Jefferson, MA 01522</p>
                 <p><strong>Hours (4/1 – 8/1):</strong> Mon–Fri 8a–5p · Sat 8a–3p · Sun closed</p>
                 <p className="text-xs text-zinc-500 pt-2">
-                  Opening for the 2026 season on April 1. After 8/1: by appointment.
-                  Open year-round — winter salt &amp; ice melt available, call for pickup hours.
+                  Opening for the 2026 season on April 1. After 8/1, pickup is by appointment.
+                  We're open year-round for winter salt and ice melt, so call for loading hours.
                 </p>
               </div>
             </div>
@@ -212,9 +211,7 @@ function DeliveryPage() {
               <Truck className="size-10 text-brand mb-6" />
               <h2 className="display-3 mb-4">Delivery</h2>
               <p className="text-zinc-300 mb-6">
-                Curbside delivery throughout Central Massachusetts. Call to
-                confirm your delivery zone, scheduling window, and final price
-                before your order is dispatched.
+                We deliver curbside throughout Central Mass. Call us to confirm your zone, the scheduling window, and the final price before we load the truck.
               </p>
               <a
                 href="tel:5085799897"

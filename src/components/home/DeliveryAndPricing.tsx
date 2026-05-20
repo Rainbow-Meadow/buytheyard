@@ -13,7 +13,7 @@ export default function DeliveryAndPricing() {
               Delivery Across <span className="text-brand">Central Mass</span>
             </h2>
             <p className="lead mt-4 md:mt-6 text-zinc-700 max-w-[48ch]">
-              Curbside delivery across Central Mass. Call before noon for same-day when available.
+              Curbside delivery across Central Mass. Call before noon and we'll try for same-day.
             </p>
             <Link
               to="/delivery"
@@ -24,10 +24,10 @@ export default function DeliveryAndPricing() {
           </div>
           <div className="grid grid-cols-2 gap-2 md:gap-3">
             {[
-              ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
-              ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
-              ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
-              ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
+              ["Driveway-to-curb only", "We drop on the driveway or at the curbline. Keeps lawns and underground lines safe."],
+              ["1 yard minimum", "Call before noon for same-day. Otherwise plan on about 48 hours."],
+              ["Mark your spot", "Drop a tarp, bucket, or cone where you want the pile. We'll put it right there."],
+              ["4% card fee", "Pass-through from our processor. Cash and check skip the fee."],
             ].map(([k, v], i) => (
               <article key={k} className="bg-white ring-1 ring-zinc-300/60 p-5 md:p-6 rounded-md">
                 <p className="eyebrow text-brand mb-2">{String(i + 1).padStart(2, "0")}</p>
@@ -48,10 +48,10 @@ export default function DeliveryAndPricing() {
               Today's prices by phone
             </p>
             <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[18ch]">
-              Call for Today's Prices
+              Call for today's price
             </h2>
             <p className="body mt-4 md:mt-6 text-zinc-700 max-w-[52ch] text-pretty">
-              Prices shift with the season, so we quote by phone. Cash and check avoid the 4% card fee.
+              Prices shift with the season, so we quote by phone. Cash and check skip the 4% card fee.
             </p>
             <div className="mt-5 md:mt-8 flex flex-wrap items-center gap-3">
               <a
@@ -59,7 +59,7 @@ export default function DeliveryAndPricing() {
                 className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 transition-opacity"
               >
                 <Phone className="size-4" />
-                Tap to call — 508.579.9897
+                Tap to call · 508.579.9897
               </a>
               <Link
                 to="/quote"

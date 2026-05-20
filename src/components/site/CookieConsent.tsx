@@ -79,8 +79,8 @@ export function CookieConsent() {
         >
           <div className="max-w-5xl mx-auto px-5 md:px-6 py-4 md:py-5 flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
             <p className="text-sm text-zinc-300 leading-relaxed flex-1">
-              We use cookies to make the site work and to understand how
-              visitors use it. Essential cookies are always on. See our{" "}
+              We use cookies to make the site work and to see how visitors use
+              it. Essential cookies are always on. See our{" "}
               <Link
                 to="/privacy"
                 hash="cookies"
@@ -115,15 +115,15 @@ export function CookieConsent() {
           <DialogHeader>
             <DialogTitle>Cookie preferences</DialogTitle>
             <DialogDescription>
-              Choose which categories of cookies you allow. You can change this
-              any time from the footer.
+              Pick which categories of cookies you allow. You can change this any
+              time from the footer.
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-5 py-2">
             <Row
               title="Essential"
-              description="Required for the site to work — security and remembering your cookie preferences."
+              description="Required for the site to work. Covers security and remembering your cookie preferences."
               checked
               disabled
               onChange={() => {}}

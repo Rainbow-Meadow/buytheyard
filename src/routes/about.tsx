@@ -10,7 +10,7 @@ const YARD_DETAILS = {
     shareId: "patio",
     eyebrow: "The yard",
     title: "The sit-and-stay corner",
-    body: "This little corner started as somewhere to plant the OPEN flag — it ended up being where half my best conversations happen. Pull up a chair, grab a coffee while we figure out your load. It's a yard, but it's kind of a front porch too.",
+    body: "This corner started as a spot to plant the OPEN flag. It ended up being where half my best conversations happen. Pull up a chair, grab a coffee while we figure out your load. It's a yard, but it's kind of a front porch too.",
   },
   charlie: {
     shareId: "charlie",
@@ -53,7 +53,7 @@ const STORY_BLOCKS: TileBlock[] = [
     number: "01",
     eyebrow: "Origin",
     title:
-      "Growing up, I was always outside — alongside my dad, around trucks and equipment, or spreading mulch in the backyard.",
+      "Growing up I was always outside, alongside my dad, around trucks and equipment, or spreading mulch in the backyard.",
     body: "A career in this industry was never really a question.",
     size: "feature",
     tone: "kraft",
@@ -71,7 +71,7 @@ const STORY_BLOCKS: TileBlock[] = [
     id: "story-03-yard-opens",
     variant: "text",
     eyebrow: "03 · Putting it to work",
-    body: "While I was still in college I started applying what I was learning — and opened Buy The Yard before I graduated in 2018.",
+    body: "While I was still in college I started putting what I was learning to work. I opened Buy The Yard before I graduated in 2018.",
     size: "md",
     tone: "white",
   },
@@ -80,7 +80,7 @@ const STORY_BLOCKS: TileBlock[] = [
     variant: "quote",
     eyebrow: "In her own words",
     quote:
-      "Opening this business was the perfect way to get into the industry. I can proudly say I found something that isn't just a job — it's something I take pride in and enjoy coming to every day.",
+      "Opening this business was the perfect way to get into the industry. I can proudly say I found something that isn't just a job. It's something I take pride in and enjoy coming to every day.",
     attribution: "Abby Montalto · Owner",
     size: "feature",
     tone: "surface",
@@ -90,7 +90,7 @@ const STORY_BLOCKS: TileBlock[] = [
     id: "story-04-wbe",
     variant: "text",
     eyebrow: "04 · WBE",
-    body: "After three years in business, I made it official — Buy The Yard became a Massachusetts Certified Woman-Owned Enterprise.",
+    body: "After three years in business I made it official. Buy The Yard became a Massachusetts Certified Woman-Owned Enterprise.",
     size: "sm",
     tone: "kraft",
   },
@@ -120,7 +120,7 @@ const STORY_BLOCKS: TileBlock[] = [
     id: "story-05-tenth-season",
     variant: "text",
     eyebrow: "05 · Still here",
-    body: "Nearly a decade in, same yard, same voice on the phone — and still genuinely glad to see you pull in.",
+    body: "Nearly a decade in. Same yard, same voice on the phone, and still genuinely glad to see you pull in.",
     size: "lg",
     tone: "white",
   },
@@ -142,7 +142,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "07 · Visit",
     body: (
       <>
-        Stop by the yard at <strong>2264 Main St., Jefferson, MA</strong>. We&rsquo;re always happy to answer questions and help you figure out what you need.
+        Stop by the yard at <strong>2264 Main St., Jefferson, MA</strong>. Happy to answer questions and help you figure out what you need.
       </>
     ),
     cta: { label: "Visit the yard", to: "/contact" },

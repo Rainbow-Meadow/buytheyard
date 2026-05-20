@@ -94,16 +94,16 @@ const BLOCKS: Block[] = [
             <ul className="mt-3 space-y-2 list-disc pl-5">
               <li>
                 <strong className="font-semibold text-zinc-900">Essential</strong>{" "}
-                — always on. Required for the site to work, including security
+                · always on. Required for the site to work, including security
                 and remembering your cookie preferences.
               </li>
               <li>
                 <strong className="font-semibold text-zinc-900">Analytics</strong>{" "}
-                — off by default. Helps us understand which pages are useful.
+                · off by default. Helps us understand which pages are useful.
               </li>
               <li>
                 <strong className="font-semibold text-zinc-900">Marketing</strong>{" "}
-                — off by default. Reserved for measuring ads. We do not
+                · off by default. Reserved for measuring ads. We don't
                 currently run any marketing cookies.
               </li>
             </ul>
@@ -200,7 +200,7 @@ const BLOCKS: Block[] = [
     tiles: [
       { term: "Frequency", body: "Message frequency varies based on your order activity." },
       { term: "Rates", body: "Message and data rates may apply." },
-      { term: "Opt out", body: <>Reply <strong className="text-zinc-900">STOP</strong> at any time to opt out.</> },
+      { term: "Opt out", body: <>Reply <strong className="text-zinc-900">STOP</strong> any time to opt out.</> },
       {
         term: "Help",
         body: (

@@ -29,7 +29,7 @@ export default function FeaturedMaterials() {
               Bulk materials &amp; garden center
             </p>
             <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch] mt-4 md:mt-6">
-              Featured Materials
+              Featured materials
             </h2>
           </div>
           <div className="flex items-center gap-4">
@@ -37,7 +37,7 @@ export default function FeaturedMaterials() {
               to="/products"
               className="inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
             >
-              See full catalog <ArrowRight className="size-4" />
+              See the full catalog <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>

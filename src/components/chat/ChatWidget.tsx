@@ -17,7 +17,7 @@ function buildMailto(messages: UIMessage[]): string {
     .map((m) => `${m.role === "user" ? "Visitor" : "BTY Helper"}: ${getText(m)}`)
     .join("\n\n");
   const body = encodeURIComponent(
-    `Hi Abby,\n\nI was chatting with BTY Helper on your site and would like to follow up.\n\n— My name:\n— Best phone:\n— What I need:\n\n---\nChat transcript:\n${transcript || "(no messages yet)"}`,
+    `Hi Abby,\n\nI was chatting with BTY Helper on your site and would like to follow up.\n\nMy name:\nBest phone:\nWhat I need:\n\n---\nChat transcript:\n${transcript || "(no messages yet)"}`,
   );
   const subject = encodeURIComponent("Question from buytheyard.lovable.app");
   return `mailto:${ABBY_EMAIL}?subject=${subject}&body=${body}`;

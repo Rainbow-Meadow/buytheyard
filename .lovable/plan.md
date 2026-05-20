@@ -1,99 +1,77 @@
 ## Goal
 
-Cut the work the browser has to do before first paint on `/` by deferring the three remaining eager loads identified in the audit: render-blocking Google Fonts, the ChatWidget JS bundle, and the rest of the below-the-fold sections that still ship in the home route chunk.
+A sitewide copywriting pass so every visitor-facing string sounds like Abby on the phone: warm, direct, plainspoken. And: **zero em dashes** (`—`) in user-visible copy.
 
-## Changes
+## Abby's voice guide (written first, applied everywhere)
 
-### 1. Async Google Fonts (no render-blocking request) — `src/routes/__root.tsx`
+**Who she is in writing:** the owner picking up the phone at the yard. Knows her stuff, doesn't oversell, treats you like a neighbor who pulled into the lot.
 
-Replace the render-blocking stylesheet entry with the standard "preload + print-swap" pattern, keep the `preconnect` hints, and keep `display=swap` so the swap is invisible.
+**5 rules**
 
-```ts
-links: [
-  // ...existing icon / manifest / splash links unchanged
-  { rel: "stylesheet", href: appCss },
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-  // Preload then swap to stylesheet — no longer blocks first paint
-  {
-    rel: "preload",
-    as: "style",
-    href: "https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
-    media: "print",
-    // applied at runtime; harmless to SSR users without JS (they keep media=print, system font shows; identical to current display=swap fallback window)
-    onLoad: "this.media='all'" as unknown as undefined,
-  },
-],
-```
+1. **First-person, plural by default.** "We deliver Tuesday." "Give us a call." Use "I" only on the About page and signed notes.
+2. **Short sentences. One idea each.** If a sentence has two thoughts, split it with a period.
+3. **Plain words over marketing words.** "We'll quote it" not "Get pricing today." "Mulch" not "premium organic mulch solutions."
+4. **Concrete over abstract.** Name the town, the truck, the time. "Call before noon for same-day" beats "fast delivery available."
+5. **Friendly, not folksy.** No "y'all," no "howdy," no exclamation-point spam. Warmth comes from specificity and offering help, not from punctuation.
 
-(Implementation detail: TanStack's `head().links` only emits standard attrs, so the `onLoad="this.media='all'"` is injected via a tiny `scripts: [{ children: "..." }]` entry that runs once after parse and flips the matching link's `media`. We'll add ~10 lines of JS for that — no library.)
+**Punctuation rules (the no-em-dash rule)**
 
-### 2. Lazy-mount `ChatWidget` after idle / on intent — `src/routes/__root.tsx` + new `src/components/chat/ChatLauncher.tsx`
+Replace every `—` with:
+- **A period** when joining two complete thoughts. *"Prices shift with the season. We quote by phone."*
+- **A comma** when adding a clause. *"Curbside delivery across Central Mass, usually within 48 hours."*
+- **Parentheses** for true asides. *"Cash and check (no card fee) work great too."*
+- **A colon** when introducing a list or detail. *"One rule: mark your drop spot."*
+- Never replace with an en dash (`–`) or double hyphen.
 
-Today: `ChatWidget` is imported statically, pulling `@ai-sdk/react` + `ai` into every route's initial JS.
+Keep hyphens in compounds (`woman-owned`, `driveway-to-curb`) and number ranges (`2–5 yards` stays a hyphen).
 
-New plan:
-- Create `ChatLauncher.tsx` — a ~50-line component that renders only the FAB (button + icon) using existing tokens, no chat state.
-- On `requestIdleCallback` (or after first user interaction: scroll / pointermove / touchstart, whichever first), it dynamically `import("./ChatWidget")` and swaps itself out for the real widget.
-- Clicking the FAB before the prefetch finishes triggers the import immediately and opens the panel on resolve.
-- Replace `<ChatWidget />` in `__root.tsx` with `<ChatLauncher />`.
+## Scope (user-visible copy only)
 
-Net: `@ai-sdk/react` + `ai` drop out of the root chunk and load only when the user is idle or actually interacts.
+Per the user's answer, skip SEO `<head>` meta/titles and skip code comments / console strings. Rewrite copy in:
 
-### 3. Code-split the rest of `/` below-the-fold — `src/routes/index.tsx`
+**Routes**
+- `src/routes/index.tsx` (hero, all body copy)
+- `src/routes/about.tsx` (story tiles, yard tile descriptions, CTAs)
+- `src/routes/delivery.tsx`
+- `src/routes/service-area.tsx`
+- `src/routes/products.tsx`
+- `src/routes/quote.tsx` (labels, helper text, success/error messages)
+- `src/routes/contact.tsx`
+- `src/routes/privacy.tsx` (only the visible body, keep legal substance intact)
 
-Extract into `src/components/home/`:
+**Home sections**
+- `DeliveryAndPricing.tsx`, `FacebookSpotlight.tsx`, `FaqSection.tsx`, `FeaturedMaterials.tsx`, `ReviewsAndCommunity.tsx`
 
-- `FacebookSpotlight.tsx` — section currently lines 402–447.
-- `ReviewsAndCommunity.tsx` — section lines 449–526, including the existing `CommunityTiles` lazy-on-visible and the reviews carousel state (`reviewsRailRef`, `scrollReviewsByCard`, `reviewsCanPrev`, `reviewsCanNext`). Move those hooks/refs into the new component so the carousel JS is in the lazy chunk, not the route chunk.
-- `DeliveryAndPricing.tsx` — sections 528–596.
-- `FaqSection.tsx` — section 598–677.
+**Site chrome**
+- `SiteHeader.tsx`, `SiteFooter.tsx`, `CookieConsent.tsx`, `SplashScreen.tsx`
 
-In `index.tsx`:
+**Data files (visitor-facing strings)**
+- `src/data/products.ts` (names stay; rewrite descriptions, taglines)
+- `src/data/promos.ts` (already short; voice + em-dash pass)
 
-```tsx
-const FacebookSpotlight = lazy(() => import("@/components/home/FacebookSpotlight"));
-const ReviewsAndCommunity = lazy(() => import("@/components/home/ReviewsAndCommunity"));
-const DeliveryAndPricing = lazy(() => import("@/components/home/DeliveryAndPricing"));
-const FaqSection = lazy(() => import("@/components/home/FaqSection"));
+**Chat surface (visible strings only)**
+- `ChatLauncher.tsx`, `ChatWidget.tsx` (placeholder, empty state, error toasts)
 
-// ...after Featured:
-<LazyOnVisible fallback={<div style={{ minHeight: 480 }} />}>
-  <FacebookSpotlight />
-</LazyOnVisible>
-<LazyOnVisible fallback={<div style={{ minHeight: 600 }} />}>
-  <ReviewsAndCommunity />
-</LazyOnVisible>
-<LazyOnVisible fallback={<div style={{ minHeight: 520 }} />}>
-  <DeliveryAndPricing />
-</LazyOnVisible>
-<LazyOnVisible fallback={<div style={{ minHeight: 640 }} />}>
-  <FaqSection />
-</LazyOnVisible>
-```
+**Knowledge file the chat AI quotes back**
+- `public/llms.txt` and `src/lib/bty-knowledge.server.ts` — rewrite the human-readable lines so the chat answers in Abby's voice too.
 
-Each `LazyOnVisible` already uses a 400px `rootMargin`, so a fast-scrolling user sees no empty placeholder; the chunk is requested before the section enters the viewport.
+**Out of scope this pass:** route `head()` meta/titles, `quote-brief.ts` prompt internals, code comments, `styles.css`, alt text that's already accurate.
 
-The home route file shrinks from ~680 lines to ~400 (hero + stats + featured wrapper), removing ~280 lines of JSX + carousel handler code from the critical chunk.
+## How I'll work
 
-## Verification
+1. Read each file in scope, identify every visible string.
+2. Apply the voice guide + punctuation rules in a single edit per file.
+3. After each route, re-grep for `—` to confirm zero remaining in JSX/strings.
+4. Respect the existing line-limit memory: headlines stay 1–2 lines, subtext 2–3 lines. If a rewrite would overflow, shorten copy rather than change type sizes.
+5. Don't touch layout, components, or design tokens. Pure copy edits.
 
-1. Build succeeds, typecheck clean, no unused imports left in `index.tsx`.
-2. DevTools Network on a cold mobile load of `/`:
-   - No `fonts.googleapis.com` request in the "render-blocking" column.
-   - Initial JS for `/` shrinks (compare bundle analyzer / network "transferred" before vs after — expect ~30–50% reduction in route chunk size).
-   - `ChatWidget` chunk requested only after idle or scroll, not as part of root.
-3. Scroll the home page top-to-bottom in mobile preview — each below-the-fold section renders without flash or layout shift, reviews carousel still scrolls horizontally with working prev/next on desktop.
-4. Click the chat FAB — panel opens (slight pause acceptable on cold click before prefetch completes).
-5. Fonts: page renders text immediately (system fallback for ~100ms), swaps to Saira / Inter without layout shift since `display=swap` already applied.
+## Deliverable
 
-## Out of scope
+Every visitor-facing string reads in Abby's voice; `rg "—" src/routes src/components/home src/components/site src/components/chat src/data public/llms.txt` returns matches only inside code comments or non-visible strings (ideally zero).
 
-- Image regeneration, video encoding, or new assets.
-- Service worker / runtime caching.
-- Copy, layout, design changes.
-- Route-level code splitting for other pages.
+## Two small judgment calls I'll make as I go
+
+- **About page "I" vs "we":** keep "I" in the origin story tiles (it's her bio) and switch to "we" for CTAs at the bottom.
+- **FAQ headings:** keep the numbered eyebrows (`01 · Pricing`); rewrite only the question text and answer body.
+
+If you want a different call on either, say so and I'll adjust before starting.

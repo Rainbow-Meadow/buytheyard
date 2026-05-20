@@ -8,7 +8,7 @@ export type Promo = {
 export const promos: Promo[] = [
   {
     title: "Mother's Day hanging baskets",
-    body: "Hand-built hanging baskets on the wagon out front. Limited quantity — call 508-579-9897 to reserve and ask about today's price.",
+    body: "Hand-built hanging baskets on the wagon out front. Limited quantity, so call 508-579-9897 to reserve and ask about today's price.",
     active: true,
   },
   {
