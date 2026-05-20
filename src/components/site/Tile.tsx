@@ -12,6 +12,16 @@ import {
 import { useTileDeepLink } from "./useTileDeepLink";
 import { useDialogGestures } from "./useDialogGestures";
 import { TileGroupProvider, useTileGroupNav } from "./TileGroupContext";
+import {
+  SIZE_PADDING,
+  SIZE_BODY_LINES,
+  SIZE_BODY_CHAR_CAP,
+  VARIANT_DEFAULT_TONE,
+  approxCharCount,
+  devValidateTile,
+  type TileAction,
+  type TileVariant,
+} from "./TileRules";
 
 /**
  * Data-driven Tile renderer.
@@ -43,6 +53,9 @@ interface BaseTile {
   size?: TileSize;
   tone?: TileTone;
   tall?: boolean;
+  /** @deprecated Padding is derived from `size` via TileRules.SIZE_PADDING.
+   *  Authoring `padding` directly is a soft violation (dev warning) — kept
+   *  for back-compat during rollout. */
   padding?: TilePadding;
   className?: string;
   /** When true, the tile fills 100% of its parent (used inside TileScreen
@@ -202,9 +215,17 @@ const toneCls: Record<TileTone, string> = {
 };
 
 const paddingCls: Record<TilePadding, string> = {
-  sm: "p-5",
-  md: "p-6 md:p-7",
-  lg: "p-7 md:p-10",
+  sm: "p-4 md:p-5",
+  md: "p-5 md:p-6",
+  lg: "p-6 md:p-8",
+};
+
+/** Tailwind line-clamp classes keyed by SIZE_BODY_LINES values. */
+const lineClampCls: Record<number, string> = {
+  0: "hidden",
+  1: "line-clamp-1",
+  2: "line-clamp-2",
+  3: "line-clamp-3",
 };
 
 export type TileAspect = "square" | "video" | "portrait" | "wide";
@@ -829,15 +850,56 @@ function FlipTileInner({
 
 export function Tile(block: TileBlock) {
   const size = block.size ?? "md";
-  const tone = block.tone ?? "kraft";
-  const padding = block.padding ?? "md";
+  const tone = block.tone ?? VARIANT_DEFAULT_TONE[block.variant as TileVariant] ?? "kraft";
+  const padding = block.padding ?? SIZE_PADDING[size];
+
+  // Dev-only ruleset linter (text-ish variants only — image/flip/carousel
+  // handle their own action semantics).
+  if (
+    block.variant === "text" ||
+    block.variant === "numbered" ||
+    block.variant === "cta" ||
+    block.variant === "definition" ||
+    block.variant === "quote" ||
+    block.variant === "stat"
+  ) {
+    const body =
+      "body" in block ? block.body :
+      block.variant === "definition" ? block.definition :
+      block.variant === "quote" ? block.quote : undefined;
+    const title =
+      "title" in block ? block.title :
+      block.variant === "definition" ? block.term :
+      block.variant === "stat" ? block.value : undefined;
+    const bodyCharCount = approxCharCount(body);
+    const titleWordCount =
+      typeof title === "string" ? title.trim().split(/\s+/).filter(Boolean).length : 0;
+    const action: TileAction =
+      block.variant === "cta" ? (("to" in block.cta && block.cta.to) || ("href" in block.cta && block.cta.href) ? "link" : "static") :
+      "static";
+    devValidateTile({
+      id: block.id,
+      size,
+      tone,
+      variant: block.variant as TileVariant,
+      action,
+      bodyCharCount,
+      titleWordCount,
+    });
+    if (block.padding !== undefined && typeof process !== "undefined" && process.env.NODE_ENV !== "production") {
+      console.warn(`[Tile${block.id ? ` ${block.id}` : ""}] "padding" prop is deprecated — derived from size "${size}".`);
+    }
+  }
+
+  const bodyClampLines = SIZE_BODY_LINES[size];
+  const bodyClamp = bodyClampLines > 0 ? lineClampCls[bodyClampLines] : "";
 
   const shell = [
     block.fill ? "h-full w-full overflow-hidden" : sizeCls[size],
     block.fill ? "" : block.tall ? "tile-row-tall" : "",
     toneCls[tone],
     paddingCls[padding],
-    "rounded-md",
+    "rounded-md flex flex-col min-h-0",
     block.className ?? "",
   ]
     .filter(Boolean)
@@ -851,7 +913,7 @@ export function Tile(block: TileBlock) {
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>}
           {block.title && <p className="display-5 leading-snug">{block.title}</p>}
           {block.body && (
-            <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""}`}>
+            <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyClamp}`}>
               {block.body}
             </div>
           )}
@@ -870,7 +932,7 @@ export function Tile(block: TileBlock) {
             </p>
           )}
           {block.body && (
-            <div className={`body ${bodyToneCls(tone)} mt-3`}>{block.body}</div>
+            <div className={`body ${bodyToneCls(tone)} mt-3 ${bodyClamp}`}>{block.body}</div>
           )}
         </article>
       );
