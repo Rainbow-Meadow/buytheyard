@@ -130,7 +130,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "06 · Office manager",
     body: (
       <>
-        <strong className="text-zinc-900">Charlie.</strong> He's a dog. He handles the greetings.
+        <strong className="text-white">Charlie.</strong> He's a dog. He handles the greetings.
       </>
     ),
     size: "md",
