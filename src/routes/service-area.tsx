@@ -117,7 +117,7 @@ function ServiceAreaPage() {
               icon={<Truck />}
               eyebrow="Home base · daily routes"
               title="Holden, Princeton, Sterling, Rutland, Paxton, West Boylston, Worcester."
-              body="Plus Boylston, Leominster, Clinton, Lancaster, Spencer, Auburn & Shrewsbury on 48-hour notice."
+              body="Boylston, Leominster, Clinton, Spencer & more on 48-hr notice."
             />
           ),
           a: (

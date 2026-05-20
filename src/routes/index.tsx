@@ -340,7 +340,7 @@ function HomePage() {
               icon={<Facebook />}
               eyebrow="On Facebook"
               title="Where the yard lives"
-              body="Daily restocks, weather closures, lot photos. 820+ neighbors already follow."
+              body="Daily restocks, closures, lot photos."
               cta={{
                 label: "Follow on Facebook",
                 href: "https://www.facebook.com/BuyTheYardOutdoorProducts",
@@ -421,7 +421,6 @@ function HomePage() {
               icon={<HelpCircle />}
               eyebrow="Before you call"
               title="Quick answers"
-              body="Pricing, delivery, payment, scheduling."
               cta={{ label: "Start a quote", to: "/quote" }}
             />
           ),
@@ -432,8 +431,8 @@ function HomePage() {
               variant="text"
               tone="gray"
               eyebrow="01 · Pricing"
-              title="How much does material cost?"
-              body="Prices move with the season, so we quote by phone. One-yard minimum on bulk orders."
+              title="What does it cost?"
+              body="Quoted by phone. 1-yard minimum."
             />
           ),
           d: (
@@ -443,8 +442,7 @@ function HomePage() {
               variant="text"
               tone="surface"
               eyebrow="02 · Delivery area"
-              title="Do you deliver to my town?"
-              body="Curbside across Holden, Princeton, Sterling, Rutland, Worcester and surrounding towns."
+              title="Deliver here?"
             />
           ),
           e: (
@@ -454,8 +452,7 @@ function HomePage() {
               variant="text"
               tone="surface"
               eyebrow="03 · Timing"
-              title="How fast can I get a delivery?"
-              body="Call before noon for same-day. Otherwise plan on about 48 hours."
+              title="How soon?"
             />
           ),
         }}
