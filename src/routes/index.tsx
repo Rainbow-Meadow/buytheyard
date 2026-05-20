@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { lazy, useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
@@ -7,12 +7,43 @@ import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
 import heroLoopMobileMp4 from "@/assets/video/hero-loop-mobile.mp4?url";
 import heroLoopMobileWebm from "@/assets/video/hero-loop-mobile.webm?url";
 import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
-import communityCtms from "@/assets/source/community-ctms-loam.webp";
-import communityRutland from "@/assets/source/community-rutland-memorial.webp";
-import { products } from "@/data/products";
-import { ProductCard } from "@/components/site/ProductCard";
-import { ProductGroup } from "@/components/site/ProductGroup";
-import { TileGrid, type TileBlock } from "@/components/site/Tile";
+import { LazyOnVisible } from "@/components/site/LazyOnVisible";
+
+const FeaturedMaterials = lazy(() => import("@/components/home/FeaturedMaterials"));
+const CommunityTiles = lazy(() => import("@/components/home/CommunityTiles"));
+
+/**
+ * Defers hero <video> load/play until the browser is idle (or after a short
+ * timeout), so the LCP poster image isn't fighting the video for bandwidth.
+ * Only the currently visible hero video (mobile or desktop, the other is
+ * `display:none`) is kicked off.
+ */
+function kickHeroVideo(el: HTMLVideoElement | null) {
+  if (!el) return;
+  el.muted = true;
+  el.defaultMuted = true;
+
+  const start = () => {
+    // Skip the hidden hero variant — `display:none` videos have offsetParent === null.
+    if (el.offsetParent === null) return;
+    try {
+      el.load();
+    } catch {
+      /* noop */
+    }
+    el.play().catch(() => {});
+  };
+
+  type IdleWindow = Window & {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+  };
+  const w = window as IdleWindow;
+  if (typeof w.requestIdleCallback === "function") {
+    w.requestIdleCallback(start, { timeout: 1500 });
+  } else {
+    setTimeout(start, 400);
+  }
+}
 
 const reviews = [
   {
@@ -31,47 +62,6 @@ const reviews = [
     name: "John Sarkisian",
     date: "May 7, 2019",
     quote: "Great customer service. Very professional. Prices are fair!",
-  },
-];
-
-const COMMUNITY_BLOCKS: TileBlock[] = [
-  {
-    id: "community-ctms",
-    variant: "image",
-    src: communityCtms,
-    alt: "Buy The Yard dump truck unloading a pile of dark loam at Central Tree Middle School",
-    size: "md",
-    aspect: "square",
-    focal: "center",
-    overlay: {
-      title: "CTMS · loam + mulch donation",
-      align: "bottom-left",
-    },
-    details: {
-      shareId: "community-ctms",
-      eyebrow: "Central Tree Middle School · Jun 26, 2024",
-      title: "Loam and mulch for CTMS",
-      body: "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way.",
-    },
-  },
-  {
-    id: "community-rutland-memorial",
-    variant: "image",
-    src: communityRutland,
-    alt: "American flags and a memorial flower bed at the Rutland Public Safety building on Memorial Day",
-    size: "md",
-    aspect: "square",
-    focal: "center",
-    overlay: {
-      title: "Rutland Public Safety · Memorial Day",
-      align: "bottom-left",
-    },
-    details: {
-      shareId: "community-rutland-memorial",
-      eyebrow: "Rutland Fire Department · May 22, 2020",
-      title: "Memorial Day at the public safety building",
-      body: "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family.",
-    },
   },
 ];
 
@@ -283,38 +273,18 @@ function HomePage() {
     };
   }, []);
 
-  const featured = [
-    "Hemlock Mulch",
-    "Screened Loam",
-    "Mason Sand",
-    "3/4\" Crushed Blue Stone",
-    "Red Lava Rock",
-    "Hanging Baskets",
-    "ASTM Playground Chips",
-    "Hand Tools & Long Handles",
-  ]
-    .map((n) => products.find((p) => p.name === n))
-    .filter((p): p is (typeof products)[number] => Boolean(p));
-
-
   return (
     <>
       {/* Hero */}
       <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[504px] flex">
         {/* Mobile single hero image */}
         <video
-          ref={(el) => {
-            if (!el) return;
-            el.muted = true;
-            el.defaultMuted = true;
-            el.play().catch(() => {});
-          }}
+          ref={kickHeroVideo}
           className="md:hidden absolute inset-0 w-full h-full object-cover"
-          autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
           poster={heroLoopMobilePoster}
           aria-hidden="true"
         >
@@ -323,18 +293,12 @@ function HomePage() {
         </video>
         {/* Desktop hero background */}
         <video
-          ref={(el) => {
-            if (!el) return;
-            el.muted = true;
-            el.defaultMuted = true;
-            el.play().catch(() => {});
-          }}
+          ref={kickHeroVideo}
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           poster={heroLoopPoster}
           aria-hidden="true"
         >
@@ -429,47 +393,11 @@ function HomePage() {
       </section>
 
       {/* Product preview */}
-      <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-5 md:mb-10">
-            <div>
-              <p className="eyebrow text-brand mb-3">
-                Bulk materials &amp; garden center
-              </p>
-            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch] mt-4 md:mt-6">
-              Featured Materials
-            </h2>
-            </div>
-            <div className="flex items-center gap-4">
-              <Link
-                to="/products"
-                className="inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
-              >
-                See full catalog <ArrowRight className="size-4" />
-              </Link>
-            </div>
-          </div>
-
-          <ProductGroup products={featured}>
-            {/* Mobile: Gallery — 2-col image-overlay grid */}
-            <div className="md:hidden grid grid-cols-2 gap-2">
-              {featured.map((p) => (
-                <ProductCard key={p.name} product={p} variant="gallery" />
-              ))}
-            </div>
-
-            {/* Desktop: Magazine — 1 large featured + 6 supporting */}
-            <div className="hidden md:grid md:grid-cols-3 gap-6 items-start">
-              <div className="md:col-span-1 md:row-span-2 flex">
-                <ProductCard product={featured[0]} />
-              </div>
-              {featured.slice(1, 7).map((p) => (
-                <ProductCard key={p.name} product={p} variant="gallery" />
-              ))}
-            </div>
-          </ProductGroup>
-        </div>
-      </section>
+      <LazyOnVisible
+        fallback={<div className="section bg-base" style={{ minHeight: 600 }} />}
+      >
+        <FeaturedMaterials />
+      </LazyOnVisible>
 
       {/* Facebook spotlight */}
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
@@ -590,7 +518,9 @@ function HomePage() {
             <p className="eyebrow text-zinc-500 mb-3">
               Community
             </p>
-            <TileGrid blocks={COMMUNITY_BLOCKS} />
+            <LazyOnVisible fallback={<div style={{ minHeight: 320 }} />}>
+              <CommunityTiles />
+            </LazyOnVisible>
           </div>
         </div>
       </section>

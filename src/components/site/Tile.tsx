@@ -575,6 +575,8 @@ function ImageTileInner({
             <img
               src={block.src}
               alt={block.alt}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full max-h-[60vh] object-contain"
             />
           </div>
