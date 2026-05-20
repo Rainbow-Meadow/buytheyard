@@ -604,10 +604,44 @@ function NotesField({
   );
 }
 
-function SuccessView({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ...args
-}: never[]): never;
+function StepTile({
+  number,
+  eyebrow,
+  title,
+  helper,
+  children,
+}: {
+  number: string;
+  eyebrow: string;
+  title: string;
+  helper?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <fieldset className="bg-kraft ring-1 ring-zinc-300 rounded-md overflow-hidden">
+      {/* Mobile header */}
+      <div className="md:hidden p-5 border-b border-zinc-300/70">
+        <p className="display-2 leading-none text-brand">{number}</p>
+        <p className="eyebrow text-zinc-600 mt-3">{eyebrow}</p>
+        <p className="display-4 mt-1 text-zinc-900">{title}</p>
+        {helper && <p className="body-sm text-zinc-600 mt-2">{helper}</p>}
+      </div>
+      {/* Desktop header */}
+      <div className="hidden md:grid grid-cols-12 border-b border-zinc-300/70">
+        <div className="col-span-3 bg-surface text-surface-foreground flex items-center justify-center p-6">
+          <p className="display-1 leading-none text-brand">{number}</p>
+        </div>
+        <div className="col-span-9 p-7">
+          <p className="eyebrow text-zinc-600">{eyebrow}</p>
+          <p className="display-4 mt-1 text-zinc-900">{title}</p>
+          {helper && <p className="body-sm text-zinc-600 mt-2 max-w-[55ch]">{helper}</p>}
+        </div>
+      </div>
+      <div className="p-5 md:p-7">{children}</div>
+    </fieldset>
+  );
+}
+
 function SuccessView({
   data,
   onEdit,
