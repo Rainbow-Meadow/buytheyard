@@ -166,6 +166,17 @@
   }
 }
 
+/* Image-tile focal point. The component sets `--op-mobile` (and optionally
+   `--op-desktop`) inline; this utility wires them into `object-position`
+   with a media-query switch so the same <img> can re-center when the
+   frame's aspect ratio changes at the md breakpoint. */
+@utility tile-focal {
+  object-position: var(--op-mobile, center);
+  @media (min-width: 768px) {
+    object-position: var(--op-desktop, var(--op-mobile, center));
+  }
+}
+
 /* =========================================================================
    Typography schema — single source of truth.
    Hierarchy:
