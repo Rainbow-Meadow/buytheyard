@@ -34,6 +34,20 @@
   --muted-foreground: oklch(0.45 0.01 280);
   --border: oklch(0.85 0.01 80);
   --ring: oklch(0.51 0.20 27);
+
+  /* ----- Tile grid metrics — single source of truth -----
+     Consumed by the `tile-grid` utility below AND read at runtime by
+     `sizesForSpan()` in src/components/site/Tile.tsx to keep image
+     `sizes` hints accurate when these values change.
+     Keep all values in px so JS can parseFloat() without unit math. */
+  --tile-grid-gap-mobile: 8px;
+  --tile-grid-gap-desktop: 16px;
+  --tile-container-max: 1280px;       /* matches max-w-7xl */
+  --tile-container-pad-mobile: 20px;  /* matches px-5  */
+  --tile-container-pad-desktop: 24px; /* matches md:px-6 */
+  --tile-grid-cols-mobile: 2;
+  --tile-grid-cols-desktop: 6;
+  --tile-md-breakpoint: 768px;
 }
 
 .dark {
@@ -103,11 +117,11 @@
 
 @utility tile-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(var(--tile-grid-cols-mobile), minmax(0, 1fr));
+  gap: var(--tile-grid-gap-mobile);
   @media (min-width: 768px) {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(var(--tile-grid-cols-desktop), minmax(0, 1fr));
+    gap: var(--tile-grid-gap-desktop);
   }
 }
 

@@ -190,15 +190,55 @@ const tileSpans: Record<TileSize, { mobile: number; desktop: number }> = {
   feature: { mobile: 2, desktop: 6 },
 };
 
-/** Container constants — keep in sync with the page wrappers
- *  (`max-w-7xl px-5 md:px-6`) and the `tile-grid` gaps in styles.css. */
-const CONTAINER_MAX = 1280;     // max-w-7xl
-const DESKTOP_PAD = 24 * 2;     // md:px-6 each side
-const DESKTOP_GAP = 16;         // tile-grid gap on md+
-const MOBILE_GAP = 8;           // tile-grid gap on mobile
-const MOBILE_COLS = 2;
-const DESKTOP_COLS = 6;
-const MD_BREAKPOINT = 768;
+/** SSR fallbacks — mirror the `:root` defaults in styles.css.
+ *  At runtime these are overwritten by values read from CSS custom properties,
+ *  so styles.css remains the single source of truth. */
+const TILE_METRIC_DEFAULTS = {
+  containerMax: 1280,
+  containerPadMobile: 20,
+  containerPadDesktop: 24,
+  gapMobile: 8,
+  gapDesktop: 16,
+  colsMobile: 2,
+  colsDesktop: 6,
+  mdBreakpoint: 768,
+} as const;
+
+type TileMetrics = { -readonly [K in keyof typeof TILE_METRIC_DEFAULTS]: number };
+
+let cachedMetrics: TileMetrics | null = null;
+
+/** Read a CSS custom property from `:root` and parse it as a px number.
+ *  Accepts `<n>px`, bare numbers, or unitless integers. */
+function readPxVar(styles: CSSStyleDeclaration, name: string, fallback: number): number {
+  const raw = styles.getPropertyValue(name).trim();
+  if (!raw) return fallback;
+  const n = parseFloat(raw);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+/** Resolve tile metrics from CSS variables on `:root`. Cached for the session.
+ *  SSR + first paint use TILE_METRIC_DEFAULTS; the cache fills on first
+ *  client read so subsequent tiles get the live values. */
+function getTileMetrics(): TileMetrics {
+  if (cachedMetrics) return cachedMetrics;
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return TILE_METRIC_DEFAULTS;
+  }
+  const styles = window.getComputedStyle(document.documentElement);
+  const metrics: TileMetrics = {
+    containerMax: readPxVar(styles, "--tile-container-max", TILE_METRIC_DEFAULTS.containerMax),
+    containerPadMobile: readPxVar(styles, "--tile-container-pad-mobile", TILE_METRIC_DEFAULTS.containerPadMobile),
+    containerPadDesktop: readPxVar(styles, "--tile-container-pad-desktop", TILE_METRIC_DEFAULTS.containerPadDesktop),
+    gapMobile: readPxVar(styles, "--tile-grid-gap-mobile", TILE_METRIC_DEFAULTS.gapMobile),
+    gapDesktop: readPxVar(styles, "--tile-grid-gap-desktop", TILE_METRIC_DEFAULTS.gapDesktop),
+    colsMobile: readPxVar(styles, "--tile-grid-cols-mobile", TILE_METRIC_DEFAULTS.colsMobile),
+    colsDesktop: readPxVar(styles, "--tile-grid-cols-desktop", TILE_METRIC_DEFAULTS.colsDesktop),
+    mdBreakpoint: readPxVar(styles, "--tile-md-breakpoint", TILE_METRIC_DEFAULTS.mdBreakpoint),
+  };
+  cachedMetrics = metrics;
+  return metrics;
+}
 
 /** Build an accurate `sizes` string from a tile's column span.
  *  Produces three tiers:
@@ -208,29 +248,31 @@ const MD_BREAKPOINT = 768;
  */
 function sizesForSpan(size: TileSize): string {
   const { mobile, desktop } = tileSpans[size];
+  const m = getTileMetrics();
+  const containerPadDesktopTotal = m.containerPadDesktop * 2;
+  const containerPadMobileTotal = m.containerPadMobile * 2;
 
   // Tier 1 — container is capped. Account for desktop padding and internal gaps.
-  const contentWidth = CONTAINER_MAX - DESKTOP_PAD;
+  const contentWidth = m.containerMax - containerPadDesktopTotal;
   const desktopColWidth =
-    (contentWidth - DESKTOP_GAP * (DESKTOP_COLS - 1)) / DESKTOP_COLS;
+    (contentWidth - m.gapDesktop * (m.colsDesktop - 1)) / m.colsDesktop;
   const cappedPx = Math.round(
-    desktopColWidth * desktop + DESKTOP_GAP * (desktop - 1),
+    desktopColWidth * desktop + m.gapDesktop * (desktop - 1),
   );
 
   // Tier 2 — fluid desktop. Subtract padding from the viewport via calc().
-  const desktopFraction = desktop / DESKTOP_COLS;
-  const desktopVw = `calc((100vw - ${DESKTOP_PAD}px) * ${desktopFraction.toFixed(4)})`;
+  const desktopFraction = desktop / m.colsDesktop;
+  const desktopVw = `calc((100vw - ${containerPadDesktopTotal}px) * ${desktopFraction.toFixed(4)})`;
 
-  // Tier 3 — mobile. Same container has px-5 (20px) per side.
-  const mobilePad = 20 * 2;
-  const mobileFraction = mobile / MOBILE_COLS;
+  // Tier 3 — mobile. Subtract page padding and the row's internal gap share.
+  const mobileFraction = mobile / m.colsMobile;
   const mobileGapAdj =
-    mobile < MOBILE_COLS ? ` - ${MOBILE_GAP / 2}px` : "";
-  const mobileVw = `calc((100vw - ${mobilePad}px${mobileGapAdj}) * ${mobileFraction.toFixed(4)})`;
+    mobile < m.colsMobile ? ` - ${m.gapMobile / 2}px` : "";
+  const mobileVw = `calc((100vw - ${containerPadMobileTotal}px${mobileGapAdj}) * ${mobileFraction.toFixed(4)})`;
 
   return [
-    `(min-width: ${CONTAINER_MAX}px) ${cappedPx}px`,
-    `(min-width: ${MD_BREAKPOINT}px) ${desktopVw}`,
+    `(min-width: ${m.containerMax}px) ${cappedPx}px`,
+    `(min-width: ${m.mdBreakpoint}px) ${desktopVw}`,
     mobileVw,
   ].join(", ");
 }
