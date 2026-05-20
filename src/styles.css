@@ -50,6 +50,16 @@
   --tile-grid-cols-mobile: 2;
   --tile-grid-cols-desktop: 6;
   --tile-md-breakpoint: 768px;
+
+  /* ----- Tile-screen viewport metrics -----
+     Header is sticky and `h-16` (64px) at every breakpoint.
+     `--tile-screen-h` = the viewport height minus the header, used as
+     the fixed outer height of every <TileScreen>. Override per-route
+     if a different chrome height is ever introduced. */
+  --header-h: 64px;
+  --tile-screen-h: calc(100svh - var(--header-h));
+  --tile-screen-pad-mobile: 8px;
+  --tile-screen-pad-desktop: 16px;
 }
 
 .dark {
@@ -167,6 +177,150 @@
     grid-row: span 2 / span 2;
   }
 }
+
+/* =========================================================================
+   Tile-screen schema — one composition per viewport.
+
+   Each TileScreen is exactly --tile-screen-h tall (100svh - header) and
+   never scrolls vertically. Slots are placed with `grid-template-areas`
+   so every supported layout has a single canonical shape on each
+   breakpoint. Content inside a slot must use `h-full w-full`.
+
+   Slot keys (typed in TileScreen.tsx): hero, a, b, c, d, e.
+   Not all layouts use every slot.
+   ========================================================================= */
+
+@utility tile-screen {
+  display: grid;
+  width: 100%;
+  height: var(--tile-screen-h);
+  padding: var(--tile-screen-pad-mobile);
+  gap: var(--tile-screen-pad-mobile);
+  box-sizing: border-box;
+  @media (min-width: 768px) {
+    padding: var(--tile-screen-pad-desktop);
+    gap: var(--tile-screen-pad-desktop);
+  }
+}
+
+@utility tile-screen-cell {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+}
+
+/* pageHero — hero + 4 stats */
+@utility ts-page-hero {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 1fr 1fr;
+  grid-template-areas:
+    "hero hero"
+    "a b"
+    "c d";
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "hero hero hero hero a b"
+      "hero hero hero hero c d";
+  }
+}
+
+/* section01 — hero (rows 1-2) + a/b right column + 3-tile bottom strip */
+@utility ts-section-01 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "hero hero"
+    "a b"
+    "c d"
+    "e e";
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      "hero hero hero hero a a"
+      "hero hero hero hero b b"
+      "c c d d e e";
+  }
+}
+
+/* section02 — hero spans full height left, a wide top-right, b/c split bottom-right */
+@utility ts-section-02 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 1fr 2fr;
+  grid-template-areas:
+    "hero hero"
+    "a a"
+    "b c";
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 2fr;
+    grid-template-areas:
+      "hero hero hero hero a a"
+      "hero hero hero hero b c";
+  }
+}
+
+/* section03 — equal rows, hero top-left, a tall-right, 3 bottom tiles */
+@utility ts-section-03 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr;
+  grid-template-areas:
+    "hero hero"
+    "a a"
+    "b c";
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "hero hero hero hero a a"
+      "b b c c d d";
+  }
+}
+
+/* section04 — like 03 but the hero row is taller */
+@utility ts-section-04 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 1fr 1fr;
+  grid-template-areas:
+    "hero hero"
+    "a a"
+    "b c";
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas:
+      "hero hero hero hero a a"
+      "b b c c d d";
+  }
+}
+
+/* section05 — hero rows 1-2, a/b right column, 3 bottom tiles */
+@utility ts-section-05 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "hero hero"
+    "a b"
+    "c c"
+    "d e";
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      "hero hero hero hero a a"
+      "hero hero hero hero b b"
+      "c c d d e e";
+  }
+}
+
+@utility ts-slot-hero { grid-area: hero; }
+@utility ts-slot-a    { grid-area: a; }
+@utility ts-slot-b    { grid-area: b; }
+@utility ts-slot-c    { grid-area: c; }
+@utility ts-slot-d    { grid-area: d; }
+@utility ts-slot-e    { grid-area: e; }
 
 /* Image-tile focal point. The component sets `--op-mobile` (and optionally
    `--op-desktop`) inline; this utility wires them into `object-position`
