@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, CalendarDays, Facebook, FileText, Phone, Star, Tag } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
@@ -11,6 +11,9 @@ import { Tile } from "@/components/site/Tile";
 import { products } from "@/data/products";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
+import { FaqDialogTile } from "@/components/home/FaqDialogTile";
+import { ServiceAreaMapTile } from "@/components/home/ServiceAreaMapTile";
+import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
 
 const FEATURED = [
   "Hemlock Mulch",
@@ -221,10 +224,10 @@ function HomePage() {
               </div>
             </article>
           ),
-          a: <Tile id="stat-years" fill variant="stat" tone="surface" value="10" label="Years in business" />,
-          b: <Tile id="stat-wbe" fill variant="stat" tone="brand" value="WBE" label="MA-certified woman-owned" />,
-          c: <Tile id="stat-fb" fill variant="stat" tone="kraft" value="820+" label="Facebook followers" />,
-          d: <Tile id="stat-stars" fill variant="stat" tone="gray" value="5★" label="Google & Facebook rated" />,
+          a: <Tile id="stat-years" fill variant="stat" tone="surface" icon={<CalendarDays />} value="10" label="Years in business" />,
+          b: <Tile id="stat-wbe" fill variant="stat" tone="brand" icon={<BadgeCheck />} value="WBE" label="MA-certified woman-owned" />,
+          c: <Tile id="stat-fb" fill variant="stat" tone="kraft" icon={<Facebook />} value="820+" label="Facebook followers" />,
+          d: <Tile id="stat-stars" fill variant="stat" tone="gray" icon={<Star />} value="5★" label="Google & Facebook rated" />,
         }}
       />
 
@@ -259,8 +262,13 @@ function HomePage() {
               src={FEATURED[1].image!}
               alt={FEATURED[1].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Loam", title: FEATURED[1].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-loam",
+                eyebrow: "Loam",
+                title: FEATURED[1].name,
+                body: FEATURED[1].description,
+              }}
             />
           ),
           b: (
@@ -271,8 +279,13 @@ function HomePage() {
               src={FEATURED[2].image!}
               alt={FEATURED[2].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Sand", title: FEATURED[2].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-sand",
+                eyebrow: "Sand",
+                title: FEATURED[2].name,
+                body: FEATURED[2].description,
+              }}
             />
           ),
           c: (
@@ -283,8 +296,13 @@ function HomePage() {
               src={FEATURED[3].image!}
               alt={FEATURED[3].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Stone", title: FEATURED[3].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-stone",
+                eyebrow: "Stone",
+                title: FEATURED[3].name,
+                body: FEATURED[3].description,
+              }}
             />
           ),
           d: (
@@ -295,8 +313,13 @@ function HomePage() {
               src={FEATURED[4].image!}
               alt={FEATURED[4].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Specialty", title: FEATURED[4].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-lava",
+                eyebrow: "Specialty",
+                title: FEATURED[4].name,
+                body: FEATURED[4].description,
+              }}
             />
           ),
           e: (
@@ -307,8 +330,13 @@ function HomePage() {
               src={FEATURED[5].image!}
               alt={FEATURED[5].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Garden center", title: FEATURED[5].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-plants",
+                eyebrow: "Garden center",
+                title: FEATURED[5].name,
+                body: FEATURED[5].description,
+              }}
             />
           ),
         }}
@@ -323,30 +351,43 @@ function HomePage() {
             <Tile
               id="reviews-hero"
               fill
-              variant="quote"
-              tone="kraft"
-
-              eyebrow="From Facebook · real customers"
-              quote="Abby and crew are awesome. Very accommodating, great prices, delivery and quality product."
-              attribution="Rob Warner · Apr 21"
+              variant="carousel"
+              auto
+              interval={6500}
+              controls="dots"
+              ariaLabel="Customer reviews from Facebook"
+              slides={[
+                {
+                  id: "rev-1",
+                  variant: "quote",
+                  tone: "kraft",
+                  eyebrow: "From Facebook · real customers",
+                  quote:
+                    "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product.",
+                  attribution: "Rob Warner · Apr 21",
+                },
+                {
+                  id: "rev-2",
+                  variant: "quote",
+                  tone: "surface",
+                  eyebrow: "From Facebook · real customers",
+                  quote:
+                    "Best mulch in Central Mass and the price can't be beat. Delivery was right on time.",
+                  attribution: "Local customer · Holden",
+                },
+                {
+                  id: "rev-3",
+                  variant: "quote",
+                  tone: "kraft",
+                  eyebrow: "From Facebook · real customers",
+                  quote:
+                    "Quality loam, fair pricing, and Abby actually picks up the phone. That's rare.",
+                  attribution: "Repeat customer · Rutland",
+                },
+              ]}
             />
           ),
-          a: (
-            <Tile
-              id="reviews-fb"
-              fill
-              variant="cta"
-              tone="surface"
-              icon={<Facebook />}
-              eyebrow="On Facebook"
-              title="Where the yard lives"
-              body="Daily restocks, closures, lot photos."
-              cta={{
-                label: "Follow on Facebook",
-                href: "https://www.facebook.com/BuyTheYardOutdoorProducts",
-              }}
-            />
-          ),
+          a: <FacebookLiveTile />,
           b: (
             <Tile
               id="reviews-ctms"
@@ -385,29 +426,16 @@ function HomePage() {
         layout="section05"
         label="Delivery, pricing & FAQ"
         tiles={{
-          hero: (
-            <Tile
-              id="dp-delivery"
-              fill
-              variant="cta"
-              tone="surface"
-
-              icon={<Truck />}
-              eyebrow="Delivery"
-              title="Delivery across Central Mass"
-              body="Curbside from our Jefferson yard. Call before noon and we'll try for same-day. Driveway or curbline only — mark your spot."
-              cta={{ label: "Delivery details", to: "/delivery" }}
-            />
-          ),
+          hero: <ServiceAreaMapTile />,
           a: (
             <Tile
               id="dp-call"
               fill
               variant="cta"
               tone="brand"
-              icon={<Tag />}
-              eyebrow="Today's price by phone"
-              title="Call for a quote"
+              icon={<Phone />}
+              eyebrow="Fastest path"
+              title="Call for today's price"
               body="Cash and check skip the 4% card fee."
               cta={{ label: "508.579.9897", href: "tel:5085799897" }}
             />
@@ -417,42 +445,36 @@ function HomePage() {
               id="dp-quote"
               fill
               variant="cta"
-              tone="kraft"
-              icon={<HelpCircle />}
-              eyebrow="Before you call"
-              title="Quick answers"
+              tone="surface"
+              icon={<FileText />}
+              eyebrow="Prefer it in writing"
+              title="Request a written quote"
+              body="Tell us the job — we'll send a number by email."
               cta={{ label: "Start a quote", to: "/quote" }}
             />
           ),
           c: (
-            <Tile
-              id="dp-faq-pricing"
-              fill
-              variant="text"
+            <FaqDialogTile
               tone="gray"
               eyebrow="01 · Pricing"
-              title="What does it cost?"
-              body="Quoted by phone. 1-yard minimum."
+              question="What does it cost?"
+              answer="Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number. One-yard minimum on all bulk orders. Cash and check payments skip the 4% card processing fee."
             />
           ),
           d: (
-            <Tile
-              id="dp-faq-area"
-              fill
-              variant="text"
+            <FaqDialogTile
               tone="surface"
               eyebrow="02 · Delivery area"
-              title="Deliver here?"
+              question="Deliver here?"
+              answer="We offer curbside delivery throughout Central Massachusetts from our Jefferson yard, including Holden, Princeton, Sterling, Rutland, West Boylston, Paxton, Worcester, Leominster, and surrounding towns. Delivery is priced by ZIP code; a brief call confirms your service area and final price before your order is dispatched."
             />
           ),
           e: (
-            <Tile
-              id="dp-faq-timing"
-              fill
-              variant="text"
+            <FaqDialogTile
               tone="surface"
               eyebrow="03 · Timing"
-              title="How soon?"
+              question="How soon?"
+              answer="Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours. Delivery is made to the driveway or curbline only — please mark your drop spot before the truck arrives."
             />
           ),
         }}
