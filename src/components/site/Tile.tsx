@@ -89,6 +89,16 @@ export type TileBlock =
       variant: "image";
       src: string;
       alt: string;
+      /** Responsive image candidates. Passed straight through to `<img srcset>`.
+       *  Example: "hero-480.jpg 480w, hero-960.jpg 960w, hero-1600.jpg 1600w". */
+      srcSet?: string;
+      /** Media-condition → rendered width hints for the browser's source selection.
+       *  Defaults to a magazine/gallery-friendly heuristic based on tile `size`. */
+      sizes?: string;
+      /** Loading strategy. Hero/above-the-fold tiles should pass "eager". Defaults to "lazy". */
+      loading?: "lazy" | "eager";
+      /** Fetch priority hint. Use "high" for LCP hero tiles. */
+      fetchPriority?: "high" | "low" | "auto";
       /** Aspect ratio for the image frame. Defaults to "square". */
       aspect?: "square" | "video" | "portrait" | "wide";
       /** Optional overlay content rendered on top of the image. */
@@ -140,6 +150,16 @@ const overlayAlignCls = {
   "top-right": "items-start justify-end text-right",
   center: "items-center justify-center text-center",
 } as const;
+
+/** Default `sizes` per tile size — assumes the magazine grid:
+ *  mobile = full width, desktop columns map to fractions of a ~1280px container. */
+const defaultSizesBySize: Record<TileSize, string> = {
+  sm: "(min-width: 768px) 33vw, 100vw",
+  third: "(min-width: 768px) 33vw, 100vw",
+  md: "(min-width: 768px) 50vw, 100vw",
+  lg: "(min-width: 768px) 66vw, 100vw",
+  feature: "(min-width: 768px) 66vw, 100vw",
+};
 
 function isLightTone(tone: TileTone) {
   return tone === "kraft" || tone === "white";
@@ -319,8 +339,12 @@ export function Tile(block: TileBlock) {
         <>
           <img
             src={block.src}
+            srcSet={block.srcSet}
+            sizes={block.srcSet ? block.sizes ?? defaultSizesBySize[size] : undefined}
             alt={block.alt}
-            loading="lazy"
+            loading={block.loading ?? "lazy"}
+            decoding="async"
+            fetchPriority={block.fetchPriority ?? "auto"}
             className="absolute inset-0 w-full h-full object-cover"
           />
           {hasOverlay && (
