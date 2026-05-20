@@ -7,11 +7,13 @@ import { TileGrid, type TileBlock } from "@/components/site/Tile";
 
 const YARD_DETAILS = {
   patio: {
+    shareId: "patio",
     eyebrow: "The yard",
     title: "The sit-and-stay corner",
     body: "This little corner started as somewhere to plant the OPEN flag — it ended up being where half my best conversations happen. Pull up a chair, grab a coffee while we figure out your load. It's a yard, but it's kind of a front porch too.",
   },
   charlie: {
+    shareId: "charlie",
     eyebrow: "Office manager",
     title: "Charlie runs the front desk",
     body: "Charlie's the unofficial office manager around here. He handles greetings, accepts treats, and supervises every delivery from the office window. If you bring a kid or a dog along, he's the first one they'll want to meet.",
