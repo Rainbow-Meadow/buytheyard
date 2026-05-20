@@ -45,6 +45,10 @@ interface BaseTile {
   tall?: boolean;
   padding?: TilePadding;
   className?: string;
+  /** When true, the tile fills 100% of its parent (used inside TileScreen
+   *  grid cells where placement is owned by the outer grid). Disables the
+   *  `tile-*` column-span class and forces the article to flex `h-full w-full`. */
+  fill?: boolean;
   /** Optional leading icon — rendered at the top of text / numbered /
    *  definition / cta tiles. Typically a lucide-react `<Icon className="size-7">`. */
   icon?: ReactNode;
