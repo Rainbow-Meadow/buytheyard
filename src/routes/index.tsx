@@ -444,7 +444,7 @@ function HomePage() {
               tone="surface"
               eyebrow="02 · Delivery area"
               title="Do you deliver to my town?"
-              body="Curbside across Holden, Princeton, Sterling, Rutland, Worcester and surrounding towns."
+              body="Curbside across Central Mass from our Jefferson yard."
             />
           ),
           e: (
