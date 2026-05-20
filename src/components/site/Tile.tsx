@@ -20,7 +20,7 @@ import { Link } from "@tanstack/react-router";
  * (see styles.css tile-grid schema).
  */
 
-export type TileSize = "sm" | "md" | "lg" | "feature";
+export type TileSize = "sm" | "third" | "md" | "lg" | "feature";
 export type TileTone = "kraft" | "surface" | "brand" | "white";
 export type TilePadding = "sm" | "md" | "lg";
 
@@ -107,6 +107,7 @@ export type TileBlock =
 
 const sizeCls: Record<TileSize, string> = {
   sm: "tile-sm",
+  third: "tile-third",
   md: "tile-md",
   lg: "tile-lg",
   feature: "tile-feature",
