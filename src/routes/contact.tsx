@@ -166,7 +166,7 @@ function ContactPage() {
               fill
               variant="cta"
               tone="surface"
-              padding="lg"
+
               icon={<ClipboardList />}
               eyebrow="Online"
               title="Get a quote"

@@ -111,7 +111,7 @@ function ServiceAreaPage() {
               fill
               variant="text"
               tone="surface"
-              padding="lg"
+
               icon={<Truck />}
               eyebrow="Home base · daily routes"
               title="Holden, Princeton, Sterling, Rutland, Paxton, West Boylston, Worcester."

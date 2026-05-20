@@ -73,7 +73,7 @@ function DeliveryPage() {
               fill
               variant="numbered"
               tone="surface"
-              padding="lg"
+
               number="01"
               icon={<Truck />}
               eyebrow="Drop standard"

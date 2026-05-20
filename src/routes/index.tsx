@@ -319,7 +319,7 @@ function HomePage() {
               fill
               variant="quote"
               tone="kraft"
-              padding="lg"
+
               eyebrow="From Facebook · real customers"
               quote="Abby and crew are awesome. Very accommodating, great prices, delivery and quality product."
               attribution="Rob Warner · Apr 21"
@@ -381,7 +381,7 @@ function HomePage() {
               fill
               variant="cta"
               tone="surface"
-              padding="lg"
+
               icon={<Truck />}
               eyebrow="Delivery"
               title="Delivery across Central Mass"

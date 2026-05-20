@@ -106,7 +106,7 @@ function ProductsPage() {
             fill
             variant="cta"
             tone="brand"
-            padding="md"
+
             icon={<Phone />}
             eyebrow="Today's price by phone"
             title="Materials. By the yard."
@@ -119,7 +119,7 @@ function ProductsPage() {
             fill
             variant="cta"
             tone="surface"
-            padding="sm"
+
             icon={<Truck />}
             eyebrow="Delivery"
             title="Curbside delivery."
@@ -131,7 +131,7 @@ function ProductsPage() {
             fill
             variant="cta"
             tone="kraft"
-            padding="sm"
+
             icon={<HelpCircle />}
             eyebrow="Quote"
             title="Build a list in 60 seconds."

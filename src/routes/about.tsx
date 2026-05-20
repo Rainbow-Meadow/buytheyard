@@ -69,7 +69,7 @@ function AboutPage() {
               fill
               variant="quote"
               tone="surface"
-              padding="lg"
+
               eyebrow="In her own words"
               quote="Opening this business was the perfect way to get into the industry. I found something that isn't just a job — it's something I take pride in every day."
               attribution="Abby Montalto · Owner"

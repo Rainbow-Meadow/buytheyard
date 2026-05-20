@@ -259,7 +259,7 @@ function PrivacyPage() {
               fill
               variant="text"
               tone="kraft"
-              padding="sm"
+
               eyebrow="07 · Mailing address"
               body={
                 <>
@@ -277,7 +277,7 @@ function PrivacyPage() {
               fill
               variant="cta"
               tone="brand"
-              padding="sm"
+
               eyebrow="08 · Questions?"
               title="Email or call Abby."
               cta={{ label: "abby@btymaterial.com", href: "mailto:abby@btymaterial.com" }}
@@ -288,7 +288,7 @@ function PrivacyPage() {
               fill
               variant="cta"
               tone="surface"
-              padding="sm"
+
               eyebrow="09 · Direct"
               title="508.579.9897"
               cta={{ label: "Call now", href: "tel:5085799897" }}
