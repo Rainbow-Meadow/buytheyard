@@ -21,7 +21,7 @@ export function SiteHeader() {
           <Link
             to="/"
             className="flex items-center leading-none"
-            aria-label="Buy The Yard — home"
+            aria-label="Buy The Yard, home"
             onClick={() => setOpen(false)}
           >
             <img

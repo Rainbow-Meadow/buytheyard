@@ -73,7 +73,7 @@ export function SiteFooter() {
           <div className="flex-col text-center space-y-3 px-2 md:px-4 flex items-center justify-center">
               <img
                 src={brandmark}
-                alt="Buy The Yard — Mulch · Loam · Sand · Stone"
+                alt="Buy The Yard · Mulch · Loam · Sand · Stone"
                 width={320}
                 height={160}
                 className="h-32 md:h-44 w-auto object-fill"
@@ -164,7 +164,7 @@ export function SiteFooter() {
               <div className="w-full max-w-[16rem] aspect-video border border-white/10 overflow-hidden">
                 <iframe
                   src={MAP_EMBED_URL}
-                  title="Buy The Yard Material — 2264 Main St, Jefferson, MA"
+                  title="Buy The Yard Material, 2264 Main St, Jefferson, MA"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="w-full h-full grayscale-[0.2] contrast-[1.05]"
