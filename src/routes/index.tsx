@@ -5,12 +5,6 @@ import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.
 import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
 const reviews = [
   {
@@ -573,20 +567,19 @@ function HomePage() {
               Delivery details <ArrowRight className="size-4" />
             </Link>
           </div>
-          <div className="bg-white ring-1 ring-zinc-300/60 p-8 rounded-md">
-            <ul className="divide-y divide-zinc-200">
-              {[
-                ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
-                ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
-                ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
-                ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
-              ].map(([k, v]) => (
-                <li key={k} className="py-4 first:pt-0 last:pb-0">
-                  <p className="display-5">{k}</p>
-                  <p className="body-sm text-zinc-600 mt-1">{v}</p>
-                </li>
-              ))}
-            </ul>
+          <div className="grid grid-cols-2 gap-2 md:gap-3">
+            {[
+              ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
+              ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
+              ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
+              ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
+            ].map(([k, v], i) => (
+              <article key={k} className="bg-white ring-1 ring-zinc-300/60 p-5 md:p-6 rounded-md">
+                <p className="eyebrow text-brand mb-2">{String(i + 1).padStart(2, "0")}</p>
+                <p className="display-5">{k}</p>
+                <p className="body-sm text-zinc-600 mt-2">{v}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -651,90 +644,50 @@ function HomePage() {
           </div>
 
           <div className="md:col-span-7">
-            <Accordion type="single" collapsible className="bg-white/5 border border-white/10 rounded-md backdrop-blur-sm px-2 md:px-4">
-              <AccordionItem value="pricing" className="border-white/10 last:border-0">
-                <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
-                  How much does material cost?
-                </AccordionTrigger>
-                <AccordionContent className="body text-zinc-300 pb-5 pr-6">
-                  <p>
-                    Prices move with the season and the market, so we quote
-                    today's number by phone — and we work to keep them the
-                    best in the area. One-yard minimum on all bulk orders.
-                  </p>
-                  <p className="mt-3">
-                    For your project, please{" "}
-                    <a href="tel:5085799897" className="font-semibold text-white underline underline-offset-4 hover:text-brand">
-                      call 508-579-9897
-                    </a>{" "}
-                    or{" "}
-                    <Link to="/quote" className="font-semibold text-white underline underline-offset-4 hover:text-brand">
-                      request a quote online
-                    </Link>
-                    .
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              <article className="sm:col-span-2 bg-white/5 ring-1 ring-white/10 rounded-md p-6 md:p-7 backdrop-blur-sm">
+                <p className="eyebrow text-brand mb-3">01 · Pricing</p>
+                <h3 className="display-5 tracking-tight">How much does material cost?</h3>
+                <p className="body-sm text-zinc-300 mt-3">
+                  Prices move with the season and the market, so we quote today's number by phone — and we work to keep them the best in the area. One-yard minimum on all bulk orders.
+                </p>
+                <p className="body-sm text-zinc-300 mt-3">
+                  For your project,{" "}
+                  <a href="tel:5085799897" className="font-semibold text-white underline underline-offset-4 hover:text-brand">call 508-579-9897</a>{" "}or{" "}
+                  <Link to="/quote" className="font-semibold text-white underline underline-offset-4 hover:text-brand">request a quote online</Link>.
+                </p>
+              </article>
 
-              <AccordionItem value="delivery-area" className="border-white/10 last:border-0">
-                <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
-                  Do you deliver to my town?
-                </AccordionTrigger>
-                <AccordionContent className="body text-zinc-300 pb-5 pr-6">
-                  <p>
-                    We offer curbside delivery throughout Central Massachusetts
-                    from our Jefferson yard, including Holden, Princeton,
-                    Sterling, Rutland, West Boylston, Paxton, Worcester,
-                    Leominster, and surrounding towns.
-                  </p>
-                  <p className="mt-3">
-                    Delivery is priced by ZIP code. A brief call confirms your
-                    service area and final price before your order is
-                    dispatched. Full details are available on{" "}
-                    <Link to="/delivery" className="font-semibold text-white underline underline-offset-4 hover:text-brand">
-                      the delivery page
-                    </Link>
-                    .
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
+              <article className="bg-white/5 ring-1 ring-white/10 rounded-md p-6 md:p-7 backdrop-blur-sm">
+                <p className="eyebrow text-brand mb-3">02 · Delivery area</p>
+                <h3 className="display-5 tracking-tight">Do you deliver to my town?</h3>
+                <p className="body-sm text-zinc-300 mt-3">
+                  Curbside delivery throughout Central Massachusetts from our Jefferson yard — Holden, Princeton, Sterling, Rutland, West Boylston, Paxton, Worcester, Leominster, and surrounding towns.
+                </p>
+                <Link to="/delivery" className="mt-4 inline-flex items-center gap-1 label text-white underline underline-offset-4 hover:text-brand">
+                  Delivery details <ArrowRight className="size-3.5" />
+                </Link>
+              </article>
 
-              <AccordionItem value="card-fee" className="border-white/10 last:border-0">
-                <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
-                  What's the 4% card fee about?
-                </AccordionTrigger>
-                <AccordionContent className="body text-zinc-300 pb-5 pr-6">
-                  <p>
-                    The 4% surcharge is passed through directly from our
-                    payment processor. Cash and check payments are accepted
-                    with no additional fee. Your quoted price stays the same
-                    regardless of payment method.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
+              <article className="bg-white/5 ring-1 ring-white/10 rounded-md p-6 md:p-7 backdrop-blur-sm">
+                <p className="eyebrow text-brand mb-3">03 · Card fee</p>
+                <h3 className="display-5 tracking-tight">What's the 4% card fee about?</h3>
+                <p className="body-sm text-zinc-300 mt-3">
+                  A processor surcharge passed through at cost. Cash and check payments are accepted with no additional fee. Your quoted price stays the same.
+                </p>
+              </article>
 
-              <AccordionItem value="timing" className="border-white/10 last:border-0">
-                <AccordionTrigger className="display-5 tracking-tight py-5 hover:no-underline">
-                  How fast can I get a delivery?
-                </AccordionTrigger>
-                <AccordionContent className="body text-zinc-300 pb-5 pr-6">
-                  <p>
-                    Same-day delivery may be available when you call before
-                    noon, depending on the day's route. Otherwise, please
-                    allow approximately 48 hours.
-                  </p>
-                  <p className="mt-3">
-                    Delivery is made to the driveway or curbline only. Please
-                    mark your preferred drop location so we can place the
-                    material accurately. To submit a material list,{" "}
-                    <Link to="/quote" className="font-semibold text-white underline underline-offset-4 hover:text-brand">
-                      start a quote
-                    </Link>{" "}
-                    and we'll respond the same day.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+              <article className="sm:col-span-2 bg-white/5 ring-1 ring-white/10 rounded-md p-6 md:p-7 backdrop-blur-sm">
+                <p className="eyebrow text-brand mb-3">04 · Timing</p>
+                <h3 className="display-5 tracking-tight">How fast can I get a delivery?</h3>
+                <p className="body-sm text-zinc-300 mt-3">
+                  Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours. Drop is driveway or curbline only — please mark your preferred spot.
+                </p>
+                <Link to="/quote" className="mt-4 inline-flex items-center gap-1 label text-white underline underline-offset-4 hover:text-brand">
+                  Start a quote <ArrowRight className="size-3.5" />
+                </Link>
+              </article>
+            </div>
 
             <a
               href="tel:5085799897"

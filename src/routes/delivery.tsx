@@ -186,22 +186,22 @@ function DeliveryPage() {
       </section>
 
       <section className="section bg-kraft border-y border-zinc-300">
-        <div className="max-w-5xl mx-auto px-5 md:px-6">
-          <h2 className="display-3 mb-5 md:mb-10">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <p className="eyebrow text-brand mb-3">Before delivery</p>
+          <h2 className="display-3 mb-6 md:mb-10 max-w-[20ch]">
             What to Know Before Delivery
           </h2>
-          <ul className="divide-y divide-zinc-300">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {POLICIES.map(([k, v], i) => (
-              <li key={k} className="py-6 grid grid-cols-[auto_1fr] gap-3 md:gap-6 items-start">
-                <span className="display-4 text-brand w-12">
+              <li
+                key={k}
+                className="bg-white ring-1 ring-zinc-300 p-6 rounded-md flex flex-col"
+              >
+                <span className="display-3 text-brand leading-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <div>
-                  <p className="display-4 text-zinc-900 leading-tight">
-                    {k}
-                  </p>
-                  <p className="text-zinc-700 mt-2">{v}</p>
-                </div>
+                <p className="display-5 text-zinc-900 leading-tight mt-5">{k}</p>
+                <p className="body-sm text-zinc-700 mt-2">{v}</p>
               </li>
             ))}
           </ul>
@@ -209,18 +209,32 @@ function DeliveryPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-5 md:px-6 flex flex-col md:flex-row items-start gap-3 md:gap-6 p-8 bg-surface text-surface-foreground rounded-md">
-          <CreditCard className="size-10 text-brand shrink-0" />
-          <div>
-            <h3 className="display-4 mb-2">
-              Card Processing Fee
-            </h3>
-            <p className="text-zinc-300">
-              The 4% surcharge is passed through directly from our payment
-              processor. Cash and check payments are accepted with no
-              additional fee.
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+          <article className="bg-surface text-surface-foreground p-7 rounded-md">
+            <CreditCard className="size-7 text-brand mb-4" />
+            <p className="eyebrow text-brand mb-2">Payment</p>
+            <h3 className="display-5 mb-3">Card Processing Fee</h3>
+            <p className="body-sm text-zinc-300">
+              The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee.
             </p>
-          </div>
+          </article>
+          <article className="bg-kraft ring-1 ring-zinc-300 p-7 rounded-md">
+            <p className="eyebrow text-brand mb-2">Same day</p>
+            <h3 className="display-5 mb-3">Call before noon</h3>
+            <p className="body-sm text-zinc-700">
+              Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise allow approximately 48 hours.
+            </p>
+          </article>
+          <article className="bg-kraft ring-1 ring-zinc-300 p-7 rounded-md">
+            <p className="eyebrow text-brand mb-2">Need a quote?</p>
+            <h3 className="display-5 mb-3">Tap to call</h3>
+            <a
+              href="tel:5085799897"
+              className="mt-1 inline-flex items-center gap-2 bg-brand text-brand-foreground px-5 h-11 label hover:opacity-90"
+            >
+              <Phone className="size-4" /> 508.579.9897
+            </a>
+          </article>
         </div>
       </section>
     </>

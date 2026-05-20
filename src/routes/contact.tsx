@@ -135,34 +135,39 @@ function ContactPage() {
               <ArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-          <p className="mt-6 text-sm text-zinc-400 max-w-[60ch]">
-            For non-urgent stuff, email{" "}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl">
             <a
               href="mailto:abby@btymaterial.com"
-              className="text-zinc-100 underline underline-offset-4 hover:text-brand"
+              className="group bg-white/5 ring-1 ring-white/10 rounded-md p-5 backdrop-blur-sm hover:bg-white/10"
             >
-              abby@btymaterial.com
+              <Mail className="size-5 text-brand mb-3" />
+              <p className="eyebrow text-zinc-400 mb-1">Email · non-urgent</p>
+              <p className="display-5 text-white leading-tight break-all">abby@btymaterial.com</p>
             </a>
-            . Please note: the chat widget on our previous website is no longer monitored.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-5">
             <a
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
+              className="group bg-white/5 ring-1 ring-white/10 rounded-md p-5 backdrop-blur-sm hover:bg-white/10"
             >
-              <Facebook className="size-4" /> Facebook
+              <Facebook className="size-5 text-brand mb-3" />
+              <p className="eyebrow text-zinc-400 mb-1">Social</p>
+              <p className="display-5 text-white leading-tight">Facebook</p>
             </a>
             <a
               href="https://www.yelp.com/biz/buy-the-yard-holden"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 label text-zinc-300 hover:text-brand"
+              className="group bg-white/5 ring-1 ring-white/10 rounded-md p-5 backdrop-blur-sm hover:bg-white/10"
             >
-              <YelpLogo className="size-4" /> Yelp
+              <YelpLogo className="size-5 text-brand mb-3" />
+              <p className="eyebrow text-zinc-400 mb-1">Reviews</p>
+              <p className="display-5 text-white leading-tight">Yelp</p>
             </a>
           </div>
+          <p className="mt-4 text-xs text-zinc-500 max-w-[60ch]">
+            Heads up: the chat widget on our previous website is no longer monitored.
+          </p>
         </div>
       </section>
 
