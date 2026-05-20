@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lazy, useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
+import { lazy, type ReactNode } from "react";
+import { ArrowRight, ChevronDown, Phone } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
@@ -10,7 +10,10 @@ import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
 import { LazyOnVisible } from "@/components/site/LazyOnVisible";
 
 const FeaturedMaterials = lazy(() => import("@/components/home/FeaturedMaterials"));
-const CommunityTiles = lazy(() => import("@/components/home/CommunityTiles"));
+const FacebookSpotlight = lazy(() => import("@/components/home/FacebookSpotlight"));
+const ReviewsAndCommunity = lazy(() => import("@/components/home/ReviewsAndCommunity"));
+const DeliveryAndPricing = lazy(() => import("@/components/home/DeliveryAndPricing"));
+const FaqSection = lazy(() => import("@/components/home/FaqSection"));
 
 /**
  * Defers hero <video> load/play until the browser is idle (or after a short
@@ -44,26 +47,6 @@ function kickHeroVideo(el: HTMLVideoElement | null) {
     setTimeout(start, 400);
   }
 }
-
-const reviews = [
-  {
-    name: "Rob Warner",
-    date: "Apr 21",
-    quote:
-      "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product.",
-  },
-  {
-    name: "Michael Radesky",
-    date: "Aug 26, 2019",
-    quote:
-      "Wicked nice folks! Dependable, personable, and good products. We love Abby!!!",
-  },
-  {
-    name: "John Sarkisian",
-    date: "May 7, 2019",
-    quote: "Great customer service. Very professional. Prices are fair!",
-  },
-];
 
 function MobileCollapse({
   id,
