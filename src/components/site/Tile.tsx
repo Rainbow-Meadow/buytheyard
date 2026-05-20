@@ -255,6 +255,7 @@ export function Tile(block: TileBlock) {
       const imageShell = [
         sizeCls[size],
         block.tall ? "tile-row-tall" : "",
+        aspect,
         "relative overflow-hidden rounded-md ring-1",
         isLightTone(tone) ? "ring-zinc-300" : "ring-white/10",
         toneCls[tone],
@@ -272,9 +273,7 @@ export function Tile(block: TileBlock) {
             src={block.src}
             alt={block.alt}
             loading="lazy"
-            className={`${aspect} w-full h-full object-cover ${
-              hasOverlay ? "absolute inset-0" : ""
-            }`}
+            className="absolute inset-0 w-full h-full object-cover"
           />
           {hasOverlay && (
             <>
@@ -283,7 +282,7 @@ export function Tile(block: TileBlock) {
                 aria-hidden="true"
                 className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
               />
-              <div className={`${aspect} relative w-full h-full flex ${align} p-5 md:p-6`}>
+              <div className={`absolute inset-0 flex ${align} p-5 md:p-6`}>
                 <div className="text-white max-w-[34ch]">
                   {block.overlay?.eyebrow && (
                     <p className="eyebrow text-brand mb-2">{block.overlay.eyebrow}</p>
