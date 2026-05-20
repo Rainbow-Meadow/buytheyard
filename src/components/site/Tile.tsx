@@ -25,6 +25,9 @@ export type TileTone = "kraft" | "surface" | "brand" | "white";
 export type TilePadding = "sm" | "md" | "lg";
 
 interface BaseTile {
+  /** Stable identifier used as the React key when present.
+   *  Provide one whenever blocks may reorder, filter, or stream in. */
+  id?: string;
   size?: TileSize;
   tone?: TileTone;
   tall?: boolean;
@@ -145,7 +148,7 @@ export function TileGrid({ blocks }: { blocks: TileBlock[] }) {
   return (
     <div className="tile-grid">
       {blocks.map((b, i) => (
-        <Tile key={i} {...b} />
+        <Tile key={b.id ?? `tile-${i}`} {...b} />
       ))}
     </div>
   );
