@@ -1,22 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { useForm, useFieldArray, Controller, type FieldPath } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowLeft,
+  ArrowRight,
   Check,
+  ChevronLeft,
   Copy,
   Mail,
   MessageSquare,
   Minus,
   Pencil,
+  Phone,
   Plus,
+  Send,
   Trash2,
 } from "lucide-react";
 import { products, categories } from "@/data/products";
 import mulchHemlock from "@/assets/mulch-hemlock.webp";
 import stoneRiver from "@/assets/stone-river.webp";
 import loam from "@/assets/loam.webp";
+import { Tile } from "@/components/site/Tile";
+import { TileScreen } from "@/components/site/TileScreen";
 import {
   CONTACT_METHODS,
   DROP_SPOTS,
@@ -58,8 +64,7 @@ export const Route = createFileRoute("/quote")({
 
 const inputCls =
   "w-full bg-white text-zinc-900 px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-brand placeholder:text-zinc-400";
-const labelCls =
-  "eyebrow text-zinc-700 mb-2 block";
+const labelCls = "eyebrow text-zinc-700 mb-2 block";
 const errorCls = "text-xs text-red-700 mt-1";
 
 const sortedProducts = [...products].sort((a, b) => {
@@ -69,9 +74,12 @@ const sortedProducts = [...products].sort((a, b) => {
   return a.name.localeCompare(b.name);
 });
 
+const STEP_LABELS = ["Materials", "Fulfillment", "Contact", "Review"] as const;
+
 function QuotePage() {
   const [submitted, setSubmitted] = useState<QuoteData | null>(null);
   const [copied, setCopied] = useState(false);
+  const [step, setStep] = useState(0);
 
   const form = useForm<QuoteData>({
     resolver: zodResolver(quoteSchema),
@@ -88,7 +96,7 @@ function QuotePage() {
     },
   });
 
-  const { register, control, handleSubmit, watch, setValue, formState } = form;
+  const { register, control, handleSubmit, watch, setValue, formState, trigger, getValues } = form;
   const items = useFieldArray({ control, name: "items" });
   const fulfillment = watch("fulfillment");
   const timing = watch("timing");
@@ -100,6 +108,33 @@ function QuotePage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
+
+  const validateStep = async (s: number): Promise<boolean> => {
+    const fields: FieldPath<QuoteData>[] = [];
+    if (s === 0) {
+      getValues("items").forEach((_, i) => {
+        fields.push(`items.${i}.product` as FieldPath<QuoteData>);
+        fields.push(`items.${i}.quantity` as FieldPath<QuoteData>);
+        fields.push(`items.${i}.unit` as FieldPath<QuoteData>);
+      });
+    } else if (s === 1) {
+      fields.push("fulfillment");
+      if (fulfillment === "Delivery") {
+        fields.push("town", "zip", "dropSpot", "timing", "acknowledged");
+        if (timing === "Specific date") fields.push("specificDate");
+      }
+    } else if (s === 2) {
+      fields.push("name", "phone", "email", "bestContact");
+    }
+    if (fields.length === 0) return true;
+    return trigger(fields);
+  };
+
+  const goNext = async () => {
+    const ok = await validateStep(step);
+    if (ok) setStep((s) => Math.min(STEP_LABELS.length - 1, s + 1));
+  };
+  const goPrev = () => setStep((s) => Math.max(0, s - 1));
 
   if (submitted) {
     return (
@@ -113,478 +148,492 @@ function QuotePage() {
   }
 
   return (
-    <>
-      <section className="bg-surface text-surface-foreground">
-        {/* Mobile stacked hero */}
-        <div className="md:hidden">
-          <div className="grid grid-cols-3 gap-1">
-            <div className="aspect-square overflow-hidden"><img src={mulchHemlock} alt="Hemlock mulch piles" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-            <div className="aspect-square overflow-hidden"><img src={loam} alt="Screened loam" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-            <div className="aspect-square overflow-hidden"><img src={stoneRiver} alt="River stone" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-          </div>
-          <div className="px-5 py-8">
-            <p className="eyebrow text-brand mb-4">Get a quote</p>
-            <h1 className="display-2 leading-[0.9]">
-              Tell us. <span className="text-brand">We'll price it.</span>
-            </h1>
-            <p className="mt-4 text-zinc-300 text-base">
-              About 60 seconds of clicking. One tap sends it to Abby. She'll come back with the number and a window.
-            </p>
-          </div>
-        </div>
-
-        {/* Desktop split hero */}
-        <div className="hidden md:block">
-          <div className="max-w-7xl mx-auto px-6 section-loose grid grid-cols-12 gap-8 items-center">
-            <div className="col-span-7">
-              <p className="eyebrow text-brand mb-4">Get a quote</p>
-              <h1 className="display-1 leading-[0.9] max-w-[14ch]">
-                Tell us. <span className="text-brand">We'll price it.</span>
-              </h1>
-              <p className="mt-6 text-zinc-400 max-w-[52ch] text-lg">
-                About 60 seconds of clicking. One tap sends it to Abby. She'll come back with the number and a window.
-              </p>
-            </div>
-            <div className="col-span-5 grid grid-cols-2 gap-2">
-              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10 col-span-2">
-                <img src={mulchHemlock} alt="Hemlock mulch piles" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-              </div>
-              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10"><img src={loam} alt="Screened loam" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-              <div className="aspect-square overflow-hidden rounded-md ring-1 ring-white/10"><img src={stoneRiver} alt="River stone" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Reassurance strip */}
-      <section className="bg-kraft border-y border-zinc-300">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 py-8 md:py-10">
-          <ul className="grid grid-cols-2 md:grid-cols-3 md:divide-x md:divide-zinc-300 gap-y-6">
-            {[
-              ["~60s", "To build a list"],
-              ["1 owner", "Abby answers"],
-              ["Same day", "Reply, in season"],
-            ].map(([v, k]) => (
-              <li key={k} className="md:px-8 first:md:pl-0 last:md:pr-0">
-                <p className="display-4 text-zinc-900 leading-none">{v}</p>
-                <p className="eyebrow text-zinc-600 mt-2">{k}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section bg-base">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="max-w-3xl mx-auto px-5 md:px-6 space-y-8 md:space-y-10"
-          noValidate
-        >
-          {/* PRODUCTS */}
-          <StepTile
-            number="01"
-            eyebrow="Step 01 · Materials"
-            title="What do you need?"
-            helper="One row per material. Ballpark the quantity. We'll dial it in on the phone."
+    <TileScreen
+      layout="pageHero"
+      label="Build a quote"
+      tiles={{
+        hero: (
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+            className="h-full w-full bg-kraft text-zinc-900 ring-1 ring-zinc-300 rounded-md overflow-hidden flex flex-col"
           >
-            <div className="space-y-4">
-              {items.fields.map((field, idx) => {
-                const productErr = formState.errors.items?.[idx]?.product;
-                const qtyErr = formState.errors.items?.[idx]?.quantity;
-                return (
-                  <div
-                    key={field.id}
-                    className="bg-kraft p-4 md:p-5 rounded-md ring-1 ring-zinc-300"
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 items-end">
-                      <div>
-                        <label className={labelCls} htmlFor={`items-${idx}-product`}>Product</label>
-                        <Controller
-                          control={control}
-                          name={`items.${idx}.product`}
-                          render={({ field: f }) => (
-                            <select
-                              {...f}
-                              id={`items-${idx}-product`}
-                              className={inputCls}
-                              onChange={(e) => {
-                                f.onChange(e);
-                                setValue(
-                                  `items.${idx}.unit`,
-                                  defaultUnitFor(e.target.value),
-                                  { shouldValidate: true },
-                                );
-                              }}
-                            >
-                              <option value="">Select a product…</option>
-                              {categories.map((cat) => (
-                                <optgroup key={cat} label={cat}>
-                                  {sortedProducts
-                                    .filter((p) => p.category === cat)
-                                    .map((p) => (
-                                      <option key={p.name} value={p.name}>
-                                        {p.name}
-                                      </option>
+            {/* Header — step pips */}
+            <div className="px-5 md:px-7 pt-5 md:pt-6 pb-4 border-b border-zinc-300/70">
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <p className="eyebrow text-brand">
+                  Step {String(step + 1).padStart(2, "0")} · {STEP_LABELS[step]}
+                </p>
+                <p className="meta text-zinc-500 tabular-nums">
+                  {step + 1} / {STEP_LABELS.length}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                {STEP_LABELS.map((label, i) => (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={async () => {
+                      if (i <= step) {
+                        setStep(i);
+                      } else {
+                        // Validate intermediate steps before jumping forward.
+                        for (let s = step; s < i; s++) {
+                          // eslint-disable-next-line no-await-in-loop
+                          const ok = await validateStep(s);
+                          if (!ok) {
+                            setStep(s);
+                            return;
+                          }
+                        }
+                        setStep(i);
+                      }
+                    }}
+                    aria-label={`Go to step ${i + 1}: ${label}`}
+                    aria-current={i === step}
+                    className={`h-1.5 flex-1 rounded-full transition-colors ${
+                      i === step
+                        ? "bg-brand"
+                        : i < step
+                          ? "bg-zinc-700"
+                          : "bg-zinc-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Slide content — scrollable inside the tile */}
+            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6">
+              {step === 0 && (
+                <SlideHeader
+                  title="What do you need?"
+                  helper="One row per material. Ballpark the quantity — we dial it in on the phone."
+                >
+                  <div className="space-y-3">
+                    {items.fields.map((field, idx) => {
+                      const productErr = formState.errors.items?.[idx]?.product;
+                      const qtyErr = formState.errors.items?.[idx]?.quantity;
+                      return (
+                        <div
+                          key={field.id}
+                          className="bg-white p-4 rounded-md ring-1 ring-zinc-300"
+                        >
+                          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 items-end">
+                            <div>
+                              <label className={labelCls} htmlFor={`items-${idx}-product`}>Product</label>
+                              <Controller
+                                control={control}
+                                name={`items.${idx}.product`}
+                                render={({ field: f }) => (
+                                  <select
+                                    {...f}
+                                    id={`items-${idx}-product`}
+                                    className={inputCls}
+                                    onChange={(e) => {
+                                      f.onChange(e);
+                                      setValue(
+                                        `items.${idx}.unit`,
+                                        defaultUnitFor(e.target.value),
+                                        { shouldValidate: true },
+                                      );
+                                    }}
+                                  >
+                                    <option value="">Select a product…</option>
+                                    {categories.map((cat) => (
+                                      <optgroup key={cat} label={cat}>
+                                        {sortedProducts
+                                          .filter((p) => p.category === cat)
+                                          .map((p) => (
+                                            <option key={p.name} value={p.name}>{p.name}</option>
+                                          ))}
+                                      </optgroup>
                                     ))}
-                                </optgroup>
-                              ))}
-                            </select>
-                          )}
-                        />
-                        {productErr && (
-                          <p className={errorCls}>{productErr.message}</p>
+                                  </select>
+                                )}
+                              />
+                              {productErr && <p className={errorCls}>{productErr.message}</p>}
+                            </div>
+
+                            <div>
+                              <label className={labelCls} htmlFor={`items-${idx}-quantity`}>Qty</label>
+                              <Controller
+                                control={control}
+                                name={`items.${idx}.quantity`}
+                                render={({ field: f }) => (
+                                  <div className="flex items-center ring-1 ring-zinc-300 rounded-sm bg-white h-11">
+                                    <button
+                                      type="button"
+                                      aria-label="Decrease quantity"
+                                      className="px-3 h-full text-zinc-600 hover:text-brand"
+                                      onClick={() => f.onChange(Math.max(1, Number(f.value) - 1))}
+                                    >
+                                      <Minus className="size-4" />
+                                    </button>
+                                    <input
+                                      id={`items-${idx}-quantity`}
+                                      type="number"
+                                      inputMode="numeric"
+                                      min={1}
+                                      max={999}
+                                      value={f.value}
+                                      onChange={(e) =>
+                                        f.onChange(
+                                          e.target.value === ""
+                                            ? ""
+                                            : Math.max(1, Number(e.target.value)),
+                                        )
+                                      }
+                                      className="w-14 text-center bg-transparent text-zinc-900 text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                    />
+                                    <button
+                                      type="button"
+                                      aria-label="Increase quantity"
+                                      className="px-3 h-full text-zinc-600 hover:text-brand"
+                                      onClick={() => f.onChange(Math.min(999, Number(f.value) + 1))}
+                                    >
+                                      <Plus className="size-4" />
+                                    </button>
+                                  </div>
+                                )}
+                              />
+                              {qtyErr && <p className={errorCls}>{qtyErr.message}</p>}
+                            </div>
+
+                            <div>
+                              <label className={labelCls} htmlFor={`items-${idx}-unit`}>Unit</label>
+                              <select
+                                id={`items-${idx}-unit`}
+                                className={`${inputCls} pr-2`}
+                                {...register(`items.${idx}.unit` as const)}
+                              >
+                                {UNITS.map((u) => (
+                                  <option key={u} value={u}>{u}</option>
+                                ))}
+                              </select>
+                            </div>
+
+                            <button
+                              type="button"
+                              aria-label="Remove product"
+                              disabled={items.fields.length === 1}
+                              onClick={() => items.remove(idx)}
+                              className="h-11 px-3 text-zinc-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                            >
+                              <Trash2 className="size-4" />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => items.append({ product: "", quantity: 1, unit: "cu yd" })}
+                    className="mt-4 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
+                  >
+                    <Plus className="size-4" /> Add another product
+                  </button>
+                </SlideHeader>
+              )}
+
+              {step === 1 && (
+                <SlideHeader title="Pickup or delivery?" helper="Pick one. We'll show delivery details if you need them.">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {(["Pickup", "Delivery"] as const).map((opt) => (
+                      <label
+                        key={opt}
+                        className={`cursor-pointer rounded-md p-5 ring-1 transition-colors ${
+                          fulfillment === opt
+                            ? "bg-surface text-surface-foreground ring-brand"
+                            : "bg-white text-zinc-900 ring-zinc-300 hover:ring-zinc-500"
+                        }`}
+                      >
+                        <input type="radio" value={opt} {...register("fulfillment")} className="sr-only" />
+                        <p className="display-4 leading-none">{opt}</p>
+                        <p className={`text-sm mt-2 ${fulfillment === opt ? "text-zinc-300" : "text-zinc-600"}`}>
+                          {opt === "Pickup"
+                            ? "I've got a truck or trailer and I'll come grab it."
+                            : "Bring it to me. I'm in Central Mass."}
+                        </p>
+                      </label>
+                    ))}
+                  </div>
+
+                  {fulfillment === "Delivery" && (
+                    <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-5 rounded-md ring-1 ring-zinc-300">
+                      <div>
+                        <label className={labelCls} htmlFor="quote-town">Town</label>
+                        <select id="quote-town" className={inputCls} {...register("town")}>
+                          <option value="">Select town…</option>
+                          {TOWNS.map((t) => <option key={t} value={t}>{t}</option>)}
+                        </select>
+                        {formState.errors.town && (
+                          <p className={errorCls}>{formState.errors.town.message as string}</p>
+                        )}
+                      </div>
+                      <div>
+                        <label className={labelCls} htmlFor="quote-zip">ZIP</label>
+                        <input id="quote-zip" inputMode="numeric" maxLength={5} placeholder="01522" className={inputCls} {...register("zip")} />
+                        {formState.errors.zip && (
+                          <p className={errorCls}>{formState.errors.zip.message as string}</p>
                         )}
                       </div>
 
-                      <div>
-                        <label className={labelCls} htmlFor={`items-${idx}-quantity`}>Qty</label>
-                        <Controller
-                          control={control}
-                          name={`items.${idx}.quantity`}
-                          render={({ field: f }) => (
-                            <div className="flex items-center ring-1 ring-zinc-300 rounded-sm bg-white h-11">
-                              <button
-                                type="button"
-                                aria-label="Decrease quantity"
-                                className="px-3 h-full text-zinc-600 hover:text-brand"
-                                onClick={() =>
-                                  f.onChange(Math.max(1, Number(f.value) - 1))
-                                }
-                              >
-                                <Minus className="size-4" />
-                              </button>
-                              <input
-                                id={`items-${idx}-quantity`}
-                                type="number"
-                                inputMode="numeric"
-                                min={1}
-                                max={999}
-                                value={f.value}
-                                onChange={(e) =>
-                                  f.onChange(
-                                    e.target.value === ""
-                                      ? ""
-                                      : Math.max(1, Number(e.target.value)),
-                                  )
-                                }
-                                className="w-14 text-center bg-transparent text-zinc-900 text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                              />
-                              <button
-                                type="button"
-                                aria-label="Increase quantity"
-                                className="px-3 h-full text-zinc-600 hover:text-brand"
-                                onClick={() =>
-                                  f.onChange(Math.min(999, Number(f.value) + 1))
-                                }
-                              >
-                                <Plus className="size-4" />
-                              </button>
-                            </div>
-                          )}
-                        />
-                        {qtyErr && <p className={errorCls}>{qtyErr.message}</p>}
-                      </div>
-
-                      <div>
-                        <label className={labelCls} htmlFor={`items-${idx}-unit`}>Unit</label>
-                        <select
-                          id={`items-${idx}-unit`}
-                          className={`${inputCls} pr-2`}
-                          {...register(`items.${idx}.unit` as const)}
-                        >
-                          {UNITS.map((u) => (
-                            <option key={u} value={u}>
-                              {u}
-                            </option>
+                      <div className="md:col-span-2">
+                        <p className={labelCls}>Where should we drop it?</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {DROP_SPOTS.map((d) => (
+                            <label
+                              key={d}
+                              className="flex items-center gap-3 bg-kraft px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2"
+                            >
+                              <input type="radio" value={d} {...register("dropSpot")} className="accent-[var(--brand)]" />
+                              <span className="text-zinc-900">{d}</span>
+                            </label>
                           ))}
-                        </select>
+                        </div>
+                        {formState.errors.dropSpot && (
+                          <p className={errorCls}>{formState.errors.dropSpot.message as string}</p>
+                        )}
                       </div>
 
-                      <button
-                        type="button"
-                        aria-label="Remove product"
-                        disabled={items.fields.length === 1}
-                        onClick={() => items.remove(idx)}
-                        className="h-11 px-3 text-zinc-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed"
-                      >
-                        <Trash2 className="size-4" />
-                      </button>
+                      <div className="md:col-span-2">
+                        <p className={labelCls}>When?</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                          {TIMING.map((t) => (
+                            <label
+                              key={t}
+                              className="flex items-center justify-center text-center bg-kraft px-2 h-11 ring-1 ring-zinc-300 rounded-sm text-xs font-semibold cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900 uppercase tracking-wide"
+                            >
+                              <input type="radio" value={t} {...register("timing")} className="sr-only" />
+                              {t === "As soon as possible" ? "ASAP" : t}
+                            </label>
+                          ))}
+                        </div>
+                        {formState.errors.timing && (
+                          <p className={errorCls}>{formState.errors.timing.message as string}</p>
+                        )}
+                        {timing === "Specific date" && (
+                          <input id="quote-specific-date" type="date" className={`${inputCls} mt-3`} {...register("specificDate")} />
+                        )}
+                        {formState.errors.specificDate && (
+                          <p className={errorCls}>{formState.errors.specificDate.message as string}</p>
+                        )}
+                      </div>
+
+                      <label className="md:col-span-2 flex items-start gap-3 text-sm text-zinc-800 cursor-pointer">
+                        <input type="checkbox" {...register("acknowledged")} className="mt-1 size-4 accent-[var(--brand)]" />
+                        <span>
+                          I get the <strong>1-yard minimum</strong> and the
+                          <strong> 48-hour scheduling window</strong>, and that
+                          delivery is driveway or curbline only.
+                        </span>
+                      </label>
+                      {formState.errors.acknowledged && (
+                        <p className={`${errorCls} md:col-span-2`}>{formState.errors.acknowledged.message as string}</p>
+                      )}
+                    </div>
+                  )}
+                </SlideHeader>
+              )}
+
+              {step === 2 && (
+                <SlideHeader title="How do we reach you?" helper="So Abby can come back with the number.">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className={labelCls} htmlFor="quote-name">Name</label>
+                      <input id="quote-name" className={inputCls} autoComplete="name" {...register("name")} />
+                      {formState.errors.name && <p className={errorCls}>{formState.errors.name.message}</p>}
+                    </div>
+                    <div>
+                      <label className={labelCls} htmlFor="quote-phone">Phone</label>
+                      <input id="quote-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(508) 555-0142" className={inputCls} {...register("phone")} />
+                      {formState.errors.phone && <p className={errorCls}>{formState.errors.phone.message}</p>}
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className={labelCls} htmlFor="quote-email">Email</label>
+                      <input id="quote-email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" className={inputCls} {...register("email")} />
+                      {formState.errors.email && <p className={errorCls}>{formState.errors.email.message}</p>}
+                    </div>
+                    <div className="md:col-span-2">
+                      <p className={labelCls}>Best way to reach me</p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {CONTACT_METHODS.map((m) => (
+                          <label
+                            key={m}
+                            className="flex items-center justify-center bg-white px-2 h-11 ring-1 ring-zinc-300 rounded-sm label cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900"
+                          >
+                            <input type="radio" value={m} {...register("bestContact")} className="sr-only" />
+                            {m}
+                          </label>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                </SlideHeader>
+              )}
 
-            <button
-              type="button"
-              onClick={() =>
-                items.append({ product: "", quantity: 1, unit: "cu yd" })
-              }
-              className="mt-4 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
-            >
-              <Plus className="size-4" /> Add another product
-            </button>
-          </StepTile>
-
-          {/* FULFILLMENT */}
-          <StepTile
-            number="02"
-            eyebrow="Step 02 · Fulfillment"
-            title="Pickup or delivery?"
-            helper="Pick one. We'll show delivery details if you need them."
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {(["Pickup", "Delivery"] as const).map((opt) => (
-                <label
-                  key={opt}
-                  className={`cursor-pointer rounded-md p-5 ring-1 transition-colors ${
-                    fulfillment === opt
-                      ? "bg-surface text-surface-foreground ring-brand"
-                      : "bg-kraft text-zinc-900 ring-zinc-300 hover:ring-zinc-500"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    value={opt}
-                    {...register("fulfillment")}
-                    className="sr-only"
-                  />
-                  <p className="display-4 leading-none">
-                    {opt}
-                  </p>
-                  <p
-                    className={`text-sm mt-2 ${fulfillment === opt ? "text-zinc-300" : "text-zinc-600"}`}
-                  >
-                    {opt === "Pickup"
-                      ? "I've got a truck or trailer and I'll come grab it."
-                      : "Bring it to me. I'm in Central Mass."}
-                  </p>
-                </label>
-              ))}
-            </div>
-
-            {fulfillment === "Delivery" && (
-              <div className="mt-3 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-kraft p-5 md:p-6 rounded-md ring-1 ring-zinc-300">
-                <div>
-                  <label className={labelCls} htmlFor="quote-town">Town</label>
-                  <select id="quote-town" className={inputCls} {...register("town")}>
-                    <option value="">Select town…</option>
-                    {TOWNS.map((t) => (
-                      <option key={t} value={t}>
-                        {t}
-                      </option>
-                    ))}
-                  </select>
-                  {formState.errors.town && (
-                    <p className={errorCls}>
-                      {formState.errors.town.message as string}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label className={labelCls} htmlFor="quote-zip">ZIP</label>
-                  <input
-                    id="quote-zip"
-                    inputMode="numeric"
-                    maxLength={5}
-                    placeholder="01522"
-                    className={inputCls}
-                    {...register("zip")}
-                  />
-                  {formState.errors.zip && (
-                    <p className={errorCls}>
-                      {formState.errors.zip.message as string}
-                    </p>
-                  )}
-                </div>
-
-                <div className="md:col-span-2">
-                  <p className={labelCls}>Where should we drop it?</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {DROP_SPOTS.map((d) => (
-                      <label
-                        key={d}
-                        className="flex items-center gap-3 bg-white px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2"
-                      >
-                        <input
-                          type="radio"
-                          value={d}
-                          {...register("dropSpot")}
-                          className="accent-[var(--brand)]"
-                        />
-                        <span className="text-zinc-900">{d}</span>
-                      </label>
-                    ))}
-                  </div>
-                  {formState.errors.dropSpot && (
-                    <p className={errorCls}>
-                      {formState.errors.dropSpot.message as string}
-                    </p>
-                  )}
-                </div>
-
-                <div className="md:col-span-2">
-                  <p className={labelCls}>When?</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {TIMING.map((t) => (
-                      <label
-                        key={t}
-                        className="flex items-center justify-center text-center bg-white px-2 h-11 ring-1 ring-zinc-300 rounded-sm text-xs font-semibold cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900 uppercase tracking-wide"
-                      >
-                        <input
-                          type="radio"
-                          value={t}
-                          {...register("timing")}
-                          className="sr-only"
-                        />
-                        {t === "As soon as possible" ? "ASAP" : t}
-                      </label>
-                    ))}
-                  </div>
-                  {formState.errors.timing && (
-                    <p className={errorCls}>
-                      {formState.errors.timing.message as string}
-                    </p>
-                  )}
-                  {timing === "Specific date" && (
-                    <input
-                      id="quote-specific-date"
-                      type="date"
-                      className={`${inputCls} mt-3`}
-                      {...register("specificDate")}
-                    />
-                  )}
-                  {formState.errors.specificDate && (
-                    <p className={errorCls}>
-                      {formState.errors.specificDate.message as string}
-                    </p>
-                  )}
-                </div>
-
-                <label className="md:col-span-2 flex items-start gap-3 text-sm text-zinc-800 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    {...register("acknowledged")}
-                    className="mt-1 size-4 accent-[var(--brand)]"
-                  />
-                  <span>
-                    I get the <strong>1-yard minimum</strong> and the
-                    <strong> 48-hour scheduling window</strong>, and that
-                    delivery is driveway or curbline only.
-                  </span>
-                </label>
-                {formState.errors.acknowledged && (
-                  <p className={`${errorCls} md:col-span-2`}>
-                    {formState.errors.acknowledged.message as string}
-                  </p>
-                )}
-              </div>
-            )}
-          </StepTile>
-
-          {/* CONTACT */}
-          <StepTile
-            number="03"
-            eyebrow="Step 03 · Contact"
-            title="How do we reach you?"
-            helper="So Abby can come back with the number."
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className={labelCls} htmlFor="quote-name">Name</label>
-                <input
-                  id="quote-name"
-                  className={inputCls}
-                  autoComplete="name"
-                  {...register("name")}
-                />
-                {formState.errors.name && (
-                  <p className={errorCls}>{formState.errors.name.message}</p>
-                )}
-              </div>
-              <div>
-                <label className={labelCls} htmlFor="quote-phone">Phone</label>
-                <input
-                  id="quote-phone"
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  placeholder="(508) 555-0142"
-                  className={inputCls}
-                  {...register("phone")}
-                />
-                {formState.errors.phone && (
-                  <p className={errorCls}>{formState.errors.phone.message}</p>
-                )}
-              </div>
-              <div className="md:col-span-2">
-                <label className={labelCls} htmlFor="quote-email">Email</label>
-                <input
-                  id="quote-email"
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder="you@example.com"
-                  className={inputCls}
-                  {...register("email")}
-                />
-                {formState.errors.email && (
-                  <p className={errorCls}>{formState.errors.email.message}</p>
-                )}
-              </div>
-              <div className="md:col-span-2">
-                <p className={labelCls}>Best way to reach me</p>
-                <div className="grid grid-cols-3 gap-2">
-                  {CONTACT_METHODS.map((m) => (
-                    <label
-                      key={m}
-                      className="flex items-center justify-center bg-kraft px-2 h-11 ring-1 ring-zinc-300 rounded-sm label cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900"
-                    >
-                      <input
-                        type="radio"
-                        value={m}
-                        {...register("bestContact")}
-                        className="sr-only"
-                      />
-                      {m}
+              {step === 3 && (
+                <SlideHeader title="Review & send" helper="Last check — then one tap fires it to Abby.">
+                  <ReviewSummary data={watch()} onJump={setStep} />
+                  <div className="mt-5">
+                    <label className={labelCls} htmlFor="quote-notes">
+                      Notes <span className="text-zinc-500 normal-case font-normal">(optional)</span>
                     </label>
-                  ))}
-                </div>
-              </div>
+                    <NotesField register={register} watch={watch} />
+                    {formState.errors.notes && <p className={errorCls}>{formState.errors.notes.message}</p>}
+                  </div>
+                  <p className="meta text-zinc-600 mt-4 max-w-[55ch]">
+                    Submitting means you agree to our{" "}
+                    <Link to="/privacy" className="underline hover:text-zinc-900">Privacy &amp; Terms</Link>.
+                  </p>
+                </SlideHeader>
+              )}
             </div>
-          </StepTile>
 
-          {/* NOTES */}
-          <StepTile
-            number="04"
-            eyebrow="Step 04 · Notes"
-            title="Anything else?"
-            helper={'Optional. Steep driveway, gate code, "leave it by the rhododendron." Anything Abby should know.'}
-          >
-            <NotesField register={register} watch={watch} />
-            {formState.errors.notes && (
-              <p className={errorCls}>{formState.errors.notes.message}</p>
-            )}
-          </StepTile>
+            {/* Footer — step nav */}
+            <div className="px-5 md:px-7 py-4 border-t border-zinc-300/70 bg-kraft flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={goPrev}
+                disabled={step === 0}
+                className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft className="size-4" /> Back
+              </button>
+              {step < STEP_LABELS.length - 1 ? (
+                <button
+                  type="button"
+                  onClick={goNext}
+                  className="inline-flex items-center gap-2 bg-surface text-surface-foreground px-6 h-11 label hover:opacity-90 rounded-sm"
+                >
+                  Next <ArrowRight className="size-4" />
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90 rounded-sm"
+                >
+                  <Send className="size-4" /> Send my request
+                </button>
+              )}
+            </div>
+          </form>
+        ),
+        a: (
+          <Tile
+            fill
+            variant="stat"
+            tone="surface"
+            value="~60s"
+            label="To build a list"
+          />
+        ),
+        b: (
+          <Tile
+            fill
+            variant="stat"
+            tone="kraft"
+            value="1 owner"
+            label="Abby answers"
+          />
+        ),
+        c: (
+          <Tile
+            fill
+            variant="image"
+            src={mulchHemlock}
+            alt="Hemlock mulch"
+            focal="center"
+            loading="lazy"
+          />
+        ),
+        d: (
+          <Tile
+            fill
+            variant="cta"
+            tone="brand"
+            icon={<Phone />}
+            eyebrow="Rather call?"
+            title="508.579.9897"
+            cta={{ label: "Call Abby", href: "tel:5085799897" }}
+          />
+        ),
+      }}
+    />
+  );
+}
 
-          <div className="pt-4 border-t border-zinc-300/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="text-xs text-zinc-600 max-w-[40ch]">
-              Next screen previews your request so you can send it in one tap. Submitting means you agree to our{" "}
-              <Link to="/privacy" className="underline hover:text-zinc-900">
-                Privacy &amp; Terms
-              </Link>
-              .
-            </p>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 disabled:opacity-50"
-            >
-              Send my request
-            </button>
+function SlideHeader({
+  title,
+  helper,
+  children,
+}: {
+  title: string;
+  helper?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <h2 className="display-4 text-zinc-900">{title}</h2>
+      {helper && <p className="body-sm text-zinc-600 mt-2 max-w-[55ch]">{helper}</p>}
+      <div className="mt-5">{children}</div>
+    </div>
+  );
+}
+
+function ReviewSummary({
+  data,
+  onJump,
+}: {
+  data: QuoteData;
+  onJump: (step: number) => void;
+}) {
+  const rows: Array<{ step: number; label: string; value: string }> = [];
+  const itemList = (data.items ?? [])
+    .filter((it) => it.product)
+    .map((it) => `${it.quantity} ${it.unit} ${it.product}`)
+    .join(", ");
+  rows.push({ step: 0, label: "Materials", value: itemList || "—" });
+  if (data.fulfillment === "Delivery") {
+    const parts = [
+      data.town && `${data.town}${data.zip ? ` ${data.zip}` : ""}`,
+      data.dropSpot,
+      data.timing === "Specific date" && data.specificDate
+        ? `Specific date: ${data.specificDate}`
+        : data.timing,
+    ].filter(Boolean);
+    rows.push({ step: 1, label: "Delivery", value: parts.join(" · ") || "—" });
+  } else {
+    rows.push({ step: 1, label: "Fulfillment", value: "Pickup" });
+  }
+  rows.push({
+    step: 2,
+    label: "Contact",
+    value: [data.name, data.phone, data.email, `Best: ${data.bestContact}`]
+      .filter(Boolean)
+      .join(" · "),
+  });
+  return (
+    <ul className="divide-y divide-zinc-300/70 bg-white rounded-md ring-1 ring-zinc-300 overflow-hidden">
+      {rows.map((r) => (
+        <li key={r.label} className="flex items-start gap-3 p-4">
+          <div className="flex-1 min-w-0">
+            <p className="eyebrow text-zinc-600 mb-1">{r.label}</p>
+            <p className="text-sm text-zinc-900 break-words">{r.value}</p>
           </div>
-        </form>
-      </section>
-    </>
+          <button
+            type="button"
+            onClick={() => onJump(r.step)}
+            className="shrink-0 inline-flex items-center gap-1 label text-zinc-700 hover:text-brand"
+          >
+            <Pencil className="size-3.5" /> Edit
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -601,54 +650,16 @@ function NotesField({
       <textarea
         id="quote-notes"
         aria-label="Notes"
-        rows={4}
+        rows={3}
         maxLength={500}
         placeholder="e.g. Leave it behind the gate if I'm not home. There's a tarp marking the spot."
-        className={`${inputCls} h-auto py-3 resize-y min-h-[110px]`}
+        className={`${inputCls} h-auto py-3 resize-y min-h-[88px]`}
         {...register("notes")}
       />
       <p className="meta text-zinc-500 mt-1 text-right tabular-nums">
         {value.length}/500
       </p>
     </div>
-  );
-}
-
-function StepTile({
-  number,
-  eyebrow,
-  title,
-  helper,
-  children,
-}: {
-  number: string;
-  eyebrow: string;
-  title: string;
-  helper?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <fieldset className="bg-kraft ring-1 ring-zinc-300 rounded-md overflow-hidden">
-      {/* Mobile header */}
-      <div className="md:hidden p-5 border-b border-zinc-300/70">
-        <p className="display-2 leading-none text-brand">{number}</p>
-        <p className="eyebrow text-zinc-600 mt-3">{eyebrow}</p>
-        <h2 className="display-4 mt-1 text-zinc-900">{title}</h2>
-        {helper && <p className="body-sm text-zinc-600 mt-2">{helper}</p>}
-      </div>
-      {/* Desktop header */}
-      <div className="hidden md:grid grid-cols-12 border-b border-zinc-300/70">
-        <div className="col-span-3 bg-surface text-surface-foreground flex items-center justify-center p-6">
-          <p className="display-1 leading-none text-brand">{number}</p>
-        </div>
-        <div className="col-span-9 p-7">
-          <p className="eyebrow text-zinc-600">{eyebrow}</p>
-          <h2 className="display-4 mt-1 text-zinc-900">{title}</h2>
-          {helper && <p className="body-sm text-zinc-600 mt-2 max-w-[55ch]">{helper}</p>}
-        </div>
-      </div>
-      <div className="p-5 md:p-7">{children}</div>
-    </fieldset>
   );
 }
 
@@ -673,63 +684,59 @@ function SuccessView({
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     } catch {
-      // ignore — fallback is select-and-copy from the visible textarea
+      // ignore
     }
   };
 
   return (
-    <>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4 inline-flex items-center gap-2">
-            <Check className="size-3.5" /> Request ready
-          </p>
-          <h1 className="display-2 leading-[0.9] max-w-[18ch]">
-            Send it to <span className="text-brand">Abby.</span>
-          </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            One tap opens mail or messages with the full request typed up. Hit send. She'll be back the same day.
-          </p>
-        </div>
-      </section>
-
-      <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-5 md:px-6 space-y-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <a
-              href={mailto}
-              className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground h-14 label hover:opacity-90 rounded-sm"
-            >
-              <Mail className="size-4" /> Email Abby
-            </a>
-            <a
-              href={sms}
-              className="inline-flex items-center justify-center gap-2 bg-surface text-surface-foreground h-14 label hover:opacity-90 rounded-sm"
-            >
-              <MessageSquare className="size-4" /> Text Abby
-            </a>
-            <button
-              type="button"
-              onClick={onCopy}
-              className="inline-flex items-center justify-center gap-2 bg-kraft text-zinc-900 ring-1 ring-zinc-300 h-14 label hover:ring-zinc-500 rounded-sm"
-            >
-              {copied ? (
-                <>
-                  <Check className="size-4" /> Copied
-                </>
-              ) : (
-                <>
-                  <Copy className="size-4" /> Copy request
-                </>
-              )}
-            </button>
-          </div>
-
-          <div className="bg-kraft rounded-md ring-1 ring-zinc-300 overflow-hidden">
-            <div className="px-5 py-3 border-b border-zinc-300/70 flex items-center justify-between">
-              <p className="eyebrow text-zinc-700">
-                Preview
+    <TileScreen
+      layout="section04"
+      label="Request ready"
+      tiles={{
+        hero: (
+          <div className="h-full w-full bg-surface text-surface-foreground rounded-md overflow-hidden flex flex-col">
+            <div className="flex-1 px-6 md:px-10 py-8 md:py-12 flex flex-col justify-center">
+              <p className="eyebrow text-brand mb-4 inline-flex items-center gap-2">
+                <Check className="size-3.5" /> Request ready
               </p>
+              <h1 className="display-2 leading-[0.9] max-w-[18ch]">
+                Send it to <span className="text-brand">Abby.</span>
+              </h1>
+              <p className="mt-4 md:mt-6 text-zinc-400 max-w-[52ch]">
+                One tap opens mail or messages with the full request typed up. Hit send. She's back the same day.
+              </p>
+            </div>
+            <div className="px-6 md:px-10 pb-8 md:pb-10 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <a
+                href={mailto}
+                className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground h-12 label hover:opacity-90 rounded-sm"
+              >
+                <Mail className="size-4" /> Email
+              </a>
+              <a
+                href={sms}
+                className="inline-flex items-center justify-center gap-2 bg-white text-zinc-900 h-12 label hover:opacity-90 rounded-sm"
+              >
+                <MessageSquare className="size-4" /> Text
+              </a>
+              <button
+                type="button"
+                onClick={onCopy}
+                className="inline-flex items-center justify-center gap-2 bg-kraft text-zinc-900 ring-1 ring-zinc-300 h-12 label hover:ring-zinc-500 rounded-sm"
+              >
+                {copied ? (
+                  <><Check className="size-4" /> Copied</>
+                ) : (
+                  <><Copy className="size-4" /> Copy</>
+                )}
+              </button>
+            </div>
+          </div>
+        ),
+        a: (
+          <div className="h-full w-full bg-kraft text-zinc-900 ring-1 ring-zinc-300 rounded-md overflow-hidden flex flex-col">
+            <div className="px-5 py-3 border-b border-zinc-300/70 flex items-center justify-between">
+              <p className="eyebrow text-zinc-700">Preview</p>
               <button
                 type="button"
                 onClick={onEdit}
@@ -738,31 +745,32 @@ function SuccessView({
                 <Pencil className="size-3.5" /> Edit
               </button>
             </div>
-            <pre className="px-5 py-5 text-xs md:text-sm text-zinc-900 whitespace-pre-wrap font-mono leading-relaxed">
+            <pre className="flex-1 overflow-y-auto px-5 py-4 text-xs md:text-sm text-zinc-900 whitespace-pre-wrap font-mono leading-relaxed">
               {brief}
             </pre>
           </div>
-
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={onEdit}
-              className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand"
-            >
-              <ArrowLeft className="size-4" /> Edit my request
-            </button>
-          </div>
-
-          <div className="text-center pt-2">
-            <Link
-              to="/contact"
-              className="label text-zinc-500 hover:text-brand"
-            >
-              Or just call 508.579.9897 →
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
+        ),
+        b: (
+          <Tile
+            fill
+            variant="cta"
+            tone="brand"
+            icon={<Phone />}
+            eyebrow="Or just call"
+            title="508.579.9897"
+            cta={{ label: "Call Abby", href: "tel:5085799897" }}
+          />
+        ),
+        c: (
+          <button
+            type="button"
+            onClick={onEdit}
+            className="h-full w-full bg-white text-zinc-900 ring-1 ring-zinc-300 rounded-md hover:ring-zinc-500 inline-flex items-center justify-center gap-2 label"
+          >
+            <ArrowLeft className="size-4" /> Edit my request
+          </button>
+        ),
+      }}
+    />
   );
 }
