@@ -11,7 +11,7 @@ import {
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { lazy, Suspense } from "react";
 const CookieConsent = lazy(() =>
   import("@/components/site/CookieConsent").then((m) => ({ default: m.CookieConsent })),
@@ -221,10 +221,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.gstatic.com",
         crossOrigin: "anonymous",
       },
+      // Preload + non-blocking attach (see scripts[] below). Without JS the
+      // browser still resolves the preload; the inline script promotes it to
+      // an applied stylesheet on parse.
       {
-        rel: "stylesheet",
+        rel: "preload",
+        as: "style",
         href: "https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
       },
+    ],
+    scripts: [
+      ...((): never[] => [])(),
     ],
   }),
   shellComponent: RootShell,
