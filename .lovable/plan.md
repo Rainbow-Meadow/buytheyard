@@ -1,39 +1,33 @@
 ## Goal
-Convert the 4 `<fieldset>` blocks in `src/routes/quote.tsx` into modular **numbered step tiles** consistent with the Magazine (desktop) / Gallery (mobile) direction already used across the site. No form logic, validation, schema, or copy changes.
 
-## Module: `StepTile`
-A local presentational component (defined in the file, no new file needed) that wraps each fieldset as a card matching the existing tile system:
+On mobile, the "04 · WBE" story tile is `tile-sm` (1 of 2 columns), leaving an empty cell next to it. Fill that empty cell with the WBE certification callout that currently sits in its own box below Abby's portrait. Desktop layout stays exactly as it is today (callout remains under the portrait, story grid unchanged).
 
-- Outer: `<fieldset className="bg-kraft ring-1 ring-zinc-300 rounded-md overflow-hidden">`
-- Header row (desktop magazine / mobile gallery):
-  - Mobile: stacked — big numeral on top, eyebrow + title beneath, inside `p-5`
-  - Desktop: 12-col grid header inside `md:p-7` — left 3 cols = oversized `display-2 text-brand` numeral (e.g. `01`) sitting on `bg-surface text-surface-foreground` panel that bleeds to the edge of the tile; right 9 cols = eyebrow ("Step 01 · Materials"), `display-4` legend, supporting `body-sm` helper text.
-- Body: `p-5 md:p-7 border-t border-zinc-300/70` wrapping the existing controls untouched.
+## Changes (all in `src/routes/about.tsx`)
 
-This makes each step read as a discrete magazine tile with the numeral as a visual anchor, while mobile gets a clean stacked gallery card.
+### 1. Add a mobile-only WBE tile to `STORY_BLOCKS`
 
-## Per-step application
-All four fieldsets get the same `StepTile` shell; their inner controls are moved verbatim into the tile body:
+Insert a new block immediately after `story-04-wbe` so it lands in the adjacent grid cell on mobile:
 
-1. **01 · Materials** — helper text "One row per material…" moves into the tile header. Product rows + "Add another product" button stay as-is inside the body.
-2. **02 · Pickup or delivery** — helper text added: "Pick one. We'll show delivery details if you need them." The 2-up Pickup/Delivery radio cards and the conditional delivery details block stay as-is in the body.
-3. **03 · Contact** — helper text added: "So Abby can come back with the number." Name/Phone/Email/Best contact grid stays as-is.
-4. **04 · Notes** — existing helper text moves into the tile header. NotesField stays as-is.
+- `id: "story-04-wbe-badge"`
+- `variant: "text"` with `eyebrow: "Certified"`, `title: "WBE"`, and a short body line: `"MA Woman Business Enterprise"`
+- `size: "sm"`, `tone: "kraft"`, `padding: "sm"`
+- `className: "md:hidden"` so it disappears at the md breakpoint and the desktop story grid stays untouched
+- `icon`: the existing `wbeSeal` rendered as a small `<img>` (≈32–40px) so the badge mark reads at a glance
 
-The numeral color (`text-brand`) currently sits inline in each legend; that inline `<span className="text-brand">0X.</span>` is removed since the numeral now lives in the tile header.
+Keeping it `tile-sm` + `md:hidden` means: on mobile it occupies the empty 1-col slot next to the WBE story tile; on desktop it is removed from the grid entirely (no layout shift).
 
-## Layout container
-The form keeps `max-w-3xl mx-auto` and `space-y-8 md:space-y-10` (down from `space-y-12`) so the tiles read as a stacked stack on mobile (gallery) and a rhythmic magazine column on desktop. Submit footer row stays unchanged.
+### 2. Hide the standalone callout on mobile
 
-## Invariants
-- No changes to `react-hook-form` registration, `useFieldArray`, `quoteSchema`, `defaultUnitFor`, success view, or routing.
-- No new dependencies, no new tokens, no palette shifts.
-- All existing error messages, ARIA, autoComplete, and validation behavior preserved.
-- Hero, reassurance strip, and `SuccessView` untouched.
-- Only `src/routes/quote.tsx` is edited.
+Wrap the existing "WBE Certified" callout `<div>` (the one under Abby's portrait, containing the seal + "WBE Certified" + subtext) with `hidden md:flex` so it only renders at md and up. The `mt-3 md:mt-6` spacing class is no longer needed on mobile and can stay (it's a no-op when the element is hidden).
 
 ## Out of scope
-- Multi-step wizard behavior (tiles remain a single long form, just visually segmented).
-- Progress indicator / step nav.
-- Copy rewrites beyond the two tiny helper lines added for steps 02 and 03.
-- Tablet-specific tuning beyond existing `md:` breakpoint.
+
+- No changes to `Tile.tsx`, `styles.css`, or the tile schema.
+- Desktop layout, typography, and copy stay identical.
+- The "Around the Yard" gallery section is untouched.
+
+## Why this approach
+
+- Reuses the existing `tile-grid` layout instead of a custom mobile-only flex row — the seal sits inside the same rhythm as the surrounding tiles.
+- `className: "md:hidden"` on a TileBlock is the cleanest way to scope a tile to a single breakpoint without forking the blocks array or introducing a new prop.
+- The desktop callout keeps its current visual weight (large seal + "WBE Certified" + subtitle) since it's not constrained to a small grid cell there.

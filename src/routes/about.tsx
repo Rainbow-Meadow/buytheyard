@@ -53,6 +53,28 @@ const STORY_BLOCKS: TileBlock[] = [
     tone: "kraft",
   },
   {
+    id: "story-04-wbe-badge",
+    variant: "text",
+    eyebrow: "Certified",
+    title: "WBE",
+    body: "MA Woman Business Enterprise",
+    size: "sm",
+    tone: "kraft",
+    padding: "sm",
+    className: "md:hidden",
+    icon: (
+      <img
+        src={wbeSeal}
+        alt=""
+        width={112}
+        height={72}
+        className="h-8 w-auto object-contain"
+        loading="lazy"
+        decoding="async"
+      />
+    ),
+  },
+  {
     id: "story-05-tenth-season",
     variant: "text",
     eyebrow: "05 · 10th season",
@@ -141,7 +163,7 @@ function AboutPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="mt-3 md:mt-6 flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
+            <div className="mt-3 md:mt-6 hidden md:flex items-center gap-4 p-5 bg-kraft rounded-md ring-1 ring-zinc-300">
               <img
                 src={wbeSeal}
                 alt="Massachusetts WBE certified seal"
