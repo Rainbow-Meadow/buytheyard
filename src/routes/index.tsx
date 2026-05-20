@@ -276,7 +276,7 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 flex aspect-[9/16] min-h-[560px] max-h-[calc(100svh-4rem)] md:aspect-video md:min-h-[560px] md:max-h-[820px]">
+      <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 flex w-full aspect-[9/16] min-h-[560px] max-h-[calc(100svh-4rem)] md:aspect-video md:min-h-[560px] md:max-h-[820px]">
         {/* Mobile single hero image */}
         <video
           ref={kickHeroVideo}
