@@ -14,6 +14,9 @@ import {
   Trash2,
 } from "lucide-react";
 import { products, categories } from "@/data/products";
+import mulchHemlock from "@/assets/mulch-hemlock.webp";
+import stoneRiver from "@/assets/stone-river.webp";
+import loam from "@/assets/loam.webp";
 import {
   CONTACT_METHODS,
   DROP_SPOTS,
