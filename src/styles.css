@@ -79,6 +79,72 @@
 }
 
 /* =========================================================================
+   Tile grid schema — Magazine (desktop) / Gallery (mobile).
+
+   All modular tile groups share one underlying track:
+     mobile  → 2-column gallery
+     md+     → 6-column magazine
+
+   Use `tile-grid` as the container, and one `tile-*` size on each child.
+   Span sizes are intentionally fixed so rhythm is consistent across pages.
+
+   Sizes (mobile span / desktop span out of 6):
+     tile-sm       1 / 2   small square (gallery cell, third on desktop)
+     tile-md       2 / 3   half-width on desktop, full on mobile
+     tile-lg       2 / 4   two-thirds desktop, full mobile
+     tile-feature  2 / 6   full-width lead tile, both breakpoints
+     tile-row-tall —/ row-span-2 on desktop only (pairs with sm/md)
+
+   Gap: 0.5rem mobile (tight gallery), 1rem md+ (magazine breathing room).
+   Never inline custom `col-span-*` on tiles inside `tile-grid` — pick a size
+   or extend this schema.
+   ========================================================================= */
+
+@utility tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@utility tile-sm {
+  grid-column: span 1 / span 1;
+  @media (min-width: 768px) {
+    grid-column: span 2 / span 2;
+  }
+}
+
+@utility tile-md {
+  grid-column: span 2 / span 2;
+  @media (min-width: 768px) {
+    grid-column: span 3 / span 3;
+  }
+}
+
+@utility tile-lg {
+  grid-column: span 2 / span 2;
+  @media (min-width: 768px) {
+    grid-column: span 4 / span 4;
+  }
+}
+
+@utility tile-feature {
+  grid-column: span 2 / span 2;
+  @media (min-width: 768px) {
+    grid-column: span 6 / span 6;
+  }
+}
+
+@utility tile-row-tall {
+  @media (min-width: 768px) {
+    grid-row: span 2 / span 2;
+  }
+}
+
+/* =========================================================================
    Typography schema — single source of truth.
    Hierarchy:
      Display (Saira Extra Condensed, UPPERCASE)
