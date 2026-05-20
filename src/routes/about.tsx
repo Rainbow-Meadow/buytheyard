@@ -3,6 +3,85 @@ import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import yardPatio from "@/assets/source/yard-banner-5.webp";
 import yardDog from "@/assets/source/yard-dog.webp";
+import { TileGrid, type TileBlock } from "@/components/site/Tile";
+
+const STORY_BLOCKS: TileBlock[] = [
+  {
+    variant: "numbered",
+    number: "01",
+    eyebrow: "Origin",
+    title:
+      "Most landscape yards treat you like a ticket number. Loaded fast, out the gate, on to the next one.",
+    body: "I built this one to feel like the opposite.",
+    size: "feature",
+    tone: "kraft",
+    padding: "lg",
+  },
+  {
+    variant: "text",
+    eyebrow: "02 · Background",
+    body: "I grew up outside — trucks, equipment, mulch piles in the backyard with my dad. Construction was never the question. Only when.",
+    size: "md",
+    tone: "white",
+  },
+  {
+    variant: "text",
+    eyebrow: "03 · The yard opens",
+    body: "I graduated Wachusett Regional in 2016 and opened the yard that same spring. Two years later I finished my Entrepreneurship and Small Business degree — while already running one of my own.",
+    size: "md",
+    tone: "white",
+  },
+  {
+    variant: "quote",
+    eyebrow: "The whole business model",
+    quote: "If you call this number, I pick up. That's the whole business model.",
+    attribution: "Abby Montalto · Owner",
+    size: "feature",
+    tone: "surface",
+    padding: "lg",
+  },
+  {
+    variant: "text",
+    eyebrow: "04 · WBE",
+    body: "Year three, we made it official: Massachusetts Certified Woman-Owned Enterprise.",
+    size: "sm",
+    tone: "kraft",
+  },
+  {
+    variant: "text",
+    eyebrow: "05 · 10th season",
+    body: (
+      <>
+        2026 is our <strong className="text-zinc-900">10th season</strong> — first spring mulch run through winter salt, same yard, same voice on the phone.
+      </>
+    ),
+    size: "lg",
+    tone: "white",
+  },
+  {
+    variant: "text",
+    eyebrow: "06 · Office manager",
+    body: (
+      <>
+        <strong className="text-zinc-900">Charlie.</strong> He's a dog. He handles the greetings.
+      </>
+    ),
+    size: "md",
+    tone: "white",
+  },
+  {
+    variant: "cta",
+    eyebrow: "07 · Visit",
+    body: (
+      <>
+        Come by — <strong>2264 Main St., Jefferson, MA</strong>. Bring your questions, even the &ldquo;how much do I need?&rdquo; ones. Especially those.
+      </>
+    ),
+    cta: { label: "Visit the yard", to: "/contact" },
+    size: "md",
+    tone: "brand",
+  },
+];
 
 export const Route = createFileRoute("/about")({
   head: () => ({
