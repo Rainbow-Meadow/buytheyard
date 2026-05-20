@@ -33,7 +33,20 @@ interface BaseTile {
   tall?: boolean;
   padding?: TilePadding;
   className?: string;
+  /** Optional leading icon — rendered at the top of text / numbered /
+   *  definition / cta tiles. Typically a lucide-react `<Icon className="size-7">`. */
+  icon?: ReactNode;
 }
+
+/** CTA target — internal route (`to`), external URL or tel/mailto (`href`).
+ *  Exactly one of `to` or `href` should be set. */
+export type TileCta = {
+  label: string;
+  to?: string;
+  href?: string;
+  /** Open external link in a new tab. Defaults to true when href is http(s). */
+  external?: boolean;
+};
 
 export type TileBlock =
   | (BaseTile & {
@@ -65,7 +78,7 @@ export type TileBlock =
       eyebrow?: string;
       title?: string;
       body?: ReactNode;
-      cta: { label: string; to: string };
+      cta: TileCta;
     })
   | (BaseTile & {
       variant: "stat";
@@ -89,7 +102,7 @@ export type TileBlock =
       /** Optional link wrapping the entire tile. */
       to?: string;
       /** Optional CTA label rendered alongside the overlay text. */
-      cta?: { label: string; to: string };
+      cta?: TileCta;
     });
 
 const sizeCls: Record<TileSize, string> = {
