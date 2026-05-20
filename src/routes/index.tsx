@@ -567,20 +567,19 @@ function HomePage() {
               Delivery details <ArrowRight className="size-4" />
             </Link>
           </div>
-          <div className="bg-white ring-1 ring-zinc-300/60 p-8 rounded-md">
-            <ul className="divide-y divide-zinc-200">
-              {[
-                ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
-                ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
-                ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
-                ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
-              ].map(([k, v]) => (
-                <li key={k} className="py-4 first:pt-0 last:pb-0">
-                  <p className="display-5">{k}</p>
-                  <p className="body-sm text-zinc-600 mt-1">{v}</p>
-                </li>
-              ))}
-            </ul>
+          <div className="grid grid-cols-2 gap-2 md:gap-3">
+            {[
+              ["Driveway-to-curb only", "Deliveries are made to the driveway or curbline to protect lawns and underground utilities."],
+              ["1 yard minimum", "Call before noon for same-day delivery when available, or allow approximately 48 hours."],
+              ["Mark your spot", "Please mark your preferred drop location so we can place the material accurately."],
+              ["4% card fee", "A processor surcharge passed through at cost. Cash and check payments avoid the fee."],
+            ].map(([k, v], i) => (
+              <article key={k} className="bg-white ring-1 ring-zinc-300/60 p-5 md:p-6 rounded-md">
+                <p className="eyebrow text-brand mb-2">{String(i + 1).padStart(2, "0")}</p>
+                <p className="display-5">{k}</p>
+                <p className="body-sm text-zinc-600 mt-2">{v}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
