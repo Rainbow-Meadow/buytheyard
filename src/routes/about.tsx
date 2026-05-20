@@ -4,6 +4,79 @@ import wbeSeal from "@/assets/source/wbe-seal.webp";
 import yardPatio from "@/assets/source/yard-banner-5.webp";
 import yardDog from "@/assets/source/yard-dog.webp";
 import { TileGrid, type TileBlock } from "@/components/site/Tile";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import type { ReactNode } from "react";
+
+type YardItem = {
+  id: string;
+  src: string;
+  alt: string;
+  caption: string;
+  eyebrow: string;
+  title: string;
+  body: ReactNode;
+};
+
+const YARD_ITEMS: YardItem[] = [
+  {
+    id: "patio",
+    src: yardPatio,
+    alt: "The Buy The Yard sit-and-stay area — Adirondack chairs, umbrellas, and an OPEN flag at the edge of the yard",
+    caption: "Sit-and-stay corner",
+    eyebrow: "The yard",
+    title: "The sit-and-stay corner",
+    body: "This little corner started as somewhere to plant the OPEN flag — it ended up being where half my best conversations happen. Pull up a chair, grab a coffee while we figure out your load. It's a yard, but it's kind of a front porch too.",
+  },
+  {
+    id: "charlie",
+    src: yardDog,
+    alt: "Charlie, the Buy The Yard office manager, watching the lot from the office window",
+    caption: "Charlie · office manager",
+    eyebrow: "Office manager",
+    title: "Charlie runs the front desk",
+    body: "Charlie's the unofficial office manager around here. He handles greetings, accepts treats, and supervises every delivery from the office window. If you bring a kid or a dog along, he's the first one they'll want to meet.",
+  },
+];
+
+function YardDialog({ item, children }: { item: YardItem; children: ReactNode }) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <button
+          type="button"
+          aria-label={`Open details: ${item.title}`}
+          className="group block w-full text-left cursor-zoom-in"
+        >
+          {children}
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-w-3xl p-0 overflow-hidden bg-zinc-950 border-zinc-800 text-zinc-100">
+        <div className="bg-black">
+          <img
+            src={item.src}
+            alt={item.alt}
+            className="w-full max-h-[70vh] object-contain"
+          />
+        </div>
+        <div className="p-6 md:p-8">
+          <p className="eyebrow text-brand mb-2">{item.eyebrow}</p>
+          <DialogTitle className="display-4 leading-tight text-white">
+            {item.title}
+          </DialogTitle>
+          <DialogDescription className="body text-zinc-300 mt-3">
+            {item.body}
+          </DialogDescription>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 const STORY_BLOCKS: TileBlock[] = [
   {
