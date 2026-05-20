@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   Dialog,
@@ -144,6 +144,11 @@ export type TileBlock =
         eyebrow?: string;
         title: string;
         body: ReactNode;
+        /** Stable share id used as the `?tile=` URL search param so the
+         *  dialog can be deep-linked. Multiple tile instances (e.g. mobile +
+         *  desktop layout of the same subject) can share the same shareId so
+         *  one URL works at any breakpoint. Falls back to `block.id`. */
+        shareId?: string;
       };
     });
 
@@ -355,6 +360,40 @@ function isLightTone(tone: TileTone) {
   return tone === "kraft" || tone === "white";
 }
 
+/** Sync a Dialog's open state with `?tile=<shareId>` in the URL so the
+ *  dialog can be linked to and reopened by navigating to the URL. */
+function useTileDeepLink(shareId: string | undefined) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!shareId || typeof window === "undefined") return;
+    const sync = () => {
+      const params = new URLSearchParams(window.location.search);
+      setOpen(params.get("tile") === shareId);
+    };
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, [shareId]);
+
+  const update = useCallback(
+    (next: boolean) => {
+      setOpen(next);
+      if (!shareId || typeof window === "undefined") return;
+      const url = new URL(window.location.href);
+      if (next) {
+        url.searchParams.set("tile", shareId);
+      } else if (url.searchParams.get("tile") === shareId) {
+        url.searchParams.delete("tile");
+      }
+      window.history.replaceState({}, "", url.toString());
+    },
+    [shareId],
+  );
+
+  return [open, update] as const;
+}
+
 function bodyToneCls(tone: TileTone) {
   return isLightTone(tone) ? "text-zinc-700" : "text-zinc-300";
 }
@@ -409,6 +448,8 @@ function ImageTileInner({
 }) {
   const [loaded, setLoaded] = useState(false);
   const aspect = resolveAspect(block.aspect);
+  const shareId = block.details?.shareId ?? block.id;
+  const [dialogOpen, setDialogOpen] = useTileDeepLink(shareId);
 
   const imageShell = [
     sizeCls[size],
@@ -506,7 +547,7 @@ function ImageTileInner({
   }
   if (block.details) {
     return (
-      <Dialog>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>
           <button
             type="button"
