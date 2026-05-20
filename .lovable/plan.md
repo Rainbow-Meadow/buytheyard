@@ -1,49 +1,108 @@
 ## Goal
-Refactor `/quote` to fit the viewport-locked `TileScreen` system using the new `carousel` Tile variant as a 4-step stepper. Preserve all form logic, validation, and submission paths unchanged.
+Lock down a single, enforceable Tile ruleset so every tile across the site has predictable content fit, hierarchy, and behavior. Four axes — **Size, Tone, Content (variant), Action** — with strict combinations. Anything outside the matrix is disallowed.
 
-## Layout
-Two `TileScreen`s, both lock to viewport height (no page scroll).
+---
 
-### Screen 1 — Quote builder (pageHero layout)
-Single hero `carousel` tile owning the entire form. The `<form>` wraps the carousel so submit works from any slide.
+## 1. Size → Content slots (STRICT)
 
-Slides (one per StepTile, content unchanged):
-1. **Materials** — product rows + Add another
-2. **Fulfillment** — pickup/delivery + conditional delivery details
-3. **Contact** — name / phone / email / best method
-4. **Review & send** — compact summary of slides 1–3 + notes textarea + submit button
+Each size is a **fixed content recipe**. Authors pick the size that fits their copy — they do not stretch content to fit a size. Line limits follow the existing Core memory (headlines 1–2 lines, subtext 2–3 lines).
 
-Per-slide footer inside the carousel tile:
-- Step pips (1·2·3·4) and "Step N of 4" label
-- "Back" (hidden on slide 1) / "Next" buttons
-- "Next" runs `form.trigger()` on that slide's field names — only advances if valid
-- Slide 4's primary action is the existing `handleSubmit(onSubmit)` submit
-- Inputs/labels keep current classes so styling stays consistent
+| Size | Grid span (mob/desk) | Allowed slots | Hard limits |
+|---|---|---|---|
+| **sm** | 1 / 2 | 1 of: {stat} OR {eyebrow + title} OR {icon + label} | title ≤ 4 words, no body, no CTA |
+| **third** | 2 / 2 | eyebrow + title + 1-line body OR stat + label | body ≤ 60 chars, no CTA |
+| **md** | 2 / 3 | eyebrow + title + body (2 lines) + optional CTA | title ≤ 6 words, body ≤ 120 chars |
+| **lg** | 2 / 4 | eyebrow + title + body (3 lines) + CTA OR image+overlay | body ≤ 200 chars |
+| **feature** | 2 / 6 | eyebrow + title + body (3 lines) + CTA + optional media | body ≤ 280 chars |
 
-Side slots (right rail on desktop, hidden on mobile to keep one-screen fit):
-- Small tile: "~60s to build · Abby answers"
-- Small tile: "Call instead → 508.579.9897" linking to /contact
-- Small image tile cycling mulch/loam/stone (existing assets)
+**Padding** is derived from size, not a free prop:
+- sm/third → `p-4 md:p-5`
+- md → `p-5 md:p-6`
+- lg → `p-6 md:p-8`
+- feature → `p-7 md:p-10`
 
-### Screen 2 — Success (section04 layout, unchanged behavior)
-Wrap the existing `SuccessView` content into a TileScreen:
-- Hero tile: headline + 3 action buttons (Email / Text / Copy)
-- Side tiles: preview brief (scroll inside tile), Edit button, "Or just call" link
+(Remove the free `padding` prop from `BaseTile` — it becomes internal.)
 
-## Technical notes
-- Add `CarouselTile` support for a `footer` render slot (or render footer outside slides via a controlled `index` prop) so step nav lives in the tile chrome, not inside each slide. Extend the existing `variant: "carousel"` API minimally — accept `controlledIndex`/`onIndexChange` and `renderFooter({index, total, goPrev, goNext})`.
-- Slide field-group validation map:
-  - 1 → `items`
-  - 2 → `fulfillment` + (if Delivery) `town`, `zip`, `dropSpot`, `timing`, `specificDate`, `acknowledged`
-  - 3 → `name`, `phone`, `email`, `bestContact`
-  - 4 → `notes` (optional) then submit
-- Keep `react-hook-form` instance, `zodResolver`, `quoteSchema`, `buildBrief`/`buildMailto`/`buildSmsHref` — no changes.
-- Each slide's inner content uses `overflow-y-auto` only if it overflows on the smallest target (mobile ≤440px); otherwise fit-by-design. Drop the desktop reassurance strip — replaced by side tiles.
-- `StepTile` helper becomes a thin slide-content wrapper (eyebrow + title + helper + children); no fieldset chrome since the carousel tile already owns the frame.
+---
 
-## Files
-- `src/components/site/Tile.tsx` — extend carousel variant with controlled index + footer render prop
-- `src/routes/quote.tsx` — restructure JSX into TileScreen + carousel; form logic unchanged
+## 2. Tone → Role (ROLE-BOUND)
 
-## Risk
-Medium. The form state is preserved (single `useForm` instance spans all slides). The only new behavior is per-step `trigger()` gating. If a slide's validation surfaces edge cases, fall back to "always allow Next, validate on submit" — submit-time validation already covers everything.
+Tone is no longer an arbitrary aesthetic choice. Each tone has one role and the linter (dev-only console warning) flags misuse.
+
+| Tone | Role | Rule |
+|---|---|---|
+| **brand** (red) | Primary CTA / single attention magnet | Max **1 per TileScreen**. Reserved for `cta` variant or hero CTA tile. |
+| **surface** (near-black) | Hero / feature anchor | Used by hero slot or 1 feature-size tile per screen. |
+| **kraft** (warm beige) | Default content tile | Text, numbered, quote, definition. The "everything else". |
+| **white** | Data / stat tile | `stat` variant, definition lists. Crisp, neutral. |
+| **gray** (brandmark) | Secondary / meta | Helper info, "call instead", phone numbers, low-priority CTAs. |
+
+Image tiles are toneless (the image owns the surface); overlay text follows `align` and uses fixed scrim.
+
+---
+
+## 3. Content variant × Action (CURATED PAIRINGS)
+
+Action is a separate axis but only the pairings below are valid. Anything else → TypeScript error.
+
+| Variant | static | link (to/href) | flip | carousel | expand (dialog) |
+|---|:-:|:-:|:-:|:-:|:-:|
+| text | ✓ | – | – | – | ✓ |
+| numbered | ✓ | – | – | – | ✓ |
+| quote | ✓ | – | – | ✓ (quote rotator) | – |
+| definition | ✓ | – | ✓ (term→def) | – | – |
+| cta | ✓ | ✓ | ✓ (label→detail) | – | – |
+| stat | ✓ | – | ✓ (number→source) | ✓ (stat rotator) | – |
+| image | ✓ | ✓ | – | ✓ (gallery) | ✓ (lightbox) |
+
+**Action rules:**
+- **flip back-face must use the SAME variant + size + tone** as the front. Prevents jarring layout shifts.
+- **carousel slides must all be the SAME variant + size**. Tone may vary.
+- **expand** auto-attaches when content exceeds the size's char limit (see §4) — authors don't add it manually.
+- A tile has **exactly one action**. No flip-on-carousel, no link-on-flip.
+
+---
+
+## 4. Overflow rule (TRUNCATE + EXPAND)
+
+Tiles never scroll vertically. When authored content exceeds the size's hard limit:
+1. Body clamps to the allowed line count via `line-clamp-N` (matches the table in §1).
+2. Tile auto-injects a `… More` affordance bottom-right.
+3. Click opens a dialog (reuses existing `ImageTileInner` dialog pattern) with the full title + body + optional CTA.
+4. If `details` is already explicitly set, that wins.
+
+Dev-only: if measured rendered height > slot height, `console.warn` with the tile id and the suggested next-size-up. No runtime crash.
+
+---
+
+## 5. Public API after refactor
+
+```ts
+type Tile = {
+  id: string;                          // required (was optional)
+  size: "sm"|"third"|"md"|"lg"|"feature";
+  tone?: TileTone;                     // defaults per variant (see §2)
+  variant: TileVariant;
+  action?: TileAction;                 // "static"|"link"|"flip"|"carousel"|"expand"
+  // variant-specific fields unchanged
+  // padding REMOVED (derived from size)
+  // tall REMOVED (replaced by tile-row-tall via size on TileScreen)
+}
+```
+
+Tone defaults by variant: cta→brand, stat→white, quote→surface, numbered/text/definition→kraft.
+
+---
+
+## 6. Files to change
+
+- `src/components/site/Tile.tsx` — narrow types, add `action` union, derive padding from size, add line-clamp + auto-expand logic, dev-warn on tone-role + pairing violations.
+- `src/styles.css` — add `tile-clamp-{1..3}` utilities; per-size padding utilities; remove unused.
+- `src/components/site/TileRules.ts` (new) — single export of the size/tone/variant/action matrix; consumed by Tile.tsx and dev linter.
+- `.lovable/plan.md` — replace with the §1–§4 tables as the durable spec.
+- All consumers (`src/routes/*.tsx`, `src/components/home/*.tsx`) — remove `padding` props, ensure each tile has an `id`, swap any disallowed combos (audit pass; expected ~10–15 small edits).
+
+Memory update (after approval): add a Core rule "Tiles follow size/tone/variant/action matrix; never override padding or mix actions" plus a `mem://design/tile-system` detail file with the full tables.
+
+## 7. Risk
+Low-medium. The matrix is additive to existing variants and the dev warnings are non-fatal. The biggest churn is the consumer audit pass; nothing changes visually unless a tile currently violates a rule.
