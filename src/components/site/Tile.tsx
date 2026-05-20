@@ -33,7 +33,7 @@ import { TileGroupProvider, useTileGroupNav } from "./TileGroupContext";
  */
 
 export type TileSize = "sm" | "third" | "md" | "lg" | "feature";
-export type TileTone = "kraft" | "surface" | "brand" | "white";
+export type TileTone = "kraft" | "surface" | "brand" | "white" | "gray";
 export type TilePadding = "sm" | "md" | "lg";
 
 interface BaseTile {
@@ -169,6 +169,7 @@ const toneCls: Record<TileTone, string> = {
   white: "bg-white ring-1 ring-zinc-300 text-zinc-900",
   surface: "bg-surface text-surface-foreground",
   brand: "bg-brand text-brand-foreground",
+  gray: "bg-brandmark-gray ring-1 ring-zinc-600/30 text-white",
 };
 
 const paddingCls: Record<TilePadding, string> = {
@@ -365,20 +366,27 @@ function isLightTone(tone: TileTone) {
 }
 
 function bodyToneCls(tone: TileTone) {
-  return isLightTone(tone) ? "text-zinc-700" : "text-zinc-300";
+  if (isLightTone(tone)) return "text-zinc-700";
+  if (tone === "gray") return "text-white/85";
+  return "text-zinc-300";
 }
 
 function eyebrowToneCls(tone: TileTone) {
   if (tone === "brand") return "eyebrow opacity-80";
+  if (tone === "gray") return "eyebrow text-white";
   return "eyebrow text-brand";
 }
 
 function attributionToneCls(tone: TileTone) {
-  return isLightTone(tone) ? "meta text-zinc-600" : "meta text-zinc-400";
+  if (isLightTone(tone)) return "meta text-zinc-600";
+  if (tone === "gray") return "meta text-white/75";
+  return "meta text-zinc-400";
 }
 
 function iconToneCls(tone: TileTone) {
-  return tone === "brand" ? "text-brand-foreground" : "text-brand";
+  if (tone === "brand") return "text-brand-foreground";
+  if (tone === "gray") return "text-white";
+  return "text-brand";
 }
 
 function CtaLink({ cta, className }: { cta: TileCta; className: string }) {

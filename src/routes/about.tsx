@@ -95,6 +95,14 @@ const STORY_BLOCKS: TileBlock[] = [
     tone: "kraft",
   },
   {
+    id: "story-stat-year-opened",
+    variant: "stat",
+    value: "2018",
+    label: "Year we opened",
+    size: "sm",
+    tone: "gray",
+  },
+  {
     id: "story-04-wbe-badge",
     variant: "text",
     body: (
@@ -135,6 +143,15 @@ const STORY_BLOCKS: TileBlock[] = [
     ),
     size: "md",
     tone: "white",
+  },
+  {
+    id: "story-gray-local",
+    variant: "text",
+    eyebrow: "Local delivery",
+    title: "Holden, Worcester, Princeton, Sterling, Rutland.",
+    body: "Curbside drops across Central Mass, dispatched from the Jefferson lot.",
+    size: "md",
+    tone: "gray",
   },
   {
     id: "story-07-visit",
