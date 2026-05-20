@@ -90,6 +90,7 @@
 
    Sizes (mobile span / desktop span out of 6):
      tile-sm       1 / 2   small square (gallery cell, third on desktop)
+     tile-third    2 / 2   full on mobile, one-third on desktop (3-up rows)
      tile-md       2 / 3   half-width on desktop, full on mobile
      tile-lg       2 / 4   two-thirds desktop, full mobile
      tile-feature  2 / 6   full-width lead tile, both breakpoints
@@ -112,6 +113,13 @@
 
 @utility tile-sm {
   grid-column: span 1 / span 1;
+  @media (min-width: 768px) {
+    grid-column: span 2 / span 2;
+  }
+}
+
+@utility tile-third {
+  grid-column: span 2 / span 2;
   @media (min-width: 768px) {
     grid-column: span 2 / span 2;
   }
