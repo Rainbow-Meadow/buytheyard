@@ -1,74 +1,58 @@
-# Prev/next nav, horizontal swipe, and swipe-UP-to-close
+## Branded splash screen — minimal, on #0c0c0e
 
-Two changes bundled together since they share the same gesture hook and dialog content:
+Add two complementary splash experiences using the existing brandmark:
 
-1. Add left/right arrow buttons + horizontal swipe to page through neighboring tiles within the same group (category for products, parent TileGrid for image tiles).
-2. Flip the close gesture from swipe-down to **swipe-up**.
+### 1. iOS PWA launch images (static, OS-rendered)
 
-Applies to both Tile image dialogs and Product dialogs.
+When the site is added to the home screen on iOS, Safari shows a blank white screen unless `apple-touch-startup-image` links are provided. We'll generate a small set of PNGs sized for current iPhone/iPad classes, each centered brandmark on `#0c0c0e`.
 
-## Swipe-up to close (gesture inversion)
+- New script `scripts/gen-splash.mjs` (sharp-based, run locally like the existing `gen-icons.mjs`) that outputs:
+  - `public/splash/apple-splash-2048x2732.png` (iPad Pro 12.9")
+  - `public/splash/apple-splash-1668x2388.png` (iPad Pro 11")
+  - `public/splash/apple-splash-1536x2048.png` (iPad 9.7")
+  - `public/splash/apple-splash-1290x2796.png` (iPhone 15/16 Pro Max)
+  - `public/splash/apple-splash-1179x2556.png` (iPhone 15/16)
+  - `public/splash/apple-splash-1170x2532.png` (iPhone 13/14)
+  - `public/splash/apple-splash-1125x2436.png` (iPhone X/XS/11 Pro)
+  - Plus matching landscape orientations for tablets.
+- Each PNG = solid `#0c0c0e` background + `brandmark.png` centered at ~28% of the shorter edge.
+- Add `<link rel="apple-touch-startup-image" href="…" media="…" />` entries in `src/routes/__root.tsx` `head.links` for each size/orientation pair.
+- Android/Chrome already use the `background_color: "#0c0c0e"` + icon from `site.webmanifest`, so no manifest change needed beyond what's already there.
 
-In `useSwipeToClose.ts`:
+Note: Android/Chrome installed PWAs render their own splash from the manifest; we won't ship a custom service worker (see "Out of scope").
 
-- Track upward Y motion (`dy < 0`) instead of downward; transform becomes `translateY(${dy}px)` where `dy` is negative.
-- Distance / velocity thresholds keep their current magnitudes (`|dy| > 20% vh clamped 100–200px` OR `|v| > 0.45 px/ms` with `≥40px` travel).
-- Drag handle bar at the top of the dialog moves to the **bottom edge** (mobile only) since the affordance now hints upward dismissal: `sm:hidden absolute bottom-2 left-1/2 -translate-x-1/2 h-1 w-10 rounded-full bg-white/30 z-10`. Update both call sites (`Tile.tsx`, `ProductCard.tsx`).
-- If the gesture starts inside a scrollable area that is NOT scrolled to **bottom**, defer to native scroll (mirror of the current "not at top" check).
+### 2. In-app splash overlay (animated)
 
-## Prev/next within the same group
+A lightweight React component shown on first paint, fades out once the app is interactive.
 
-### Shared sibling context
+- New `src/components/site/SplashScreen.tsx`:
+  - Fixed full-viewport overlay, `bg-surface` (#0c0c0e), z-index above header.
+  - Centered `brandmark.png` at ~96px, subtle opacity-in (0 → 1 over 200ms).
+  - Auto-dismiss: fade out (300ms) once `document.readyState === "complete"` OR after a 600ms minimum, whichever is later. Hard cap at 1500ms so it never blocks.
+  - Removed from DOM after fade.
+  - Respects `prefers-reduced-motion`: skip fade, just hide.
+  - Show-once-per-session via `sessionStorage["bty.splash.shown"]`; subsequent route changes don't re-trigger.
+  - SSR-safe: render `null` on server, mount on client effect so it never appears in the SSR'd HTML (avoids FOUC of overlay on top of already-painted content).
+- Mounted in `src/routes/__root.tsx` `RootComponent`, alongside `ChatWidget` / `CookieConsent`.
 
-New `src/components/site/TileGroupContext.tsx`:
+### Technical details
 
-```ts
-type TileGroup = { ids: string[] };
-```
+- Brandmark source: existing `public/brandmark.png`.
+- Background color: `#0c0c0e` (matches `--surface`, `theme-color`, and manifest `background_color` — already consistent).
+- The splash component uses semantic Tailwind tokens (`bg-surface`) — no hardcoded colors in JSX.
+- `scripts/gen-splash.mjs` is dev-only tooling (like the existing `scripts/gen-icons.mjs` and `scripts/og.mjs`); the generated PNGs are committed to `public/splash/`. It will use `sharp`, which is already a transitive dep of the existing icon script.
+- No new npm packages required.
+- No service worker, no `vite-plugin-pwa` — site.webmanifest stays as-is.
 
-- `TileGrid` (in `Tile.tsx`) wraps its children in a provider whose `ids` are the deep-link shareIds of every image-with-`details` block, in render order.
-- A new `<ProductGroup products={items}>{children}</ProductGroup>` helper wraps product card rows with a provider whose `ids = items.map(p => "product-" + productSlug(p.name))`.
+### Out of scope
 
-### Navigation hook
+- Full PWA / offline support / service worker (not needed for a splash; would risk preview-iframe caching issues).
+- Changing the wordmark or adding tagline text to the splash (user chose "minimal").
+- Re-showing the splash on every navigation (session-scoped only).
 
-`useTileGroupNav(shareId)` returns `{ prev, next, hasPrev, hasNext }`. `prev/next` rewrite the URL's `?tile=` param via `history.replaceState`; the existing `useTileDeepLink` already listens and reopens with the new id, so no extra wiring.
+### Files
 
-### UI
-
-In both `Tile` image dialog and `ProductCard` dialog, inside `DialogContent`:
-
-- Two 40px round buttons absolutely positioned on the image area:
-  - `<ChevronLeft />` at `left-3`, `<ChevronRight />` at `right-3`, vertically centered.
-  - `bg-black/50 hover:bg-black/70 text-white rounded-full size-10 grid place-items-center backdrop-blur-sm`.
-  - `hidden sm:grid` — mobile uses horizontal swipe instead.
-  - Disabled state when `!hasPrev` / `!hasNext`.
-- Keyboard: ArrowLeft / ArrowRight while open call prev/next. Bound via a single `useEffect` on `keydown` when `open`.
-
-### Horizontal swipe (extend the existing hook)
-
-Rename `useSwipeToClose` → `useDialogGestures({ onClose, onPrev, onNext })`. Same return shape `{ onTouchStart, onTouchMove, onTouchEnd, style }`:
-
-- After ~10px of total motion, lock the axis to whichever of |dx|/|dy| is larger.
-- **Vertical axis**: existing swipe-up-to-close (clamped to negative `dy`).
-- **Horizontal axis**:
-  - Translate the dialog by `dx` while dragging.
-  - Release thresholds: `|dx| > 25% of dialog width` (clamped 80–180px) OR `|v| > 0.45 px/ms` with `≥40px` travel.
-  - `dx < 0` → `onNext()`, `dx > 0` → `onPrev()`.
-  - If the chosen neighbor doesn't exist, rubber-band (apply `dx * 0.3`) and snap back.
-- Touch handlers still spread onto `DialogContent` the same way; both consumers just pass `onPrev`/`onNext` in addition to `onClose`.
-
-## Files touched
-
-- `src/components/site/useSwipeToClose.ts` — invert axis to upward; extend with horizontal nav (rename to `useDialogGestures`).
-- `src/components/site/TileGroupContext.tsx` (new) — provider + `useTileGroupNav`.
-- `src/components/site/ProductGroup.tsx` (new) — convenience wrapper around the provider.
-- `src/components/site/Tile.tsx` — `TileGrid` wraps children in provider; `ImageTileInner` adds arrow buttons + keyboard listener; move drag handle to bottom edge.
-- `src/components/site/ProductCard.tsx` — adds arrow buttons + keyboard listener; move drag handle to bottom edge.
-- `src/routes/products.tsx` — wrap each category's mobile gallery and desktop magazine grid in `<ProductGroup products={items}>`.
-- `src/routes/index.tsx` — wrap "Featured Materials" mobile + desktop blocks in `<ProductGroup products={featured}>`.
-
-## Notes
-
-- Single-item groups: arrows hidden, horizontal swipe rubber-bands. Safe no-op.
-- Deep links still work; opening `?tile=product-X` directly leaves prev/next available because the provider is rendered around the static lists on the page.
-- Mobile uses swipe (horizontal for nav, upward for close); desktop uses arrow buttons + keyboard + Esc.
+- New: `scripts/gen-splash.mjs`
+- New: `public/splash/*.png` (8–10 generated PNGs)
+- New: `src/components/site/SplashScreen.tsx`
+- Edited: `src/routes/__root.tsx` (add `apple-touch-startup-image` links + mount `<SplashScreen />`)
