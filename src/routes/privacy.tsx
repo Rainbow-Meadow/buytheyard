@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import yardPiles from "@/assets/source/yard-piles.webp";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -34,36 +35,77 @@ function PrivacyPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-4xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Legal
-          </p>
-          <h1 className="display-2 leading-[0.9]">
-            Privacy & <span className="text-brand">Terms.</span>
-          </h1>
-          <p className="mt-5 text-sm text-zinc-400">
-            Last updated: {LAST_UPDATED}
-          </p>
+        {/* Mobile stacked */}
+        <div className="md:hidden">
+          <div className="aspect-[16/10] overflow-hidden">
+            <img src={yardPiles} alt="" className="w-full h-full object-cover opacity-60" />
+          </div>
+          <div className="px-5 py-8">
+            <p className="eyebrow text-brand mb-4">Legal</p>
+            <h1 className="display-2 leading-[0.9]">
+              Privacy &amp; <span className="text-brand">Terms.</span>
+            </h1>
+            <p className="mt-4 text-sm text-zinc-400">Last updated: {LAST_UPDATED}</p>
+          </div>
+        </div>
+
+        {/* Desktop narrow split */}
+        <div className="hidden md:block">
+          <div className="max-w-7xl mx-auto px-6 section-loose grid grid-cols-12 gap-8 items-end">
+            <div className="col-span-8">
+              <p className="eyebrow text-brand mb-4">Legal</p>
+              <h1 className="display-1 leading-[0.9]">
+                Privacy &amp; <span className="text-brand">Terms.</span>
+              </h1>
+              <p className="mt-5 text-sm text-zinc-400">
+                Last updated: {LAST_UPDATED}
+              </p>
+            </div>
+            <div className="col-span-4">
+              <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-white/10">
+                <img src={yardPiles} alt="" className="w-full h-full object-cover opacity-70" />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-3xl mx-auto px-5 md:px-6">
-          <nav
-            aria-label="On this page"
-            className="border border-border bg-white/60 px-5 py-4 mb-12"
-          >
-            <p className="eyebrow text-zinc-500 mb-3">On this page</p>
-            <ol className="space-y-1.5 text-sm text-zinc-700 list-decimal pl-5">
-              <li><a href="#privacy" className={linkCls}>Privacy Policy</a></li>
-              <li><a href="#cookies" className={linkCls}>Cookies</a></li>
-              <li><a href="#sms" className={linkCls}>SMS Terms</a></li>
-              <li><a href="#terms" className={linkCls}>Website Terms of Use</a></li>
-              <li><a href="#contact" className={linkCls}>Contact</a></li>
-            </ol>
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+          {/* Mobile: anchor chips */}
+          <nav aria-label="On this page" className="md:hidden -mx-5 px-5 overflow-x-auto">
+            <ul className="flex gap-2 pb-2 min-w-max">
+              {[
+                ["#privacy", "Privacy"],
+                ["#cookies", "Cookies"],
+                ["#sms", "SMS"],
+                ["#terms", "Terms"],
+                ["#contact", "Contact"],
+              ].map(([href, label]) => (
+                <li key={href}>
+                  <a href={href} className="inline-flex items-center px-4 h-9 label bg-kraft ring-1 ring-zinc-300 rounded-full text-zinc-800 hover:text-brand">
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          <div className="space-y-14">
+          {/* Desktop: sticky TOC sidebar */}
+          <aside className="hidden md:block md:col-span-3">
+            <nav aria-label="On this page" className="sticky top-24 border-l-2 border-brand pl-5">
+              <p className="eyebrow text-zinc-500 mb-3">On this page</p>
+              <ol className="space-y-2 text-sm text-zinc-700 list-decimal pl-5">
+                <li><a href="#privacy" className={linkCls}>Privacy Policy</a></li>
+                <li><a href="#cookies" className={linkCls}>Cookies</a></li>
+                <li><a href="#sms" className={linkCls}>SMS Terms</a></li>
+                <li><a href="#terms" className={linkCls}>Website Terms of Use</a></li>
+                <li><a href="#contact" className={linkCls}>Contact</a></li>
+              </ol>
+            </nav>
+          </aside>
+
+          <div className="md:col-span-9 space-y-14 max-w-3xl">
             {/* ---------------- Privacy ---------------- */}
             <section id="privacy" className="scroll-mt-24">
               <h2 className="display-4 tracking-tight text-zinc-900">
