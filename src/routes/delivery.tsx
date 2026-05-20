@@ -79,7 +79,7 @@ function DeliveryPage() {
               icon={<Truck />}
               eyebrow="Drop standard"
               title="Driveway-to-curbline only."
-              body="We drop on the driveway or at the curbline. Keeps your lawn safe — and any gas, water, or irrigation beneath it."
+              body="Drop on driveway or curbline — keeps lawn and lines safe."
             />
           ),
           a: (
