@@ -1,108 +1,52 @@
 ## Goal
-Lock down a single, enforceable Tile ruleset so every tile across the site has predictable content fit, hierarchy, and behavior. Four axes — **Size, Tone, Content (variant), Action** — with strict combinations. Anything outside the matrix is disallowed.
+Bring every existing tile into compliance with the TileRules matrix, and redesign content per-tile so each slot is purpose-built for its size/tone/variant/action — not generic copy stretched to fit.
 
----
+## Method
+For each of the 13 tile-authoring files, do a 3-pass sweep:
 
-## 1. Size → Content slots (STRICT)
+**Pass 1 — Inventory.** Read the file, list every tile with: route/section, slot (hero/a/b/c/d/e), current `{variant, size, tone, action}`, body char count, title word count, whether it has a CTA/details/flip-back.
 
-Each size is a **fixed content recipe**. Authors pick the size that fits their copy — they do not stretch content to fit a size. Line limits follow the existing Core memory (headlines 1–2 lines, subtext 2–3 lines).
+**Pass 2 — Diagnose.** Mark each tile against the matrix:
+- size→content fit (too much/too little copy for the slot)
+- tone→role correctness (brand reserved for CTA/stat/image; surface for hero/feature; ≤1 brand per screen)
+- variant×action validity (no flip-on-text, no carousel-on-cta, etc.)
+- overflow (body chars > SIZE_BODY_CHAR_CAP)
+- redundant chrome that the variant now owns (manual padding, custom rounded, duplicated eyebrows)
 
-| Size | Grid span (mob/desk) | Allowed slots | Hard limits |
-|---|---|---|---|
-| **sm** | 1 / 2 | 1 of: {stat} OR {eyebrow + title} OR {icon + label} | title ≤ 4 words, no body, no CTA |
-| **third** | 2 / 2 | eyebrow + title + 1-line body OR stat + label | body ≤ 60 chars, no CTA |
-| **md** | 2 / 3 | eyebrow + title + body (2 lines) + optional CTA | title ≤ 6 words, body ≤ 120 chars |
-| **lg** | 2 / 4 | eyebrow + title + body (3 lines) + CTA OR image+overlay | body ≤ 200 chars |
-| **feature** | 2 / 6 | eyebrow + title + body (3 lines) + CTA + optional media | body ≤ 280 chars |
+**Pass 3 — Refactor.** Apply the smallest change that makes the tile right *and* purpose-built:
+- If copy fits the next size down, downsize and tighten.
+- If copy overflows, either (a) trim to the cap, (b) move overflow to `details`/flip-back, or (c) bump size and adjust the TileScreen layout slot.
+- Re-pick variant when content is wrong-shape (e.g. a 3-stat list inside a `text` tile becomes 3 `stat` tiles or a `carousel` of stats).
+- Re-pick tone using `VARIANT_DEFAULT_TONE` first; only override for hierarchy.
+- Replace lookalike action hacks with the canonical action (a `cta` tile linking out via overlay → a real `cta` variant; an image tile with title+body overlay that scrolls → an `image` tile with `details`).
+- Tailor copy to the tile: rewrite eyebrow + headline + body for that specific slot. No copy reused verbatim across tiles in the same screen.
 
-**Padding** is derived from size, not a free prop:
-- sm/third → `p-4 md:p-5`
-- md → `p-5 md:p-6`
-- lg → `p-6 md:p-8`
-- feature → `p-7 md:p-10`
+## Per-file scope
 
-(Remove the free `padding` prop from `BaseTile` — it becomes internal.)
+Routes (highest visibility first):
+1. `src/routes/index.tsx` (462 lines, ~25 tiles across 6 TileScreens) — hero, featured materials, delivery+pricing recap, reviews, community, FAQ. Biggest audit.
+2. `src/routes/products.tsx` — carousel hero + side CTAs; verify slide uniformity rule.
+3. `src/routes/quote.tsx` — stepper carousel + success screen; per-step tiles + side rail.
+4. `src/routes/delivery.tsx`, `src/routes/service-area.tsx`, `src/routes/contact.tsx`, `src/routes/about.tsx` — leaner content routes.
+5. `src/routes/privacy.tsx` — already on flip tiles; verify front/back size+tone parity.
 
----
+Shared components (used inside route TileScreens):
+6. `CommunityTiles.tsx`, `DeliveryAndPricing.tsx`, `FacebookSpotlight.tsx`, `FaqSection.tsx`, `ReviewsAndCommunity.tsx` — each gets the same 3-pass.
 
-## 2. Tone → Role (ROLE-BOUND)
+## Deliverables per file
+- All tiles compliant (zero dev warnings in console on that route).
+- Every tile has a stable `id`.
+- Tone props removed when they match the variant default.
+- Copy rewritten so no two tiles in the same screen repeat eyebrow or headline.
+- Layout slot in the parent `TileScreen` adjusted only when the right tile size demands it.
 
-Tone is no longer an arbitrary aesthetic choice. Each tone has one role and the linter (dev-only console warning) flags misuse.
+## Verification
+After each file: open the corresponding route, watch the browser console for `[Tile …]` warnings, fix until silent. Final spot-check on viewports 440 (current) + 1280.
 
-| Tone | Role | Rule |
-|---|---|---|
-| **brand** (red) | Primary CTA / single attention magnet | Max **1 per TileScreen**. Reserved for `cta` variant or hero CTA tile. |
-| **surface** (near-black) | Hero / feature anchor | Used by hero slot or 1 feature-size tile per screen. |
-| **kraft** (warm beige) | Default content tile | Text, numbered, quote, definition. The "everything else". |
-| **white** | Data / stat tile | `stat` variant, definition lists. Crisp, neutral. |
-| **gray** (brandmark) | Secondary / meta | Helper info, "call instead", phone numbers, low-priority CTAs. |
+## Out of scope
+- Adding new TileScreen layouts (use existing pageHero / section01–05 set).
+- Changing the matrix itself.
+- Photography swaps or new assets — work with what's already imported.
 
-Image tiles are toneless (the image owns the surface); overlay text follows `align` and uses fixed scrim.
-
----
-
-## 3. Content variant × Action (CURATED PAIRINGS)
-
-Action is a separate axis but only the pairings below are valid. Anything else → TypeScript error.
-
-| Variant | static | link (to/href) | flip | carousel | expand (dialog) |
-|---|:-:|:-:|:-:|:-:|:-:|
-| text | ✓ | – | – | – | ✓ |
-| numbered | ✓ | – | – | – | ✓ |
-| quote | ✓ | – | – | ✓ (quote rotator) | – |
-| definition | ✓ | – | ✓ (term→def) | – | – |
-| cta | ✓ | ✓ | ✓ (label→detail) | – | – |
-| stat | ✓ | – | ✓ (number→source) | ✓ (stat rotator) | – |
-| image | ✓ | ✓ | – | ✓ (gallery) | ✓ (lightbox) |
-
-**Action rules:**
-- **flip back-face must use the SAME variant + size + tone** as the front. Prevents jarring layout shifts.
-- **carousel slides must all be the SAME variant + size**. Tone may vary.
-- **expand** auto-attaches when content exceeds the size's char limit (see §4) — authors don't add it manually.
-- A tile has **exactly one action**. No flip-on-carousel, no link-on-flip.
-
----
-
-## 4. Overflow rule (TRUNCATE + EXPAND)
-
-Tiles never scroll vertically. When authored content exceeds the size's hard limit:
-1. Body clamps to the allowed line count via `line-clamp-N` (matches the table in §1).
-2. Tile auto-injects a `… More` affordance bottom-right.
-3. Click opens a dialog (reuses existing `ImageTileInner` dialog pattern) with the full title + body + optional CTA.
-4. If `details` is already explicitly set, that wins.
-
-Dev-only: if measured rendered height > slot height, `console.warn` with the tile id and the suggested next-size-up. No runtime crash.
-
----
-
-## 5. Public API after refactor
-
-```ts
-type Tile = {
-  id: string;                          // required (was optional)
-  size: "sm"|"third"|"md"|"lg"|"feature";
-  tone?: TileTone;                     // defaults per variant (see §2)
-  variant: TileVariant;
-  action?: TileAction;                 // "static"|"link"|"flip"|"carousel"|"expand"
-  // variant-specific fields unchanged
-  // padding REMOVED (derived from size)
-  // tall REMOVED (replaced by tile-row-tall via size on TileScreen)
-}
-```
-
-Tone defaults by variant: cta→brand, stat→white, quote→surface, numbered/text/definition→kraft.
-
----
-
-## 6. Files to change
-
-- `src/components/site/Tile.tsx` — narrow types, add `action` union, derive padding from size, add line-clamp + auto-expand logic, dev-warn on tone-role + pairing violations.
-- `src/styles.css` — add `tile-clamp-{1..3}` utilities; per-size padding utilities; remove unused.
-- `src/components/site/TileRules.ts` (new) — single export of the size/tone/variant/action matrix; consumed by Tile.tsx and dev linter.
-- `.lovable/plan.md` — replace with the §1–§4 tables as the durable spec.
-- All consumers (`src/routes/*.tsx`, `src/components/home/*.tsx`) — remove `padding` props, ensure each tile has an `id`, swap any disallowed combos (audit pass; expected ~10–15 small edits).
-
-Memory update (after approval): add a Core rule "Tiles follow size/tone/variant/action matrix; never override padding or mix actions" plus a `mem://design/tile-system` detail file with the full tables.
-
-## 7. Risk
-Low-medium. The matrix is additive to existing variants and the dev warnings are non-fatal. The biggest churn is the consumer audit pass; nothing changes visually unless a tile currently violates a rule.
+## Risk
+Medium. Visual changes are intentional and per-tile; the matrix already exists so guardrails catch regressions. The biggest risk is copy quality — mitigated by treating each tile as a discrete writing task rather than a global sed.

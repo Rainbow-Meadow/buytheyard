@@ -221,10 +221,10 @@ function HomePage() {
               </div>
             </article>
           ),
-          a: <Tile fill variant="stat" tone="surface" value="10" label="Years in business" />,
-          b: <Tile fill variant="stat" tone="brand" value="WBE" label="MA-certified woman-owned" />,
-          c: <Tile fill variant="stat" tone="kraft" value="820+" label="Facebook followers" />,
-          d: <Tile fill variant="stat" tone="gray" value="5★" label="Google & Facebook rated" />,
+          a: <Tile id="stat-years" fill variant="stat" tone="surface" value="10" label="Years in business" />,
+          b: <Tile id="stat-wbe" fill variant="stat" tone="brand" value="WBE" label="MA-certified woman-owned" />,
+          c: <Tile id="stat-fb" fill variant="stat" tone="kraft" value="820+" label="Facebook followers" />,
+          d: <Tile id="stat-stars" fill variant="stat" tone="gray" value="5★" label="Google & Facebook rated" />,
         }}
       />
 
@@ -235,13 +235,13 @@ function HomePage() {
         tiles={{
           hero: (
             <Tile
+              id="feat-hero"
               fill
               variant="image"
               src={FEATURED[0].image!}
               alt={FEATURED[0].name}
               aspect={{ mobile: "portrait", desktop: "wide" }}
               focal="center"
-              to="/products"
               overlay={{
                 eyebrow: "Bulk materials & garden center",
                 title: "Featured materials",
@@ -253,57 +253,62 @@ function HomePage() {
           ),
           a: (
             <Tile
+              id="feat-loam"
               fill
               variant="image"
               src={FEATURED[1].image!}
               alt={FEATURED[1].name}
               focal="center"
               to="/products"
-              overlay={{ title: FEATURED[1].name, align: "bottom-left" }}
+              overlay={{ eyebrow: "Loam", title: FEATURED[1].name, align: "bottom-left" }}
             />
           ),
           b: (
             <Tile
+              id="feat-sand"
               fill
               variant="image"
               src={FEATURED[2].image!}
               alt={FEATURED[2].name}
               focal="center"
               to="/products"
-              overlay={{ title: FEATURED[2].name, align: "bottom-left" }}
+              overlay={{ eyebrow: "Sand", title: FEATURED[2].name, align: "bottom-left" }}
             />
           ),
           c: (
             <Tile
+              id="feat-stone"
               fill
               variant="image"
               src={FEATURED[3].image!}
               alt={FEATURED[3].name}
               focal="center"
               to="/products"
-              overlay={{ title: FEATURED[3].name, align: "bottom-left" }}
+              overlay={{ eyebrow: "Stone", title: FEATURED[3].name, align: "bottom-left" }}
             />
           ),
           d: (
             <Tile
+              id="feat-lava"
               fill
               variant="image"
               src={FEATURED[4].image!}
               alt={FEATURED[4].name}
               focal="center"
               to="/products"
-              overlay={{ title: FEATURED[4].name, align: "bottom-left" }}
+              overlay={{ eyebrow: "Specialty", title: FEATURED[4].name, align: "bottom-left" }}
             />
           ),
           e: (
             <Tile
+              id="feat-plants"
               fill
               variant="image"
               src={FEATURED[5].image!}
               alt={FEATURED[5].name}
               focal="center"
               to="/products"
-              overlay={{ title: FEATURED[5].name, align: "bottom-left" }}
+              overlay={{ eyebrow: "Garden center", title: FEATURED[5].name, align: "bottom-left" }}
             />
           ),
         }}
@@ -316,10 +321,11 @@ function HomePage() {
         tiles={{
           hero: (
             <Tile
+              id="reviews-hero"
               fill
               variant="quote"
               tone="kraft"
-              padding="lg"
+
               eyebrow="From Facebook · real customers"
               quote="Abby and crew are awesome. Very accommodating, great prices, delivery and quality product."
               attribution="Rob Warner · Apr 21"
@@ -327,6 +333,7 @@ function HomePage() {
           ),
           a: (
             <Tile
+              id="reviews-fb"
               fill
               variant="cta"
               tone="surface"
@@ -342,6 +349,7 @@ function HomePage() {
           ),
           b: (
             <Tile
+              id="reviews-ctms"
               fill
               variant="image"
               src={communityCtms}
@@ -356,6 +364,7 @@ function HomePage() {
           ),
           c: (
             <Tile
+              id="reviews-rutland"
               fill
               variant="image"
               src={communityRutland}
@@ -378,10 +387,11 @@ function HomePage() {
         tiles={{
           hero: (
             <Tile
+              id="dp-delivery"
               fill
               variant="cta"
               tone="surface"
-              padding="lg"
+
               icon={<Truck />}
               eyebrow="Delivery"
               title="Delivery across Central Mass"
@@ -391,6 +401,7 @@ function HomePage() {
           ),
           a: (
             <Tile
+              id="dp-call"
               fill
               variant="cta"
               tone="brand"
@@ -403,6 +414,7 @@ function HomePage() {
           ),
           b: (
             <Tile
+              id="dp-quote"
               fill
               variant="cta"
               tone="kraft"
@@ -415,6 +427,7 @@ function HomePage() {
           ),
           c: (
             <Tile
+              id="dp-faq-pricing"
               fill
               variant="text"
               tone="gray"
@@ -425,6 +438,7 @@ function HomePage() {
           ),
           d: (
             <Tile
+              id="dp-faq-area"
               fill
               variant="text"
               tone="surface"
@@ -435,6 +449,7 @@ function HomePage() {
           ),
           e: (
             <Tile
+              id="dp-faq-timing"
               fill
               variant="text"
               tone="surface"

@@ -71,6 +71,7 @@ function ContactPage() {
         tiles={{
           hero: (
             <Tile
+              id="contact-hero"
               fill
               variant="image"
               src={yardPatio}
@@ -78,7 +79,6 @@ function ContactPage() {
               focal="center"
               loading="eager"
               fetchPriority="high"
-              to="/quote"
               overlay={{
                 eyebrow: "Contact",
                 title: "Call. We answer.",
@@ -90,6 +90,7 @@ function ContactPage() {
           ),
           a: (
             <Tile
+              id="contact-phone"
               fill
               variant="cta"
               tone="brand"
@@ -101,6 +102,7 @@ function ContactPage() {
           ),
           b: (
             <Tile
+              id="contact-address"
               fill
               variant="cta"
               tone="surface"
@@ -116,6 +118,7 @@ function ContactPage() {
           ),
           c: (
             <Tile
+              id="contact-hours"
               fill
               variant="cta"
               tone="kraft"
@@ -128,6 +131,7 @@ function ContactPage() {
           ),
           d: (
             <Tile
+              id="contact-fb"
               fill
               variant="cta"
               tone="gray"
@@ -163,10 +167,11 @@ function ContactPage() {
           ),
           a: (
             <Tile
+              id="contact-quote"
               fill
               variant="cta"
               tone="surface"
-              padding="lg"
+
               icon={<ClipboardList />}
               eyebrow="Online"
               title="Get a quote"
@@ -176,6 +181,7 @@ function ContactPage() {
           ),
           b: (
             <Tile
+              id="contact-email"
               fill
               variant="cta"
               tone="kraft"
@@ -187,6 +193,7 @@ function ContactPage() {
           ),
           c: (
             <Tile
+              id="contact-vm"
               fill
               variant="text"
               tone="gray"

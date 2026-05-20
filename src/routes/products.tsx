@@ -94,6 +94,7 @@ function ProductsPage() {
       tiles={{
         hero: (
           <Tile
+            id="products-carousel"
             fill
             variant="carousel"
             ariaLabel="Browse materials by category"
@@ -103,10 +104,11 @@ function ProductsPage() {
         ),
         a: (
           <Tile
+            id="products-call"
             fill
             variant="cta"
             tone="brand"
-            padding="md"
+
             icon={<Phone />}
             eyebrow="Today's price by phone"
             title="Materials. By the yard."
@@ -116,10 +118,11 @@ function ProductsPage() {
         ),
         b: (
           <Tile
+            id="products-delivery"
             fill
             variant="cta"
             tone="surface"
-            padding="sm"
+
             icon={<Truck />}
             eyebrow="Delivery"
             title="Curbside delivery."
@@ -128,10 +131,11 @@ function ProductsPage() {
         ),
         c: (
           <Tile
+            id="products-quote"
             fill
             variant="cta"
             tone="kraft"
-            padding="sm"
+
             icon={<HelpCircle />}
             eyebrow="Quote"
             title="Build a list in 60 seconds."

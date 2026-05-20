@@ -3,10 +3,10 @@ import { ArrowRight, Phone, Tag, Truck } from "lucide-react";
 import { TileGrid, type TileBlock } from "@/components/site/Tile";
 
 const DELIVERY_RULES: Array<[string, string]> = [
-  ["Driveway-to-curb only", "We drop on the driveway or at the curbline. Keeps lawns and underground lines safe."],
-  ["1 yard minimum", "Call before noon for same-day. Otherwise plan on about 48 hours."],
-  ["Mark your spot", "Drop a tarp, bucket, or cone where you want the pile. We'll put it right there."],
-  ["4% card fee", "Pass-through from our processor. Cash and check skip the fee."],
+  ["Driveway-to-curb only", "Lawns and underground lines stay safe."],
+  ["1 yard minimum", "Call before noon for same-day."],
+  ["Mark your spot", "Tarp, bucket, or cone — pile lands there."],
+  ["4% card fee", "Cash & check skip the surcharge."],
 ];
 
 const DESKTOP_BLOCKS: TileBlock[] = [
@@ -27,9 +27,8 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     eyebrow: String(i + 1).padStart(2, "0"),
     title: k,
     body: v,
-    // First rule sits next to the hero (sm = 2 cols) to fill row 1.
-    // The remaining three share row 2 (3 × sm = 6 cols).
-    size: "sm",
+    // `third` (2/2 cols) keeps the 4-up rhythm AND allows a 60-char body.
+    size: "third",
     tone: i % 2 === 0 ? "kraft" : "white",
   })),
   {

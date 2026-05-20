@@ -37,6 +37,7 @@ function AboutPage() {
         tiles={{
           hero: (
             <Tile
+              id="about-hero"
               fill
               variant="image"
               src={abbyPortrait}
@@ -52,10 +53,10 @@ function AboutPage() {
               }}
             />
           ),
-          a: <Tile fill variant="stat" tone="surface" value="2018" label="Year founded" />,
-          b: <Tile fill variant="stat" tone="brand" value="WBE" label="MA-certified woman-owned" />,
-          c: <Tile fill variant="stat" tone="kraft" value="Local" label="Wachusett Regional · '16" />,
-          d: <Tile fill variant="stat" tone="gray" value="5★" label="Google & Facebook rated" />,
+          a: <Tile id="about-stat-year" fill variant="stat" tone="surface" value="2018" label="Year founded" />,
+          b: <Tile id="about-stat-wbe" fill variant="stat" tone="brand" value="WBE" label="MA-certified woman-owned" />,
+          c: <Tile id="about-stat-local" fill variant="stat" tone="kraft" value="Local" label="Wachusett Regional · '16" />,
+          d: <Tile id="about-stat-stars" fill variant="stat" tone="gray" value="5★" label="Google & Facebook rated" />,
         }}
       />
 
@@ -66,10 +67,11 @@ function AboutPage() {
         tiles={{
           hero: (
             <Tile
+              id="about-quote"
               fill
               variant="quote"
               tone="surface"
-              padding="lg"
+
               eyebrow="In her own words"
               quote="Opening this business was the perfect way to get into the industry. I found something that isn't just a job — it's something I take pride in every day."
               attribution="Abby Montalto · Owner"
@@ -77,6 +79,7 @@ function AboutPage() {
           ),
           a: (
             <Tile
+              id="about-charlie"
               fill
               variant="image"
               src={yardDog}
@@ -87,6 +90,7 @@ function AboutPage() {
           ),
           b: (
             <Tile
+              id="about-patio"
               fill
               variant="image"
               src={yardPatio}
@@ -97,6 +101,7 @@ function AboutPage() {
           ),
           c: (
             <Tile
+              id="about-visit"
               fill
               variant="cta"
               tone="brand"

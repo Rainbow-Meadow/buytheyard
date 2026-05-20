@@ -77,6 +77,7 @@ function ServiceAreaPage() {
         tiles={{
           hero: (
             <Tile
+              id="sa-hero"
               fill
               variant="image"
               src={yardTrucks}
@@ -84,7 +85,6 @@ function ServiceAreaPage() {
               focal="center"
               loading="eager"
               fetchPriority="high"
-              to="/quote"
               overlay={{
                 eyebrow: "Service area",
                 title: "Across Central Mass.",
@@ -94,10 +94,10 @@ function ServiceAreaPage() {
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
-          a: <Tile fill variant="stat" tone="surface" value={`${TOWNS.length}`} label="Towns served" />,
-          b: <Tile fill variant="stat" tone="brand" value="~25 mi" label="Max delivery radius" />,
-          c: <Tile fill variant="stat" tone="kraft" value="1 yd" label="Order minimum" />,
-          d: <Tile fill variant="stat" tone="gray" value="~48 hr" label="Typical lead time" />,
+          a: <Tile id="sa-stat-towns" fill variant="stat" tone="surface" value={`${TOWNS.length}`} label="Towns served" />,
+          b: <Tile id="sa-stat-radius" fill variant="stat" tone="brand" value="~25 mi" label="Max delivery radius" />,
+          c: <Tile id="sa-stat-min" fill variant="stat" tone="kraft" value="1 yd" label="Order minimum" />,
+          d: <Tile id="sa-stat-lead" fill variant="stat" tone="gray" value="~48 hr" label="Typical lead time" />,
         }}
       />
 
@@ -108,18 +108,21 @@ function ServiceAreaPage() {
         tiles={{
           hero: (
             <Tile
+              id="sa-towns"
               fill
+              size="feature"
               variant="text"
               tone="surface"
-              padding="lg"
+
               icon={<Truck />}
               eyebrow="Home base · daily routes"
               title="Holden, Princeton, Sterling, Rutland, Paxton, West Boylston, Worcester."
-              body="Plus Boylston, Leominster, Clinton, Lancaster, Spencer, Auburn & Shrewsbury on a 48-hour notice. Don't see your town? Call — we deliver throughout Worcester County and parts of Middlesex."
+              body="Plus Boylston, Leominster, Clinton, Lancaster, Spencer, Auburn & Shrewsbury on 48-hour notice."
             />
           ),
           a: (
             <Tile
+              id="sa-jefferson"
               fill
               variant="image"
               src={loadingTruck}
@@ -130,6 +133,7 @@ function ServiceAreaPage() {
           ),
           b: (
             <Tile
+              id="sa-call"
               fill
               variant="cta"
               tone="brand"
@@ -141,6 +145,7 @@ function ServiceAreaPage() {
           ),
           c: (
             <Tile
+              id="sa-quote"
               fill
               variant="cta"
               tone="kraft"
