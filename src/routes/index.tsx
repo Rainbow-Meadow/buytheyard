@@ -351,30 +351,43 @@ function HomePage() {
             <Tile
               id="reviews-hero"
               fill
-              variant="quote"
-              tone="kraft"
-
-              eyebrow="From Facebook · real customers"
-              quote="Abby and crew are awesome. Very accommodating, great prices, delivery and quality product."
-              attribution="Rob Warner · Apr 21"
+              variant="carousel"
+              auto
+              interval={6500}
+              controls="dots"
+              ariaLabel="Customer reviews from Facebook"
+              slides={[
+                {
+                  id: "rev-1",
+                  variant: "quote",
+                  tone: "kraft",
+                  eyebrow: "From Facebook · real customers",
+                  quote:
+                    "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product.",
+                  attribution: "Rob Warner · Apr 21",
+                },
+                {
+                  id: "rev-2",
+                  variant: "quote",
+                  tone: "surface",
+                  eyebrow: "From Facebook · real customers",
+                  quote:
+                    "Best mulch in Central Mass and the price can't be beat. Delivery was right on time.",
+                  attribution: "Local customer · Holden",
+                },
+                {
+                  id: "rev-3",
+                  variant: "quote",
+                  tone: "kraft",
+                  eyebrow: "From Facebook · real customers",
+                  quote:
+                    "Quality loam, fair pricing, and Abby actually picks up the phone. That's rare.",
+                  attribution: "Repeat customer · Rutland",
+                },
+              ]}
             />
           ),
-          a: (
-            <Tile
-              id="reviews-fb"
-              fill
-              variant="cta"
-              tone="surface"
-              icon={<Facebook />}
-              eyebrow="On Facebook"
-              title="Where the yard lives"
-              body="Daily restocks, closures, lot photos."
-              cta={{
-                label: "Follow on Facebook",
-                href: "https://www.facebook.com/BuyTheYardOutdoorProducts",
-              }}
-            />
-          ),
+          a: <FacebookLiveTile />,
           b: (
             <Tile
               id="reviews-ctms"
