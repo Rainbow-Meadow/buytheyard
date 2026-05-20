@@ -224,10 +224,10 @@ function HomePage() {
               </div>
             </article>
           ),
-          a: <Tile id="stat-years" fill variant="stat" tone="surface" value="10" label="Years in business" />,
-          b: <Tile id="stat-wbe" fill variant="stat" tone="brand" value="WBE" label="MA-certified woman-owned" />,
-          c: <Tile id="stat-fb" fill variant="stat" tone="kraft" value="820+" label="Facebook followers" />,
-          d: <Tile id="stat-stars" fill variant="stat" tone="gray" value="5★" label="Google & Facebook rated" />,
+          a: <Tile id="stat-years" fill variant="stat" tone="surface" icon={<CalendarDays />} value="10" label="Years in business" />,
+          b: <Tile id="stat-wbe" fill variant="stat" tone="brand" icon={<BadgeCheck />} value="WBE" label="MA-certified woman-owned" />,
+          c: <Tile id="stat-fb" fill variant="stat" tone="kraft" icon={<Facebook />} value="820+" label="Facebook followers" />,
+          d: <Tile id="stat-stars" fill variant="stat" tone="gray" icon={<Star />} value="5★" label="Google & Facebook rated" />,
         }}
       />
 
