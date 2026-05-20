@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useTileDeepLink } from "./useTileDeepLink";
+import { useSwipeToClose } from "./useSwipeToClose";
 
 /**
  * Data-driven Tile renderer.
