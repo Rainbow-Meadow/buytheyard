@@ -3,9 +3,12 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.png";
 import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
+import communityCtms from "@/assets/source/community-ctms-loam.jpg";
+import communityRutland from "@/assets/source/community-rutland-memorial.jpg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import { ProductGroup } from "@/components/site/ProductGroup";
+import { TileGrid, type TileBlock } from "@/components/site/Tile";
 
 const reviews = [
   {
@@ -27,18 +30,44 @@ const reviews = [
   },
 ];
 
-const communityPosts = [
+const COMMUNITY_BLOCKS: TileBlock[] = [
   {
-    org: "Central Tree Middle School",
-    date: "Jun 26, 2024",
-    quote:
-      "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way.",
+    id: "community-ctms",
+    variant: "image",
+    src: communityCtms,
+    alt: "Buy The Yard dump truck unloading a pile of dark loam at Central Tree Middle School",
+    size: "md",
+    aspect: "square",
+    focal: "center",
+    overlay: {
+      title: "CTMS · loam + mulch donation",
+      align: "bottom-left",
+    },
+    details: {
+      shareId: "community-ctms",
+      eyebrow: "Central Tree Middle School · Jun 26, 2024",
+      title: "Loam and mulch for CTMS",
+      body: "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way.",
+    },
   },
   {
-    org: "Rutland Fire Department",
-    date: "May 22, 2020",
-    quote:
-      "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family.",
+    id: "community-rutland-memorial",
+    variant: "image",
+    src: communityRutland,
+    alt: "American flags and a memorial flower bed at the Rutland Public Safety building on Memorial Day",
+    size: "md",
+    aspect: "square",
+    focal: "center",
+    overlay: {
+      title: "Rutland Public Safety · Memorial Day",
+      align: "bottom-left",
+    },
+    details: {
+      shareId: "community-rutland-memorial",
+      eyebrow: "Rutland Fire Department · May 22, 2020",
+      title: "Memorial Day at the public safety building",
+      body: "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family.",
+    },
   },
 ];
 
@@ -535,19 +564,7 @@ function HomePage() {
             <p className="eyebrow text-zinc-500 mb-3">
               Community
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
-              {communityPosts.map((p) => (
-                <div key={p.org} className="flex flex-col">
-                  <p className="body text-zinc-800">
-                    &ldquo;{p.quote}&rdquo;
-                  </p>
-                  <p className="meta mt-3 text-zinc-500">
-                    <span className="font-semibold text-zinc-900">{p.org}</span>{" "}
-                    · {p.date}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <TileGrid blocks={COMMUNITY_BLOCKS} />
           </div>
         </div>
       </section>
