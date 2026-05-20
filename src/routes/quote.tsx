@@ -524,6 +524,7 @@ function QuotePage() {
         ),
         a: (
           <Tile
+            id="quote-stat-time"
             fill
             variant="stat"
             tone="surface"
@@ -533,6 +534,7 @@ function QuotePage() {
         ),
         b: (
           <Tile
+            id="quote-stat-owner"
             fill
             variant="stat"
             tone="kraft"
@@ -542,6 +544,7 @@ function QuotePage() {
         ),
         c: (
           <Tile
+            id="quote-img"
             fill
             variant="image"
             src={mulchHemlock}
@@ -552,6 +555,7 @@ function QuotePage() {
         ),
         d: (
           <Tile
+            id="quote-call"
             fill
             variant="cta"
             tone="brand"
@@ -752,6 +756,7 @@ function SuccessView({
         ),
         b: (
           <Tile
+            id="quote-success-call"
             fill
             variant="cta"
             tone="brand"
