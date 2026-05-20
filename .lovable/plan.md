@@ -1,48 +1,51 @@
 ## Audit
 
-I scanned every JPG/PNG/MP4 referenced from `src/` and `public/`. Most of the catalog is already WebP. Here's the actual state:
+Most images already use `loading="lazy" decoding="async"` (ProductCard, Tile, About, Footer). The real first-paint cost on `/` mobile is:
 
-**Already done** (just shipped): `hero-loop.webm`, `hero-loop-mobile.webm` siblings. MP4s kept as iOS Safari fallback.
-
-**Worth converting to WebP** (live, referenced in code):
-| File | Size | Used by |
-|---|---|---|
-| `src/assets/source/community-ctms-loam.jpg` | 529 KB | `routes/index.tsx` |
-| `src/assets/source/community-rutland-memorial.jpg` | 265 KB | `routes/index.tsx` |
-| `src/assets/brandmark-dark.png` | 364 KB | `SiteHeader`, `SiteFooter` |
-| `public/brandmark.png` | 269 KB | `SplashScreen` `<img>`, `__root.tsx` JSON-LD `logo`, favicon `<link>` |
-
-**Dead weight — delete, don't convert** (no code references):
-- `src/assets/source/hero-desktop-yard-2026.png` (1608 KB)
-- `src/assets/source/hero-mobile-piles-mulch-sand-stone-2026.png` (2120 KB)
-- `src/assets/source/hero-mobile-yard-chairs-2026.jpeg` (439 KB)
-- `src/assets/brandmark.png` (365 KB — only `-dark` variant is imported)
-
-**Must stay as-is** (spec/compat requirements — do NOT convert):
-- `public/og/*.jpg` — OG/Twitter scrapers (LinkedIn especially) still choke on WebP. JPG is the safe format for share cards.
-- `public/splash/apple-splash-*.png` — Apple PWA splash spec requires PNG.
-- `public/icons/icon-*.png`, `public/apple-touch-icon.png` — PWA manifest + iOS home-screen icon require PNG.
-- `src/assets/video/hero-loop*-poster.jpg` — `<video poster>` has historical WebP quirks in Safari and they're already <120 KB each. Not worth the risk.
-- `src/assets/video/hero-loop*.mp4` — iOS Safari fallback for the WebM sources.
+1. **3.1 MB mobile hero video** with `preload="auto"` — fetched immediately, blocks bandwidth from everything else
+2. **All below-the-fold sections** (Featured products, Community, Service area, Reviews, FAQ, Final CTA) parse + execute as part of the initial route chunk
+3. **A few bare `<img>` tags** missing lazy/decoding attrs (`quote.tsx` thumbnails, `Tile.tsx` dialog full-size image)
+4. **`CookieConsent` and `SplashScreen`** imported eagerly in `__root.tsx` — they're shipped to every page
 
 ## Plan
 
-**1. Convert** the 4 live assets with `cwebp` (lossy q=82 for photos, lossless `-z 9` for the transparent brandmark) via `nix run nixpkgs#libwebp`. Write the WebP next to the original.
+### 1. Defer hero video bytes until after first paint (biggest win on mobile)
+- Switch both hero `<video>` tags to `preload="none"` and remove `autoPlay` from the JSX.
+- In the ref callback, kick off load + play inside `requestIdleCallback` (with `setTimeout` fallback), only on the visible video (skip the `display:none` one based on viewport width).
+- LCP remains the poster `<img>` preloaded via `head().links` — no LCP regression.
+- Expected: ~3 MB removed from mobile critical path; video starts ~300–800 ms after first paint instead of competing with it.
 
-**2. Update references**:
-- `src/routes/index.tsx` — swap two `community-*.jpg` imports to `.webp`.
-- `src/components/site/SiteHeader.tsx`, `SiteFooter.tsx` — swap `brandmark-dark.png` import to `.webp`.
-- `src/components/site/SplashScreen.tsx` — `<img src="/brandmark.webp">`.
-- `src/routes/__root.tsx` — JSON-LD `logo` URL → `/brandmark.webp`; favicon `<link>` updated to `type="image/webp"` and `href="/brandmark.webp"` (modern browsers accept WebP favicons; Apple touch icon stays PNG so iOS is unaffected).
+### 2. Code-split below-the-fold sections of `/`
+- Extract these sections from `src/routes/index.tsx` into their own files under `src/components/home/`:
+  - `FeaturedMaterials.tsx` (grid + ProductCard usage)
+  - `CommunitySection.tsx` (TileGrid)
+  - `ServiceAreaTeaser.tsx`
+  - `ReviewsCarousel.tsx`
+  - `FaqSection.tsx`
+  - `FinalCta.tsx`
+- Load each via `React.lazy()` wrapped in a tiny `<LazyOnVisible>` helper that uses `IntersectionObserver` with a 400 px rootMargin to start fetching the chunk just before it scrolls in. `<Suspense fallback={<div className="min-h-[200px]" />}>` to reserve layout space and avoid CLS.
+- The hero + featured-eyebrow stay in the main route chunk (above the fold).
+- This shrinks the initial `/` JS chunk and defers the product/tile asset URL strings + component code until needed.
 
-**3. Delete originals** for all 4 converted files, plus the 4 dead-weight assets listed above.
+### 3. Lazy-load root-level UI that isn't part of first paint
+- `CookieConsent` → `lazy()` + `Suspense` in `__root.tsx`. It only renders a banner conditionally and isn't needed for the first frame.
+- `SplashScreen` stays eager — it IS the first frame.
 
-**4. Verify** — typecheck/build passes, preview shows brandmark + community photos render, splash screen still shows logo.
+### 4. Patch the missing lazy/decoding attrs
+- `src/routes/quote.tsx` — 6 bare `<img>` thumbnails get `loading="lazy" decoding="async"`.
+- `src/components/site/Tile.tsx` line 575 (dialog full-size image) — same. (Dialog is conditionally rendered, but the image still benefits from `decoding="async"` to avoid blocking the main thread when it opens.)
 
-## Expected savings
-- Converted live assets: ~1,427 KB → ~250 KB (≈ 1.2 MB saved on first load)
-- Dead-weight deletions: ~4,530 KB removed from repo (no bundle impact, but cleaner)
-- Plus the ~2.0 MB already saved by the WebM hero loops
+### 5. Verify
+- Build succeeds, typecheck clean.
+- Load `/` on the mobile viewport: confirm hero poster paints immediately, video kicks in after, below-the-fold sections render correctly when scrolled into view (no layout shift, no flash of empty state visible during normal scroll).
+- Network panel: confirm mobile hero `.webm` request fires AFTER initial document/JS/CSS, not in the first wave.
 
 ## Out of scope
-- No regeneration of source imagery. No layout, copy, or component logic changes. No changes to OG, splash, icon, or video-poster files.
+- No route-level code-split changes (TanStack already auto-splits routes).
+- No image regeneration, no copy or layout changes, no design tweaks.
+- No service worker / runtime caching changes.
+
+## Expected impact
+- Mobile transferred bytes on first load: ~3.5 MB → ~500 KB (hero video deferred + below-fold JS deferred).
+- LCP unchanged (poster JPG, already preloaded).
+- TTI/INP improves because less JS parses on first frame.
