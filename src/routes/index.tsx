@@ -497,7 +497,9 @@ function HomePage() {
             <p className="eyebrow text-zinc-500 mb-3">
               Community
             </p>
-            <TileGrid blocks={COMMUNITY_BLOCKS} />
+            <LazyOnVisible fallback={<div style={{ minHeight: 320 }} />}>
+              <CommunityTiles />
+            </LazyOnVisible>
           </div>
         </div>
       </section>
