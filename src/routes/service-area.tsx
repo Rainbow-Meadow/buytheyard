@@ -221,28 +221,60 @@ function ServiceAreaPage() {
             </ul>
           </div>
 
-          <p className="mt-5 md:mt-10 text-sm text-zinc-600 max-w-[60ch]">
-            Don't see your town? We deliver throughout Worcester County
-            and parts of Middlesex County. Give us a call and we'll
-            confirm your ZIP and final price before dispatch.
-          </p>
+          <div className="mt-6 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            <article className="bg-kraft ring-1 ring-zinc-300 p-6 md:p-7 rounded-md">
+              <p className="eyebrow text-brand mb-2">Don't see your town?</p>
+              <p className="display-5 text-zinc-900 leading-tight">Worcester &amp; Middlesex County</p>
+              <p className="body-sm text-zinc-700 mt-3">
+                We deliver throughout Worcester County and parts of Middlesex County. Give us a call and we'll confirm your ZIP and final price before dispatch.
+              </p>
+            </article>
+            <article className="bg-surface text-surface-foreground p-6 md:p-7 rounded-md flex flex-col">
+              <p className="eyebrow text-brand mb-2">Talk to Abby</p>
+              <p className="display-5 leading-tight">Confirm your ZIP &amp; price</p>
+              <a
+                href="tel:5085799897"
+                className="mt-auto pt-5 inline-flex items-center gap-2 label text-white border-b border-white/40 self-start hover:text-brand hover:border-brand"
+              >
+                <Phone className="size-4" /> 508.579.9897
+              </a>
+            </article>
+          </div>
         </div>
       </section>
 
       <section className="section bg-kraft border-t border-zinc-300">
-        <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
-          <h2 className="display-3 mb-4">
-            Ready to schedule a delivery?
-          </h2>
-          <p className="text-zinc-700 mb-3 md:mb-6">
-            Call Abby directly — every order is handled by the owner.
-          </p>
-          <a
-            href="tel:5085799897"
-            className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
-          >
-            <Phone className="size-4" /> 508.579.9897
-          </a>
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+          <article className="md:col-span-2 bg-surface text-surface-foreground p-7 md:p-10 rounded-md flex flex-col justify-between gap-6">
+            <div>
+              <p className="eyebrow text-brand mb-3">Ready to schedule</p>
+              <h2 className="display-3 leading-tight max-w-[18ch]">
+                Ready to schedule a delivery?
+              </h2>
+              <p className="body text-zinc-300 mt-4 max-w-[44ch]">
+                Call Abby directly — every order is handled by the owner.
+              </p>
+            </div>
+            <a
+              href="tel:5085799897"
+              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90 self-start"
+            >
+              <Phone className="size-4" /> 508.579.9897
+            </a>
+          </article>
+          <article className="bg-white ring-1 ring-zinc-300 p-7 rounded-md">
+            <p className="eyebrow text-brand mb-2">Online</p>
+            <p className="display-5 text-zinc-900 leading-tight">Build a material list</p>
+            <p className="body-sm text-zinc-700 mt-3">
+              Prefer to type it out? Send a list and we'll come back with pricing and a window.
+            </p>
+            <Link
+              to="/quote"
+              className="mt-4 inline-flex items-center gap-2 label text-zinc-900 border-b border-zinc-900 hover:text-brand hover:border-brand"
+            >
+              Get a quote
+            </Link>
+          </article>
         </div>
       </section>
     </>
