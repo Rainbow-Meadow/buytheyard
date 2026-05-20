@@ -73,7 +73,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "03 · Putting it to work",
     body: "While I was still in college I started putting what I was learning to work. I opened Buy The Yard before I graduated in 2018.",
     size: "md",
-    tone: "white",
+    tone: "brand",
   },
   {
     id: "story-quote-model",
