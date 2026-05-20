@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 /**
@@ -101,6 +102,10 @@ export type TileBlock =
       fetchPriority?: "high" | "low" | "auto";
       /** Aspect ratio for the image frame. Defaults to "square". */
       aspect?: "square" | "video" | "portrait" | "wide";
+      /** Low-quality image placeholder shown (blurred) until the full image loads.
+       *  Accepts a data URL (base64 tiny JPEG/PNG), a solid color (`#hex`/`rgb()`),
+       *  or any CSS background value. Falls back to the tile tone when omitted. */
+      placeholder?: string;
       /** Optional overlay content rendered on top of the image. */
       overlay?: {
         eyebrow?: string;
@@ -205,6 +210,115 @@ function CtaLink({ cta, className }: { cta: TileCta; className: string }) {
 
 function TileIcon({ icon, tone }: { icon: ReactNode; tone: TileTone }) {
   return <div className={`${iconToneCls(tone)} mb-4 [&>*]:size-7`}>{icon}</div>;
+}
+
+/** Image tile body — extracted so we can use hooks (load state for LQIP fade). */
+function ImageTileInner({
+  block,
+  size,
+  tone,
+}: {
+  block: Extract<TileBlock, { variant: "image" }>;
+  size: TileSize;
+  tone: TileTone;
+}) {
+  const [loaded, setLoaded] = useState(false);
+  const aspect = aspectCls[block.aspect ?? "square"];
+
+  const imageShell = [
+    sizeCls[size],
+    block.tall ? "tile-row-tall" : "",
+    aspect,
+    "relative overflow-hidden rounded-md ring-1",
+    isLightTone(tone) ? "ring-zinc-300" : "ring-white/10",
+    toneCls[tone],
+    block.className ?? "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const hasOverlay = Boolean(block.overlay || block.cta);
+  const align = overlayAlignCls[block.overlay?.align ?? "bottom-left"];
+
+  // Placeholder: tiny data URL gets blurred + scaled; solid colors render flat.
+  const placeholder = block.placeholder;
+  const isImagePlaceholder =
+    !!placeholder && /^(data:image|https?:|\/)/i.test(placeholder);
+  const placeholderStyle: React.CSSProperties | undefined = placeholder
+    ? isImagePlaceholder
+      ? {
+          backgroundImage: `url("${placeholder}")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(20px)",
+          transform: "scale(1.1)",
+        }
+      : { background: placeholder }
+    : undefined;
+
+  const inner = (
+    <>
+      {placeholder && (
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 transition-opacity duration-500 ${
+            loaded ? "opacity-0" : "opacity-100"
+          }`}
+          style={placeholderStyle}
+        />
+      )}
+      <img
+        src={block.src}
+        srcSet={block.srcSet}
+        sizes={block.srcSet ? block.sizes ?? defaultSizesBySize[size] : undefined}
+        alt={block.alt}
+        loading={block.loading ?? "lazy"}
+        decoding="async"
+        fetchPriority={block.fetchPriority ?? "auto"}
+        onLoad={() => setLoaded(true)}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+          placeholder && !loaded ? "opacity-0" : "opacity-100"
+        }`}
+      />
+      {hasOverlay && (
+        <>
+          {/* Readability scrim — only when overlay text exists */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+          />
+          <div className={`absolute inset-0 flex ${align} p-5 md:p-6`}>
+            <div className="text-white max-w-[34ch]">
+              {block.overlay?.eyebrow && (
+                <p className="eyebrow text-brand mb-2">{block.overlay.eyebrow}</p>
+              )}
+              {block.overlay?.title && (
+                <p className="display-4 leading-tight">{block.overlay.title}</p>
+              )}
+              {block.overlay?.body && (
+                <div className="body-sm text-zinc-200 mt-2">{block.overlay.body}</div>
+              )}
+              {block.cta && (
+                <CtaLink
+                  cta={block.cta}
+                  className="mt-4 inline-flex items-center gap-2 label border-b border-current hover:opacity-80"
+                />
+              )}
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
+
+  if (block.to) {
+    return (
+      <Link to={block.to} className={`${imageShell} group block`}>
+        {inner}
+      </Link>
+    );
+  }
+  return <article className={imageShell}>{inner}</article>;
 }
 
 export function TileGrid({ blocks }: { blocks: TileBlock[] }) {
@@ -317,75 +431,7 @@ export function Tile(block: TileBlock) {
         </article>
       );
 
-    case "image": {
-      // Image variant gets its own shell — no padding, frame is full-bleed.
-      const aspect = aspectCls[block.aspect ?? "square"];
-      const imageShell = [
-        sizeCls[size],
-        block.tall ? "tile-row-tall" : "",
-        aspect,
-        "relative overflow-hidden rounded-md ring-1",
-        isLightTone(tone) ? "ring-zinc-300" : "ring-white/10",
-        toneCls[tone],
-        block.className ?? "",
-      ]
-        .filter(Boolean)
-        .join(" ");
-
-      const hasOverlay = Boolean(block.overlay || block.cta);
-      const align = overlayAlignCls[block.overlay?.align ?? "bottom-left"];
-
-      const inner = (
-        <>
-          <img
-            src={block.src}
-            srcSet={block.srcSet}
-            sizes={block.srcSet ? block.sizes ?? defaultSizesBySize[size] : undefined}
-            alt={block.alt}
-            loading={block.loading ?? "lazy"}
-            decoding="async"
-            fetchPriority={block.fetchPriority ?? "auto"}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          {hasOverlay && (
-            <>
-              {/* Readability scrim — only when overlay text exists */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-              />
-              <div className={`absolute inset-0 flex ${align} p-5 md:p-6`}>
-                <div className="text-white max-w-[34ch]">
-                  {block.overlay?.eyebrow && (
-                    <p className="eyebrow text-brand mb-2">{block.overlay.eyebrow}</p>
-                  )}
-                  {block.overlay?.title && (
-                    <p className="display-4 leading-tight">{block.overlay.title}</p>
-                  )}
-                  {block.overlay?.body && (
-                    <div className="body-sm text-zinc-200 mt-2">{block.overlay.body}</div>
-                  )}
-                  {block.cta && (
-                    <CtaLink
-                      cta={block.cta}
-                      className="mt-4 inline-flex items-center gap-2 label border-b border-current hover:opacity-80"
-                    />
-                  )}
-                </div>
-              </div>
-            </>
-          )}
-        </>
-      );
-
-      if (block.to) {
-        return (
-          <Link to={block.to} className={`${imageShell} group block`}>
-            {inner}
-          </Link>
-        );
-      }
-      return <article className={imageShell}>{inner}</article>;
-    }
+    case "image":
+      return <ImageTileInner block={block} size={size} tone={tone} />;
   }
 }
