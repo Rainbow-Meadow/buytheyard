@@ -1,43 +1,36 @@
-# Add expandable dialog treatment to product tiles
+# Swipe down to close expandable dialog
 
-Bring the `Tile` image dialog UX to `ProductCard`, including the same standardized sizing and `?tile=` deep linking. Because both the `/products` catalog **and** the "Featured Materials" section on `/` (`src/routes/index.tsx`) render through `ProductCard`, updating the component covers both surfaces in one change.
+Add a touch swipe-down-to-close gesture to the shared expandable image dialog used by `Tile` (image variant) and `ProductCard`. Keep the existing `Dialog` shell intact — no swap to `Drawer`, so desktop centering and the current visual design stay the same.
 
-## Scope
+## Approach
 
-- `src/components/site/ProductCard.tsx` — both `gallery` and `default` variants become buttons that open a shared expandable dialog (matching the Tile dialog: large `object-contain` image up to `60vh`, scrollable text panel, `max-w-3xl`, `90vh` cap, dark surface).
-- `src/data/products.ts` — add a stable `slug` to each `Product` (derived from name) so the deep-link param is predictable.
-- `src/components/site/useTileDeepLink.ts` — extract the existing hook from `Tile.tsx` so both `Tile` and `ProductCard` import it. No behavior change to current Tile dialogs.
+Add a small hook `useSwipeToClose(onClose)` in `src/components/site/useSwipeToClose.ts` that returns `{ onTouchStart, onTouchMove, onTouchEnd, style }` to spread onto the dialog content. Behavior:
 
-No changes needed in `src/routes/index.tsx` or `src/routes/products.tsx` — they just keep rendering `<ProductCard … />` and inherit the new behavior.
+- Tracks only **touch** events (mouse drag untouched).
+- On `touchstart`: record startY, startTime.
+- On `touchmove`: if `dy > 0` (downward), apply `transform: translateY(dy)` and dim the backdrop slightly by lowering opacity (`1 - dy/600`, floored at 0.6). Ignore upward motion. If the gesture starts inside a scrollable region that is **not** scrolled to top, defer to native scroll (don't hijack).
+- On `touchend`: close if `dy > 120px` **or** velocity `> 0.5 px/ms`. Otherwise spring back (`transition: transform 200ms`).
+- Hook is a no-op on non-touch devices (no listeners attached, identity style) so desktop is unaffected.
 
-## Dialog content
+## Wiring
 
-Mirrors Tile's `details` panel:
-- Eyebrow: product `category`
-- Title: product `name` (DialogTitle, `display-5`)
-- Body: product `description`
-- Footer line: badge (if any) + "Pickup & Delivery"
+Apply the hook to the `DialogContent` in both places, passing `() => setOpen(false)`:
 
-Products without an image keep their current text-only front face but still open the dialog (image area shows the same no-image fallback at large size).
+1. `src/components/site/Tile.tsx` — `ImageTileInner`'s dialog branch.
+2. `src/components/site/ProductCard.tsx` — the product dialog.
 
-## Deep linking
-
-- URL param: `?tile=product-<slug>` (reuses the existing `tile` namespace so it coexists with Tile deep links).
-- Same open/close URL sync as Tile dialogs: visiting `/?tile=product-hemlock-mulch` or `/products?tile=product-hemlock-mulch` auto-opens that product.
+A subtle drag handle bar (`h-1 w-10 rounded-full bg-white/30 mx-auto mt-2`) shown only on mobile (`sm:hidden`) at the top of `DialogContent` to signal the affordance.
 
 ## Technical sketch
 
 ```text
-ProductCard (gallery|default)
-  └─ <Dialog open=… onOpenChange=…>           ← useTileDeepLink("product-<slug>")
-       ├─ <DialogTrigger asChild>
-       │     <button className="…current card classes… cursor-zoom-in">
-       │       …existing card markup unchanged…
-       │     </button>
-       └─ <DialogContent ← same classes as Tile dialog>
-             <img max-h-[60vh] object-contain />
-             <div p-5 sm:p-7 overflow-y-auto>
-               eyebrow (category) / title (name) / description / badge + availability
+useSwipeToClose(onClose)
+  state: dy (number), dragging (bool)
+  handlers:
+    onTouchStart(e)  → record startY/startTime, scrollTop check
+    onTouchMove(e)   → dy = max(0, currentY - startY); setState; e.preventDefault when dragging
+    onTouchEnd()     → if dy>120 || v>0.5 → onClose(); else animate back to 0
+  style: { transform: `translateY(${dy}px)`, transition: dragging ? 'none' : 'transform 200ms' }
 ```
 
-Front-face visuals of the cards stay identical; only wrapped in a `button` plus the dialog. No route, schema, or business-logic changes.
+No changes to data, routes, or the deep-link hook. Pure presentation/interaction.
