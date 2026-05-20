@@ -122,7 +122,7 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "05 · Still here",
     body: "Nearly a decade in. Same yard, same voice on the phone, and still genuinely glad to see you pull in.",
     size: "lg",
-    tone: "white",
+    tone: "kraft",
   },
   {
     id: "story-06-office-manager",
