@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   Dialog,
@@ -144,6 +144,11 @@ export type TileBlock =
         eyebrow?: string;
         title: string;
         body: ReactNode;
+        /** Stable share id used as the `?tile=` URL search param so the
+         *  dialog can be deep-linked. Multiple tile instances (e.g. mobile +
+         *  desktop layout of the same subject) can share the same shareId so
+         *  one URL works at any breakpoint. Falls back to `block.id`. */
+        shareId?: string;
       };
     });
 
