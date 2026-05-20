@@ -1,5 +1,26 @@
 import { useCallback, useRef, useState } from "react";
 
+/** Close thresholds tuned to feel consistent on iOS Safari and Android Chrome.
+ *
+ *  - Distance: 20% of viewport height, clamped to [100, 200] px. Apple's
+ *    own sheet uses ~25% with a fast spring; matching that on tall Android
+ *    devices (e.g. 900px) would require dragging 225px which feels sticky,
+ *    while a fixed 120px feels twitchy on small iOS devices. A clamped
+ *    viewport-relative value bridges both.
+ *  - Velocity: 0.45 px/ms (≈ Material's "fling" + vaul defaults). iOS
+ *    momentum produces slightly higher velocities than Android for the same
+ *    perceived flick, so we stay just below vaul's 0.5 to compensate.
+ *  - Minimum travel for velocity-close: 40px. Prevents an accidental tap
+ *    + tiny twitch on iOS (which can register a 10–20px flick) from
+ *    dismissing the sheet. */
+const VELOCITY_CLOSE = 0.45; // px / ms
+const VELOCITY_MIN_TRAVEL = 40; // px
+
+function distanceThreshold(): number {
+  if (typeof window === "undefined") return 140;
+  return Math.min(200, Math.max(100, window.innerHeight * 0.2));
+}
+
 /** Touch swipe-down-to-close gesture for modal dialogs.
  *
  *  Spread the returned handlers + style onto the dialog content element.
@@ -48,16 +69,24 @@ export function useSwipeToClose(onClose: () => void) {
     setDy(delta);
   }, []);
 
-  const onTouchEnd = useCallback(() => {
+  const onTouchEnd = useCallback((e: React.TouchEvent<HTMLElement>) => {
     if (!active.current) {
       setDragging(false);
       return;
     }
+    // iOS sometimes skips the final touchmove — read end position from
+    // changedTouches so velocity reflects the actual release point.
+    const endTouch = e.changedTouches[0];
+    const endY = endTouch ? endTouch.clientY - startY.current : dy;
+    const finalDy = Math.max(0, endY);
     const elapsed = performance.now() - startT.current;
-    const velocity = elapsed > 0 ? dy / elapsed : 0;
+    const velocity = elapsed > 0 ? finalDy / elapsed : 0;
     active.current = false;
     setDragging(false);
-    if (dy > 120 || velocity > 0.5) {
+    const shouldClose =
+      finalDy > distanceThreshold() ||
+      (velocity > VELOCITY_CLOSE && finalDy > VELOCITY_MIN_TRAVEL);
+    if (shouldClose) {
       onClose();
       // Reset after the dialog has unmounted so a reopen starts clean.
       setTimeout(() => setDy(0), 250);
