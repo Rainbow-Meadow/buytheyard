@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
-import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.png";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
+import heroLoopMobileMp4 from "@/assets/video/hero-loop-mobile.mp4?url";
+import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
 import communityCtms from "@/assets/source/community-ctms-loam.jpg";
 import communityRutland from "@/assets/source/community-rutland-memorial.jpg";
 import { products } from "@/data/products";
@@ -136,7 +137,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
     ],
     links: [
-      { rel: "preload", as: "image", href: heroMobile, fetchpriority: "high", media: "(max-width: 767px)" },
+      { rel: "preload", as: "image", href: heroLoopMobilePoster, fetchpriority: "high", media: "(max-width: 767px)" },
       { rel: "preload", as: "image", href: heroLoopPoster, fetchpriority: "high", media: "(min-width: 768px)" },
       { rel: "canonical", href: "https://buytheyard.lovable.app/" },
     ],
@@ -299,14 +300,18 @@ function HomePage() {
       {/* Hero */}
       <section className="relative bg-zinc-950 text-white overflow-hidden border-b border-zinc-300/60 md:min-h-[504px] flex">
         {/* Mobile single hero image */}
-        <img
-          src={heroMobile}
-          alt="Illustration of red, tan, and gray landscape material piles"
-          fetchPriority="high"
-          loading="eager"
-          decoding="async"
-          className="md:hidden absolute inset-0 w-full h-full object-cover object-center"
-        />
+        <video
+          className="md:hidden absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={heroLoopMobilePoster}
+          aria-hidden="true"
+        >
+          <source src={heroLoopMobileMp4} type="video/mp4" />
+        </video>
         {/* Desktop hero background */}
         <video
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
