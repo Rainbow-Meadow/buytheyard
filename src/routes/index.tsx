@@ -5,12 +5,6 @@ import heroMobile from "@/assets/source/hero-mobile-piles-mulch-sand-stone-2026.
 import heroDesktop from "@/assets/source/hero-desktop-yard-2026.png";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
 const reviews = [
   {
