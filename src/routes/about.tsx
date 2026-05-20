@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import abbyPortrait from "@/assets/source/abby-portrait.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import yardPatio from "@/assets/source/yard-banner-5.webp";
