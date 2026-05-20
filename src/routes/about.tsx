@@ -79,9 +79,9 @@ function AboutPage() {
               Our Story
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-6 gap-3 md:gap-4">
+            <div className="tile-grid">
               {/* 01 — Origin (oversized lead) */}
-              <article className="md:col-span-6 bg-kraft ring-1 ring-zinc-300 rounded-md p-6 md:p-8">
+              <article className="tile-feature bg-kraft ring-1 ring-zinc-300 rounded-md p-6 md:p-8">
                 <p className="eyebrow text-brand mb-3">01 · Origin</p>
                 <p className="display-5 text-zinc-900 leading-snug">
                   Most landscape yards treat you like a ticket number. Loaded fast, out the gate, on to the next one.
@@ -92,7 +92,7 @@ function AboutPage() {
               </article>
 
               {/* 02 — Background */}
-              <article className="md:col-span-3 bg-white ring-1 ring-zinc-300 rounded-md p-6">
+              <article className="tile-md bg-white ring-1 ring-zinc-300 rounded-md p-6">
                 <p className="eyebrow text-brand mb-2">02 · Background</p>
                 <p className="body text-zinc-700">
                   I grew up outside — trucks, equipment, mulch piles in the backyard with my dad. Construction was never the question. Only when.
@@ -100,7 +100,7 @@ function AboutPage() {
               </article>
 
               {/* 03 — The yard opens */}
-              <article className="md:col-span-3 bg-white ring-1 ring-zinc-300 rounded-md p-6">
+              <article className="tile-md bg-white ring-1 ring-zinc-300 rounded-md p-6">
                 <p className="eyebrow text-brand mb-2">03 · The yard opens</p>
                 <p className="body text-zinc-700">
                   I graduated Wachusett Regional in 2016 and opened the yard that same spring. Two years later I finished my Entrepreneurship and Small Business degree — while already running one of my own.
@@ -108,7 +108,7 @@ function AboutPage() {
               </article>
 
               {/* Pull quote */}
-              <article className="md:col-span-6 bg-surface text-surface-foreground rounded-md p-7 md:p-10">
+              <article className="tile-feature bg-surface text-surface-foreground rounded-md p-7 md:p-10">
                 <p className="eyebrow text-brand mb-4">The whole business model</p>
                 <blockquote className="display-3 leading-tight text-white">
                   &ldquo;If you call this number, I pick up. That&rsquo;s the whole business model.&rdquo;
@@ -117,7 +117,7 @@ function AboutPage() {
               </article>
 
               {/* 04 — WBE */}
-              <article className="md:col-span-2 bg-kraft ring-1 ring-zinc-300 rounded-md p-6">
+              <article className="tile-sm bg-kraft ring-1 ring-zinc-300 rounded-md p-6">
                 <p className="eyebrow text-brand mb-2">04 · WBE</p>
                 <p className="body text-zinc-700">
                   Year three, we made it official: Massachusetts Certified Woman-Owned Enterprise.
@@ -125,7 +125,7 @@ function AboutPage() {
               </article>
 
               {/* 05 — 10th season */}
-              <article className="md:col-span-4 bg-white ring-1 ring-zinc-300 rounded-md p-6">
+              <article className="tile-lg bg-white ring-1 ring-zinc-300 rounded-md p-6">
                 <p className="eyebrow text-brand mb-2">05 · 10th season</p>
                 <p className="body text-zinc-700">
                   2026 is our <strong className="text-zinc-900">10th season</strong> — first spring mulch run through winter salt, same yard, same voice on the phone.
@@ -133,7 +133,7 @@ function AboutPage() {
               </article>
 
               {/* 06 — Charlie */}
-              <article className="md:col-span-3 bg-white ring-1 ring-zinc-300 rounded-md p-6">
+              <article className="tile-md bg-white ring-1 ring-zinc-300 rounded-md p-6">
                 <p className="eyebrow text-brand mb-2">06 · Office manager</p>
                 <p className="body text-zinc-700">
                   <strong className="text-zinc-900">Charlie.</strong> He's a dog. He handles the greetings.
@@ -141,7 +141,7 @@ function AboutPage() {
               </article>
 
               {/* 07 — Visit (CTA tile) */}
-              <article className="md:col-span-3 bg-brand text-brand-foreground rounded-md p-6 flex flex-col">
+              <article className="tile-md bg-brand text-brand-foreground rounded-md p-6 flex flex-col">
                 <p className="eyebrow opacity-80 mb-2">07 · Visit</p>
                 <p className="body">
                   Come by — <strong>2264 Main St., Jefferson, MA</strong>. Bring your questions, even the &ldquo;how much do I need?&rdquo; ones. Especially those.
