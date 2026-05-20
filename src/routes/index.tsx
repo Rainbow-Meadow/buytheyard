@@ -1,21 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lazy } from "react";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Facebook, HelpCircle, Phone, Tag, Truck } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
 import heroLoopMobileMp4 from "@/assets/video/hero-loop-mobile.mp4?url";
 import heroLoopMobileWebm from "@/assets/video/hero-loop-mobile.webm?url";
 import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
-import { LazyOnVisible } from "@/components/site/LazyOnVisible";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
+import { products } from "@/data/products";
+import communityCtms from "@/assets/source/community-ctms-loam.webp";
+import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 
-const FeaturedMaterials = lazy(() => import("@/components/home/FeaturedMaterials"));
-const FacebookSpotlight = lazy(() => import("@/components/home/FacebookSpotlight"));
-const ReviewsAndCommunity = lazy(() => import("@/components/home/ReviewsAndCommunity"));
-const DeliveryAndPricing = lazy(() => import("@/components/home/DeliveryAndPricing"));
-const FaqSection = lazy(() => import("@/components/home/FaqSection"));
+const FEATURED = [
+  "Hemlock Mulch",
+  "Screened Loam",
+  "Mason Sand",
+  "3/4\" Crushed Blue Stone",
+  "Red Lava Rock",
+  "Hanging Baskets",
+].map((n) => products.find((p) => p.name === n)!);
 
 /**
  * Defers hero <video> load/play until the browser is idle (or after a short
