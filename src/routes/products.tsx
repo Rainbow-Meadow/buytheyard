@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone } from "lucide-react";
+import { HelpCircle, Phone, Truck } from "lucide-react";
 import { categories, products } from "@/data/products";
-import { ProductCard } from "@/components/site/ProductCard";
-import { ProductGroup } from "@/components/site/ProductGroup";
+import { TileScreen } from "@/components/site/TileScreen";
+import { Tile, type TileBlock } from "@/components/site/Tile";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -60,83 +60,87 @@ export const Route = createFileRoute("/products")({
 });
 
 function ProductsPage() {
+  const categorySlides: TileBlock[] = categories
+    .map((cat) => {
+      const items = products.filter((p) => p.category === cat);
+      if (items.length === 0) return null;
+      const featured = items.find((p) => !!p.image) ?? items[0];
+      const names = items.map((p) => p.name);
+      const preview =
+        names.length <= 4
+          ? names.join(" · ")
+          : `${names.slice(0, 3).join(" · ")} · +${names.length - 3} more`;
+      const block: TileBlock = {
+        id: `cat-${cat}`,
+        variant: "image",
+        src: featured.image ?? "",
+        alt: `${cat} — ${featured.name}`,
+        focal: "center",
+        loading: "eager",
+        overlay: {
+          eyebrow: `${cat} · ${items.length} option${items.length === 1 ? "" : "s"}`,
+          title: featured.name,
+          body: preview,
+          align: "bottom-left",
+        },
+        cta: { label: "Call for today's price", href: "tel:5085799897" },
+      };
+      return block;
+    })
+    .filter((b): b is TileBlock => b !== null);
+
   return (
-    <>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Catalog
-          </p>
-          <h1 className="display-1 leading-[0.9] max-w-[18ch]">
-            Materials. By the <span className="text-brand">yard</span>.
-          </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Prices move with the season. Call{" "}
-            <a href="tel:5085799897" className="text-zinc-100 underline underline-offset-4">
-              508-579-9897
-            </a>{" "}
-            for today's number and we'll size your project right on the phone.
-          </p>
-        </div>
-      </section>
-
-      {categories.map((cat) => {
-        const items = products.filter((p) => p.category === cat);
-        if (items.length === 0) return null;
-        const [featured, ...rest] = items;
-        return (
-          <section key={cat} className="section bg-base border-b border-zinc-200 last:border-0">
-            <div className="max-w-7xl mx-auto px-5 md:px-6">
-              <div className="flex items-end justify-between mb-5 md:mb-10 border-b-2 border-zinc-900 pb-4">
-                <h2 className="display-4 leading-none text-zinc-900">
-                  {cat}
-                </h2>
-                <span className="label text-zinc-500">
-                  {items.length} {items.length === 1 ? "option" : "options"}
-                </span>
-              </div>
-
-              <ProductGroup products={items}>
-                {/* Mobile: Gallery — 2-col image-overlay thumbnails */}
-                <div className="md:hidden grid grid-cols-2 gap-2">
-                  {items.map((p) => (
-                    <ProductCard key={p.name} product={p} variant="gallery" />
-                  ))}
-                </div>
-
-                {/* Desktop: Magazine — featured cover + supporting 3-col grid */}
-                <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-6">
-                  <div className="md:col-span-3 lg:col-span-3 flex">
-                    <ProductCard product={featured} />
-                  </div>
-                  <div className="md:col-span-3 lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6 content-start">
-                    {rest.map((p) => (
-                      <ProductCard key={p.name} product={p} variant="gallery" />
-                    ))}
-                  </div>
-                </div>
-              </ProductGroup>
-            </div>
-          </section>
-        );
-      })}
-
-      <section className="bg-kraft section">
-        <div className="max-w-3xl mx-auto px-5 md:px-6 text-center">
-          <h2 className="display-3 mb-4">
-            Looking for something else?
-          </h2>
-          <p className="text-zinc-700 mb-4 md:mb-8">
-            That's our regular lineup. We also stock bulk salt and ice melt in winter, bagged soils year-round, plus seasonal specials. Call to check stock.
-          </p>
-          <a
-            href="tel:5085799897"
-            className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
-          >
-            <Phone className="size-4" /> 508.579.9897
-          </a>
-        </div>
-      </section>
-    </>
+    <TileScreen
+      layout="section02"
+      label="Materials catalog"
+      tiles={{
+        hero: (
+          <Tile
+            fill
+            variant="carousel"
+            ariaLabel="Browse materials by category"
+            slides={categorySlides}
+            controls="both"
+          />
+        ),
+        a: (
+          <Tile
+            fill
+            variant="cta"
+            tone="brand"
+            padding="md"
+            icon={<Phone />}
+            eyebrow="Today's price by phone"
+            title="Materials. By the yard."
+            body="Prices move with the season. One call sizes your project and locks the number."
+            cta={{ label: "508.579.9897", href: "tel:5085799897" }}
+          />
+        ),
+        b: (
+          <Tile
+            fill
+            variant="cta"
+            tone="surface"
+            padding="sm"
+            icon={<Truck />}
+            eyebrow="Delivery"
+            title="Curbside delivery."
+            cta={{ label: "Delivery details", to: "/delivery" }}
+          />
+        ),
+        c: (
+          <Tile
+            fill
+            variant="cta"
+            tone="kraft"
+            padding="sm"
+            icon={<HelpCircle />}
+            eyebrow="Quote"
+            title="Build a list in 60 seconds."
+            cta={{ label: "Start a quote", to: "/quote" }}
+          />
+        ),
+      }}
+    />
   );
 }
