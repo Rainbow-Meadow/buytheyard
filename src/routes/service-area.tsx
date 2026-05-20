@@ -1,5 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MapPin, Phone, Truck } from "lucide-react";
+import yardTrucks from "@/assets/source/yard-trucks.webp";
+import yardPiles from "@/assets/source/yard-piles.webp";
+import loadingTruck from "@/assets/source/loading-truck.webp";
+import yardDog from "@/assets/source/yard-dog.webp";
 
 type Town = {
   name: string;
@@ -64,33 +68,84 @@ export const Route = createFileRoute("/service-area")({
 });
 
 function ServiceAreaPage() {
+  const featured = TOWNS[0];
+  const secondary = TOWNS.slice(1, 4);
+  const rest = TOWNS.slice(4);
+  const ZONE_IMGS = [yardPiles, loadingTruck, yardDog];
+
   return (
     <>
+      {/* HERO */}
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Service Area
-          </p>
-          <h1 className="display-1 leading-[0.9] max-w-[18ch]">
-            Across <span className="text-brand">Central Mass.</span>
-          </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[62ch] text-lg">
-            Mulch, loam, sand, gravel, and stone delivered from Jefferson across Worcester County.
-          </p>
-          <div className="mt-4 md:mt-8 flex flex-wrap gap-4">
-            <a
-              href="tel:5085799897"
-              className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
-            >
-              <Phone className="size-4" /> 508.579.9897
-            </a>
-            <Link
-              to="/quote"
-              className="inline-flex items-center gap-2 border border-white text-white px-7 h-12 label hover:bg-white hover:text-zinc-900 transition-colors"
-            >
-              Get a quote
-            </Link>
+        {/* Mobile stacked */}
+        <div className="md:hidden">
+          <div className="aspect-square overflow-hidden">
+            <img src={yardTrucks} alt="Buy The Yard trucks parked at the Jefferson, MA lot" className="w-full h-full object-cover" fetchPriority="high" decoding="async" />
           </div>
+          <div className="px-5 py-8">
+            <p className="eyebrow text-brand mb-4">Service Area</p>
+            <h1 className="display-2 leading-[0.9]">
+              Across <span className="text-brand">Central Mass.</span>
+            </h1>
+            <p className="mt-4 text-zinc-300 text-base">
+              Mulch, loam, sand, gravel, and stone delivered from Jefferson across Worcester County.
+            </p>
+            <div className="mt-6 flex flex-col gap-3">
+              <a href="tel:5085799897" className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90">
+                <Phone className="size-4" /> 508.579.9897
+              </a>
+              <Link to="/quote" className="inline-flex items-center justify-center gap-2 border border-white text-white px-7 h-12 label hover:bg-white hover:text-zinc-900 transition-colors">
+                Get a quote
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop split */}
+        <div className="hidden md:block">
+          <div className="max-w-7xl mx-auto px-6 section-loose grid grid-cols-12 gap-8 items-center">
+            <div className="col-span-7">
+              <p className="eyebrow text-brand mb-4">Service Area</p>
+              <h1 className="display-1 leading-[0.9] max-w-[16ch]">
+                Across <span className="text-brand">Central Mass.</span>
+              </h1>
+              <p className="mt-6 text-zinc-400 max-w-[52ch] text-lg">
+                Mulch, loam, sand, gravel, and stone delivered from Jefferson across Worcester County.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a href="tel:5085799897" className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90">
+                  <Phone className="size-4" /> 508.579.9897
+                </a>
+                <Link to="/quote" className="inline-flex items-center gap-2 border border-white text-white px-7 h-12 label hover:bg-white hover:text-zinc-900 transition-colors">
+                  Get a quote
+                </Link>
+              </div>
+            </div>
+            <div className="col-span-5">
+              <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-white/10">
+                <img src={yardTrucks} alt="Buy The Yard trucks parked at the Jefferson, MA lot" className="w-full h-full object-cover" fetchPriority="high" decoding="async" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stat strip */}
+      <section className="bg-kraft border-y border-zinc-300">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 py-8 md:py-10">
+          <ul className="grid grid-cols-2 md:grid-cols-4 md:divide-x md:divide-zinc-300 gap-y-6">
+            {[
+              [`${TOWNS.length}`, "Towns served"],
+              ["~25 mi", "Max radius"],
+              ["1 yd", "Order minimum"],
+              ["~48 hr", "Typical lead time"],
+            ].map(([v, k]) => (
+              <li key={k} className="md:px-8 first:md:pl-0 last:md:pr-0">
+                <p className="display-3 text-zinc-900 leading-none">{v}</p>
+                <p className="eyebrow text-zinc-600 mt-2">{k}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -102,27 +157,70 @@ function ServiceAreaPage() {
               Towns We Deliver To
             </h2>
           </div>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {TOWNS.map((t) => (
-              <li
+
+          {/* Mobile: 2-col image-overlay gallery */}
+          <div className="md:hidden grid grid-cols-2 gap-2">
+            {TOWNS.map((t, i) => (
+              <div
                 key={t.name}
-                className="bg-kraft ring-1 ring-zinc-300 p-6 rounded-md"
+                className="relative aspect-square overflow-hidden rounded-md bg-surface text-surface-foreground"
               >
-                <div className="flex items-start gap-2 mb-2">
-                  <MapPin className="size-4 text-brand mt-1 shrink-0" />
-                  <div>
-                    <p className="display-4 text-zinc-900 leading-tight">
-                      {t.name}
-                    </p>
-                    <p className="label text-zinc-500 mt-1">
-                      {t.drive}
-                    </p>
+                <img src={ZONE_IMGS[i % ZONE_IMGS.length]} alt="" className="absolute inset-0 w-full h-full object-cover opacity-35" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent" />
+                <div className="relative z-10 p-4 flex flex-col h-full">
+                  <MapPin className="size-5 text-brand" />
+                  <p className="display-5 text-white mt-auto leading-tight">{t.name.replace(", MA", "")}</p>
+                  <p className="micro text-zinc-300 mt-1">{t.drive}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: featured zone + 3-col secondary + dense rest grid */}
+          <div className="hidden md:block space-y-6">
+            <div className="grid grid-cols-12 gap-6">
+              <article className="col-span-6 relative overflow-hidden rounded-md bg-surface text-surface-foreground aspect-[5/4]">
+                <img src={yardPiles} alt="" className="absolute inset-0 w-full h-full object-cover opacity-50" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/40 to-transparent" />
+                <div className="relative z-10 p-8 flex flex-col h-full">
+                  <MapPin className="size-6 text-brand" />
+                  <div className="mt-auto">
+                    <p className="eyebrow text-brand mb-2">Home base</p>
+                    <p className="display-3 text-white leading-tight">{featured.name}</p>
+                    <p className="label text-zinc-300 mt-2">{featured.drive}</p>
+                    <p className="text-zinc-200 mt-3 max-w-[40ch]">{featured.blurb}</p>
                   </div>
                 </div>
-                <p className="text-sm text-zinc-700 mt-3">{t.blurb}</p>
-              </li>
-            ))}
-          </ul>
+              </article>
+              <div className="col-span-6 grid grid-cols-1 gap-6 content-start">
+                {secondary.map((t, i) => (
+                  <article key={t.name} className="bg-kraft ring-1 ring-zinc-300 p-6 rounded-md grid grid-cols-[auto_1fr] gap-4">
+                    <span className="display-4 text-brand leading-none">{String(i + 2).padStart(2, "0")}</span>
+                    <div>
+                      <p className="display-5 text-zinc-900 leading-tight">{t.name}</p>
+                      <p className="label text-zinc-500 mt-1">{t.drive}</p>
+                      <p className="text-sm text-zinc-700 mt-2">{t.blurb}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <ul className="grid grid-cols-3 gap-4">
+              {rest.map((t) => (
+                <li key={t.name} className="bg-kraft ring-1 ring-zinc-300 p-5 rounded-md">
+                  <div className="flex items-start gap-2">
+                    <MapPin className="size-4 text-brand mt-1 shrink-0" />
+                    <div>
+                      <p className="display-5 text-zinc-900 leading-tight">{t.name}</p>
+                      <p className="label text-zinc-500 mt-1">{t.drive}</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-zinc-700 mt-3">{t.blurb}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <p className="mt-5 md:mt-10 text-sm text-zinc-600 max-w-[60ch]">
             Don't see your town? We deliver throughout Worcester County
             and parts of Middlesex County. Give us a call and we'll

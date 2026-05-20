@@ -9,6 +9,8 @@ import {
   Facebook,
 } from "lucide-react";
 import { YelpLogo } from "@/components/site/YelpLogo";
+import yardPatio from "@/assets/source/yard-banner-5.webp";
+import yardDog from "@/assets/source/yard-dog.webp";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -64,17 +66,45 @@ function ContactPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 section-loose">
-          <p className="eyebrow text-brand mb-4">
-            Contact
-          </p>
-          <h1 className="display-1 leading-[0.9] max-w-[16ch]">
-            Call. <span className="text-brand">We answer.</span>
-          </h1>
-          <p className="mt-3 md:mt-6 text-zinc-400 max-w-[60ch] text-lg">
-            Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
-          </p>
-          <div className="mt-5 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
+        {/* Mobile stacked hero */}
+        <div className="md:hidden">
+          <div className="aspect-square overflow-hidden">
+            <img src={yardPatio} alt="The patio area at the Buy The Yard lot in Jefferson, MA" className="w-full h-full object-cover" fetchPriority="high" decoding="async" />
+          </div>
+          <div className="px-5 py-8">
+            <p className="eyebrow text-brand mb-4">Contact</p>
+            <h1 className="display-2 leading-[0.9]">
+              Call. <span className="text-brand">We answer.</span>
+            </h1>
+            <p className="mt-4 text-zinc-300 text-base">
+              Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
+            </p>
+          </div>
+        </div>
+
+        {/* Desktop split hero */}
+        <div className="hidden md:block">
+          <div className="max-w-7xl mx-auto px-6 section-loose grid grid-cols-12 gap-8 items-center">
+            <div className="col-span-7">
+              <p className="eyebrow text-brand mb-4">Contact</p>
+              <h1 className="display-1 leading-[0.9] max-w-[14ch]">
+                Call. <span className="text-brand">We answer.</span>
+              </h1>
+              <p className="mt-6 text-zinc-400 max-w-[52ch] text-lg">
+                Phone is fastest. Use the online quote form for material lists. Email for non-urgent questions.
+              </p>
+            </div>
+            <div className="col-span-5">
+              <div className="aspect-[4/5] overflow-hidden rounded-md ring-1 ring-white/10">
+                <img src={yardPatio} alt="The patio area at the Buy The Yard lot in Jefferson, MA" className="w-full h-full object-cover" fetchPriority="high" decoding="async" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA channels — unified across breakpoints */}
+        <div className="max-w-7xl mx-auto px-5 md:px-6 pb-12 md:pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
             <a
               href="tel:5085799897"
               className="group flex items-center gap-4 bg-brand text-brand-foreground px-6 py-6 rounded-md hover:opacity-90 transition-opacity"
@@ -105,7 +135,7 @@ function ContactPage() {
               <ArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-          <p className="mt-3 md:mt-6 text-sm text-zinc-400 max-w-[60ch]">
+          <p className="mt-6 text-sm text-zinc-400 max-w-[60ch]">
             For non-urgent stuff, email{" "}
             <a
               href="mailto:abby@btymaterial.com"
@@ -115,7 +145,7 @@ function ContactPage() {
             </a>
             . Please note: the chat widget on our previous website is no longer monitored.
           </p>
-          <div className="mt-4 md:mt-8 flex flex-wrap items-center gap-5">
+          <div className="mt-6 flex flex-wrap items-center gap-5">
             <a
               href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
               target="_blank"
@@ -137,7 +167,48 @@ function ContactPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6">
+          {/* Featured editorial: Address + dog photo — desktop only */}
+          <article className="hidden md:flex md:col-span-6 relative overflow-hidden rounded-md bg-surface text-surface-foreground aspect-[5/4]">
+            <img src={yardDog} alt="The yard dog at Buy The Yard" className="absolute inset-0 w-full h-full object-cover opacity-45" />
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/40 to-transparent" />
+            <div className="relative z-10 p-8 flex flex-col h-full w-full">
+              <MapPin className="size-7 text-brand" />
+              <div className="mt-auto">
+                <p className="eyebrow text-brand mb-2">Stop by</p>
+                <p className="display-3 text-white leading-tight">2264 Main St.<br />Jefferson, MA 01522</p>
+                <a
+                  href="https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 label text-white border-b border-white/40 hover:text-brand hover:border-brand"
+                >
+                  Open in maps →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          {/* Address card — mobile only */}
+          <div className="md:hidden bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
+            <MapPin className="size-7 text-brand mb-4" />
+            <h2 className="display-4 mb-2">Address</h2>
+            <p className="text-zinc-900">
+              2264 Main St.
+              <br />
+              Jefferson, MA 01522
+            </p>
+            <a
+              href="https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-block label text-brand font-semibold"
+            >
+              Open in maps →
+            </a>
+          </div>
+
+          <div className="md:col-span-6 grid grid-cols-1 gap-3 md:gap-6 content-start">
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <ClipboardList className="size-7 text-brand mb-4" />
             <h2 className="display-4 mb-2">Get a Quote</h2>
@@ -172,24 +243,6 @@ function ContactPage() {
           </div>
 
           <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
-            <MapPin className="size-7 text-brand mb-4" />
-            <h2 className="display-4 mb-2">Address</h2>
-            <p className="text-zinc-900">
-              2264 Main St.
-              <br />
-              Jefferson, MA 01522
-            </p>
-            <a
-              href="https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-block label text-brand font-semibold"
-            >
-              Open in maps →
-            </a>
-          </div>
-
-          <div className="bg-kraft p-8 rounded-md ring-1 ring-zinc-300">
             <Clock className="size-7 text-brand mb-4" />
             <h2 className="display-4 mb-2">Hours</h2>
             <p className="eyebrow text-brand mb-2">
@@ -205,6 +258,7 @@ function ContactPage() {
               pickup and delivery are by appointment. Salt and ice melt are
               available year-round; call for winter loading hours.
             </p>
+          </div>
           </div>
         </div>
       </section>
