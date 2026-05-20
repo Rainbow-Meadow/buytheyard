@@ -448,6 +448,8 @@ function ImageTileInner({
 }) {
   const [loaded, setLoaded] = useState(false);
   const aspect = resolveAspect(block.aspect);
+  const shareId = block.details?.shareId ?? block.id;
+  const [dialogOpen, setDialogOpen] = useTileDeepLink(shareId);
 
   const imageShell = [
     sizeCls[size],
@@ -545,7 +547,7 @@ function ImageTileInner({
   }
   if (block.details) {
     return (
-      <Dialog>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>
           <button
             type="button"
