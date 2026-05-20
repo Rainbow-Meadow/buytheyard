@@ -660,7 +660,7 @@ export function Tile(block: TileBlock) {
       return (
         <article className={`${shell} flex flex-col`}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
-          <p className="display-3 text-brand leading-none">{block.number}</p>
+          <p className={`display-3 leading-none ${tone === "brand" ? "text-brand-foreground" : "text-brand"}`}>{block.number}</p>
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mt-4`}>{block.eyebrow}</p>}
           {block.title && (
             <p className={`display-5 leading-snug ${block.eyebrow ? "mt-1" : "mt-4"}`}>
