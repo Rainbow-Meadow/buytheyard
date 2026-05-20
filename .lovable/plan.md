@@ -1,51 +1,43 @@
-## Goal
+# Add expandable dialog treatment to product tiles
 
-Click-to-expand dialogs on gallery image tiles, with copy written in Abby's voice (warm, first-person, plainspoken — same tone as the rewritten Story tiles).
+Bring the `Tile` image dialog UX to `ProductCard`, including the same standardized sizing and `?tile=` deep linking. Because both the `/products` catalog **and** the "Featured Materials" section on `/` (`src/routes/index.tsx`) render through `ProductCard`, updating the component covers both surfaces in one change.
 
-After auditing the whole site, the only true "gallery/newspaper" photo tiles are the two on `/about` ("Around the Yard"). Other images sitewide are heroes, decorative backgrounds, or zone tiles where the context already lives on the surface. So "sitewide" lands as: build the expand-dialog capability into the `Tile` image variant so any route can opt in later, and ship the `/about` gallery wired up with real copy now.
+## Scope
 
-## Approach
+- `src/components/site/ProductCard.tsx` — both `gallery` and `default` variants become buttons that open a shared expandable dialog (matching the Tile dialog: large `object-contain` image up to `60vh`, scrollable text panel, `max-w-3xl`, `90vh` cap, dark surface).
+- `src/data/products.ts` — add a stable `slug` to each `Product` (derived from name) so the deep-link param is predictable.
+- `src/components/site/useTileDeepLink.ts` — extract the existing hook from `Tile.tsx` so both `Tile` and `ProductCard` import it. No behavior change to current Tile dialogs.
 
-### 1. Extend `src/components/site/Tile.tsx` — `image` variant
+No changes needed in `src/routes/index.tsx` or `src/routes/products.tsx` — they just keep rendering `<ProductCard … />` and inherit the new behavior.
 
-Add an optional `details` prop:
+## Dialog content
 
-```ts
-details?: { eyebrow?: string; title: string; body: ReactNode }
+Mirrors Tile's `details` panel:
+- Eyebrow: product `category`
+- Title: product `name` (DialogTitle, `display-5`)
+- Body: product `description`
+- Footer line: badge (if any) + "Pickup & Delivery"
+
+Products without an image keep their current text-only front face but still open the dialog (image area shows the same no-image fallback at large size).
+
+## Deep linking
+
+- URL param: `?tile=product-<slug>` (reuses the existing `tile` namespace so it coexists with Tile deep links).
+- Same open/close URL sync as Tile dialogs: visiting `/?tile=product-hemlock-mulch` or `/products?tile=product-hemlock-mulch` auto-opens that product.
+
+## Technical sketch
+
+```text
+ProductCard (gallery|default)
+  └─ <Dialog open=… onOpenChange=…>           ← useTileDeepLink("product-<slug>")
+       ├─ <DialogTrigger asChild>
+       │     <button className="…current card classes… cursor-zoom-in">
+       │       …existing card markup unchanged…
+       │     </button>
+       └─ <DialogContent ← same classes as Tile dialog>
+             <img max-h-[60vh] object-contain />
+             <div p-5 sm:p-7 overflow-y-auto>
+               eyebrow (category) / title (name) / description / badge + availability
 ```
 
-When `details` is set and there's no `to` link, the tile becomes a `<DialogTrigger asChild><button>` wrapping the existing image markup. Shared `<DialogContent>` renders:
-- full image, `max-h-[80vh] object-contain`, dark surround
-- `DialogTitle` = `details.title`, optional eyebrow above
-- `DialogDescription` = `details.body`
-- close X (already in `dialog.tsx`), ESC + overlay click dismiss
-
-Hover: `cursor-zoom-in` + subtle image scale. `aria-label="Open details: {alt or title}"`. If both `to` and `details` are passed, `to` wins (documented).
-
-### 2. About-page gallery (`src/routes/about.tsx`)
-
-Extract the 2 yard photos into a `YARD_ITEMS` array and map over them in both layouts. Wrap each `<figure>` in `<Dialog>` using the same shared dialog content. One dialog instance per item.
-
-### 3. Copy (Abby's voice)
-
-**Sit-and-stay corner**
-- Eyebrow: `The yard`
-- Title: `The sit-and-stay corner`
-- Body: "This little corner started as somewhere to plant the OPEN flag — it ended up being where half my best conversations happen. Pull up a chair, grab a coffee while we figure out your load. It's a yard, but it's kind of a front porch too."
-
-**Charlie**
-- Eyebrow: `Office manager`
-- Title: `Charlie runs the front desk`
-- Body: "Charlie's the unofficial office manager around here. He handles greetings, accepts treats, and supervises every delivery from the office window. If you bring a kid or a dog along, he's the first one they'll want to meet."
-
-## Files
-
-- `src/components/site/Tile.tsx` — add `details` to image variant + render shared `<Dialog>` wrapper.
-- `src/routes/about.tsx` — extract `YARD_ITEMS`, wrap both gallery layouts in dialogs with the copy above.
-
-## Out of scope
-
-- Story `TileGrid` text tiles (already self-contained — nothing to reveal).
-- `service-area` zone tiles (town blurb already surfaces; covered by the new prop if you want to opt in later).
-- Hero/background images on `/delivery`, `/contact`, `/quote` (decorative, not gallery items).
-- Lightbox navigation (next/prev/swipe) — single image, ESC/X to close.
+Front-face visuals of the cards stay identical; only wrapped in a `button` plus the dialog. No route, schema, or business-logic changes.
