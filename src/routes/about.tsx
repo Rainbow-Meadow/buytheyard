@@ -92,14 +92,6 @@ const STORY_BLOCKS: TileBlock[] = [
     eyebrow: "04 · WBE",
     body: "After three years in business I made it official. Buy The Yard became a Massachusetts Certified Woman-Owned Enterprise.",
     size: "sm",
-    tone: "kraft",
-  },
-  {
-    id: "story-stat-year-opened",
-    variant: "stat",
-    value: "2018",
-    label: "Year we opened",
-    size: "sm",
     tone: "gray",
   },
   {
