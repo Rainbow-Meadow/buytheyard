@@ -372,47 +372,11 @@ function HomePage() {
       </section>
 
       {/* Product preview */}
-      <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-5 md:mb-10">
-            <div>
-              <p className="eyebrow text-brand mb-3">
-                Bulk materials &amp; garden center
-              </p>
-            <h2 className="display-3 leading-[0.95] text-zinc-950 max-w-[16ch] mt-4 md:mt-6">
-              Featured Materials
-            </h2>
-            </div>
-            <div className="flex items-center gap-4">
-              <Link
-                to="/products"
-                className="inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
-              >
-                See full catalog <ArrowRight className="size-4" />
-              </Link>
-            </div>
-          </div>
-
-          <ProductGroup products={featured}>
-            {/* Mobile: Gallery — 2-col image-overlay grid */}
-            <div className="md:hidden grid grid-cols-2 gap-2">
-              {featured.map((p) => (
-                <ProductCard key={p.name} product={p} variant="gallery" />
-              ))}
-            </div>
-
-            {/* Desktop: Magazine — 1 large featured + 6 supporting */}
-            <div className="hidden md:grid md:grid-cols-3 gap-6 items-start">
-              <div className="md:col-span-1 md:row-span-2 flex">
-                <ProductCard product={featured[0]} />
-              </div>
-              {featured.slice(1, 7).map((p) => (
-                <ProductCard key={p.name} product={p} variant="gallery" />
-              ))}
-            </div>
-          </ProductGroup>
-        </div>
-      </section>
+      <LazyOnVisible
+        fallback={<div className="section bg-base" style={{ minHeight: 600 }} />}
+      >
+        <FeaturedMaterials />
+      </LazyOnVisible>
 
       {/* Facebook spotlight */}
       <section className="section bg-surface text-surface-foreground border-y border-white/5">
