@@ -262,8 +262,13 @@ function HomePage() {
               src={FEATURED[1].image!}
               alt={FEATURED[1].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Loam", title: FEATURED[1].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-loam",
+                eyebrow: "Loam",
+                title: FEATURED[1].name,
+                body: FEATURED[1].description,
+              }}
             />
           ),
           b: (
@@ -274,8 +279,13 @@ function HomePage() {
               src={FEATURED[2].image!}
               alt={FEATURED[2].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Sand", title: FEATURED[2].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-sand",
+                eyebrow: "Sand",
+                title: FEATURED[2].name,
+                body: FEATURED[2].description,
+              }}
             />
           ),
           c: (
@@ -286,8 +296,13 @@ function HomePage() {
               src={FEATURED[3].image!}
               alt={FEATURED[3].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Stone", title: FEATURED[3].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-stone",
+                eyebrow: "Stone",
+                title: FEATURED[3].name,
+                body: FEATURED[3].description,
+              }}
             />
           ),
           d: (
@@ -298,8 +313,13 @@ function HomePage() {
               src={FEATURED[4].image!}
               alt={FEATURED[4].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Specialty", title: FEATURED[4].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-lava",
+                eyebrow: "Specialty",
+                title: FEATURED[4].name,
+                body: FEATURED[4].description,
+              }}
             />
           ),
           e: (
@@ -310,8 +330,13 @@ function HomePage() {
               src={FEATURED[5].image!}
               alt={FEATURED[5].name}
               focal="center"
-              to="/products"
               overlay={{ eyebrow: "Garden center", title: FEATURED[5].name, align: "bottom-left" }}
+              details={{
+                shareId: "feat-plants",
+                eyebrow: "Garden center",
+                title: FEATURED[5].name,
+                body: FEATURED[5].description,
+              }}
             />
           ),
         }}
