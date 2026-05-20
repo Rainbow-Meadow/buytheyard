@@ -139,7 +139,7 @@ const STORY_BLOCKS: TileBlock[] = [
   {
     id: "story-gray-local",
     variant: "text",
-    eyebrow: "Local delivery",
+    eyebrow: "07 · Local delivery",
     title: "Holden, Worcester, Princeton, Sterling, Rutland.",
     body: "Curbside drops across Central Mass, dispatched from the Jefferson lot.",
     size: "md",
@@ -148,7 +148,7 @@ const STORY_BLOCKS: TileBlock[] = [
   {
     id: "story-07-visit",
     variant: "cta",
-    eyebrow: "07 · Visit",
+    eyebrow: "08 · Visit",
     body: (
       <>
         Stop by the yard at <strong>2264 Main St., Jefferson, MA</strong>. Happy to answer questions and help you figure out what you need.
