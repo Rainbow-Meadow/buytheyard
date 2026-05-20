@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lazy, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, Phone } from "lucide-react";
+import { lazy } from "react";
+import { ArrowRight, Phone } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
@@ -46,51 +46,6 @@ function kickHeroVideo(el: HTMLVideoElement | null) {
   } else {
     setTimeout(start, 400);
   }
-}
-
-function MobileCollapse({
-  id,
-  open,
-  onToggle,
-  label,
-  children,
-}: {
-  id: string;
-  open: boolean;
-  onToggle: () => void;
-  label: string;
-  children: ReactNode;
-}) {
-  return (
-    <>
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        aria-controls={id}
-        className="md:hidden w-full flex items-center justify-between gap-4 py-4 mt-2 text-left border-y border-zinc-300/70"
-      >
-        <span className="label text-zinc-900">
-          {open ? `Hide ${label}` : `Show ${label}`}
-        </span>
-        <ChevronDown
-          className={`size-5 text-zinc-700 transition-transform duration-300 motion-reduce:transition-none ${
-            open ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-      <div
-        id={id}
-        className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none md:!grid-rows-[1fr] ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
-      >
-        <div className="overflow-hidden md:overflow-visible">
-          <div className="pt-6 md:pt-0">{children}</div>
-        </div>
-      </div>
-    </>
-  );
 }
 
 export const Route = createFileRoute("/")({
