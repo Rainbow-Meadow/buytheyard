@@ -55,7 +55,7 @@ const PAYMENT_BLOCKS: TileBlock[] = [
     eyebrow: "Payment",
     title: "Card Processing Fee",
     body: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee.",
-    size: "md",
+    size: "third",
     tone: "surface",
   },
   {
@@ -64,7 +64,7 @@ const PAYMENT_BLOCKS: TileBlock[] = [
     eyebrow: "Same day",
     title: "Call before noon",
     body: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise allow approximately 48 hours.",
-    size: "md",
+    size: "third",
     tone: "kraft",
   },
   {
@@ -73,7 +73,7 @@ const PAYMENT_BLOCKS: TileBlock[] = [
     eyebrow: "Need a quote?",
     title: "Tap to call",
     cta: { label: "508.579.9897", href: "tel:5085799897" },
-    size: "md",
+    size: "third",
     tone: "kraft",
   },
 ];
