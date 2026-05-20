@@ -56,7 +56,6 @@ const STORY_BLOCKS: TileBlock[] = [
     id: "story-04-wbe-badge",
     variant: "text",
     eyebrow: "Certified",
-    title: "WBE",
     body: "MA Woman Business Enterprise",
     size: "sm",
     tone: "brand",
@@ -68,7 +67,7 @@ const STORY_BLOCKS: TileBlock[] = [
         alt=""
         width={112}
         height={72}
-        className="h-8 w-auto object-contain"
+        className="h-16 w-auto object-contain"
         loading="lazy"
         decoding="async"
       />
