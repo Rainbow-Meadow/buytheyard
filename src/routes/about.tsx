@@ -55,23 +55,24 @@ const STORY_BLOCKS: TileBlock[] = [
   {
     id: "story-04-wbe-badge",
     variant: "text",
-    eyebrow: "Certified",
-    body: "MA Woman Business Enterprise",
+    body: (
+      <div className="flex h-full flex-col items-center justify-center gap-3 text-center">
+        <img
+          src={wbeSeal}
+          alt="Massachusetts WBE certified seal"
+          width={112}
+          height={72}
+          className="h-24 w-auto object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+        <span className="meta">MA Woman Business Enterprise</span>
+      </div>
+    ),
     size: "sm",
     tone: "brand",
     padding: "sm",
-    className: "md:hidden",
-    icon: (
-      <img
-        src={wbeSeal}
-        alt=""
-        width={112}
-        height={72}
-        className="h-16 w-auto object-contain"
-        loading="lazy"
-        decoding="async"
-      />
-    ),
+    className: "md:hidden flex flex-col items-center justify-center text-center",
   },
   {
     id: "story-05-tenth-season",
