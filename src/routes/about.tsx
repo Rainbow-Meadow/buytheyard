@@ -73,51 +73,86 @@ function AboutPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-7 space-y-6 text-zinc-700 text-lg leading-relaxed">
-            <h2 className="display-4 text-zinc-900 leading-tight">
+          <div className="lg:col-span-7">
+            <p className="eyebrow text-brand mb-3">In her own words</p>
+            <h2 className="display-3 text-zinc-900 leading-tight mb-6 md:mb-8">
               Our Story
             </h2>
-            <p>
-              Most landscape yards treat you like a ticket number. Loaded fast, out the gate, on to the next one.
-            </p>
-            <p>
-              I built this one to feel like the opposite.
-            </p>
-            <p>
-              I grew up outside — trucks, equipment, mulch piles in the backyard with my dad.
-              Construction was never the question. Only when.
-            </p>
-            <p>
-              I graduated Wachusett Regional in 2016 and opened the yard that same spring.
-              Two years later I finished my Entrepreneurship and Small Business degree —
-              while already running one of my own.
-            </p>
-            <blockquote className="border-l-4 border-brand pl-6 py-2 my-10 display-4 text-zinc-900 leading-tight">
-              "If you call this number, I pick up. That's the whole business model."
-            </blockquote>
-            <p>
-              Year three, we made it official: Massachusetts Certified Woman-Owned Enterprise.
-            </p>
-            <p>
-              2026 is our <strong>10th season</strong> — first spring mulch run through
-              winter salt, same yard, same voice on the phone.
-            </p>
-            <p>
-              Office manager: <strong>Charlie</strong>. He's a dog. He handles the greetings.
-            </p>
-            <p>
-              Come by — <strong>2264 Main St., Jefferson, MA</strong>. Bring your questions,
-              even the "how much do I need?" ones. Especially those.
-            </p>
-            <p className="display-4 text-zinc-900">— Abby</p>
 
-            <div className="pt-6">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
-              >
-                Visit the yard
-              </Link>
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-3 md:gap-4">
+              {/* 01 — Origin (oversized lead) */}
+              <article className="md:col-span-6 bg-kraft ring-1 ring-zinc-300 rounded-md p-6 md:p-8">
+                <p className="eyebrow text-brand mb-3">01 · Origin</p>
+                <p className="display-5 text-zinc-900 leading-snug">
+                  Most landscape yards treat you like a ticket number. Loaded fast, out the gate, on to the next one.
+                </p>
+                <p className="body text-zinc-700 mt-4">
+                  I built this one to feel like the opposite.
+                </p>
+              </article>
+
+              {/* 02 — Background */}
+              <article className="md:col-span-3 bg-white ring-1 ring-zinc-300 rounded-md p-6">
+                <p className="eyebrow text-brand mb-2">02 · Background</p>
+                <p className="body text-zinc-700">
+                  I grew up outside — trucks, equipment, mulch piles in the backyard with my dad. Construction was never the question. Only when.
+                </p>
+              </article>
+
+              {/* 03 — The yard opens */}
+              <article className="md:col-span-3 bg-white ring-1 ring-zinc-300 rounded-md p-6">
+                <p className="eyebrow text-brand mb-2">03 · The yard opens</p>
+                <p className="body text-zinc-700">
+                  I graduated Wachusett Regional in 2016 and opened the yard that same spring. Two years later I finished my Entrepreneurship and Small Business degree — while already running one of my own.
+                </p>
+              </article>
+
+              {/* Pull quote */}
+              <article className="md:col-span-6 bg-surface text-surface-foreground rounded-md p-7 md:p-10">
+                <p className="eyebrow text-brand mb-4">The whole business model</p>
+                <blockquote className="display-3 leading-tight text-white">
+                  &ldquo;If you call this number, I pick up. That&rsquo;s the whole business model.&rdquo;
+                </blockquote>
+                <p className="meta text-zinc-400 mt-5">— Abby Montalto · Owner</p>
+              </article>
+
+              {/* 04 — WBE */}
+              <article className="md:col-span-2 bg-kraft ring-1 ring-zinc-300 rounded-md p-6">
+                <p className="eyebrow text-brand mb-2">04 · WBE</p>
+                <p className="body text-zinc-700">
+                  Year three, we made it official: Massachusetts Certified Woman-Owned Enterprise.
+                </p>
+              </article>
+
+              {/* 05 — 10th season */}
+              <article className="md:col-span-4 bg-white ring-1 ring-zinc-300 rounded-md p-6">
+                <p className="eyebrow text-brand mb-2">05 · 10th season</p>
+                <p className="body text-zinc-700">
+                  2026 is our <strong className="text-zinc-900">10th season</strong> — first spring mulch run through winter salt, same yard, same voice on the phone.
+                </p>
+              </article>
+
+              {/* 06 — Charlie */}
+              <article className="md:col-span-3 bg-white ring-1 ring-zinc-300 rounded-md p-6">
+                <p className="eyebrow text-brand mb-2">06 · Office manager</p>
+                <p className="body text-zinc-700">
+                  <strong className="text-zinc-900">Charlie.</strong> He's a dog. He handles the greetings.
+                </p>
+              </article>
+
+              {/* 07 — Visit (CTA tile) */}
+              <article className="md:col-span-3 bg-brand text-brand-foreground rounded-md p-6 flex flex-col">
+                <p className="eyebrow opacity-80 mb-2">07 · Visit</p>
+                <p className="body">
+                  Come by — <strong>2264 Main St., Jefferson, MA</strong>. Bring your questions, even the &ldquo;how much do I need?&rdquo; ones. Especially those.
+                </p>
+                <Link
+                  to="/contact"
+                  className="mt-5 inline-flex items-center gap-2 label border-b border-current self-start hover:opacity-80"
+                >
+                  Visit the yard
+                </Link>
+              </article>
             </div>
           </div>
         </div>
