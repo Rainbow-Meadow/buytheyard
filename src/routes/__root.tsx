@@ -13,6 +13,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ChatWidget } from "@/components/chat/ChatWidget";
 import { CookieConsent } from "@/components/site/CookieConsent";
+import { SplashScreen } from "@/components/site/SplashScreen";
 
 function NotFoundComponent() {
   return (
@@ -180,6 +181,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", href: "/brandmark.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
+      // iOS PWA launch images (apple-touch-startup-image)
+      ...[
+        { w: 1024, h: 1366, dpr: 2, file: "2048x2732" }, // iPad Pro 12.9"
+        { w: 834,  h: 1194, dpr: 2, file: "1668x2388" }, // iPad Pro 11"
+        { w: 768,  h: 1024, dpr: 2, file: "1536x2048" }, // iPad 9.7"
+        { w: 430,  h: 932,  dpr: 3, file: "1290x2796" }, // iPhone 15/16 Pro Max
+        { w: 393,  h: 852,  dpr: 3, file: "1179x2556" }, // iPhone 15/16
+        { w: 390,  h: 844,  dpr: 3, file: "1170x2532" }, // iPhone 13/14
+        { w: 375,  h: 812,  dpr: 3, file: "1125x2436" }, // iPhone X/XS/11 Pro
+      ].flatMap(({ w, h, dpr, file }) => {
+        const [pw, ph] = file.split("x");
+        return [
+          {
+            rel: "apple-touch-startup-image",
+            href: `/splash/apple-splash-${pw}x${ph}.png`,
+            media: `(device-width: ${w}px) and (device-height: ${h}px) and (-webkit-device-pixel-ratio: ${dpr}) and (orientation: portrait)`,
+          },
+          {
+            rel: "apple-touch-startup-image",
+            href: `/splash/apple-splash-${ph}x${pw}.png`,
+            media: `(device-width: ${w}px) and (device-height: ${h}px) and (-webkit-device-pixel-ratio: ${dpr}) and (orientation: landscape)`,
+          },
+        ];
+      }),
       {
         rel: "stylesheet",
         href: appCss,
@@ -232,6 +257,7 @@ function RootComponent() {
         <SiteFooter />
         <ChatWidget />
         <CookieConsent />
+        <SplashScreen />
       </div>
     </QueryClientProvider>
   );
