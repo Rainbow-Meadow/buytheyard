@@ -530,7 +530,7 @@ function ImageTileInner({
             {block.details.eyebrow && (
               <p className="eyebrow text-brand mb-2">{block.details.eyebrow}</p>
             )}
-            <DialogTitle className="display-5 sm:display-4 leading-tight text-white">
+            <DialogTitle className="display-5 leading-tight text-white">
               {block.details.title}
             </DialogTitle>
             <DialogDescription className="body text-zinc-300 mt-3">
