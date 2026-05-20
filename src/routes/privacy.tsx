@@ -200,7 +200,7 @@ const BLOCKS: Block[] = [
     tiles: [
       { term: "Frequency", body: "Message frequency varies based on your order activity." },
       { term: "Rates", body: "Message and data rates may apply." },
-      { term: "Opt out", body: <>Reply <strong className="text-zinc-900">STOP</strong> at any time to opt out.</> },
+      { term: "Opt out", body: <>Reply <strong className="text-zinc-900">STOP</strong> any time to opt out.</> },
       {
         term: "Help",
         body: (
