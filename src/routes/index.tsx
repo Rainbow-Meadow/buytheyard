@@ -426,29 +426,16 @@ function HomePage() {
         layout="section05"
         label="Delivery, pricing & FAQ"
         tiles={{
-          hero: (
-            <Tile
-              id="dp-delivery"
-              fill
-              variant="cta"
-              tone="surface"
-
-              icon={<Truck />}
-              eyebrow="Delivery"
-              title="Delivery across Central Mass"
-              body="Curbside from our Jefferson yard. Call before noon and we'll try for same-day. Driveway or curbline only — mark your spot."
-              cta={{ label: "Delivery details", to: "/delivery" }}
-            />
-          ),
+          hero: <ServiceAreaMapTile />,
           a: (
             <Tile
               id="dp-call"
               fill
               variant="cta"
               tone="brand"
-              icon={<Tag />}
-              eyebrow="Today's price by phone"
-              title="Call for a quote"
+              icon={<Phone />}
+              eyebrow="Fastest path"
+              title="Call for today's price"
               body="Cash and check skip the 4% card fee."
               cta={{ label: "508.579.9897", href: "tel:5085799897" }}
             />
@@ -458,42 +445,36 @@ function HomePage() {
               id="dp-quote"
               fill
               variant="cta"
-              tone="kraft"
-              icon={<HelpCircle />}
-              eyebrow="Before you call"
-              title="Quick answers"
+              tone="surface"
+              icon={<FileText />}
+              eyebrow="Prefer it in writing"
+              title="Request a written quote"
+              body="Tell us the job — we'll send a number by email."
               cta={{ label: "Start a quote", to: "/quote" }}
             />
           ),
           c: (
-            <Tile
-              id="dp-faq-pricing"
-              fill
-              variant="text"
+            <FaqDialogTile
               tone="gray"
               eyebrow="01 · Pricing"
-              title="What does it cost?"
-              body="Quoted by phone. 1-yard minimum."
+              question="What does it cost?"
+              answer="Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number. One-yard minimum on all bulk orders. Cash and check payments skip the 4% card processing fee."
             />
           ),
           d: (
-            <Tile
-              id="dp-faq-area"
-              fill
-              variant="text"
+            <FaqDialogTile
               tone="surface"
               eyebrow="02 · Delivery area"
-              title="Deliver here?"
+              question="Deliver here?"
+              answer="We offer curbside delivery throughout Central Massachusetts from our Jefferson yard, including Holden, Princeton, Sterling, Rutland, West Boylston, Paxton, Worcester, Leominster, and surrounding towns. Delivery is priced by ZIP code; a brief call confirms your service area and final price before your order is dispatched."
             />
           ),
           e: (
-            <Tile
-              id="dp-faq-timing"
-              fill
-              variant="text"
+            <FaqDialogTile
               tone="surface"
               eyebrow="03 · Timing"
-              title="How soon?"
+              question="How soon?"
+              answer="Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours. Delivery is made to the driveway or curbline only — please mark your drop spot before the truck arrives."
             />
           ),
         }}
