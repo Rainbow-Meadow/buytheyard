@@ -124,42 +124,78 @@ function AboutPage() {
       </section>
 
       <section className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
-          <h2 className="md:col-span-3 display-4 text-zinc-900 leading-tight">
+        <div className="max-w-7xl mx-auto px-5 md:px-6">
+          <h2 className="display-4 text-zinc-900 leading-tight mb-5 md:mb-8">
             Around the Yard
           </h2>
-          <figure className="md:col-span-2 rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
-            <div className="aspect-[4/3] overflow-hidden">
+
+          {/* Mobile: Gallery — square image grid, captions tucked under */}
+          <div className="md:hidden grid grid-cols-2 gap-2">
+            <figure className="relative aspect-square overflow-hidden rounded-sm ring-1 ring-zinc-300 bg-kraft">
               <img
                 src={yardPatio}
                 alt="The Buy The Yard sit-and-stay area — Adirondack chairs, umbrellas, and an OPEN flag at the edge of the yard"
                 width={1500}
-                height={2000}
+                height={1500}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-            </div>
-            <figcaption className="p-5 label text-zinc-600">
-              The sit-and-stay corner — coffee, umbrellas, and the OPEN flag.
-            </figcaption>
-          </figure>
-          <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
-            <div className="aspect-[4/5] overflow-hidden">
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 pt-8 label text-white">
+                Sit-and-stay corner
+              </figcaption>
+            </figure>
+            <figure className="relative aspect-square overflow-hidden rounded-sm ring-1 ring-zinc-300 bg-kraft">
               <img
                 src={yardDog}
                 alt="Charlie, the Buy The Yard office manager, watching the lot from the office window"
                 width={1500}
-                height={2000}
+                height={1500}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-            </div>
-            <figcaption className="p-5 label text-zinc-600">
-              Charlie · office manager · accepts treats and pets.
-            </figcaption>
-          </figure>
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 pt-8 label text-white">
+                Charlie · office manager
+              </figcaption>
+            </figure>
+          </div>
+
+          {/* Desktop: Magazine — featured large + supporting small */}
+          <div className="hidden md:grid md:grid-cols-3 gap-6">
+            <figure className="md:col-span-2 rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={yardPatio}
+                  alt="The Buy The Yard sit-and-stay area — Adirondack chairs, umbrellas, and an OPEN flag at the edge of the yard"
+                  width={1500}
+                  height={2000}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <figcaption className="p-5 label text-zinc-600">
+                The sit-and-stay corner — coffee, umbrellas, and the OPEN flag.
+              </figcaption>
+            </figure>
+            <figure className="rounded-md overflow-hidden ring-1 ring-zinc-300 bg-kraft">
+              <div className="aspect-[4/5] overflow-hidden">
+                <img
+                  src={yardDog}
+                  alt="Charlie, the Buy The Yard office manager, watching the lot from the office window"
+                  width={1500}
+                  height={2000}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <figcaption className="p-5 label text-zinc-600">
+                Charlie · office manager · accepts treats and pets.
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
     </>
