@@ -118,9 +118,9 @@ function QuotePage() {
         {/* Mobile stacked hero */}
         <div className="md:hidden">
           <div className="grid grid-cols-3 gap-1">
-            <div className="aspect-square overflow-hidden"><img src={mulchHemlock} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-            <div className="aspect-square overflow-hidden"><img src={loam} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
-            <div className="aspect-square overflow-hidden"><img src={stoneRiver} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={mulchHemlock} alt="Hemlock mulch piles" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={loam} alt="Screened loam" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
+            <div className="aspect-square overflow-hidden"><img src={stoneRiver} alt="River stone" loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
           </div>
           <div className="px-5 py-8">
             <p className="eyebrow text-brand mb-4">Get a quote</p>
@@ -623,7 +623,7 @@ function StepTile({
       <div className="md:hidden p-5 border-b border-zinc-300/70">
         <p className="display-2 leading-none text-brand">{number}</p>
         <p className="eyebrow text-zinc-600 mt-3">{eyebrow}</p>
-        <p className="display-4 mt-1 text-zinc-900">{title}</p>
+        <h2 className="display-4 mt-1 text-zinc-900">{title}</h2>
         {helper && <p className="body-sm text-zinc-600 mt-2">{helper}</p>}
       </div>
       {/* Desktop header */}
@@ -633,7 +633,7 @@ function StepTile({
         </div>
         <div className="col-span-9 p-7">
           <p className="eyebrow text-zinc-600">{eyebrow}</p>
-          <p className="display-4 mt-1 text-zinc-900">{title}</p>
+          <h2 className="display-4 mt-1 text-zinc-900">{title}</h2>
           {helper && <p className="body-sm text-zinc-600 mt-2 max-w-[55ch]">{helper}</p>}
         </div>
       </div>
