@@ -340,7 +340,7 @@ function HomePage() {
               icon={<Facebook />}
               eyebrow="On Facebook"
               title="Where the yard lives"
-              body="Daily restocks, weather closures, lot photos. 820+ neighbors already follow."
+              body="Daily restocks, closures, lot photos."
               cta={{
                 label: "Follow on Facebook",
                 href: "https://www.facebook.com/BuyTheYardOutdoorProducts",
