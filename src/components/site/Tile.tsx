@@ -452,9 +452,9 @@ function ImageTileInner({
   }, [dialogOpen, nav.hasPrev, nav.hasNext, nav.prev, nav.next]);
 
   const imageShell = [
-    sizeCls[size],
-    block.tall ? "tile-row-tall" : "",
-    aspect,
+    block.fill ? "h-full w-full" : sizeCls[size],
+    block.fill ? "" : block.tall ? "tile-row-tall" : "",
+    block.fill ? "" : aspect,
     "relative overflow-hidden rounded-md ring-1",
     isLightTone(tone) ? "ring-zinc-300" : "ring-white/10",
     toneCls[tone],
