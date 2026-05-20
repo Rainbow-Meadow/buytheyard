@@ -12,6 +12,39 @@ import { LazyOnVisible } from "@/components/site/LazyOnVisible";
 const FeaturedMaterials = lazy(() => import("@/components/home/FeaturedMaterials"));
 const CommunityTiles = lazy(() => import("@/components/home/CommunityTiles"));
 
+/**
+ * Defers hero <video> load/play until the browser is idle (or after a short
+ * timeout), so the LCP poster image isn't fighting the video for bandwidth.
+ * Only the currently visible hero video (mobile or desktop, the other is
+ * `display:none`) is kicked off.
+ */
+function kickHeroVideo(el: HTMLVideoElement | null) {
+  if (!el) return;
+  el.muted = true;
+  el.defaultMuted = true;
+
+  const start = () => {
+    // Skip the hidden hero variant — `display:none` videos have offsetParent === null.
+    if (el.offsetParent === null) return;
+    try {
+      el.load();
+    } catch {
+      /* noop */
+    }
+    el.play().catch(() => {});
+  };
+
+  type IdleWindow = Window & {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+  };
+  const w = window as IdleWindow;
+  if (typeof w.requestIdleCallback === "function") {
+    w.requestIdleCallback(start, { timeout: 1500 });
+  } else {
+    setTimeout(start, 400);
+  }
+}
+
 const reviews = [
   {
     name: "Rob Warner",
