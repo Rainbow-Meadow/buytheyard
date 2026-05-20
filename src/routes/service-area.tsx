@@ -87,6 +87,11 @@ function ServiceAreaPage() {
       body: t.drive,
       align: "bottom-left",
     },
+    details: {
+      eyebrow: t.drive,
+      title: t.name,
+      body: t.blurb,
+    },
   }));
 
   const restBlocks: TileBlock[] = rest.map((t) => ({
