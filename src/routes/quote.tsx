@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   Clock,
   Copy,
+  Home,
   Layers,
   Mail,
   MessageSquare,
@@ -18,12 +19,11 @@ import {
   Plus,
   Send,
   Trash2,
+  Truck,
   User,
 } from "lucide-react";
 import { products, categories } from "@/data/products";
 import mulchHemlock from "@/assets/mulch-hemlock.webp";
-import stoneRiver from "@/assets/stone-river.webp";
-import loam from "@/assets/loam.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 import {
@@ -65,10 +65,19 @@ export const Route = createFileRoute("/quote")({
   component: QuotePage,
 });
 
+// --- Anchored-tile chrome utilities ---------------------------------
+// Sub-tiles live on a `surface` toned form card, so controls sit on a
+// translucent white wash with a hairline ring (same rule weight as the
+// rest of the site's anchored tiles).
 const inputCls =
-  "w-full bg-white text-zinc-900 px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-brand placeholder:text-zinc-400";
-const labelCls = "eyebrow text-zinc-700 mb-2 block";
-const errorCls = "text-xs text-red-700 mt-1";
+  "w-full bg-white/5 text-surface-foreground placeholder:text-white/40 px-3 h-11 ring-1 ring-white/15 text-sm focus:outline-none focus:ring-2 focus:ring-brand";
+const labelCls = "eyebrow text-white/60 mb-2 block";
+const errorCls = "text-xs text-red-400 mt-1";
+
+// Reusable sub-tile shell — borrows the anchored-tile visual vocabulary
+// without authoring an actual <Tile> (which would trigger TileRules).
+const subTileCls =
+  "relative overflow-hidden bg-white/5 ring-1 ring-white/15 p-4 md:p-5";
 
 const sortedProducts = [...products].sort((a, b) => {
   const ca = categories.indexOf(a.category);
@@ -77,7 +86,33 @@ const sortedProducts = [...products].sort((a, b) => {
   return a.name.localeCompare(b.name);
 });
 
-const STEP_LABELS = ["Materials", "Fulfillment", "Contact", "Review"] as const;
+type StepMeta = { num: string; eyebrow: string; title: string; helper: string };
+const STEPS: StepMeta[] = [
+  {
+    num: "01",
+    eyebrow: "Materials",
+    title: "What do you need?",
+    helper: "One row per material. Ballpark the quantity — we dial it in on the phone.",
+  },
+  {
+    num: "02",
+    eyebrow: "Fulfillment",
+    title: "Pickup or delivery?",
+    helper: "Pick one. We'll show delivery details if you need them.",
+  },
+  {
+    num: "03",
+    eyebrow: "Contact",
+    title: "How do we reach you?",
+    helper: "So Abby can come back with the number.",
+  },
+  {
+    num: "04",
+    eyebrow: "Review",
+    title: "Review & send.",
+    helper: "Last check — then one tap fires it to Abby.",
+  },
+];
 
 function QuotePage() {
   const [submitted, setSubmitted] = useState<QuoteData | null>(null);
@@ -135,7 +170,7 @@ function QuotePage() {
 
   const goNext = async () => {
     const ok = await validateStep(step);
-    if (ok) setStep((s) => Math.min(STEP_LABELS.length - 1, s + 1));
+    if (ok) setStep((s) => Math.min(STEPS.length - 1, s + 1));
   };
   const goPrev = () => setStep((s) => Math.max(0, s - 1));
 
@@ -150,6 +185,8 @@ function QuotePage() {
     );
   }
 
+  const meta = STEPS[step];
+
   return (
     <TileScreen
       layout="pageHero"
@@ -159,47 +196,55 @@ function QuotePage() {
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="h-full w-full bg-kraft text-zinc-900 ring-1 ring-zinc-300 rounded-md overflow-hidden flex flex-col"
+            className="h-full w-full bg-surface text-surface-foreground overflow-hidden flex flex-col"
           >
-            {/* Header — step pips */}
-            <div className="px-5 md:px-7 pt-5 md:pt-6 pb-4 border-b border-zinc-300/70">
-              <div className="flex items-center justify-between gap-4 mb-4">
-                <p className="eyebrow text-brand">
-                  Step {String(step + 1).padStart(2, "0")} · {STEP_LABELS[step]}
-                </p>
-                <p className="meta text-zinc-500 tabular-nums">
-                  {step + 1} / {STEP_LABELS.length}
+            {/* Header — anchored numeral + pip rail */}
+            <div className="relative px-5 md:px-7 pt-5 md:pt-7 pb-5 border-b border-white/10 overflow-hidden">
+              <div className="relative flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="eyebrow text-brand">
+                    Step {String(step + 1).padStart(2, "0")} · {meta.eyebrow}
+                  </p>
+                  <h2 className="display-4 mt-3 text-surface-foreground">{meta.title}</h2>
+                  {meta.helper && (
+                    <p className="body-sm text-white/60 mt-2 max-w-[55ch]">{meta.helper}</p>
+                  )}
+                </div>
+                <p
+                  aria-hidden="true"
+                  className="display-1 leading-none text-white/[0.06] tabular-nums select-none pointer-events-none -mt-2 -mr-1"
+                >
+                  {meta.num}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
-                {STEP_LABELS.map((label, i) => (
+              <div className="mt-5 flex items-center gap-2">
+                {STEPS.map((s, i) => (
                   <button
-                    key={label}
+                    key={s.num}
                     type="button"
                     onClick={async () => {
                       if (i <= step) {
                         setStep(i);
                       } else {
-                        // Validate intermediate steps before jumping forward.
-                        for (let s = step; s < i; s++) {
+                        for (let ss = step; ss < i; ss++) {
                           // eslint-disable-next-line no-await-in-loop
-                          const ok = await validateStep(s);
+                          const ok = await validateStep(ss);
                           if (!ok) {
-                            setStep(s);
+                            setStep(ss);
                             return;
                           }
                         }
                         setStep(i);
                       }
                     }}
-                    aria-label={`Go to step ${i + 1}: ${label}`}
+                    aria-label={`Go to step ${i + 1}: ${s.eyebrow}`}
                     aria-current={i === step}
-                    className={`h-1.5 flex-1 rounded-full transition-colors ${
+                    className={`h-px flex-1 transition-colors ${
                       i === step
-                        ? "bg-brand"
+                        ? "bg-brand h-0.5"
                         : i < step
-                          ? "bg-zinc-700"
-                          : "bg-zinc-300"
+                          ? "bg-white/50"
+                          : "bg-white/15"
                     }`}
                   />
                 ))}
@@ -209,164 +254,200 @@ function QuotePage() {
             {/* Slide content — scrollable inside the tile */}
             <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6">
               {step === 0 && (
-                <SlideHeader
-                  title="What do you need?"
-                  helper="One row per material. Ballpark the quantity — we dial it in on the phone."
-                >
-                  <div className="space-y-3">
-                    {items.fields.map((field, idx) => {
-                      const productErr = formState.errors.items?.[idx]?.product;
-                      const qtyErr = formState.errors.items?.[idx]?.quantity;
-                      return (
-                        <div
-                          key={field.id}
-                          className="bg-white p-4 rounded-md ring-1 ring-zinc-300"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 items-end">
-                            <div>
-                              <label className={labelCls} htmlFor={`items-${idx}-product`}>Product</label>
-                              <Controller
-                                control={control}
-                                name={`items.${idx}.product`}
-                                render={({ field: f }) => (
-                                  <select
-                                    {...f}
-                                    id={`items-${idx}-product`}
-                                    className={inputCls}
-                                    onChange={(e) => {
-                                      f.onChange(e);
-                                      setValue(
-                                        `items.${idx}.unit`,
-                                        defaultUnitFor(e.target.value),
-                                        { shouldValidate: true },
-                                      );
-                                    }}
+                <div className="space-y-3">
+                  {items.fields.map((field, idx) => {
+                    const productErr = formState.errors.items?.[idx]?.product;
+                    const qtyErr = formState.errors.items?.[idx]?.quantity;
+                    return (
+                      <div key={field.id} className={subTileCls}>
+                        <div className="flex items-start justify-between gap-3 mb-3">
+                          <p className="eyebrow text-brand tabular-nums">
+                            Item · {String(idx + 1).padStart(2, "0")}
+                          </p>
+                          <button
+                            type="button"
+                            aria-label="Remove product"
+                            disabled={items.fields.length === 1}
+                            onClick={() => items.remove(idx)}
+                            className="inline-flex items-center gap-1 label text-white/50 hover:text-brand disabled:opacity-30 disabled:cursor-not-allowed"
+                          >
+                            <Trash2 className="size-3.5" /> Remove
+                          </button>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-3 items-end">
+                          <div>
+                            <label className={labelCls} htmlFor={`items-${idx}-product`}>Product</label>
+                            <Controller
+                              control={control}
+                              name={`items.${idx}.product`}
+                              render={({ field: f }) => (
+                                <select
+                                  {...f}
+                                  id={`items-${idx}-product`}
+                                  className={inputCls}
+                                  onChange={(e) => {
+                                    f.onChange(e);
+                                    setValue(
+                                      `items.${idx}.unit`,
+                                      defaultUnitFor(e.target.value),
+                                      { shouldValidate: true },
+                                    );
+                                  }}
+                                >
+                                  <option value="">Select a product…</option>
+                                  {categories.map((cat) => (
+                                    <optgroup key={cat} label={cat}>
+                                      {sortedProducts
+                                        .filter((p) => p.category === cat)
+                                        .map((p) => (
+                                          <option key={p.name} value={p.name}>{p.name}</option>
+                                        ))}
+                                    </optgroup>
+                                  ))}
+                                </select>
+                              )}
+                            />
+                            {productErr && <p className={errorCls}>{productErr.message}</p>}
+                          </div>
+
+                          <div>
+                            <label className={labelCls} htmlFor={`items-${idx}-quantity`}>Qty</label>
+                            <Controller
+                              control={control}
+                              name={`items.${idx}.quantity`}
+                              render={({ field: f }) => (
+                                <div className="flex items-center ring-1 ring-white/15 bg-white/5 h-11">
+                                  <button
+                                    type="button"
+                                    aria-label="Decrease quantity"
+                                    className="px-3 h-full text-white/60 hover:text-brand"
+                                    onClick={() => f.onChange(Math.max(1, Number(f.value) - 1))}
                                   >
-                                    <option value="">Select a product…</option>
-                                    {categories.map((cat) => (
-                                      <optgroup key={cat} label={cat}>
-                                        {sortedProducts
-                                          .filter((p) => p.category === cat)
-                                          .map((p) => (
-                                            <option key={p.name} value={p.name}>{p.name}</option>
-                                          ))}
-                                      </optgroup>
-                                    ))}
-                                  </select>
-                                )}
-                              />
-                              {productErr && <p className={errorCls}>{productErr.message}</p>}
-                            </div>
+                                    <Minus className="size-4" />
+                                  </button>
+                                  <input
+                                    id={`items-${idx}-quantity`}
+                                    type="number"
+                                    inputMode="numeric"
+                                    min={1}
+                                    max={999}
+                                    value={f.value}
+                                    onChange={(e) =>
+                                      f.onChange(
+                                        e.target.value === ""
+                                          ? ""
+                                          : Math.max(1, Number(e.target.value)),
+                                      )
+                                    }
+                                    className="w-14 text-center bg-transparent text-surface-foreground text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                  />
+                                  <button
+                                    type="button"
+                                    aria-label="Increase quantity"
+                                    className="px-3 h-full text-white/60 hover:text-brand"
+                                    onClick={() => f.onChange(Math.min(999, Number(f.value) + 1))}
+                                  >
+                                    <Plus className="size-4" />
+                                  </button>
+                                </div>
+                              )}
+                            />
+                            {qtyErr && <p className={errorCls}>{qtyErr.message}</p>}
+                          </div>
 
-                            <div>
-                              <label className={labelCls} htmlFor={`items-${idx}-quantity`}>Qty</label>
-                              <Controller
-                                control={control}
-                                name={`items.${idx}.quantity`}
-                                render={({ field: f }) => (
-                                  <div className="flex items-center ring-1 ring-zinc-300 rounded-sm bg-white h-11">
-                                    <button
-                                      type="button"
-                                      aria-label="Decrease quantity"
-                                      className="px-3 h-full text-zinc-600 hover:text-brand"
-                                      onClick={() => f.onChange(Math.max(1, Number(f.value) - 1))}
-                                    >
-                                      <Minus className="size-4" />
-                                    </button>
-                                    <input
-                                      id={`items-${idx}-quantity`}
-                                      type="number"
-                                      inputMode="numeric"
-                                      min={1}
-                                      max={999}
-                                      value={f.value}
-                                      onChange={(e) =>
-                                        f.onChange(
-                                          e.target.value === ""
-                                            ? ""
-                                            : Math.max(1, Number(e.target.value)),
-                                        )
-                                      }
-                                      className="w-14 text-center bg-transparent text-zinc-900 text-sm font-semibold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                    />
-                                    <button
-                                      type="button"
-                                      aria-label="Increase quantity"
-                                      className="px-3 h-full text-zinc-600 hover:text-brand"
-                                      onClick={() => f.onChange(Math.min(999, Number(f.value) + 1))}
-                                    >
-                                      <Plus className="size-4" />
-                                    </button>
-                                  </div>
-                                )}
-                              />
-                              {qtyErr && <p className={errorCls}>{qtyErr.message}</p>}
-                            </div>
-
-                            <div>
-                              <label className={labelCls} htmlFor={`items-${idx}-unit`}>Unit</label>
-                              <select
-                                id={`items-${idx}-unit`}
-                                className={`${inputCls} pr-2`}
-                                {...register(`items.${idx}.unit` as const)}
-                              >
-                                {UNITS.map((u) => (
-                                  <option key={u} value={u}>{u}</option>
-                                ))}
-                              </select>
-                            </div>
-
-                            <button
-                              type="button"
-                              aria-label="Remove product"
-                              disabled={items.fields.length === 1}
-                              onClick={() => items.remove(idx)}
-                              className="h-11 px-3 text-zinc-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                          <div>
+                            <label className={labelCls} htmlFor={`items-${idx}-unit`}>Unit</label>
+                            <select
+                              id={`items-${idx}-unit`}
+                              className={`${inputCls} pr-2`}
+                              {...register(`items.${idx}.unit` as const)}
                             >
-                              <Trash2 className="size-4" />
-                            </button>
+                              {UNITS.map((u) => (
+                                <option key={u} value={u}>{u}</option>
+                              ))}
+                            </select>
                           </div>
                         </div>
-                      );
-                    })}
-                  </div>
+
+                        {/* Ghost glyph */}
+                        <Layers
+                          aria-hidden="true"
+                          strokeWidth={1.25}
+                          className="pointer-events-none absolute -bottom-4 -right-3 z-0 size-28 md:size-32 text-white/[0.05]"
+                        />
+                      </div>
+                    );
+                  })}
 
                   <button
                     type="button"
                     onClick={() => items.append({ product: "", quantity: 1, unit: "cu yd" })}
-                    className="mt-4 inline-flex items-center gap-2 label text-zinc-900 hover:text-brand"
+                    className="w-full inline-flex items-center justify-center gap-2 label text-white/70 hover:text-brand bg-transparent ring-1 ring-dashed ring-white/15 hover:ring-white/30 h-12 transition-colors"
                   >
                     <Plus className="size-4" /> Add another product
                   </button>
-                </SlideHeader>
+                </div>
               )}
 
               {step === 1 && (
-                <SlideHeader title="Pickup or delivery?" helper="Pick one. We'll show delivery details if you need them.">
+                <div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {(["Pickup", "Delivery"] as const).map((opt) => (
-                      <label
-                        key={opt}
-                        className={`cursor-pointer rounded-md p-5 ring-1 transition-colors ${
-                          fulfillment === opt
-                            ? "bg-surface text-surface-foreground ring-brand"
-                            : "bg-white text-zinc-900 ring-zinc-300 hover:ring-zinc-500"
-                        }`}
-                      >
-                        <input type="radio" value={opt} {...register("fulfillment")} className="sr-only" />
-                        <p className="display-4 leading-none">{opt}</p>
-                        <p className={`text-sm mt-2 ${fulfillment === opt ? "text-zinc-300" : "text-zinc-600"}`}>
-                          {opt === "Pickup"
-                            ? "I've got a truck or trailer and I'll come grab it."
-                            : "Bring it to me. I'm in Central Mass."}
-                        </p>
-                      </label>
-                    ))}
+                    {(
+                      [
+                        {
+                          opt: "Pickup",
+                          eyebrow: "Option 01",
+                          helper: "I've got a truck or trailer and I'll come grab it.",
+                          Icon: Truck,
+                        },
+                        {
+                          opt: "Delivery",
+                          eyebrow: "Option 02",
+                          helper: "Bring it to me. I'm in Central Mass.",
+                          Icon: Home,
+                        },
+                      ] as const
+                    ).map(({ opt, eyebrow, helper, Icon }) => {
+                      const selected = fulfillment === opt;
+                      return (
+                        <label
+                          key={opt}
+                          className={`relative overflow-hidden cursor-pointer p-5 min-h-[140px] flex flex-col justify-between ring-1 transition-colors ${
+                            selected
+                              ? "bg-brand text-brand-foreground ring-brand"
+                              : "bg-white/5 text-surface-foreground ring-white/15 hover:ring-white/40"
+                          }`}
+                        >
+                          <input type="radio" value={opt} {...register("fulfillment")} className="sr-only" />
+                          <p
+                            className={`eyebrow ${selected ? "text-brand-foreground/80" : "text-brand"}`}
+                          >
+                            {eyebrow}
+                          </p>
+                          <div className="relative z-10">
+                            <p className="display-4 leading-none">{opt}</p>
+                            <p
+                              className={`body-sm mt-2 ${selected ? "text-brand-foreground/85" : "text-white/65"}`}
+                            >
+                              {helper}
+                            </p>
+                          </div>
+                          <Icon
+                            aria-hidden="true"
+                            strokeWidth={1.25}
+                            className={`pointer-events-none absolute -bottom-4 -right-3 z-0 size-32 md:size-40 ${
+                              selected ? "text-brand-foreground/15" : "text-white/[0.06]"
+                            }`}
+                          />
+                        </label>
+                      );
+                    })}
                   </div>
 
                   {fulfillment === "Delivery" && (
-                    <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-5 rounded-md ring-1 ring-zinc-300">
-                      <div>
+                    <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className={subTileCls}>
                         <label className={labelCls} htmlFor="quote-town">Town</label>
                         <select id="quote-town" className={inputCls} {...register("town")}>
                           <option value="">Select town…</option>
@@ -376,7 +457,7 @@ function QuotePage() {
                           <p className={errorCls}>{formState.errors.town.message as string}</p>
                         )}
                       </div>
-                      <div>
+                      <div className={subTileCls}>
                         <label className={labelCls} htmlFor="quote-zip">ZIP</label>
                         <input id="quote-zip" inputMode="numeric" maxLength={5} placeholder="01522" className={inputCls} {...register("zip")} />
                         {formState.errors.zip && (
@@ -384,16 +465,16 @@ function QuotePage() {
                         )}
                       </div>
 
-                      <div className="md:col-span-2">
+                      <div className={`${subTileCls} md:col-span-2`}>
                         <p className={labelCls}>Where should we drop it?</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {DROP_SPOTS.map((d) => (
                             <label
                               key={d}
-                              className="flex items-center gap-3 bg-kraft px-3 h-11 ring-1 ring-zinc-300 rounded-sm text-sm cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2"
+                              className="flex items-center gap-3 bg-white/5 px-3 h-11 ring-1 ring-white/15 text-sm cursor-pointer hover:ring-white/40 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:bg-brand/10 transition-colors"
                             >
                               <input type="radio" value={d} {...register("dropSpot")} className="accent-[var(--brand)]" />
-                              <span className="text-zinc-900">{d}</span>
+                              <span className="text-surface-foreground">{d}</span>
                             </label>
                           ))}
                         </div>
@@ -402,13 +483,13 @@ function QuotePage() {
                         )}
                       </div>
 
-                      <div className="md:col-span-2">
+                      <div className={`${subTileCls} md:col-span-2`}>
                         <p className={labelCls}>When?</p>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                           {TIMING.map((t) => (
                             <label
                               key={t}
-                              className="flex items-center justify-center text-center bg-kraft px-2 h-11 ring-1 ring-zinc-300 rounded-sm text-xs font-semibold cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900 uppercase tracking-wide"
+                              className="flex items-center justify-center text-center bg-white/5 px-2 h-11 ring-1 ring-white/15 text-xs font-semibold cursor-pointer hover:ring-white/40 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-surface-foreground uppercase tracking-wide transition-colors"
                             >
                               <input type="radio" value={t} {...register("timing")} className="sr-only" />
                               {t === "As soon as possible" ? "ASAP" : t}
@@ -426,11 +507,11 @@ function QuotePage() {
                         )}
                       </div>
 
-                      <label className="md:col-span-2 flex items-start gap-3 text-sm text-zinc-800 cursor-pointer">
+                      <label className="md:col-span-2 flex items-start gap-3 text-sm text-white/80 cursor-pointer px-1">
                         <input type="checkbox" {...register("acknowledged")} className="mt-1 size-4 accent-[var(--brand)]" />
                         <span>
-                          I get the <strong>1-yard minimum</strong> and the
-                          <strong> 48-hour scheduling window</strong>, and that
+                          I get the <strong className="text-surface-foreground">1-yard minimum</strong> and the
+                          <strong className="text-surface-foreground"> 48-hour scheduling window</strong>, and that
                           delivery is driveway or curbline only.
                         </span>
                       </label>
@@ -439,85 +520,100 @@ function QuotePage() {
                       )}
                     </div>
                   )}
-                </SlideHeader>
+                </div>
               )}
 
               {step === 2 && (
-                <SlideHeader title="How do we reach you?" helper="So Abby can come back with the number.">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className={labelCls} htmlFor="quote-name">Name</label>
-                      <input id="quote-name" className={inputCls} autoComplete="name" {...register("name")} />
-                      {formState.errors.name && <p className={errorCls}>{formState.errors.name.message}</p>}
-                    </div>
-                    <div>
-                      <label className={labelCls} htmlFor="quote-phone">Phone</label>
-                      <input id="quote-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(508) 555-0142" className={inputCls} {...register("phone")} />
-                      {formState.errors.phone && <p className={errorCls}>{formState.errors.phone.message}</p>}
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className={labelCls} htmlFor="quote-email">Email</label>
-                      <input id="quote-email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" className={inputCls} {...register("email")} />
-                      {formState.errors.email && <p className={errorCls}>{formState.errors.email.message}</p>}
-                    </div>
-                    <div className="md:col-span-2">
-                      <p className={labelCls}>Best way to reach me</p>
-                      <div className="grid grid-cols-3 gap-2">
-                        {CONTACT_METHODS.map((m) => (
-                          <label
-                            key={m}
-                            className="flex items-center justify-center bg-white px-2 h-11 ring-1 ring-zinc-300 rounded-sm label cursor-pointer hover:ring-zinc-500 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-zinc-900"
-                          >
-                            <input type="radio" value={m} {...register("bestContact")} className="sr-only" />
-                            {m}
-                          </label>
-                        ))}
+                <div className="space-y-3">
+                  <div className={subTileCls}>
+                    <p className="eyebrow text-brand mb-4">Your details</p>
+                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className={labelCls} htmlFor="quote-name">Name</label>
+                        <input id="quote-name" className={inputCls} autoComplete="name" {...register("name")} />
+                        {formState.errors.name && <p className={errorCls}>{formState.errors.name.message}</p>}
+                      </div>
+                      <div>
+                        <label className={labelCls} htmlFor="quote-phone">Phone</label>
+                        <input id="quote-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(508) 555-0142" className={inputCls} {...register("phone")} />
+                        {formState.errors.phone && <p className={errorCls}>{formState.errors.phone.message}</p>}
+                      </div>
+                      <div className="md:col-span-2">
+                        <label className={labelCls} htmlFor="quote-email">Email</label>
+                        <input id="quote-email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" className={inputCls} {...register("email")} />
+                        {formState.errors.email && <p className={errorCls}>{formState.errors.email.message}</p>}
                       </div>
                     </div>
+                    <User
+                      aria-hidden="true"
+                      strokeWidth={1.25}
+                      className="pointer-events-none absolute -bottom-4 -right-3 z-0 size-32 md:size-40 text-white/[0.05]"
+                    />
                   </div>
-                </SlideHeader>
+
+                  <div className={subTileCls}>
+                    <p className={labelCls}>Best way to reach me</p>
+                    <div className="grid grid-cols-3 gap-2">
+                      {CONTACT_METHODS.map((m) => {
+                        const Icon = m === "Call" ? Phone : m === "Text" ? MessageSquare : Mail;
+                        return (
+                          <label
+                            key={m}
+                            className="flex flex-col items-center justify-center gap-1 bg-white/5 px-2 py-3 ring-1 ring-white/15 label cursor-pointer hover:ring-white/40 has-[:checked]:ring-brand has-[:checked]:ring-2 has-[:checked]:text-brand text-surface-foreground transition-colors"
+                          >
+                            <input type="radio" value={m} {...register("bestContact")} className="sr-only" />
+                            <Icon className="size-4" strokeWidth={1.5} />
+                            <span>{m}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
               )}
 
               {step === 3 && (
-                <SlideHeader title="Review & send" helper="Last check — then one tap fires it to Abby.">
+                <div className="space-y-3">
                   <ReviewSummary data={watch()} onJump={setStep} />
-                  <div className="mt-5">
-                    <label className={labelCls} htmlFor="quote-notes">
-                      Notes <span className="text-zinc-500 normal-case font-normal">(optional)</span>
-                    </label>
+                  <div className={subTileCls}>
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="eyebrow text-brand" htmlFor="quote-notes">
+                        Notes <span className="text-white/40 normal-case font-normal tracking-normal">(optional)</span>
+                      </label>
+                    </div>
                     <NotesField register={register} watch={watch} />
                     {formState.errors.notes && <p className={errorCls}>{formState.errors.notes.message}</p>}
                   </div>
-                  <p className="meta text-zinc-600 mt-4 max-w-[55ch]">
+                  <p className="meta text-white/55 mt-2 max-w-[55ch]">
                     Submitting means you agree to our{" "}
-                    <Link to="/privacy" className="underline hover:text-zinc-900">Privacy &amp; Terms</Link>.
+                    <Link to="/privacy" className="underline hover:text-surface-foreground">Privacy &amp; Terms</Link>.
                   </p>
-                </SlideHeader>
+                </div>
               )}
             </div>
 
             {/* Footer — step nav */}
-            <div className="px-5 md:px-7 py-4 border-t border-zinc-300/70 bg-kraft flex items-center justify-between gap-3">
+            <div className="px-5 md:px-7 py-4 border-t border-white/10 flex items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={goPrev}
                 disabled={step === 0}
-                className="inline-flex items-center gap-2 label text-zinc-700 hover:text-brand disabled:opacity-30 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 label text-white/60 hover:text-brand disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="size-4" /> Back
               </button>
-              {step < STEP_LABELS.length - 1 ? (
+              {step < STEPS.length - 1 ? (
                 <button
                   type="button"
                   onClick={goNext}
-                  className="inline-flex items-center gap-2 bg-surface text-surface-foreground px-6 h-11 label hover:opacity-90 rounded-sm"
+                  className="inline-flex items-center gap-2 bg-white text-zinc-900 px-7 h-12 label hover:opacity-90"
                 >
                   Next <ArrowRight className="size-4" />
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90 rounded-sm"
+                  className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-7 h-12 label hover:opacity-90"
                 >
                   <Send className="size-4" /> Send my request
                 </button>
@@ -587,24 +683,6 @@ function QuotePage() {
   );
 }
 
-function SlideHeader({
-  title,
-  helper,
-  children,
-}: {
-  title: string;
-  helper?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <h2 className="display-4 text-zinc-900">{title}</h2>
-      {helper && <p className="body-sm text-zinc-600 mt-2 max-w-[55ch]">{helper}</p>}
-      <div className="mt-5">{children}</div>
-    </div>
-  );
-}
-
 function ReviewSummary({
   data,
   onJump,
@@ -638,23 +716,26 @@ function ReviewSummary({
       .join(" · "),
   });
   return (
-    <ul className="divide-y divide-zinc-300/70 bg-white rounded-md ring-1 ring-zinc-300 overflow-hidden">
+    <div className="space-y-2">
       {rows.map((r) => (
-        <li key={r.label} className="flex items-start gap-3 p-4">
+        <div
+          key={r.label}
+          className="relative bg-white/5 ring-1 ring-white/15 p-4 flex items-start gap-3"
+        >
           <div className="flex-1 min-w-0">
-            <p className="eyebrow text-zinc-600 mb-1">{r.label}</p>
-            <p className="text-sm text-zinc-900 break-words">{r.value}</p>
+            <p className="eyebrow text-brand mb-1">{r.label}</p>
+            <p className="text-sm text-surface-foreground break-words">{r.value}</p>
           </div>
           <button
             type="button"
             onClick={() => onJump(r.step)}
-            className="shrink-0 inline-flex items-center gap-1 label text-zinc-700 hover:text-brand"
+            className="shrink-0 inline-flex items-center gap-1 label text-white/60 hover:text-brand"
           >
             <Pencil className="size-3.5" /> Edit
           </button>
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
 
@@ -677,7 +758,7 @@ function NotesField({
         className={`${inputCls} h-auto py-3 resize-y min-h-[88px]`}
         {...register("notes")}
       />
-      <p className="meta text-zinc-500 mt-1 text-right tabular-nums">
+      <p className="meta text-white/45 mt-1 text-right tabular-nums">
         {value.length}/500
       </p>
     </div>
@@ -715,7 +796,7 @@ function SuccessView({
       label="Request ready"
       tiles={{
         hero: (
-          <div className="h-full w-full bg-surface text-surface-foreground rounded-md overflow-hidden flex flex-col">
+          <div className="h-full w-full bg-surface text-surface-foreground overflow-hidden flex flex-col">
             <div className="flex-1 px-6 md:px-10 py-8 md:py-12 flex flex-col justify-center">
               <p className="eyebrow text-brand mb-4 inline-flex items-center gap-2">
                 <Check className="size-3.5" /> Request ready
@@ -723,27 +804,27 @@ function SuccessView({
               <h1 className="display-2 leading-[0.9] max-w-[18ch]">
                 Send it to <span className="text-brand">Abby.</span>
               </h1>
-              <p className="mt-4 md:mt-6 text-zinc-400 max-w-[52ch]">
+              <p className="mt-4 md:mt-6 text-white/60 max-w-[52ch]">
                 One tap opens mail or messages with the full request typed up. Hit send. She's back the same day.
               </p>
             </div>
             <div className="px-6 md:px-10 pb-8 md:pb-10 grid grid-cols-1 sm:grid-cols-3 gap-3">
               <a
                 href={mailto}
-                className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground h-12 label hover:opacity-90 rounded-sm"
+                className="inline-flex items-center justify-center gap-2 bg-brand text-brand-foreground h-12 label hover:opacity-90"
               >
                 <Mail className="size-4" /> Email
               </a>
               <a
                 href={sms}
-                className="inline-flex items-center justify-center gap-2 bg-white text-zinc-900 h-12 label hover:opacity-90 rounded-sm"
+                className="inline-flex items-center justify-center gap-2 bg-white text-zinc-900 h-12 label hover:opacity-90"
               >
                 <MessageSquare className="size-4" /> Text
               </a>
               <button
                 type="button"
                 onClick={onCopy}
-                className="inline-flex items-center justify-center gap-2 bg-kraft text-zinc-900 ring-1 ring-zinc-300 h-12 label hover:ring-zinc-500 rounded-sm"
+                className="inline-flex items-center justify-center gap-2 bg-white/5 text-surface-foreground ring-1 ring-white/15 h-12 label hover:ring-white/40 transition-colors"
               >
                 {copied ? (
                   <><Check className="size-4" /> Copied</>
@@ -755,7 +836,7 @@ function SuccessView({
           </div>
         ),
         a: (
-          <div className="h-full w-full bg-kraft text-zinc-900 ring-1 ring-zinc-300 rounded-md overflow-hidden flex flex-col">
+          <div className="h-full w-full bg-kraft text-zinc-900 ring-1 ring-zinc-300 overflow-hidden flex flex-col">
             <div className="px-5 py-3 border-b border-zinc-300/70 flex items-center justify-between">
               <p className="eyebrow text-zinc-700">Preview</p>
               <button
@@ -787,7 +868,7 @@ function SuccessView({
           <button
             type="button"
             onClick={onEdit}
-            className="h-full w-full bg-white text-zinc-900 ring-1 ring-zinc-300 rounded-md hover:ring-zinc-500 inline-flex items-center justify-center gap-2 label"
+            className="h-full w-full bg-white text-zinc-900 ring-1 ring-zinc-300 hover:ring-zinc-500 inline-flex items-center justify-center gap-2 label"
           >
             <ArrowLeft className="size-4" /> Edit my request
           </button>
