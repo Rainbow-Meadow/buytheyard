@@ -168,6 +168,14 @@ export type TileBlock =
         body?: ReactNode;
         /** Overlay anchor inside the frame. Defaults to "bottom-left". */
         align?: "bottom-left" | "bottom-right" | "top-left" | "top-right" | "center";
+        /** Internal composition. `"stack"` (default) keeps the existing
+         *  overlay treatment. `"anchored"` adds the anchored-family
+         *  ornaments (vertical brand bar on the left edge, optional ghosted
+         *  index numeral behind the text, brand-red eyebrow rule). */
+        layout?: "stack" | "anchored";
+        /** Optional ghosted numeral (e.g. "01"…"06") rendered behind the
+         *  overlay text when `layout="anchored"`. */
+        index?: string;
       };
       /** Optional link wrapping the entire tile. */
       to?: string;
@@ -578,10 +586,36 @@ function ImageTileInner({
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-transparent"
           />
+          {block.overlay?.layout === "anchored" && (
+            <>
+              {/* Vertical brand-red anchor bar bleeding off the left edge */}
+              <div
+                aria-hidden="true"
+                className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+              />
+              {/* Ghosted index numeral */}
+              {block.overlay.index && (
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-6 left-3 leading-none font-black text-white/[0.10] select-none pointer-events-none z-10"
+                  style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+                >
+                  {block.overlay.index}
+                </span>
+              )}
+            </>
+          )}
           <div className={`absolute inset-0 flex ${align} p-5 md:p-6`}>
-            <div className="text-white max-w-[34ch]">
+            <div className="text-white max-w-[34ch] relative z-30">
               {block.overlay?.eyebrow && (
-                <p className="eyebrow text-brand-glow mb-2">{block.overlay.eyebrow}</p>
+                block.overlay?.layout === "anchored" ? (
+                  <p className="eyebrow text-brand mb-2 inline-flex items-center gap-2">
+                    <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
+                    {block.overlay.eyebrow}
+                  </p>
+                ) : (
+                  <p className="eyebrow text-brand-glow mb-2">{block.overlay.eyebrow}</p>
+                )
               )}
               {block.overlay?.title && (
                 <p className="display-4 leading-tight">{block.overlay.title}</p>

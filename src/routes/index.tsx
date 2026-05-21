@@ -193,6 +193,8 @@ function HomePage() {
                 title: "Featured materials",
                 body: "Mulch, loam, sand, stone — by the yard, from our Jefferson lot.",
                 align: "bottom-left",
+                layout: "anchored",
+                index: "01",
               }}
               cta={{ label: "See the full catalog", to: "/products" }}
             />
@@ -209,7 +211,13 @@ function HomePage() {
                   src={p.image!}
                   alt={p.name}
                   focal="center"
-                  overlay={{ eyebrow: p.category, title: p.name, align: "bottom-left" }}
+                  overlay={{
+                    eyebrow: p.category,
+                    title: p.name,
+                    align: "bottom-left",
+                    layout: "anchored",
+                    index: String(i + 2).padStart(2, "0"),
+                  }}
                   details={{
                     shareId: `feat-${productSlug(p.name)}`,
                     eyebrow: p.category,
