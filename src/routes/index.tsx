@@ -12,7 +12,6 @@ import { products, productSlug } from "@/data/products";
 import mulchBlack from "@/assets/mulch-black.webp";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
-import { FaqDialogTile } from "@/components/home/FaqDialogTile";
 import { ServiceAreaMapTile } from "@/components/home/ServiceAreaMapTile";
 import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
 
