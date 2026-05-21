@@ -950,7 +950,7 @@ function FlipTileInner({
         aria-label={flipLabel}
         aria-pressed={flipped}
         onClick={trigger === "click" ? () => setFlipped((f) => !f) : undefined}
-        className="absolute top-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 hover:bg-black/75 text-white text-[10px] uppercase tracking-wider backdrop-blur-sm min-h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 hover:bg-black/75 text-white text-[10px] uppercase tracking-wider backdrop-blur-sm min-h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
       >
         <RotateCw className="size-3" aria-hidden="true" />
         <span aria-hidden="true">{hint}</span>
