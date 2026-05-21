@@ -58,10 +58,10 @@ function DeliveryPage() {
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
-          a: <Tile id="dlv-stat-radius" fill variant="stat" tone="surface" layout="anchored" value="~25 mi" label="Service radius" />,
-          b: <Tile id="dlv-stat-min" fill variant="stat" tone="brand" layout="anchored" value="1 yd" label="Order minimum" />,
-          c: <Tile id="dlv-stat-lead" fill variant="stat" tone="kraft" layout="anchored" value="~48 hr" label="Typical lead time" />,
-          d: <Tile id="dlv-stat-drop" fill variant="stat" tone="gray" layout="anchored" value="Curb" label="Driveway drop" />,
+          a: <Tile id="dlv-stat-radius" fill variant="stat" tone="surface" layout="anchored" anchorIndex="02" value="~25 mi" label="Service radius" />,
+          b: <Tile id="dlv-stat-min" fill variant="stat" tone="brand" layout="anchored" anchorIndex="03" value="1 yd" label="Order minimum" />,
+          c: <Tile id="dlv-stat-lead" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="04" value="~48 hr" label="Typical lead time" />,
+          d: <Tile id="dlv-stat-drop" fill variant="stat" tone="gray" layout="anchored" anchorIndex="05" value="Curb" label="Driveway drop" />,
         }}
       />
 
