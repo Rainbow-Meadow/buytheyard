@@ -20,10 +20,9 @@ const FEATURED = [
   "Hemlock Mulch",
   "Screened Loam",
   "Mason Sand",
-  "3/4\" Crushed Blue Stone",
+  '3/4" Crushed Blue Stone',
   "Red Lava Rock",
   "Hanging Baskets",
-  "ASTM Playground Chips",
 ].map((n) => products.find((p) => p.name === n)!);
 
 /**
