@@ -90,6 +90,10 @@ export type TileBlock =
       eyebrow?: string;
       title?: string;
       body?: ReactNode;
+      /** Two-digit index numeral that adds the anchored-family ornament
+       *  (brand-red left bar + ghosted index numeral + brand-rule eyebrow)
+       *  when `layout="anchored"`. */
+      anchorIndex?: string;
     })
   | (BaseTile & {
       variant: "numbered";
