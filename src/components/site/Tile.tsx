@@ -1090,21 +1090,30 @@ export function Tile(block: TileBlock) {
             ? "text-white/[0.12]"
             : "text-white/[0.08]";
         const ruleColor = tone === "brand" ? "bg-brand-foreground" : "bg-brand";
+        const hasIcon = !!block.icon;
         return (
           <article className={`${shell} flex flex-col relative overflow-hidden`}>
             <span
               aria-hidden="true"
               className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
             />
-            <span
-              aria-hidden="true"
-              className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
-              style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
-            >
-              {block.number}
-            </span>
+            {hasIcon ? (
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none select-none absolute -bottom-6 -left-2 z-0 ${ghostColor} [&>*]:size-44 md:[&>*]:size-56`}
+              >
+                {block.icon}
+              </span>
+            ) : (
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
+                style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+              >
+                {block.number}
+              </span>
+            )}
             <div className="relative z-10 flex flex-col h-full">
-              {block.icon && <TileIcon icon={block.icon} tone={tone} />}
               {block.eyebrow && (
                 <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2`}>
                   <span aria-hidden="true" className={`inline-block h-0.5 w-6 ${ruleColor}`} />
