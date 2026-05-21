@@ -767,6 +767,13 @@ function CarouselTileInner({
         })}
       </div>
 
+      {/* Polite live region announces slide changes to assistive tech.
+       *  Autoplay pauses on focus, so SR users only hear changes they
+       *  caused themselves (arrows, dots, swipe). */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {`Slide ${index + 1} of ${count}`}
+      </div>
+
       {showArrows && count > 1 && (
         <>
           <button
