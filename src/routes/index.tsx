@@ -19,7 +19,7 @@ const FEATURED = [
   "Screened Loam",
   "Mason Sand",
   '3/4" Crushed Blue Stone',
-  "Red Lava Rock",
+  "Hanging Baskets",
 ].map((n) => products.find((p) => p.name === n)!);
 
 /**
