@@ -31,9 +31,9 @@ export function SiteFooter() {
     <footer className="bg-surface text-kraft border-t border-white/10">
       <div className="border-l-[1.5px] border-brand">
         <div className="max-w-7xl mx-auto px-5 md:px-8 py-8 md:py-14">
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Column 1 — Identity + WBE */}
-            <div className="col-span-2 lg:col-span-1 space-y-8 md:space-y-10">
+            <div className="space-y-8 md:space-y-10">
               <div className="space-y-4">
                 <Wordmark size="lg" withTagline />
                 <p className="meta text-kraft/50 flex items-center gap-2">
@@ -43,7 +43,7 @@ export function SiteFooter() {
                 </p>
               </div>
 
-              <div className="space-y-4 pt-6 border-t border-white/5">
+              <div className="space-y-4 md:pt-6 md:border-t md:border-white/5">
                 <Eyebrow>Certification</Eyebrow>
                 <div className="flex items-start gap-4">
                   <img
@@ -108,7 +108,7 @@ export function SiteFooter() {
                 </div>
               </div>
 
-              <div className="space-y-4 pt-6 border-t border-white/5">
+              <div className="space-y-4 md:pt-6 md:border-t md:border-white/5">
                 <Eyebrow>Visit</Eyebrow>
                 <address className="not-italic body-sm text-kraft/80 leading-relaxed">
                   2264 Main St.
@@ -186,7 +186,7 @@ export function SiteFooter() {
 
               <div className="space-y-4">
                 <Eyebrow>Site</Eyebrow>
-                <nav className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 md:gap-y-3">
+                <nav className="grid grid-cols-2 gap-x-4 gap-y-2 md:gap-y-3">
                   <Link to="/products" className="label text-kraft/70 hover:text-kraft transition-colors">Products</Link>
                   <Link to="/about" className="label text-kraft/70 hover:text-kraft transition-colors">About</Link>
                   <Link to="/delivery" className="label text-kraft/70 hover:text-kraft transition-colors">Delivery</Link>
