@@ -90,8 +90,8 @@ function DeliveryPage() {
               tone="kraft"
               number="02"
               eyebrow="Timing"
-              title="Call before noon for same-day."
-              body="Otherwise ~48 hours."
+              title="Call before noon."
+              body="Same-day, otherwise ~48 hours."
             />
           ),
           b: (
@@ -102,7 +102,7 @@ function DeliveryPage() {
               tone="white"
               number="03"
               eyebrow="Mark your spot"
-              title="Tarp, bucket, or cone."
+              title="Tarp or cone."
               body="Pile lands right there."
             />
           ),
@@ -115,7 +115,7 @@ function DeliveryPage() {
               icon={<Warehouse />}
               eyebrow="04 · Pickup"
               title="Bring a truck"
-              body="Mon–Fri 8a–5p · Sat 8a–3p."
+              body="Mon–Fri 8–5, Sat 8–3."
             />
           ),
           d: (
@@ -126,8 +126,8 @@ function DeliveryPage() {
               tone="kraft"
               icon={<CreditCard />}
               eyebrow="05 · Payment"
-              title="4% card fee — pass-through"
-              body="Cash or check skip the fee."
+              title="4% card fee."
+              body="Cash or check skip it."
             />
           ),
           e: (
