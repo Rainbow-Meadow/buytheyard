@@ -1,47 +1,58 @@
-## Goal
+## Workflow: section-by-section design tuning across the site
 
-Make the delivery page's section01 tiles look composed rather than templated. User picked the "Asymmetric anchor" direction: ghosted backdrop numeral on the hero, split number/eyebrow on the small numbered tiles with the title anchored to the bottom, ghosted bottom-right icon on the text tiles, and a horizontal icon-bubble row for the CTA.
+You want to go through every page, one section at a time, generating three "Asymmetric anchor / Swiss / Editorial"-style design directions per section and picking one before I implement. Same loop we just ran for `/delivery` section 2.
 
-## Approach
+## Inventory (15 sections)
 
-Add an opt-in `layout` prop to `Tile`. Default stays `"stack"` (current rendering) so no other page is affected; the six delivery section01 tiles opt into `"anchored"`.
+```
+/                  index.tsx        — 3 sections
+/products          products.tsx     — 1 section
+/about             about.tsx        — 2 sections
+/delivery          delivery.tsx     — 2 sections  (sec2 already tuned ✓)
+/service-area      service-area.tsx — 2 sections
+/quote             quote.tsx        — 2 sections
+/contact           contact.tsx      — 2 sections
+/privacy           privacy.tsx      — long-form, skip
+```
 
-### Files
+Net queue: **14 sections** (15 minus the one already done).
 
-- `src/components/site/Tile.tsx` — extend `BaseTile` with `layout?: "stack" | "anchored"` and branch the render path for the three variants below. No new tone/padding logic; reuse `eyebrowToneCls`, `bodyToneCls`, `iconToneCls`, `isLightTone`.
-- `src/routes/delivery.tsx` — add `layout="anchored"` to the six tiles inside the section01 `TileScreen` (`hero`, `a`, `b`, `c`, `d`, `e`).
+## Per-section loop
 
-### Composition rules (anchored variant)
+For each section I will:
 
-`numbered` with a `body` (the hero):
-- Top-left: icon (existing `TileIcon`), then eyebrow → title → body in a tight stack.
-- Bottom-right: huge ghosted numeral — `display-1`-scale, `text-current/[0.05]` on dark tones / `text-current/[0.06]` on light, absolutely positioned at `-right-4 -bottom-10`, `select-none pointer-events-none`, `aria-hidden`.
+1. Navigate to the route at 414×896, scroll to the section, take a screenshot.
+2. Call `design--create_directions` with that screenshot and a one-line description of what's locked vs free. Tones, copy, grid, and tile order stay LOCKED — directions only vary composition / anchoring / hierarchy.
+3. Surface the three rendered prototypes via `ask_questions` (`type: prototype`).
+4. Implement the picked direction surgically. Default rendering of other pages stays untouched — anything reusable becomes a new `layout="…"` value on `Tile` (same pattern as `layout="anchored"`), opted into only on the section being tuned.
+5. Verify in-browser, then move to the next section.
 
-`numbered` without a body (02, 03):
-- Top row: eyebrow on the left, number on the right (display-4 size, brand color, leading-none).
-- Title anchored to the bottom via `mt-auto`.
-- No icon.
+I'll work in this order unless you redirect:
 
-`text` (Payment, Pickup):
-- Eyebrow + title top-aligned (same type as today).
-- Icon pushed to bottom-right via `mt-auto self-end`, rendered at `size-7` with `opacity-25` (light tones) / `opacity-40` (dark tones), `aria-hidden`.
+```
+1.  /             Screen 1 (hero)
+2.  /             Screen 2
+3.  /             Screen 3
+4.  /products     Screen 1
+5.  /about        Screen 1
+6.  /about        Screen 2
+7.  /delivery     Screen 1 (hero + stats)
+8.  /service-area Screen 1
+9.  /service-area Screen 2
+10. /quote        Screen 1
+11. /quote        Screen 2
+12. /contact      Screen 1
+13. /contact      Screen 2
+14. (review pass — any section you want to revisit)
+```
 
-`cta` (Talk to Abby):
-- Horizontal row, `items-center justify-between`.
-- Left: icon inside a circular bubble (`grid place-items-center size-12 rounded-full bg-current/10`, icon at `size-5`), then eyebrow + title stacked beside it.
-- Right: existing `CtaLink` (`508.579.9897`) rendered with the current underline label treatment, right-aligned.
+Each section is its own approval cycle — you pick, I build, we move on. No batching three sections into one direction set, because per-section taste matters and the prototypes lose specificity when scope widens.
 
-### Constraints honored
+## What I need from you to start
 
-- Headlines stay 1–2 lines, body 1–2 lines — copy is unchanged from the prior turn.
-- No `padding` overrides — still derived from `size` via `SIZE_PADDING`.
-- No new tones, no new design tokens, no font swaps. The prototype's `Big Shoulders Display` headline look is already covered by our existing `display-*` utilities used in the tile.
-- Default `"stack"` rendering of every other route (`about`, `service-area`, `contact`, `quote`, `privacy`, `products`) is untouched.
+Two quick decisions:
 
-### Verification
+- **Start point** — kick off at `/` Screen 1, or jump somewhere specific?
+- **Cohesion guardrail** — do you want me to lock the *anchored* pattern we just picked for `/delivery` as the house style across every section (so directions are variations within that family), or treat each section as a blank slate and let directions diverge?
 
-After implementation: navigate to `/delivery` at 414×896, screenshot section01, confirm:
-- Hero shows ghosted "01" backdrop, no top-of-tile dead space, content reads call-it-in.
-- 02 / 03 show eyebrow + number on the top row, title flush at the bottom.
-- Payment / Pickup show a ghosted icon in the bottom-right corner.
-- CTA reads as a single horizontal row: bubble, text block, phone link.
+Once you answer those two, I'll start the first section immediately — capture, generate three directions, ask you to pick.
