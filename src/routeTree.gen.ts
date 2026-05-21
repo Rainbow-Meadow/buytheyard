@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServiceAreaRouteImport } from './routes/service-area'
+import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as DeliveryRouteImport } from './routes/delivery'
@@ -26,6 +27,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServiceAreaRoute = ServiceAreaRouteImport.update({
   id: '/service-area',
   path: '/service-area',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuoteRoute = QuoteRouteImport.update({
+  id: '/quote',
+  path: '/quote',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsRoute = ProductsRouteImport.update({
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/delivery': typeof DeliveryRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
+  '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/delivery': typeof DeliveryRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
+  '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/delivery': typeof DeliveryRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
+  '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/delivery'
     | '/privacy'
     | '/products'
+    | '/quote'
     | '/service-area'
     | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/delivery'
     | '/privacy'
     | '/products'
+    | '/quote'
     | '/service-area'
     | '/sitemap.xml'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/delivery'
     | '/privacy'
     | '/products'
+    | '/quote'
     | '/service-area'
     | '/sitemap.xml'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   DeliveryRoute: typeof DeliveryRoute
   PrivacyRoute: typeof PrivacyRoute
   ProductsRoute: typeof ProductsRoute
+  QuoteRoute: typeof QuoteRoute
   ServiceAreaRoute: typeof ServiceAreaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/service-area'
       fullPath: '/service-area'
       preLoaderRoute: typeof ServiceAreaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quote': {
+      id: '/quote'
+      path: '/quote'
+      fullPath: '/quote'
+      preLoaderRoute: typeof QuoteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products': {
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeliveryRoute: DeliveryRoute,
   PrivacyRoute: PrivacyRoute,
   ProductsRoute: ProductsRoute,
+  QuoteRoute: QuoteRoute,
   ServiceAreaRoute: ServiceAreaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
