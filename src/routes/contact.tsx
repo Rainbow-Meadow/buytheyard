@@ -75,7 +75,7 @@ function ContactPage() {
               fill
               variant="image"
               src={yardPatio}
-              alt="The patio area at the Buy The Yard lot in Jefferson, MA"
+              alt="Buy The Yard crew welcoming customers at the Jefferson, MA yard with OPEN flag and loader"
               focal="center"
               loading="eager"
               fetchPriority="high"
