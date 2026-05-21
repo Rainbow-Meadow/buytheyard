@@ -75,7 +75,7 @@ export function SiteFooter() {
             <div className="space-y-10">
               <div className="space-y-4">
                 <Eyebrow>Hours</Eyebrow>
-                <ul className="body-sm space-y-1.5 max-w-[32ch]">
+                <ul className="body-sm space-y-1.5 max-w-[32ch] mx-auto md:mx-0">
                   <li className="flex justify-between gap-4">
                     <span className="label text-kraft/50">Mon – Fri</span>
                     <span className="text-kraft">8:00am – 5:00pm</span>
