@@ -1091,7 +1091,7 @@ export function Tile(block: TileBlock) {
         );
       }
       return (
-        <article className={`${shell} flex flex-col ${block.anchorIndex ? "relative overflow-hidden" : ""}`}>
+        <article className={`${shell} flex flex-col`}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
           <p className={`display-3 leading-none ${tone === "brand" ? "text-brand-foreground" : "text-brand"}`}>{block.number}</p>
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mt-4`}>{block.eyebrow}</p>}
