@@ -115,6 +115,7 @@ function DeliveryPage() {
               variant="text"
               tone="kraft"
               layout="anchored"
+              anchorIndex="04"
               icon={<CreditCard />}
               eyebrow="Payment"
               title="Cash, check, or card (+4%)."
@@ -127,6 +128,7 @@ function DeliveryPage() {
               variant="text"
               tone="gray"
               layout="anchored"
+              anchorIndex="05"
               icon={<Warehouse />}
               eyebrow="Prefer pickup?"
               title="Bring a truck, no appt."
@@ -138,7 +140,7 @@ function DeliveryPage() {
               fill
               variant="cta"
               tone="brand"
-              layout="anchored"
+              anchorIndex="06"
               icon={<Phone />}
               eyebrow="Need a quote?"
               title="Talk to Abby"

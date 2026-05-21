@@ -90,6 +90,10 @@ export type TileBlock =
       eyebrow?: string;
       title?: string;
       body?: ReactNode;
+      /** Two-digit index numeral that adds the anchored-family ornament
+       *  (brand-red left bar + ghosted index numeral + brand-rule eyebrow)
+       *  when `layout="anchored"`. */
+      anchorIndex?: string;
     })
   | (BaseTile & {
       variant: "numbered";
@@ -1006,23 +1010,56 @@ export function Tile(block: TileBlock) {
   switch (block.variant) {
     case "text":
       if (block.layout === "anchored") {
+        const hasIndex = !!block.anchorIndex;
+        const ghostColor = isLightTone(tone)
+          ? "text-zinc-900/[0.06]"
+          : tone === "brand"
+            ? "text-white/[0.12]"
+            : "text-white/[0.08]";
+        const ruleColor = tone === "brand" ? "bg-brand-foreground" : "bg-brand";
         return (
-          <article className={`${shell} relative`}>
-            {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>}
-            {block.title && <p className="display-5 leading-snug">{block.title}</p>}
-            {block.body && (
-              <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyClamp}`}>
-                {block.body}
-              </div>
+          <article className={`${shell} relative ${hasIndex ? "overflow-hidden" : ""}`}>
+            {hasIndex && (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+                />
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
+                  style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+                >
+                  {block.anchorIndex}
+                </span>
+              </>
             )}
-            {block.icon && (
-              <div
-                aria-hidden="true"
-                className={`mt-auto self-end ${iconToneCls(tone)} ${isLightTone(tone) ? "opacity-25" : "opacity-40"} [&>*]:size-7`}
-              >
-                {block.icon}
-              </div>
-            )}
+            <div className={`relative z-10 flex flex-col h-full`}>
+              {block.eyebrow && (
+                hasIndex ? (
+                  <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2`}>
+                    <span aria-hidden="true" className={`inline-block h-0.5 w-6 ${ruleColor}`} />
+                    {block.eyebrow}
+                  </p>
+                ) : (
+                  <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>
+                )
+              )}
+              {block.title && <p className="display-5 leading-snug">{block.title}</p>}
+              {block.body && (
+                <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyClamp}`}>
+                  {block.body}
+                </div>
+              )}
+              {block.icon && (
+                <div
+                  aria-hidden="true"
+                  className={`mt-auto self-end ${iconToneCls(tone)} ${isLightTone(tone) ? "opacity-25" : "opacity-40"} [&>*]:size-7`}
+                >
+                  {block.icon}
+                </div>
+              )}
+            </div>
           </article>
         );
       }
@@ -1041,52 +1078,44 @@ export function Tile(block: TileBlock) {
 
     case "numbered":
       if (block.layout === "anchored") {
-        const numberColor = tone === "brand" ? "text-brand-foreground" : "text-brand";
-        if (block.body) {
-          // Hero composition — content top-left, ghosted backdrop numeral bottom-right.
-          const ghostColor = isLightTone(tone)
-            ? "text-zinc-900/[0.06]"
-            : tone === "brand"
-              ? "text-white/[0.08]"
-              : "text-white/[0.04]";
-          return (
-            <article className={`${shell} relative`}>
+        // Anchored family — brand-red left bar, ghosted index bottom-left,
+        // brand-rule eyebrow. Consistent across home/products/delivery.
+        const ghostColor = isLightTone(tone)
+          ? "text-zinc-900/[0.06]"
+          : tone === "brand"
+            ? "text-white/[0.12]"
+            : "text-white/[0.08]";
+        const ruleColor = tone === "brand" ? "bg-brand-foreground" : "bg-brand";
+        return (
+          <article className={`${shell} flex flex-col relative overflow-hidden`}>
+            <span
+              aria-hidden="true"
+              className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+            />
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
+              style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+            >
+              {block.number}
+            </span>
+            <div className="relative z-10 flex flex-col h-full">
               {block.icon && <TileIcon icon={block.icon} tone={tone} />}
-              {block.eyebrow && <p className={eyebrowToneCls(tone)}>{block.eyebrow}</p>}
-              {block.title && (
-                <p className={`display-5 leading-snug ${block.eyebrow ? "mt-1" : ""}`}>
-                  {block.title}
+              {block.eyebrow && (
+                <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2`}>
+                  <span aria-hidden="true" className={`inline-block h-0.5 w-6 ${ruleColor}`} />
+                  {block.eyebrow}
                 </p>
+              )}
+              {block.title && (
+                <p className="display-5 leading-snug">{block.title}</p>
               )}
               {block.body && (
                 <div className={`body ${bodyToneCls(tone)} mt-3 max-w-[34ch] ${bodyClamp}`}>
                   {block.body}
                 </div>
               )}
-              <span
-                aria-hidden="true"
-                className={`pointer-events-none select-none absolute -right-4 -bottom-10 leading-none font-black ${ghostColor}`}
-                style={{ fontSize: "clamp(9rem, 38vw, 14rem)" }}
-              >
-                {block.number}
-              </span>
-            </article>
-          );
-        }
-        // Compact composition — eyebrow + number on top row, title anchored bottom.
-        return (
-          <article className={`${shell} flex flex-col`}>
-            <div className="flex items-start justify-between gap-3">
-              {block.eyebrow ? (
-                <p className={`${eyebrowToneCls(tone)} mt-1`}>{block.eyebrow}</p>
-              ) : (
-                <span />
-              )}
-              <p className={`display-4 leading-none ${numberColor}`}>{block.number}</p>
             </div>
-            {block.title && (
-              <p className="display-5 leading-snug mt-auto pt-6">{block.title}</p>
-            )}
           </article>
         );
       }
