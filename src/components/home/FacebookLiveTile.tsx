@@ -1,4 +1,5 @@
 import { Facebook, ArrowUpRight } from "lucide-react";
+import fbProfileCard from "@/assets/fb-profile-card.webp";
 
 /**
  * Live-feel Facebook social proof card for the home reviews section.
@@ -25,6 +26,16 @@ export function FacebookLiveTile() {
       </div>
 
       <p className="display-5 leading-snug mt-3">Where the yard lives</p>
+
+      <div className="mt-3 rounded-md overflow-hidden ring-1 ring-white/10 bg-white">
+        <img
+          src={fbProfileCard}
+          alt="Buy The Yard Outdoor Products on Facebook — 822 followers, 268 posts"
+          loading="lazy"
+          decoding="async"
+          className="block w-full h-auto"
+        />
+      </div>
 
       <div className="mt-auto pt-4 flex items-end justify-between gap-3">
         <div>
