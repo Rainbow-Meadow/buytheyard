@@ -1,53 +1,57 @@
-## Goal
+## What I found
 
-Deliver Abby a polished "Welcome to your new Buy The Yard site" package she can flip through on a phone or screen-share. Format: editable `.pptx` + matching exported `.pdf`, both saved to `/mnt/documents/`.
+I went through all 19 screenshots and labeled each one against the live site. A few slides in the current deck pair photos with the wrong page.
 
-## Source material
+**True page for each screenshot:**
 
-19 screenshots in `user-uploads://BTY.zip` (mix of `.heic` and `.jpg`, mobile captures of the new site). First step is converting all HEICs to JPG with ImageMagick (via `nix run nixpkgs#imagemagick`) into `/tmp/bty-shots/` and sorting by filename so the deck mirrors the natural scroll order.
+| File | Actual page |
+|------|-------------|
+| 3939 | Home — hero ("Mulch. Loam. Sand. Stone") |
+| 3940 | Home — Featured Materials grid |
+| 3941 | Home — Facebook reviews / community |
+| 3942 | Home — Premium Black Mulch carousel + "today's price by phone" |
+| 3943 | About — "Built by Abby" (owner portrait) |
+| 3944 | About — "In her own words" quote + Charlie |
+| 3945 | Delivery — "You call. We deliver." (truck hero) |
+| 3946 | Delivery — "Call by noon" details + Talk to Abby |
+| 3947 | Get a Quote — Step 01 Materials form |
+| 3948 | Contact — "Call. We answer." (Open flag photo) |
+| 3949 | Contact — Map + email card |
+| 3950 | Service Area — "Across Central Mass" hero |
+| 3951 | Service Area — Daily routes / towns list |
+| 3952 | Service Area — "Not sure if we deliver?" |
+| 3953 | Privacy — top tap-to-flip cards (01–04) |
+| 3954 | Privacy — bottom cards (05–09) |
+| 3955 | Hamburger menu (open) |
+| 3956 | About — bottom (WBENC cert + hours) |
+| 3957 | Contact — bottom (map + Google review + footer) |
 
-## Brand & tone
+## Mismatches in the current deck
 
-- Client-facing — plain English, warm, no jargon. No "tile matrix / Size-Tone-Variant" talk.
-- Visual language pulled from the live site: kraft/cream background, deep brand orange accent, charcoal text. Header font Archivo Black-ish, body Inter — both safe-mappable in PPTX (Impact / Calibri fallback).
-- One bold idea per slide. Lots of whitespace. Each phone screenshot floats in a rounded "device frame" with a soft drop shadow against a kraft-toned background.
+1. **Slide 4 "Built on real reviews"** — pairs Home reviews (3941) with About quote (3944). 3944 is not a home page.
+2. **Slide 5 "One call locks the price"** — pairs Home carousel (3942) with Contact (3948). 3948 is not a pricing screen.
+3. **Slide 8 "Your story, on the page" (About)** — uses 3943 + 3956 but skips the strongest About shot, 3944 (Abby's quote).
+4. **Slide 9 "Tap. Call. Drive over." (Contact)** — uses 3957 + 3949 and skips 3948, the actual contact hero.
 
-## Deck structure (≈14 slides)
+## Corrections I'll apply
 
-1. **Cover** — "Your new site is live." Subhead with the URL `buytheyard.lovable.app`. Date.
-2. **What changed at a glance** — 4 stat-style callouts: Mobile-first, Faster, Clearer pricing path, Built to grow.
-3. **Home** — 2 screenshots side-by-side (hero + featured materials). Caption: "Front door — what neighbors see first."
-4. **Products** — 2 screenshots. Caption: "Every material, one scroll."
-5. **Delivery & Pickup** — 2 screenshots. Caption: "Answers the call-before-you-call questions."
-6. **Service Area** — 1–2 screenshots. Caption: "Towns we cover, on the map."
-7. **About** — 1 screenshot. Caption: "Your story, front and center."
-8. **Contact** — 1 screenshot. Caption: "Tap to call. Tap to map. Done."
-9. **Get a Quote** — 1 screenshot. Caption: "Lists come in ready to price."
-10. **Privacy & Terms** — 1 screenshot. Caption: "Plain-English on the front, full text behind."
-11. **Designed for the phone** — 3 screenshots in a row showing the tile system reading well at 440px.
-12. **Built to grow** — short bullets: easy content updates, SEO-ready pages per section, room for online ordering / blog later.
-13. **What's next** — 3 simple action items (share the link, add Google Business photos, send any copy tweaks).
-14. **Thank you / contact** — wordmark, URL, phone, email.
+| Slide | Before | After |
+|-------|--------|-------|
+| 4 Home trust | 3941 + 3944 | **3941 only** (single phone layout) |
+| 5 Pricing | 3942 + 3948 | **3942 only** (single phone layout) |
+| 8 About | 3943 + 3956 | **3943 + 3944** (portrait + her own words) |
+| 9 Contact | 3957 + 3949 | **3948 + 3949** (contact hero + map) |
 
-Exact screenshot-to-slide mapping is finalized after I view the converted JPGs (since filenames don't tell me which page each one is) — I'll sort, label, and place them deterministically. If a category has no screenshot, that slide is dropped rather than padded.
+All other slides already match correctly:
+- Slide 3 Home: 3939 + 3940 ✓
+- Slide 6 Delivery: 3945 + 3946 ✓
+- Slide 7 Service Area: 3950 + 3951 ✓
+- Slide 10 Quote: 3947 ✓
+- Slide 11 Privacy: 3953 + 3954 ✓
+- Slide 12 "Designed for the phone" triple: 3940 / 3946 / 3954 (one per major section) ✓
 
-## Build approach
+Unused after corrections: 3952, 3955, 3956, 3957 — kept out so each slide stays focused on the page it claims to show.
 
-- Use the `pptx` skill (pptxgenjs) — base it on the design tokens from the live site (kraft `#E9DFCB`-ish, brand orange `#C5471B`-ish, ink `#1B1B1B`). Title font Impact, body Calibri.
-- Each content slide: kraft background, thin brand-orange rule top-left, slide title 44pt, supporting line 20pt, screenshots inserted as base64 data URIs with rounded-mask shadows.
-- Embed images as base64 (per skill guidance) so LibreOffice PDF conversion stays intact.
-- Convert `.pptx` → `.pdf` via the bundled `run_libreoffice.py` script.
-- Visual QA: render each slide to JPG with `pdftoppm`, inspect every page for clipped text, mis-sized images, low contrast. Fix and re-render until clean. Report what was checked.
+## Then
 
-## Deliverables
-
-- `/mnt/documents/buy-the-yard-new-site.pptx`
-- `/mnt/documents/buy-the-yard-new-site.pdf`
-
-Both surfaced via `<presentation-artifact>` tags at the end of the build.
-
-## Open assumptions (will proceed unless told otherwise)
-
-- 16:9 widescreen (good for laptop screen-share and prints clean to landscape PDF).
-- English only.
-- No comparison to the previous site — purely a "here's what you got" walkthrough.
+Re-run the existing build script with the corrected mapping, convert to PDF via LibreOffice, render every slide to JPG, and visually QA all 14 before handing over. Output overwrites `/mnt/documents/buy-the-yard-new-site.pptx` and `.pdf`.
