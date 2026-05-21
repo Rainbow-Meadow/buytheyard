@@ -11,7 +11,6 @@ import {
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { lazy, Suspense } from "react";
 const CookieConsent = lazy(() =>
   import("@/components/site/CookieConsent").then((m) => ({ default: m.CookieConsent })),
@@ -268,7 +267,6 @@ function RootComponent() {
           <Outlet />
         </main>
         <SiteFooter />
-        <ChatLauncher />
         <Suspense fallback={null}>
           <CookieConsent />
         </Suspense>
