@@ -13,6 +13,7 @@
   --color-kraft: var(--kraft);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
+  --color-brand-glow: var(--brand-glow);
   --color-brandmark-gray: var(--brandmark-gray);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -31,6 +32,7 @@
   --kraft: oklch(0.91 0.012 80);                /* #e8e4dc */
   --brand: oklch(0.51 0.20 27);                 /* #ba1a1a red */
   --brand-foreground: oklch(0.99 0 0);
+  --brand-glow: oklch(0.78 0.15 32);             /* light brand red for eyebrows on dark/photo */
   --brandmark-gray: oklch(0.635 0.003 280);     /* #909092 brandmark right-triangle */
   --muted: oklch(0.91 0.012 80);
   --muted-foreground: oklch(0.45 0.01 280);
