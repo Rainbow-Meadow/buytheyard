@@ -284,7 +284,7 @@ function PrivacyPage() {
               icon={<ShieldCheck />}
               eyebrow="Legal entity"
               title="Buy The Yard, LLC"
-              body="MA-certified woman-owned business. Records kept 7 yrs for tax."
+              body="MA woman-owned. Records kept 7 yrs."
             />
           ),
           d: (
@@ -297,7 +297,7 @@ function PrivacyPage() {
               icon={<Mail />}
               eyebrow="08 · Email"
               title="Questions?"
-              cta={{ label: "abby@btymaterial.com", href: "mailto:abby@btymaterial.com" }}
+              cta={{ label: "Email Abby", href: "mailto:abby@btymaterial.com" }}
             />
           ),
           e: (
