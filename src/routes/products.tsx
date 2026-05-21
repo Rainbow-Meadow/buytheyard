@@ -82,6 +82,8 @@ function ProductsPage() {
         title: featured.name,
         body: preview,
         align: "bottom-left",
+        layout: "anchored",
+        index: "01",
       },
       cta: { label: "Call for today's price", href: "tel:5085799897" },
     });
@@ -110,6 +112,7 @@ function ProductsPage() {
             tone="brand"
 
             icon={<Phone />}
+            anchorIndex="02"
             eyebrow="Today's price by phone"
             title="Materials. By the yard."
             body="Seasonal pricing — one call sizes the project and locks the number."
@@ -124,6 +127,7 @@ function ProductsPage() {
             tone="surface"
 
             icon={<Truck />}
+            anchorIndex="03"
             eyebrow="Delivery"
             title="Curbside delivery."
             cta={{ label: "Delivery details", to: "/delivery" }}
@@ -137,6 +141,7 @@ function ProductsPage() {
             tone="kraft"
 
             icon={<HelpCircle />}
+            anchorIndex="04"
             eyebrow="Quote"
             title="Build a list in 60 seconds."
             cta={{ label: "Start a quote", to: "/quote" }}
