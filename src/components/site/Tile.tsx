@@ -1244,7 +1244,6 @@ export function Tile(block: TileBlock) {
       }
       return (
         (() => {
-          const showOrnament = !!block.anchorIndex || (!!block.icon && !!block.anchorIndex);
           // Family ornament gates on anchorIndex (opt-in). When present and an
           // icon exists, ghost the icon; otherwise ghost the numeral.
           const familyOn = !!block.anchorIndex;
