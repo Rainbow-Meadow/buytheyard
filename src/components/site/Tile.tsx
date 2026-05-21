@@ -1225,7 +1225,7 @@ export function Tile(block: TileBlock) {
             </div>
             <CtaLink
               cta={block.cta}
-              className="shrink-0 inline-flex items-center gap-2 label border-b border-current self-center hover:opacity-80"
+              className="shrink-0 inline-flex items-center gap-2 label self-center hover:opacity-80"
             />
           </article>
         );
@@ -1279,7 +1279,7 @@ export function Tile(block: TileBlock) {
               )}
               <CtaLink
                 cta={block.cta}
-                className="mt-5 inline-flex items-center gap-2 label border-b border-current self-start hover:opacity-80 relative z-10"
+                className="mt-5 inline-flex items-center gap-2 label self-start hover:opacity-80 relative z-10"
               />
             </article>
           );
