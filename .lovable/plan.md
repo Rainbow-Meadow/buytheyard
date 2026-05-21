@@ -1,56 +1,60 @@
-## Goal
-Make the /quote stepper read as part of the new anchored-tile system instead of a generic form card. Keep the 4-step flow, validation, hero/stat/image/CTA companions, and SuccessView wiring exactly as they are — only chrome and slide composition change.
+# Unify the stat tile system
 
-## Scope
-Single file: `src/routes/quote.tsx`. No changes to `quote-brief.ts`, `Tile.tsx`, `TileScreen`, or shared CSS.
+## What's inconsistent today
 
-## A. Form chrome reskin
+Five pages render `variant="stat"` tiles, but they don't speak the same visual language:
 
-Apply the site's tile vocabulary to the form shell, header, footer, and inline controls.
+| Page | Layout | Index strip | Top icon | Anchor glyph | Tones |
+|---|---|---|---|---|---|
+| `/` (home) | anchored | none | yes | per-tile, mixed sizes (`!size-40`, `!size-48`, raw `"f"` letter) | surface · brand · kraft · gray |
+| `/delivery` | anchored | 02–05 | none | lucide @ stroke 1.25 | surface · brand · kraft · gray |
+| `/about` | anchored | 02–05 | none | lucide @ stroke 1.25 | surface · brand · kraft · gray |
+| `/service-area` | **default (no anchored)** | none | none | none | surface · brand · kraft · gray |
+| `/quote` | anchored | 02, 03 (skips 01) | none | lucide @ stroke 1.25 | surface · kraft |
 
-- Form card: `bg-kraft … rounded-md` → flat tile shell — `bg-surface text-surface-foreground` outer with no rounding (matches `tone="surface"` anchored tiles). Border becomes `border-y border-zinc-800/60` instead of all-around ring.
-- Header band:
-  - Replace the `eyebrow` "Step 01 · Materials" + counter row with the anchored pattern: small eyebrow LEFT (`STEP · 01/04`), giant ghosted numeral RIGHT (`01` in `display-1` opacity-10), title underneath (the current step's question, e.g. "What do you need?") in `display-4` — same anchored-numbered pattern used on /delivery.
-  - Pip rail stays but becomes 4 short rules (`h-px` not `h-1.5`), brand on current, white/40 on done, white/15 on todo — matches the thin-rule density used elsewhere.
-- Footer band: `bg-kraft` → `bg-surface` with a top hairline; Back/Next/Send buttons restyle to the site's standard `h-12 px-7 label` shape (square corners, no `rounded-sm`). Primary action uses `bg-brand text-brand-foreground`; secondary uses ghost text.
-- Inputs (`inputCls`): drop `rounded-sm`; switch to `bg-white/5` on the surface-tone card with `ring-1 ring-white/15` and `focus:ring-brand`; label utility (`labelCls`) keeps `eyebrow` but moves to white/70.
-- Quantity stepper, select, textarea: same square-edge, ring-on-surface treatment. Trash/Add-row buttons become `label` rows in brand-on-hover.
-- Move the in-form `SlideHeader` (title + helper) OUT of the scrolling body — it now lives in the header band as the anchored numeral pairing, so each slide's body starts straight at the controls. `SlideHeader` shrinks to just `{children}` wrapping for spacing.
+Result: home reads as "icon stats," delivery/about read as "indexed family," service-area reads as a plain fallback, quote starts numbering at 02. Same component, four dialects.
 
-## B. Slide composition (anchored sub-tiles)
+## Canonical pattern (the "stat family")
 
-Each step's choice groups recompose as anchored tiles instead of plain radios/cards. Validation hooks (react-hook-form `register`/`Controller`) stay identical — only the visible label markup changes.
+Adopt the delivery/about treatment as the single canonical form. Every stat tile, on every page, becomes:
 
-### Step 0 — Materials
-- Each item row becomes a `bg-white/5 ring-1 ring-white/15` tile with a leading `02`-style index badge (top-left) and a ghosted `<Layers>` glyph bottom-right (size-32, opacity 8, stroke 1.25 — the standard ghost recipe).
-- "Add another product" becomes a dashed-ring tile-shaped add slot spanning the row, with `+ Add another product` centered in `label` style.
+- `variant="stat"` + `layout="anchored"`
+- `anchorIndex` numbered **sequentially from `01`** within its own grid (no shared numbering with neighboring non-stat tiles, no skipping)
+- `anchorGlyph={<LucideIcon strokeWidth={1.25} />}` — always a lucide node, never a raw letter or a tile-specific size override
+- **No top `icon` prop** (the anchor glyph is the icon)
+- Tone rotation `surface → brand → kraft → gray` in slot order `a → b → c → d`
+- `anchorPosition` left at default (bottom-right) — drop the `top-right` / `center` overrides on home
 
-### Step 1 — Fulfillment
-- Pickup / Delivery radios become two anchored tiles side-by-side:
-  - Pickup: tone "kraft" sub-tile, ghosted `<Truck>` bottom-right.
-  - Delivery: tone "brand" when selected, "white" when not, ghosted `<Home>` bottom-right.
-  - Each shows eyebrow ("OPTION 01" / "OPTION 02"), `display-4` label, helper line.
-- Delivery extras panel: keep grid, but each field group sits in a `bg-white/5 ring-1 ring-white/15` micro-tile with eyebrow label. Drop-spot and timing radios become small anchored chips: square, hairline ring, brand ring when checked, no `rounded-sm`.
+`Tile.tsx`'s anchored-stat branch already renders the brand index strip, the dash-rule eyebrow, and the ghost glyph at a uniform `[&>*]:size-32 md:[&>*]:size-44`. No component changes required if every call site conforms.
 
-### Step 2 — Contact
-- Name/Phone/Email fields are grouped into a single anchored card with an `<User>` ghost glyph bottom-right.
-- "Best way to reach me" → three anchored chips (Call / Text / Email) with the matching lucide glyph above the label, brand ring when checked.
+## Per-page changes (call sites only)
 
-### Step 3 — Review & send
-- Review rows convert from a `divide-y` list into a column of small anchored tiles, one per row (Materials / Fulfillment / Contact), each with its own eyebrow + value + right-side `Pencil` "Edit" `label` link.
-- Notes textarea stays inside its own anchored sub-tile with eyebrow + char counter in the bottom-right.
+**`src/routes/index.tsx`** — 4 stat tiles
+- Remove `icon={...}` from all four
+- Add `anchorIndex="01"` … `"04"`
+- Replace `anchorGlyph={<BadgeCheck className="!size-40" .../>}`, `"f"`, and `<Star className="!size-48" ...>` with plain `<Icon strokeWidth={1.25} />` (BadgeCheck, Facebook, Star)
+- For `stat-years`, add `anchorGlyph={<CalendarDays strokeWidth={1.25} />}`
+- Drop `anchorPosition="top-right"` and `anchorPosition="center"` overrides
 
-## C. Success view
+**`src/routes/service-area.tsx`** — 4 stat tiles
+- Add `layout="anchored"`, `anchorIndex="01"`–`"04"`, and an `anchorGlyph` per tile (suggested: `MapPin`, `Map`, `Box`, `Clock`)
 
-Apply the same chrome rules (square corners, surface tone, hairline rules) to the SuccessView hero and preview tiles. Buttons (Email / Text / Copy) take the standard `h-12 label` shape, no `rounded-sm`. Layout grid stays as-is.
+**`src/routes/quote.tsx`** — 2 stat tiles
+- Renumber `anchorIndex` from `02`/`03` to `01`/`02` (stat family numbers itself, independent of surrounding tiles)
+
+**`src/routes/delivery.tsx`** and **`src/routes/about.tsx`**
+- Renumber `anchorIndex` from `02`–`05` to `01`–`04` so every page's stat row starts at 01
+
+## What is NOT changing
+
+- `Tile.tsx` rendering logic — the anchored-stat branch is already the canonical look
+- Tone palette, typography (`display-3` value + `eyebrow` label), grid layouts, copy
+- Non-stat tiles (image / cta / text / quote / carousel)
+- The Size/Tone/Variant/Action matrix in `TileRules.ts`
 
 ## Verification
-1. Walk all 4 steps on mobile (440px) and desktop: visuals match anchored-tile family — no stray `rounded-sm`, no kraft form-card panel.
-2. Validation still blocks "Next" when fields are empty (Materials, Delivery details, Contact).
-3. SuccessView still renders the brief and `mailto`/`sms`/copy actions work.
-4. No console warnings from `Tile` rules — sub-tiles use plain divs styled to match (we are not authoring `<Tile>` inside the form, just borrowing the visual vocabulary).
 
-## Out of scope
-- No copy changes beyond restructuring the step header.
-- No changes to the right-column hero stat/image/CTA tiles.
-- No new files; no new exports from `Tile.tsx`.
+- Visit `/`, `/delivery`, `/about`, `/service-area`, `/quote` at mobile (440px) and desktop widths
+- Confirm every stat tile shows: left brand strip + dash-rule eyebrow + ghosted lucide glyph bottom-right at identical size
+- Confirm anchor indices on each page run `01 → 02 → 03 → 04` (or `01 → 02` on quote) with no gaps
+- No console warnings from `TileRules` and no truncated labels on the mobile cell
