@@ -8,7 +8,7 @@ import heroLoopMobileWebm from "@/assets/video/hero-loop-mobile.webm?url";
 import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
-import { products } from "@/data/products";
+import { products, productSlug } from "@/data/products";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 import { FaqDialogTile } from "@/components/home/FaqDialogTile";
