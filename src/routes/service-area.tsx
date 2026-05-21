@@ -90,8 +90,10 @@ function ServiceAreaPage() {
               overlay={{
                 eyebrow: "Service area",
                 title: "Across Central Mass.",
-                body: "Mulch, loam, sand, gravel & stone delivered from Jefferson across Worcester County.",
+                body: "Mulch, loam, sand & stone from Jefferson to your town.",
                 align: "bottom-left",
+                layout: "anchored",
+                anchorIcon: <Truck />,
               }}
               cta={{ label: "Get a quote", to: "/quote" }}
             />
@@ -103,23 +105,112 @@ function ServiceAreaPage() {
         }}
       />
 
-      {/* Screen 2 — section04: featured towns + helper CTAs */}
+      {/* Screen 2 — section05: where we run (the towns grid) */}
       <TileScreen
-        layout="section04"
-        label="Towns we deliver to"
+        layout="section05"
+        label="Where we run"
         tiles={{
           hero: (
             <Tile
-              id="sa-towns"
+              id="sa-routes"
               fill
               size="feature"
               variant="text"
               tone="surface"
-
+              layout="anchored"
+              icon={<MapPin />}
+              eyebrow="Where we run"
+              title="Daily routes across Worcester County."
+              body="Jefferson home base. Daily runs to Holden, Princeton, Sterling, Rutland, Paxton, West Boylston & Worcester. 48-hr notice for the outer ring."
+            />
+          ),
+          a: (
+            <Tile
+              id="sa-home"
+              fill
+              variant="text"
+              tone="kraft"
+              layout="anchored"
+              anchorIndex="01"
+              icon={<Home />}
+              eyebrow="Home base"
+              title="Jefferson, MA"
+            />
+          ),
+          b: (
+            <Tile
+              id="sa-ring-inner"
+              fill
+              variant="text"
+              tone="white"
+              layout="anchored"
+              anchorIndex="02"
               icon={<Truck />}
-              eyebrow="Home base · daily routes"
-              title="Holden, Princeton, Sterling, Rutland, Paxton, West Boylston, Worcester."
-              body="Boylston, Leominster, Clinton, Spencer & more on 48-hr notice."
+              eyebrow="Daily · inner ring"
+              title="Holden · Princeton · Sterling"
+            />
+          ),
+          c: (
+            <Tile
+              id="sa-ring-west"
+              fill
+              variant="text"
+              tone="gray"
+              layout="anchored"
+              anchorIndex="03"
+              icon={<Truck />}
+              eyebrow="Daily · west"
+              title="Rutland · Paxton · W. Boylston"
+              body="Mulch, loam & stone — curbside drops."
+            />
+          ),
+          d: (
+            <Tile
+              id="sa-ring-east"
+              fill
+              variant="text"
+              tone="kraft"
+              layout="anchored"
+              anchorIndex="04"
+              icon={<MapPin />}
+              eyebrow="48-hr · east"
+              title="Worcester · Boylston · Clinton"
+            />
+          ),
+          e: (
+            <Tile
+              id="sa-ring-outer"
+              fill
+              variant="text"
+              tone="gray"
+              layout="anchored"
+              anchorIndex="05"
+              icon={<MapPin />}
+              eyebrow="48-hr · outer"
+              title="Leominster · Lancaster · Spencer · Auburn · Shrewsbury"
+            />
+          ),
+        }}
+      />
+
+      {/* Screen 3 — section04: not-sure-if-we-deliver + Jefferson + CTAs */}
+      <TileScreen
+        layout="section04"
+        label="Confirm your ZIP and price"
+        tiles={{
+          hero: (
+            <Tile
+              id="sa-confirm"
+              fill
+              size="feature"
+              variant="text"
+              tone="surface"
+              layout="anchored"
+              icon={<Phone />}
+              eyebrow="Not sure if we deliver?"
+              title="Call Abby — she'll confirm your ZIP and price."
+              body="ZIPs near the edge are usually a yes. One quick call locks it."
+              cta={{ label: "508.579.9897", href: "tel:5085799897" }}
             />
           ),
           a: (
@@ -130,7 +221,13 @@ function ServiceAreaPage() {
               src={loadingTruck}
               alt="A Buy The Yard truck being loaded at the Jefferson yard"
               focal="center"
-              overlay={{ eyebrow: "Jefferson, MA", title: "Home base · 2264 Main St.", align: "bottom-left" }}
+              overlay={{
+                eyebrow: "Jefferson, MA",
+                title: "Home base · 2264 Main St.",
+                align: "bottom-left",
+                layout: "anchored",
+                anchorIcon: <Home />,
+              }}
             />
           ),
           b: (
@@ -139,9 +236,10 @@ function ServiceAreaPage() {
               fill
               variant="cta"
               tone="brand"
+              anchorIndex="02"
               icon={<Phone />}
-              eyebrow="Confirm your ZIP & price"
-              title="Call Abby"
+              eyebrow="Call"
+              title="Abby"
               cta={{ label: "508.579.9897", href: "tel:5085799897" }}
             />
           ),
@@ -151,10 +249,10 @@ function ServiceAreaPage() {
               fill
               variant="cta"
               tone="kraft"
-              icon={<MapPin />}
+              anchorIndex="03"
+              icon={<ClipboardList />}
               eyebrow="Online"
               title="Build a material list"
-              body="Send products, town, and timing — we'll come back with pricing."
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
