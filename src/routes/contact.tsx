@@ -113,9 +113,8 @@ function ContactPage() {
               icon={<MapPin />}
               eyebrow="Yard"
               title="2264 Main St."
-              body="Jefferson, MA 01522"
               cta={{
-                label: "Open in maps",
+                label: "Jefferson, MA · Maps",
                 href: "https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522",
               }}
             />
@@ -128,10 +127,9 @@ function ContactPage() {
               tone="kraft"
               anchorIndex="04"
               icon={<Clock />}
-              eyebrow="In-season hours"
+              eyebrow="Hours"
               title="Mon–Sat"
-              body="Mon–Fri 8a–5p · Sat 8a–3p · Closed Sun"
-              cta={{ label: "Season opens April 1", to: "/contact" }}
+              cta={{ label: "Mon–Fri 8–5 · Sat 8–3", to: "/contact" }}
             />
           ),
           d: (
@@ -144,9 +142,8 @@ function ContactPage() {
               icon={<Facebook />}
               eyebrow="Social"
               title="Facebook"
-              body="Daily restocks, weather closures, lot photos."
               cta={{
-                label: "Follow",
+                label: "Daily restocks · Follow",
                 href: "https://www.facebook.com/BuyTheYardOutdoorProducts",
               }}
             />
@@ -208,7 +205,7 @@ function ContactPage() {
               icon={<Phone />}
               eyebrow="Heads up"
               title="Voicemail returned same day"
-              body="Yard cell coverage is spotty — leave a message, we'll call back."
+              body="Yard cell is spotty — leave a message."
             />
           ),
         }}
