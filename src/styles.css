@@ -32,7 +32,7 @@
   --kraft: oklch(0.91 0.012 80);                /* #e8e4dc */
   --brand: oklch(0.51 0.20 27);                 /* #ba1a1a red */
   --brand-foreground: oklch(0.99 0 0);
-  --brand-glow: oklch(0.78 0.15 32);             /* light brand red for eyebrows on dark/photo */
+  --brand-glow: oklch(0.75 0.18 27);             /* same hue/chroma as --brand, lifted L for dark/photo eyebrows */
   --brandmark-gray: oklch(0.635 0.003 280);     /* #909092 brandmark right-triangle */
   --muted: oklch(0.91 0.012 80);
   --muted-foreground: oklch(0.45 0.01 280);
