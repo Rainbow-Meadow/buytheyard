@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Box, Clock, Map, MapPin, Phone, Truck } from "lucide-react";
+import { Box, ClipboardList, Clock, Home, Map, MapPin, Phone, Truck } from "lucide-react";
 import yardTrucks from "@/assets/source/yard-trucks.webp";
 import loadingTruck from "@/assets/source/loading-truck.webp";
 import { Tile } from "@/components/site/Tile";
@@ -42,6 +42,8 @@ export const Route = createFileRoute("/service-area")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: "https://buytheyard.lovable.app/service-area" },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-service-area.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-service-area.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/service-area" },
