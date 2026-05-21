@@ -108,12 +108,14 @@ export type TileBlock =
       quote: string;
       attribution?: string;
       /** When `layout="anchored"`, the slide adopts the anchored house style:
-       *  brand-red vertical bar on the left edge, ghosted index numeral
-       *  behind the quote, and brand-red rule before the eyebrow. */
+       *  brand-red vertical bar on the left edge, ghosted symbol behind the
+       *  quote (via `anchorIcon`), and brand-red rule before the eyebrow. */
       layout?: "stack" | "anchored";
-      /** Two-digit index numeral rendered ghosted behind the quote when
-       *  `layout="anchored"`. */
+      /** Deprecated — retained for back-compat. The anchored family ghosts
+       *  `anchorIcon` instead. */
       index?: string;
+      /** Ghosted symbol rendered behind the quote when `layout="anchored"`. */
+      anchorIcon?: ReactNode;
     })
   | (BaseTile & {
       variant: "definition";
