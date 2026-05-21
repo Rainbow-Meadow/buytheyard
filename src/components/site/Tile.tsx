@@ -168,6 +168,14 @@ export type TileBlock =
         body?: ReactNode;
         /** Overlay anchor inside the frame. Defaults to "bottom-left". */
         align?: "bottom-left" | "bottom-right" | "top-left" | "top-right" | "center";
+        /** Internal composition. `"stack"` (default) keeps the existing
+         *  overlay treatment. `"anchored"` adds the anchored-family
+         *  ornaments (vertical brand bar on the left edge, optional ghosted
+         *  index numeral behind the text, brand-red eyebrow rule). */
+        layout?: "stack" | "anchored";
+        /** Optional ghosted numeral (e.g. "01"…"06") rendered behind the
+         *  overlay text when `layout="anchored"`. */
+        index?: string;
       };
       /** Optional link wrapping the entire tile. */
       to?: string;
