@@ -8,7 +8,7 @@ import heroLoopMobileWebm from "@/assets/video/hero-loop-mobile.webm?url";
 import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
-import { products } from "@/data/products";
+import { products, productSlug } from "@/data/products";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 import { FaqDialogTile } from "@/components/home/FaqDialogTile";
@@ -22,6 +22,7 @@ const FEATURED = [
   "3/4\" Crushed Blue Stone",
   "Red Lava Rock",
   "Hanging Baskets",
+  "ASTM Playground Chips",
 ].map((n) => products.find((p) => p.name === n)!);
 
 /**
@@ -231,116 +232,47 @@ function HomePage() {
         }}
       />
 
-      {/* Screen 2 — section01: Featured materials */}
-      <TileScreen
-        layout="section01"
-        label="Featured materials"
-        tiles={{
-          hero: (
-            <Tile
-              id="feat-hero"
-              fill
-              variant="image"
-              src={FEATURED[0].image!}
-              alt={FEATURED[0].name}
-              aspect={{ mobile: "portrait", desktop: "wide" }}
-              focal="center"
-              overlay={{
-                eyebrow: "Bulk materials & garden center",
-                title: "Featured materials",
-                body: "Mulch, loam, sand, stone — by the yard, from our Jefferson lot.",
-                align: "bottom-left",
-              }}
-              cta={{ label: "See the full catalog", to: "/products" }}
-            />
-          ),
-          a: (
-            <Tile
-              id="feat-loam"
-              fill
-              variant="image"
-              src={FEATURED[1].image!}
-              alt={FEATURED[1].name}
-              focal="center"
-              overlay={{ eyebrow: "Loam", title: FEATURED[1].name, align: "bottom-left" }}
-              details={{
-                shareId: "feat-loam",
-                eyebrow: "Loam",
-                title: FEATURED[1].name,
-                body: FEATURED[1].description,
-              }}
-            />
-          ),
-          b: (
-            <Tile
-              id="feat-sand"
-              fill
-              variant="image"
-              src={FEATURED[2].image!}
-              alt={FEATURED[2].name}
-              focal="center"
-              overlay={{ eyebrow: "Sand", title: FEATURED[2].name, align: "bottom-left" }}
-              details={{
-                shareId: "feat-sand",
-                eyebrow: "Sand",
-                title: FEATURED[2].name,
-                body: FEATURED[2].description,
-              }}
-            />
-          ),
-          c: (
-            <Tile
-              id="feat-stone"
-              fill
-              variant="image"
-              src={FEATURED[3].image!}
-              alt={FEATURED[3].name}
-              focal="center"
-              overlay={{ eyebrow: "Stone", title: FEATURED[3].name, align: "bottom-left" }}
-              details={{
-                shareId: "feat-stone",
-                eyebrow: "Stone",
-                title: FEATURED[3].name,
-                body: FEATURED[3].description,
-              }}
-            />
-          ),
-          d: (
-            <Tile
-              id="feat-lava"
-              fill
-              variant="image"
-              src={FEATURED[4].image!}
-              alt={FEATURED[4].name}
-              focal="center"
-              overlay={{ eyebrow: "Specialty", title: FEATURED[4].name, align: "bottom-left" }}
-              details={{
-                shareId: "feat-lava",
-                eyebrow: "Specialty",
-                title: FEATURED[4].name,
-                body: FEATURED[4].description,
-              }}
-            />
-          ),
-          e: (
-            <Tile
-              id="feat-plants"
-              fill
-              variant="image"
-              src={FEATURED[5].image!}
-              alt={FEATURED[5].name}
-              focal="center"
-              overlay={{ eyebrow: "Garden center", title: FEATURED[5].name, align: "bottom-left" }}
-              details={{
-                shareId: "feat-plants",
-                eyebrow: "Garden center",
-                title: FEATURED[5].name,
-                body: FEATURED[5].description,
-              }}
-            />
-          ),
-        }}
-      />
+      {/* Screen 2 — Featured materials: hero tile + 2×3 product grid */}
+      <section aria-label="Featured materials" className="section bg-base">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 flex flex-col gap-2 md:gap-4">
+          <Tile
+            id="feat-hero"
+            variant="image"
+            size="feature"
+            src={FEATURED[0].image!}
+            alt={FEATURED[0].name}
+            aspect={{ mobile: "portrait", desktop: "wide" }}
+            focal="center"
+            overlay={{
+              eyebrow: "Bulk materials & garden center",
+              title: "Featured materials",
+              body: "Mulch, loam, sand, stone — by the yard, from our Jefferson lot.",
+              align: "bottom-left",
+            }}
+            cta={{ label: "See the full catalog", to: "/products" }}
+          />
+          <div className="tile-grid">
+            {FEATURED.slice(1, 7).map((p) => (
+              <Tile
+                key={p.name}
+                id={`feat-${productSlug(p.name)}`}
+                variant="image"
+                size="sm"
+                src={p.image!}
+                alt={p.name}
+                focal="center"
+                overlay={{ eyebrow: p.category, title: p.name, align: "bottom-left" }}
+                details={{
+                  shareId: `feat-${productSlug(p.name)}`,
+                  eyebrow: p.category,
+                  title: p.name,
+                  body: p.description,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Screen 3 — section02: Social proof + community */}
       <TileScreen
