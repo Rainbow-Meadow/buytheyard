@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, Phone, Truck } from "lucide-react";
+import { Box, Clock, Map, MapPin, Phone, Truck } from "lucide-react";
 import yardTrucks from "@/assets/source/yard-trucks.webp";
 import loadingTruck from "@/assets/source/loading-truck.webp";
 import { Tile } from "@/components/site/Tile";
