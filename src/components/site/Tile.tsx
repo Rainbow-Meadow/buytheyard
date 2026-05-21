@@ -1015,6 +1015,8 @@ export function Tile(block: TileBlock) {
     case "text":
       if (block.layout === "anchored") {
         const hasIndex = !!block.anchorIndex;
+        const hasIcon = !!block.icon;
+        const showOrnament = hasIndex || hasIcon;
         const ghostColor = isLightTone(tone)
           ? "text-zinc-900/[0.06]"
           : tone === "brand"
@@ -1022,25 +1024,34 @@ export function Tile(block: TileBlock) {
             : "text-white/[0.08]";
         const ruleColor = tone === "brand" ? "bg-brand-foreground" : "bg-brand";
         return (
-          <article className={`${shell} relative ${hasIndex ? "overflow-hidden" : ""}`}>
-            {hasIndex && (
+          <article className={`${shell} relative ${showOrnament ? "overflow-hidden" : ""}`}>
+            {showOrnament && (
               <>
                 <span
                   aria-hidden="true"
                   className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
                 />
-                <span
-                  aria-hidden="true"
-                  className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
-                  style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
-                >
-                  {block.anchorIndex}
-                </span>
+                {hasIcon ? (
+                  <span
+                    aria-hidden="true"
+                    className={`pointer-events-none select-none absolute -bottom-6 -left-2 z-0 ${ghostColor} [&>*]:size-44 md:[&>*]:size-56`}
+                  >
+                    {block.icon}
+                  </span>
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
+                    style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+                  >
+                    {block.anchorIndex}
+                  </span>
+                )}
               </>
             )}
             <div className={`relative z-10 flex flex-col h-full`}>
               {block.eyebrow && (
-                hasIndex ? (
+                showOrnament ? (
                   <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2`}>
                     <span aria-hidden="true" className={`inline-block h-0.5 w-6 ${ruleColor}`} />
                     {block.eyebrow}
@@ -1055,7 +1066,7 @@ export function Tile(block: TileBlock) {
                   {block.body}
                 </div>
               )}
-              {block.icon && (
+              {block.icon && !hasIcon && (
                 <div
                   aria-hidden="true"
                   className={`mt-auto self-end ${iconToneCls(tone)} ${isLightTone(tone) ? "opacity-25" : "opacity-40"} [&>*]:size-7`}
