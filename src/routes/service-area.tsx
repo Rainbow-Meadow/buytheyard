@@ -208,8 +208,8 @@ function ServiceAreaPage() {
               layout="anchored"
               icon={<Phone />}
               eyebrow="Not sure if we deliver?"
-              title="Call Abby — she'll confirm your ZIP and price."
-              body="ZIPs near the edge are usually a yes. One quick call locks it."
+              title="Call Abby."
+              body="ZIPs near the edge are usually a yes — one quick call confirms your spot and locks the price."
               cta={{ label: "508.579.9897", href: "tel:5085799897" }}
             />
           ),
