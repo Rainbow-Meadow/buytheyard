@@ -4,7 +4,7 @@ import yardPatio from "@/assets/source/yard-banner-5.webp";
 import yardDog from "@/assets/source/yard-dog.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
-import { Hammer, Calendar, BadgeCheck, GraduationCap, Star } from "lucide-react";
+import { Hammer, Calendar, BadgeCheck, GraduationCap, Star, Quote, Dog, Armchair, MapPin } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -74,7 +74,8 @@ function AboutPage() {
               fill
               variant="quote"
               tone="surface"
-
+              layout="anchored"
+              anchorIcon={<Quote />}
               eyebrow="In her own words"
               quote="I found something that isn't just a job — it's something I take pride in every day."
               attribution="Abby Montalto · Owner"
@@ -88,7 +89,7 @@ function AboutPage() {
               src={yardDog}
               alt="Charlie, the Buy The Yard office manager, watching the lot from the office window"
               focal={{ x: 50, y: 25 }}
-              overlay={{ eyebrow: "Office manager", title: "Charlie", align: "bottom-left" }}
+              overlay={{ eyebrow: "Office manager", title: "Charlie", align: "bottom-left", layout: "anchored", anchorIcon: <Dog /> }}
             />
           ),
           b: (
@@ -99,7 +100,7 @@ function AboutPage() {
               src={yardPatio}
               alt="The Buy The Yard sit-and-stay area with Adirondack chairs and OPEN flag"
               focal="center"
-              overlay={{ eyebrow: "The yard", title: "Sit-and-stay corner", align: "bottom-left" }}
+              overlay={{ eyebrow: "The yard", title: "Sit-and-stay corner", align: "bottom-left", layout: "anchored", anchorIcon: <Armchair /> }}
             />
           ),
           c: (
@@ -108,6 +109,9 @@ function AboutPage() {
               fill
               variant="cta"
               tone="brand"
+              layout="anchored"
+              anchorIndex="05"
+              icon={<MapPin />}
               eyebrow="Visit"
               title="2264 Main St."
               body="Jefferson, MA. Stop by anytime."
