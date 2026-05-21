@@ -257,7 +257,7 @@ function HomePage() {
                   variant: "quote",
                   tone: "kraft",
                   layout: "anchored",
-                  index: "01",
+                  anchorIcon: <MessageSquareQuote />,
                   eyebrow: "From Facebook · real customers",
                   quote:
                     "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product.",
@@ -268,7 +268,7 @@ function HomePage() {
                   variant: "quote",
                   tone: "surface",
                   layout: "anchored",
-                  index: "01",
+                  anchorIcon: <MessageSquareQuote />,
                   eyebrow: "From Facebook · real customers",
                   quote:
                     "Best mulch in Central Mass and the price can't be beat. Delivery was right on time.",
@@ -279,7 +279,7 @@ function HomePage() {
                   variant: "quote",
                   tone: "kraft",
                   layout: "anchored",
-                  index: "01",
+                  anchorIcon: <MessageSquareQuote />,
                   eyebrow: "From Facebook · real customers",
                   quote:
                     "Quality loam, fair pricing, and Abby actually picks up the phone. That's rare.",
@@ -302,7 +302,7 @@ function HomePage() {
                 title: "CTMS · loam donation",
                 align: "bottom-left",
                 layout: "anchored",
-                index: "03",
+                anchorIcon: <Truck />,
               }}
             />
           ),
@@ -319,7 +319,7 @@ function HomePage() {
                 title: "Rutland · Memorial Day",
                 align: "bottom-left",
                 layout: "anchored",
-                index: "04",
+                anchorIcon: <Flower2 />,
               }}
             />
           ),
