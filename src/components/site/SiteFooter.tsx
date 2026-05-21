@@ -108,7 +108,7 @@ export function SiteFooter() {
                 </div>
               </div>
 
-              <div className="space-y-4 pt-6 border-t border-white/5">
+              <div className="space-y-4 md:pt-6 md:border-t md:border-white/5">
                 <Eyebrow>Visit</Eyebrow>
                 <address className="not-italic body-sm text-kraft/80 leading-relaxed">
                   2264 Main St.
@@ -186,7 +186,7 @@ export function SiteFooter() {
 
               <div className="space-y-4">
                 <Eyebrow>Site</Eyebrow>
-                <nav className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 md:gap-y-3">
+                <nav className="grid grid-cols-2 gap-x-4 gap-y-2 md:gap-y-3">
                   <Link to="/products" className="label text-kraft/70 hover:text-kraft transition-colors">Products</Link>
                   <Link to="/about" className="label text-kraft/70 hover:text-kraft transition-colors">About</Link>
                   <Link to="/delivery" className="label text-kraft/70 hover:text-kraft transition-colors">Delivery</Link>
