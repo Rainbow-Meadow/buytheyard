@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { FileText, Mail, Phone, ShieldCheck } from "lucide-react";
 import yardPiles from "@/assets/source/yard-piles.webp";
-import { Tile, type TileBlock } from "@/components/site/Tile";
+import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
 export const Route = createFileRoute("/privacy")({
@@ -19,6 +20,8 @@ export const Route = createFileRoute("/privacy")({
           "Privacy policy, SMS terms, and website terms of use for Buy The Yard Materials in Jefferson, MA.",
       },
       { property: "og:url", content: "/privacy" },
+      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-privacy.jpg" },
+      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-privacy.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/privacy" },
