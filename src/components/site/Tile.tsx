@@ -103,6 +103,13 @@ export type TileBlock =
       eyebrow?: string;
       quote: string;
       attribution?: string;
+      /** When `layout="anchored"`, the slide adopts the anchored house style:
+       *  brand-red vertical bar on the left edge, ghosted index numeral
+       *  behind the quote, and brand-red rule before the eyebrow. */
+      layout?: "stack" | "anchored";
+      /** Two-digit index numeral rendered ghosted behind the quote when
+       *  `layout="anchored"`. */
+      index?: string;
     })
   | (BaseTile & {
       variant: "definition";
