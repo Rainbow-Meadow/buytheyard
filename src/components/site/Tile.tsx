@@ -122,6 +122,10 @@ export type TileBlock =
       title?: string;
       body?: ReactNode;
       cta: TileCta;
+      /** Two-digit index numeral that adds the anchored-family ornament
+       *  (brand-red left bar + ghosted index numeral + brand-rule eyebrow).
+       *  Independent of `layout` — works on the default vertical CTA. */
+      anchorIndex?: string;
     })
   | (BaseTile & {
       variant: "stat";
