@@ -20,7 +20,6 @@ const FEATURED = [
   "Mason Sand",
   '3/4" Crushed Blue Stone',
   "Red Lava Rock",
-  "Hanging Baskets",
 ].map((n) => products.find((p) => p.name === n)!);
 
 /**
@@ -207,47 +206,53 @@ function HomePage() {
         }}
       />
 
-      {/* Screen 2 — Featured materials: hero tile + 2×3 product grid */}
-      <section aria-label="Featured materials" className="section bg-base">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 flex flex-col gap-2 md:gap-4">
-          <Tile
-            id="feat-hero"
-            variant="image"
-            size="feature"
-            src={mulchBlack}
-            alt="Bulk mulch, loam, sand and stone"
-            aspect={{ mobile: "portrait", desktop: "wide" }}
-            focal="center"
-            overlay={{
-              eyebrow: "Bulk materials & garden center",
-              title: "Featured materials",
-              body: "Mulch, loam, sand, stone — by the yard, from our Jefferson lot.",
-              align: "bottom-left",
-            }}
-            cta={{ label: "See the full catalog", to: "/products" }}
-          />
-          <div className="tile-grid">
-            {FEATURED.map((p) => (
-              <Tile
-                key={p.name}
-                id={`feat-${productSlug(p.name)}`}
-                variant="image"
-                size="sm"
-                src={p.image!}
-                alt={p.name}
-                focal="center"
-                overlay={{ eyebrow: p.category, title: p.name, align: "bottom-left" }}
-                details={{
-                  shareId: `feat-${productSlug(p.name)}`,
-                  eyebrow: p.category,
-                  title: p.name,
-                  body: p.description,
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Screen 2 — Featured materials: hero + 5 product tiles, viewport-locked */}
+      <TileScreen
+        layout="section01"
+        label="Featured materials"
+        tiles={{
+          hero: (
+            <Tile
+              id="feat-hero"
+              fill
+              variant="image"
+              src={mulchBlack}
+              alt="Bulk mulch, loam, sand and stone"
+              focal="center"
+              overlay={{
+                eyebrow: "Bulk materials & garden center",
+                title: "Featured materials",
+                body: "Mulch, loam, sand, stone — by the yard, from our Jefferson lot.",
+                align: "bottom-left",
+              }}
+              cta={{ label: "See the full catalog", to: "/products" }}
+            />
+          ),
+          ...Object.fromEntries(
+            FEATURED.map((p, i) => [
+              ["a", "b", "c", "d", "e"][i],
+              (
+                <Tile
+                  key={p.name}
+                  id={`feat-${productSlug(p.name)}`}
+                  fill
+                  variant="image"
+                  src={p.image!}
+                  alt={p.name}
+                  focal="center"
+                  overlay={{ eyebrow: p.category, title: p.name, align: "bottom-left" }}
+                  details={{
+                    shareId: `feat-${productSlug(p.name)}`,
+                    eyebrow: p.category,
+                    title: p.name,
+                    body: p.description,
+                  }}
+                />
+              ),
+            ]),
+          ),
+        }}
+      />
 
       {/* Screen 3 — section02: Social proof + community */}
       <TileScreen
