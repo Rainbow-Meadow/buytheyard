@@ -7,7 +7,7 @@ import {
   Phone,
   Facebook,
 } from "lucide-react";
-import yardPatio from "@/assets/source/yard-banner-5.webp";
+import yardPatio from "@/assets/source/contact-hero-welcome.png";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
@@ -75,7 +75,7 @@ function ContactPage() {
               fill
               variant="image"
               src={yardPatio}
-              alt="The patio area at the Buy The Yard lot in Jefferson, MA"
+              alt="Buy The Yard crew welcoming customers at the Jefferson, MA yard with OPEN flag and loader"
               focal="center"
               loading="eager"
               fetchPriority="high"
