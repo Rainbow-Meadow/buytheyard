@@ -6,6 +6,7 @@ type WordmarkProps = {
   asLink?: boolean;
   onClick?: () => void;
   className?: string;
+  variant?: "default" | "light";
 };
 
 /**
@@ -19,6 +20,7 @@ export function Wordmark({
   asLink = false,
   onClick,
   className = "",
+  variant = "default",
 }: WordmarkProps) {
   const wordCls =
     size === "lg"
@@ -27,13 +29,19 @@ export function Wordmark({
 
   const taglineCls =
     size === "lg"
-      ? "mt-2 eyebrow text-kraft/50"
-      : "mt-1 text-[8px] uppercase tracking-[0.2em] font-semibold text-kraft/55";
+      ? variant === "light"
+        ? "mt-2 eyebrow text-white/50"
+        : "mt-2 eyebrow text-kraft/50"
+      : variant === "light"
+        ? "mt-1 text-[8px] uppercase tracking-[0.2em] font-semibold text-white/55"
+        : "mt-1 text-[8px] uppercase tracking-[0.2em] font-semibold text-kraft/55";
+
+  const yardCls = variant === "light" ? "text-white" : "text-brand";
 
   const inner = (
     <span className={`flex flex-col leading-none ${className}`}>
-      <span className={wordCls}>
-        Buy The <span className="text-brand">Yard</span>
+      <span className={`${wordCls} ${variant === "light" ? "text-white" : ""}`}>
+        Buy The <span className={yardCls}>Yard</span>
       </span>
       {withTagline && (
         <span className={taglineCls}>Mulch · Loam · Sand · Stone</span>
