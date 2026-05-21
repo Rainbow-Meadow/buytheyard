@@ -99,16 +99,24 @@ function HomePage() {
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
               <div className="md:hidden absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-zinc-950/25" />
-              <div className="relative z-10 h-full w-full flex items-center">
-                <div className="px-5 md:px-10 max-w-3xl">
-                  <p className="eyebrow text-zinc-200 mb-4 pb-2 border-b border-white/30 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                    <span className="inline-flex items-center gap-1.5">
-                      <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-                      10 yrs local
-                    </span>
-                    <span aria-hidden="true" className="text-white/40">·</span>
-                    <span>Woman-owned <span className="text-brand">(WBE)</span></span>
-                  </p>
+              {/* Vertical anchor mark — bleeds off the left edge as a structural anchor */}
+              <div
+                aria-hidden="true"
+                className="absolute left-0 bottom-16 md:bottom-20 w-1.5 h-56 md:h-72 bg-brand z-10"
+              />
+              <div className="relative z-10 h-full w-full flex items-end md:items-center">
+                <div className="px-5 md:px-10 pb-8 md:pb-0 max-w-3xl">
+                  <div className="mb-6">
+                    <p className="eyebrow text-zinc-200 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                      <span className="inline-flex items-center gap-1.5">
+                        <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
+                        10 yrs local
+                      </span>
+                      <span aria-hidden="true" className="text-white/40">·</span>
+                      <span>Woman-owned <span className="text-brand">(WBE)</span></span>
+                    </p>
+                    <span aria-hidden="true" className="mt-2 block h-px w-24 bg-white/25" />
+                  </div>
                   <h1 className="display-2 leading-[0.95] text-balance text-white">
                     Mulch. Loam. Sand.{" "}
                     <span className="relative inline-block text-brand">
@@ -132,36 +140,38 @@ function HomePage() {
                   <p className="lead text-zinc-200 max-w-[54ch] mt-4 text-pretty">
                     By the yard, from our Jefferson lot. Best prices in Central Mass.
                   </p>
-                  <div className="mt-5 flex flex-wrap items-center gap-3">
+                  <div className="mt-6 flex flex-col gap-2 max-w-md md:flex-row md:flex-wrap md:items-center md:gap-3 md:max-w-none">
                     <Link
                       to="/products"
-                      className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90 transition-opacity"
+                      className="inline-flex items-center justify-between md:justify-start gap-2 bg-brand text-brand-foreground px-6 h-12 md:h-11 label hover:opacity-90 transition-opacity"
                     >
                       Shop materials
                       <ArrowRight className="size-4" />
                     </Link>
-                    <Link
-                      to="/quote"
-                      className="inline-flex items-center gap-2 border border-white text-white px-6 h-11 label hover:bg-white hover:text-zinc-900 transition-colors"
-                    >
-                      Get a quote
-                    </Link>
-                    <a
-                      href="tel:5085799897"
-                      className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors h-11 px-1"
-                    >
-                      <Phone className="size-4" />
-                      508.579.9897
-                    </a>
+                    <div className="flex items-stretch gap-3 md:contents">
+                      <Link
+                        to="/quote"
+                        className="flex-1 md:flex-none inline-flex items-center justify-center md:justify-start gap-2 border border-white/30 hover:border-white text-white px-5 h-12 md:h-11 label hover:bg-white/10 transition-colors"
+                      >
+                        Get a quote
+                      </Link>
+                      <a
+                        href="tel:5085799897"
+                        className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors h-12 md:h-11 px-3"
+                      >
+                        <Phone className="size-4 text-brand" />
+                        508.579.9897
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </article>
           ),
-          a: <Tile id="stat-years" fill variant="stat" tone="surface" icon={<CalendarDays />} value="10" label="Years in business" />,
-          b: <Tile id="stat-wbe" fill variant="stat" tone="brand" icon={<BadgeCheck />} value="WBE" label="MA-certified woman-owned" />,
-          c: <Tile id="stat-fb" fill variant="stat" tone="kraft" icon={<Facebook />} value="820+" label="Facebook followers" />,
-          d: <Tile id="stat-stars" fill variant="stat" tone="gray" icon={<Star />} value="5★" label="Google & Facebook rated" />,
+          a: <Tile id="stat-years" fill variant="stat" layout="anchored" tone="surface" icon={<CalendarDays />} value="10" label="Years in business" anchorPosition="top-right" />,
+          b: <Tile id="stat-wbe" fill variant="stat" layout="anchored" tone="brand" icon={<BadgeCheck />} value="WBE" label="MA-certified woman-owned" anchorGlyph={<BadgeCheck className="!size-40" strokeWidth={1.5} />} />,
+          c: <Tile id="stat-fb" fill variant="stat" layout="anchored" tone="kraft" icon={<Facebook />} value="820+" label="Facebook followers" anchorGlyph="f" />,
+          d: <Tile id="stat-stars" fill variant="stat" layout="anchored" tone="gray" icon={<Star />} value="5★" label="Google & Facebook rated" anchorGlyph={<Star className="!size-48" strokeWidth={1} />} anchorPosition="center" />,
         }}
       />
 
