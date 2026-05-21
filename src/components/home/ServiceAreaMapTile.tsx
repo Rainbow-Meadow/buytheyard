@@ -65,24 +65,29 @@ export function ServiceAreaMapTile() {
           ))}
         </svg>
 
-        {/* town labels — absolutely positioned for legibility */}
-        {TOWNS.map((t) => (
-          <span
-            key={`lbl-${t.name}`}
-            className={`absolute meta whitespace-nowrap pointer-events-none ${
-              t.star ? "text-brand font-semibold" : "text-white/70"
-            }`}
-            style={{
-              left: `${t.x}%`,
-              top: `${t.y}%`,
-              transform: "translate(8px, -50%)",
-              fontSize: "10px",
-            }}
-          >
-            {t.star && <MapPin className="inline size-3 mr-0.5 -mt-0.5" />}
-            {t.name}
-          </span>
-        ))}
+        {/* Town labels — decorative, paired with the SVG above.
+         *  The whole cluster is aria-hidden because the spatial layout is
+         *  meaningless without sight; SR users get the headline + CTA only. */}
+        <div aria-hidden="true">
+          {TOWNS.map((t) => (
+            <span
+              key={`lbl-${t.name}`}
+              className={`absolute whitespace-nowrap pointer-events-none ${
+                t.star ? "text-brand font-semibold" : "text-white/85"
+              }`}
+              style={{
+                left: `${t.x}%`,
+                top: `${t.y}%`,
+                transform: "translate(8px, -50%)",
+                fontSize: "11px",
+                lineHeight: 1,
+              }}
+            >
+              {t.star && <MapPin className="inline size-3 mr-0.5 -mt-0.5" />}
+              {t.name}
+            </span>
+          ))}
+        </div>
       </div>
 
       <Link
