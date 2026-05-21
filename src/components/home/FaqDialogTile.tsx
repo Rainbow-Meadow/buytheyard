@@ -31,8 +31,7 @@ export function FaqDialogTile({ eyebrow, question, answer, tone = "surface" }: F
       <DialogTrigger asChild>
         <button
           type="button"
-          aria-label={`Open answer: ${question}`}
-          className={`group relative h-full w-full overflow-hidden rounded-md p-4 md:p-5 text-left flex flex-col ${toneCls} hover:opacity-95 transition-opacity cursor-pointer`}
+          className={`group relative h-full w-full overflow-hidden rounded-md p-4 md:p-5 text-left flex flex-col ${toneCls} hover:opacity-95 transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
         >
           <p className={`${eyebrowCls} mb-2`}>{eyebrow}</p>
           <p className="display-5 leading-snug pr-7">{question}</p>
