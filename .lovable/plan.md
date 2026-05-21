@@ -1,46 +1,47 @@
 ## Goal
 
-Make Screen 2 of the delivery page read as one connected story instead of five disconnected facts. Right now the tiles each say something true, but the order and emphasis don't add up to a clear sequence for a customer planning a drop.
+Make the delivery page's section01 tiles look composed rather than templated. User picked the "Asymmetric anchor" direction: ghosted backdrop numeral on the hero, split number/eyebrow on the small numbered tiles with the title anchored to the bottom, ghosted bottom-right icon on the text tiles, and a horizontal icon-bubble row for the CTA.
 
-## Current state (Screen 2)
+## Approach
 
-```
-HERO  01 Drop standard — Driveway-to-curbline only
-A     02 Timing — Call before noon for same-day
-B     03 Mark your spot — Tarp or cone marks the spot
-C     04 Pickup — Bring a truck, no appt
-D     05 Payment — 4% card fee — cash skips it
-E     CTA — Talk to Abby
-```
+Add an opt-in `layout` prop to `Tile`. Default stays `"stack"` (current rendering) so no other page is affected; the six delivery section01 tiles opt into `"anchored"`.
 
-Problems with the composition:
-- The hero tile (biggest, most weight) is a constraint ("driveway only") rather than the customer's first action.
-- Steps 1–3 are all delivery prep, but the chronology is jumbled (rule → time → mark).
-- Tile 04 jumps to pickup — a different fulfillment mode — under a section labeled "What to know before delivery."
-- Numbering implies a linear 5-step flow, but step 4 is actually an alternate path.
+### Files
 
-## Proposed re-composition
+- `src/components/site/Tile.tsx` — extend `BaseTile` with `layout?: "stack" | "anchored"` and branch the render path for the three variants below. No new tone/padding logic; reuse `eyebrowToneCls`, `bodyToneCls`, `iconToneCls`, `isLightTone`.
+- `src/routes/delivery.tsx` — add `layout="anchored"` to the six tiles inside the section01 `TileScreen` (`hero`, `a`, `b`, `c`, `d`, `e`).
 
-Re-frame as a chronological delivery checklist, with pickup pulled out as the alternate path it really is, and the section label updated to match.
+### Composition rules (anchored variant)
 
-```
-HERO  01 Call it in — Call by noon for same-day drop
-A     02 Mark the spot — A tarp or cone is all we need
-B     03 Where we drop — Driveway or curbline only
-C     Payment — Cash, check, or card (+4%)
-D     Prefer pickup? — Bring a truck, no appointment
-E     CTA — Talk to Abby (unchanged)
-```
+`numbered` with a `body` (the hero):
+- Top-left: icon (existing `TileIcon`), then eyebrow → title → body in a tight stack.
+- Bottom-right: huge ghosted numeral — `display-1`-scale, `text-current/[0.05]` on dark tones / `text-current/[0.06]` on light, absolutely positioned at `-right-4 -bottom-10`, `select-none pointer-events-none`, `aria-hidden`.
 
-Changes:
-- Promote "Timing" to the hero — it's the customer's first action and the most useful single fact.
-- Re-order rules into actual chronology: book → mark → drop.
-- Drop the "05 ·" / "04 ·" numbering on the bottom two tiles so they read as supporting facts, not steps in the sequence. Keep their icons and tones.
-- Update section label from "What to know before delivery" to "How a delivery works" so the pickup tile fits naturally.
-- Keep all tones, icons, variants, and the CTA tile exactly as-is — this is copy + ordering only.
+`numbered` without a body (02, 03):
+- Top row: eyebrow on the left, number on the right (display-4 size, brand color, leading-none).
+- Title anchored to the bottom via `mt-auto`.
+- No icon.
 
-## Files to touch
+`text` (Payment, Pickup):
+- Eyebrow + title top-aligned (same type as today).
+- Icon pushed to bottom-right via `mt-auto self-end`, rendered at `size-7` with `opacity-25` (light tones) / `opacity-40` (dark tones), `aria-hidden`.
 
-- `src/routes/delivery.tsx` — re-order the `tiles` object for the section01 `TileScreen`, update titles/eyebrows/bodies per above, update the screen `label`.
+`cta` (Talk to Abby):
+- Horizontal row, `items-center justify-between`.
+- Left: icon inside a circular bubble (`grid place-items-center size-12 rounded-full bg-current/10`, icon at `size-5`), then eyebrow + title stacked beside it.
+- Right: existing `CtaLink` (`508.579.9897`) rendered with the current underline label treatment, right-aligned.
 
-No component, token, or layout changes. Copy stays within the existing 1–2 line headline / 1–2 line body budget for `section01` cells.
+### Constraints honored
+
+- Headlines stay 1–2 lines, body 1–2 lines — copy is unchanged from the prior turn.
+- No `padding` overrides — still derived from `size` via `SIZE_PADDING`.
+- No new tones, no new design tokens, no font swaps. The prototype's `Big Shoulders Display` headline look is already covered by our existing `display-*` utilities used in the tile.
+- Default `"stack"` rendering of every other route (`about`, `service-area`, `contact`, `quote`, `privacy`, `products`) is untouched.
+
+### Verification
+
+After implementation: navigate to `/delivery` at 414×896, screenshot section01, confirm:
+- Hero shows ghosted "01" backdrop, no top-of-tile dead space, content reads call-it-in.
+- 02 / 03 show eyebrow + number on the top row, title flush at the bottom.
+- Payment / Pickup show a ghosted icon in the bottom-right corner.
+- CTA reads as a single horizontal row: bubble, text block, phone link.

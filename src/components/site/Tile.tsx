@@ -65,6 +65,13 @@ interface BaseTile {
   /** Optional leading icon — rendered at the top of text / numbered /
    *  definition / cta tiles. Typically a lucide-react `<Icon className="size-7">`. */
   icon?: ReactNode;
+  /** Internal composition. `"stack"` (default) renders icon → eyebrow → title
+   *  → body in a single top-aligned column. `"anchored"` re-composes the
+   *  numbered / text / cta variants into the asymmetric pattern used on the
+   *  delivery page: ghosted backdrop numeral for numbered+body, split
+   *  eyebrow/number with bottom-anchored title for numbered, ghosted
+   *  bottom-right icon for text, and a horizontal icon-bubble row for cta. */
+  layout?: "stack" | "anchored";
 }
 
 /** CTA target — internal route (`to`), external URL or tel/mailto (`href`).
