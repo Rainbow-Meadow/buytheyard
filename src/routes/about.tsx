@@ -73,7 +73,7 @@ function AboutPage() {
               tone="surface"
 
               eyebrow="In her own words"
-              quote="Opening this business was the perfect way to get into the industry. I found something that isn't just a job — it's something I take pride in every day."
+              quote="I found something that isn't just a job — it's something I take pride in every day."
               attribution="Abby Montalto · Owner"
             />
           ),
@@ -107,7 +107,7 @@ function AboutPage() {
               tone="brand"
               eyebrow="Visit"
               title="2264 Main St."
-              body="Jefferson, MA. Stop by and we'll size your project on the spot."
+              body="Jefferson, MA. Stop by anytime."
               cta={{ label: "Contact & hours", to: "/contact" }}
             />
           ),
