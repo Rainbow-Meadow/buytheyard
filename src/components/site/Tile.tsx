@@ -616,14 +616,13 @@ function ImageTileInner({
                 aria-hidden="true"
                 className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
               />
-              {/* Ghosted index numeral */}
-              {block.overlay.index && (
+              {/* Ghosted symbol */}
+              {block.overlay.anchorIcon && (
                 <span
                   aria-hidden="true"
-                  className="absolute -bottom-6 left-3 leading-none font-black text-white/[0.10] select-none pointer-events-none z-10"
-                  style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+                  className="absolute -bottom-6 -left-2 text-white/[0.12] select-none pointer-events-none z-10 [&>*]:size-44 md:[&>*]:size-56"
                 >
-                  {block.overlay.index}
+                  {block.overlay.anchorIcon}
                 </span>
               )}
             </>
