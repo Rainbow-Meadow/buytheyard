@@ -1066,14 +1066,6 @@ export function Tile(block: TileBlock) {
                   {block.body}
                 </div>
               )}
-              {block.icon && !hasIcon && (
-                <div
-                  aria-hidden="true"
-                  className={`mt-auto self-end ${iconToneCls(tone)} ${isLightTone(tone) ? "opacity-25" : "opacity-40"} [&>*]:size-7`}
-                >
-                  {block.icon}
-                </div>
-              )}
             </div>
           </article>
         );
