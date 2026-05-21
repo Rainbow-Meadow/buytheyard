@@ -1288,7 +1288,7 @@ export function Tile(block: TileBlock) {
 
     case "stat":
       if (block.layout === "anchored") {
-        const ghost = block.anchorGlyph ?? block.value;
+        const ghost = block.anchorGlyph;
         const ghostColor = isLightTone(tone)
           ? "text-zinc-900/[0.05]"
           : tone === "brand"
@@ -1320,13 +1320,14 @@ export function Tile(block: TileBlock) {
                 className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
               />
             )}
-            <span
-              aria-hidden="true"
-              className={`pointer-events-none select-none absolute leading-none font-black ${ghostColor} ${positionCls}`}
-              style={{ fontSize: "clamp(7rem, 30vw, 11rem)" }}
-            >
-              {ghost}
-            </span>
+            {ghost && (
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none select-none absolute ${ghostColor} ${positionCls} [&>*]:size-44 md:[&>*]:size-56`}
+              >
+                {ghost}
+              </span>
+            )}
             {block.icon && (
               <div className={`${iconToneCls(tone)} mb-2 [&>*]:size-5 relative z-10`}>
                 {block.icon}
