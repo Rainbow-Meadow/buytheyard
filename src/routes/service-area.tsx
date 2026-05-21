@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Box, ClipboardList, Clock, Home, Map, MapPin, Phone, Truck } from "lucide-react";
+import { Box, ClipboardList, Clock, Home, Map as MapIcon, MapPin, Phone, Truck } from "lucide-react";
 import yardTrucks from "@/assets/source/yard-trucks.webp";
 import loadingTruck from "@/assets/source/loading-truck.webp";
 import { Tile } from "@/components/site/Tile";
@@ -98,7 +98,7 @@ function ServiceAreaPage() {
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
-          a: <Tile id="sa-stat-towns" fill variant="stat" tone="surface" layout="anchored" anchorIndex="01" anchorGlyph={<Map strokeWidth={1.25} />} value={`${TOWNS.length}`} label="Towns served" />,
+          a: <Tile id="sa-stat-towns" fill variant="stat" tone="surface" layout="anchored" anchorIndex="01" anchorGlyph={<MapIcon strokeWidth={1.25} />} value={`${TOWNS.length}`} label="Towns served" />,
           b: <Tile id="sa-stat-radius" fill variant="stat" tone="brand" layout="anchored" anchorIndex="02" anchorGlyph={<MapPin strokeWidth={1.25} />} value="~25 mi" label="Max delivery radius" />,
           c: <Tile id="sa-stat-min" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<Box strokeWidth={1.25} />} value="1 yd" label="Order minimum" />,
           d: <Tile id="sa-stat-lead" fill variant="stat" tone="gray" layout="anchored" anchorIndex="04" anchorGlyph={<Clock strokeWidth={1.25} />} value="~48 hr" label="Typical lead time" />,
