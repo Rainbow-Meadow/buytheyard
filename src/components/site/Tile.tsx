@@ -572,10 +572,19 @@ function ImageTileInner({
                 <div className="body-sm text-zinc-200 mt-2">{block.overlay.body}</div>
               )}
               {block.cta && (
-                <CtaLink
-                  cta={block.cta}
-                  className="mt-4 inline-flex items-center gap-2 label border-b border-current hover:opacity-80"
-                />
+                block.to || block.details ? (
+                  // Outer tile is already a Link/button — render CTA as a
+                  // visual span to avoid nested interactives. The outer
+                  // wrap carries the action and its accessible name.
+                  <span className="mt-4 inline-flex items-center gap-2 label border-b border-current">
+                    {block.cta.label}
+                  </span>
+                ) : (
+                  <CtaLink
+                    cta={block.cta}
+                    className="mt-4 inline-flex items-center gap-2 label border-b border-current hover:opacity-80"
+                  />
+                )
               )}
             </div>
           </div>
@@ -586,7 +595,10 @@ function ImageTileInner({
 
   if (block.to) {
     return (
-      <Link to={block.to} className={`${imageShell} group block`}>
+      <Link
+        to={block.to}
+        className={`${imageShell} group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
+      >
         {inner}
       </Link>
     );
@@ -598,7 +610,7 @@ function ImageTileInner({
           <button
             type="button"
             aria-label={`Open details: ${block.details.title}`}
-            className={`${imageShell} group block text-left cursor-zoom-in`}
+            className={`${imageShell} group block text-left cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
           >
             {inner}
           </button>
