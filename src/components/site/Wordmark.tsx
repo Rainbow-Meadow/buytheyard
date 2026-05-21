@@ -40,7 +40,7 @@ export function Wordmark({
 
   const inner = (
     <span className={`flex flex-col leading-none ${className}`}>
-      <span className={`${wordCls} ${variant === "light" ? "text-white" : ""}`}>
+      <span className={`${wordCls} ${variant === "light" ? "text-white" : "text-kraft"}`}>
         Buy The <span className={yardCls}>Yard</span>
       </span>
       {withTagline && (
