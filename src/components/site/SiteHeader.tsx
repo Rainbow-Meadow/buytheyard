@@ -47,12 +47,12 @@ export function SiteHeader() {
             <a
               href="tel:5085799897"
               aria-label="Call Buy The Yard at 508-579-9897"
-              className="group inline-flex items-center gap-2 bg-brand text-kraft pl-2 pr-3 h-10 hover:bg-kraft hover:text-surface transition-colors"
+              className="group relative inline-flex items-center gap-2.5 h-10 pl-2.5 pr-2.5 sm:pr-4 rounded-full bg-transparent ring-1 ring-brand/55 hover:ring-brand text-kraft hover:bg-brand transition-all duration-300 ease-out shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_8px_24px_-12px_var(--color-brand)]"
             >
-              <span className="p-1 bg-white/15 group-hover:bg-brand/15 transition-colors shrink-0">
-                <Phone className="size-4 group-hover:text-brand transition-colors" strokeWidth={2.5} />
+              <span className="grid place-items-center size-6 rounded-full bg-brand text-kraft group-hover:bg-kraft group-hover:text-brand transition-colors shrink-0">
+                <Phone className="size-3.5" strokeWidth={2.25} />
               </span>
-              <span className="label hidden sm:inline">508.579.9897</span>
+              <span className="label hidden sm:inline tracking-wide">508.579.9897</span>
             </a>
             <button
               type="button"
