@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HelpCircle, Phone, Truck } from "lucide-react";
+import { HelpCircle, Layers, Phone, Truck } from "lucide-react";
 import { categories, products } from "@/data/products";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile, type TileBlock } from "@/components/site/Tile";
@@ -83,7 +83,7 @@ function ProductsPage() {
         body: preview,
         align: "bottom-left",
         layout: "anchored",
-        index: "01",
+        anchorIcon: <Layers />,
       },
       cta: { label: "Call for today's price", href: "tel:5085799897" },
     });
