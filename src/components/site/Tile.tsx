@@ -1024,7 +1024,17 @@ export function Tile(block: TileBlock) {
             <div className={`${iconToneCls(tone)} mb-3 [&>*]:size-5`}>{block.icon}</div>
           )}
           <p className="display-3 leading-none">{block.value}</p>
-          <p className={`eyebrow ${isLightTone(tone) ? "text-zinc-600" : "text-zinc-400"} mt-3`}>
+          <p
+            className={`eyebrow mt-3 ${
+              isLightTone(tone)
+                ? "text-zinc-700"
+                : tone === "brand"
+                  ? "text-brand-foreground/90"
+                  : tone === "gray"
+                    ? "text-zinc-900/80"
+                    : "text-zinc-300"
+            }`}
+          >
             {block.label}
           </p>
         </article>
