@@ -45,7 +45,7 @@ export function SiteFooter() {
 
               <div className="space-y-4 pt-6 border-t border-white/5">
                 <Eyebrow>Certification</Eyebrow>
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 justify-center md:justify-start">
                   <img
                     src={wbeSeal}
                     alt="Massachusetts WBE certified seal"
