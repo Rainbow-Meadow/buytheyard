@@ -3,7 +3,6 @@ import { ArrowRight, Facebook } from "lucide-react";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import { YelpLogo } from "@/components/site/YelpLogo";
 import { Wordmark } from "@/components/site/Wordmark";
-import { ServiceAreaMapTile } from "@/components/home/ServiceAreaMapTile";
 import { openCookieSettings } from "@/lib/cookie-consent";
 
 // TODO: replace with the real Google review short link from the
