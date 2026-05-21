@@ -203,7 +203,7 @@ function ServiceAreaPage() {
               id="sa-confirm"
               fill
               size="feature"
-              variant="text"
+              variant="cta"
               tone="surface"
               layout="anchored"
               icon={<Phone />}
