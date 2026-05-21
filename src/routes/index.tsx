@@ -328,64 +328,6 @@ function HomePage() {
         }}
       />
 
-      {/* Screen 4 — section05: Delivery, pricing, FAQ */}
-      <TileScreen
-        layout="section05"
-        label="Delivery, pricing & FAQ"
-        tiles={{
-          hero: <ServiceAreaMapTile />,
-          a: (
-            <Tile
-              id="dp-call"
-              fill
-              variant="cta"
-              tone="brand"
-              icon={<Phone />}
-              eyebrow="Fastest path"
-              title="Call for today's price"
-              body="Cash and check skip the 4% card fee."
-              cta={{ label: "508.579.9897", href: "tel:5085799897" }}
-            />
-          ),
-          b: (
-            <Tile
-              id="dp-quote"
-              fill
-              variant="cta"
-              tone="surface"
-              icon={<FileText />}
-              eyebrow="Prefer it in writing"
-              title="Request a written quote"
-              body="Tell us the job — we'll send a number by email."
-              cta={{ label: "Start a quote", to: "/quote" }}
-            />
-          ),
-          c: (
-            <FaqDialogTile
-              tone="gray"
-              eyebrow="01 · Pricing"
-              question="What does it cost?"
-              answer="Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number. One-yard minimum on all bulk orders. Cash and check payments skip the 4% card processing fee."
-            />
-          ),
-          d: (
-            <FaqDialogTile
-              tone="surface"
-              eyebrow="02 · Delivery area"
-              question="Deliver here?"
-              answer="We offer curbside delivery throughout Central Massachusetts from our Jefferson yard, including Holden, Princeton, Sterling, Rutland, West Boylston, Paxton, Worcester, Leominster, and surrounding towns. Delivery is priced by ZIP code; a brief call confirms your service area and final price before your order is dispatched."
-            />
-          ),
-          e: (
-            <FaqDialogTile
-              tone="surface"
-              eyebrow="03 · Timing"
-              question="How soon?"
-              answer="Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours. Delivery is made to the driveway or curbline only — please mark your drop spot before the truck arrives."
-            />
-          ),
-        }}
-      />
 
       {/* Final CTA — sticky phone bar */}
       <div className="bg-brand text-brand-foreground">
