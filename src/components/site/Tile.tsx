@@ -808,7 +808,11 @@ function CarouselTileInner({
   );
 }
 
-/** Flip tile body. Two faces; click (or hover) rotates between them. */
+/** Flip tile body. Two faces; a dedicated flip button rotates between them.
+ *  The outer is a `<div>` (not `<button>`) so the faces are free to contain
+ *  their own interactive children (links, dialog triggers) without nesting
+ *  interactives. The non-visible face is `inert` so it's removed from the
+ *  tab order and from screen-reader output. */
 function FlipTileInner({
   block,
 }: {
@@ -817,6 +821,10 @@ function FlipTileInner({
   const [flipped, setFlipped] = useState(false);
   const trigger = block.trigger ?? "click";
   const hint = block.hint ?? "Tap to flip";
+  // Accessible name for the flip control — exposes the affordance and state.
+  const flipLabel = block.ariaLabel
+    ? `${block.ariaLabel} (${flipped ? "showing back" : "showing front"})`
+    : `${hint} — currently showing ${flipped ? "back" : "front"}`;
 
   const shell = [
     block.fill ? "h-full w-full" : sizeCls[block.size ?? "md"],
@@ -837,33 +845,34 @@ function FlipTileInner({
         }
       : {};
 
+  const flipInert = (cond: boolean) =>
+    cond ? ({ inert: "" as unknown as boolean } as const) : {};
+
   return (
-    <button
-      type="button"
-      aria-label={block.ariaLabel ?? "Flip card"}
-      aria-pressed={flipped}
-      onClick={trigger === "click" ? () => setFlipped((f) => !f) : undefined}
-      className={`${shell} text-left cursor-pointer`}
-      {...hoverProps}
-    >
-      <div
-        className={`tile-flip-inner ${flipped ? "is-flipped" : ""}`}
-      >
-        <div className="tile-flip-face">
+    <div className={shell} {...hoverProps}>
+      <div className={`tile-flip-inner ${flipped ? "is-flipped" : ""}`}>
+        <div className="tile-flip-face" {...flipInert(flipped)} aria-hidden={flipped}>
           <Tile {...block.front} fill />
         </div>
-        <div className="tile-flip-face tile-flip-back">
+        <div
+          className="tile-flip-face tile-flip-back"
+          {...flipInert(!flipped)}
+          aria-hidden={!flipped}
+        >
           <Tile {...block.back} fill />
         </div>
       </div>
-      <span
-        aria-hidden="true"
-        className="absolute top-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 text-white text-[10px] uppercase tracking-wider backdrop-blur-sm pointer-events-none"
+      <button
+        type="button"
+        aria-label={flipLabel}
+        aria-pressed={flipped}
+        onClick={trigger === "click" ? () => setFlipped((f) => !f) : undefined}
+        className="absolute top-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 hover:bg-black/75 text-white text-[10px] uppercase tracking-wider backdrop-blur-sm min-h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
       >
-        <RotateCw className="size-3" />
-        {hint}
-      </span>
-    </button>
+        <RotateCw className="size-3" aria-hidden="true" />
+        <span aria-hidden="true">{hint}</span>
+      </button>
+    </div>
   );
 }
 
