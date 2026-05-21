@@ -473,7 +473,7 @@ function eyebrowToneCls(tone: TileTone) {
   // WCAG AA targets for 11px bold (4.5:1). Picked per-tone for ≥5:1.
   if (tone === "brand") return "eyebrow text-brand-foreground";       // white on red — 5.4:1
   if (tone === "gray") return "eyebrow text-zinc-900";                // dark on mid-gray — 9:1
-  if (tone === "surface") return "eyebrow text-brand-glow";           // light red on near-black — 7:1
+  if (tone === "surface") return "eyebrow text-brand";                // brand red on near-black
   return "eyebrow text-brand";                                        // brand on kraft/white — 4.6:1
 }
 
