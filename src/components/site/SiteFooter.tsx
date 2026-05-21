@@ -17,7 +17,7 @@ const MAP_DIRECTIONS_URL =
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 justify-center md:justify-start">
       <span aria-hidden className="h-px w-6 bg-brand" />
       <span className="eyebrow text-brand">{children}</span>
     </div>
