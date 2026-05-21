@@ -1036,20 +1036,12 @@ export function Tile(block: TileBlock) {
                   aria-hidden="true"
                   className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
                 />
-                {hasIcon ? (
+                {hasIcon && (
                   <span
                     aria-hidden="true"
                     className={`pointer-events-none select-none absolute -bottom-6 -left-2 z-0 ${ghostColor} [&>*]:size-44 md:[&>*]:size-56`}
                   >
                     {block.icon}
-                  </span>
-                ) : (
-                  <span
-                    aria-hidden="true"
-                    className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
-                    style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
-                  >
-                    {block.anchorIndex}
                   </span>
                 )}
               </>
