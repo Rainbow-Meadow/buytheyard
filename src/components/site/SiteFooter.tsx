@@ -31,7 +31,7 @@ export function SiteFooter() {
     <footer className="bg-surface text-kraft border-t border-white/10">
       <div className="border-l-[1.5px] border-brand">
         <div className="max-w-7xl mx-auto px-5 md:px-8 py-10 md:py-14">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 text-center md:text-left">
             {/* Column 1 — Identity + WBE */}
             <div className="space-y-10">
               <div className="space-y-4">
