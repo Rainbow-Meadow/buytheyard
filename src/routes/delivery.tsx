@@ -91,7 +91,6 @@ function DeliveryPage() {
               number="02"
               eyebrow="Timing"
               title="Call before noon for same-day."
-              body="Otherwise plan on about 48 hours."
             />
           ),
           b: (
@@ -102,8 +101,7 @@ function DeliveryPage() {
               tone="white"
               number="03"
               eyebrow="Mark your spot"
-              title="Tarp, bucket, or cone."
-              body="We'll put the pile right there."
+              title="Tarp or cone marks the spot."
             />
           ),
           c: (
@@ -114,8 +112,7 @@ function DeliveryPage() {
               tone="gray"
               icon={<Warehouse />}
               eyebrow="04 · Pickup"
-              title="Bring a truck"
-              body="No appointment. We load when you pull in. Mon–Fri 8a–5p · Sat 8a–3p."
+              title="Bring a truck, no appt."
             />
           ),
           d: (
@@ -126,8 +123,7 @@ function DeliveryPage() {
               tone="kraft"
               icon={<CreditCard />}
               eyebrow="05 · Payment"
-              title="4% card fee — pass-through"
-              body="Cash and check skip the surcharge."
+              title="4% card fee — cash skips it."
             />
           ),
           e: (
