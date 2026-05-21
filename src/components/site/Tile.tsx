@@ -1297,10 +1297,10 @@ export function Tile(block: TileBlock) {
         const position = block.anchorPosition ?? "bottom-right";
         const positionCls =
           position === "top-right"
-            ? "-top-6 -right-3"
+            ? "-top-3 -right-3"
             : position === "center"
               ? "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              : "-bottom-10 -right-4";
+              : "-bottom-4 -right-3";
         const valueColor =
           tone === "brand"
             ? "text-brand-foreground"
@@ -1323,7 +1323,7 @@ export function Tile(block: TileBlock) {
             {ghost && (
               <span
                 aria-hidden="true"
-                className={`pointer-events-none select-none absolute ${ghostColor} ${positionCls} [&>*]:size-44 md:[&>*]:size-56`}
+                className={`pointer-events-none select-none absolute ${ghostColor} ${positionCls} [&>*]:size-32 md:[&>*]:size-44 [&>*]:stroke-[1.25]`}
               >
                 {ghost}
               </span>
