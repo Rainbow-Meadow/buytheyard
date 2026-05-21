@@ -35,8 +35,8 @@ export function SiteFooter() {
             {/* Column 1 — Identity + WBE */}
             <div className="space-y-10">
               <div className="space-y-4">
-                <Wordmark size="lg" withTagline />
-                <p className="meta text-kraft/50 flex items-center gap-2">
+                <Wordmark size="lg" withTagline className="justify-center md:justify-start" />
+                <p className="meta text-kraft/50 flex items-center gap-2 justify-center md:justify-start">
                   <span>Est. 2016</span>
                   <span aria-hidden className="size-1 rounded-full bg-brand" />
                   <span>WBE Certified</span>
