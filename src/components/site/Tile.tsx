@@ -1243,50 +1243,68 @@ export function Tile(block: TileBlock) {
         );
       }
       return (
-        <article className={`${shell} flex flex-col ${block.anchorIndex ? "relative overflow-hidden" : ""}`}>
-          {block.icon && <TileIcon icon={block.icon} tone={tone} />}
-          {block.anchorIndex && (
-            <>
-              <span
-                aria-hidden="true"
-                className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+        (() => {
+          const showOrnament = !!block.anchorIndex || (!!block.icon && !!block.anchorIndex);
+          // Family ornament gates on anchorIndex (opt-in). When present and an
+          // icon exists, ghost the icon; otherwise ghost the numeral.
+          const familyOn = !!block.anchorIndex;
+          const ghostIcon = familyOn && !!block.icon;
+          const ghostColor =
+            tone === "brand"
+              ? "text-white/[0.12]"
+              : isLightTone(tone)
+                ? "text-zinc-900/[0.06]"
+                : "text-white/[0.08]";
+          return (
+            <article className={`${shell} flex flex-col ${familyOn ? "relative overflow-hidden" : ""}`}>
+              {!familyOn && block.icon && <TileIcon icon={block.icon} tone={tone} />}
+              {familyOn && (
+                <>
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+                  />
+                  {ghostIcon ? (
+                    <span
+                      aria-hidden="true"
+                      className={`pointer-events-none select-none absolute -bottom-6 -left-2 z-0 ${ghostColor} [&>*]:size-44 md:[&>*]:size-56`}
+                    >
+                      {block.icon}
+                    </span>
+                  ) : (
+                    <span
+                      aria-hidden="true"
+                      className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
+                      style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+                    >
+                      {block.anchorIndex}
+                    </span>
+                  )}
+                </>
+              )}
+              {block.eyebrow && (
+                familyOn ? (
+                  <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2 relative z-10`}>
+                    <span aria-hidden="true" className={`inline-block h-0.5 w-6 ${tone === "brand" ? "bg-brand-foreground" : "bg-brand"}`} />
+                    {block.eyebrow}
+                  </p>
+                ) : (
+                  <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>
+                )
+              )}
+              {block.title && <p className="display-5 leading-snug relative z-10">{block.title}</p>}
+              {block.body && (
+                <div className={`body ${tone === "brand" ? "" : bodyToneCls(tone)} ${block.title ? "mt-3" : ""} relative z-10`}>
+                  {block.body}
+                </div>
+              )}
+              <CtaLink
+                cta={block.cta}
+                className="mt-5 inline-flex items-center gap-2 label border-b border-current self-start hover:opacity-80 relative z-10"
               />
-              <span
-                aria-hidden="true"
-                className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${
-                  tone === "brand"
-                    ? "text-white/[0.12]"
-                    : isLightTone(tone)
-                      ? "text-zinc-900/[0.06]"
-                      : "text-white/[0.08]"
-                }`}
-                style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
-              >
-                {block.anchorIndex}
-              </span>
-            </>
-          )}
-          {block.eyebrow && (
-            block.anchorIndex ? (
-              <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2 relative z-10`}>
-                <span aria-hidden="true" className={`inline-block h-0.5 w-6 ${tone === "brand" ? "bg-brand-foreground" : "bg-brand"}`} />
-                {block.eyebrow}
-              </p>
-            ) : (
-              <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>
-            )
-          )}
-          {block.title && <p className="display-5 leading-snug">{block.title}</p>}
-          {block.body && (
-            <div className={`body ${tone === "brand" ? "" : bodyToneCls(tone)} ${block.title ? "mt-3" : ""}`}>
-              {block.body}
-            </div>
-          )}
-          <CtaLink
-            cta={block.cta}
-            className="mt-5 inline-flex items-center gap-2 label border-b border-current self-start hover:opacity-80"
-          />
-        </article>
+            </article>
+          );
+        })()
       );
 
     case "stat":
