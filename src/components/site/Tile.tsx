@@ -1200,7 +1200,37 @@ export function Tile(block: TileBlock) {
       return (
         <article className={`${shell} flex flex-col`}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
-          {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>}
+          {block.anchorIndex && (
+            <>
+              <span
+                aria-hidden="true"
+                className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+              />
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${
+                  tone === "brand"
+                    ? "text-white/[0.12]"
+                    : isLightTone(tone)
+                      ? "text-zinc-900/[0.06]"
+                      : "text-white/[0.08]"
+                }`}
+                style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+              >
+                {block.anchorIndex}
+              </span>
+            </>
+          )}
+          {block.eyebrow && (
+            block.anchorIndex ? (
+              <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2 relative z-10`}>
+                <span aria-hidden="true" className={`inline-block h-0.5 w-6 ${tone === "brand" ? "bg-brand-foreground" : "bg-brand"}`} />
+                {block.eyebrow}
+              </p>
+            ) : (
+              <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>
+            )
+          )}
           {block.title && <p className="display-5 leading-snug">{block.title}</p>}
           {block.body && (
             <div className={`body ${tone === "brand" ? "" : bodyToneCls(tone)} ${block.title ? "mt-3" : ""}`}>
