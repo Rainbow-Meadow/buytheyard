@@ -17,7 +17,7 @@ const MAP_DIRECTIONS_URL =
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-3 justify-center md:justify-start">
+    <div className="flex items-center gap-3">
       <span aria-hidden className="h-px w-6 bg-brand" />
       <span className="eyebrow text-brand">{children}</span>
     </div>
@@ -31,12 +31,12 @@ export function SiteFooter() {
     <footer className="bg-surface text-kraft border-t border-white/10">
       <div className="border-l-[1.5px] border-brand">
         <div className="max-w-7xl mx-auto px-5 md:px-8 py-10 md:py-14">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 text-center md:text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
             {/* Column 1 — Identity + WBE */}
             <div className="space-y-10">
               <div className="space-y-4">
-                <Wordmark size="lg" withTagline className="items-center md:items-start" />
-                <p className="meta text-kraft/50 flex items-center gap-2 justify-center md:justify-start">
+                <Wordmark size="lg" withTagline />
+                <p className="meta text-kraft/50 flex items-center gap-2">
                   <span>Est. 2016</span>
                   <span aria-hidden className="size-1 rounded-full bg-brand" />
                   <span>WBE Certified</span>
@@ -45,7 +45,7 @@ export function SiteFooter() {
 
               <div className="space-y-4 pt-6 border-t border-white/5">
                 <Eyebrow>Certification</Eyebrow>
-                <div className="flex items-start gap-4 justify-center md:justify-start">
+                <div className="flex items-start gap-4">
                   <img
                     src={wbeSeal}
                     alt="Massachusetts WBE certified seal"
@@ -75,7 +75,7 @@ export function SiteFooter() {
             <div className="space-y-10">
               <div className="space-y-4">
                 <Eyebrow>Hours</Eyebrow>
-                <ul className="body-sm space-y-1.5 max-w-[32ch] mx-auto md:mx-0">
+                <ul className="body-sm space-y-1.5 max-w-[32ch]">
                   <li className="flex justify-between gap-4">
                     <span className="label text-kraft/50">Mon – Fri</span>
                     <span className="text-kraft">8:00am – 5:00pm</span>
@@ -161,7 +161,7 @@ export function SiteFooter() {
                   </svg>
                   Write a Google review
                 </a>
-                <div className="flex items-center gap-5 pt-1 justify-center md:justify-start">
+                <div className="flex items-center gap-5 pt-1">
                   <a
                     href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
                     target="_blank"
@@ -183,7 +183,7 @@ export function SiteFooter() {
 
               <div className="space-y-4">
                 <Eyebrow>Site</Eyebrow>
-                <nav className="grid grid-cols-2 gap-x-4 gap-y-3 justify-items-center md:justify-items-start">
+                <nav className="grid grid-cols-2 gap-x-4 gap-y-3 justify-items-start">
                   <Link to="/products" className="label text-kraft/70 hover:text-kraft transition-colors">Products</Link>
                   <Link to="/about" className="label text-kraft/70 hover:text-kraft transition-colors">About</Link>
                   <Link to="/delivery" className="label text-kraft/70 hover:text-kraft transition-colors">Delivery</Link>
@@ -196,11 +196,11 @@ export function SiteFooter() {
           </div>
 
           {/* Legal bar */}
-          <div className="mt-12 pt-6 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-y-3 items-center micro text-kraft/40 text-center md:text-left">
+          <div className="mt-12 pt-6 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-y-3 items-center micro text-kraft/40">
             <span>
               &copy; {year} Buy The Yard Material · Jefferson, MA · WBE Certified
             </span>
-            <span className="flex items-center justify-center md:justify-end gap-4 text-kraft/30">
+            <span className="flex items-center md:justify-end gap-4 text-kraft/30">
               <button
                 type="button"
                 onClick={openCookieSettings}
