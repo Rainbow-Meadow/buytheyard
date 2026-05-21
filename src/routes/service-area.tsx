@@ -76,6 +76,8 @@ function ServiceAreaPage() {
       <TileScreen
         layout="pageHero"
         label="Buy The Yard service area"
+        heading="Buy The Yard service area — Central Massachusetts"
+        headingLevel="h1"
         tiles={{
           hero: (
             <Tile
@@ -109,6 +111,7 @@ function ServiceAreaPage() {
       <TileScreen
         layout="section05"
         label="Where we run"
+        heading="Where we run — towns we deliver to"
         tiles={{
           hero: (
             <Tile
@@ -197,6 +200,7 @@ function ServiceAreaPage() {
       <TileScreen
         layout="section04"
         label="Confirm your ZIP and price"
+        heading="Confirm your ZIP and price"
         tiles={{
           hero: (
             <Tile
