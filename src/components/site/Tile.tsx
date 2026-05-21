@@ -120,6 +120,14 @@ export type TileBlock =
       variant: "stat";
       value: string;
       label: string;
+      /** Optional oversized ghosted glyph rendered behind the value when
+       *  `layout="anchored"`. Defaults to repeating `value` as text. Accepts
+       *  any ReactNode so the caller can pass an SVG, single letter, or
+       *  alternate string for higher visual weight. */
+      anchorGlyph?: ReactNode;
+      /** Where the anchored glyph sits inside the tile. Defaults to
+       *  `"bottom-right"`. */
+      anchorPosition?: "top-right" | "bottom-right" | "center";
     })
   | (BaseTile & {
       variant: "image";
@@ -1125,6 +1133,52 @@ export function Tile(block: TileBlock) {
       );
 
     case "stat":
+      if (block.layout === "anchored") {
+        const ghost = block.anchorGlyph ?? block.value;
+        const ghostColor = isLightTone(tone)
+          ? "text-zinc-900/[0.05]"
+          : tone === "brand"
+            ? "text-white/[0.10]"
+            : "text-white/[0.04]";
+        const position = block.anchorPosition ?? "bottom-right";
+        const positionCls =
+          position === "top-right"
+            ? "-top-6 -right-3"
+            : position === "center"
+              ? "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              : "-bottom-10 -right-4";
+        const valueColor =
+          tone === "brand"
+            ? "text-brand-foreground"
+            : isLightTone(tone)
+              ? "text-zinc-900"
+              : "text-white";
+        const labelColor = isLightTone(tone)
+          ? "text-zinc-600"
+          : tone === "brand"
+            ? "text-brand-foreground/80"
+            : "text-zinc-400";
+        return (
+          <article className={`${shell} relative overflow-hidden`}>
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none select-none absolute leading-none font-black ${ghostColor} ${positionCls}`}
+              style={{ fontSize: "clamp(7rem, 30vw, 11rem)" }}
+            >
+              {ghost}
+            </span>
+            {block.icon && (
+              <div className={`${iconToneCls(tone)} mb-2 [&>*]:size-5 relative z-10`}>
+                {block.icon}
+              </div>
+            )}
+            <div className="mt-auto relative z-10">
+              <p className={`display-3 leading-none ${valueColor}`}>{block.value}</p>
+              <p className={`eyebrow mt-2 ${labelColor}`}>{block.label}</p>
+            </div>
+          </article>
+        );
+      }
       return (
         <article className={shell}>
           {block.icon && (
