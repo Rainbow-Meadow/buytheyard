@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BadgeCheck, CalendarDays, Facebook, FileText, Phone, Star, Tag } from "lucide-react";
+import { ArrowRight, BadgeCheck, CalendarDays, Facebook, Phone, Star } from "lucide-react";
 import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
 import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
 import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
@@ -12,8 +12,6 @@ import { products, productSlug } from "@/data/products";
 import mulchBlack from "@/assets/mulch-black.webp";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
-import { FaqDialogTile } from "@/components/home/FaqDialogTile";
-import { ServiceAreaMapTile } from "@/components/home/ServiceAreaMapTile";
 import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
 
 const FEATURED = [
@@ -86,41 +84,18 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: "How much does material cost?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number. One-yard minimum on all bulk orders.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "Do you deliver to my town?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "We offer curbside delivery throughout Central Massachusetts from our Jefferson yard, including Holden, Princeton, Sterling, Rutland, West Boylston, Paxton, Worcester, Leominster, and surrounding towns. Delivery is priced by ZIP code; a brief call confirms your service area and final price before your order is dispatched.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "What's the 4% card fee about?",
-              acceptedAnswer: {
-                "@type": "Answer",
-              text: "The 4% surcharge is passed through directly from our payment processor. Cash and check payments are accepted with no additional fee. Your quoted price is the same regardless of payment method.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "How fast can I get a delivery?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours. Delivery is made to the driveway or curbline only.",
-              },
-            },
-          ],
+          "@type": "LocalBusiness",
+          name: "Buy The Yard",
+          image: "https://buytheyard.lovable.app/og/og-home.jpg",
+          telephone: "+1-508-579-9897",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "30 Florence Rd",
+            addressLocality: "Jefferson",
+            addressRegion: "MA",
+            postalCode: "01522",
+          },
+          url: "https://buytheyard.lovable.app",
         }),
       },
     ],
@@ -353,64 +328,6 @@ function HomePage() {
         }}
       />
 
-      {/* Screen 4 — section05: Delivery, pricing, FAQ */}
-      <TileScreen
-        layout="section05"
-        label="Delivery, pricing & FAQ"
-        tiles={{
-          hero: <ServiceAreaMapTile />,
-          a: (
-            <Tile
-              id="dp-call"
-              fill
-              variant="cta"
-              tone="brand"
-              icon={<Phone />}
-              eyebrow="Fastest path"
-              title="Call for today's price"
-              body="Cash and check skip the 4% card fee."
-              cta={{ label: "508.579.9897", href: "tel:5085799897" }}
-            />
-          ),
-          b: (
-            <Tile
-              id="dp-quote"
-              fill
-              variant="cta"
-              tone="surface"
-              icon={<FileText />}
-              eyebrow="Prefer it in writing"
-              title="Request a written quote"
-              body="Tell us the job — we'll send a number by email."
-              cta={{ label: "Start a quote", to: "/quote" }}
-            />
-          ),
-          c: (
-            <FaqDialogTile
-              tone="gray"
-              eyebrow="01 · Pricing"
-              question="What does it cost?"
-              answer="Prices move with the season and the market, so we quote by phone. Call 508-579-9897 or request an online quote and you'll get today's number. One-yard minimum on all bulk orders. Cash and check payments skip the 4% card processing fee."
-            />
-          ),
-          d: (
-            <FaqDialogTile
-              tone="surface"
-              eyebrow="02 · Delivery area"
-              question="Deliver here?"
-              answer="We offer curbside delivery throughout Central Massachusetts from our Jefferson yard, including Holden, Princeton, Sterling, Rutland, West Boylston, Paxton, Worcester, Leominster, and surrounding towns. Delivery is priced by ZIP code; a brief call confirms your service area and final price before your order is dispatched."
-            />
-          ),
-          e: (
-            <FaqDialogTile
-              tone="surface"
-              eyebrow="03 · Timing"
-              question="How soon?"
-              answer="Same-day delivery may be available when you call before noon, depending on the day's route. Otherwise, please allow approximately 48 hours. Delivery is made to the driveway or curbline only — please mark your drop spot before the truck arrives."
-            />
-          ),
-        }}
-      />
 
       {/* Final CTA — sticky phone bar */}
       <div className="bg-brand text-brand-foreground">
