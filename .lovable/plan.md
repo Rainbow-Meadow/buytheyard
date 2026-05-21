@@ -1,60 +1,50 @@
-# Unify the stat tile system
+## Goal
 
-## What's inconsistent today
+Bring `/service-area` up to the same standard as `/delivery`, `/about`, `/contact`: a multi-screen `TileScreen` page where every tile passes the Size/Tone/Variant/Action matrix and the mobile cell-budget rules. Surface the 15-town dataset that's currently defined but never rendered.
 
-Five pages render `variant="stat"` tiles, but they don't speak the same visual language:
+## Problems with the current page
 
-| Page | Layout | Index strip | Top icon | Anchor glyph | Tones |
-|---|---|---|---|---|---|
-| `/` (home) | anchored | none | yes | per-tile, mixed sizes (`!size-40`, `!size-48`, raw `"f"` letter) | surface · brand · kraft · gray |
-| `/delivery` | anchored | 02–05 | none | lucide @ stroke 1.25 | surface · brand · kraft · gray |
-| `/about` | anchored | 02–05 | none | lucide @ stroke 1.25 | surface · brand · kraft · gray |
-| `/service-area` | **default (no anchored)** | none | none | none | surface · brand · kraft · gray |
-| `/quote` | anchored | 02, 03 (skips 01) | none | lucide @ stroke 1.25 | surface · kraft |
+1. **Screen 2 hero overflows the headline-line-limit rule.** The `sa-towns` tile (feature size) crams 7 town names into the title — "Holden, Princeton, Sterling, Rutland, Paxton, West Boylston, Worcester." That's 3+ wrapped lines on mobile and leaves a giant black void below the copy (visible in the user's screenshot).
+2. **TOWNS[15] is dead data.** The structured town list with drive times and blurbs is declared, fed into the JSON-LD `areaServed`, but never shown to users. It's the single most useful content on this page.
+3. **Only 2 screens.** Delivery has rules + payment + CTA. Service-area has stats + a redundant towns blurb. Needs a "how delivery works in your town" section and a real towns grid.
+4. **No leaf `og:image`.** Sibling pages all set one; service-area doesn't.
 
-Result: home reads as "icon stats," delivery/about read as "indexed family," service-area reads as a plain fallback, quote starts numbering at 02. Same component, four dialects.
+## New page structure (3 screens)
 
-## Canonical pattern (the "stat family")
+### Screen 1 — `pageHero` (keep, tighten copy)
+- `hero`: yard-trucks image, overlay "Service area / Across Central Mass. / Mulch, loam, sand & stone from Jefferson to your town." + Get a quote CTA. Add `anchorIcon={<Truck />}` to match delivery/about/contact overlay style.
+- `a/b/c/d` stat tiles: keep `15 / Towns served`, `~25 mi / Max radius`, `1 yd / Order minimum`, `~48 hr / Typical lead time`.
 
-Adopt the delivery/about treatment as the single canonical form. Every stat tile, on every page, becomes:
+### Screen 2 — `section05` (NEW: towns grid)
+Use `section05` because it has 5 content slots (a/b/c/d/e) plus a hero — fits a real towns breakdown.
+- `hero` (feature, surface, anchored, `<MapPin/>`): eyebrow "Where we run" / title "Daily routes across Worcester County." / body "Jefferson home base. Daily runs to Holden, Princeton, Sterling, Rutland, Paxton, West Boylston & Worcester. 48-hr notice for the outer ring." (≤200 chars, 2 mobile lines).
+- `a` (md, kraft, anchored "01", `<Home/>`): eyebrow "Home base" / title "Jefferson, MA" / body "2264 Main St. — pickup or call-ahead load." (1 mobile line).
+- `b` (md, white, anchored "02", `<Truck/>`): eyebrow "Daily route · inner ring" / title "Holden · Princeton · Sterling" / body "Most-frequent drops — call by noon for same-day." (1 mobile line).
+- `c` (wide, md, gray, anchored "03", `<Truck/>`): eyebrow "Daily route · west" / title "Rutland · Paxton · W. Boylston" / body "Bulk mulch, screened loam, crushed stone — curbside drops." (2 mobile lines).
+- `d` (md, kraft, anchored "04", `<MapPin/>`): eyebrow "48-hr notice" / title "Worcester · Boylston · Clinton" / body "Plan a day ahead for the eastern route." (1 mobile line).
+- `e` (md, gray, anchored "05", `<MapPin/>`): eyebrow "48-hr notice" / title "Leominster · Lancaster · Spencer · Auburn · Shrewsbury" — title trimmed to 1–2 lines, no body. (1 mobile line.)
 
-- `variant="stat"` + `layout="anchored"`
-- `anchorIndex` numbered **sequentially from `01`** within its own grid (no shared numbering with neighboring non-stat tiles, no skipping)
-- `anchorGlyph={<LucideIcon strokeWidth={1.25} />}` — always a lucide node, never a raw letter or a tile-specific size override
-- **No top `icon` prop** (the anchor glyph is the icon)
-- Tone rotation `surface → brand → kraft → gray` in slot order `a → b → c → d`
-- `anchorPosition` left at default (bottom-right) — drop the `top-right` / `center` overrides on home
+This finally renders the TOWNS data; keep the TOWNS array as the source of truth for JSON-LD and derive the inner/outer ring strings from it so they stay in sync.
 
-`Tile.tsx`'s anchored-stat branch already renders the brand index strip, the dash-rule eyebrow, and the ghost glyph at a uniform `[&>*]:size-32 md:[&>*]:size-44`. No component changes required if every call site conforms.
+### Screen 3 — `section04` (CTAs + Jefferson image)
+- `hero` (feature, surface, anchored `<Phone/>`): eyebrow "Not sure if we deliver?" / title "Call Abby — she'll confirm your ZIP and price." / body "ZIPs near the edge are usually a yes — one quick call locks it." / CTA `508.579.9897`.
+- `a` (image, wide): `loadingTruck` photo, overlay "Jefferson, MA / Home base · 2264 Main St." `<MapPin/>`.
+- `b` (cta, brand, `<Phone/>`): "Call · Abby" → tel link.
+- `c` (cta, kraft, `<ClipboardList/>`): "Online · Build a material list" → /quote.
 
-## Per-page changes (call sites only)
+## Content QA (every tile)
 
-**`src/routes/index.tsx`** — 4 stat tiles
-- Remove `icon={...}` from all four
-- Add `anchorIndex="01"` … `"04"`
-- Replace `anchorGlyph={<BadgeCheck className="!size-40" .../>}`, `"f"`, and `<Star className="!size-48" ...>` with plain `<Icon strokeWidth={1.25} />` (BadgeCheck, Facebook, Star)
-- For `stat-years`, add `anchorGlyph={<CalendarDays strokeWidth={1.25} />}`
-- Drop `anchorPosition="top-right"` and `anchorPosition="center"` overrides
+For each tile in the new file verify against `src/components/site/TileRules.ts` and the tile-system memory:
+- Size matches slot intent (sm → stat only; md → eyebrow+title+2-line body; feature → hero recipe).
+- Tone follows role: 1 `brand` per screen, `surface` for hero/feature, defaults elsewhere.
+- Body copy fits the **mobile cell budget** from the memory table (e.g. section04 `b/c` = 2 lines, section05 `c` = 2 lines, all others 1 line).
+- Headlines respect the Core rule: 1–2 lines, never resized — trim copy instead.
+- No `padding` props, no disallowed Variant×Action combos.
 
-**`src/routes/service-area.tsx`** — 4 stat tiles
-- Add `layout="anchored"`, `anchorIndex="01"`–`"04"`, and an `anchorGlyph` per tile (suggested: `MapPin`, `Map`, `Box`, `Clock`)
+After implementation, capture a mobile screenshot (440×798) of each screen via the browser tools and verify no truncation, no empty cells, no overflow.
 
-**`src/routes/quote.tsx`** — 2 stat tiles
-- Renumber `anchorIndex` from `02`/`03` to `01`/`02` (stat family numbers itself, independent of surrounding tiles)
+## Files to edit
 
-**`src/routes/delivery.tsx`** and **`src/routes/about.tsx`**
-- Renumber `anchorIndex` from `02`–`05` to `01`–`04` so every page's stat row starts at 01
+- `src/routes/service-area.tsx` — replace screens 2/3; derive ring strings from TOWNS; add `og:image` meta + twitter:image; keep JSON-LD (still driven by TOWNS).
 
-## What is NOT changing
-
-- `Tile.tsx` rendering logic — the anchored-stat branch is already the canonical look
-- Tone palette, typography (`display-3` value + `eyebrow` label), grid layouts, copy
-- Non-stat tiles (image / cta / text / quote / carousel)
-- The Size/Tone/Variant/Action matrix in `TileRules.ts`
-
-## Verification
-
-- Visit `/`, `/delivery`, `/about`, `/service-area`, `/quote` at mobile (440px) and desktop widths
-- Confirm every stat tile shows: left brand strip + dash-rule eyebrow + ghosted lucide glyph bottom-right at identical size
-- Confirm anchor indices on each page run `01 → 02 → 03 → 04` (or `01 → 02` on quote) with no gaps
-- No console warnings from `TileRules` and no truncated labels on the mobile cell
+No new components needed — `Tile` + `TileScreen` cover everything.
