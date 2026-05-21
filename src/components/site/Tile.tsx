@@ -65,6 +65,13 @@ interface BaseTile {
   /** Optional leading icon — rendered at the top of text / numbered /
    *  definition / cta tiles. Typically a lucide-react `<Icon className="size-7">`. */
   icon?: ReactNode;
+  /** Internal composition. `"stack"` (default) renders icon → eyebrow → title
+   *  → body in a single top-aligned column. `"anchored"` re-composes the
+   *  numbered / text / cta variants into the asymmetric pattern used on the
+   *  delivery page: ghosted backdrop numeral for numbered+body, split
+   *  eyebrow/number with bottom-anchored title for numbered, ghosted
+   *  bottom-right icon for text, and a horizontal icon-bubble row for cta. */
+  layout?: "stack" | "anchored";
 }
 
 /** CTA target — internal route (`to`), external URL or tel/mailto (`href`).
@@ -945,6 +952,27 @@ export function Tile(block: TileBlock) {
 
   switch (block.variant) {
     case "text":
+      if (block.layout === "anchored") {
+        return (
+          <article className={`${shell} relative`}>
+            {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>}
+            {block.title && <p className="display-5 leading-snug">{block.title}</p>}
+            {block.body && (
+              <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyClamp}`}>
+                {block.body}
+              </div>
+            )}
+            {block.icon && (
+              <div
+                aria-hidden="true"
+                className={`mt-auto self-end ${iconToneCls(tone)} ${isLightTone(tone) ? "opacity-25" : "opacity-40"} [&>*]:size-7`}
+              >
+                {block.icon}
+              </div>
+            )}
+          </article>
+        );
+      }
       return (
         <article className={shell}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
@@ -959,6 +987,56 @@ export function Tile(block: TileBlock) {
       );
 
     case "numbered":
+      if (block.layout === "anchored") {
+        const numberColor = tone === "brand" ? "text-brand-foreground" : "text-brand";
+        if (block.body) {
+          // Hero composition — content top-left, ghosted backdrop numeral bottom-right.
+          const ghostColor = isLightTone(tone)
+            ? "text-zinc-900/[0.06]"
+            : tone === "brand"
+              ? "text-white/[0.08]"
+              : "text-white/[0.04]";
+          return (
+            <article className={`${shell} relative`}>
+              {block.icon && <TileIcon icon={block.icon} tone={tone} />}
+              {block.eyebrow && <p className={eyebrowToneCls(tone)}>{block.eyebrow}</p>}
+              {block.title && (
+                <p className={`display-5 leading-snug ${block.eyebrow ? "mt-1" : ""}`}>
+                  {block.title}
+                </p>
+              )}
+              {block.body && (
+                <div className={`body ${bodyToneCls(tone)} mt-3 max-w-[34ch] ${bodyClamp}`}>
+                  {block.body}
+                </div>
+              )}
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none select-none absolute -right-4 -bottom-10 leading-none font-black ${ghostColor}`}
+                style={{ fontSize: "clamp(9rem, 38vw, 14rem)" }}
+              >
+                {block.number}
+              </span>
+            </article>
+          );
+        }
+        // Compact composition — eyebrow + number on top row, title anchored bottom.
+        return (
+          <article className={`${shell} flex flex-col`}>
+            <div className="flex items-start justify-between gap-3">
+              {block.eyebrow ? (
+                <p className={`${eyebrowToneCls(tone)} mt-1`}>{block.eyebrow}</p>
+              ) : (
+                <span />
+              )}
+              <p className={`display-4 leading-none ${numberColor}`}>{block.number}</p>
+            </div>
+            {block.title && (
+              <p className="display-5 leading-snug mt-auto pt-6">{block.title}</p>
+            )}
+          </article>
+        );
+      }
       return (
         <article className={`${shell} flex flex-col`}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
@@ -1000,6 +1078,35 @@ export function Tile(block: TileBlock) {
       );
 
     case "cta":
+      if (block.layout === "anchored") {
+        const bubbleBg = isLightTone(tone) ? "bg-brand/10" : "bg-white/10";
+        return (
+          <article className={`${shell} !flex-row items-center justify-between gap-4`}>
+            <div className="flex items-center gap-4 min-w-0">
+              {block.icon && (
+                <div
+                  className={`shrink-0 grid place-items-center size-12 rounded-full ${bubbleBg} ${iconToneCls(tone)} [&>*]:size-5`}
+                  aria-hidden="true"
+                >
+                  {block.icon}
+                </div>
+              )}
+              <div className="min-w-0">
+                {block.eyebrow && (
+                  <p className={`${eyebrowToneCls(tone)} mb-1`}>{block.eyebrow}</p>
+                )}
+                {block.title && (
+                  <p className="display-5 leading-tight truncate">{block.title}</p>
+                )}
+              </div>
+            </div>
+            <CtaLink
+              cta={block.cta}
+              className="shrink-0 inline-flex items-center gap-2 label border-b border-current self-center hover:opacity-80"
+            />
+          </article>
+        );
+      }
       return (
         <article className={`${shell} flex flex-col`}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
