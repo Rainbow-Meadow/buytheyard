@@ -115,7 +115,7 @@ function ProductsPage() {
             anchorIndex="02"
             eyebrow="Today's price by phone"
             title="Materials. By the yard."
-            body="Seasonal pricing — one call sizes the project and locks the number."
+            body="One call sizes the project and locks the price."
             cta={{ label: "508.579.9897", href: "tel:5085799897" }}
           />
         ),
