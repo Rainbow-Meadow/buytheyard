@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, Menu, Phone, X } from "lucide-react";
-import brandmark from "@/assets/brandmark-dark.webp";
+import { Wordmark } from "@/components/site/Wordmark";
 
 const NAV = [
   { to: "/products", label: "Products" },
@@ -19,20 +19,7 @@ export function SiteHeader() {
       <div className="relative border-l-[1.5px] border-brand">
         <div className="max-w-7xl mx-auto pl-5 pr-3 md:pl-8 md:pr-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-5 md:gap-12">
-            <Link
-              to="/"
-              className="flex items-center leading-none"
-              aria-label="Buy The Yard, home"
-              onClick={() => setOpen(false)}
-            >
-              <img
-                src={brandmark}
-                alt="Buy The Yard"
-                width={160}
-                height={60}
-                className="h-12 w-auto"
-              />
-            </Link>
+            <Wordmark asLink onClick={() => setOpen(false)} withTagline />
             <nav className="hidden md:flex items-center gap-6 lg:gap-8">
               {NAV.map((item) => (
                 <Link
