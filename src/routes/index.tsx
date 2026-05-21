@@ -9,7 +9,7 @@ import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
 import { products, productSlug } from "@/data/products";
-import mulchBlack from "@/assets/mulch-black.webp";
+import featuredHeroYard from "@/assets/featured-hero-yard.webp";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
@@ -216,8 +216,8 @@ function HomePage() {
               id="feat-hero"
               fill
               variant="image"
-              src={mulchBlack}
-              alt="Bulk mulch, loam, sand and stone"
+              src={featuredHeroYard}
+              alt="Piles of mulch, sand, and stone at the Jefferson yard"
               focal="center"
               overlay={{
                 eyebrow: "Bulk materials & garden center",
