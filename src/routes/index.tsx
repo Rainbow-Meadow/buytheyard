@@ -43,8 +43,8 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
     ],
     links: [
-      { rel: "preload", as: "image", href: heroLoopMobilePoster, fetchpriority: "high", media: "(max-width: 767px)" },
-      { rel: "preload", as: "image", href: heroLoopPoster, fetchpriority: "high", media: "(min-width: 768px)" },
+      { rel: "preload", as: "image", href: heroStorefrontMobile, fetchpriority: "high", media: "(max-width: 767px)" },
+      { rel: "preload", as: "image", href: heroStorefrontDesktop, fetchpriority: "high", media: "(min-width: 768px)" },
       { rel: "canonical", href: "https://buytheyard.lovable.app/" },
     ],
     scripts: [
@@ -81,32 +81,22 @@ function HomePage() {
         tiles={{
           hero: (
             <article className="relative h-full w-full overflow-hidden rounded-md ring-1 ring-zinc-800 bg-zinc-950 text-white">
-              <video
-                ref={kickHeroVideo}
+              <img
+                src={heroStorefrontMobile}
+                alt=""
+                aria-hidden="true"
                 className="md:hidden absolute inset-0 w-full h-full object-cover"
-                muted
-                loop
-                playsInline
-                preload="none"
-                poster={heroLoopMobilePoster}
+                fetchPriority="high"
+                decoding="async"
+              />
+              <img
+                src={heroStorefrontDesktop}
+                alt=""
                 aria-hidden="true"
-              >
-                <source src={heroLoopMobileWebm} type="video/webm" />
-                <source src={heroLoopMobileMp4} type="video/mp4" />
-              </video>
-              <video
-                ref={kickHeroVideo}
                 className="hidden md:block absolute inset-0 w-full h-full object-cover"
-                muted
-                loop
-                playsInline
-                preload="none"
-                poster={heroLoopPoster}
-                aria-hidden="true"
-              >
-                <source src={heroLoopWebm} type="video/webm" />
-                <source src={heroLoopMp4} type="video/mp4" />
-              </video>
+                fetchPriority="high"
+                decoding="async"
+              />
               <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
               <div className="md:hidden absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-zinc-950/25" />
               <div className="relative z-10 h-full w-full flex items-center">
