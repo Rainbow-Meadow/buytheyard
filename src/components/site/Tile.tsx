@@ -1254,7 +1254,7 @@ export function Tile(block: TileBlock) {
                   {ghostIcon && (
                     <span
                       aria-hidden="true"
-                      className={`pointer-events-none select-none absolute -bottom-6 -left-2 z-0 ${ghostColor} [&>*]:size-44 md:[&>*]:size-56`}
+                      className={`pointer-events-none select-none absolute -bottom-4 -right-3 z-0 ${ghostColor} [&>*]:size-32 md:[&>*]:size-44 [&>*]:stroke-[1.25]`}
                     >
                       {block.icon}
                     </span>
