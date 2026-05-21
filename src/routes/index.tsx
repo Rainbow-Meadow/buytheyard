@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BadgeCheck, CalendarDays, Facebook, Flower2, Layers, MessageSquareQuote, Mountain, Phone, Sprout, Star, TreePine, Truck, Waves } from "lucide-react";
-import heroStorefrontDesktop from "@/assets/hero-storefront-desktop.webp";
-import heroStorefrontMobile from "@/assets/hero-storefront-mobile.webp";
+import heroStorefront from "@/assets/source/hero-storefront-open.png";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
 import { products, productSlug } from "@/data/products";
@@ -43,8 +42,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
     ],
     links: [
-      { rel: "preload", as: "image", href: heroStorefrontMobile, fetchpriority: "high", media: "(max-width: 767px)" },
-      { rel: "preload", as: "image", href: heroStorefrontDesktop, fetchpriority: "high", media: "(min-width: 768px)" },
+      { rel: "preload", as: "image", href: heroStorefront, fetchpriority: "high" },
       { rel: "canonical", href: "https://buytheyard.lovable.app/" },
     ],
     scripts: [
@@ -82,7 +80,7 @@ function HomePage() {
           hero: (
             <article className="relative h-full w-full overflow-hidden rounded-md ring-1 ring-zinc-800 bg-zinc-950 text-white">
               <img
-                src={heroStorefrontMobile}
+                src={heroStorefront}
                 alt=""
                 aria-hidden="true"
                 className="md:hidden absolute inset-0 w-full h-full object-cover"
@@ -90,7 +88,7 @@ function HomePage() {
                 decoding="async"
               />
               <img
-                src={heroStorefrontDesktop}
+                src={heroStorefront}
                 alt=""
                 aria-hidden="true"
                 className="hidden md:block absolute inset-0 w-full h-full object-cover"
