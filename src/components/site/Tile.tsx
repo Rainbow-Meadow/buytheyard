@@ -1010,23 +1010,56 @@ export function Tile(block: TileBlock) {
   switch (block.variant) {
     case "text":
       if (block.layout === "anchored") {
+        const hasIndex = !!block.anchorIndex;
+        const ghostColor = isLightTone(tone)
+          ? "text-zinc-900/[0.06]"
+          : tone === "brand"
+            ? "text-white/[0.12]"
+            : "text-white/[0.08]";
+        const ruleColor = tone === "brand" ? "bg-brand-foreground" : "bg-brand";
         return (
-          <article className={`${shell} relative`}>
-            {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>}
-            {block.title && <p className="display-5 leading-snug">{block.title}</p>}
-            {block.body && (
-              <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyClamp}`}>
-                {block.body}
-              </div>
+          <article className={`${shell} relative ${hasIndex ? "overflow-hidden" : ""}`}>
+            {hasIndex && (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+                />
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
+                  style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+                >
+                  {block.anchorIndex}
+                </span>
+              </>
             )}
-            {block.icon && (
-              <div
-                aria-hidden="true"
-                className={`mt-auto self-end ${iconToneCls(tone)} ${isLightTone(tone) ? "opacity-25" : "opacity-40"} [&>*]:size-7`}
-              >
-                {block.icon}
-              </div>
-            )}
+            <div className={`relative z-10 flex flex-col h-full`}>
+              {block.eyebrow && (
+                hasIndex ? (
+                  <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2`}>
+                    <span aria-hidden="true" className={`inline-block h-0.5 w-6 ${ruleColor}`} />
+                    {block.eyebrow}
+                  </p>
+                ) : (
+                  <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>
+                )
+              )}
+              {block.title && <p className="display-5 leading-snug">{block.title}</p>}
+              {block.body && (
+                <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyClamp}`}>
+                  {block.body}
+                </div>
+              )}
+              {block.icon && (
+                <div
+                  aria-hidden="true"
+                  className={`mt-auto self-end ${iconToneCls(tone)} ${isLightTone(tone) ? "opacity-25" : "opacity-40"} [&>*]:size-7`}
+                >
+                  {block.icon}
+                </div>
+              )}
+            </div>
           </article>
         );
       }
