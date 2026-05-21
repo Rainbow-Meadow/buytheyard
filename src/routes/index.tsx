@@ -177,6 +177,7 @@ function HomePage() {
       <TileScreen
         layout="section01"
         label="Featured materials"
+        heading="Featured materials"
         tiles={{
           hero: (
             <Tile
@@ -239,6 +240,7 @@ function HomePage() {
       <TileScreen
         layout="section02"
         label="Reviews and community"
+        heading="Reviews and community"
         tiles={{
           hero: (
             <Tile

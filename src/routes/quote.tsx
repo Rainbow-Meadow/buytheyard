@@ -191,6 +191,8 @@ function QuotePage() {
     <TileScreen
       layout="pageHero"
       label="Build a quote"
+      heading="Build a quote for bulk materials"
+      headingLevel="h1"
       tiles={{
         hero: (
           <form

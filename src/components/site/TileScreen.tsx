@@ -51,15 +51,26 @@ interface TileScreenProps {
   label?: string;
   /** Optional override className applied to the outer <section>. */
   className?: string;
+  /**
+   * Optional descriptive heading for the section. Rendered visually-hidden
+   * (sr-only) so it does not disturb the tiled visual layout, but provides
+   * a proper document heading hierarchy for SEO and assistive tech.
+   * Use `headingLevel="h1"` for the primary page heading (exactly once per
+   * route) and `headingLevel="h2"` for subsequent section headings.
+   */
+  heading?: string;
+  headingLevel?: "h1" | "h2";
 }
 
-export function TileScreen({ layout, tiles, label, className }: TileScreenProps) {
+export function TileScreen({ layout, tiles, label, className, heading, headingLevel = "h2" }: TileScreenProps) {
   const order: TileScreenSlot[] = ["hero", "a", "b", "c", "d", "e"];
+  const HeadingTag = headingLevel;
   return (
     <section
       aria-label={label}
       className={`tile-screen ${layoutCls[layout]} ${className ?? ""}`}
     >
+      {heading ? <HeadingTag className="sr-only">{heading}</HeadingTag> : null}
       {order.map((slot) => {
         const node = tiles[slot];
         if (node === undefined || node === null) return null;

@@ -49,6 +49,8 @@ function PrivacyPage() {
       <TileScreen
         layout="pageHero"
         label="Privacy policy"
+        heading="Privacy policy and terms"
+        headingLevel="h1"
         tiles={{
           hero: (
             <Tile
@@ -195,6 +197,7 @@ function PrivacyPage() {
       <TileScreen
         layout="section05"
         label="SMS terms, website terms, and contact"
+        heading="SMS terms, website terms, and contact"
         tiles={{
           hero: (
             <Tile
