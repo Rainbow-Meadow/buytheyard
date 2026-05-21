@@ -622,7 +622,7 @@ function ImageTileInner({
               {block.overlay.anchorIcon && (
                 <span
                   aria-hidden="true"
-                  className="absolute -bottom-8 -right-6 text-white/[0.08] select-none pointer-events-none z-10 [&>*]:size-28 md:[&>*]:size-40 [&>*]:stroke-[1.25]"
+                  className="absolute -bottom-4 -right-3 text-white/[0.08] select-none pointer-events-none z-10 [&>*]:size-32 md:[&>*]:size-44 [&>*]:stroke-[1.25]"
                 >
                   {block.overlay.anchorIcon}
                 </span>
@@ -1151,9 +1151,9 @@ export function Tile(block: TileBlock) {
             {block.anchorIcon && (
               <span
                 aria-hidden="true"
-                className={`absolute -bottom-8 -right-6 select-none pointer-events-none z-0 ${
+                className={`absolute -bottom-4 -right-3 select-none pointer-events-none z-0 ${
                   isLightTone(tone) ? "text-zinc-900/[0.05]" : "text-white/[0.08]"
-                } [&>*]:size-28 md:[&>*]:size-40 [&>*]:stroke-[1.25]`}
+                } [&>*]:size-32 md:[&>*]:size-44 [&>*]:stroke-[1.25]`}
               >
                 {block.anchorIcon}
               </span>
