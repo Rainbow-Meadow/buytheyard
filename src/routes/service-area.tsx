@@ -94,10 +94,10 @@ function ServiceAreaPage() {
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
-          a: <Tile id="sa-stat-towns" fill variant="stat" tone="surface" value={`${TOWNS.length}`} label="Towns served" />,
-          b: <Tile id="sa-stat-radius" fill variant="stat" tone="brand" value="~25 mi" label="Max delivery radius" />,
-          c: <Tile id="sa-stat-min" fill variant="stat" tone="kraft" value="1 yd" label="Order minimum" />,
-          d: <Tile id="sa-stat-lead" fill variant="stat" tone="gray" value="~48 hr" label="Typical lead time" />,
+          a: <Tile id="sa-stat-towns" fill variant="stat" tone="surface" layout="anchored" anchorIndex="01" anchorGlyph={<Map strokeWidth={1.25} />} value={`${TOWNS.length}`} label="Towns served" />,
+          b: <Tile id="sa-stat-radius" fill variant="stat" tone="brand" layout="anchored" anchorIndex="02" anchorGlyph={<MapPin strokeWidth={1.25} />} value="~25 mi" label="Max delivery radius" />,
+          c: <Tile id="sa-stat-min" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<Box strokeWidth={1.25} />} value="1 yd" label="Order minimum" />,
+          d: <Tile id="sa-stat-lead" fill variant="stat" tone="gray" layout="anchored" anchorIndex="04" anchorGlyph={<Clock strokeWidth={1.25} />} value="~48 hr" label="Typical lead time" />,
         }}
       />
 
