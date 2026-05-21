@@ -24,6 +24,17 @@ export function FacebookLiveTile() {
       />
       <span
         aria-hidden="true"
+        className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+      />
+      <span
+        aria-hidden="true"
+        className="absolute -bottom-6 left-3 font-black leading-none text-white/[0.10] select-none pointer-events-none z-10"
+        style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+      >
+        02
+      </span>
+      <span
+        aria-hidden="true"
         className="absolute top-3 right-3 inline-flex items-center justify-center size-7 rounded-full bg-zinc-900/80 text-white backdrop-blur-sm group-hover:bg-zinc-900 transition-colors"
       >
         <ArrowUpRight className="size-4" />

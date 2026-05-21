@@ -103,6 +103,13 @@ export type TileBlock =
       eyebrow?: string;
       quote: string;
       attribution?: string;
+      /** When `layout="anchored"`, the slide adopts the anchored house style:
+       *  brand-red vertical bar on the left edge, ghosted index numeral
+       *  behind the quote, and brand-red rule before the eyebrow. */
+      layout?: "stack" | "anchored";
+      /** Two-digit index numeral rendered ghosted behind the quote when
+       *  `layout="anchored"`. */
+      index?: string;
     })
   | (BaseTile & {
       variant: "definition";
@@ -1096,6 +1103,43 @@ export function Tile(block: TileBlock) {
       );
 
     case "quote":
+      if (block.layout === "anchored") {
+        return (
+          <article className={`${shell} relative overflow-hidden`}>
+            <span
+              aria-hidden="true"
+              className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+            />
+            {block.index && (
+              <span
+                aria-hidden="true"
+                className={`absolute -bottom-6 left-3 font-black leading-none select-none pointer-events-none z-0 ${
+                  isLightTone(tone) ? "text-zinc-900/[0.06]" : "text-white/[0.08]"
+                }`}
+                style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+              >
+                {block.index}
+              </span>
+            )}
+            <div className="relative z-10">
+              {block.eyebrow && (
+                <p className={`${eyebrowToneCls(tone)} mb-4 inline-flex items-center gap-2`}>
+                  <span aria-hidden="true" className="inline-block h-0.5 w-6 bg-brand" />
+                  {block.eyebrow}
+                </p>
+              )}
+              <blockquote
+                className={`display-3 leading-tight ${isLightTone(tone) ? "text-zinc-900" : "text-white"}`}
+              >
+                &ldquo;{block.quote}&rdquo;
+              </blockquote>
+              {block.attribution && (
+                <p className={`${attributionToneCls(tone)} mt-5`}>· {block.attribution}</p>
+              )}
+            </div>
+          </article>
+        );
+      }
       return (
         <article className={shell}>
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-4`}>{block.eyebrow}</p>}
