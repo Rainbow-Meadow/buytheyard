@@ -7,7 +7,9 @@ import {
   ArrowRight,
   Check,
   ChevronLeft,
+  Clock,
   Copy,
+  Layers,
   Mail,
   MessageSquare,
   Minus,
@@ -16,6 +18,7 @@ import {
   Plus,
   Send,
   Trash2,
+  User,
 } from "lucide-react";
 import { products, categories } from "@/data/products";
 import mulchHemlock from "@/assets/mulch-hemlock.webp";
@@ -528,6 +531,9 @@ function QuotePage() {
             fill
             variant="stat"
             tone="surface"
+            layout="anchored"
+            anchorIndex="02"
+            anchorGlyph={<Clock strokeWidth={1.25} />}
             value="~60s"
             label="To build a list"
           />
@@ -538,6 +544,9 @@ function QuotePage() {
             fill
             variant="stat"
             tone="kraft"
+            layout="anchored"
+            anchorIndex="03"
+            anchorGlyph={<User strokeWidth={1.25} />}
             value="1 owner"
             label="Abby answers"
           />
@@ -551,6 +560,13 @@ function QuotePage() {
             alt="Hemlock mulch"
             focal="center"
             loading="lazy"
+            overlay={{
+              eyebrow: "Materials",
+              title: "From our yard",
+              align: "bottom-left",
+              layout: "anchored",
+              anchorIcon: <Layers />,
+            }}
           />
         ),
         d: (
@@ -559,6 +575,7 @@ function QuotePage() {
             fill
             variant="cta"
             tone="brand"
+            anchorIndex="05"
             icon={<Phone />}
             eyebrow="Rather call?"
             title="508.579.9897"
