@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BadgeCheck, CalendarDays, Facebook, Phone, Star } from "lucide-react";
+import { ArrowRight, BadgeCheck, CalendarDays, Facebook, Flower2, Layers, MessageSquareQuote, Mountain, Phone, Sprout, Star, TreePine, Truck, Waves } from "lucide-react";
 import heroStorefrontDesktop from "@/assets/hero-storefront-desktop.webp";
 import heroStorefrontMobile from "@/assets/hero-storefront-mobile.webp";
 import { TileScreen } from "@/components/site/TileScreen";
@@ -194,7 +194,7 @@ function HomePage() {
                 body: "Mulch, loam, sand, stone — by the yard, from our Jefferson lot.",
                 align: "bottom-left",
                 layout: "anchored",
-                index: "01",
+                anchorIcon: <Layers />,
               }}
               cta={{ label: "See the full catalog", to: "/products" }}
             />
@@ -216,7 +216,13 @@ function HomePage() {
                     title: p.name,
                     align: "bottom-left",
                     layout: "anchored",
-                    index: String(i + 2).padStart(2, "0"),
+                    anchorIcon: [
+                      <TreePine />,   // Hemlock Mulch
+                      <Sprout />,     // Screened Loam
+                      <Waves />,      // Mason Sand
+                      <Mountain />,   // Crushed Blue Stone
+                      <Flower2 />,    // Hanging Baskets
+                    ][i],
                   }}
                   details={{
                     shareId: `feat-${productSlug(p.name)}`,
