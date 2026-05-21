@@ -557,10 +557,11 @@ function ImageTileInner({
       />
       {hasOverlay && (
         <>
-          {/* Readability scrim — only when overlay text exists */}
+          {/* Readability scrim — covers the full text zone (bottom ~55%)
+              so eyebrow + title stay legible over any photo tone. */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-transparent"
           />
           <div className={`absolute inset-0 flex ${align} p-5 md:p-6`}>
             <div className="text-white max-w-[34ch]">
