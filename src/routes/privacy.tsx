@@ -60,8 +60,10 @@ function PrivacyPage() {
               overlay={{
                 eyebrow: "Legal · last updated " + LAST_UPDATED,
                 title: "Privacy & Terms.",
-                body: "Plain-English summaries on the front. Tap any card to flip for the full legal text.",
+                body: "Plain-English on the front. Tap a card for the full text.",
                 align: "bottom-left",
+                layout: "anchored",
+                anchorIcon: <FileText />,
               }}
             />
           ),
@@ -74,9 +76,8 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
-                eyebrow: "01 · What we collect",
+                eyebrow: "01 · Data",
                 title: "Name, phone, email, address.",
-                body: "Only what's needed to quote and deliver.",
               }}
               back={{
                 variant: "text",
@@ -106,8 +107,7 @@ function PrivacyPage() {
                 variant: "text",
                 tone: "surface",
                 eyebrow: "02 · Cookies",
-                title: "Essential on. Analytics & marketing off.",
-                body: "Change any time from the footer link.",
+                title: "Essential on. Others off.",
               }}
               back={{
                 variant: "text",
@@ -138,7 +138,6 @@ function PrivacyPage() {
                 tone: "kraft",
                 eyebrow: "03 · Sharing",
                 title: "We don't sell your info.",
-                body: "Shared only to fulfill your order or by law.",
               }}
               back={{
                 variant: "text",
@@ -167,9 +166,8 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
-                eyebrow: "04 · Your choices",
+                eyebrow: "04 · Rights",
                 title: "Access, correct, delete.",
-                body: "Email abby@btymaterial.com any time.",
               }}
               back={{
                 variant: "text",
@@ -193,24 +191,24 @@ function PrivacyPage() {
         }}
       />
 
-      {/* Screen 2 — section04: SMS + Terms + Contact */}
+      {/* Screen 2 — section05: Terms + SMS + Mail + Entity + Email + Call */}
       <TileScreen
-        layout="section04"
+        layout="section05"
         label="SMS terms, website terms, and contact"
         tiles={{
           hero: (
             <Tile
               id="priv-terms"
               fill
+              size="feature"
               variant="flip"
               ariaLabel="Website terms of use"
               front={{
                 variant: "text",
                 tone: "surface",
-                eyebrow: "05 · Website terms of use",
-                title: "Use the site lawfully. Prices are estimates.",
-                body:
-                  "Final pricing is confirmed by phone. Natural materials vary by load and season. You're responsible for choosing a safe delivery drop. Massachusetts law governs.",
+                eyebrow: "05 · Terms",
+                title: "Use the site lawfully.",
+                body: "Prices are estimates — confirmed by phone. MA law governs.",
               }}
               back={{
                 variant: "text",
@@ -240,9 +238,8 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
-                eyebrow: "06 · SMS terms",
+                eyebrow: "06 · SMS",
                 title: "Reply STOP any time.",
-                body: "Msg & data rates may apply. Frequency varies by order activity.",
               }}
               back={{
                 variant: "text",
@@ -268,40 +265,50 @@ function PrivacyPage() {
               id="priv-address"
               fill
               variant="text"
-              tone="kraft"
-
-              eyebrow="07 · Mailing address"
-              body={
-                <>
-                  Buy The Yard, LLC
-                  <br />
-                  2264 Main St.
-                  <br />
-                  Jefferson, MA 01522
-                </>
-              }
+              tone="white"
+              layout="anchored"
+              anchorIndex="07"
+              icon={<Mail />}
+              eyebrow="07 · Mail"
+              title="2264 Main St."
+              body="Jefferson, MA 01522"
             />
           ),
           c: (
+            <Tile
+              id="priv-entity"
+              fill
+              variant="text"
+              tone="kraft"
+              layout="anchored"
+              icon={<ShieldCheck />}
+              eyebrow="Legal entity"
+              title="Buy The Yard, LLC"
+              body="MA-certified woman-owned business. Records kept 7 yrs for tax."
+            />
+          ),
+          d: (
             <Tile
               id="priv-email"
               fill
               variant="cta"
               tone="brand"
-
-              eyebrow="08 · Questions?"
-              title="Email or call Abby."
+              anchorIndex="08"
+              icon={<Mail />}
+              eyebrow="08 · Email"
+              title="Questions?"
               cta={{ label: "abby@btymaterial.com", href: "mailto:abby@btymaterial.com" }}
             />
           ),
-          d: (
+          e: (
             <Tile
               id="priv-call"
               fill
               variant="cta"
-              tone="surface"
-
-              eyebrow="09 · Direct"
+              tone="kraft"
+              anchorIndex="09"
+              icon={<Phone />}
+              eyebrow="09 · Call"
               title="508.579.9897"
               cta={{ label: "Call now", href: "tel:5085799897" }}
             />
