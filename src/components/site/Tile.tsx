@@ -1305,6 +1305,12 @@ export function Tile(block: TileBlock) {
             : "text-zinc-400";
         return (
           <article className={`${shell} relative overflow-hidden`}>
+            {block.anchorIndex && (
+              <span
+                aria-hidden="true"
+                className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
+              />
+            )}
             <span
               aria-hidden="true"
               className={`pointer-events-none select-none absolute leading-none font-black ${ghostColor} ${positionCls}`}
@@ -1319,7 +1325,17 @@ export function Tile(block: TileBlock) {
             )}
             <div className="mt-auto relative z-10">
               <p className={`display-3 leading-none ${valueColor}`}>{block.value}</p>
-              <p className={`eyebrow mt-2 ${labelColor}`}>{block.label}</p>
+              {block.anchorIndex ? (
+                <p className={`eyebrow mt-2 ${labelColor} inline-flex items-center gap-2`}>
+                  <span
+                    aria-hidden="true"
+                    className={`inline-block h-0.5 w-6 ${tone === "brand" ? "bg-brand-foreground" : "bg-brand"}`}
+                  />
+                  {block.label}
+                </p>
+              ) : (
+                <p className={`eyebrow mt-2 ${labelColor}`}>{block.label}</p>
+              )}
             </div>
           </article>
         );
