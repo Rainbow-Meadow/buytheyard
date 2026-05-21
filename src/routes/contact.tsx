@@ -84,6 +84,8 @@ function ContactPage() {
                 title: "Call. We answer.",
                 body: "Phone is fastest. Quote form for material lists. Email for the rest.",
                 align: "bottom-left",
+                layout: "anchored",
+                anchorIcon: <Phone />,
               }}
               cta={{ label: "Start an online quote", to: "/quote" }}
             />
@@ -94,6 +96,7 @@ function ContactPage() {
               fill
               variant="cta"
               tone="brand"
+              anchorIndex="02"
               icon={<Phone />}
               eyebrow="Call"
               title="508.579.9897"
@@ -106,6 +109,7 @@ function ContactPage() {
               fill
               variant="cta"
               tone="surface"
+              anchorIndex="03"
               icon={<MapPin />}
               eyebrow="Yard"
               title="2264 Main St."
@@ -122,6 +126,7 @@ function ContactPage() {
               fill
               variant="cta"
               tone="kraft"
+              anchorIndex="04"
               icon={<Clock />}
               eyebrow="In-season hours"
               title="Mon–Sat"
@@ -135,6 +140,7 @@ function ContactPage() {
               fill
               variant="cta"
               tone="gray"
+              anchorIndex="05"
               icon={<Facebook />}
               eyebrow="Social"
               title="Facebook"
@@ -171,7 +177,7 @@ function ContactPage() {
               fill
               variant="cta"
               tone="surface"
-
+              anchorIndex="06"
               icon={<ClipboardList />}
               eyebrow="Online"
               title="Get a quote"
@@ -185,6 +191,7 @@ function ContactPage() {
               fill
               variant="cta"
               tone="kraft"
+              anchorIndex="07"
               icon={<Mail />}
               eyebrow="Email · non-urgent"
               title="abby@btymaterial.com"
@@ -197,6 +204,8 @@ function ContactPage() {
               fill
               variant="text"
               tone="gray"
+              anchorIndex="08"
+              icon={<Phone />}
               eyebrow="Heads up"
               title="Voicemail returned same day"
               body="Yard cell coverage is spotty — leave a message, we'll call back."
