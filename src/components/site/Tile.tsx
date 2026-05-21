@@ -190,11 +190,15 @@ export type TileBlock =
         /** Internal composition. `"stack"` (default) keeps the existing
          *  overlay treatment. `"anchored"` adds the anchored-family
          *  ornaments (vertical brand bar on the left edge, optional ghosted
-         *  index numeral behind the text, brand-red eyebrow rule). */
+         *  symbol behind the text, brand-red eyebrow rule). */
         layout?: "stack" | "anchored";
-        /** Optional ghosted numeral (e.g. "01"…"06") rendered behind the
-         *  overlay text when `layout="anchored"`. */
+        /** Optional ghosted numeral (e.g. "01"…"06"). Retained for
+         *  back-compat; the anchored family now uses `anchorIcon` for the
+         *  ghost symbol — `index` no longer renders. */
         index?: string;
+        /** Ghosted symbol rendered behind the overlay text when
+         *  `layout="anchored"`. Pass a Lucide icon node. */
+        anchorIcon?: ReactNode;
       };
       /** Optional link wrapping the entire tile. */
       to?: string;
