@@ -30,10 +30,10 @@ export function SiteFooter() {
   return (
     <footer className="bg-surface text-kraft border-t border-white/10">
       <div className="border-l-[1.5px] border-brand">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 py-8 md:py-14">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 py-10 md:py-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
             {/* Column 1 — Identity + WBE */}
-            <div className="space-y-8 md:space-y-10">
+            <div className="space-y-10">
               <div className="space-y-4">
                 <Wordmark size="lg" withTagline />
                 <p className="meta text-kraft/50 flex items-center gap-2">
@@ -43,7 +43,7 @@ export function SiteFooter() {
                 </p>
               </div>
 
-              <div className="space-y-4 md:pt-6 md:border-t md:border-white/5">
+              <div className="space-y-4 pt-6 border-t border-white/5">
                 <Eyebrow>Certification</Eyebrow>
                 <div className="flex items-start gap-4">
                   <img
@@ -72,7 +72,7 @@ export function SiteFooter() {
             </div>
 
             {/* Column 2 — Hours + Visit */}
-            <div className="space-y-8 md:space-y-10">
+            <div className="space-y-10">
               <div className="space-y-4">
                 <Eyebrow>Hours</Eyebrow>
                 <ul className="body-sm space-y-1.5 max-w-[32ch]">
@@ -108,14 +108,14 @@ export function SiteFooter() {
                 </div>
               </div>
 
-              <div className="space-y-4 md:pt-6 md:border-t md:border-white/5">
+              <div className="space-y-4 pt-6 border-t border-white/5">
                 <Eyebrow>Visit</Eyebrow>
                 <address className="not-italic body-sm text-kraft/80 leading-relaxed">
                   2264 Main St.
                   <br />
                   Jefferson, MA 01522
                 </address>
-                <div className="hidden md:block w-full aspect-video ring-1 ring-white/10 overflow-hidden">
+                <div className="w-full aspect-video ring-1 ring-white/10 overflow-hidden">
                   <iframe
                     src={MAP_EMBED_URL}
                     title="Buy The Yard Material, 2264 Main St, Jefferson, MA"
@@ -137,13 +137,13 @@ export function SiteFooter() {
             </div>
 
             {/* Column 3 — Community + Site */}
-            <div className="space-y-8 md:space-y-10">
-              <div className="space-y-4 bg-brand/10 ring-1 ring-brand/20 p-5 md:p-6">
+            <div className="space-y-10">
+              <div className="space-y-4 bg-brand/10 ring-1 ring-brand/20 p-6">
                 <Eyebrow>Feedback</Eyebrow>
                 <h2 className="display-5 text-kraft">
                   Leave a <span className="text-brand">Google review.</span>
                 </h2>
-                <p className="hidden md:block body-sm text-kraft/70">
+                <p className="body-sm text-kraft/70">
                   Reviews from Central Mass neighbors mean a lot to me.
                 </p>
                 <a
@@ -186,7 +186,7 @@ export function SiteFooter() {
 
               <div className="space-y-4">
                 <Eyebrow>Site</Eyebrow>
-                <nav className="grid grid-cols-2 gap-x-4 gap-y-2 md:gap-y-3">
+                <nav className="grid grid-cols-2 gap-x-4 gap-y-3">
                   <Link to="/products" className="label text-kraft/70 hover:text-kraft transition-colors">Products</Link>
                   <Link to="/about" className="label text-kraft/70 hover:text-kraft transition-colors">About</Link>
                   <Link to="/delivery" className="label text-kraft/70 hover:text-kraft transition-colors">Delivery</Link>

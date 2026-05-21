@@ -56,10 +56,10 @@ function AboutPage() {
               }}
             />
           ),
-          a: <Tile id="about-stat-year" fill variant="stat" tone="surface" layout="anchored" anchorIndex="01" anchorGlyph={<Calendar strokeWidth={1.25} />} value="2018" label="Year founded" />,
-          b: <Tile id="about-stat-wbe" fill variant="stat" tone="brand" layout="anchored" anchorIndex="02" anchorGlyph={<BadgeCheck strokeWidth={1.25} />} value="WBE" label="MA-certified woman-owned" />,
-          c: <Tile id="about-stat-local" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<GraduationCap strokeWidth={1.25} />} value="Local" label="Wachusett Regional · '16" />,
-          d: <Tile id="about-stat-stars" fill variant="stat" tone="gray" layout="anchored" anchorIndex="04" anchorGlyph={<Star strokeWidth={1.25} />} value="5★" label="Google & Facebook rated" />,
+          a: <Tile id="about-stat-year" fill variant="stat" tone="surface" layout="anchored" anchorIndex="02" anchorGlyph={<Calendar strokeWidth={1.25} />} value="2018" label="Year founded" />,
+          b: <Tile id="about-stat-wbe" fill variant="stat" tone="brand" layout="anchored" anchorIndex="03" anchorGlyph={<BadgeCheck strokeWidth={1.25} />} value="WBE" label="MA-certified woman-owned" />,
+          c: <Tile id="about-stat-local" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="04" anchorGlyph={<GraduationCap strokeWidth={1.25} />} value="Local" label="Wachusett Regional · '16" />,
+          d: <Tile id="about-stat-stars" fill variant="stat" tone="gray" layout="anchored" anchorIndex="05" anchorGlyph={<Star strokeWidth={1.25} />} value="5★" label="Google & Facebook rated" />,
         }}
       />
 
@@ -109,7 +109,7 @@ function AboutPage() {
               fill
               variant="cta"
               tone="brand"
-              anchorIndex="04"
+              anchorIndex="05"
               icon={<MapPin />}
               eyebrow="Visit"
               title="2264 Main St."
