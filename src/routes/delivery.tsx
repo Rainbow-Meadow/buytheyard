@@ -66,7 +66,7 @@ function DeliveryPage() {
       {/* Screen 2 — section01: rules + payment + call CTA */}
       <TileScreen
         layout="section01"
-        label="What to know before delivery"
+        label="How a delivery works"
         tiles={{
           hero: (
             <Tile
@@ -76,10 +76,10 @@ function DeliveryPage() {
               tone="surface"
 
               number="01"
-              icon={<Truck />}
-              eyebrow="Drop standard"
-              title="Driveway-to-curbline only."
-              body="Drop on driveway or curbline — keeps lawn and lines safe."
+              icon={<Phone />}
+              eyebrow="Call it in"
+              title="Call by noon for same-day."
+              body="One quick call locks your drop — material, address, where to put it."
             />
           ),
           a: (
@@ -89,8 +89,8 @@ function DeliveryPage() {
               variant="numbered"
               tone="kraft"
               number="02"
-              eyebrow="Timing"
-              title="Call before noon for same-day."
+              eyebrow="Mark the spot"
+              title="A tarp or cone is all we need."
             />
           ),
           b: (
@@ -100,30 +100,30 @@ function DeliveryPage() {
               variant="numbered"
               tone="white"
               number="03"
-              eyebrow="Mark your spot"
-              title="Tarp or cone marks the spot."
+              eyebrow="Where we drop"
+              title="Driveway or curbline only."
             />
           ),
           c: (
-            <Tile
-              id="dlv-pickup"
-              fill
-              variant="text"
-              tone="gray"
-              icon={<Warehouse />}
-              eyebrow="04 · Pickup"
-              title="Bring a truck, no appt."
-            />
-          ),
-          d: (
             <Tile
               id="dlv-payment"
               fill
               variant="text"
               tone="kraft"
               icon={<CreditCard />}
-              eyebrow="05 · Payment"
-              title="4% card fee — cash skips it."
+              eyebrow="Payment"
+              title="Cash, check, or card (+4%)."
+            />
+          ),
+          d: (
+            <Tile
+              id="dlv-pickup"
+              fill
+              variant="text"
+              tone="gray"
+              icon={<Warehouse />}
+              eyebrow="Prefer pickup?"
+              title="Bring a truck, no appt."
             />
           ),
           e: (
