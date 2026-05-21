@@ -108,12 +108,14 @@ export type TileBlock =
       quote: string;
       attribution?: string;
       /** When `layout="anchored"`, the slide adopts the anchored house style:
-       *  brand-red vertical bar on the left edge, ghosted index numeral
-       *  behind the quote, and brand-red rule before the eyebrow. */
+       *  brand-red vertical bar on the left edge, ghosted symbol behind the
+       *  quote (via `anchorIcon`), and brand-red rule before the eyebrow. */
       layout?: "stack" | "anchored";
-      /** Two-digit index numeral rendered ghosted behind the quote when
-       *  `layout="anchored"`. */
+      /** Deprecated — retained for back-compat. The anchored family ghosts
+       *  `anchorIcon` instead. */
       index?: string;
+      /** Ghosted symbol rendered behind the quote when `layout="anchored"`. */
+      anchorIcon?: ReactNode;
     })
   | (BaseTile & {
       variant: "definition";
@@ -190,11 +192,15 @@ export type TileBlock =
         /** Internal composition. `"stack"` (default) keeps the existing
          *  overlay treatment. `"anchored"` adds the anchored-family
          *  ornaments (vertical brand bar on the left edge, optional ghosted
-         *  index numeral behind the text, brand-red eyebrow rule). */
+         *  symbol behind the text, brand-red eyebrow rule). */
         layout?: "stack" | "anchored";
-        /** Optional ghosted numeral (e.g. "01"…"06") rendered behind the
-         *  overlay text when `layout="anchored"`. */
+        /** Optional ghosted numeral (e.g. "01"…"06"). Retained for
+         *  back-compat; the anchored family now uses `anchorIcon` for the
+         *  ghost symbol — `index` no longer renders. */
         index?: string;
+        /** Ghosted symbol rendered behind the overlay text when
+         *  `layout="anchored"`. Pass a Lucide icon node. */
+        anchorIcon?: ReactNode;
       };
       /** Optional link wrapping the entire tile. */
       to?: string;
@@ -612,14 +618,13 @@ function ImageTileInner({
                 aria-hidden="true"
                 className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
               />
-              {/* Ghosted index numeral */}
-              {block.overlay.index && (
+              {/* Ghosted symbol */}
+              {block.overlay.anchorIcon && (
                 <span
                   aria-hidden="true"
-                  className="absolute -bottom-6 left-3 leading-none font-black text-white/[0.10] select-none pointer-events-none z-10"
-                  style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+                  className="absolute -bottom-6 -left-2 text-white/[0.12] select-none pointer-events-none z-10 [&>*]:size-44 md:[&>*]:size-56"
                 >
-                  {block.overlay.index}
+                  {block.overlay.anchorIcon}
                 </span>
               )}
             </>
@@ -1031,20 +1036,12 @@ export function Tile(block: TileBlock) {
                   aria-hidden="true"
                   className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
                 />
-                {hasIcon ? (
+                {hasIcon && (
                   <span
                     aria-hidden="true"
                     className={`pointer-events-none select-none absolute -bottom-6 -left-2 z-0 ${ghostColor} [&>*]:size-44 md:[&>*]:size-56`}
                   >
                     {block.icon}
-                  </span>
-                ) : (
-                  <span
-                    aria-hidden="true"
-                    className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
-                    style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
-                  >
-                    {block.anchorIndex}
                   </span>
                 )}
               </>
@@ -1100,20 +1097,12 @@ export function Tile(block: TileBlock) {
               aria-hidden="true"
               className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
             />
-            {hasIcon ? (
+            {hasIcon && (
               <span
                 aria-hidden="true"
                 className={`pointer-events-none select-none absolute -bottom-6 -left-2 z-0 ${ghostColor} [&>*]:size-44 md:[&>*]:size-56`}
               >
                 {block.icon}
-              </span>
-            ) : (
-              <span
-                aria-hidden="true"
-                className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
-                style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
-              >
-                {block.number}
               </span>
             )}
             <div className="relative z-10 flex flex-col h-full">
@@ -1159,15 +1148,14 @@ export function Tile(block: TileBlock) {
               aria-hidden="true"
               className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
             />
-            {block.index && (
+            {block.anchorIcon && (
               <span
                 aria-hidden="true"
-                className={`absolute -bottom-6 left-3 font-black leading-none select-none pointer-events-none z-0 ${
-                  isLightTone(tone) ? "text-zinc-900/[0.06]" : "text-white/[0.08]"
-                }`}
-                style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+                className={`absolute -bottom-6 -left-2 select-none pointer-events-none z-0 ${
+                  isLightTone(tone) ? "text-zinc-900/[0.06]" : "text-white/[0.10]"
+                } [&>*]:size-44 md:[&>*]:size-56`}
               >
-                {block.index}
+                {block.anchorIcon}
               </span>
             )}
             <div className="relative z-10">
@@ -1263,20 +1251,12 @@ export function Tile(block: TileBlock) {
                     aria-hidden="true"
                     className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
                   />
-                  {ghostIcon ? (
+                  {ghostIcon && (
                     <span
                       aria-hidden="true"
                       className={`pointer-events-none select-none absolute -bottom-6 -left-2 z-0 ${ghostColor} [&>*]:size-44 md:[&>*]:size-56`}
                     >
                       {block.icon}
-                    </span>
-                  ) : (
-                    <span
-                      aria-hidden="true"
-                      className={`pointer-events-none select-none absolute -bottom-6 left-3 leading-none font-black z-0 ${ghostColor}`}
-                      style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
-                    >
-                      {block.anchorIndex}
                     </span>
                   )}
                 </>
@@ -1308,7 +1288,7 @@ export function Tile(block: TileBlock) {
 
     case "stat":
       if (block.layout === "anchored") {
-        const ghost = block.anchorGlyph ?? block.value;
+        const ghost = block.anchorGlyph;
         const ghostColor = isLightTone(tone)
           ? "text-zinc-900/[0.05]"
           : tone === "brand"
@@ -1340,13 +1320,14 @@ export function Tile(block: TileBlock) {
                 className="absolute left-0 inset-y-0 w-1.5 bg-brand z-20"
               />
             )}
-            <span
-              aria-hidden="true"
-              className={`pointer-events-none select-none absolute leading-none font-black ${ghostColor} ${positionCls}`}
-              style={{ fontSize: "clamp(7rem, 30vw, 11rem)" }}
-            >
-              {ghost}
-            </span>
+            {ghost && (
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none select-none absolute ${ghostColor} ${positionCls} [&>*]:size-44 md:[&>*]:size-56`}
+              >
+                {ghost}
+              </span>
+            )}
             {block.icon && (
               <div className={`${iconToneCls(tone)} mb-2 [&>*]:size-5 relative z-10`}>
                 {block.icon}

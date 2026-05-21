@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Facebook } from "lucide-react";
 import fbProfileCard from "@/assets/fb-profile-card.webp";
 
 /**
@@ -28,10 +28,9 @@ export function FacebookLiveTile() {
       />
       <span
         aria-hidden="true"
-        className="absolute -bottom-6 left-3 font-black leading-none text-white/[0.10] select-none pointer-events-none z-10"
-        style={{ fontSize: "clamp(7rem, 28vw, 12rem)" }}
+        className="absolute -bottom-6 -left-2 text-white/[0.12] select-none pointer-events-none z-10 [&>*]:size-44 md:[&>*]:size-56"
       >
-        02
+        <Facebook />
       </span>
       <span
         aria-hidden="true"
