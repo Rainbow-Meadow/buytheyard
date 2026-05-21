@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Facebook } from "lucide-react";
-import brandmark from "@/assets/brandmark-dark.webp";
 import wbeSeal from "@/assets/source/wbe-seal.webp";
 import { YelpLogo } from "@/components/site/YelpLogo";
+import { Wordmark } from "@/components/site/Wordmark";
 import { openCookieSettings } from "@/lib/cookie-consent";
 
 // TODO: replace with the real Google review short link from the
@@ -35,15 +35,7 @@ export function SiteFooter() {
             {/* Column 1 — Identity + WBE */}
             <div className="space-y-10">
               <div className="space-y-4">
-                <img
-                  src={brandmark}
-                  alt="Buy The Yard · Mulch · Loam · Sand · Stone"
-                  width={320}
-                  height={160}
-                  className="h-28 w-auto"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <Wordmark size="lg" withTagline />
                 <p className="meta text-kraft/50 flex items-center gap-2">
                   <span>Est. 2016</span>
                   <span aria-hidden className="size-1 rounded-full bg-brand" />
