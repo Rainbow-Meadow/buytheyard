@@ -747,17 +747,24 @@ function CarouselTileInner({
         className="flex h-full w-full transition-transform duration-500 ease-out motion-reduce:transition-none"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
-        {slides.map((s, i) => (
-          <div
-            key={s.id ?? `slide-${i}`}
-            className="h-full w-full shrink-0 basis-full"
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${count}`}
-            aria-hidden={i !== index}
-          >
-            <Tile {...s} fill />
-          </div>
-        ))}
+        {slides.map((s, i) => {
+          const inactive = i !== index;
+          return (
+            <div
+              key={s.id ?? `slide-${i}`}
+              className="h-full w-full shrink-0 basis-full"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${count}`}
+              aria-hidden={inactive}
+              // `inert` removes focusable descendants from the tab order so
+              // hiding the slide doesn't leave focusable links/buttons
+              // inside an aria-hidden subtree (WCAG aria-hidden-focus).
+              {...(inactive ? { inert: "" as unknown as boolean } : {})}
+            >
+              <Tile {...s} fill />
+            </div>
+          );
+        })}
       </div>
 
       {showArrows && count > 1 && (
@@ -766,7 +773,7 @@ function CarouselTileInner({
             type="button"
             onClick={prev}
             aria-label="Previous slide"
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-10 rounded-full bg-black/55 hover:bg-black/75 text-white backdrop-blur-sm"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-11 rounded-full bg-black/70 hover:bg-black/85 text-white backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             <ChevronLeft className="size-5" />
           </button>
@@ -774,7 +781,7 @@ function CarouselTileInner({
             type="button"
             onClick={next}
             aria-label="Next slide"
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-10 rounded-full bg-black/55 hover:bg-black/75 text-white backdrop-blur-sm"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-11 rounded-full bg-black/70 hover:bg-black/85 text-white backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             <ChevronRight className="size-5" />
           </button>
