@@ -239,8 +239,8 @@ function HomePage() {
             id="feat-hero"
             variant="image"
             size="feature"
-            src={FEATURED[0].image!}
-            alt={FEATURED[0].name}
+            src={mulchBlack}
+            alt="Bulk mulch, loam, sand and stone"
             aspect={{ mobile: "portrait", desktop: "wide" }}
             focal="center"
             overlay={{
@@ -252,7 +252,7 @@ function HomePage() {
             cta={{ label: "See the full catalog", to: "/products" }}
           />
           <div className="tile-grid">
-            {FEATURED.slice(1, 7).map((p) => (
+            {FEATURED.map((p) => (
               <Tile
                 key={p.name}
                 id={`feat-${productSlug(p.name)}`}
