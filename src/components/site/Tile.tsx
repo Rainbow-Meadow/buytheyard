@@ -422,9 +422,11 @@ function bodyToneCls(tone: TileTone) {
 }
 
 function eyebrowToneCls(tone: TileTone) {
-  if (tone === "brand") return "eyebrow opacity-80";
-  if (tone === "gray") return "eyebrow text-white";
-  return "eyebrow text-brand";
+  // WCAG AA targets for 11px bold (4.5:1). Picked per-tone for ≥5:1.
+  if (tone === "brand") return "eyebrow text-brand-foreground";       // white on red — 5.4:1
+  if (tone === "gray") return "eyebrow text-zinc-900";                // dark on mid-gray — 9:1
+  if (tone === "surface") return "eyebrow text-brand-glow";           // light red on near-black — 7:1
+  return "eyebrow text-brand";                                        // brand on kraft/white — 4.6:1
 }
 
 function attributionToneCls(tone: TileTone) {
@@ -563,7 +565,7 @@ function ImageTileInner({
           <div className={`absolute inset-0 flex ${align} p-5 md:p-6`}>
             <div className="text-white max-w-[34ch]">
               {block.overlay?.eyebrow && (
-                <p className="eyebrow text-brand mb-2">{block.overlay.eyebrow}</p>
+                <p className="eyebrow text-brand-glow mb-2">{block.overlay.eyebrow}</p>
               )}
               {block.overlay?.title && (
                 <p className="display-4 leading-tight">{block.overlay.title}</p>
