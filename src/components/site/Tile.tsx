@@ -120,6 +120,14 @@ export type TileBlock =
       variant: "stat";
       value: string;
       label: string;
+      /** Optional oversized ghosted glyph rendered behind the value when
+       *  `layout="anchored"`. Defaults to repeating `value` as text. Accepts
+       *  any ReactNode so the caller can pass an SVG, single letter, or
+       *  alternate string for higher visual weight. */
+      anchorGlyph?: ReactNode;
+      /** Where the anchored glyph sits inside the tile. Defaults to
+       *  `"bottom-right"`. */
+      anchorPosition?: "top-right" | "bottom-right" | "center";
     })
   | (BaseTile & {
       variant: "image";
