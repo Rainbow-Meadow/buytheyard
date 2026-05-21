@@ -22,6 +22,7 @@ const FEATURED = [
   "3/4\" Crushed Blue Stone",
   "Red Lava Rock",
   "Hanging Baskets",
+  "ASTM Playground Chips",
 ].map((n) => products.find((p) => p.name === n)!);
 
 /**
