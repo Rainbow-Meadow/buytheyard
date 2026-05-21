@@ -1,12 +1,30 @@
 ## Goal
-Pull the ghost glyph back in from the corner so more of its silhouette reads — still anchored, not centered.
+Apply the new ghost-glyph treatment (smaller, less-clipped, thin stroke, anchored bottom-right) to every remaining tile variant so all ghosts read consistently.
 
-## Change
-In `src/components/site/Tile.tsx`, both ghost-glyph spots (image-overlay anchored ~line 622, quote anchored ~line 1151):
+## Sites to update in `src/components/site/Tile.tsx`
 
-- Offset: `-bottom-8 -right-6` → `-bottom-4 -right-3` (less aggressive clip)
-- Size: bump up one step — `[&>*]:size-32 md:[&>*]:size-44` (was `size-28 / size-40`) so the visible portion has more weight
-- Keep the soft opacity and thin stroke from the last pass
+Four more ghost-glyph blocks still use the old `-bottom-6 -left-2 … size-44 md:size-56` recipe:
+
+1. **`text` anchored** (~line 1042) — ghosts `block.icon`
+2. **`numbered` anchored** (~line 1103) — ghosts `block.icon`
+3. **`cta` non-anchored, family-on** (~line 1257) — ghosts `block.icon`
+4. **`stat` anchored** (~line 1326) — uses `anchorPosition` (top-right / center / bottom-right)
+
+## Change recipe
+
+For 1–3 (single fixed bottom-left placement → move to bottom-right corner):
+- `absolute -bottom-6 -left-2 z-0 … [&>*]:size-44 md:[&>*]:size-56`
+- →
+- `absolute -bottom-4 -right-3 z-0 … [&>*]:size-32 md:[&>*]:size-44 [&>*]:stroke-[1.25]`
+
+For 4 (`stat`, keep position switch — just tighten offsets, shrink size, thin stroke):
+- `top-right`: `-top-6 -right-3` → `-top-3 -right-3`
+- `bottom-right`: `-bottom-10 -right-4` → `-bottom-4 -right-3`
+- `center`: unchanged
+- size: `[&>*]:size-44 md:[&>*]:size-56` → `[&>*]:size-32 md:[&>*]:size-44`
+- add `[&>*]:stroke-[1.25]`
+
+Opacity values stay tone-aware as already coded — no opacity edits.
 
 ## Verification
-Preview the reviews carousel and the CTMS / Rutland tiles — the glyph should clearly read as a recognizable shape in the bottom-right (truck, flower, quote mark), not a sliver.
+Scan home page and products page: stat tiles, the brand-red Today's Price CTA, the Curbside Delivery tile, and any text/numbered anchored tiles should all show a smaller, thin-stroke silhouette in the bottom-right (or the configured stat position), never a bottom-left bleed.
