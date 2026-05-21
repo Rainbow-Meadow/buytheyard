@@ -626,7 +626,7 @@ function ImageTileInner({
               type="button"
               onClick={nav.prev}
               aria-label="Previous"
-              className="hidden sm:grid absolute left-3 top-1/2 -translate-y-1/2 size-10 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10"
+              className="hidden sm:grid absolute left-3 top-1/2 -translate-y-1/2 size-11 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <ChevronLeft className="size-5" />
             </button>
@@ -636,7 +636,7 @@ function ImageTileInner({
               type="button"
               onClick={nav.next}
               aria-label="Next"
-              className="hidden sm:grid absolute right-3 top-1/2 -translate-y-1/2 size-10 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10"
+              className="hidden sm:grid absolute right-3 top-1/2 -translate-y-1/2 size-11 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <ChevronRight className="size-5" />
             </button>
