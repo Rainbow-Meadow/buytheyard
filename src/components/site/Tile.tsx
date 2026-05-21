@@ -1198,7 +1198,7 @@ export function Tile(block: TileBlock) {
         );
       }
       return (
-        <article className={`${shell} flex flex-col`}>
+        <article className={`${shell} flex flex-col ${block.anchorIndex ? "relative overflow-hidden" : ""}`}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
           {block.anchorIndex && (
             <>
