@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CreditCard, Phone, Truck, Warehouse } from "lucide-react";
+import { Box, Clock, CreditCard, Home, MapPin, Phone, Target, Truck, Warehouse } from "lucide-react";
 import loadingTruck from "@/assets/source/loading-truck.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
@@ -53,15 +53,15 @@ function DeliveryPage() {
                 body: "Curbside from Jefferson across Central Mass. Call before noon for same-day.",
                 align: "bottom-left",
                 layout: "anchored",
-                index: "01",
+                anchorIcon: <Truck />,
               }}
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
-          a: <Tile id="dlv-stat-radius" fill variant="stat" tone="surface" layout="anchored" anchorIndex="02" value="~25 mi" label="Service radius" />,
-          b: <Tile id="dlv-stat-min" fill variant="stat" tone="brand" layout="anchored" anchorIndex="03" value="1 yd" label="Order minimum" />,
-          c: <Tile id="dlv-stat-lead" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="04" value="~48 hr" label="Typical lead time" />,
-          d: <Tile id="dlv-stat-drop" fill variant="stat" tone="gray" layout="anchored" anchorIndex="05" value="Curb" label="Driveway drop" />,
+          a: <Tile id="dlv-stat-radius" fill variant="stat" tone="surface" layout="anchored" anchorIndex="02" anchorGlyph={<MapPin strokeWidth={1.25} />} value="~25 mi" label="Service radius" />,
+          b: <Tile id="dlv-stat-min" fill variant="stat" tone="brand" layout="anchored" anchorIndex="03" anchorGlyph={<Box strokeWidth={1.25} />} value="1 yd" label="Order minimum" />,
+          c: <Tile id="dlv-stat-lead" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="04" anchorGlyph={<Clock strokeWidth={1.25} />} value="~48 hr" label="Typical lead time" />,
+          d: <Tile id="dlv-stat-drop" fill variant="stat" tone="gray" layout="anchored" anchorIndex="05" anchorGlyph={<Truck strokeWidth={1.25} />} value="Curb" label="Driveway drop" />,
         }}
       />
 
@@ -92,6 +92,7 @@ function DeliveryPage() {
               tone="kraft"
               layout="anchored"
               number="02"
+              icon={<Target />}
               eyebrow="Mark the spot"
               title="A tarp or cone is all we need."
             />
@@ -104,6 +105,7 @@ function DeliveryPage() {
               tone="white"
               layout="anchored"
               number="03"
+              icon={<Home />}
               eyebrow="Where we drop"
               title="Driveway or curbline only."
             />
