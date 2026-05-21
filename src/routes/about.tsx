@@ -109,7 +109,6 @@ function AboutPage() {
               fill
               variant="cta"
               tone="brand"
-              layout="anchored"
               anchorIndex="05"
               icon={<MapPin />}
               eyebrow="Visit"
