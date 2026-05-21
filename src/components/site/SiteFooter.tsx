@@ -164,7 +164,7 @@ export function SiteFooter() {
                   </svg>
                   Write a Google review
                 </a>
-                <div className="flex items-center gap-5 pt-1">
+                <div className="flex items-center gap-5 pt-1 justify-center md:justify-start">
                   <a
                     href="https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/"
                     target="_blank"
