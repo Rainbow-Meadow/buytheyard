@@ -89,9 +89,6 @@ export function SiteFooter() {
                     <span className="text-brand">Closed</span>
                   </li>
                 </ul>
-                <p className="micro italic text-kraft/40 leading-relaxed max-w-[36ch]">
-                  In-season 4/1 to 8/1. After 8/1, by appointment. Winter salt year-round.
-                </p>
                 <div className="space-y-1 pt-2">
                   <a
                     href="tel:5085799897"
