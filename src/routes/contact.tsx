@@ -7,7 +7,7 @@ import {
   Phone,
   Facebook,
 } from "lucide-react";
-import yardPatio from "@/assets/source/yard-banner-5.webp";
+import yardPatio from "@/assets/source/contact-hero-welcome.png";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
