@@ -1151,9 +1151,9 @@ export function Tile(block: TileBlock) {
             {block.anchorIcon && (
               <span
                 aria-hidden="true"
-                className={`absolute -bottom-6 -left-2 select-none pointer-events-none z-0 ${
-                  isLightTone(tone) ? "text-zinc-900/[0.06]" : "text-white/[0.10]"
-                } [&>*]:size-44 md:[&>*]:size-56`}
+                className={`absolute -bottom-8 -right-6 select-none pointer-events-none z-0 ${
+                  isLightTone(tone) ? "text-zinc-900/[0.05]" : "text-white/[0.08]"
+                } [&>*]:size-28 md:[&>*]:size-40 [&>*]:stroke-[1.25]`}
               >
                 {block.anchorIcon}
               </span>
