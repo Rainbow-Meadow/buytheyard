@@ -74,7 +74,7 @@ function DeliveryPage() {
               fill
               variant="numbered"
               tone="surface"
-
+              layout="anchored"
               number="01"
               icon={<Phone />}
               eyebrow="Call it in"
@@ -88,6 +88,7 @@ function DeliveryPage() {
               fill
               variant="numbered"
               tone="kraft"
+              layout="anchored"
               number="02"
               eyebrow="Mark the spot"
               title="A tarp or cone is all we need."
@@ -99,6 +100,7 @@ function DeliveryPage() {
               fill
               variant="numbered"
               tone="white"
+              layout="anchored"
               number="03"
               eyebrow="Where we drop"
               title="Driveway or curbline only."
@@ -110,6 +112,7 @@ function DeliveryPage() {
               fill
               variant="text"
               tone="kraft"
+              layout="anchored"
               icon={<CreditCard />}
               eyebrow="Payment"
               title="Cash, check, or card (+4%)."
@@ -121,6 +124,7 @@ function DeliveryPage() {
               fill
               variant="text"
               tone="gray"
+              layout="anchored"
               icon={<Warehouse />}
               eyebrow="Prefer pickup?"
               title="Bring a truck, no appt."
@@ -132,6 +136,7 @@ function DeliveryPage() {
               fill
               variant="cta"
               tone="brand"
+              layout="anchored"
               icon={<Phone />}
               eyebrow="Need a quote?"
               title="Talk to Abby"
