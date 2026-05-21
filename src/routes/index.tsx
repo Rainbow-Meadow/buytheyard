@@ -1,11 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BadgeCheck, CalendarDays, Facebook, Phone, Star } from "lucide-react";
-import heroLoopMp4 from "@/assets/video/hero-loop.mp4?url";
-import heroLoopWebm from "@/assets/video/hero-loop.webm?url";
-import heroLoopPoster from "@/assets/video/hero-loop-poster.jpg";
-import heroLoopMobileMp4 from "@/assets/video/hero-loop-mobile.mp4?url";
-import heroLoopMobileWebm from "@/assets/video/hero-loop-mobile.webm?url";
-import heroLoopMobilePoster from "@/assets/video/hero-loop-mobile-poster.jpg";
+import heroStorefrontDesktop from "@/assets/hero-storefront-desktop.webp";
+import heroStorefrontMobile from "@/assets/hero-storefront-mobile.webp";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
 import { products, productSlug } from "@/data/products";
@@ -28,33 +24,6 @@ const FEATURED = [
  * Only the currently visible hero video (mobile or desktop, the other is
  * `display:none`) is kicked off.
  */
-function kickHeroVideo(el: HTMLVideoElement | null) {
-  if (!el) return;
-  el.muted = true;
-  el.defaultMuted = true;
-
-  const start = () => {
-    // Skip the hidden hero variant — `display:none` videos have offsetParent === null.
-    if (el.offsetParent === null) return;
-    try {
-      el.load();
-    } catch {
-      /* noop */
-    }
-    el.play().catch(() => {});
-  };
-
-  type IdleWindow = Window & {
-    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-  };
-  const w = window as IdleWindow;
-  if (typeof w.requestIdleCallback === "function") {
-    w.requestIdleCallback(start, { timeout: 1500 });
-  } else {
-    setTimeout(start, 400);
-  }
-}
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -74,8 +43,8 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
     ],
     links: [
-      { rel: "preload", as: "image", href: heroLoopMobilePoster, fetchpriority: "high", media: "(max-width: 767px)" },
-      { rel: "preload", as: "image", href: heroLoopPoster, fetchpriority: "high", media: "(min-width: 768px)" },
+      { rel: "preload", as: "image", href: heroStorefrontMobile, fetchpriority: "high", media: "(max-width: 767px)" },
+      { rel: "preload", as: "image", href: heroStorefrontDesktop, fetchpriority: "high", media: "(min-width: 768px)" },
       { rel: "canonical", href: "https://buytheyard.lovable.app/" },
     ],
     scripts: [
@@ -112,32 +81,22 @@ function HomePage() {
         tiles={{
           hero: (
             <article className="relative h-full w-full overflow-hidden rounded-md ring-1 ring-zinc-800 bg-zinc-950 text-white">
-              <video
-                ref={kickHeroVideo}
+              <img
+                src={heroStorefrontMobile}
+                alt=""
+                aria-hidden="true"
                 className="md:hidden absolute inset-0 w-full h-full object-cover"
-                muted
-                loop
-                playsInline
-                preload="none"
-                poster={heroLoopMobilePoster}
+                fetchPriority="high"
+                decoding="async"
+              />
+              <img
+                src={heroStorefrontDesktop}
+                alt=""
                 aria-hidden="true"
-              >
-                <source src={heroLoopMobileWebm} type="video/webm" />
-                <source src={heroLoopMobileMp4} type="video/mp4" />
-              </video>
-              <video
-                ref={kickHeroVideo}
                 className="hidden md:block absolute inset-0 w-full h-full object-cover"
-                muted
-                loop
-                playsInline
-                preload="none"
-                poster={heroLoopPoster}
-                aria-hidden="true"
-              >
-                <source src={heroLoopWebm} type="video/webm" />
-                <source src={heroLoopMp4} type="video/mp4" />
-              </video>
+                fetchPriority="high"
+                decoding="async"
+              />
               <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
               <div className="md:hidden absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-zinc-950/25" />
               <div className="relative z-10 h-full w-full flex items-center">
