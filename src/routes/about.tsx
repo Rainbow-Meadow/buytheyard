@@ -35,6 +35,8 @@ function AboutPage() {
       <TileScreen
         layout="pageHero"
         label="About Abby and Buy The Yard"
+        heading="About Abby and Buy The Yard"
+        headingLevel="h1"
         tiles={{
           hero: (
             <Tile
@@ -67,6 +69,7 @@ function AboutPage() {
       <TileScreen
         layout="section04"
         label="Our story and around the yard"
+        heading="Our story and around the yard"
         tiles={{
           hero: (
             <Tile

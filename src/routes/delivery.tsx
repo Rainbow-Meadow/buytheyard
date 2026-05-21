@@ -36,6 +36,8 @@ function DeliveryPage() {
       <TileScreen
         layout="pageHero"
         label="Delivery and pickup"
+        heading="Delivery and pickup across Central Massachusetts"
+        headingLevel="h1"
         tiles={{
           hero: (
             <Tile
@@ -69,6 +71,7 @@ function DeliveryPage() {
       <TileScreen
         layout="section01"
         label="How a delivery works"
+        heading="How a delivery works"
         tiles={{
           hero: (
             <Tile

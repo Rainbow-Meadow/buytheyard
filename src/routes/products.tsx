@@ -93,6 +93,8 @@ function ProductsPage() {
     <TileScreen
       layout="section02"
       label="Materials catalog"
+      heading="Materials catalog — mulch, loam, sand, and stone"
+      headingLevel="h1"
       tiles={{
         hero: (
           <Tile

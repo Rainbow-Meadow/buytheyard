@@ -68,6 +68,8 @@ function ContactPage() {
       <TileScreen
         layout="pageHero"
         label="Contact Buy The Yard"
+        heading="Contact Buy The Yard"
+        headingLevel="h1"
         tiles={{
           hero: (
             <Tile
@@ -155,6 +157,7 @@ function ContactPage() {
       <TileScreen
         layout="section03"
         label="Map, quote, and email"
+        heading="Map, quote, and email"
         tiles={{
           hero: (
             <article className="relative h-full w-full overflow-hidden rounded-md ring-1 ring-zinc-300 bg-kraft">
