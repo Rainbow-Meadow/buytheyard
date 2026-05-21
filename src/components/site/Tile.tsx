@@ -143,6 +143,10 @@ export type TileBlock =
       /** Where the anchored glyph sits inside the tile. Defaults to
        *  `"bottom-right"`. */
       anchorPosition?: "top-right" | "bottom-right" | "center";
+      /** Two-digit index numeral that adds the anchored-family ornament
+       *  (brand-red left bar + brand-rule on the label) when
+       *  `layout="anchored"`. The ghosted glyph stays. */
+      anchorIndex?: string;
     })
   | (BaseTile & {
       variant: "image";
