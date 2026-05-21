@@ -1,56 +1,53 @@
 ## Goal
 
-Bring `/privacy` in line with the rebuilt service-area / delivery / about / contact pages: hero with anchored icon, every tile passing the Size/Tone/Variant/Action matrix, and zero truncation at 440×798.
+Deliver Abby a polished "Welcome to your new Buy The Yard site" package she can flip through on a phone or screen-share. Format: editable `.pptx` + matching exported `.pdf`, both saved to `/mnt/documents/`.
 
-## Problems with the current page (from the screenshots)
+## Source material
 
-1. **Hero overlay is missing the anchored icon/layout** every other page uses (Shield/FileText). No `og:image` either.
-2. **Screen 2 uses `section04` but passes 5 tiles (`hero, a, b, c, d`)** — section04's mobile grid only has hero/a/b/c slots, so the `d` tile (09 · Direct phone) gets orphaned and ends up floating bottom-right with empty space around it (visible in upload IMG_3935).
-3. **05 · Website terms front body overflows** the feature-tile mobile budget (2 lines) — shows "Final pricing is confirmed by phone. Natural materials vary…" with an ellipsis cutoff.
-4. **06 · SMS terms front body overflows** the md-tile mobile budget (1 line in the wide `a` slot) — "Msg & data rates may apply…" is clipped.
-5. **07 · Mailing address tile** uses a `<br/>`-split JSX body inside an md text tile and only renders "Buy The" before truncation. Eyebrow "07 · MAILING ADDRESS" itself wraps to 3 lines, pushing body out.
-6. **08 · Questions? cta** title "Email or call Abby." is too long for the small CTA cell and reads cramped.
-7. The `TAP TO FLIP` chip on screen 1 partially overlays the eyebrow ("01 · WHAT COLLECT" → "01 · WHAT COLLEC…"). Front content of the small flip cells is being clipped by both the chip and the cell height.
+19 screenshots in `user-uploads://BTY.zip` (mix of `.heic` and `.jpg`, mobile captures of the new site). First step is converting all HEICs to JPG with ImageMagick (via `nix run nixpkgs#imagemagick`) into `/tmp/bty-shots/` and sorting by filename so the deck mirrors the natural scroll order.
 
-## New structure
+## Brand & tone
 
-### Screen 1 — `pageHero` (keep, fix hero + front copy)
-- Hero: same yard-piles image, but switch overlay to `layout: "anchored"` with `<FileText/>` icon (matches delivery/about/contact pattern). Shorten body to one tight line: "Plain-English on the front. Tap a card for the full text."
-- Tighten each flip front so eyebrow + title + 1-line body fit the small mobile cell *with* the TAP TO FLIP chip overlay:
-  - **01 · Data** / "Name, phone, email, address." / (no body — eyebrow+title only, sm-style)
-  - **02 · Cookies** / "Essential on. Others off." / (no body)
-  - **03 · Sharing** / "We don't sell your info." / (no body)
-  - **04 · Rights** / "Access, correct, delete." / (no body)
-- Back content (full legal text) is unchanged — it's already scrollable via the `Back` wrapper.
+- Client-facing — plain English, warm, no jargon. No "tile matrix / Size-Tone-Variant" talk.
+- Visual language pulled from the live site: kraft/cream background, deep brand orange accent, charcoal text. Header font Archivo Black-ish, body Inter — both safe-mappable in PPTX (Impact / Calibri fallback).
+- One bold idea per slide. Lots of whitespace. Each phone screenshot floats in a rounded "device frame" with a soft drop shadow against a kraft-toned background.
 
-### Screen 2 — switch from `section04` to `section05` (6 slots so nothing orphans)
-- **hero** (feature, surface, flip, `<FileText/>`): "05 · Terms" / "Use the site lawfully." / body "Prices are estimates — confirmed by phone. MA law governs." (≤120 chars, 2 mobile lines). Back unchanged.
-- **a** (md, kraft, flip, anchored "06"): "06 · SMS" / "Reply STOP any time." / no body. Back unchanged.
-- **b** (md, white, text, anchored "07"): "07 · Mail" / "2264 Main St." / body "Jefferson, MA 01522" (1 mobile line). Drop the `<br/>` JSX.
-- **c** wide (md, kraft, text, anchored): "Legal entity" / "Buy The Yard, LLC" / body "MA-certified woman-owned business. Records kept 7 yrs for tax." (2 mobile lines).
-- **d** (cta, brand, anchored "08"): "08 · Email" / "Questions?" / cta `abby@btymaterial.com`.
-- **e** (cta, kraft, anchored "09"): "09 · Call" / "508.579.9897" / cta "Call now".
+## Deck structure (≈14 slides)
 
-This puts the brand CTA in slot `d` (one brand per screen, per matrix) and gives the contact-phone tile a real home in `e` instead of floating.
+1. **Cover** — "Your new site is live." Subhead with the URL `buytheyard.lovable.app`. Date.
+2. **What changed at a glance** — 4 stat-style callouts: Mobile-first, Faster, Clearer pricing path, Built to grow.
+3. **Home** — 2 screenshots side-by-side (hero + featured materials). Caption: "Front door — what neighbors see first."
+4. **Products** — 2 screenshots. Caption: "Every material, one scroll."
+5. **Delivery & Pickup** — 2 screenshots. Caption: "Answers the call-before-you-call questions."
+6. **Service Area** — 1–2 screenshots. Caption: "Towns we cover, on the map."
+7. **About** — 1 screenshot. Caption: "Your story, front and center."
+8. **Contact** — 1 screenshot. Caption: "Tap to call. Tap to map. Done."
+9. **Get a Quote** — 1 screenshot. Caption: "Lists come in ready to price."
+10. **Privacy & Terms** — 1 screenshot. Caption: "Plain-English on the front, full text behind."
+11. **Designed for the phone** — 3 screenshots in a row showing the tile system reading well at 440px.
+12. **Built to grow** — short bullets: easy content updates, SEO-ready pages per section, room for online ordering / blog later.
+13. **What's next** — 3 simple action items (share the link, add Google Business photos, send any copy tweaks).
+14. **Thank you / contact** — wordmark, URL, phone, email.
 
-### Meta
-- Add `og:image` + `twitter:image` pointing at `https://buytheyard.lovable.app/og/og-privacy.jpg` to match siblings.
+Exact screenshot-to-slide mapping is finalized after I view the converted JPGs (since filenames don't tell me which page each one is) — I'll sort, label, and place them deterministically. If a category has no screenshot, that slide is dropped rather than padded.
 
-## Content QA (every tile)
+## Build approach
 
-For each Tile, verify against `TileRules.ts` and the tile-system memory:
-- Eyebrows under ~12 chars so they stay on one line on mobile.
-- Size matches slot: feature hero = full recipe + ≤2 mobile body lines; md a/b/d/e = eyebrow+title+1-line body; wide c = 2-line body.
-- Exactly one `brand` tone per screen (slot `d` on screen 2).
-- No `padding` props, no disallowed Variant×Action combos (flip/cta/text only here, all allowed).
-- Flip backs continue to use the scrollable `Back` wrapper — full legal text stays intact, no copy lost.
+- Use the `pptx` skill (pptxgenjs) — base it on the design tokens from the live site (kraft `#E9DFCB`-ish, brand orange `#C5471B`-ish, ink `#1B1B1B`). Title font Impact, body Calibri.
+- Each content slide: kraft background, thin brand-orange rule top-left, slide title 44pt, supporting line 20pt, screenshots inserted as base64 data URIs with rounded-mask shadows.
+- Embed images as base64 (per skill guidance) so LibreOffice PDF conversion stays intact.
+- Convert `.pptx` → `.pdf` via the bundled `run_libreoffice.py` script.
+- Visual QA: render each slide to JPG with `pdftoppm`, inspect every page for clipped text, mis-sized images, low contrast. Fix and re-render until clean. Report what was checked.
 
-## Verification
+## Deliverables
 
-After the edit, capture the page at 440×798 in three scroll positions and confirm: no ellipsis in any front face, the `d`/`e` tiles render side-by-side at the bottom of screen 2, hero overlay shows the icon anchor.
+- `/mnt/documents/buy-the-yard-new-site.pptx`
+- `/mnt/documents/buy-the-yard-new-site.pdf`
 
-## Files to edit
+Both surfaced via `<presentation-artifact>` tags at the end of the build.
 
-- `src/routes/privacy.tsx` — hero overlay layout/icon, flip front bodies trimmed, screen 2 switched to section05, eyebrows shortened, address tile restructured, og:image added.
+## Open assumptions (will proceed unless told otherwise)
 
-No new components or assets needed.
+- 16:9 widescreen (good for laptop screen-share and prints clean to landscape PDF).
+- English only.
+- No comparison to the previous site — purely a "here's what you got" walkthrough.
