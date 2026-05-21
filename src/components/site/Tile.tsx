@@ -572,10 +572,19 @@ function ImageTileInner({
                 <div className="body-sm text-zinc-200 mt-2">{block.overlay.body}</div>
               )}
               {block.cta && (
-                <CtaLink
-                  cta={block.cta}
-                  className="mt-4 inline-flex items-center gap-2 label border-b border-current hover:opacity-80"
-                />
+                block.to || block.details ? (
+                  // Outer tile is already a Link/button — render CTA as a
+                  // visual span to avoid nested interactives. The outer
+                  // wrap carries the action and its accessible name.
+                  <span className="mt-4 inline-flex items-center gap-2 label border-b border-current">
+                    {block.cta.label}
+                  </span>
+                ) : (
+                  <CtaLink
+                    cta={block.cta}
+                    className="mt-4 inline-flex items-center gap-2 label border-b border-current hover:opacity-80"
+                  />
+                )
               )}
             </div>
           </div>
@@ -586,7 +595,10 @@ function ImageTileInner({
 
   if (block.to) {
     return (
-      <Link to={block.to} className={`${imageShell} group block`}>
+      <Link
+        to={block.to}
+        className={`${imageShell} group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
+      >
         {inner}
       </Link>
     );
@@ -598,7 +610,7 @@ function ImageTileInner({
           <button
             type="button"
             aria-label={`Open details: ${block.details.title}`}
-            className={`${imageShell} group block text-left cursor-zoom-in`}
+            className={`${imageShell} group block text-left cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
           >
             {inner}
           </button>
@@ -614,7 +626,7 @@ function ImageTileInner({
               type="button"
               onClick={nav.prev}
               aria-label="Previous"
-              className="hidden sm:grid absolute left-3 top-1/2 -translate-y-1/2 size-10 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10"
+              className="hidden sm:grid absolute left-3 top-1/2 -translate-y-1/2 size-11 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <ChevronLeft className="size-5" />
             </button>
@@ -624,7 +636,7 @@ function ImageTileInner({
               type="button"
               onClick={nav.next}
               aria-label="Next"
-              className="hidden sm:grid absolute right-3 top-1/2 -translate-y-1/2 size-10 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10"
+              className="hidden sm:grid absolute right-3 top-1/2 -translate-y-1/2 size-11 place-items-center bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <ChevronRight className="size-5" />
             </button>
@@ -735,17 +747,24 @@ function CarouselTileInner({
         className="flex h-full w-full transition-transform duration-500 ease-out motion-reduce:transition-none"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
-        {slides.map((s, i) => (
-          <div
-            key={s.id ?? `slide-${i}`}
-            className="h-full w-full shrink-0 basis-full"
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${count}`}
-            aria-hidden={i !== index}
-          >
-            <Tile {...s} fill />
-          </div>
-        ))}
+        {slides.map((s, i) => {
+          const inactive = i !== index;
+          return (
+            <div
+              key={s.id ?? `slide-${i}`}
+              className="h-full w-full shrink-0 basis-full"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${count}`}
+              aria-hidden={inactive}
+              // `inert` removes focusable descendants from the tab order so
+              // hiding the slide doesn't leave focusable links/buttons
+              // inside an aria-hidden subtree (WCAG aria-hidden-focus).
+              {...(inactive ? { inert: "" as unknown as boolean } : {})}
+            >
+              <Tile {...s} fill />
+            </div>
+          );
+        })}
       </div>
 
       {showArrows && count > 1 && (
@@ -754,7 +773,7 @@ function CarouselTileInner({
             type="button"
             onClick={prev}
             aria-label="Previous slide"
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-10 rounded-full bg-black/55 hover:bg-black/75 text-white backdrop-blur-sm"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-11 rounded-full bg-black/70 hover:bg-black/85 text-white backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             <ChevronLeft className="size-5" />
           </button>
@@ -762,7 +781,7 @@ function CarouselTileInner({
             type="button"
             onClick={next}
             aria-label="Next slide"
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-10 rounded-full bg-black/55 hover:bg-black/75 text-white backdrop-blur-sm"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center size-11 rounded-full bg-black/70 hover:bg-black/85 text-white backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             <ChevronRight className="size-5" />
           </button>
@@ -789,7 +808,11 @@ function CarouselTileInner({
   );
 }
 
-/** Flip tile body. Two faces; click (or hover) rotates between them. */
+/** Flip tile body. Two faces; a dedicated flip button rotates between them.
+ *  The outer is a `<div>` (not `<button>`) so the faces are free to contain
+ *  their own interactive children (links, dialog triggers) without nesting
+ *  interactives. The non-visible face is `inert` so it's removed from the
+ *  tab order and from screen-reader output. */
 function FlipTileInner({
   block,
 }: {
@@ -798,6 +821,10 @@ function FlipTileInner({
   const [flipped, setFlipped] = useState(false);
   const trigger = block.trigger ?? "click";
   const hint = block.hint ?? "Tap to flip";
+  // Accessible name for the flip control — exposes the affordance and state.
+  const flipLabel = block.ariaLabel
+    ? `${block.ariaLabel} (${flipped ? "showing back" : "showing front"})`
+    : `${hint} — currently showing ${flipped ? "back" : "front"}`;
 
   const shell = [
     block.fill ? "h-full w-full" : sizeCls[block.size ?? "md"],
@@ -818,33 +845,34 @@ function FlipTileInner({
         }
       : {};
 
+  const flipInert = (cond: boolean) =>
+    cond ? ({ inert: "" as unknown as boolean } as const) : {};
+
   return (
-    <button
-      type="button"
-      aria-label={block.ariaLabel ?? "Flip card"}
-      aria-pressed={flipped}
-      onClick={trigger === "click" ? () => setFlipped((f) => !f) : undefined}
-      className={`${shell} text-left cursor-pointer`}
-      {...hoverProps}
-    >
-      <div
-        className={`tile-flip-inner ${flipped ? "is-flipped" : ""}`}
-      >
-        <div className="tile-flip-face">
+    <div className={shell} {...hoverProps}>
+      <div className={`tile-flip-inner ${flipped ? "is-flipped" : ""}`}>
+        <div className="tile-flip-face" {...flipInert(flipped)} aria-hidden={flipped}>
           <Tile {...block.front} fill />
         </div>
-        <div className="tile-flip-face tile-flip-back">
+        <div
+          className="tile-flip-face tile-flip-back"
+          {...flipInert(!flipped)}
+          aria-hidden={!flipped}
+        >
           <Tile {...block.back} fill />
         </div>
       </div>
-      <span
-        aria-hidden="true"
-        className="absolute top-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 text-white text-[10px] uppercase tracking-wider backdrop-blur-sm pointer-events-none"
+      <button
+        type="button"
+        aria-label={flipLabel}
+        aria-pressed={flipped}
+        onClick={trigger === "click" ? () => setFlipped((f) => !f) : undefined}
+        className="absolute top-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 hover:bg-black/75 text-white text-[10px] uppercase tracking-wider backdrop-blur-sm min-h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
       >
-        <RotateCw className="size-3" />
-        {hint}
-      </span>
-    </button>
+        <RotateCw className="size-3" aria-hidden="true" />
+        <span aria-hidden="true">{hint}</span>
+      </button>
+    </div>
   );
 }
 

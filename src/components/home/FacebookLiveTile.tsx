@@ -11,7 +11,8 @@ export function FacebookLiveTile() {
       href="https://www.facebook.com/BuyTheYardOutdoorProducts"
       target="_blank"
       rel="noreferrer"
-      className="group relative h-full w-full overflow-hidden rounded-md p-4 md:p-5 flex flex-col bg-surface text-surface-foreground hover:opacity-95 transition-opacity"
+      aria-label="Follow Buy The Yard on Facebook — 820+ followers, active community"
+      className="group relative h-full w-full overflow-hidden rounded-md p-4 md:p-5 flex flex-col bg-surface text-surface-foreground hover:opacity-95 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <div className="flex items-center justify-between">
         <div className="inline-flex items-center gap-2 text-[#1877F2]">
