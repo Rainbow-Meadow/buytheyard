@@ -622,7 +622,7 @@ function ImageTileInner({
               {block.overlay.anchorIcon && (
                 <span
                   aria-hidden="true"
-                  className="absolute -bottom-6 -left-2 text-white/[0.12] select-none pointer-events-none z-10 [&>*]:size-44 md:[&>*]:size-56"
+                  className="absolute -bottom-8 -right-6 text-white/[0.08] select-none pointer-events-none z-10 [&>*]:size-28 md:[&>*]:size-40 [&>*]:stroke-[1.25]"
                 >
                   {block.overlay.anchorIcon}
                 </span>
