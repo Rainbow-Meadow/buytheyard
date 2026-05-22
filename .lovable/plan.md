@@ -1,37 +1,62 @@
-# Finish the design-drift cleanup
+# Align stat cards with the contact card styling (typography + color)
 
-Three items remain from the audit. All are scoped to presentation only.
+## Target — contact's family-ornament cta cards
 
-## 1. Quote page — make the form fit the locked viewport
+From the screenshot:
 
-The form already lives inside a `pageHero` `TileScreen` with `overflow-y-auto` on the slide body, but on mobile (440px viewport) the combined header (eyebrow + display-4 title + helper + pip rail + border) eats so much vertical space that the actual inputs sit below the fold and the sticky footer (Back / Next) collides with step 1's "Add another product" button.
+```text
+┌─────────────────────────────┐
+│▌ — CALL                     │   eyebrow: red brand, uppercase, dash prefix
+│                             │
+│  508.579.9897               │   title: tone foreground (display-5)
+│                             │
+│  TAP TO CALL          (ghost│   label/CTA: muted tone foreground
+└─────────────────────────────┘
+```
 
-Fix in place — keep the locked-viewport composition; just tighten the chrome so the inputs are always visible:
+Color rules in `Tile.tsx` for the cta-family-ornament render:
+- **Eyebrow** → `eyebrowToneCls(tone)`:
+  - light tones (`surface`, `kraft`, `gray`) → `text-brand` (red)
+  - `tone="brand"` → `text-brand-foreground` (white)
+  - dark tones → `text-brand` (red)
+- **Dash** → `bg-brand` on every tone except `tone="brand"` where it's `bg-brand-foreground`
+- **Title** → inherits `shell`'s foreground (`text-zinc-900` on light, `text-white` on dark, `text-brand-foreground` on brand)
+- **CTA label** → inherits same foreground via `label` utility
 
-- Header block: drop helper copy to one line (`line-clamp-2`), shrink the title from `display-4` to `display-5`, and reduce vertical padding (`pt-5 md:pt-7 pb-5` → `pt-4 pb-3`).
-- Ghost numeral: keep, but reduce size on mobile so it doesn't push the title down.
-- Slide body: bump `py` down (`py-5 md:py-6` → `py-3 md:py-5`) so step 1's first item card is visible without scrolling on a 440×798 viewport.
-- Step 2 fulfillment cards: lower `min-h-[140px]` to `min-h-[112px]` on mobile so both options + the delivery sub-form fit.
-- Footer: ensure it's `sticky bottom-0` with a solid `bg-surface` band so it never overlaps content (it already is; verify after padding changes).
+## Today's stat-anchored cards
 
-No structural change — the form stays in the hero tile, no separate scroll section added.
+- No eyebrow on top
+- Value in custom `valueColor` (mostly redundant with shell)
+- Label uses `labelColor` — `text-zinc-600` / `text-zinc-400` / `text-brand-foreground/80` — these are muted variants, not the red brand eyebrow used on contact.
 
-## 2. About — Charlie tile focal point
+## Plan
 
-`about-charlie` image currently crops Charlie out of frame on the locked-viewport cell. Add `objectPosition="center 30%"` (or the right value after checking the asset) to the `<TileImage>` so Charlie's head sits in the visible upper portion of the cell, above the bottom-anchored overlay.
+Restyle `case "stat"` → `layout === "anchored"` in `src/components/site/Tile.tsx` to mirror contact's family-ornament cards in **layout, ornament, AND color**:
 
-## 3. Delivery — gray-tone tile contrast
+### Layout (top → bottom)
+1. Red `w-1.5 bg-brand` left rule (unchanged)
+2. **Eyebrow row at top** — render `block.label` as the eyebrow:
+   - Wrapper: `inline-flex items-center gap-2 mb-2 relative z-10`
+   - Dash: `inline-block h-0.5 w-6` with `bg-brand-foreground` on `tone="brand"`, else `bg-brand`
+   - Text: `eyebrow` utility + `eyebrowToneCls(tone)` (red on light/dark, white on brand) — matching contact exactly
+3. **Value as title** — `block.value` with `display-5 leading-snug relative z-10`. **Drop the custom `valueColor` constant** and let it inherit from `shell`'s tone foreground — that's exactly how contact's title behaves.
+4. **Ghost glyph** — keep `block.anchorGlyph` with the same opacity ramp the cta-family-ornament uses so both card families render an identical ghost: `text-zinc-900/[0.06]` on light, `text-white/[0.12]` on brand, `text-white/[0.08]` on dark.
+5. Drop `mt-auto` wrapper, drop the second `labelColor` dash row, drop the round icon bubble path.
 
-`tone="gray"` tiles on `delivery.tsx` (the `dlv-stat-drop` stat tile and the section 3 step tile at line 134) read washed out next to the surface/brand/kraft neighbors. Two-line fix:
+### Color summary
+- Eyebrow color: `eyebrowToneCls(tone)` — same helper contact uses.
+- Dash color: `bg-brand` / `bg-brand-foreground` on `tone="brand"` — same logic contact uses.
+- Value color: inherited from shell tone foreground — same as contact's title.
+- Ghost glyph opacity ramp: aligned with cta-family-ornament values above.
 
-- Audit the `gray` tone in `src/styles.css` / Tile variants. If `--tile-gray-foreground` is too low-contrast against `--tile-gray`, bump the foreground toward `--surface-foreground` so eyebrow + body copy hit WCAG AA.
-- If the tone token is shared with other pages, change it at the token level — do not patch the contrast inline on delivery only.
+Remove now-unused locals in the branch: `valueColor`, `labelColor`, `position`, `positionCls` (keep default `-bottom-4 -right-3`).
 
-## Verification
+## Files touched
 
-After edits: open `/quote` at 440×798 and confirm step 1 shows the first item card above the sticky footer without scrolling; open `/about` and confirm Charlie's face is visible above the overlay band; open `/delivery` and confirm `dlv-stat-drop` + the section 3 gray step tile read as clearly as their kraft/brand neighbors.
+- `src/components/site/Tile.tsx` — only the `case "stat"` / `layout === "anchored"` block.
 
-Files touched:
-- `src/routes/quote.tsx`
-- `src/routes/about.tsx`
-- `src/styles.css` (gray tone token) **or** `src/components/site/Tile.tsx` (tone variant)
+## Out of scope
+
+- Contact page (unchanged — it's the source of truth).
+- Non-anchored `variant="stat"` fallback (unchanged).
+- No prop API change.
