@@ -204,6 +204,7 @@ function ContactPage() {
               fill
               variant="text"
               tone="gray"
+              layout="anchored"
               anchorIndex="08"
               icon={<Phone />}
               eyebrow="Heads up"
