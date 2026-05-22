@@ -103,7 +103,7 @@ function WbePage() {
               icon={<BadgeCheck strokeWidth={1.25} />}
               eyebrow="01 · What it is"
               title="Women Business Enterprise"
-              body="At least 51% owned, operated, and controlled by one or more women."
+              body="51%+ woman-owned and woman-run."
             />
           ),
           b: (
@@ -116,8 +116,8 @@ function WbePage() {
               anchorIndex="02"
               icon={<Building2 strokeWidth={1.25} />}
               eyebrow="02 · Who certifies"
-              title="MA Supplier Diversity Office"
-              body="The state office (SDO) that reviews and grants WBE, MBE, and DBE status."
+              title="MA Supplier Diversity"
+              body="The state office (SDO) that grants WBE status."
             />
           ),
           c: (
@@ -130,8 +130,8 @@ function WbePage() {
               anchorIndex="03"
               icon={<ClipboardCheck strokeWidth={1.25} />}
               eyebrow="03 · How it works"
-              title="Application + site visit"
-              body="Ownership and control documentation, an interview, and periodic recertification."
+              title="Application + review"
+              body="Ownership docs, site visit, periodic recertification."
             />
           ),
           d: (
@@ -144,8 +144,8 @@ function WbePage() {
               anchorIndex="04"
               icon={<HeartHandshake strokeWidth={1.25} />}
               eyebrow="04 · Why it matters"
-              title="Counts toward diversity goals"
-              body="Towns, schools, and contractors with supplier-diversity targets can credit purchases from a certified WBE."
+              title="Counts toward goals"
+              body="Public + private buyers credit purchases from a WBE."
             />
           ),
         }}
