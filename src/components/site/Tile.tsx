@@ -149,6 +149,9 @@ export type TileBlock =
        *  (brand-red left bar + brand-rule on the label) when
        *  `layout="anchored"`. The ghosted glyph stays. */
       anchorIndex?: string;
+      /** Small uppercase tagline rendered below the value in
+       *  `layout="anchored"`, matching the cta-family bottom row. */
+      caption?: string;
     })
   | (BaseTile & {
       variant: "image";
