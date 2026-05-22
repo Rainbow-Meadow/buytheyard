@@ -1,62 +1,66 @@
-# Align stat cards with the contact card styling (typography + color)
+# Add bottom tagline to stat cards
 
-## Target — contact's family-ornament cta cards
+## What contact does
 
-From the screenshot:
-
-```text
-┌─────────────────────────────┐
-│▌ — CALL                     │   eyebrow: red brand, uppercase, dash prefix
-│                             │
-│  508.579.9897               │   title: tone foreground (display-5)
-│                             │
-│  TAP TO CALL          (ghost│   label/CTA: muted tone foreground
-└─────────────────────────────┘
-```
-
-Color rules in `Tile.tsx` for the cta-family-ornament render:
-- **Eyebrow** → `eyebrowToneCls(tone)`:
-  - light tones (`surface`, `kraft`, `gray`) → `text-brand` (red)
-  - `tone="brand"` → `text-brand-foreground` (white)
-  - dark tones → `text-brand` (red)
-- **Dash** → `bg-brand` on every tone except `tone="brand"` where it's `bg-brand-foreground`
-- **Title** → inherits `shell`'s foreground (`text-zinc-900` on light, `text-white` on dark, `text-brand-foreground` on brand)
-- **CTA label** → inherits same foreground via `label` utility
-
-## Today's stat-anchored cards
-
-- No eyebrow on top
-- Value in custom `valueColor` (mostly redundant with shell)
-- Label uses `labelColor` — `text-zinc-600` / `text-zinc-400` / `text-brand-foreground/80` — these are muted variants, not the red brand eyebrow used on contact.
+Each contact card has 3 stacked text rows: red **eyebrow** ("CALL") on top → big **title** ("508.579.9897") in the middle → small uppercase **CTA/tagline** at the bottom ("TAP TO CALL"). The stat cards on `/`, `/about`, `/delivery`, `/service-area` currently render only the top two rows — the bottom uppercase tagline is missing, so the visual rhythm doesn't match.
 
 ## Plan
 
-Restyle `case "stat"` → `layout === "anchored"` in `src/components/site/Tile.tsx` to mirror contact's family-ornament cards in **layout, ornament, AND color**:
+### 1. Add optional `caption` prop to the `stat` variant
 
-### Layout (top → bottom)
-1. Red `w-1.5 bg-brand` left rule (unchanged)
-2. **Eyebrow row at top** — render `block.label` as the eyebrow:
-   - Wrapper: `inline-flex items-center gap-2 mb-2 relative z-10`
-   - Dash: `inline-block h-0.5 w-6` with `bg-brand-foreground` on `tone="brand"`, else `bg-brand`
-   - Text: `eyebrow` utility + `eyebrowToneCls(tone)` (red on light/dark, white on brand) — matching contact exactly
-3. **Value as title** — `block.value` with `display-5 leading-snug relative z-10`. **Drop the custom `valueColor` constant** and let it inherit from `shell`'s tone foreground — that's exactly how contact's title behaves.
-4. **Ghost glyph** — keep `block.anchorGlyph` with the same opacity ramp the cta-family-ornament uses so both card families render an identical ghost: `text-zinc-900/[0.06]` on light, `text-white/[0.12]` on brand, `text-white/[0.08]` on dark.
-5. Drop `mt-auto` wrapper, drop the second `labelColor` dash row, drop the round icon bubble path.
+In `src/components/site/Tile.tsx`, extend the `stat` discriminated-union member with:
 
-### Color summary
-- Eyebrow color: `eyebrowToneCls(tone)` — same helper contact uses.
-- Dash color: `bg-brand` / `bg-brand-foreground` on `tone="brand"` — same logic contact uses.
-- Value color: inherited from shell tone foreground — same as contact's title.
-- Ghost glyph opacity ramp: aligned with cta-family-ornament values above.
+```ts
+/** Small uppercase tagline rendered below the value in `layout="anchored"`,
+ *  matching the cta-family bottom row (e.g. "TAP TO CALL"). */
+caption?: string;
+```
 
-Remove now-unused locals in the branch: `valueColor`, `labelColor`, `position`, `positionCls` (keep default `-bottom-4 -right-3`).
+In the `case "stat"` → `layout === "anchored"` branch, after the `<p class="display-5">` value, render when `block.caption` is set:
+
+```tsx
+{block.caption && (
+  <p className={`label mt-3 ${captionToneCls(tone)} relative z-10`}>
+    {block.caption}
+  </p>
+)}
+```
+
+`captionToneCls` mirrors contact's bottom-row color: inherits the shell foreground with reduced opacity — `text-zinc-900/70` on light tones, `text-brand-foreground/85` on `brand`, `text-white/75` on dark. (Same ramp the `CtaLink` ends up at on contact's cards.)
+
+### 2. Add a `caption` to every existing stat tile site
+
+| File | Tile | caption |
+|---|---|---|
+| `src/routes/index.tsx` | `stat-years` | `"Since 2016"` |
+| `src/routes/index.tsx` | `stat-wbe` | `"MA-certified"` |
+| `src/routes/index.tsx` | `stat-fb` | `"Daily restocks"` |
+| `src/routes/index.tsx` | `stat-stars` | `"Google & Facebook"` |
+| `src/routes/about.tsx` | `about-stat-year` | `"Family-run"` |
+| `src/routes/about.tsx` | `about-stat-wbe` | `"State certified"` |
+| `src/routes/about.tsx` | `about-stat-local` | `"Wachusett · '16"` |
+| `src/routes/about.tsx` | `about-stat-stars` | `"Five-star rated"` |
+| `src/routes/delivery.tsx` | `dlv-stat-radius` | `"Around Jefferson"` |
+| `src/routes/delivery.tsx` | `dlv-stat-min` | `"Per delivery"` |
+| `src/routes/delivery.tsx` | `dlv-stat-lead` | `"After order"` |
+| `src/routes/delivery.tsx` | `dlv-stat-drop` | `"Curbside drop"` |
+| `src/routes/service-area.tsx` | `sa-stat-towns` | `"Inner + outer ring"` |
+| `src/routes/service-area.tsx` | `sa-stat-radius` | `"From Jefferson"` |
+| `src/routes/service-area.tsx` | `sa-stat-min` | `"One yard or more"` |
+| `src/routes/service-area.tsx` | `sa-stat-lead` | `"Plan ahead"` |
+
+(Short, uppercase-rendered via the `label` class, single line. Adjust copy if any feel redundant with the value/eyebrow next to it.)
+
+### 3. Non-goals
+
+- Contact page is the source of truth; untouched.
+- `quote-stat-*` tiles (Quote page) — keep as-is; they're inside a dense form area where a third line would crowd the row. Skip captions there.
+- Non-anchored `stat` fallback unchanged.
 
 ## Files touched
 
-- `src/components/site/Tile.tsx` — only the `case "stat"` / `layout === "anchored"` block.
-
-## Out of scope
-
-- Contact page (unchanged — it's the source of truth).
-- Non-anchored `variant="stat"` fallback (unchanged).
-- No prop API change.
+- `src/components/site/Tile.tsx`
+- `src/routes/index.tsx`
+- `src/routes/about.tsx`
+- `src/routes/delivery.tsx`
+- `src/routes/service-area.tsx`
