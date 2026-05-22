@@ -116,6 +116,20 @@ function AboutPage() {
               body="Quiet donations to Wachusett-area schools and community projects."
             />
           ),
+          c: (
+            <Tile
+              id="about-roots-yard"
+              fill
+              variant="text"
+              tone="gray"
+              layout="anchored"
+              anchorIndex="04"
+              icon={<MapPin />}
+              eyebrow="One yard, two trades"
+              title="2264 Main St."
+              body="Materials out front, site-construction crew out back. Same family, same lot."
+            />
+          ),
         }}
       />
 
