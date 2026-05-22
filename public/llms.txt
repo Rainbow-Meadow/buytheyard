@@ -11,6 +11,7 @@
 - [About](/about): Owner's story and Massachusetts WBE certification.
 - [Contact](/contact): Phone, email, address, hours, and map.
 - [Get a Quote](/quote): Online quote builder for material lists.
+- [WBE Certification](/wbe): What Women Business Enterprise certification means, how Massachusetts certifies it, and why it matters for customers.
 
 ## Optional
 
