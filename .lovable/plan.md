@@ -1,18 +1,24 @@
-# Add captions to the Quote page stat tiles
+# Break Saturday hours onto its own line
 
-The two stat tiles on `/quote` (`quote-stat-time` and `quote-stat-owner`) were intentionally skipped in the previous pass but now read as broken — they're missing the third-row tagline every other stat card has.
+The Hours card on `/contact` currently shows `MON-FRI 8-5 · SAT 8-` / `3` — the wrap lands mid-"8-3" because the layout only has space for ~14 chars per line and there's no preferred break point.
 
 ## Plan
 
-Add a `caption` prop to both tiles in `src/routes/quote.tsx`:
+Edit one line in `src/routes/contact.tsx` (line 134) — replace the spaces inside each group with non-breaking spaces so the only valid wrap point is the `·` separator:
 
-| Tile | caption |
-|---|---|
-| `quote-stat-time` (value `~60s`, label `To build a list`) | `"Quick + easy"` |
-| `quote-stat-owner` (value `1 owner`, label `Abby answers`) | `"No call center"` |
+```tsx
+cta={{ label: "Mon–Fri\u00A08–5 · Sat\u00A08–3", to: "/contact" }}
+```
 
-No other changes. The `caption` prop is already wired into `Tile.tsx`'s anchored stat render.
+Result on mobile:
+
+```text
+MON–FRI 8–5 ·
+SAT 8–3
+```
+
+No component or type changes. Index page and others unaffected (they don't render this string).
 
 ## Files touched
 
-- `src/routes/quote.tsx`
+- `src/routes/contact.tsx`

@@ -131,7 +131,7 @@ function ContactPage() {
               icon={<Clock />}
               eyebrow="Hours"
               title="Mon–Sat"
-              cta={{ label: "Mon–Fri 8–5 · Sat 8–3", to: "/contact" }}
+              cta={{ label: "Mon–Fri\u00A08–5 · Sat\u00A08–3", to: "/contact" }}
             />
           ),
           d: (
