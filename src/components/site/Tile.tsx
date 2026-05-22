@@ -259,7 +259,7 @@ const toneCls: Record<TileTone, string> = {
   white: "bg-white ring-1 ring-zinc-300 text-zinc-900",
   surface: "bg-surface text-surface-foreground",
   brand: "bg-brand text-brand-foreground",
-  gray: "bg-brandmark-gray ring-1 ring-zinc-600/30 text-white",
+  gray: "bg-brandmark-gray ring-1 ring-zinc-900/20 text-zinc-900",
 };
 
 const paddingCls: Record<TilePadding, string> = {
