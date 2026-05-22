@@ -99,7 +99,7 @@ function AboutPage() {
               icon={<Truck />}
               eyebrow="The family business"
               title="Callahan & Montalto Site Construction"
-              body="Abby's father Tim runs CMSC out of the same 2264 Main St. yard — excavation, utilities, site work."
+              body="Abby's father Tim runs CMSC from the same yard — excavation and site work."
             />
           ),
           b: (
@@ -113,7 +113,7 @@ function AboutPage() {
               icon={<HeartHandshake />}
               eyebrow="Giving back"
               title="Loam and mulch for local schools"
-              body="Quiet donations to Wachusett-area schools and community projects."
+              body="Quiet donations to Wachusett-area schools."
             />
           ),
           c: (
@@ -127,7 +127,7 @@ function AboutPage() {
               icon={<MapPin />}
               eyebrow="One yard, two trades"
               title="2264 Main St."
-              body="Materials out front, site-construction crew out back. Same family, same lot."
+              body="Materials out front. Site crew out back."
             />
           ),
         }}
