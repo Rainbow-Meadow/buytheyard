@@ -210,7 +210,7 @@ export function SiteFooter() {
           {/* Legal bar */}
           <div className="mt-12 pt-6 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-y-3 items-center micro text-kraft/40">
             <span>
-              &copy; {year} Buy The Yard Material · Jefferson, MA · WBE Certified
+              &copy; {year} Buy The Yard Material · Jefferson, MA · Licensed & insured · MA HIC #214009 · USDOT #3543587 · WBE Certified
             </span>
             <span className="flex items-center md:justify-end gap-4 text-kraft/30">
               <button
