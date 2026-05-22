@@ -34,6 +34,7 @@ function WbePage() {
       {/* Screen 1 — pageHero: WBE seal + four definition tiles */}
       <TileScreen
         layout="pageHero"
+        className="wbe-page-hero"
         label="What WBE certification means"
         heading="What WBE certification means"
         headingLevel="h1"
@@ -102,8 +103,8 @@ function WbePage() {
               anchorIndex="01"
               icon={<BadgeCheck strokeWidth={1.25} />}
               eyebrow="01 · What it is"
-              title="Women Business Enterprise"
-              body="51%+ woman-owned and woman-run."
+              title="Woman-owned"
+              body="51%+ owned and run by women."
             />
           ),
           b: (
@@ -116,8 +117,8 @@ function WbePage() {
               anchorIndex="02"
               icon={<Building2 strokeWidth={1.25} />}
               eyebrow="02 · Who certifies"
-              title="MA Supplier Diversity"
-              body="The state office (SDO) that grants WBE status."
+              title="MA SDO"
+              body="State WBE certifier."
             />
           ),
           c: (
@@ -130,8 +131,8 @@ function WbePage() {
               anchorIndex="03"
               icon={<ClipboardCheck strokeWidth={1.25} />}
               eyebrow="03 · How it works"
-              title="Application + review"
-              body="Ownership docs, site visit, periodic recertification."
+              title="Formal review"
+              body="Docs, site visit, recertification."
             />
           ),
           d: (
@@ -144,8 +145,8 @@ function WbePage() {
               anchorIndex="04"
               icon={<HeartHandshake strokeWidth={1.25} />}
               eyebrow="04 · Why it matters"
-              title="Counts toward goals"
-              body="Public + private buyers credit purchases from a WBE."
+              title="Counts for goals"
+              body="Supports supplier-diversity goals."
             />
           ),
         }}
