@@ -634,6 +634,7 @@ function QuotePage() {
             anchorGlyph={<Clock strokeWidth={1.25} />}
             value="~60s"
             label="To build a list"
+            caption="Quick + easy"
           />
         ),
         b: (
@@ -647,6 +648,7 @@ function QuotePage() {
             anchorGlyph={<User strokeWidth={1.25} />}
             value="1 owner"
             label="Abby answers"
+            caption="No call center"
           />
         ),
         c: (
