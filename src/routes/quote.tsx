@@ -415,7 +415,7 @@ function QuotePage() {
                       return (
                         <label
                           key={opt}
-                          className={`relative overflow-hidden cursor-pointer p-5 min-h-[140px] flex flex-col justify-between ring-1 transition-colors ${
+                          className={`relative overflow-hidden cursor-pointer p-5 min-h-[112px] md:min-h-[140px] flex flex-col justify-between ring-1 transition-colors ${
                             selected
                               ? "bg-brand text-brand-foreground ring-brand"
                               : "bg-white/5 text-surface-foreground ring-white/15 hover:ring-white/40"
