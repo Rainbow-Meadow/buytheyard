@@ -71,7 +71,7 @@ function AboutPage() {
 
       {/* Screen 2 — section03: Roots — three generations in Central Mass construction */}
       <TileScreen
-        layout="section03Stacked"
+        layout="section03"
         label="Roots — three generations in Central Mass construction"
         heading="Roots — three generations in Central Mass construction"
         tiles={{
@@ -99,7 +99,7 @@ function AboutPage() {
               icon={<Truck />}
               eyebrow="The family business"
               title="Callahan & Montalto Site Construction"
-              body="Abby's father Tim runs CMSC from the same yard — excavation, utilities, and site work."
+              body="Abby's father Tim runs CMSC from the same yard — excavation and site work."
             />
           ),
           b: (
@@ -113,7 +113,7 @@ function AboutPage() {
               icon={<HeartHandshake />}
               eyebrow="Giving back"
               title="Loam and mulch for local schools"
-              body="Quiet donations of loam and mulch to Wachusett-area schools."
+              body="Quiet donations to Wachusett-area schools."
             />
           ),
           c: (
@@ -127,7 +127,7 @@ function AboutPage() {
               icon={<MapPin />}
               eyebrow="One yard, two trades"
               title="2264 Main St."
-              body="Materials out front. Site-construction crew out back."
+              body="Materials out front. Site crew out back."
             />
           ),
         }}
