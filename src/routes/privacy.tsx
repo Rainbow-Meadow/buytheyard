@@ -78,12 +78,14 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
+                layout: "anchored",
                 eyebrow: "01 · Data",
                 title: "Name, phone, email, address.",
               }}
               back={{
                 variant: "text",
                 tone: "kraft",
+                layout: "anchored",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -108,12 +110,14 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "surface",
+                layout: "anchored",
                 eyebrow: "02 · Cookies",
                 title: "Essential on. Others off.",
               }}
               back={{
                 variant: "text",
                 tone: "surface",
+                layout: "anchored",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -138,12 +142,14 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
+                layout: "anchored",
                 eyebrow: "03 · Sharing",
                 title: "We don't sell your info.",
               }}
               back={{
                 variant: "text",
                 tone: "kraft",
+                layout: "anchored",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -168,12 +174,14 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
+                layout: "anchored",
                 eyebrow: "04 · Rights",
                 title: "Access, correct, delete.",
               }}
               back={{
                 variant: "text",
                 tone: "kraft",
+                layout: "anchored",
                 eyebrow: "Full clause",
                 body: (
                   <Back>
@@ -209,6 +217,7 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "surface",
+                layout: "anchored",
                 eyebrow: "05 · Terms",
                 title: "Use the site lawfully.",
                 body: "Prices are estimates — confirmed by phone. MA law governs.",
@@ -216,6 +225,7 @@ function PrivacyPage() {
               back={{
                 variant: "text",
                 tone: "surface",
+                layout: "anchored",
                 eyebrow: "Full terms",
                 body: (
                   <Back>
@@ -241,12 +251,14 @@ function PrivacyPage() {
               front={{
                 variant: "text",
                 tone: "kraft",
+                layout: "anchored",
                 eyebrow: "06 · SMS",
                 title: "Reply STOP any time.",
               }}
               back={{
                 variant: "text",
                 tone: "kraft",
+                layout: "anchored",
                 eyebrow: "Full SMS terms",
                 body: (
                   <Back>

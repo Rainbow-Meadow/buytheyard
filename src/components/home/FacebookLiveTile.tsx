@@ -20,7 +20,8 @@ export function FacebookLiveTile() {
         alt="Buy The Yard Outdoor Products on Facebook — 822 followers, 268 posts"
         loading="lazy"
         decoding="async"
-        className="absolute inset-0 w-full h-full object-cover object-top"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ objectPosition: "center 15%" }}
       />
       <span
         aria-hidden="true"
@@ -38,7 +39,7 @@ export function FacebookLiveTile() {
       >
         <ArrowUpRight className="size-4" />
       </span>
-      <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 px-4 py-3 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-transparent text-white">
+      <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 px-4 py-4 bg-zinc-950/95 text-white">
         <p className="inline-flex items-center gap-1.5 meta">
           <span aria-hidden="true" className="relative inline-flex size-2">
             <span className="absolute inset-0 rounded-full bg-emerald-400 opacity-60 animate-ping" />

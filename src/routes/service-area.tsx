@@ -124,7 +124,7 @@ function ServiceAreaPage() {
               icon={<MapPin />}
               eyebrow="Where we run"
               title="Daily routes across Worcester County."
-              body="Jefferson home base. Daily runs to Holden, Princeton, Sterling, Rutland, Paxton, West Boylston & Worcester. 48-hr notice for the outer ring."
+              body="Jefferson home base. Daily inner-ring runs; 48-hour notice for the outer towns."
             />
           ),
           a: (
@@ -207,14 +207,14 @@ function ServiceAreaPage() {
               id="sa-confirm"
               fill
               size="feature"
-              variant="cta"
+              variant="numbered"
               tone="surface"
               layout="anchored"
+              number="01"
               icon={<Phone />}
               eyebrow="Not sure if we deliver?"
               title="Call Abby."
               body="ZIPs near the edge are usually a yes — one quick call confirms your spot and locks the price."
-              cta={{ label: "508.579.9897", href: "tel:5085799897" }}
             />
           ),
           a: (
@@ -231,6 +231,10 @@ function ServiceAreaPage() {
                 align: "bottom-left",
                 layout: "anchored",
                 anchorIcon: <Home />,
+              }}
+              cta={{
+                label: "Open in Maps",
+                href: "https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522",
               }}
             />
           ),
