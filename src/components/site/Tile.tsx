@@ -492,6 +492,21 @@ function iconToneCls(tone: TileTone) {
   return "text-brand";
 }
 
+function CtaLabel({ label }: { label: string }) {
+  const lines = label.split("\n");
+  if (lines.length === 1) return <>{label}</>;
+
+  return (
+    <>
+      {lines.map((line, index) => (
+        <span key={`${line}-${index}`} className="block">
+          {line}
+        </span>
+      ))}
+    </>
+  );
+}
+
 function CtaLink({ cta, className }: { cta: TileCta; className: string }) {
   if (cta.href) {
     const isExternal =
@@ -502,13 +517,13 @@ function CtaLink({ cta, className }: { cta: TileCta; className: string }) {
         className={className}
         {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
       >
-        {cta.label}
+        <CtaLabel label={cta.label} />
       </a>
     );
   }
   return (
     <Link to={cta.to ?? "/"} className={className}>
-      {cta.label}
+      <CtaLabel label={cta.label} />
     </Link>
   );
 }
