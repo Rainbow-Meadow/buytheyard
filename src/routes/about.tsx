@@ -91,7 +91,7 @@ function AboutPage() {
               variant="image"
               src={yardDog}
               alt="Charlie, the Buy The Yard office manager, watching the lot from the office window"
-              focal={{ x: 50, y: 25 }}
+              focal={{ x: 50, y: 18 }}
               overlay={{ eyebrow: "Office manager", title: "Charlie", align: "bottom-left", layout: "anchored", anchorIcon: <Dog /> }}
             />
           ),
