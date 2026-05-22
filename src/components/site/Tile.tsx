@@ -1290,28 +1290,10 @@ export function Tile(block: TileBlock) {
       if (block.layout === "anchored") {
         const ghost = block.anchorGlyph;
         const ghostColor = isLightTone(tone)
-          ? "text-zinc-900/[0.05]"
+          ? "text-zinc-900/[0.06]"
           : tone === "brand"
-            ? "text-white/[0.10]"
-            : "text-white/[0.04]";
-        const position = block.anchorPosition ?? "bottom-right";
-        const positionCls =
-          position === "top-right"
-            ? "-top-3 -right-3"
-            : position === "center"
-              ? "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              : "-bottom-4 -right-3";
-        const valueColor =
-          tone === "brand"
-            ? "text-brand-foreground"
-            : isLightTone(tone)
-              ? "text-zinc-900"
-              : "text-white";
-        const labelColor = isLightTone(tone)
-          ? "text-zinc-600"
-          : tone === "brand"
-            ? "text-brand-foreground/80"
-            : "text-zinc-400";
+            ? "text-white/[0.12]"
+            : "text-white/[0.08]";
         return (
           <article className={`${shell} relative overflow-hidden`}>
             {block.anchorIndex && (
@@ -1323,30 +1305,21 @@ export function Tile(block: TileBlock) {
             {ghost && (
               <span
                 aria-hidden="true"
-                className={`pointer-events-none select-none absolute ${ghostColor} ${positionCls} [&>*]:size-32 md:[&>*]:size-44 [&>*]:stroke-[1.25]`}
+                className={`pointer-events-none select-none absolute -bottom-4 -right-3 ${ghostColor} [&>*]:size-32 md:[&>*]:size-44 [&>*]:stroke-[1.25]`}
               >
                 {ghost}
               </span>
             )}
-            {block.icon && (
-              <div className={`${iconToneCls(tone)} mb-2 [&>*]:size-5 relative z-10`}>
-                {block.icon}
-              </div>
+            {block.label && (
+              <p className={`${eyebrowToneCls(tone)} mb-2 inline-flex items-center gap-2 relative z-10`}>
+                <span
+                  aria-hidden="true"
+                  className={`inline-block h-0.5 w-6 ${tone === "brand" ? "bg-brand-foreground" : "bg-brand"}`}
+                />
+                {block.label}
+              </p>
             )}
-            <div className="mt-auto relative z-10">
-              <p className={`display-3 leading-none ${valueColor}`}>{block.value}</p>
-              {block.anchorIndex ? (
-                <p className={`eyebrow mt-2 ${labelColor} inline-flex items-center gap-2`}>
-                  <span
-                    aria-hidden="true"
-                    className={`inline-block h-0.5 w-6 ${tone === "brand" ? "bg-brand-foreground" : "bg-brand"}`}
-                  />
-                  {block.label}
-                </p>
-              ) : (
-                <p className={`eyebrow mt-2 ${labelColor}`}>{block.label}</p>
-              )}
-            </div>
+            <p className="display-5 leading-snug relative z-10">{block.value}</p>
           </article>
         );
       }
