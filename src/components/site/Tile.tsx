@@ -1323,6 +1323,19 @@ export function Tile(block: TileBlock) {
               </p>
             )}
             <p className="display-5 leading-snug relative z-10">{block.value}</p>
+            {block.caption && (
+              <p
+                className={`label mt-3 relative z-10 ${
+                  isLightTone(tone)
+                    ? "text-zinc-900/70"
+                    : tone === "brand"
+                      ? "text-brand-foreground/85"
+                      : "text-white/75"
+                }`}
+              >
+                {block.caption}
+              </p>
+            )}
           </article>
         );
       }
