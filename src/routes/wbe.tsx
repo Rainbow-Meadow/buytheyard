@@ -34,6 +34,7 @@ function WbePage() {
       {/* Screen 1 — pageHero: WBE seal + four definition tiles */}
       <TileScreen
         layout="pageHero"
+        className="wbe-page-hero"
         label="What WBE certification means"
         heading="What WBE certification means"
         headingLevel="h1"

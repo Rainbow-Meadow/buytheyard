@@ -228,6 +228,22 @@
   }
 }
 
+@media (max-width: 767px) {
+  .wbe-page-hero {
+    height: auto;
+    min-height: var(--tile-screen-h);
+    grid-template-rows: auto minmax(180px, auto) minmax(180px, auto);
+  }
+
+  .wbe-page-hero .tile-screen-cell {
+    min-height: 180px;
+  }
+
+  .wbe-page-hero .ts-slot-hero {
+    min-height: min(450px, calc(var(--tile-screen-h) - 24px));
+  }
+}
+
 /* section01 — hero (rows 1-2) + a/b right column + 3-tile bottom strip */
 @utility ts-section-01 {
   grid-template-columns: 1fr 1fr;
