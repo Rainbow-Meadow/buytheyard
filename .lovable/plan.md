@@ -1,24 +1,10 @@
-# Break Saturday hours onto its own line
+Update the Contact page Hours tile so the CTA is not a wrapping phrase at all.
 
-The Hours card on `/contact` currently shows `MON-FRI 8-5 · SAT 8-` / `3` — the wrap lands mid-"8-3" because the layout only has space for ~14 chars per line and there's no preferred break point.
-
-## Plan
-
-Edit one line in `src/routes/contact.tsx` (line 134) — replace the spaces inside each group with non-breaking spaces so the only valid wrap point is the `·` separator:
-
-```tsx
-cta={{ label: "Mon–Fri\u00A08–5 · Sat\u00A08–3", to: "/contact" }}
-```
-
-Result on mobile:
-
+Implementation:
+- Replace the current Hours CTA label with explicit weekday/Saturday rows:
 ```text
-MON–FRI 8–5 ·
+MON–FRI 8–5
 SAT 8–3
 ```
-
-No component or type changes. Index page and others unaffected (they don't render this string).
-
-## Files touched
-
-- `src/routes/contact.tsx`
+- Render newline-separated CTA labels as stacked block rows in the Tile CTA renderer, so mobile cannot split `SAT 8–3` across lines.
+- Keep the change scoped to the existing Contact page Hours card and shared CTA label rendering only; no layout or tile sizing changes.

@@ -497,13 +497,13 @@ function CtaLabel({ label }: { label: string }) {
   if (lines.length === 1) return <>{label}</>;
 
   return (
-    <>
+    <span className="inline-flex flex-col items-start">
       {lines.map((line, index) => (
-        <span key={`${line}-${index}`} className="block">
+        <span key={`${line}-${index}`}>
           {line}
         </span>
       ))}
-    </>
+    </span>
   );
 }
 
