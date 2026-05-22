@@ -297,24 +297,6 @@
   }
 }
 
-/* section03Stacked — same as section03 but b/c stack full-width on mobile */
-@utility ts-section-03-stacked {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "hero hero"
-    "a a"
-    "b b"
-    "c c";
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      "hero hero hero hero a a"
-      "b b c c d d";
-  }
-}
-
 /* section04 — like 03 but the hero row is taller */
 @utility ts-section-04 {
   grid-template-columns: 1fr 1fr;

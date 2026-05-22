@@ -20,7 +20,6 @@ export type TileScreenLayout =
   | "section01"
   | "section02"
   | "section03"
-  | "section03Stacked"
   | "section04"
   | "section05";
 
@@ -31,7 +30,6 @@ const layoutCls: Record<TileScreenLayout, string> = {
   section01: "ts-section-01",
   section02: "ts-section-02",
   section03: "ts-section-03",
-  section03Stacked: "ts-section-03-stacked",
   section04: "ts-section-04",
   section05: "ts-section-05",
 };
