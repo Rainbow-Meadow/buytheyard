@@ -118,7 +118,7 @@ function WbePage() {
               icon={<Building2 strokeWidth={1.25} />}
               eyebrow="02 · Who certifies"
               title="MA SDO"
-              body="The state office that certifies WBE status."
+              body="State WBE certifier."
             />
           ),
           c: (
@@ -132,7 +132,7 @@ function WbePage() {
               icon={<ClipboardCheck strokeWidth={1.25} />}
               eyebrow="03 · How it works"
               title="Formal review"
-              body="Documents, site visit, and recertification."
+              body="Docs, site visit, recertification."
             />
           ),
           d: (
@@ -146,7 +146,7 @@ function WbePage() {
               icon={<HeartHandshake strokeWidth={1.25} />}
               eyebrow="04 · Why it matters"
               title="Counts for goals"
-              body="Purchases help meet supplier-diversity goals."
+              body="Supports supplier-diversity goals."
             />
           ),
         }}
