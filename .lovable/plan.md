@@ -1,71 +1,57 @@
-# Plan: Research Buy The Yard + Abby Montalto, then enrich site
+# Plan: Deeper scrape — MA SDO WBE record, real Google reviews, FB stats
 
-## Phase 1 — Gather (research only, no code changes)
+Continues the research dossier at `/mnt/documents/bty-research.md`. No site files edited; output goes into a v2 of the dossier.
 
-Use Firecrawl (already available as a connector) + web search to pull everything public about the business and owner. Save raw findings to `/mnt/documents/btv-research.md` as a working dossier so we can review before editing copy.
+## Targets
 
-Sources to hit, in priority order:
+1. **MA SDO WBE directory record**
+   - Query the official MA Supplier Diversity Office certified business directory for "Buy the Yard, LLC" (Jefferson, MA).
+   - Capture: certification number, certification date, expiration date, certified NAICS scope, certifying officer / contact on file.
+   - URL family to try (Firecrawl rendered scrape, since the directory is a JS app):
+     - `https://mmars.osd.state.ma.us/supplierportal` (current SDO portal)
+     - `https://www.sdo.osd.state.ma.us` (legacy URL, may redirect)
+     - Google site-search `site:mass.gov "Buy the Yard"` and `site:osd.state.ma.us "Buy the Yard"`
+   - Fallback: COMMBUYS vendor search, SAM.gov entity record (we already have CAGE 887D5 / UEI 116831528 to confirm identity).
 
-1. **Owned web presence**
-   - `buytheyard.com` / `buytheyardoutdoor.com` (if either exists) — full crawl
-   - Current published site `buytheyard.lovable.app` — baseline of what's already stated
-   - Google Business Profile for "Buy The Yard Outdoor Products, Jefferson MA" (hours, phone, photos, review snippets, Q&A)
-   - Facebook page `Buy The Yard Outdoor Products` — bio, founding date, posts, reviews, photos, community tags
-   - Instagram, TikTok, Yelp, Nextdoor, BBB, Houzz — presence + any bio copy
-   - LinkedIn — Abby Montalto profile + company page
+2. **Real Google reviews**
+   - Resolve the Google Maps Place ID we already have: `0x89e3ffde94fe4615:0x9fb059fa24b6f5fd`.
+   - Firecrawl rendered scrape of the public Google Maps place page → pull review count, average rating, and the verbatim text of the latest ~10 reviews with reviewer first name + relative date.
+   - Cross-check against any aggregator that mirrors GBP reviews (Topsoil.com directory, BBB, Yelp if present, Nextdoor business pages).
+   - Flag any review that mentions Abby by name, the dog Charlie, delivery timing, or specific products — those are the highest-signal pulls for the home-page carousel.
 
-2. **Certifications & official records**
-   - MA Supplier Diversity Office (SDO) WBE directory entry (cert #, NAICS codes, cert date, scope of services)
-   - MA Secretary of State corporations search (entity name, formation date, officers, registered address)
-   - Town of Holden / Jefferson permits or assessor records for 2264 Main St.
+3. **Facebook page facts**
+   - Locate the public FB page (likely `facebook.com/buytheyardoutdoorproducts` or similar).
+   - Pull: current follower / like count, page-creation date, "About" blurb, last 10 public posts (date + first line) for tone calibration and to find any community/sponsorship posts we missed.
+   - Note that login-gated detail will be unavailable — record what is publicly visible and flag the rest.
 
-3. **Press, community, schools**
-   - Local news (Worcester Telegram, Holden Landmark, Rutland Reminder, Wachusett-area outlets)
-   - Wachusett Regional HS — class of '16 mentions, alumni features
-   - CTMS donation, Rutland Memorial Day, any sponsorships, scholarships, sports team backings
-   - Chamber of commerce listings (Wachusett Area, Worcester Regional)
+4. **Father / family corroboration (light-touch)**
+   - Confirm whether **Callahan & Montalto Site Construction (Holden, MA)** is publicly tied to Abby's father — check BBB page detail, MA Sec. of State corporate filings for officer names, and any local news. Do NOT publish family detail to the site unless Abby greenlights it; this is just to firm up the surname provenance.
 
-4. **Reviews & customer voice**
-   - Google reviews (full text + dates of recent 20)
-   - Facebook recommendations
-   - Yelp reviews if any
-   - Pull representative quotes + reviewer first-name/town for social proof
+5. **One missing item from pass 1**
+   - Capture the full FedLinks "capability statement" paragraph (it was truncated in the first fetch) so we have her own elevator-pitch wording verbatim.
 
-5. **Products & ops detail**
-   - Material lists, pricing hints, delivery zones, truck info, seasonal posts
-   - Any photos of Abby, Charlie the dog, yard, trucks we can attribute
+## Output
 
-## Phase 2 — Synthesize
+- Update `/mnt/documents/bty-research.md` in-place with a new "Pass 2 findings" section, including:
+  - WBE cert # / dates / scope (or "not found in public directory" if gated)
+  - Verbatim Google reviews table (name, date, stars, text, signal-tags)
+  - FB page follower count + about blurb
+  - Full FedLinks capability statement
+  - Updated "Gaps" list (what still requires Abby)
+- Write a separate `/mnt/documents/bty-reviews.json` with the cleaned review pulls so the next enrichment step can drop them straight into the home-page carousel.
 
-Produce a structured dossier in `/mnt/documents/btv-research.md` with sections:
-- Owner bio (Abby): hometown, school, year founded, motivation, family, role
-- Business facts: founding year confirmed, address, hours, phone, service area towns, delivery radius, fleet
-- Certifications: WBE cert # + date, NAICS, any others (DBE? veteran? small biz?)
-- Community involvement: dated list of donations / sponsorships
-- Voice & tone cues observed from her own posts (so enriched copy sounds like her)
-- Reviews: 8–12 cleaned, attributed quotes
-- Gaps: anything we *can't* confirm and should ask Abby before publishing
+## Tools used
 
-## Phase 3 — Enrichment proposal (separate follow-up, not this turn)
+- `websearch--web_search` (broad discovery + site-restricted searches)
+- `code--fetch_website` for static HTML pages
+- **Firecrawl connector** (already linked to this project) for JS-rendered pages — Google Maps place page, MA SDO portal, Facebook public page. Server-side `scrape` with `formats: ['markdown']` and `waitFor` for dynamic content. No new secrets needed; the connector already injects `FIRECRAWL_API_KEY` server-side.
 
-After you review the dossier, I'll come back with a targeted edit list:
-- `/about` — tighten Abby's story with verified specifics
-- `/` hero eyebrow + stat tiles — confirm "10 yrs", "820+ FB", "5★", WBE wording
-- `/wbe` — add real cert #, NAICS scope, cert date
-- `/service-area` — reconcile towns list with what she actually serves
-- Reviews carousel on `/` — swap placeholder/illustrative quotes for verified real ones with consent-safe attribution
-- `llms.txt` + meta descriptions — fold in concrete differentiators
+## Out of scope (still)
 
-No site files edited in this plan — just research first, you approve the dossier, then we wire findings into copy.
+- Any site code change — that happens after you review the v2 dossier.
+- Anything behind FB login, LinkedIn detail, or paywalled local-news archives.
+- Publishing real reviewer names without your sign-off on the attribution policy (first-name only vs. initials vs. anonymized).
 
-## Technical notes
+## Open question
 
-- Firecrawl connector + `web_search` handle the crawl; Google/Facebook scraping uses Firecrawl's rendered scrape with `onlyMainContent`.
-- Anything behind login (full FB feed, LinkedIn detail) may be partial — flagged as gaps rather than guessed.
-- Nothing is published to the site until you sign off on the dossier.
-
-## Open questions before I start
-
-1. Are there any sources you already know about that I should prioritize (specific articles, a personal site, a podcast appearance)?
-2. Is it OK to quote real Google/Facebook reviewers by first name + town, or do you want initials only?
-3. Anything off-limits (family details, exact home town, etc.)?
+Before I scrape Google reviews — when we eventually use them on the site, do you want full first name + town, **initials only**, or fully anonymized? I'll scrape verbatim either way; this just affects how I shape the JSON output.
