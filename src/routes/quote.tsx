@@ -201,25 +201,25 @@ function QuotePage() {
             className="h-full w-full bg-surface text-surface-foreground overflow-hidden flex flex-col"
           >
             {/* Header — anchored numeral + pip rail */}
-            <div className="relative px-5 md:px-7 pt-5 md:pt-7 pb-5 border-b border-white/10 overflow-hidden">
+            <div className="relative px-5 md:px-7 pt-4 md:pt-6 pb-3 md:pb-4 border-b border-white/10 overflow-hidden">
               <div className="relative flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <p className="eyebrow text-brand">
                     Step {String(step + 1).padStart(2, "0")} · {meta.eyebrow}
                   </p>
-                  <h2 className="display-4 mt-3 text-surface-foreground">{meta.title}</h2>
+                  <h2 className="display-5 md:display-4 mt-2 text-surface-foreground">{meta.title}</h2>
                   {meta.helper && (
-                    <p className="body-sm text-white/60 mt-2 max-w-[55ch]">{meta.helper}</p>
+                    <p className="body-sm text-white/60 mt-1.5 max-w-[55ch] line-clamp-2">{meta.helper}</p>
                   )}
                 </div>
                 <p
                   aria-hidden="true"
-                  className="display-1 leading-none text-white/[0.06] tabular-nums select-none pointer-events-none -mt-2 -mr-1"
+                  className="display-2 md:display-1 leading-none text-white/[0.06] tabular-nums select-none pointer-events-none -mt-1 -mr-1"
                 >
                   {meta.num}
                 </p>
               </div>
-              <div className="mt-5 flex items-center gap-2">
+              <div className="mt-4 flex items-center gap-2">
                 {STEPS.map((s, i) => (
                   <button
                     key={s.num}
@@ -254,7 +254,7 @@ function QuotePage() {
             </div>
 
             {/* Slide content — scrollable inside the tile */}
-            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6">
+            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-3 md:py-5">
               {step === 0 && (
                 <div className="space-y-3">
                   {items.fields.map((field, idx) => {
