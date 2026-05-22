@@ -166,10 +166,10 @@ function HomePage() {
               </div>
             </article>
           ),
-          a: <Tile id="stat-years" fill variant="stat" layout="anchored" tone="surface" anchorIndex="01" anchorGlyph={<CalendarDays strokeWidth={1.25} />} value="10" label="Years in business" />,
-          b: <Tile id="stat-wbe" fill variant="stat" layout="anchored" tone="brand" anchorIndex="02" anchorGlyph={<BadgeCheck strokeWidth={1.25} />} value="WBE" label="MA-certified woman-owned" />,
-          c: <Tile id="stat-fb" fill variant="stat" layout="anchored" tone="kraft" anchorIndex="03" anchorGlyph={<Facebook strokeWidth={1.25} />} value="820+" label="Facebook followers" />,
-          d: <Tile id="stat-stars" fill variant="stat" layout="anchored" tone="gray" anchorIndex="04" anchorGlyph={<Star strokeWidth={1.25} />} value="5★" label="Google & Facebook rated" />,
+          a: <Tile id="stat-years" fill variant="stat" layout="anchored" tone="surface" anchorIndex="01" anchorGlyph={<CalendarDays strokeWidth={1.25} />} value="10" label="Years in business" caption="Since 2016" />,
+          b: <Tile id="stat-wbe" fill variant="stat" layout="anchored" tone="brand" anchorIndex="02" anchorGlyph={<BadgeCheck strokeWidth={1.25} />} value="WBE" label="MA-certified woman-owned" caption="State certified" />,
+          c: <Tile id="stat-fb" fill variant="stat" layout="anchored" tone="kraft" anchorIndex="03" anchorGlyph={<Facebook strokeWidth={1.25} />} value="820+" label="Facebook followers" caption="Daily restocks" />,
+          d: <Tile id="stat-stars" fill variant="stat" layout="anchored" tone="gray" anchorIndex="04" anchorGlyph={<Star strokeWidth={1.25} />} value="5★" label="Google & Facebook rated" caption="Five-star rated" />,
         }}
       />
 
