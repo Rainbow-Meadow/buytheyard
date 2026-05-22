@@ -45,7 +45,10 @@ export function SiteFooter() {
 
               <div className="space-y-4 pt-6 border-t border-white/5">
                 <Eyebrow>Certification</Eyebrow>
-                <div className="flex items-start gap-4">
+                <Link
+                  to="/wbe"
+                  className="group flex items-start gap-4 -m-2 p-2 hover:bg-white/[0.02] transition-colors"
+                >
                   <img
                     src={wbeSeal}
                     alt="Massachusetts WBE certified seal"
@@ -56,18 +59,26 @@ export function SiteFooter() {
                     decoding="async"
                   />
                   <div className="space-y-2">
-                    <p className="display-5 text-kraft">Certified Woman-Owned</p>
+                    <p className="display-5 text-kraft group-hover:text-brand transition-colors">Certified Woman-Owned</p>
                     <p className="body-sm text-kraft/70 max-w-[28ch]">
                       Certified by the Commonwealth of Massachusetts since 2018.
                     </p>
                   </div>
-                </div>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 label text-kraft hover:text-brand transition-colors"
-                >
-                  Meet Abby <ArrowRight className="size-4" />
                 </Link>
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                  <Link
+                    to="/wbe"
+                    className="inline-flex items-center gap-2 label text-kraft hover:text-brand transition-colors"
+                  >
+                    What WBE means <ArrowRight className="size-4" />
+                  </Link>
+                  <Link
+                    to="/about"
+                    className="inline-flex items-center gap-2 label text-kraft/70 hover:text-kraft transition-colors"
+                  >
+                    Meet Abby <ArrowRight className="size-4" />
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -189,6 +200,7 @@ export function SiteFooter() {
                   <Link to="/delivery" className="label text-kraft/70 hover:text-kraft transition-colors">Delivery</Link>
                   <Link to="/service-area" className="label text-kraft/70 hover:text-kraft transition-colors">Service Area</Link>
                   <Link to="/contact" className="label text-kraft/70 hover:text-kraft transition-colors">Contact</Link>
+                  <Link to="/wbe" className="label text-kraft/70 hover:text-kraft transition-colors">WBE</Link>
                   <Link to="/privacy" className="label text-kraft/40 hover:text-kraft transition-colors">Privacy</Link>
                 </nav>
               </div>

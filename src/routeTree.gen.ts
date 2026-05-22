@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WbeRouteImport } from './routes/wbe'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServiceAreaRouteImport } from './routes/service-area'
 import { Route as QuoteRouteImport } from './routes/quote'
@@ -19,6 +20,11 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WbeRoute = WbeRouteImport.update({
+  id: '/wbe',
+  path: '/wbe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wbe': typeof WbeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wbe': typeof WbeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wbe': typeof WbeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/quote'
     | '/service-area'
     | '/sitemap.xml'
+    | '/wbe'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/quote'
     | '/service-area'
     | '/sitemap.xml'
+    | '/wbe'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/quote'
     | '/service-area'
     | '/sitemap.xml'
+    | '/wbe'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,10 +157,18 @@ export interface RootRouteChildren {
   QuoteRoute: typeof QuoteRoute
   ServiceAreaRoute: typeof ServiceAreaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  WbeRoute: typeof WbeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wbe': {
+      id: '/wbe'
+      path: '/wbe'
+      fullPath: '/wbe'
+      preLoaderRoute: typeof WbeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   QuoteRoute: QuoteRoute,
   ServiceAreaRoute: ServiceAreaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  WbeRoute: WbeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
