@@ -465,7 +465,7 @@ function isLightTone(tone: TileTone) {
 
 function bodyToneCls(tone: TileTone) {
   if (isLightTone(tone)) return "text-zinc-700";
-  if (tone === "gray") return "text-white/85";
+  if (tone === "gray") return "text-zinc-900/85";
   return "text-zinc-300";
 }
 
@@ -479,13 +479,13 @@ function eyebrowToneCls(tone: TileTone) {
 
 function attributionToneCls(tone: TileTone) {
   if (isLightTone(tone)) return "meta text-zinc-600";
-  if (tone === "gray") return "meta text-white/75";
+  if (tone === "gray") return "meta text-zinc-900/70";
   return "meta text-zinc-400";
 }
 
 function iconToneCls(tone: TileTone) {
   if (tone === "brand") return "text-brand-foreground";
-  if (tone === "gray") return "text-white";
+  if (tone === "gray") return "text-zinc-900";
   return "text-brand";
 }
 
