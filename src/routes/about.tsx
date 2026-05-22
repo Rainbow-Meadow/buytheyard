@@ -4,7 +4,7 @@ import yardPatio from "@/assets/source/yard-banner-5.webp";
 import yardDog from "@/assets/source/yard-dog.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
-import { Hammer, Calendar, BadgeCheck, GraduationCap, Star, Quote, Dog, Armchair, MapPin } from "lucide-react";
+import { Hammer, Calendar, BadgeCheck, GraduationCap, Star, Quote, Dog, Armchair, MapPin, Hourglass, Truck, HeartHandshake } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/about")({
           "Buy The Yard is a Massachusetts WBE-certified, woman-owned landscape supply yard in Jefferson, MA — built by Abby. Read her story.",
       },
       { property: "og:title", content: "Meet The Owner — Buy The Yard" },
-      { property: "og:description", content: "Abby's story and the WBE-certified yard she built in Jefferson, MA." },
+      { property: "og:description", content: "Abby Montalto's story — entrepreneurship grad, third-generation Central Mass construction roots, and the WBE-certified yard she built in Jefferson, MA." },
       { property: "og:url", content: "/about" },
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-about.jpg" },
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-about.jpg" },
@@ -64,12 +64,76 @@ function AboutPage() {
               <Tile id="about-stat-wbe" fill variant="stat" tone="brand" layout="anchored" anchorIndex="02" anchorGlyph={<BadgeCheck strokeWidth={1.25} />} value="WBE" label="MA-certified woman-owned" caption="What this means →" />
             </Link>
           ),
-          c: <Tile id="about-stat-local" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<GraduationCap strokeWidth={1.25} />} value="Local" label="Wachusett Regional · '16" caption="Jefferson born" />,
+          c: <Tile id="about-stat-local" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<GraduationCap strokeWidth={1.25} />} value="Local" label="Wachusett Regional · '16" caption="Entrepreneurship '18" />,
           d: <Tile id="about-stat-stars" fill variant="stat" tone="gray" layout="anchored" anchorIndex="04" anchorGlyph={<Star strokeWidth={1.25} />} value="5★" label="Google & Facebook rated" caption="Five-star rated" />,
         }}
       />
 
-      {/* Screen 2 — section04: Story quote + yard + Charlie + visit CTA */}
+      {/* Screen 2 — section03: Roots — three generations in Central Mass construction */}
+      <TileScreen
+        layout="section03"
+        label="Roots — three generations in Central Mass construction"
+        heading="Roots — three generations in Central Mass construction"
+        tiles={{
+          hero: (
+            <Tile
+              id="about-roots-lede"
+              fill
+              variant="quote"
+              tone="kraft"
+              layout="anchored"
+              anchorIcon={<Hourglass />}
+              eyebrow="Since the 1940s"
+              quote="Three generations of Central Mass construction — and a yard built on top of it."
+              attribution="The Montalto family · Jefferson, MA"
+            />
+          ),
+          a: (
+            <Tile
+              id="about-roots-cmsc"
+              fill
+              variant="text"
+              tone="surface"
+              layout="anchored"
+              anchorIndex="02"
+              icon={<Truck />}
+              eyebrow="The family business"
+              title="Callahan & Montalto Site Construction"
+              body="Abby's father Tim runs CMSC out of the same 2264 Main St. yard — excavation, utilities, site work."
+            />
+          ),
+          b: (
+            <Tile
+              id="about-roots-community"
+              fill
+              variant="text"
+              tone="brand"
+              layout="anchored"
+              anchorIndex="03"
+              icon={<HeartHandshake />}
+              eyebrow="Giving back"
+              title="Loam and mulch for local schools"
+              body="Quiet donations to Wachusett-area schools and community projects."
+            />
+          ),
+          c: (
+            <Tile
+              id="about-roots-yard"
+              fill
+              variant="text"
+              tone="gray"
+              layout="anchored"
+              anchorIndex="04"
+              icon={<MapPin />}
+              eyebrow="One yard, two trades"
+              title="2264 Main St."
+              body="Materials out front, site-construction crew out back. Same family, same lot."
+            />
+          ),
+        }}
+      />
+
+      {/* Screen 3 — section04: Story quote + yard + Charlie + visit CTA */}
       <TileScreen
         layout="section04"
         label="Our story and around the yard"

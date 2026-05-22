@@ -13,7 +13,7 @@ export const Route = createFileRoute("/wbe")({
       {
         name: "description",
         content:
-          "Buy The Yard is a Massachusetts WBE — a state-certified Women Business Enterprise. What WBE means, how the Commonwealth certifies it, and why it matters for customers.",
+          "Buy The Yard is a Massachusetts WBE — certified by the MA Supplier Diversity Office (MassUCP). MA Home Improvement Contractor #214009 · USDOT #3543587.",
       },
       { property: "og:title", content: "Certified Woman-Owned (WBE) — Buy The Yard" },
       {
@@ -215,6 +215,20 @@ function WbePage() {
               </div>
 
               <div className="pt-4 border-t border-white/10 flex flex-wrap items-center gap-4">
+                <div className="w-full grid gap-3 sm:grid-cols-3 pb-4">
+                  <div className="p-4 ring-1 ring-white/10 bg-white/5">
+                    <p className="eyebrow text-brand">WBE</p>
+                    <p className="body-sm text-kraft mt-1">MA SDO / MassUCP</p>
+                  </div>
+                  <div className="p-4 ring-1 ring-white/10 bg-white/5">
+                    <p className="eyebrow text-brand">MA HIC</p>
+                    <p className="body-sm text-kraft mt-1">#214009 · Active</p>
+                  </div>
+                  <div className="p-4 ring-1 ring-white/10 bg-white/5">
+                    <p className="eyebrow text-brand">USDOT</p>
+                    <p className="body-sm text-kraft mt-1">#3543587 · Intrastate</p>
+                  </div>
+                </div>
                 <Link
                   to="/quote"
                   className="inline-flex items-center gap-2 bg-brand text-brand-foreground px-6 h-11 label hover:opacity-90 transition-opacity"

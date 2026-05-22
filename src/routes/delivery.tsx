@@ -84,7 +84,7 @@ function DeliveryPage() {
               icon={<Phone />}
               eyebrow="Call it in"
               title="Call by noon for same-day."
-              body="One quick call locks your drop — material, address, where to put it."
+              body="48-hour notice preferred for scheduled drops — one call locks material, address, and spot."
             />
           ),
           a: (
