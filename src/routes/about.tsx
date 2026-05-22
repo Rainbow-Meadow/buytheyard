@@ -99,7 +99,7 @@ function AboutPage() {
               icon={<Truck />}
               eyebrow="The family business"
               title="Callahan & Montalto Site Construction"
-              body="Abby's father Tim runs CMSC from the same yard — excavation and site work."
+              body="Abby's father Tim runs CMSC from the same yard — excavation, utilities, and site work."
             />
           ),
           b: (
