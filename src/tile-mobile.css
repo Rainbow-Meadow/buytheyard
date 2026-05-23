@@ -24,11 +24,11 @@
   }
 
   .tile-screen.ts-section-02 {
-    grid-template-rows: minmax(260px, auto) minmax(230px, auto) minmax(210px, auto);
+    grid-template-rows: minmax(340px, auto) minmax(230px, auto) minmax(210px, auto);
   }
 
   .tile-screen.ts-section-02 .ts-slot-hero {
-    min-height: 260px;
+    min-height: 340px;
   }
 
   .tile-screen.ts-section-02 .ts-slot-a {
