@@ -13,7 +13,7 @@ import {
   Truck,
   Waves,
 } from "lucide-react";
-import heroStorefront from "@/assets/source/hero-storefront-open.png";
+import heroStorefront from "@/assets/source/hero-storefront-open.webp";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
 import { products, productSlug } from "@/data/products";

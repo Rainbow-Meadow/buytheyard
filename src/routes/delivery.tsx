@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Box, Clock, CreditCard, Home, MapPin, Phone, Target, Truck, Warehouse } from "lucide-react";
-import loadingTruck from "@/assets/source/delivery-hero-truck.png";
+import loadingTruck from "@/assets/source/delivery-hero-truck.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 

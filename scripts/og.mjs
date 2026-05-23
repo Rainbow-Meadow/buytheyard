@@ -2,10 +2,10 @@ import sharp from "sharp";
 import { readFileSync } from "fs";
 
 const W = 1200, H = 630;
-const BRAND = "src/assets/brandmark-dark.png";
+const BRAND = "src/assets/brandmark-dark.webp";
 
 const jobs = [
-  ["src/assets/source/hero-desktop-yard.png", "public/og/og-home.jpg"],
+  ["src/assets/source/hero-desktop-yard.webp", "public/og/og-home.jpg"],
   ["src/assets/source/abby-portrait.webp",   "public/og/og-about.jpg"],
   ["src/assets/source/yard-piles.webp",      "public/og/og-products.jpg"],
   ["src/assets/source/loading-truck.webp",   "public/og/og-delivery.jpg"],
