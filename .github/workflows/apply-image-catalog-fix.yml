@@ -1,0 +1,88 @@
+name: Apply image placement fix
+
+on:
+  push:
+    branches:
+      - image-catalog-placement-fix
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.head_commit.message == 'Add transient image placement patch workflow'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: image-catalog-placement-fix
+          token: ${{ secrets.GPTFULL }}
+
+      - name: Patch image placement files
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          def replace(path: str, old: str, new: str) -> None:
+              p = Path(path)
+              s = p.read_text()
+              if old not in s:
+                  raise SystemExit(f"Expected text not found in {path}: {old[:80]!r}")
+              p.write_text(s.replace(old, new))
+
+          # Product card and home feature tiles should use image-specific alt copy.
+          replace("src/components/site/ProductCard.tsx", "alt={product.name}", "alt={product.imageAlt ?? product.name}")
+          replace("src/routes/index.tsx", '''const FEATURED = [\n  "Hemlock Mulch",\n  "Screened Loam",\n  "Mason Sand",\n  '3/4" Crushed Blue Stone',\n  "Hanging Baskets",\n].map((n) => products.find((p) => p.name === n)!);''', '''const FEATURED = [\n  "Hemlock Mulch",\n  "Screened Loam",\n  '3/4" Crushed Blue Stone',\n  '3/8" Pea Stone',\n  "Hanging Baskets",\n].map((n) => products.find((p) => p.name === n)!);''')
+          replace("src/routes/index.tsx", "alt={p.name}", "alt={p.imageAlt ?? p.name}")
+
+          # Quote page should not use the mislabeled hemlock/stone image.
+          replace("src/routes/quote.tsx", 'import mulchHemlock from "@/assets/mulch-hemlock.webp";', 'import quoteYardMaterials from "@/assets/source/yard-piles.webp";')
+          replace("src/routes/quote.tsx", "src={mulchHemlock}", "src={quoteYardMaterials}")
+          replace("src/routes/quote.tsx", 'alt="Hemlock mulch"', 'alt="Bulk material piles at the Jefferson yard"')
+
+          # Fix OG references that pointed at files not present in public/og.
+          replace("src/routes/privacy.tsx", "https://buytheyard.lovable.app/og/og-privacy.jpg", "https://buytheyard.lovable.app/og/og-home.jpg")
+          replace("src/routes/service-area.tsx", "https://buytheyard.lovable.app/og/og-service-area.jpg", "https://buytheyard.lovable.app/og/og-quote.jpg")
+
+          # Mason Sand is still featured on main in some contexts; use broad yard context rather than mislabeled stone chips.
+          replace("src/data/products.ts", '''  {\n    name: "Mason Sand",\n    category: "Sand",\n    description: "Washed, fine-grain, and clean enough for kids' play boxes. Same sand goes under pavers and into a masonry mix.",\n  },''', '''  {\n    name: "Mason Sand",\n    category: "Sand",\n    description: "Washed, fine-grain, and clean enough for kids' play boxes. Same sand goes under pavers and into a masonry mix.",\n    image: materialYardPiles,\n    imageAlt: "Bulk material piles at the Jefferson yard",\n  },''')
+
+          # Product buying guide should use vetted category images, not whichever first product happens to have an image.
+          p = Path("src/components/products/ProductBuyingGuide.tsx")
+          s = p.read_text()
+          s = s.replace('import { products, type Product } from "@/data/products";', '''import { products, type Product } from "@/data/products";\nimport materialYardPiles from "@/assets/source/yard-piles.webp";\nimport loamDelivery from "@/assets/source/community-ctms-loam.webp";\nimport blueStone from "@/assets/stone-blue-crushed.webp";\nimport riverStone from "@/assets/stone-river.webp";\nimport gardenBaskets from "@/assets/garden-baskets.webp";''')
+          s = s.replace('''  askAbby: string;\n  imageAlt: string;''', '''  askAbby: string;\n  image: string;\n  imageAlt: string;''')
+          for old, new in [
+              ('category: "Mulch",\n    icon: <TreePine />', 'category: "Mulch",\n    image: materialYardPiles,\n    icon: <TreePine />'),
+              ('category: "Loam",\n    icon: <Sprout />', 'category: "Loam",\n    image: loamDelivery,\n    icon: <Sprout />'),
+              ('category: "Sand",\n    icon: <Waves />', 'category: "Sand",\n    image: materialYardPiles,\n    icon: <Waves />'),
+              ('category: "Gravel",\n    icon: <Truck />', 'category: "Gravel",\n    image: blueStone,\n    icon: <Truck />'),
+              ('category: "Specialty Stone",\n    icon: <Mountain />', 'category: "Specialty Stone",\n    image: riverStone,\n    icon: <Mountain />'),
+              ('category: "Garden Center",\n    icon: <Flower2 />', 'category: "Garden Center",\n    image: gardenBaskets,\n    icon: <Flower2 />'),
+              ('imageAlt: "Mulch texture from the yard"', 'imageAlt: "Bulk material piles and flowers at the Jefferson yard"'),
+              ('imageAlt: "Screened loam material texture"', 'imageAlt: "Buy The Yard dump truck unloading loam"'),
+              ('imageAlt: "Fine mason sand texture"', 'imageAlt: "Bulk material piles at the Jefferson yard"'),
+              ('imageAlt: "Decorative landscape stone texture"', 'imageAlt: "Rounded brown river stone with a golf ball for scale"'),
+              ('imageAlt: "Seasonal garden center stock at the yard"', 'imageAlt: "Colorful hanging baskets and annuals at the yard"'),
+              ('The photo shows the texture. The notes tell you how to use it. The call confirms the order.', 'The photo is a verified yard or material image. The notes tell you how to use it. The call confirms the order.'),
+              ('const guideImage = items.find((p) => p.image)?.image;', 'const guideImage = guide.image;'),
+          ]:
+              if old not in s:
+                  raise SystemExit(f"Expected text not found in ProductBuyingGuide: {old[:80]!r}")
+              s = s.replace(old, new)
+          p.write_text(s)
+
+          replace("docs/photo-shot-guide.md", "Quote support image | Currently `mulch-hemlock.webp` tile | Better: practical material-list/counter photo or truck/material pile at yard.", "Quote support image | Currently `src/assets/source/yard-piles.webp` | Practical material-list/counter photo or truck/material pile at yard.")
+
+          Path(".github/workflows/apply-image-catalog-fix.yml").unlink()
+          PY
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Apply image placement fixes"
+          git push origin image-catalog-placement-fix
