@@ -124,21 +124,21 @@ function HomePage() {
               <div className="relative z-10 h-full w-full flex items-end md:items-center">
                 <div className="px-5 md:px-10 pb-8 md:pb-0 max-w-3xl">
                   <div className="mb-6">
-                    <p className="eyebrow text-zinc-200 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                    <p className="home-hero-meta eyebrow text-zinc-200 flex flex-wrap items-center gap-x-2.5 gap-y-1">
                       <span className="inline-flex items-center gap-1.5">
                         <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
                         Est. 2016
                       </span>
                       <span aria-hidden="true" className="text-white/40">·</span>
                       <Link to="/wbe" className="hover:text-brand transition-colors">
-                        Woman-owned <span className="text-brand">(WBE)</span>
+                        Woman-owned
                       </Link>
-                      <span aria-hidden="true" className="text-white/40">·</span>
-                      <span>Jefferson, MA</span>
+                      <span aria-hidden="true" className="hidden sm:inline text-white/40">·</span>
+                      <span className="basis-full sm:basis-auto text-zinc-300">Jefferson, MA</span>
                     </p>
                     <span aria-hidden="true" className="mt-2 block h-px w-24 bg-white/25" />
                   </div>
-                  <h1 className="display-2 leading-[0.95] text-balance text-white">
+                  <h1 className="home-hero-heading display-2 leading-[0.95] text-balance text-white">
                     Mulch. Loam. Sand.{" "}
                     <span className="relative inline-block text-brand">
                       Stone.
