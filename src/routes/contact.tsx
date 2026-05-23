@@ -18,10 +18,10 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Call 508-579-9897 or send a quote online. Stop by Buy The Yard at 2264 Main St., Jefferson, MA 01522. In-season: Mon–Fri 8a–5p, Sat 8a–3p.",
+          "Call 508-579-9897, send a quote request, or stop by Buy The Yard at 2264 Main St., Jefferson, MA. Phone is fastest when timing matters.",
       },
       { property: "og:title", content: "Contact — Buy The Yard" },
-      { property: "og:description", content: "Phone, address, hours, and the map. Jefferson, MA." },
+      { property: "og:description", content: "Phone, address, hours, quote request, and map for the Jefferson yard." },
       { property: "og:url", content: "/contact" },
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
       { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/contact")({
           telephone: "+1-508-579-9897",
           email: "abby@btymaterial.com",
           sameAs: [
-            "https://www.facebook.com/Buy-The-Yard-Outdoor-Products-546148285792835/",
+            "https://www.facebook.com/BuyTheYardOutdoorProducts",
             "https://www.yelp.com/biz/buy-the-yard-holden",
           ],
           address: {
@@ -65,7 +65,6 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   return (
     <>
-      {/* Screen 1 — pageHero: call/quote CTAs + contact stat tiles */}
       <TileScreen
         layout="pageHero"
         label="Contact Buy The Yard"
@@ -84,8 +83,8 @@ function ContactPage() {
               fetchPriority="high"
               overlay={{
                 eyebrow: "Contact",
-                title: "Call. We answer.",
-                body: "Phone is fastest. Quote form for material lists. Email for the rest.",
+                title: "Call when you need a real answer."
+                ,body: "Phone is fastest for price, timing, quantity, and delivery questions. The quote form is best when you already have a material list.",
                 align: "bottom-left",
                 layout: "anchored",
                 anchorIcon: <Phone />,
@@ -101,8 +100,9 @@ function ContactPage() {
               tone="brand"
               anchorIndex="02"
               icon={<Phone />}
-              eyebrow="Call"
+              eyebrow="Fastest"
               title="508.579.9897"
+              body="Best for same-day questions, delivery timing, or quantity nerves."
               cta={{ label: "Tap to call", href: "tel:5085799897" }}
             />
           ),
@@ -116,6 +116,7 @@ function ContactPage() {
               icon={<MapPin />}
               eyebrow="Yard"
               title="2264 Main St."
+              body="Stop in for pickup or to see material in person."
               cta={{
                 label: "Jefferson, MA · Maps",
                 href: "https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522",
@@ -132,6 +133,7 @@ function ContactPage() {
               icon={<Clock />}
               eyebrow="Hours"
               title="Mon–Sat"
+              body="Winter salt and ice-melt pickup may be by phone."
               cta={{ label: "Mon–Fri 8–5 · Sat 8–3 · Sun closed", to: "/contact" }}
             />
           ),
@@ -145,8 +147,9 @@ function ContactPage() {
               icon={<Facebook />}
               eyebrow="Social"
               title="Facebook"
+              body="Seasonal updates, stock notes, and community posts."
               cta={{
-                label: "Daily restocks · Follow",
+                label: "Follow the yard feed",
                 href: "https://www.facebook.com/BuyTheYardOutdoorProducts",
               }}
             />
@@ -154,7 +157,6 @@ function ContactPage() {
         }}
       />
 
-      {/* Screen 2 — section03: Map + quote/email tiles */}
       <TileScreen
         layout="section03"
         label="Map, quote, and email"
@@ -181,8 +183,8 @@ function ContactPage() {
               anchorIndex="06"
               icon={<ClipboardList />}
               eyebrow="Online"
-              title="Get a quote"
-              body="Best for material lists — send products, town, and timing."
+              title="Send the list. Abby will confirm."
+              body="Best for product list, town, rough quantity, delivery timing, and drop spot notes."
               cta={{ label: "Start a request", to: "/quote" }}
             />
           ),
@@ -196,6 +198,7 @@ function ContactPage() {
               icon={<Mail />}
               eyebrow="Email · non-urgent"
               title="abby@btymaterial.com"
+              body="Good for paperwork, photos, or questions that do not need same-day timing."
               cta={{ label: "Send an email", href: "mailto:abby@btymaterial.com" }}
             />
           ),
@@ -209,8 +212,8 @@ function ContactPage() {
               anchorIndex="08"
               icon={<Phone />}
               eyebrow="Heads up"
-              title="Voicemail returned same day"
-              body="Yard cell is spotty — leave a message."
+              title="Leave a message if the yard is moving."
+              body="Loaders, trucks, and cell service do not always cooperate — messages get returned."
             />
           ),
         }}
