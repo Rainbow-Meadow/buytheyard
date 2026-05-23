@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ClipboardCheck, Phone, Ruler, Truck } from "lucide-react";
 import { categories, categoryPricing, products } from "@/data/products";
@@ -11,8 +12,8 @@ export function ProductCatalogIntro(_: { categorySlides?: TileBlock[] }) {
   return (
     <section aria-labelledby="products-heading" className="bg-base text-zinc-900 py-4 md:py-6">
       <div className="mx-auto max-w-7xl px-5 md:px-6">
-        <div className="grid min-h-[calc(100svh-7rem)] gap-4 lg:grid-cols-[0.42fr_0.58fr] lg:items-stretch">
-          <article className="relative overflow-hidden rounded-md bg-white p-5 ring-1 ring-zinc-300 md:p-7 lg:p-8">
+        <div className="grid min-h-[calc(100svh-7rem)] gap-4 lg:grid-cols-[0.38fr_0.62fr] lg:items-stretch">
+          <article className="relative order-2 overflow-hidden rounded-md bg-white p-5 ring-1 ring-zinc-300 md:p-7 lg:order-1 lg:p-8">
             <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
             <div className="relative z-10 flex h-full flex-col justify-between gap-8">
               <div>
@@ -52,7 +53,7 @@ export function ProductCatalogIntro(_: { categorySlides?: TileBlock[] }) {
             </div>
           </article>
 
-          <article className="relative overflow-hidden rounded-md bg-surface text-white ring-1 ring-zinc-800">
+          <article className="relative order-1 min-h-[calc(100svh-7rem)] overflow-hidden rounded-md bg-surface text-white ring-1 ring-zinc-800 lg:order-2">
             <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
             <div className="flex h-full flex-col">
               <div className="border-b border-white/10 p-5 md:p-6">
@@ -74,7 +75,7 @@ export function ProductCatalogIntro(_: { categorySlides?: TileBlock[] }) {
                     const items = products.filter((product) => product.category === category);
                     const pricing = categoryPricing[category];
                     return (
-                      <section key={category} className="rounded-md bg-white/[0.06] ring-1 ring-white/10 overflow-hidden">
+                      <section key={category} className="overflow-hidden rounded-md bg-white/[0.06] ring-1 ring-white/10">
                         <div className="grid gap-2 border-b border-white/10 px-4 py-3 sm:grid-cols-[1fr_auto] sm:items-center">
                           <div>
                             <p className="eyebrow text-brand">{category}</p>
@@ -119,7 +120,7 @@ export function ProductCatalogIntro(_: { categorySlides?: TileBlock[] }) {
   );
 }
 
-function HeroCue({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+function HeroCue({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
   return (
     <div className="rounded-md bg-kraft p-3 ring-1 ring-zinc-300">
       <div className="mb-2 text-brand [&>*]:size-4" aria-hidden="true">{icon}</div>
