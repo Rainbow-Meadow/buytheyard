@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
+  BadgeCheck,
   ClipboardCheck,
-  CreditCard,
   MapPin,
   PackageCheck,
   Phone,
@@ -42,9 +42,9 @@ export function OrderingBreak() {
   return (
     <section aria-labelledby="ordering-heading" className="section bg-base text-zinc-900">
       <div className="max-w-7xl mx-auto px-5 md:px-6">
-        <div className="relative overflow-hidden rounded-md bg-kraft ring-1 ring-zinc-300 p-6 md:p-8">
+        <div className="relative overflow-hidden rounded-md bg-kraft ring-1 ring-zinc-300 p-5 md:p-8">
           <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.45fr] lg:items-start">
+          <div className="grid gap-6 lg:grid-cols-[0.95fr_1.45fr] lg:items-start">
             <div>
               <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                 <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
@@ -58,18 +58,18 @@ export function OrderingBreak() {
                 and the right drop spot before anything leaves the yard.
               </p>
             </div>
-            <div className="grid gap-3 md:grid-cols-3">
+            <div className="grid gap-2.5 md:grid-cols-3 md:gap-3">
               {orderingSteps.map((step) => (
                 <article
                   key={step.eyebrow}
-                  className="bg-white/70 ring-1 ring-zinc-300 rounded-md p-5 min-h-[220px] flex flex-col"
+                  className="bg-white/70 ring-1 ring-zinc-300 rounded-md p-4 md:p-5 md:min-h-[220px] flex flex-col"
                 >
-                  <div className="text-brand mb-4 [&>*]:size-7" aria-hidden="true">
+                  <div className="text-brand mb-3 md:mb-4 [&>*]:size-6 md:[&>*]:size-7" aria-hidden="true">
                     {step.icon}
                   </div>
                   <p className="eyebrow text-brand mb-2">{step.eyebrow}</p>
                   <h3 className="display-5 leading-snug text-balance">{step.title}</h3>
-                  <p className="body-sm text-zinc-700 mt-3 text-pretty">{step.body}</p>
+                  <p className="body-sm text-zinc-700 mt-2 md:mt-3 text-pretty">{step.body}</p>
                 </article>
               ))}
             </div>
@@ -96,8 +96,8 @@ export function DeliveryBasicsBreak() {
                 Know before the truck rolls
               </h2>
               <p className="body text-zinc-300 max-w-[46ch] mt-4 text-pretty">
-                The homepage should answer the practical stuff quickly: where we go, how much to
-                order, how the drop works, and how to pay.
+                We’ll confirm your town, quantity, timing, and drop spot before anything leaves
+                the yard.
               </p>
             </div>
             <PackageCheck
@@ -177,7 +177,7 @@ export function AbbyTrustBreak() {
                 to="/wbe"
                 className="group rounded-md bg-brand text-brand-foreground p-5 hover:opacity-95 transition-opacity"
               >
-                <CreditCard className="size-7 mb-4" aria-hidden="true" />
+                <BadgeCheck className="size-7 mb-4" aria-hidden="true" />
                 <p className="eyebrow mb-2">Certification</p>
                 <p className="display-5 leading-tight text-balance">What WBE means</p>
                 <p className="body-sm mt-2 text-white/85">
