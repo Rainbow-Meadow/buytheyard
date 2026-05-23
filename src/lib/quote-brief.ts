@@ -11,6 +11,12 @@ export const TOWNS = [
   "West Boylston",
   "Worcester",
   "Boylston",
+  "Leominster",
+  "Clinton",
+  "Lancaster",
+  "Spencer",
+  "Auburn",
+  "Shrewsbury",
   "Oakham",
   "Barre",
   "Other / not listed",
@@ -19,14 +25,16 @@ export const TOWNS = [
 export const DROP_SPOTS = [
   "End of driveway",
   "Side of driveway",
+  "Curbline",
   "Specific spot I'll mark",
-  "Not sure yet",
+  "Not sure — please confirm",
 ] as const;
 
 export const TIMING = [
   "As soon as possible",
   "This week",
   "Next week",
+  "Flexible / when route allows",
   "Specific date",
 ] as const;
 
@@ -178,7 +186,7 @@ export function buildBrief(data: QuoteData): string {
       lines.push(`  Timing:    ${t}`);
     }
     if (data.acknowledged)
-      lines.push("  Acknowledged: 1-yard minimum, 48-hour scheduling");
+      lines.push("  Acknowledged: 1-yard minimum, 48-hour scheduling, driveway/curbline drop");
   }
   if (data.notes && data.notes.trim()) {
     lines.push("");
@@ -200,7 +208,6 @@ export function buildMailto(data: QuoteData): string {
 
 export function buildSmsHref(data: QuoteData): string {
   const body = encodeURIComponent(buildBrief(data));
-  // ?body= works on iOS 14+ and modern Android
   return `sms:+15085799897?body=${body}`;
 }
 
