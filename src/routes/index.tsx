@@ -1,5 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BadgeCheck, CalendarDays, Facebook, Flower2, Layers, MessageSquareQuote, Mountain, Phone, Sprout, Star, TreePine, Truck, Waves } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  CalendarDays,
+  Flower2,
+  Layers,
+  Mountain,
+  Phone,
+  ShieldCheck,
+  Sprout,
+  TreePine,
+  Truck,
+  Waves,
+} from "lucide-react";
 import heroStorefront from "@/assets/source/hero-storefront-open.png";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
@@ -8,7 +21,12 @@ import featuredHeroYard from "@/assets/featured-hero-yard.webp";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
-import { AbbyTrustBreak, DeliveryBasicsBreak, OrderingBreak } from "@/components/home/HomeBreaks";
+import {
+  AbbyTrustBreak,
+  DeliveryBasicsBreak,
+  LocalProofPanel,
+  OrderingBreak,
+} from "@/components/home/HomeBreaks";
 
 const FEATURED = [
   "Hemlock Mulch",
@@ -18,12 +36,6 @@ const FEATURED = [
   "Hanging Baskets",
 ].map((n) => products.find((p) => p.name === n)!);
 
-/**
- * Defers hero <video> load/play until the browser is idle (or after a short
- * timeout), so the LCP poster image isn't fighting the video for bandwidth.
- * Only the currently visible hero video (mobile or desktop, the other is
- * `display:none`) is kicked off.
- */
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -31,12 +43,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Bulk mulch, loam, sand & stone from our Jefferson, MA yard. Delivery to Holden, Worcester, Princeton, Sterling, Rutland & all of Central Mass. Call 508-579-9897.",
+          "Bulk mulch, loam, sand & stone from Buy The Yard in Jefferson, MA. Woman-owned, WBE-certified, and built for pickup or delivery across Central Mass.",
       },
-      { property: "og:title", content: "Buy The Yard — Premium Outdoor Materials" },
+      { property: "og:title", content: "Buy The Yard — Bulk Landscape Materials in Jefferson, MA" },
       {
         property: "og:description",
-        content: "Bulk mulch, loam, sand, stone — and a full plant nursery. Pickup or delivery in Central Mass.",
+        content:
+          "Mulch, loam, sand, stone, garden center materials, and practical ordering help from Abby's Jefferson yard.",
       },
       { property: "og:url", content: "https://buytheyard.lovable.app/" },
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
@@ -51,18 +64,24 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
+          "@type": "LandscapingBusiness",
           name: "Buy The Yard",
           image: "https://buytheyard.lovable.app/og/og-home.jpg",
           telephone: "+1-508-579-9897",
+          email: "abby@btymaterial.com",
           address: {
             "@type": "PostalAddress",
             streetAddress: "2264 Main St.",
             addressLocality: "Jefferson",
             addressRegion: "MA",
             postalCode: "01522",
+            addressCountry: "US",
           },
           url: "https://buytheyard.lovable.app",
+          founder: {
+            "@type": "Person",
+            name: "Abby Montalto",
+          },
         }),
       },
     ],
@@ -73,7 +92,6 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <>
-      {/* Screen 1 — pageHero: hero panel + 4 stat tiles */}
       <TileScreen
         layout="pageHero"
         label="Buy The Yard — bulk materials in Central Mass"
@@ -98,7 +116,6 @@ function HomePage() {
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
               <div className="md:hidden absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-zinc-950/25" />
-              {/* Vertical anchor mark — bleeds off the left edge as a structural anchor */}
               <div
                 aria-hidden="true"
                 className="absolute left-0 bottom-16 md:bottom-20 w-1.5 h-56 md:h-72 bg-brand z-10"
@@ -109,15 +126,14 @@ function HomePage() {
                     <p className="eyebrow text-zinc-200 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1">
                       <span className="inline-flex items-center gap-1.5">
                         <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-                        10 yrs local
+                        Est. 2016
                       </span>
                       <span aria-hidden="true" className="text-white/40">·</span>
-                      <Link
-                        to="/wbe"
-                        className="hover:text-brand transition-colors"
-                      >
+                      <Link to="/wbe" className="hover:text-brand transition-colors">
                         Woman-owned <span className="text-brand">(WBE)</span>
                       </Link>
+                      <span aria-hidden="true" className="text-white/40">·</span>
+                      <span>Jefferson, MA</span>
                     </p>
                     <span aria-hidden="true" className="mt-2 block h-px w-24 bg-white/25" />
                   </div>
@@ -142,7 +158,8 @@ function HomePage() {
                     </span>
                   </h1>
                   <p className="lead text-zinc-200 max-w-[54ch] mt-4 text-pretty">
-                    Bulk landscape materials from our Jefferson yard — pickup or delivery across Central Mass.
+                    Bulk landscape materials from Abby’s Jefferson yard — pickup or delivery
+                    across Central Mass.
                   </p>
                   <div className="mt-6 flex flex-col gap-2 max-w-md md:flex-row md:flex-wrap md:items-center md:gap-3 md:max-w-none">
                     <Link
@@ -172,20 +189,73 @@ function HomePage() {
               </div>
             </article>
           ),
-          a: <Tile id="stat-years" fill variant="stat" layout="anchored" tone="surface" anchorIndex="01" anchorGlyph={<CalendarDays strokeWidth={1.25} />} value="10" label="Years in business" caption="Since 2016" />,
+          a: (
+            <Tile
+              id="stat-founded"
+              fill
+              variant="stat"
+              layout="anchored"
+              tone="surface"
+              anchorIndex="01"
+              anchorGlyph={<CalendarDays strokeWidth={1.25} />}
+              value="2016"
+              label="Founded"
+              caption="Jefferson yard"
+            />
+          ),
           b: (
-            <Link to="/wbe" aria-label="What WBE certification means" className="block h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
-              <Tile id="stat-wbe" fill variant="stat" layout="anchored" tone="brand" anchorIndex="02" anchorGlyph={<BadgeCheck strokeWidth={1.25} />} value="WBE" label="WBE-certified" caption="Woman-owned →" />
+            <Link
+              to="/wbe"
+              aria-label="What WBE certification means"
+              className="block h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+            >
+              <Tile
+                id="stat-wbe"
+                fill
+                variant="stat"
+                layout="anchored"
+                tone="brand"
+                anchorIndex="02"
+                anchorGlyph={<BadgeCheck strokeWidth={1.25} />}
+                value="WBE"
+                label="Certified woman-owned"
+                caption="Massachusetts →"
+              />
             </Link>
           ),
-          c: <Tile id="stat-fb" fill variant="stat" layout="anchored" tone="kraft" anchorIndex="03" anchorGlyph={<Facebook strokeWidth={1.25} />} value="820+" label="Facebook followers" caption="Daily restocks" />,
-          d: <Tile id="stat-stars" fill variant="stat" layout="anchored" tone="gray" anchorIndex="04" anchorGlyph={<Star strokeWidth={1.25} />} value="5★" label="Google & Facebook rated" caption="Five-star rated" />,
+          c: (
+            <Tile
+              id="stat-licensed"
+              fill
+              variant="stat"
+              layout="anchored"
+              tone="kraft"
+              anchorIndex="03"
+              anchorGlyph={<ShieldCheck strokeWidth={1.25} />}
+              value="HIC"
+              label="MA #214009"
+              caption="USDOT #3543587"
+            />
+          ),
+          d: (
+            <Tile
+              id="stat-call"
+              fill
+              variant="stat"
+              layout="anchored"
+              tone="gray"
+              anchorIndex="04"
+              anchorGlyph={<Phone strokeWidth={1.25} />}
+              value="Call"
+              label="Fastest way to order"
+              caption="Abby answers"
+            />
+          ),
         }}
       />
 
       <OrderingBreak />
 
-      {/* Screen 2 — Featured materials: hero + 5 product tiles, viewport-locked */}
       <TileScreen
         layout="section01"
         label="Featured materials"
@@ -228,11 +298,11 @@ function HomePage() {
                     align: "bottom-left",
                     layout: "anchored",
                     anchorIcon: [
-                      <TreePine />,   // Hemlock Mulch
-                      <Sprout />,     // Screened Loam
-                      <Waves />,      // Mason Sand
-                      <Mountain />,   // Crushed Blue Stone
-                      <Flower2 />,    // Hanging Baskets
+                      <TreePine />,
+                      <Sprout />,
+                      <Waves />,
+                      <Mountain />,
+                      <Flower2 />,
                     ][i],
                   }}
                   details={{
@@ -250,58 +320,12 @@ function HomePage() {
 
       <DeliveryBasicsBreak />
 
-      {/* Screen 3 — section02: Social proof + community */}
       <TileScreen
         layout="section02"
         label="Local proof"
         heading="Local proof"
         tiles={{
-          hero: (
-            <Tile
-              id="reviews-hero"
-              fill
-              variant="carousel"
-              auto
-              interval={6500}
-              controls="dots"
-              ariaLabel="Customer reviews from Facebook"
-              slides={[
-                {
-                  id: "rev-1",
-                  variant: "quote",
-                  tone: "kraft",
-                  layout: "anchored",
-                  anchorIcon: <MessageSquareQuote />,
-                  eyebrow: "Local proof · real customers",
-                  quote:
-                    "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product.",
-                  attribution: "Rob Warner · Apr 21",
-                },
-                {
-                  id: "rev-2",
-                  variant: "quote",
-                  tone: "surface",
-                  layout: "anchored",
-                  anchorIcon: <MessageSquareQuote />,
-                  eyebrow: "Local proof · real customers",
-                  quote:
-                    "Best mulch in Central Mass and the price can't be beat. Delivery was right on time.",
-                  attribution: "Local customer · Holden",
-                },
-                {
-                  id: "rev-3",
-                  variant: "quote",
-                  tone: "kraft",
-                  layout: "anchored",
-                  anchorIcon: <MessageSquareQuote />,
-                  eyebrow: "Local proof · real customers",
-                  quote:
-                    "Quality loam, fair pricing, and Abby actually picks up the phone. That's rare.",
-                  attribution: "Repeat customer · Rutland",
-                },
-              ]}
-            />
-          ),
+          hero: <LocalProofPanel />,
           a: <FacebookLiveTile />,
           b: (
             <Tile
@@ -342,11 +366,10 @@ function HomePage() {
 
       <AbbyTrustBreak />
 
-      {/* Final CTA — sticky phone bar */}
       <div className="bg-brand text-brand-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 py-4 flex flex-col items-start gap-3 md:flex-row md:flex-wrap md:items-center md:justify-between">
           <p className="label">Ready to order? Call Abby.</p>
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-col items-start gap-2 md:flex-row md:flex-wrap md:items-center md:gap-4">
             <a href="tel:5085799897" className="inline-flex items-center gap-2 label">
               <Phone className="size-4" />
               508.579.9897
