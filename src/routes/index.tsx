@@ -232,9 +232,9 @@ function HomePage() {
               tone="kraft"
               anchorIndex="03"
               anchorGlyph={<ShieldCheck strokeWidth={1.25} />}
-              value="HIC"
-              label="MA #214009"
-              caption="USDOT #3543587"
+              value="Licensed"
+              label="HIC + USDOT"
+              caption="MA #214009 · USDOT #3543587"
             />
           ),
           d: (
@@ -243,12 +243,12 @@ function HomePage() {
               fill
               variant="stat"
               layout="anchored"
-              tone="gray"
+              tone="surface"
               anchorIndex="04"
               anchorGlyph={<Phone strokeWidth={1.25} />}
               value="Call"
               label="Fastest way to order"
-              caption="Abby answers"
+              caption="508.579.9897"
             />
           ),
         }}
