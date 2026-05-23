@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  Calculator,
   Flower2,
   HelpCircle,
   Home,
@@ -8,7 +7,6 @@ import {
   MapPin,
   Mountain,
   Phone,
-  Ruler,
   Sprout,
   TreePine,
   Truck,
@@ -16,6 +14,7 @@ import {
 import { categories, products } from "@/data/products";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile, type TileBlock } from "@/components/site/Tile";
+import { ProductBuyingGuide, ProductQuantityGuide } from "@/components/products/ProductBuyingGuide";
 
 const projectGuides = [
   {
@@ -204,6 +203,8 @@ function ProductsPage() {
         }}
       />
 
+      <ProductBuyingGuide />
+
       <TileScreen
         layout="section01"
         label="Shop by project"
@@ -246,70 +247,7 @@ function ProductsPage() {
         }}
       />
 
-      <TileScreen
-        layout="section03"
-        label="Quantity confidence"
-        heading="Quantity confidence"
-        tiles={{
-          hero: (
-            <Tile
-              id="quantity-helper"
-              fill
-              variant="numbered"
-              tone="kraft"
-              layout="anchored"
-              number="01"
-              icon={<Calculator />}
-              eyebrow="Before you order"
-              title="Measure what you can. Abby will confirm the rest."
-              body="Length × width × depth gets you close for mulch, loam, and stone. If you only know the project, send that — the yard can help turn it into yards."
-              cta={{ label: "Start a quote", to: "/quote" }}
-            />
-          ),
-          a: (
-            <Tile
-              id="quantity-depth"
-              fill
-              variant="text"
-              tone="white"
-              layout="anchored"
-              anchorIndex="02"
-              icon={<Ruler />}
-              eyebrow="Common depth"
-              title="Mulch beds usually start at 2–3 inches."
-              body="Freshening an existing bed and building a new bed are not the same order. Tell Abby which one you’re doing."
-            />
-          ),
-          b: (
-            <Tile
-              id="quantity-min"
-              fill
-              variant="stat"
-              tone="brand"
-              layout="anchored"
-              anchorIndex="03"
-              anchorGlyph={<Truck strokeWidth={1.25} />}
-              value="1 yd"
-              label="Delivery minimum"
-              caption="Per drop"
-            />
-          ),
-          c: (
-            <Tile
-              id="quantity-call"
-              fill
-              variant="cta"
-              tone="surface"
-              anchorIndex="04"
-              icon={<Phone />}
-              eyebrow="Nervous about quantity?"
-              title="Call before you commit."
-              body="Too much material is annoying. Too little costs another trip. Ask first."
-              cta={{ label: "508.579.9897", href: "tel:5085799897" }}
-            />
-          ),
-        }}
-      />
+      <ProductQuantityGuide />
     </>
   );
 }
