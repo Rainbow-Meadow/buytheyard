@@ -1,11 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Layers } from "lucide-react";
-import { categories, products } from "@/data/products";
-import { type TileBlock } from "@/components/site/Tile";
+import { products } from "@/data/products";
 import { ProductCatalogIntro } from "@/components/products/ProductCatalogIntro";
 import { ProductBuyingGuide, ProductQuantityGuide } from "@/components/products/ProductBuyingGuide";
 import { ProductProjectGuide } from "@/components/products/ProductProjectGuide";
-import { ProductImageGallery } from "@/components/products/ProductImageGallery";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -64,40 +61,9 @@ export const Route = createFileRoute("/products")({
 });
 
 function ProductsPage() {
-  const categorySlides: TileBlock[] = [];
-  for (const cat of categories) {
-    const items = products.filter((p) => p.category === cat);
-    if (items.length === 0) continue;
-    const featured = items.find((p) => !!p.image) ?? items[0];
-    const names = items.map((p) => p.name);
-    const preview =
-      names.length <= 4
-        ? names.join(" · ")
-        : `${names.slice(0, 3).join(" · ")} · +${names.length - 3} more`;
-    categorySlides.push({
-      id: `cat-${cat}`,
-      variant: "image",
-      src: featured.image ?? "",
-      alt: `${cat} — ${featured.name}`,
-      focal: "center",
-      loading: "eager",
-      overlay: {
-        eyebrow: `${cat} · ${items.length} option${items.length === 1 ? "" : "s"}`,
-        title: featured.name,
-        body: preview,
-        align: "bottom-left",
-        layout: "anchored",
-        anchorIcon: <Layers />,
-      },
-      cta: { label: "Call for today's price", href: "tel:5085799897" },
-    });
-  }
-
   return (
     <>
-      <ProductCatalogIntro categorySlides={categorySlides} />
-
-      <ProductImageGallery categorySlides={categorySlides} />
+      <ProductCatalogIntro />
 
       <ProductBuyingGuide />
 
