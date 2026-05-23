@@ -1,5 +1,6 @@
+import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ClipboardCheck, HelpCircle, Phone, Ruler, Truck } from "lucide-react";
+import { ArrowRight, Phone, Ruler, Truck } from "lucide-react";
 import { Tile, type TileBlock } from "@/components/site/Tile";
 
 export function ProductCatalogIntro({ categorySlides }: { categorySlides: TileBlock[] }) {
@@ -88,7 +89,7 @@ function IntroNote({
   title,
   body,
 }: {
-  icon: React.ReactNode;
+  icon: ReactNode;
   label: string;
   title: string;
   body: string;
