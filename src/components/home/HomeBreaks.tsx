@@ -15,6 +15,14 @@ import {
   ShieldCheck,
   Truck,
 } from "lucide-react";
+import {
+  EditorialSection,
+  EditorialColumns,
+  EditorialProse,
+  PullQuote,
+  LedgerList,
+  OffsetTile,
+} from "@/components/site/editorial";
 
 const decisionPaths = [
   {
@@ -156,56 +164,65 @@ export function DecisionPathBreak() {
 
 export function OrderingBreak() {
   return (
-    <section aria-labelledby="ordering-heading" className="section bg-base text-zinc-900">
-      <div className="max-w-7xl mx-auto px-5 md:px-6">
-        <div className="relative overflow-hidden rounded-md bg-kraft ring-1 ring-zinc-300 p-4 md:p-7">
-          <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
-          <div className="grid gap-5 lg:grid-cols-[0.95fr_1.45fr] lg:items-start">
-            <div>
-              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-                <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
-                Ordering rhythm
-              </p>
-              <h2 id="ordering-heading" className="display-3 max-w-[12ch] text-balance">
-                Start with the right material, not a guess
-              </h2>
-              <p className="body text-zinc-700 max-w-[48ch] mt-4 text-pretty">
-                Tell us what you’re working on. Abby will help confirm the right material,
-                quantity, and drop spot before anything leaves Jefferson.
-              </p>
-            </div>
-            <div className="grid gap-2.5 md:grid-cols-3 md:gap-3">
-              {orderingSteps.map((step) => (
-                <article
-                  key={step.eyebrow}
-                  className="relative overflow-hidden rounded-md bg-white/80 ring-1 ring-zinc-300 p-3.5 md:p-4"
-                >
-                  <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none select-none absolute -bottom-3 -right-3 text-zinc-900/[0.045] [&>*]:size-24 md:[&>*]:size-32 [&>*]:stroke-[1.25]"
-                  >
-                    {step.icon}
-                  </span>
-                  <div className="relative z-10">
-                    <p className="eyebrow text-brand mb-2 inline-flex items-center gap-2">
-                      <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
-                      {step.eyebrow}
-                    </p>
-                    <h3 className="display-5 leading-snug text-balance">{step.title}</h3>
-                    <p className="body-sm text-zinc-700 mt-2 text-pretty">{step.body}</p>
-                    <div className="mt-3 rounded-md bg-kraft/70 ring-1 ring-zinc-300/70 p-3">
-                      <p className="eyebrow text-brand mb-1">Why it matters</p>
-                      <p className="body-sm text-zinc-700 text-pretty">{step.why}</p>
-                    </div>
-                  </div>
-                </article>
+    <EditorialSection eyebrow="Ordering rhythm" label="How orders work" id="ordering">
+      <EditorialColumns
+        lead={
+          <div>
+            <h2
+              id="ordering-heading"
+              className="display-3 leading-[0.95] text-balance text-zinc-950"
+            >
+              Start with the right material, not a guess.
+            </h2>
+            <p className="lead text-zinc-700 mt-6 text-pretty max-w-[34ch]">
+              Tell us what you’re working on. Abby will help confirm the right
+              material, quantity, and drop spot before anything leaves Jefferson.
+            </p>
+            <p className="body-sm text-zinc-500 mt-5 text-pretty max-w-[40ch]">
+              Most orders start with a single question: which material holds
+              color through a New England summer, or how many yards of loam
+              actually cover a fresh garden bed.
+            </p>
+          </div>
+        }
+        body={
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+            <div className="space-y-12">
+              {orderingSteps.slice(0, 2).map((step) => (
+                <div key={step.eyebrow}>
+                  <p className="font-mono-meta text-zinc-400 mb-3">
+                    {step.eyebrow.replace(" · ", " / ").toUpperCase()}
+                  </p>
+                  <h3 className="display-5 leading-tight text-balance mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="body-sm text-zinc-600 leading-6 text-pretty">
+                    {step.body}
+                  </p>
+                </div>
               ))}
             </div>
+            <div className="relative">
+              <OffsetTile eyebrow="Site logic" cite="Abby Montalto">
+                “Stock and pricing can move with the season. We’ll confirm the
+                real number before you plan your whole weekend around it.”
+              </OffsetTile>
+              <div className="mt-12 md:mt-20">
+                <p className="font-mono-meta text-zinc-400 mb-3">
+                  {orderingSteps[2].eyebrow.replace(" · ", " / ").toUpperCase()}
+                </p>
+                <h3 className="display-5 leading-tight text-balance mb-3">
+                  {orderingSteps[2].title}
+                </h3>
+                <p className="body-sm text-zinc-600 leading-6 text-pretty">
+                  {orderingSteps[2].body}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        }
+      />
+    </EditorialSection>
   );
 }
 
@@ -305,51 +322,92 @@ export function LocalProofPanel() {
 
 export function AbbyTrustBreak() {
   return (
-    <section aria-labelledby="abby-heading" className="section bg-base text-zinc-900">
-      <div className="max-w-7xl mx-auto px-5 md:px-6">
-        <div className="relative overflow-hidden rounded-md bg-white ring-1 ring-zinc-300 p-6 md:p-8">
-          <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
-          <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-            <div>
-              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-                <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
-                Built from the yard up
-              </p>
-              <h2 id="abby-heading" className="display-3 text-balance">
-                Abby grew up around the work. Then she built the yard.
-              </h2>
-              <p className="body text-zinc-700 max-w-[68ch] mt-4 text-pretty">
-                Abby Montalto grew up around trucks, equipment, and material work, then built Buy
-                The Yard while studying Entrepreneurship & Small Business. She still runs it the
-                way locals appreciate: direct answers, practical help, and someone who actually
-                picks up the phone.
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
-              <Link
-                to="/about"
-                className="group rounded-md bg-kraft ring-1 ring-zinc-300 p-5 hover:bg-zinc-100 transition-colors"
-              >
-                <GraduationCap className="size-7 text-brand mb-4" aria-hidden="true" />
-                <p className="eyebrow text-brand mb-2">Founder</p>
-                <p className="display-5 leading-tight text-balance">Meet Abby</p>
-                <p className="body-sm text-zinc-700 mt-2">Wachusett ’16. Built while studying business.</p>
-              </Link>
-              <Link
-                to="/wbe"
-                className="group rounded-md bg-brand text-brand-foreground p-5 hover:opacity-95 transition-opacity"
-              >
-                <BadgeCheck className="size-7 mb-4" aria-hidden="true" />
-                <p className="eyebrow mb-2">Certification</p>
-                <p className="display-5 leading-tight text-balance">WBE-certified</p>
-                <p className="body-sm mt-2 text-white/85">
-                  Woman-owned, licensed, and built for real work.
-                </p>
-              </Link>
-            </div>
+    <EditorialSection
+      eyebrow="Built from the yard up"
+      label="About Abby"
+      id="abby"
+    >
+      <EditorialColumns
+        variant="lead-body-aside"
+        lead={
+          <div>
+            <h2
+              id="abby-heading"
+              className="display-3 leading-[0.95] text-balance text-zinc-950 mb-8"
+            >
+              Abby grew up around the work. Then she built the yard.
+            </h2>
+            <div className="rule-h mb-6" aria-hidden="true" />
+            <LedgerList
+              rows={[
+                { label: "Location", value: "Jefferson, MA" },
+                { label: "Ownership", value: "100% woman-owned" },
+                { label: "Service", value: "Central Mass" },
+                { label: "Founded", value: "2016" },
+              ]}
+            />
           </div>
-        </div>
-      </div>
-    </section>
+        }
+        body={
+          <EditorialProse>
+            <p>
+              Abby Montalto grew up around trucks, equipment, and material work,
+              then built Buy The Yard while studying Entrepreneurship &amp;
+              Small Business at Worcester State.
+            </p>
+            <p>
+              She still runs it the way locals appreciate: direct answers,
+              practical help, and someone who actually picks up the phone. It’s
+              about more than moving material from a pile to a truck — it’s
+              knowing the rhythm of the season and the needs of a jobsite.
+            </p>
+            <PullQuote>
+              We aren’t just selling dirt. We’re providing the foundation for
+              the projects that make a house feel like a home.
+            </PullQuote>
+            <p>
+              Whether you’re a contractor needing a reliable route or a
+              homeowner tackling your first yard of mulch, the experience is
+              anchored in the same Jefferson grit that started it all in 2016.
+            </p>
+          </EditorialProse>
+        }
+        aside={
+          <div className="space-y-4">
+            <Link
+              to="/about"
+              className="group block bg-white ring-1 ring-zinc-300 border-t-4 border-brand p-6 hover:bg-zinc-50 transition-colors"
+            >
+              <GraduationCap
+                className="size-6 text-brand mb-4"
+                aria-hidden="true"
+              />
+              <p className="font-mono-meta text-zinc-500 mb-2">FOUNDER</p>
+              <p className="display-5 leading-tight text-balance text-zinc-950">
+                Meet Abby
+              </p>
+              <p className="body-sm text-zinc-600 mt-2">
+                Wachusett ’16. Built while studying business.
+              </p>
+            </Link>
+            <Link
+              to="/wbe"
+              className="group block bg-brand text-brand-foreground p-6 hover:opacity-95 transition-opacity"
+            >
+              <BadgeCheck className="size-6 mb-4" aria-hidden="true" />
+              <p className="font-mono-meta text-white/70 mb-2">
+                CERTIFICATION
+              </p>
+              <p className="display-5 leading-tight text-balance">
+                WBE-certified
+              </p>
+              <p className="body-sm mt-2 text-white/85">
+                Woman-owned, licensed, built for real work.
+              </p>
+            </Link>
+          </div>
+        }
+      />
+    </EditorialSection>
   );
 }
