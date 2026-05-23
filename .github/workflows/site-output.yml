@@ -1,0 +1,91 @@
+name: site-output
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_ref:
+        description: Branch or SHA to capture
+        required: true
+        default: site-update
+      output_path:
+        description: Output folder name
+        required: true
+        default: pr-1
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref }}
+          path: source
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: source/package.json
+
+      - name: Install dependencies
+        working-directory: source
+        run: npm install
+
+      - name: Build
+        working-directory: source
+        run: npm run build
+
+      - name: Install browser
+        working-directory: source
+        run: npx -y playwright@latest install --with-deps chromium
+
+      - name: Start local server
+        working-directory: source
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/site-server.log 2>&1 &
+          for i in {1..60}; do
+            curl -fsS http://127.0.0.1:4173/ > /dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/site-server.log
+          exit 1
+
+      - name: Capture screenshots
+        working-directory: source
+        run: |
+          mkdir -p artifacts/screenshots
+          npx -y playwright@latest screenshot --full-page --viewport-size=390,1400 http://127.0.0.1:4173/ artifacts/screenshots/home-mobile.png
+          npx -y playwright@latest screenshot --full-page --viewport-size=1440,1400 http://127.0.0.1:4173/ artifacts/screenshots/home-desktop.png
+
+      - name: Checkout output
+        uses: actions/checkout@v4
+        with:
+          ref: site-output
+          path: output
+
+      - name: Save output
+        run: |
+          mkdir -p "output/${{ inputs.output_path }}/latest"
+          rm -f "output/${{ inputs.output_path }}/latest"/*.png
+          cp source/artifacts/screenshots/*.png "output/${{ inputs.output_path }}/latest/"
+          cd output
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update site output" || exit 0
+          git push
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-output-screenshots
+          path: source/artifacts/screenshots
+          if-no-files-found: ignore
