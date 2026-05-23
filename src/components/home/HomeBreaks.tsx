@@ -17,24 +17,21 @@ const orderingSteps = [
     eyebrow: "01 · Start",
     title: "Call first if timing matters",
     body: "Phone is fastest. The quote form is best when you already know your material list and town.",
-    why:
-      "We can confirm today’s price, route timing, and pickup vs. delivery before you lose time guessing.",
+    why: "Confirms price, route timing, and whether pickup or delivery makes more sense before you guess.",
   },
   {
     icon: <ClipboardCheck />,
     eyebrow: "02 · Confirm",
     title: "Material, yards, and town",
     body: "Abby confirms the material, quantity, delivery town, and whether the route has room.",
-    why:
-      "Materials move with the season. The real quote is the one confirmed before the order leaves the yard.",
+    why: "Seasonal materials move. The real quote is the one confirmed before the order leaves the yard.",
   },
   {
     icon: <MapPin />,
     eyebrow: "03 · Drop",
     title: "Mark the spot clearly",
     body: "Use a tarp, cone, bucket, or note. Delivery is driveway or curbline only.",
-    why:
-      "Loaded trucks can damage lawns and underground utilities. A clear marker helps the driver drop it safely the first time.",
+    why: "Loaded trucks can damage lawns and utilities. A clear marker helps the driver drop it safely.",
   },
 ];
 
@@ -68,16 +65,16 @@ export function OrderingBreak() {
   return (
     <section aria-labelledby="ordering-heading" className="section bg-base text-zinc-900">
       <div className="max-w-7xl mx-auto px-5 md:px-6">
-        <div className="relative overflow-hidden rounded-md bg-kraft ring-1 ring-zinc-300 p-5 md:p-8">
+        <div className="relative overflow-hidden rounded-md bg-kraft ring-1 ring-zinc-300 p-4 md:p-7">
           <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
-          <div className="grid gap-6 lg:grid-cols-[0.95fr_1.45fr] lg:items-start">
+          <div className="grid gap-5 lg:grid-cols-[0.95fr_1.45fr] lg:items-start">
             <div>
               <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                 <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
                 Ordering rhythm
               </p>
               <h2 id="ordering-heading" className="display-3 max-w-[12ch] text-balance">
-                Start with the right yard, not a guess
+                Start with the right material, not a guess
               </h2>
               <p className="body text-zinc-700 max-w-[48ch] mt-4 text-pretty">
                 Tell us what you need. We’ll help confirm the right material, quantity, and drop
@@ -88,23 +85,23 @@ export function OrderingBreak() {
               {orderingSteps.map((step) => (
                 <article
                   key={step.eyebrow}
-                  className="relative overflow-hidden rounded-md bg-white/80 ring-1 ring-zinc-300 p-4 md:p-5"
+                  className="relative overflow-hidden rounded-md bg-white/80 ring-1 ring-zinc-300 p-3.5 md:p-4"
                 >
                   <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none select-none absolute -bottom-4 -right-4 text-zinc-900/[0.05] [&>*]:size-28 md:[&>*]:size-36 [&>*]:stroke-[1.25]"
+                    className="pointer-events-none select-none absolute -bottom-3 -right-3 text-zinc-900/[0.045] [&>*]:size-24 md:[&>*]:size-32 [&>*]:stroke-[1.25]"
                   >
                     {step.icon}
                   </span>
                   <div className="relative z-10">
-                    <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
+                    <p className="eyebrow text-brand mb-2 inline-flex items-center gap-2">
                       <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
                       {step.eyebrow}
                     </p>
                     <h3 className="display-5 leading-snug text-balance">{step.title}</h3>
-                    <p className="body-sm text-zinc-700 mt-3 text-pretty">{step.body}</p>
-                    <div className="mt-4 border-t border-zinc-300 pt-3">
+                    <p className="body-sm text-zinc-700 mt-2 text-pretty">{step.body}</p>
+                    <div className="mt-3 rounded-md bg-kraft/70 ring-1 ring-zinc-300/70 p-3">
                       <p className="eyebrow text-brand mb-1">Why it matters</p>
                       <p className="body-sm text-zinc-700 text-pretty">{step.why}</p>
                     </div>
