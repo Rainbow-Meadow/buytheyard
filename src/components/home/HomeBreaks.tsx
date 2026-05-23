@@ -3,39 +3,69 @@ import {
   ArrowRight,
   BadgeCheck,
   ClipboardCheck,
+  GraduationCap,
+  HeartHandshake,
   MapPin,
   PackageCheck,
   Phone,
   ShieldCheck,
 } from "lucide-react";
+import { Tile } from "@/components/site/Tile";
 
 const orderingSteps = [
   {
     icon: <Phone />,
     eyebrow: "01 · Start",
-    title: "Call or send a quote request",
-    body: "Phone is fastest. The quote form works best when you already know your material list and town.",
+    title: "Call first if timing matters",
+    body: "Phone is fastest. The quote form is best when you already know your material list and town.",
+    backTitle: "Why phone stays first",
+    backBody:
+      "The yard can confirm today’s price, truck timing, and whether pickup or delivery makes more sense before you lose time guessing.",
   },
   {
     icon: <ClipboardCheck />,
     eyebrow: "02 · Confirm",
-    title: "Material, yards, and timing",
-    body: "Abby confirms today’s price, quantity, pickup or delivery, and whether the route has room.",
+    title: "Material, yards, and town",
+    body: "Abby confirms the material, quantity, delivery town, and whether the route has room.",
+    backTitle: "No stale price sheets",
+    backBody:
+      "Materials move with the season. The real quote is the one confirmed before the order leaves the yard.",
   },
   {
     icon: <MapPin />,
     eyebrow: "03 · Drop",
-    title: "Mark the spot before delivery",
-    body: "Use a tarp, cone, or bucket. Delivery is driveway or curbline only, so the drop spot needs to be clear.",
+    title: "Mark the spot clearly",
+    body: "Use a tarp, cone, bucket, or note. Delivery is driveway or curbline only.",
+    backTitle: "Why the rule matters",
+    backBody:
+      "Loaded trucks can damage lawns and underground utilities. A clear marker helps the driver drop it safely the first time.",
   },
 ];
 
 const deliveryBasics = [
-  { label: "Service area", value: "About 25 miles from Jefferson" },
+  { label: "Service area", value: "Central Mass from the Jefferson yard" },
   { label: "Minimum", value: "1 yard per delivery" },
-  { label: "Timing", value: "Same-day when the route allows; 48 hours is safer" },
+  { label: "Timing", value: "48 hours is best; same-day only when the route allows" },
   { label: "Drop spot", value: "Driveway or curbline only — mark it clearly" },
   { label: "Payment", value: "Cash, check, or card; card payments add 4%" },
+];
+
+const proofRows = [
+  {
+    icon: <BadgeCheck />,
+    label: "Certified",
+    value: "Massachusetts WBE-certified woman-owned business",
+  },
+  {
+    icon: <ShieldCheck />,
+    label: "Licensed",
+    value: "MA HIC #214009 · USDOT #3543587",
+  },
+  {
+    icon: <HeartHandshake />,
+    label: "Local",
+    value: "CTMS loam donation · Rutland Memorial Day support",
+  },
 ];
 
 export function OrderingBreak() {
@@ -51,26 +81,46 @@ export function OrderingBreak() {
                 Ordering rhythm
               </p>
               <h2 id="ordering-heading" className="display-3 max-w-[12ch] text-balance">
-                How ordering works
+                Start with the right yard, not a guess
               </h2>
               <p className="body text-zinc-700 max-w-[48ch] mt-4 text-pretty">
-                Tell us what you need. We’ll help confirm the right material, the right quantity,
-                and the right drop spot before anything leaves the yard.
+                Tell us what you need. We’ll help confirm the right material, quantity, and drop
+                spot before anything leaves Jefferson.
               </p>
             </div>
             <div className="grid gap-2.5 md:grid-cols-3 md:gap-3">
               {orderingSteps.map((step) => (
-                <article
-                  key={step.eyebrow}
-                  className="bg-white/70 ring-1 ring-zinc-300 rounded-md p-4 md:p-5 md:min-h-[220px] flex flex-col"
-                >
-                  <div className="text-brand mb-3 md:mb-4 [&>*]:size-6 md:[&>*]:size-7" aria-hidden="true">
-                    {step.icon}
-                  </div>
-                  <p className="eyebrow text-brand mb-2">{step.eyebrow}</p>
-                  <h3 className="display-5 leading-snug text-balance">{step.title}</h3>
-                  <p className="body-sm text-zinc-700 mt-2 md:mt-3 text-pretty">{step.body}</p>
-                </article>
+                <div key={step.eyebrow} className="h-[245px] md:h-[250px]">
+                  <Tile
+                    fill
+                    variant="flip"
+                    trigger="click"
+                    hint="Why"
+                    ariaLabel={step.title}
+                    front={{
+                      id: `${step.eyebrow}-front`,
+                      variant: "text",
+                      tone: "white",
+                      layout: "anchored",
+                      anchorIndex: step.eyebrow.slice(0, 2),
+                      icon: step.icon,
+                      eyebrow: step.eyebrow,
+                      title: step.title,
+                      body: step.body,
+                    }}
+                    back={{
+                      id: `${step.eyebrow}-back`,
+                      variant: "text",
+                      tone: "surface",
+                      layout: "anchored",
+                      anchorIndex: step.eyebrow.slice(0, 2),
+                      icon: step.icon,
+                      eyebrow: "Why it matters",
+                      title: step.backTitle,
+                      body: step.backBody,
+                    }}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -142,6 +192,38 @@ export function DeliveryBasicsBreak() {
   );
 }
 
+export function LocalProofPanel() {
+  return (
+    <article className="relative h-full w-full overflow-hidden rounded-md bg-kraft text-zinc-900 ring-1 ring-zinc-300 p-5 md:p-6">
+      <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
+      <div className="relative z-10 flex h-full flex-col justify-between gap-5">
+        <div>
+          <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
+            <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
+            Local proof
+          </p>
+          <h2 className="display-3 max-w-[12ch] text-balance">Local proof with receipts</h2>
+          <p className="body-sm md:text-base md:leading-[1.6] text-zinc-700 mt-3 max-w-[54ch] text-pretty">
+            A working yard should be easy to verify: certified, licensed, locally rooted, and
+            already showing up for schools and town projects around Central Mass.
+          </p>
+        </div>
+        <div className="grid gap-2.5 md:grid-cols-3">
+          {proofRows.map((row) => (
+            <div key={row.label} className="rounded-md bg-white/70 ring-1 ring-zinc-300 p-3 md:p-4">
+              <div className="text-brand mb-2 [&>*]:size-5" aria-hidden="true">
+                {row.icon}
+              </div>
+              <p className="eyebrow text-brand mb-1">{row.label}</p>
+              <p className="body-sm text-zinc-800 text-pretty">{row.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export function AbbyTrustBreak() {
   return (
     <section aria-labelledby="abby-heading" className="section bg-base text-zinc-900">
@@ -152,15 +234,16 @@ export function AbbyTrustBreak() {
             <div>
               <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                 <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
-                Local trust
+                Built from the yard up
               </p>
               <h2 id="abby-heading" className="display-3 text-balance">
-                Built by Abby. Run from Jefferson.
+                Abby grew up around the work. Then she built the yard.
               </h2>
-              <p className="body text-zinc-700 max-w-[64ch] mt-4 text-pretty">
-                Buy The Yard is a woman-owned, Massachusetts WBE-certified materials yard serving
-                homeowners, landscapers, contractors, schools, and town projects across Central
-                Mass.
+              <p className="body text-zinc-700 max-w-[68ch] mt-4 text-pretty">
+                Abby Montalto is a Wachusett Regional graduate who studied Entrepreneurship &
+                Small Business while building Buy The Yard. She grew up around trucks, equipment,
+                and backyard material work — and still runs the yard with direct answers and
+                practical help.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
@@ -168,10 +251,10 @@ export function AbbyTrustBreak() {
                 to="/about"
                 className="group rounded-md bg-kraft ring-1 ring-zinc-300 p-5 hover:bg-zinc-100 transition-colors"
               >
-                <ShieldCheck className="size-7 text-brand mb-4" aria-hidden="true" />
-                <p className="eyebrow text-brand mb-2">About</p>
+                <GraduationCap className="size-7 text-brand mb-4" aria-hidden="true" />
+                <p className="eyebrow text-brand mb-2">Founder</p>
                 <p className="display-5 leading-tight text-balance">Meet Abby</p>
-                <p className="body-sm text-zinc-700 mt-2">The local story behind the yard.</p>
+                <p className="body-sm text-zinc-700 mt-2">Wachusett ’16. Entrepreneurship ’18.</p>
               </Link>
               <Link
                 to="/wbe"
@@ -179,9 +262,9 @@ export function AbbyTrustBreak() {
               >
                 <BadgeCheck className="size-7 mb-4" aria-hidden="true" />
                 <p className="eyebrow mb-2">Certification</p>
-                <p className="display-5 leading-tight text-balance">What WBE means</p>
+                <p className="display-5 leading-tight text-balance">WBE-certified</p>
                 <p className="body-sm mt-2 text-white/85">
-                  Why the certification matters for local projects.
+                  Woman-owned, licensed, and credentialed for real work.
                 </p>
               </Link>
             </div>
