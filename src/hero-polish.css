@@ -1,0 +1,92 @@
+.tile-screen.ts-page-hero {
+  grid-template-rows: minmax(clamp(560px, 74svh, 720px), auto) minmax(96px, auto) minmax(96px, auto);
+}
+
+.tile-screen.ts-page-hero .home-hero-heading {
+  font-size: clamp(3.35rem, 13.25vw, 5.35rem);
+}
+
+.tile-screen.ts-page-hero .home-hero-meta {
+  max-width: 28ch;
+}
+
+.tile-screen.ts-page-hero .ts-slot-a,
+.tile-screen.ts-page-hero .ts-slot-b,
+.tile-screen.ts-page-hero .ts-slot-c,
+.tile-screen.ts-page-hero .ts-slot-d {
+  min-height: 96px;
+}
+
+.tile-screen.ts-page-hero .ts-slot-a article,
+.tile-screen.ts-page-hero .ts-slot-b article,
+.tile-screen.ts-page-hero .ts-slot-c article,
+.tile-screen.ts-page-hero .ts-slot-d article {
+  padding: 0.75rem 0.875rem;
+}
+
+.tile-screen.ts-page-hero .ts-slot-a .eyebrow,
+.tile-screen.ts-page-hero .ts-slot-b .eyebrow,
+.tile-screen.ts-page-hero .ts-slot-c .eyebrow,
+.tile-screen.ts-page-hero .ts-slot-d .eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+}
+
+.tile-screen.ts-page-hero .ts-slot-a .display-5,
+.tile-screen.ts-page-hero .ts-slot-b .display-5,
+.tile-screen.ts-page-hero .ts-slot-c .display-5,
+.tile-screen.ts-page-hero .ts-slot-d .display-5 {
+  font-size: 1.05rem;
+  line-height: 1.05;
+}
+
+.tile-screen.ts-page-hero .ts-slot-a .label,
+.tile-screen.ts-page-hero .ts-slot-b .label,
+.tile-screen.ts-page-hero .ts-slot-c .label,
+.tile-screen.ts-page-hero .ts-slot-d .label {
+  font-size: 0.58rem;
+  letter-spacing: 0.13em;
+}
+
+.tile-screen.ts-page-hero .ts-slot-a svg,
+.tile-screen.ts-page-hero .ts-slot-b svg,
+.tile-screen.ts-page-hero .ts-slot-c svg,
+.tile-screen.ts-page-hero .ts-slot-d svg {
+  transform: scale(0.82);
+  transform-origin: bottom right;
+}
+
+@media (min-width: 768px) {
+  .tile-screen.ts-page-hero {
+    grid-template-rows: minmax(0, 4fr) minmax(116px, 1fr);
+  }
+
+  .tile-screen.ts-page-hero .home-hero-heading {
+    font-size: clamp(4.75rem, 7.25vw, 7.5rem);
+  }
+
+  .tile-screen.ts-page-hero .home-hero-meta {
+    max-width: none;
+  }
+
+  .tile-screen.ts-page-hero .ts-slot-a article,
+  .tile-screen.ts-page-hero .ts-slot-b article,
+  .tile-screen.ts-page-hero .ts-slot-c article,
+  .tile-screen.ts-page-hero .ts-slot-d article {
+    padding: 0.9rem 1rem;
+  }
+
+  .tile-screen.ts-page-hero .ts-slot-a .display-5,
+  .tile-screen.ts-page-hero .ts-slot-b .display-5,
+  .tile-screen.ts-page-hero .ts-slot-c .display-5,
+  .tile-screen.ts-page-hero .ts-slot-d .display-5 {
+    font-size: 1.25rem;
+  }
+
+  .tile-screen.ts-page-hero .ts-slot-a svg,
+  .tile-screen.ts-page-hero .ts-slot-b svg,
+  .tile-screen.ts-page-hero .ts-slot-c svg,
+  .tile-screen.ts-page-hero .ts-slot-d svg {
+    transform: scale(0.76);
+  }
+}
