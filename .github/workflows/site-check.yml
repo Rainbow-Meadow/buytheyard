@@ -1,0 +1,66 @@
+name: site-check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: build-and-capture
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Install browser
+        run: npx -y playwright@latest install --with-deps chromium
+
+      - name: Start preview
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/site-preview.log 2>&1 &
+          for i in {1..60}; do
+            curl -fsS http://127.0.0.1:4173/ > /dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/site-preview.log
+          exit 1
+
+      - name: Capture homepage screenshots
+        run: |
+          mkdir -p artifacts/screenshots
+          npx -y playwright@latest screenshot --full-page --viewport-size=390,1400 http://127.0.0.1:4173/ artifacts/screenshots/home-mobile.png
+          npx -y playwright@latest screenshot --full-page --viewport-size=1440,1400 http://127.0.0.1:4173/ artifacts/screenshots/home-desktop.png
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-check-screenshots
+          path: artifacts/screenshots
+          if-no-files-found: ignore
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-check-logs
+          path: /tmp/site-preview.log
+          if-no-files-found: ignore
