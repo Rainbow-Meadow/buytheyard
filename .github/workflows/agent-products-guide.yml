@@ -1,0 +1,54 @@
+name: Agent products guide patch
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: sandbox
+
+      - name: Patch products route
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          p = Path('src/routes/products.tsx')
+          s = p.read_text()
+          s = s.replace('  Calculator,\n', '')
+          s = s.replace('  Ruler,\n', '')
+          marker = 'import { Tile, type TileBlock } from "@/components/site/Tile";\n'
+          insert = 'import { ProductBuyingGuide, ProductQuantityGuide } from "@/components/products/ProductBuyingGuide";\n'
+          if insert not in s:
+              s = s.replace(marker, marker + insert)
+          if '<ProductBuyingGuide />' not in s:
+              s = s.replace('      />\n\n      <TileScreen\n        layout="section01"', '      />\n\n      <ProductBuyingGuide />\n\n      <TileScreen\n        layout="section01"', 1)
+          start = s.find('      <TileScreen\n        layout="section03"')
+          if start != -1:
+              end = s.find('    </>\n  );\n}', start)
+              if end != -1:
+                  s = s[:start] + '      <ProductQuantityGuide />\n' + s[end:]
+          p.write_text(s)
+          wf = Path('.github/workflows/agent-products-guide.yml')
+          if wf.exists():
+              wf.unlink()
+          PY
+
+      - name: Commit patch
+        run: |
+          git config user.name "buytheyard-agent"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Wire product buying guide into products page"
+          git push origin sandbox
