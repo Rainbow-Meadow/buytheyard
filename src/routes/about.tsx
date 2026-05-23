@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -8,7 +9,6 @@ import {
   GraduationCap,
   Hammer,
   HardHat,
-  HeartHandshake,
   MapPin,
   Phone,
   ShieldCheck,
@@ -347,12 +347,12 @@ function ProofCard({
   to,
   cta,
 }: {
-  icon: React.ReactNode;
+  icon: ReactNode;
   label: string;
   title: string;
   body: string;
   tone?: "brand" | "light";
-  to?: string;
+  to?: "/wbe";
   cta?: string;
 }) {
   const classes =
