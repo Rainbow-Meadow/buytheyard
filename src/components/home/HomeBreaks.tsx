@@ -2,14 +2,50 @@ import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   BadgeCheck,
+  Calculator,
   ClipboardCheck,
   GraduationCap,
+  HardHat,
   HeartHandshake,
+  HelpCircle,
+  Layers,
   MapPin,
   PackageCheck,
   Phone,
   ShieldCheck,
+  Truck,
 } from "lucide-react";
+
+const decisionPaths = [
+  {
+    icon: <HelpCircle />,
+    eyebrow: "Material",
+    title: "Find the right material",
+    body: "Start with the project if you are not sure what to order.",
+    to: "/products",
+  },
+  {
+    icon: <Calculator />,
+    eyebrow: "Quantity",
+    title: "Estimate the yards",
+    body: "Measure what you can. Abby will confirm before it leaves the yard.",
+    to: "/quote",
+  },
+  {
+    icon: <Truck />,
+    eyebrow: "Delivery",
+    title: "Check the drop rules",
+    body: "1-yard minimum, driveway or curbline, marked spot preferred.",
+    to: "/delivery",
+  },
+  {
+    icon: <HardHat />,
+    eyebrow: "Contractors",
+    title: "Send a jobsite list",
+    body: "Product, quantity, town, timing, and notes in one quick request.",
+    to: "/quote",
+  },
+];
 
 const orderingSteps = [
   {
@@ -60,6 +96,63 @@ const proofRows = [
     value: "CTMS loam donation · Rutland Memorial Day support",
   },
 ];
+
+export function DecisionPathBreak() {
+  return (
+    <section aria-labelledby="decision-path-heading" className="section bg-base text-zinc-900">
+      <div className="max-w-7xl mx-auto px-5 md:px-6">
+        <div className="relative overflow-hidden rounded-md bg-white ring-1 ring-zinc-300 p-5 md:p-7">
+          <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
+          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.6fr] lg:items-start">
+            <div>
+              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
+                <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
+                Start here
+              </p>
+              <h2 id="decision-path-heading" className="display-3 max-w-[12ch] text-balance">
+                What are you trying to figure out?
+              </h2>
+              <p className="body text-zinc-700 max-w-[50ch] mt-4 text-pretty">
+                Most orders start with a question: which material, how many yards, whether we
+                deliver there, or how to get it to the jobsite without surprises.
+              </p>
+            </div>
+            <div className="grid gap-2.5 sm:grid-cols-2">
+              {decisionPaths.map((path, index) => (
+                <Link
+                  key={path.title}
+                  to={path.to}
+                  className="group relative overflow-hidden rounded-md bg-kraft ring-1 ring-zinc-300 p-4 hover:bg-zinc-100 transition-colors"
+                >
+                  <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none select-none absolute -bottom-4 -right-4 text-zinc-900/[0.04] [&>*]:size-28 [&>*]:stroke-[1.25]"
+                  >
+                    {path.icon}
+                  </span>
+                  <div className="relative z-10">
+                    <p className="eyebrow text-brand mb-2 inline-flex items-center gap-2">
+                      <span aria-hidden="true" className="text-zinc-500 tabular-nums">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {path.eyebrow}
+                    </p>
+                    <p className="display-5 leading-tight text-balance">{path.title}</p>
+                    <p className="body-sm text-zinc-700 mt-2 text-pretty">{path.body}</p>
+                    <p className="label text-brand mt-4 inline-flex items-center gap-2">
+                      Start <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export function OrderingBreak() {
   return (
