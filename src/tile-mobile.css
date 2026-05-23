@@ -35,4 +35,15 @@
   .tile-screen.ts-section-03-stacked {
     grid-template-rows: minmax(320px, auto) minmax(170px, auto) minmax(170px, auto) minmax(170px, auto);
   }
+
+  main > .bg-brand.text-brand-foreground > .max-w-7xl {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  main > .bg-brand.text-brand-foreground > .max-w-7xl > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
