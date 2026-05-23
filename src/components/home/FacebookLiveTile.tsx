@@ -33,7 +33,7 @@ export function FacebookLiveTile() {
             Yard feed
           </p>
           <h3 className="display-4 leading-tight text-balance">
-            Follow for stock notes, season calls, and local updates
+            Follow for stock notes, seasonal updates, and local posts
           </h3>
         </div>
 
