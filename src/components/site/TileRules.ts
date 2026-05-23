@@ -41,16 +41,16 @@ export const SIZE_BODY_LINES: Record<TileSize, number> = {
   sm: 0,
   third: 1,
   md: 2,
-  lg: 3,
-  feature: 3,
+  lg: 2,
+  feature: 2,
 };
 
 export const SIZE_BODY_CHAR_CAP: Record<TileSize, number> = {
   sm: 0,
-  third: 60,
-  md: 120,
-  lg: 200,
-  feature: 280,
+  third: 56,
+  md: 96,
+  lg: 150,
+  feature: 180,
 };
 
 export const VARIANT_DEFAULT_TONE: Record<TileVariant, TileTone> = {
