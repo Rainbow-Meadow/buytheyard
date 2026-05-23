@@ -11,12 +11,12 @@ export const Route = createFileRoute("/delivery")({
       {
         name: "description",
         content:
-          "Curbside bulk delivery from Jefferson, MA to Holden, Worcester, Princeton, Sterling & nearby. 1-yard minimum. Call 508-579-9897.",
+          "Bulk material pickup and curbside delivery from Jefferson, MA. 1-yard minimum, 48 hours is best, driveway or curbline drop only. Call 508-579-9897.",
       },
       { property: "og:title", content: "Delivery & Pickup — Buy The Yard" },
       {
         property: "og:description",
-        content: "Two ways to get your material from the Jefferson, MA yard.",
+        content: "How pickup and delivery work before the truck leaves the Jefferson yard.",
       },
       { property: "og:url", content: "/delivery" },
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-delivery.jpg" },
@@ -32,7 +32,6 @@ export const Route = createFileRoute("/delivery")({
 function DeliveryPage() {
   return (
     <>
-      {/* Screen 1 — pageHero: loading-truck image + delivery stat tiles */}
       <TileScreen
         layout="pageHero"
         label="Delivery and pickup"
@@ -51,27 +50,26 @@ function DeliveryPage() {
               fetchPriority="high"
               overlay={{
                 eyebrow: "Delivery & pickup",
-                title: "You call. We deliver.",
-                body: "Curbside from Jefferson across Central Mass. Call before noon for same-day.",
+                title: "Get the material without the surprise."
+                ,body: "Abby confirms the town, quantity, timing, and drop spot before the truck leaves Jefferson.",
                 align: "bottom-left",
                 layout: "anchored",
                 anchorIcon: <Truck />,
               }}
-              cta={{ label: "Get a quote", to: "/quote" }}
+              cta={{ label: "Start a quote", to: "/quote" }}
             />
           ),
-          a: <Tile id="dlv-stat-radius" fill variant="stat" tone="surface" layout="anchored" anchorIndex="01" anchorGlyph={<MapPin strokeWidth={1.25} />} value="~25 mi" label="Service radius" caption="Around Jefferson" />,
+          a: <Tile id="dlv-stat-radius" fill variant="stat" tone="surface" layout="anchored" anchorIndex="01" anchorGlyph={<MapPin strokeWidth={1.25} />} value="Central" label="Mass delivery" caption="From Jefferson" />,
           b: <Tile id="dlv-stat-min" fill variant="stat" tone="brand" layout="anchored" anchorIndex="02" anchorGlyph={<Box strokeWidth={1.25} />} value="1 yd" label="Order minimum" caption="Per delivery" />,
-          c: <Tile id="dlv-stat-lead" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<Clock strokeWidth={1.25} />} value="~48 hr" label="Typical lead time" caption="After order" />,
-          d: <Tile id="dlv-stat-drop" fill variant="stat" tone="gray" layout="anchored" anchorIndex="04" anchorGlyph={<Truck strokeWidth={1.25} />} value="Curb" label="Driveway drop" caption="Curbside drop" />,
+          c: <Tile id="dlv-stat-lead" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<Clock strokeWidth={1.25} />} value="48 hr" label="Best timing" caption="Same-day if route allows" />,
+          d: <Tile id="dlv-stat-drop" fill variant="stat" tone="gray" layout="anchored" anchorIndex="04" anchorGlyph={<Truck strokeWidth={1.25} />} value="Curb" label="Driveway drop" caption="Mark the spot" />,
         }}
       />
 
-      {/* Screen 2 — section01: rules + payment + call CTA */}
       <TileScreen
         layout="section01"
-        label="How a delivery works"
-        heading="How a delivery works"
+        label="How to make delivery easy"
+        heading="How to make delivery easy"
         tiles={{
           hero: (
             <Tile
@@ -82,9 +80,9 @@ function DeliveryPage() {
               layout="anchored"
               number="01"
               icon={<Phone />}
-              eyebrow="Call it in"
-              title="Call by noon for same-day."
-              body="48-hour notice preferred for scheduled drops — one call locks material, address, and spot."
+              eyebrow="Start with the call"
+              title="Tell us the town, material, and rough amount."
+              body="If timing matters, phone is fastest. If you already have the list, the quote form works too."
             />
           ),
           a: (
@@ -97,7 +95,8 @@ function DeliveryPage() {
               number="02"
               icon={<Target />}
               eyebrow="Mark the spot"
-              title="A tarp or cone is all we need."
+              title="A tarp, cone, bucket, or note is perfect."
+              body="A clear marker keeps the drop simple, especially if you are not home."
             />
           ),
           b: (
@@ -111,6 +110,7 @@ function DeliveryPage() {
               icon={<Home />}
               eyebrow="Where we drop"
               title="Driveway or curbline only."
+              body="Loaded trucks can damage lawns and underground utilities, so we keep the truck on solid access."
             />
           ),
           c: (
@@ -123,7 +123,8 @@ function DeliveryPage() {
               anchorIndex="03"
               icon={<CreditCard />}
               eyebrow="Payment"
-              title="Cash, check, or card (+4%)."
+              title="Cash or check keeps costs down."
+              body="Cards are accepted with a 4% convenience fee."
             />
           ),
           d: (
@@ -136,7 +137,8 @@ function DeliveryPage() {
               anchorIndex="04"
               icon={<Warehouse />}
               eyebrow="Prefer pickup?"
-              title="Bring a truck, no appt."
+              title="Bring a truck during yard hours."
+              body="Stop in for mulch, loam, sand, or stone pickup during regular hours."
             />
           ),
           e: (
@@ -147,8 +149,9 @@ function DeliveryPage() {
               tone="brand"
               anchorIndex="06"
               icon={<Phone />}
-              eyebrow="Need a quote?"
-              title="Talk to Abby"
+              eyebrow="Unsure about access?"
+              title="Ask before the truck rolls."
+              body="A quick call can prevent the wrong material, wrong spot, or an awkward second trip."
               cta={{ label: "508.579.9897", href: "tel:5085799897" }}
             />
           ),
