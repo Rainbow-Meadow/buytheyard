@@ -19,6 +19,7 @@ const materialGuides: Array<{
   measure: string;
   watchFor: string;
   askAbby: string;
+  imageAlt: string;
 }> = [
   {
     category: "Mulch",
@@ -29,6 +30,7 @@ const materialGuides: Array<{
     measure: "Measure length and width. Use 2–3 inches for most refreshes; deeper if the bed is bare or thin.",
     watchFor: "Refresh and new-bed orders are different. A light top-off needs less than a bare bed.",
     askAbby: "Tell us the bed size, whether old mulch is already there, and the color you want.",
+    imageAlt: "Mulch texture from the yard",
   },
   {
     category: "Loam",
@@ -39,6 +41,7 @@ const materialGuides: Array<{
     measure: "Measure the area and the depth you need to add. Even an inch over a large lawn patch adds up fast.",
     watchFor: "Loam settles. If you are filling a low spot, plan for compaction and final grade.",
     askAbby: "Tell us whether you are seeding, filling, or building a bed — the answer changes the recommendation.",
+    imageAlt: "Screened loam material texture",
   },
   {
     category: "Sand",
@@ -49,6 +52,7 @@ const materialGuides: Array<{
     measure: "Know the square footage and target depth. Thin leveling layers need less than a full base build.",
     watchFor: "Sand drains and shifts differently than crushed stone. It is not the default for every base job.",
     askAbby: "Tell us if this is for pavers, play, masonry, or leveling so you do not order the wrong base.",
+    imageAlt: "Fine mason sand texture",
   },
   {
     category: "Gravel",
@@ -59,6 +63,7 @@ const materialGuides: Array<{
     measure: "Measure length, width, and depth. Driveways and drainage work usually need more depth than people expect.",
     watchFor: "Round stone looks nice but does not lock like crushed stone. Pick for function first.",
     askAbby: "Tell us if cars will drive on it, water needs to move through it, or it is just for appearance.",
+    imageAlt: "Crushed blue stone gravel texture",
   },
   {
     category: "Specialty Stone",
@@ -69,6 +74,7 @@ const materialGuides: Array<{
     measure: "Measure the coverage area and desired depth. Stone is heavy, so quantity mistakes matter.",
     watchFor: "Stone is harder to change later than mulch. Color, size, and feel underfoot all matter.",
     askAbby: "Send a photo or describe the spot if you are choosing between pea stone, river stone, and lava rock.",
+    imageAlt: "Decorative landscape stone texture",
   },
   {
     category: "Garden Center",
@@ -79,6 +85,7 @@ const materialGuides: Array<{
     measure: "Bring rough counts or photos for bed gaps, porch hooks, planters, and entry areas.",
     watchFor: "Seasonal stock changes quickly. If you saw something online, call before driving over.",
     askAbby: "Tell us what color, sun exposure, and container or bed size you are working with.",
+    imageAlt: "Seasonal garden center stock at the yard",
   },
 ];
 
@@ -123,27 +130,42 @@ export function ProductBuyingGuide() {
         <div className="grid gap-8 lg:grid-cols-[0.36fr_0.64fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
             <h2 className="display-3 leading-[0.95] text-balance text-zinc-950">What each material is actually for.</h2>
-            <p className="body text-zinc-700 mt-5 max-w-[42ch] text-pretty">This is the practical layer between browsing products and calling Abby.</p>
+            <p className="body text-zinc-700 mt-5 max-w-[42ch] text-pretty">The photo shows the texture. The notes tell you how to use it. The call confirms the order.</p>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-5">
             {materialGuides.map((guide) => {
               const items = products.filter((p) => p.category === guide.category);
+              const guideImage = items.find((p) => p.image)?.image;
               return (
-                <article key={guide.category} className="relative overflow-hidden rounded-md bg-white p-5 ring-1 ring-zinc-300 md:p-6">
+                <article key={guide.category} className="relative overflow-hidden rounded-md bg-white ring-1 ring-zinc-300">
                   <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
-                  <div className="grid gap-5 md:grid-cols-[0.72fr_1.28fr]">
-                    <div>
-                      <div className="mb-4 text-brand [&>*]:size-7" aria-hidden="true">{guide.icon}</div>
-                      <p className="eyebrow text-brand mb-2">{guide.category}</p>
-                      <h3 className="display-5 leading-tight text-balance text-zinc-950">{guide.title}</h3>
-                      <p className="body-sm text-zinc-700 mt-3 text-pretty">{guide.plainEnglish}</p>
-                      <p className="body-sm text-zinc-500 mt-4 text-pretty"><span className="font-semibold text-zinc-700">Common options:</span> {items.map((p) => p.name).join(" · ")}</p>
+                  <div className="grid gap-0 lg:grid-cols-[0.45fr_0.55fr]">
+                    <div className="relative min-h-[260px] overflow-hidden bg-zinc-200 lg:min-h-full">
+                      {guideImage ? (
+                        <img
+                          src={guideImage}
+                          alt={guide.imageAlt}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      ) : null}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                        <div className="mb-4 text-brand [&>*]:size-7" aria-hidden="true">{guide.icon}</div>
+                        <p className="eyebrow text-brand mb-2">{guide.category}</p>
+                        <h3 className="display-5 leading-tight text-balance">{guide.title}</h3>
+                      </div>
                     </div>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      <GuideNote label="Best for" value={guide.bestFor} />
-                      <GuideNote label="Measure" value={guide.measure} />
-                      <GuideNote label="Watch for" value={guide.watchFor} />
-                      <GuideNote label="Ask Abby" value={guide.askAbby} />
+                    <div className="p-5 md:p-6">
+                      <p className="body-sm text-zinc-700 text-pretty">{guide.plainEnglish}</p>
+                      <p className="body-sm text-zinc-500 mt-4 text-pretty"><span className="font-semibold text-zinc-700">Common options:</span> {items.map((p) => p.name).join(" · ")}</p>
+                      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                        <GuideNote label="Best for" value={guide.bestFor} />
+                        <GuideNote label="Measure" value={guide.measure} />
+                        <GuideNote label="Watch for" value={guide.watchFor} />
+                        <GuideNote label="Ask Abby" value={guide.askAbby} />
+                      </div>
                     </div>
                   </div>
                 </article>
