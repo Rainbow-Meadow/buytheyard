@@ -8,6 +8,7 @@ import featuredHeroYard from "@/assets/featured-hero-yard.webp";
 import communityCtms from "@/assets/source/community-ctms-loam.webp";
 import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
+import { AbbyTrustBreak, DeliveryBasicsBreak, OrderingBreak } from "@/components/home/HomeBreaks";
 
 const FEATURED = [
   "Hemlock Mulch",
@@ -56,7 +57,7 @@ export const Route = createFileRoute("/")({
           telephone: "+1-508-579-9897",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "30 Florence Rd",
+            streetAddress: "2264 Main St.",
             addressLocality: "Jefferson",
             addressRegion: "MA",
             postalCode: "01522",
@@ -141,7 +142,7 @@ function HomePage() {
                     </span>
                   </h1>
                   <p className="lead text-zinc-200 max-w-[54ch] mt-4 text-pretty">
-                    By the yard, from our Jefferson lot. Best prices in Central Mass.
+                    Bulk landscape materials from our Jefferson yard — pickup or delivery across Central Mass.
                   </p>
                   <div className="mt-6 flex flex-col gap-2 max-w-md md:flex-row md:flex-wrap md:items-center md:gap-3 md:max-w-none">
                     <Link
@@ -174,13 +175,15 @@ function HomePage() {
           a: <Tile id="stat-years" fill variant="stat" layout="anchored" tone="surface" anchorIndex="01" anchorGlyph={<CalendarDays strokeWidth={1.25} />} value="10" label="Years in business" caption="Since 2016" />,
           b: (
             <Link to="/wbe" aria-label="What WBE certification means" className="block h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
-              <Tile id="stat-wbe" fill variant="stat" layout="anchored" tone="brand" anchorIndex="02" anchorGlyph={<BadgeCheck strokeWidth={1.25} />} value="WBE" label="MA-certified woman-owned" caption="What this means →" />
+              <Tile id="stat-wbe" fill variant="stat" layout="anchored" tone="brand" anchorIndex="02" anchorGlyph={<BadgeCheck strokeWidth={1.25} />} value="WBE" label="WBE-certified" caption="Woman-owned →" />
             </Link>
           ),
           c: <Tile id="stat-fb" fill variant="stat" layout="anchored" tone="kraft" anchorIndex="03" anchorGlyph={<Facebook strokeWidth={1.25} />} value="820+" label="Facebook followers" caption="Daily restocks" />,
           d: <Tile id="stat-stars" fill variant="stat" layout="anchored" tone="gray" anchorIndex="04" anchorGlyph={<Star strokeWidth={1.25} />} value="5★" label="Google & Facebook rated" caption="Five-star rated" />,
         }}
       />
+
+      <OrderingBreak />
 
       {/* Screen 2 — Featured materials: hero + 5 product tiles, viewport-locked */}
       <TileScreen
@@ -199,7 +202,7 @@ function HomePage() {
               overlay={{
                 eyebrow: "Bulk materials & garden center",
                 title: "Featured materials",
-                body: "Mulch, loam, sand, stone — by the yard, from our Jefferson lot.",
+                body: "Mulch, loam, sand, and stone by the yard — plus seasonal garden center favorites.",
                 align: "bottom-left",
                 layout: "anchored",
                 anchorIcon: <Layers />,
@@ -245,11 +248,13 @@ function HomePage() {
         }}
       />
 
+      <DeliveryBasicsBreak />
+
       {/* Screen 3 — section02: Social proof + community */}
       <TileScreen
         layout="section02"
-        label="Reviews and community"
-        heading="Reviews and community"
+        label="Local proof"
+        heading="Local proof"
         tiles={{
           hero: (
             <Tile
@@ -267,7 +272,7 @@ function HomePage() {
                   tone: "kraft",
                   layout: "anchored",
                   anchorIcon: <MessageSquareQuote />,
-                  eyebrow: "From Facebook · real customers",
+                  eyebrow: "Local proof · real customers",
                   quote:
                     "Abby and crew are awesome. Very accommodating, great prices, delivery and quality product.",
                   attribution: "Rob Warner · Apr 21",
@@ -278,7 +283,7 @@ function HomePage() {
                   tone: "surface",
                   layout: "anchored",
                   anchorIcon: <MessageSquareQuote />,
-                  eyebrow: "From Facebook · real customers",
+                  eyebrow: "Local proof · real customers",
                   quote:
                     "Best mulch in Central Mass and the price can't be beat. Delivery was right on time.",
                   attribution: "Local customer · Holden",
@@ -289,7 +294,7 @@ function HomePage() {
                   tone: "kraft",
                   layout: "anchored",
                   anchorIcon: <MessageSquareQuote />,
-                  eyebrow: "From Facebook · real customers",
+                  eyebrow: "Local proof · real customers",
                   quote:
                     "Quality loam, fair pricing, and Abby actually picks up the phone. That's rare.",
                   attribution: "Repeat customer · Rutland",
@@ -335,16 +340,22 @@ function HomePage() {
         }}
       />
 
+      <AbbyTrustBreak />
 
       {/* Final CTA — sticky phone bar */}
       <div className="bg-brand text-brand-foreground">
         <div className="max-w-7xl mx-auto px-5 md:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
           <p className="label">Ready to order? Call Abby.</p>
-          <a href="tel:5085799897" className="inline-flex items-center gap-2 label">
-            <Phone className="size-4" />
-            508.579.9897
-            <ArrowRight className="size-4" />
-          </a>
+          <div className="flex flex-wrap items-center gap-4">
+            <a href="tel:5085799897" className="inline-flex items-center gap-2 label">
+              <Phone className="size-4" />
+              508.579.9897
+              <ArrowRight className="size-4" />
+            </a>
+            <Link to="/quote" className="inline-flex items-center gap-2 label border-b border-current">
+              Send a quote request
+            </Link>
+          </div>
         </div>
       </div>
     </>
