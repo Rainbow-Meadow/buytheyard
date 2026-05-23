@@ -10,7 +10,6 @@ import {
   Phone,
   ShieldCheck,
 } from "lucide-react";
-import { Tile } from "@/components/site/Tile";
 
 const orderingSteps = [
   {
@@ -18,17 +17,15 @@ const orderingSteps = [
     eyebrow: "01 · Start",
     title: "Call first if timing matters",
     body: "Phone is fastest. The quote form is best when you already know your material list and town.",
-    backTitle: "Why phone stays first",
-    backBody:
-      "The yard can confirm today’s price, truck timing, and whether pickup or delivery makes more sense before you lose time guessing.",
+    why:
+      "We can confirm today’s price, route timing, and pickup vs. delivery before you lose time guessing.",
   },
   {
     icon: <ClipboardCheck />,
     eyebrow: "02 · Confirm",
     title: "Material, yards, and town",
     body: "Abby confirms the material, quantity, delivery town, and whether the route has room.",
-    backTitle: "No stale price sheets",
-    backBody:
+    why:
       "Materials move with the season. The real quote is the one confirmed before the order leaves the yard.",
   },
   {
@@ -36,8 +33,7 @@ const orderingSteps = [
     eyebrow: "03 · Drop",
     title: "Mark the spot clearly",
     body: "Use a tarp, cone, bucket, or note. Delivery is driveway or curbline only.",
-    backTitle: "Why the rule matters",
-    backBody:
+    why:
       "Loaded trucks can damage lawns and underground utilities. A clear marker helps the driver drop it safely the first time.",
   },
 ];
@@ -90,37 +86,30 @@ export function OrderingBreak() {
             </div>
             <div className="grid gap-2.5 md:grid-cols-3 md:gap-3">
               {orderingSteps.map((step) => (
-                <div key={step.eyebrow} className="h-[245px] md:h-[250px]">
-                  <Tile
-                    fill
-                    variant="flip"
-                    trigger="click"
-                    hint="Why"
-                    ariaLabel={step.title}
-                    front={{
-                      id: `${step.eyebrow}-front`,
-                      variant: "text",
-                      tone: "white",
-                      layout: "anchored",
-                      anchorIndex: step.eyebrow.slice(0, 2),
-                      icon: step.icon,
-                      eyebrow: step.eyebrow,
-                      title: step.title,
-                      body: step.body,
-                    }}
-                    back={{
-                      id: `${step.eyebrow}-back`,
-                      variant: "text",
-                      tone: "surface",
-                      layout: "anchored",
-                      anchorIndex: step.eyebrow.slice(0, 2),
-                      icon: step.icon,
-                      eyebrow: "Why it matters",
-                      title: step.backTitle,
-                      body: step.backBody,
-                    }}
-                  />
-                </div>
+                <article
+                  key={step.eyebrow}
+                  className="relative overflow-hidden rounded-md bg-white/80 ring-1 ring-zinc-300 p-4 md:p-5"
+                >
+                  <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none select-none absolute -bottom-4 -right-4 text-zinc-900/[0.05] [&>*]:size-28 md:[&>*]:size-36 [&>*]:stroke-[1.25]"
+                  >
+                    {step.icon}
+                  </span>
+                  <div className="relative z-10">
+                    <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
+                      <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
+                      {step.eyebrow}
+                    </p>
+                    <h3 className="display-5 leading-snug text-balance">{step.title}</h3>
+                    <p className="body-sm text-zinc-700 mt-3 text-pretty">{step.body}</p>
+                    <div className="mt-4 border-t border-zinc-300 pt-3">
+                      <p className="eyebrow text-brand mb-1">Why it matters</p>
+                      <p className="body-sm text-zinc-700 text-pretty">{step.why}</p>
+                    </div>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
@@ -204,8 +193,8 @@ export function LocalProofPanel() {
           </p>
           <h2 className="display-3 max-w-[12ch] text-balance">Local proof with receipts</h2>
           <p className="body-sm md:text-base md:leading-[1.6] text-zinc-700 mt-3 max-w-[54ch] text-pretty">
-            A working yard should be easy to verify: certified, licensed, locally rooted, and
-            already showing up for schools and town projects around Central Mass.
+            Certified, licensed, locally rooted, and already showing up for schools and town
+            projects around Central Mass.
           </p>
         </div>
         <div className="grid gap-2.5 md:grid-cols-3">
@@ -242,8 +231,7 @@ export function AbbyTrustBreak() {
               <p className="body text-zinc-700 max-w-[68ch] mt-4 text-pretty">
                 Abby Montalto is a Wachusett Regional graduate who studied Entrepreneurship &
                 Small Business while building Buy The Yard. She grew up around trucks, equipment,
-                and backyard material work — and still runs the yard with direct answers and
-                practical help.
+                and material work — and still runs the yard with direct answers and practical help.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
