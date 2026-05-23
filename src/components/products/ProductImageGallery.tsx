@@ -20,7 +20,7 @@ export function ProductImageGallery({ categorySlides }: { categorySlides: TileBl
           </div>
 
           <div className="overflow-hidden rounded-md ring-1 ring-zinc-800">
-            <div className="min-h-[420px] md:min-h-[560px]">
+            <div className="h-[420px] md:h-[560px] lg:h-[640px]">
               <Tile
                 id="products-image-gallery"
                 fill

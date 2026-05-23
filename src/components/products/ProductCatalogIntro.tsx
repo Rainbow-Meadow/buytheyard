@@ -12,7 +12,7 @@ export function ProductCatalogIntro(_: { categorySlides?: TileBlock[] }) {
   return (
     <section aria-labelledby="products-heading" className="bg-base text-zinc-900 py-4 md:py-6">
       <div className="mx-auto max-w-7xl px-5 md:px-6">
-        <div className="grid min-h-[calc(100svh-7rem)] gap-4 lg:grid-cols-[0.38fr_0.62fr] lg:items-stretch">
+        <div className="grid min-h-[calc(100svh-7rem)] gap-4 lg:grid-cols-[0.36fr_0.64fr] lg:items-stretch">
           <article className="relative order-2 overflow-hidden rounded-md bg-white p-5 ring-1 ring-zinc-300 md:p-7 lg:order-1 lg:p-8">
             <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
             <div className="relative z-10 flex h-full flex-col justify-between gap-8">
@@ -46,8 +46,8 @@ export function ProductCatalogIntro(_: { categorySlides?: TileBlock[] }) {
                 </div>
                 <div className="grid gap-2 text-sm text-zinc-700 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                   <HeroCue icon={<Ruler />} label="Measure" value="Length × width × depth" />
-                  <HeroCue icon={<Truck />} label="Delivery" value="1-yard minimum" />
-                  <HeroCue icon={<ClipboardCheck />} label="Confirm" value="Price before it leaves" />
+                  <HeroCue icon={<Truck />} label="Delivery" value="1-yard min." />
+                  <HeroCue icon={<ClipboardCheck />} label="Confirm" value="Price before load" />
                 </div>
               </div>
             </div>
@@ -69,38 +69,38 @@ export function ProductCatalogIntro(_: { categorySlides?: TileBlock[] }) {
                 </div>
               </div>
 
-              <div className="min-h-0 flex-1 overflow-y-auto p-3 md:p-4">
-                <div className="space-y-2">
+              <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3 md:px-5 md:py-4">
+                <div className="divide-y divide-white/10 rounded-md bg-white/[0.045] ring-1 ring-white/10">
                   {heroCategories.map((category) => {
                     const items = products.filter((product) => product.category === category);
                     const pricing = categoryPricing[category];
                     return (
-                      <section key={category} className="overflow-hidden rounded-md bg-white/[0.06] ring-1 ring-white/10">
-                        <div className="grid gap-2 border-b border-white/10 px-4 py-3 sm:grid-cols-[1fr_auto] sm:items-center">
-                          <div>
-                            <p className="eyebrow text-brand">{category}</p>
-                            <p className="body-sm text-zinc-300">
-                              {items.length} option{items.length === 1 ? "" : "s"}
-                            </p>
-                          </div>
-                          <div className="sm:text-right">
-                            <p className="label text-white">{pricing.range}</p>
-                            <p className="body-sm text-zinc-500">{pricing.unit}</p>
-                          </div>
+                      <section
+                        key={category}
+                        className="grid gap-3 px-4 py-4 md:grid-cols-[8rem_1fr_8.5rem] md:items-start md:gap-5"
+                      >
+                        <div>
+                          <p className="eyebrow text-brand">{category}</p>
+                          <p className="body-sm text-zinc-500">
+                            {items.length} option{items.length === 1 ? "" : "s"}
+                          </p>
                         </div>
-                        <ul className="divide-y divide-white/10">
+
+                        <ul className="grid gap-1.5">
                           {items.map((item) => (
-                            <li key={item.name} className="grid gap-1 px-4 py-3 sm:grid-cols-[1fr_auto] sm:items-center">
-                              <div>
-                                <p className="display-5 leading-tight text-white text-balance">{item.name}</p>
-                                <p className="body-sm mt-1 line-clamp-2 text-zinc-400 text-pretty">{item.description}</p>
-                              </div>
+                            <li key={item.name} className="grid gap-1 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-3">
+                              <p className="display-5 leading-none text-white text-balance">{item.name}</p>
                               {item.badge ? (
-                                <span className="eyebrow text-brand sm:ml-4 sm:text-right">{item.badge}</span>
+                                <span className="eyebrow text-brand sm:text-right">{item.badge}</span>
                               ) : null}
                             </li>
                           ))}
                         </ul>
+
+                        <div className="border-t border-white/10 pt-3 md:border-t-0 md:pt-0 md:text-right">
+                          <p className="label text-white">{pricing.range}</p>
+                          <p className="body-sm text-zinc-500">{pricing.unit}</p>
+                        </div>
                       </section>
                     );
                   })}
