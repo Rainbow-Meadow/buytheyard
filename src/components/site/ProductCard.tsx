@@ -47,7 +47,7 @@ export function ProductCard({
         {product.image ? (
           <img
             src={product.image}
-            alt={product.name}
+            alt={product.imageAlt ?? product.name}
             width={1200}
             height={1200}
             loading="lazy"
@@ -76,7 +76,7 @@ export function ProductCard({
           {product.image ? (
             <img
               src={product.image}
-              alt={product.name}
+              alt={product.imageAlt ?? product.name}
               width={1200}
               height={1600}
               loading="lazy"
@@ -112,7 +112,7 @@ export function ProductCard({
         {product.image ? (
           <img
             src={product.image}
-            alt={product.name}
+            alt={product.imageAlt ?? product.name}
             width={1200}
             height={1200}
             loading="lazy"
@@ -200,7 +200,7 @@ export function ProductCard({
           {product.image ? (
             <img
               src={product.image}
-              alt={product.name}
+              alt={product.imageAlt ?? product.name}
               className="w-full h-full max-h-[60vh] object-contain"
             />
           ) : (

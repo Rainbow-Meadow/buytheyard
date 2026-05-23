@@ -2,6 +2,11 @@ import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Calculator, Flower2, Phone, Ruler, Sprout, TreePine, Truck, Waves, Mountain } from "lucide-react";
 import { products, type Product } from "@/data/products";
+import materialYardPiles from "@/assets/source/yard-piles.webp";
+import loamDelivery from "@/assets/source/community-ctms-loam.webp";
+import blueStone from "@/assets/stone-blue-crushed.webp";
+import riverStone from "@/assets/stone-river.webp";
+import gardenBaskets from "@/assets/garden-baskets.webp";
 import {
   EditorialSection,
   EditorialColumns,
@@ -19,10 +24,12 @@ const materialGuides: Array<{
   measure: string;
   watchFor: string;
   askAbby: string;
+  image: string;
   imageAlt: string;
 }> = [
   {
     category: "Mulch",
+    image: materialYardPiles,
     icon: <TreePine />,
     title: "For beds that need a clean finished look.",
     plainEnglish: "Mulch is the fast visual win: it darkens the bed, frames the plants, holds moisture, and makes a tired edge look maintained again.",
@@ -30,10 +37,11 @@ const materialGuides: Array<{
     measure: "Measure length and width. Use 2–3 inches for most refreshes; deeper if the bed is bare or thin.",
     watchFor: "Refresh and new-bed orders are different. A light top-off needs less than a bare bed.",
     askAbby: "Tell us the bed size, whether old mulch is already there, and the color you want.",
-    imageAlt: "Mulch texture from the yard",
+    imageAlt: "Bulk material piles and flowers at the Jefferson yard",
   },
   {
     category: "Loam",
+    image: loamDelivery,
     icon: <Sprout />,
     title: "For growing, patching, leveling, and starting over.",
     plainEnglish: "Loam is for projects where you need soil, not decoration: lawn repair, grading, filling, seeding, and garden-bed prep.",
@@ -41,10 +49,11 @@ const materialGuides: Array<{
     measure: "Measure the area and the depth you need to add. Even an inch over a large lawn patch adds up fast.",
     watchFor: "Loam settles. If you are filling a low spot, plan for compaction and final grade.",
     askAbby: "Tell us whether you are seeding, filling, or building a bed — the answer changes the recommendation.",
-    imageAlt: "Screened loam material texture",
+    imageAlt: "Buy The Yard dump truck unloading loam",
   },
   {
     category: "Sand",
+    image: materialYardPiles,
     icon: <Waves />,
     title: "For leveling, masonry, pavers, and clean play areas.",
     plainEnglish: "Mason sand is fine, washed, and predictable. It is useful anywhere the surface needs to level cleanly or feel smooth underfoot.",
@@ -52,10 +61,11 @@ const materialGuides: Array<{
     measure: "Know the square footage and target depth. Thin leveling layers need less than a full base build.",
     watchFor: "Sand drains and shifts differently than crushed stone. It is not the default for every base job.",
     askAbby: "Tell us if this is for pavers, play, masonry, or leveling so you do not order the wrong base.",
-    imageAlt: "Fine mason sand texture",
+    imageAlt: "Bulk material piles at the Jefferson yard",
   },
   {
     category: "Gravel",
+    image: blueStone,
     icon: <Truck />,
     title: "For structure, drainage, and areas that take traffic.",
     plainEnglish: "Crushed stone behaves differently than decorative stone. Angular gravel locks in, carries weight, and lets water move.",
@@ -67,6 +77,7 @@ const materialGuides: Array<{
   },
   {
     category: "Specialty Stone",
+    image: riverStone,
     icon: <Mountain />,
     title: "For the spots where appearance matters as much as function.",
     plainEnglish: "Decorative stone lasts longer than mulch and changes the look of a bed, walkway, or drainage edge for years.",
@@ -74,10 +85,11 @@ const materialGuides: Array<{
     measure: "Measure the coverage area and desired depth. Stone is heavy, so quantity mistakes matter.",
     watchFor: "Stone is harder to change later than mulch. Color, size, and feel underfoot all matter.",
     askAbby: "Send a photo or describe the spot if you are choosing between pea stone, river stone, and lava rock.",
-    imageAlt: "Decorative landscape stone texture",
+    imageAlt: "Rounded brown river stone with a golf ball for scale",
   },
   {
     category: "Garden Center",
+    image: gardenBaskets,
     icon: <Flower2 />,
     title: "For seasonal color and what looks good right now.",
     plainEnglish: "The garden center side changes with the season. What is out front is usually what is fresh, full, and moving now.",
@@ -85,7 +97,7 @@ const materialGuides: Array<{
     measure: "Bring rough counts or photos for bed gaps, porch hooks, planters, and entry areas.",
     watchFor: "Seasonal stock changes quickly. If you saw something online, call before driving over.",
     askAbby: "Tell us what color, sun exposure, and container or bed size you are working with.",
-    imageAlt: "Seasonal garden center stock at the yard",
+    imageAlt: "Colorful hanging baskets and annuals at the yard",
   },
 ];
 
@@ -130,12 +142,12 @@ export function ProductBuyingGuide() {
         <div className="grid gap-8 lg:grid-cols-[0.36fr_0.64fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
             <h2 className="display-3 leading-[0.95] text-balance text-zinc-950">What each material is actually for.</h2>
-            <p className="body text-zinc-700 mt-5 max-w-[42ch] text-pretty">The photo shows the texture. The notes tell you how to use it. The call confirms the order.</p>
+            <p className="body text-zinc-700 mt-5 max-w-[42ch] text-pretty">The photo is a verified yard or material image. The notes tell you how to use it. The call confirms the order.</p>
           </div>
           <div className="space-y-5">
             {materialGuides.map((guide) => {
               const items = products.filter((p) => p.category === guide.category);
-              const guideImage = items.find((p) => p.image)?.image;
+              const guideImage = guide.image;
               return (
                 <article key={guide.category} className="relative overflow-hidden rounded-md bg-white ring-1 ring-zinc-300">
                   <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />

@@ -69,6 +69,8 @@ export const products: Product[] = [
     name: "Mason Sand",
     category: "Sand",
     description: "Washed, fine-grain, and clean enough for kids' play boxes. Same sand goes under pavers and into a masonry mix.",
+    image: materialYardPiles,
+    imageAlt: "Bulk material piles at the Jefferson yard",
   },
   {
     name: "3/4\" Crushed Blue Stone",
