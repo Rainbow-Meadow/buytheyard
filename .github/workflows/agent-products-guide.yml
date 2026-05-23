@@ -1,6 +1,9 @@
 name: Agent products guide patch
 
 on:
+  push:
+    branches:
+      - sandbox
   workflow_dispatch:
 
 permissions:
