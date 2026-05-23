@@ -32,8 +32,8 @@ import {
 const FEATURED = [
   "Hemlock Mulch",
   "Screened Loam",
-  "Mason Sand",
   '3/4" Crushed Blue Stone',
+  '3/8" Pea Stone',
   "Hanging Baskets",
 ].map((n) => products.find((p) => p.name === n)!);
 
@@ -292,7 +292,7 @@ function HomePage() {
                   fill
                   variant="image"
                   src={p.image!}
-                  alt={p.name}
+                  alt={p.imageAlt ?? p.name}
                   focal="center"
                   overlay={{
                     eyebrow: p.category,

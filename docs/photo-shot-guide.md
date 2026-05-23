@@ -203,7 +203,7 @@ Current product images are imported in `src/data/products.ts`. These remain usef
 
 | Slot | Current source / use | Ideal photo |
 |---|---|---|
-| Quote support image | Currently `mulch-hemlock.webp` tile | Better: practical material-list/counter photo or truck/material pile at yard. The quote page is about “build the list,” not one product. Use a neutral yard image with materials visible. |
+| Quote support image | Currently `src/assets/source/yard-piles.webp` | Practical material-list/counter photo or truck/material pile at yard. The quote page is about “build the list,” not one product. Use a neutral yard image with materials visible. |
 | Quote flow background | No photo needed | Keep mostly UI. Photos should not compete with the form. |
 | Success view | No known photo need | Optional small yard/loaded truck confirmation image, but not necessary. |
 

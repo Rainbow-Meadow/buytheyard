@@ -23,7 +23,7 @@ import {
   User,
 } from "lucide-react";
 import { products, categories } from "@/data/products";
-import mulchHemlock from "@/assets/mulch-hemlock.webp";
+import quoteYardMaterials from "@/assets/source/yard-piles.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 import {
@@ -656,8 +656,8 @@ function QuotePage() {
             id="quote-img"
             fill
             variant="image"
-            src={mulchHemlock}
-            alt="Hemlock mulch"
+            src={quoteYardMaterials}
+            alt="Bulk material piles at the Jefferson yard"
             focal="center"
             loading="lazy"
             overlay={{
