@@ -5,6 +5,7 @@ import { type TileBlock } from "@/components/site/Tile";
 import { ProductCatalogIntro } from "@/components/products/ProductCatalogIntro";
 import { ProductBuyingGuide, ProductQuantityGuide } from "@/components/products/ProductBuyingGuide";
 import { ProductProjectGuide } from "@/components/products/ProductProjectGuide";
+import { ProductImageGallery } from "@/components/products/ProductImageGallery";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -95,6 +96,8 @@ function ProductsPage() {
   return (
     <>
       <ProductCatalogIntro categorySlides={categorySlides} />
+
+      <ProductImageGallery categorySlides={categorySlides} />
 
       <ProductBuyingGuide />
 
