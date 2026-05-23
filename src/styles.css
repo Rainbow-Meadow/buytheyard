@@ -557,6 +557,82 @@
   letter-spacing: 0.18em;
 }
 
+/* =========================================================================
+   Editorial layer utilities.
+
+   The editorial layer is a parallel composition language to the tile
+   system. Tiles are for IMPACT (hero bands, product strips, CTAs, stats);
+   editorial sections are the scannable, typographic, well-paced body
+   between them. Utilities here are intentionally minimal — most layout
+   work happens in src/components/site/editorial/.
+   ========================================================================= */
+
+/* Mono micro-label for technical/structural meta — `01 / START`,
+   `[01] AREA`, ledger keys. Distinct from `.eyebrow` (sans, brand). */
+@utility font-mono-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;     /* 11px */
+  line-height: 1.3;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Editorial eyebrow — red, with a left rule. Used at the top of every
+   EditorialSection to mark the kicker. */
+@utility editorial-eyebrow {
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brand);
+  border-left: 2px solid var(--brand);
+  padding-left: 0.75rem;
+  display: inline-block;
+}
+
+/* Hairline rules. Use `rule-h` as a top border on EditorialSection and
+   between ledger rows; `rule-v` for the vertical divider between
+   editorial columns on md+. */
+@utility rule-h {
+  border-top: 1px solid var(--rule);
+}
+
+@utility rule-v {
+  width: 1px;
+  background-color: var(--rule);
+}
+
+/* Pull quote — large brand-bar block quote inside EditorialProse. */
+@utility pull-quote {
+  border-left: 4px solid var(--brand);
+  padding: 0.5rem 0 0.5rem 2rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.5rem;        /* 24px */
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  color: var(--foreground);
+  margin: 2.5rem 0;
+  @media (min-width: 768px) {
+    font-size: 1.875rem;    /* 30px */
+    padding-left: 2.5rem;
+  }
+}
+
+/* Dropcap — apply to the FIRST prose paragraph of an editorial section
+   to anchor the eye. Never stack two dropcaps in one section. */
+.dropcap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 0.85;
+  margin-right: 0.5rem;
+  margin-top: 0.25rem;
+  color: var(--brand);
+}
+
 @keyframes shimmer-sweep {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
