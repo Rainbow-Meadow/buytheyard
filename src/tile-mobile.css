@@ -3,6 +3,73 @@
   min-height: 0;
 }
 
+/* Page heroes should behave like heroes first, proof grids second.
+   The original pageHero composition put the four proof/stat tiles inside the
+   first viewport with the image, which made the hero feel like a dashboard.
+   This override gives the image more room and turns the stats into compact
+   support tiles below it. */
+.tile-screen.ts-page-hero {
+  height: auto;
+  min-height: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(clamp(560px, 74svh, 720px), auto) minmax(104px, auto) minmax(104px, auto);
+  grid-template-areas:
+    "hero hero"
+    "a b"
+    "c d";
+}
+
+.tile-screen.ts-page-hero .ts-slot-hero {
+  min-height: clamp(560px, 74svh, 720px);
+}
+
+.tile-screen.ts-page-hero :is(.ts-slot-a, .ts-slot-b, .ts-slot-c, .ts-slot-d) {
+  min-height: 104px;
+}
+
+.tile-screen.ts-page-hero :is(.ts-slot-a, .ts-slot-b, .ts-slot-c, .ts-slot-d) article {
+  padding: 0.875rem 1rem;
+}
+
+.tile-screen.ts-page-hero :is(.ts-slot-a, .ts-slot-b, .ts-slot-c, .ts-slot-d) .eyebrow {
+  font-size: 0.625rem;
+  letter-spacing: 0.17em;
+}
+
+.tile-screen.ts-page-hero :is(.ts-slot-a, .ts-slot-b, .ts-slot-c, .ts-slot-d) .display-5 {
+  font-size: 1.125rem;
+  line-height: 1.05;
+}
+
+.tile-screen.ts-page-hero :is(.ts-slot-a, .ts-slot-b, .ts-slot-c, .ts-slot-d) .label {
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+}
+
+@media (min-width: 768px) {
+  .tile-screen.ts-page-hero {
+    height: var(--tile-screen-h);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 4fr) minmax(124px, 1fr);
+    grid-template-areas:
+      "hero hero hero hero"
+      "a b c d";
+  }
+
+  .tile-screen.ts-page-hero .ts-slot-hero,
+  .tile-screen.ts-page-hero :is(.ts-slot-a, .ts-slot-b, .ts-slot-c, .ts-slot-d) {
+    min-height: 0;
+  }
+
+  .tile-screen.ts-page-hero :is(.ts-slot-a, .ts-slot-b, .ts-slot-c, .ts-slot-d) article {
+    padding: 1rem 1.125rem;
+  }
+
+  .tile-screen.ts-page-hero :is(.ts-slot-a, .ts-slot-b, .ts-slot-c, .ts-slot-d) .display-5 {
+    font-size: 1.35rem;
+  }
+}
+
 @media (max-width: 767px) {
   .tile-screen:not(.ts-page-hero) {
     height: auto;
