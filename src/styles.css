@@ -21,6 +21,7 @@
   --color-ring: var(--ring);
   --font-display: 'Saira Extra Condensed', sans-serif;
   --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
@@ -38,6 +39,14 @@
   --muted-foreground: oklch(0.45 0.01 280);
   --border: oklch(0.85 0.01 80);
   --ring: oklch(0.51 0.20 27);
+
+  /* ----- Editorial layer -----
+     Used by EditorialSection and friends. The editorial layer is a parallel
+     composition language to the tile system: typographic body copy, hairline
+     rules, mono micro-labels, ledger rows, offset tile overlays. */
+  --editorial-bg: oklch(0.965 0.006 80);   /* slightly warmer than --base */
+  --rule: oklch(0.85 0.005 80);            /* zinc-300 equivalent on warm base */
+  --rule-strong: oklch(0.55 0.01 280);
 
   /* ----- Tile grid metrics — single source of truth -----
      Consumed by the `tile-grid` utility below AND read at runtime by
