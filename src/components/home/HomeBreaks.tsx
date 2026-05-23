@@ -1,3 +1,4 @@
+import "../../hero-polish.css";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
