@@ -1,12 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Flower2,
-  HelpCircle,
   Home,
   Layers,
-  MapPin,
   Mountain,
-  Phone,
   Sprout,
   TreePine,
   Truck,
@@ -14,6 +11,7 @@ import {
 import { categories, products } from "@/data/products";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile, type TileBlock } from "@/components/site/Tile";
+import { ProductCatalogIntro } from "@/components/products/ProductCatalogIntro";
 import { ProductBuyingGuide, ProductQuantityGuide } from "@/components/products/ProductBuyingGuide";
 
 const projectGuides = [
@@ -142,66 +140,7 @@ function ProductsPage() {
 
   return (
     <>
-      <TileScreen
-        layout="section02"
-        label="Materials catalog"
-        heading="Materials catalog — mulch, loam, sand, and stone"
-        headingLevel="h1"
-        tiles={{
-          hero: (
-            <Tile
-              id="products-carousel"
-              fill
-              variant="carousel"
-              ariaLabel="Browse materials by category"
-              slides={categorySlides}
-              controls="both"
-            />
-          ),
-          a: (
-            <Tile
-              id="products-call"
-              fill
-              variant="cta"
-              tone="brand"
-              icon={<Phone />}
-              anchorIndex="02"
-              eyebrow="Today's price by phone"
-              title="Tell Abby what you’re working on."
-              body="One call helps match the material, rough quantity, and delivery plan."
-              cta={{ label: "508.579.9897", href: "tel:5085799897" }}
-            />
-          ),
-          b: (
-            <Tile
-              id="products-delivery"
-              fill
-              variant="cta"
-              tone="surface"
-              icon={<Truck />}
-              anchorIndex="03"
-              eyebrow="Delivery"
-              title="Check the rules before you order."
-              body="1-yard minimum, driveway or curbline drop, and 48 hours is best."
-              cta={{ label: "Delivery details", to: "/delivery" }}
-            />
-          ),
-          c: (
-            <Tile
-              id="products-quote"
-              fill
-              variant="cta"
-              tone="kraft"
-              icon={<HelpCircle />}
-              anchorIndex="04"
-              eyebrow="Quote"
-              title="Build a list, even if it’s rough."
-              body="Abby can confirm the quantity before anything leaves the yard."
-              cta={{ label: "Start a quote", to: "/quote" }}
-            />
-          ),
-        }}
-      />
+      <ProductCatalogIntro categorySlides={categorySlides} />
 
       <ProductBuyingGuide />
 
