@@ -16,31 +16,31 @@ const orderingSteps = [
     icon: <Phone />,
     eyebrow: "01 · Start",
     title: "Call first if timing matters",
-    body: "Phone is fastest. The quote form is best when you already know your material list and town.",
-    why: "Confirms price, route timing, and whether pickup or delivery makes more sense before you guess.",
+    body: "Phone is fastest. The quote form works best when you already have a material list and town.",
+    why: "A quick call confirms price, route timing, and whether pickup or delivery makes more sense.",
   },
   {
     icon: <ClipboardCheck />,
     eyebrow: "02 · Confirm",
     title: "Material, yards, and town",
-    body: "Abby confirms the material, quantity, delivery town, and whether the route has room.",
-    why: "Seasonal materials move. The real quote is the one confirmed before the order leaves the yard.",
+    body: "Abby checks the material, quantity, delivery town, and whether the route has room.",
+    why: "Stock and pricing can move with the season. We’ll confirm the real number before you plan around it.",
   },
   {
     icon: <MapPin />,
     eyebrow: "03 · Drop",
     title: "Mark the spot clearly",
-    body: "Use a tarp, cone, bucket, or note. Delivery is driveway or curbline only.",
-    why: "Loaded trucks can damage lawns and utilities. A clear marker helps the driver drop it safely.",
+    body: "A tarp, cone, bucket, or clear note is perfect. Delivery is driveway or curbline only.",
+    why: "Loaded trucks and lawns are not friends. A clear marker helps the driver drop it safely.",
   },
 ];
 
 const deliveryBasics = [
-  { label: "Service area", value: "Central Mass from the Jefferson yard" },
+  { label: "Service area", value: "Central Mass, from the Jefferson yard" },
   { label: "Minimum", value: "1 yard per delivery" },
   { label: "Timing", value: "48 hours is best; same-day only when the route allows" },
   { label: "Drop spot", value: "Driveway or curbline only — mark it clearly" },
-  { label: "Payment", value: "Cash, check, or card; card payments add 4%" },
+  { label: "Payment", value: "Cash or check keeps costs down; card payments add 4%" },
 ];
 
 const proofRows = [
@@ -77,8 +77,8 @@ export function OrderingBreak() {
                 Start with the right material, not a guess
               </h2>
               <p className="body text-zinc-700 max-w-[48ch] mt-4 text-pretty">
-                Tell us what you need. We’ll help confirm the right material, quantity, and drop
-                spot before anything leaves Jefferson.
+                Tell us what you’re working on. Abby will help confirm the right material,
+                quantity, and drop spot before anything leaves Jefferson.
               </p>
             </div>
             <div className="grid gap-2.5 md:grid-cols-3 md:gap-3">
@@ -132,8 +132,8 @@ export function DeliveryBasicsBreak() {
                 Know before the truck rolls
               </h2>
               <p className="body text-zinc-300 max-w-[46ch] mt-4 text-pretty">
-                We’ll confirm your town, quantity, timing, and drop spot before anything leaves
-                the yard.
+                We’ll confirm the town, quantity, timing, and drop spot so the delivery is simple
+                when the truck pulls in.
               </p>
             </div>
             <PackageCheck
@@ -190,8 +190,8 @@ export function LocalProofPanel() {
           </p>
           <h2 className="display-3 max-w-[12ch] text-balance">Local proof with receipts</h2>
           <p className="body-sm md:text-base md:leading-[1.6] text-zinc-700 mt-3 max-w-[54ch] text-pretty">
-            Certified, licensed, locally rooted, and already showing up for schools and town
-            projects around Central Mass.
+            Certified, licensed, locally rooted — with real donations and town support to show
+            for it.
           </p>
         </div>
         <div className="grid gap-2.5 md:grid-cols-3">
@@ -226,9 +226,10 @@ export function AbbyTrustBreak() {
                 Abby grew up around the work. Then she built the yard.
               </h2>
               <p className="body text-zinc-700 max-w-[68ch] mt-4 text-pretty">
-                Abby Montalto is a Wachusett Regional graduate who studied Entrepreneurship &
-                Small Business while building Buy The Yard. She grew up around trucks, equipment,
-                and material work — and still runs the yard with direct answers and practical help.
+                Abby Montalto grew up around trucks, equipment, and material work, then built Buy
+                The Yard while studying Entrepreneurship & Small Business. She still runs it the
+                way locals appreciate: direct answers, practical help, and someone who actually
+                picks up the phone.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
@@ -239,7 +240,7 @@ export function AbbyTrustBreak() {
                 <GraduationCap className="size-7 text-brand mb-4" aria-hidden="true" />
                 <p className="eyebrow text-brand mb-2">Founder</p>
                 <p className="display-5 leading-tight text-balance">Meet Abby</p>
-                <p className="body-sm text-zinc-700 mt-2">Wachusett ’16. Entrepreneurship ’18.</p>
+                <p className="body-sm text-zinc-700 mt-2">Wachusett ’16. Built while studying business.</p>
               </Link>
               <Link
                 to="/wbe"
@@ -249,7 +250,7 @@ export function AbbyTrustBreak() {
                 <p className="eyebrow mb-2">Certification</p>
                 <p className="display-5 leading-tight text-balance">WBE-certified</p>
                 <p className="body-sm mt-2 text-white/85">
-                  Woman-owned, licensed, and credentialed for real work.
+                  Woman-owned, licensed, and built for real work.
                 </p>
               </Link>
             </div>
