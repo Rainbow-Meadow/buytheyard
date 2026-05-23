@@ -233,8 +233,8 @@ function HomePage() {
               anchorIndex="03"
               anchorGlyph={<ShieldCheck strokeWidth={1.25} />}
               value="Licensed"
-              label="HIC + USDOT"
-              caption="MA #214009 · USDOT #3543587"
+              label="HIC + DOT"
+              caption="MA registered · active carrier"
             />
           ),
           d: (
