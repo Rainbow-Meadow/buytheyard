@@ -14,6 +14,7 @@ import { useDialogGestures } from "./useDialogGestures";
 import { TileGroupProvider, useTileGroupNav } from "./TileGroupContext";
 import {
   SIZE_PADDING,
+  SIZE_TITLE_LINES,
   SIZE_BODY_LINES,
   SIZE_BODY_CHAR_CAP,
   VARIANT_DEFAULT_TONE,
@@ -271,12 +272,14 @@ const paddingCls: Record<TilePadding, string> = {
   lg: "p-6 md:p-8",
 };
 
-/** Tailwind line-clamp classes keyed by SIZE_BODY_LINES values. */
+/** Tailwind line-clamp classes keyed by copy-rule values. */
 const lineClampCls: Record<number, string> = {
   0: "hidden",
   1: "line-clamp-1",
   2: "line-clamp-2",
   3: "line-clamp-3",
+  4: "line-clamp-4",
+  5: "line-clamp-5",
 };
 
 export type TileAspect = "square" | "video" | "portrait" | "wide";
@@ -332,7 +335,7 @@ const focalAnchorCss: Record<TileFocalAnchor, string> = {
   "top-left": "left top",
   "top-right": "right top",
   "bottom-left": "left bottom",
-  "bottom-right": "right bottom",
+  "bottom-right": "left bottom",
 };
 
 function focalToCss(focal: TileFocal): string {
@@ -660,10 +663,10 @@ function ImageTileInner({
                 )
               )}
               {block.overlay?.title && (
-                <p className="display-4 leading-tight">{block.overlay.title}</p>
+                <p className="display-4 leading-tight line-clamp-2 text-balance">{block.overlay.title}</p>
               )}
               {block.overlay?.body && (
-                <div className="body-sm text-zinc-200 mt-2">{block.overlay.body}</div>
+                <div className="body-sm text-zinc-200 mt-2 line-clamp-2 text-pretty">{block.overlay.body}</div>
               )}
               {block.cta && (
                 block.to || block.details ? (
@@ -703,8 +706,8 @@ function ImageTileInner({
         <DialogTrigger asChild>
           <button
             type="button"
-            aria-label={`Open details: ${block.details.title}`}
-            className={`${imageShell} group block text-left cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
+            className={`${imageShell} group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
+            aria-label={`${block.details.title} details`}
           >
             {inner}
           </button>
@@ -1022,6 +1025,9 @@ export function Tile(block: TileBlock) {
 
   const bodyClampLines = SIZE_BODY_LINES[size];
   const bodyClamp = bodyClampLines > 0 ? lineClampCls[bodyClampLines] : "";
+  const titleClamp = lineClampCls[SIZE_TITLE_LINES[size]] ?? "";
+  const titleTextCls = `${titleClamp} text-balance`;
+  const bodyTextCls = `${bodyClamp} text-pretty`;
 
   const shell = [
     block.fill ? "h-full w-full overflow-hidden" : sizeCls[size],
@@ -1075,9 +1081,9 @@ export function Tile(block: TileBlock) {
                   <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>
                 )
               )}
-              {block.title && <p className="display-5 leading-snug">{block.title}</p>}
+              {block.title && <p className={`display-5 leading-snug ${titleTextCls}`}>{block.title}</p>}
               {block.body && (
-                <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyClamp}`}>
+                <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyTextCls}`}>
                   {block.body}
                 </div>
               )}
@@ -1089,9 +1095,9 @@ export function Tile(block: TileBlock) {
         <article className={shell}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>}
-          {block.title && <p className="display-5 leading-snug">{block.title}</p>}
+          {block.title && <p className={`display-5 leading-snug ${titleTextCls}`}>{block.title}</p>}
           {block.body && (
-            <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyClamp}`}>
+            <div className={`body ${bodyToneCls(tone)} ${block.title ? "mt-3" : ""} ${bodyTextCls}`}>
               {block.body}
             </div>
           )}
@@ -1131,10 +1137,10 @@ export function Tile(block: TileBlock) {
                 </p>
               )}
               {block.title && (
-                <p className="display-5 leading-snug">{block.title}</p>
+                <p className={`display-5 leading-snug ${titleTextCls}`}>{block.title}</p>
               )}
               {block.body && (
-                <div className={`body ${bodyToneCls(tone)} mt-3 max-w-[34ch] ${bodyClamp}`}>
+                <div className={`body ${bodyToneCls(tone)} mt-3 max-w-[34ch] ${bodyTextCls}`}>
                   {block.body}
                 </div>
               )}
@@ -1148,12 +1154,12 @@ export function Tile(block: TileBlock) {
           <p className={`display-3 leading-none ${tone === "brand" ? "text-brand-foreground" : "text-brand"}`}>{block.number}</p>
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mt-4`}>{block.eyebrow}</p>}
           {block.title && (
-            <p className={`display-5 leading-snug ${block.eyebrow ? "mt-1" : "mt-4"}`}>
+            <p className={`display-5 leading-snug ${block.eyebrow ? "mt-1" : "mt-4"} ${titleTextCls}`}>
               {block.title}
             </p>
           )}
           {block.body && (
-            <div className={`body ${bodyToneCls(tone)} mt-3 ${bodyClamp}`}>{block.body}</div>
+            <div className={`body ${bodyToneCls(tone)} mt-3 ${bodyTextCls}`}>{block.body}</div>
           )}
         </article>
       );
@@ -1184,7 +1190,7 @@ export function Tile(block: TileBlock) {
                 </p>
               )}
               <blockquote
-                className={`display-3 leading-tight ${isLightTone(tone) ? "text-zinc-900" : "text-white"}`}
+                className={`display-4 leading-snug line-clamp-5 text-pretty ${isLightTone(tone) ? "text-zinc-900" : "text-white"}`}
               >
                 &ldquo;{block.quote}&rdquo;
               </blockquote>
@@ -1199,7 +1205,7 @@ export function Tile(block: TileBlock) {
         <article className={shell}>
           {block.eyebrow && <p className={`${eyebrowToneCls(tone)} mb-4`}>{block.eyebrow}</p>}
           <blockquote
-            className={`display-3 leading-tight ${isLightTone(tone) ? "text-zinc-900" : "text-white"}`}
+            className={`display-4 leading-snug line-clamp-5 text-pretty ${isLightTone(tone) ? "text-zinc-900" : "text-white"}`}
           >
             &ldquo;{block.quote}&rdquo;
           </blockquote>
@@ -1213,8 +1219,8 @@ export function Tile(block: TileBlock) {
       return (
         <article className={shell}>
           {block.icon && <TileIcon icon={block.icon} tone={tone} />}
-          <p className="display-5 leading-snug">{block.term}</p>
-          <div className={`body-sm ${bodyToneCls(tone)} mt-2`}>{block.definition}</div>
+          <p className={`display-5 leading-snug ${titleTextCls}`}>{block.term}</p>
+          <div className={`body-sm ${bodyToneCls(tone)} mt-2 text-pretty`}>{block.definition}</div>
         </article>
       );
 
@@ -1237,7 +1243,7 @@ export function Tile(block: TileBlock) {
                   <p className={`${eyebrowToneCls(tone)} mb-1`}>{block.eyebrow}</p>
                 )}
                 {block.title && (
-                  <p className="display-5 leading-tight truncate">{block.title}</p>
+                  <p className={`display-5 leading-tight ${titleTextCls}`}>{block.title}</p>
                 )}
               </div>
             </div>
@@ -1289,9 +1295,9 @@ export function Tile(block: TileBlock) {
                   <p className={`${eyebrowToneCls(tone)} mb-2`}>{block.eyebrow}</p>
                 )
               )}
-              {block.title && <p className="display-5 leading-snug relative z-10">{block.title}</p>}
+              {block.title && <p className={`display-5 leading-snug relative z-10 ${titleTextCls}`}>{block.title}</p>}
               {block.body && (
-                <div className={`body ${tone === "brand" ? "" : bodyToneCls(tone)} ${block.title ? "mt-3" : ""} relative z-10`}>
+                <div className={`body ${tone === "brand" ? "" : bodyToneCls(tone)} ${block.title ? "mt-3" : ""} relative z-10 ${bodyTextCls}`}>
                   {block.body}
                 </div>
               )}
@@ -1337,7 +1343,7 @@ export function Tile(block: TileBlock) {
                 {block.label}
               </p>
             )}
-            <p className="display-5 leading-snug relative z-10">{block.value}</p>
+            <p className={`display-5 leading-snug relative z-10 ${titleTextCls}`}>{block.value}</p>
             {block.caption && (
               <p
                 className={`label mt-3 relative z-10 ${
@@ -1359,7 +1365,7 @@ export function Tile(block: TileBlock) {
           {block.icon && (
             <div className={`${iconToneCls(tone)} mb-3 [&>*]:size-5`}>{block.icon}</div>
           )}
-          <p className="display-3 leading-none">{block.value}</p>
+          <p className={`display-3 leading-none ${titleTextCls}`}>{block.value}</p>
           <p
             className={`eyebrow mt-3 ${
               isLightTone(tone)
@@ -1371,7 +1377,7 @@ export function Tile(block: TileBlock) {
                     : "text-zinc-300"
             }`}
           >
-            {block.label}
+            <span className="line-clamp-2 text-balance">{block.label}</span>
           </p>
         </article>
       );
