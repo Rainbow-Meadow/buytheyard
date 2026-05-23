@@ -1,8 +1,59 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HelpCircle, Layers, Phone, Truck } from "lucide-react";
+import {
+  Calculator,
+  Flower2,
+  HelpCircle,
+  Home,
+  Layers,
+  MapPin,
+  Mountain,
+  Phone,
+  Ruler,
+  Sprout,
+  TreePine,
+  Truck,
+} from "lucide-react";
 import { categories, products } from "@/data/products";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile, type TileBlock } from "@/components/site/Tile";
+
+const projectGuides = [
+  {
+    id: "beds",
+    icon: <TreePine />,
+    eyebrow: "Flower beds",
+    title: "Fresh mulch, less guessing.",
+    body: "Most bed refreshes use 2–3 inches. Tell Abby the bed size and color you like, and she’ll help dial in the yards.",
+  },
+  {
+    id: "lawn",
+    icon: <Sprout />,
+    eyebrow: "Lawn repair",
+    title: "Loam for seed, grading, and patching.",
+    body: "Screened loam is the usual starting point for thin spots, new lawn areas, and small re-grades.",
+  },
+  {
+    id: "driveway",
+    icon: <Truck />,
+    eyebrow: "Driveways & drainage",
+    title: "Use angular stone where it needs to lock in.",
+    body: "Crushed blue stone is the workhorse for driveways, drainage trenches, and base layers that need structure.",
+  },
+  {
+    id: "walkways",
+    icon: <Mountain />,
+    eyebrow: "Walkways & edges",
+    title: "Choose the stone by look and feel.",
+    body: "Pea stone, river stone, and decorative rock all behave differently underfoot. Photos help, but a call helps more.",
+  },
+  {
+    id: "garden",
+    icon: <Flower2 />,
+    eyebrow: "Garden center",
+    title: "Seasonal color changes fast.",
+    body: "Baskets, annuals, mums, pumpkins, and plant mix move with the weather. Call if you’re after something specific.",
+  },
+];
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -11,12 +62,13 @@ export const Route = createFileRoute("/products")({
       {
         name: "description",
         content:
-          "Bulk mulch, loam, sand, gravel, specialty stone, plus garden center and ASTM playground chips. Pickup or delivery from Jefferson, MA.",
+          "Bulk mulch, loam, sand, gravel, specialty stone, garden center materials, and project guidance from Buy The Yard in Jefferson, MA.",
       },
       { property: "og:title", content: "Products — Buy The Yard" },
       {
         property: "og:description",
-        content: "Bulk landscape materials. By the yard. Pickup or delivery in Central Mass.",
+        content:
+          "Find the right bulk material, estimate how much you need, and ask Abby before you order.",
       },
       { property: "og:url", content: "/products" },
       { property: "og:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
@@ -90,66 +142,174 @@ function ProductsPage() {
   }
 
   return (
-    <TileScreen
-      layout="section02"
-      label="Materials catalog"
-      heading="Materials catalog — mulch, loam, sand, and stone"
-      headingLevel="h1"
-      tiles={{
-        hero: (
-          <Tile
-            id="products-carousel"
-            fill
-            variant="carousel"
-            ariaLabel="Browse materials by category"
-            slides={categorySlides}
-            controls="both"
-          />
-        ),
-        a: (
-          <Tile
-            id="products-call"
-            fill
-            variant="cta"
-            tone="brand"
+    <>
+      <TileScreen
+        layout="section02"
+        label="Materials catalog"
+        heading="Materials catalog — mulch, loam, sand, and stone"
+        headingLevel="h1"
+        tiles={{
+          hero: (
+            <Tile
+              id="products-carousel"
+              fill
+              variant="carousel"
+              ariaLabel="Browse materials by category"
+              slides={categorySlides}
+              controls="both"
+            />
+          ),
+          a: (
+            <Tile
+              id="products-call"
+              fill
+              variant="cta"
+              tone="brand"
+              icon={<Phone />}
+              anchorIndex="02"
+              eyebrow="Today's price by phone"
+              title="Tell Abby what you’re working on."
+              body="One call helps match the material, rough quantity, and delivery plan."
+              cta={{ label: "508.579.9897", href: "tel:5085799897" }}
+            />
+          ),
+          b: (
+            <Tile
+              id="products-delivery"
+              fill
+              variant="cta"
+              tone="surface"
+              icon={<Truck />}
+              anchorIndex="03"
+              eyebrow="Delivery"
+              title="Check the rules before you order."
+              body="1-yard minimum, driveway or curbline drop, and 48 hours is best."
+              cta={{ label: "Delivery details", to: "/delivery" }}
+            />
+          ),
+          c: (
+            <Tile
+              id="products-quote"
+              fill
+              variant="cta"
+              tone="kraft"
+              icon={<HelpCircle />}
+              anchorIndex="04"
+              eyebrow="Quote"
+              title="Build a list, even if it’s rough."
+              body="Abby can confirm the quantity before anything leaves the yard."
+              cta={{ label: "Start a quote", to: "/quote" }}
+            />
+          ),
+        }}
+      />
 
-            icon={<Phone />}
-            anchorIndex="02"
-            eyebrow="Today's price by phone"
-            title="Materials. By the yard."
-            body="One call sizes the project and locks the price."
-            cta={{ label: "508.579.9897", href: "tel:5085799897" }}
-          />
-        ),
-        b: (
-          <Tile
-            id="products-delivery"
-            fill
-            variant="cta"
-            tone="surface"
+      <TileScreen
+        layout="section01"
+        label="Shop by project"
+        heading="Shop by project — start with what you’re fixing"
+        tiles={{
+          hero: (
+            <Tile
+              id="project-hero"
+              fill
+              variant="text"
+              tone="surface"
+              layout="anchored"
+              icon={<Home />}
+              eyebrow="Not sure which material?"
+              title="Start with the project."
+              body="Most people do not wake up needing “three yards of something.” They need a cleaner bed, a better lawn, a driveway that drains, or stone that looks right. Start there and Abby can help with the rest."
+              cta={{ label: "Send the project to Abby", to: "/quote" }}
+            />
+          ),
+          ...Object.fromEntries(
+            projectGuides.map((guide, i) => [
+              ["a", "b", "c", "d", "e"][i],
+              (
+                <Tile
+                  key={guide.id}
+                  id={`project-${guide.id}`}
+                  fill
+                  variant="text"
+                  tone={i % 2 === 0 ? "kraft" : "white"}
+                  layout="anchored"
+                  anchorIndex={String(i + 1).padStart(2, "0")}
+                  icon={guide.icon}
+                  eyebrow={guide.eyebrow}
+                  title={guide.title}
+                  body={guide.body}
+                />
+              ),
+            ]),
+          ),
+        }}
+      />
 
-            icon={<Truck />}
-            anchorIndex="03"
-            eyebrow="Delivery"
-            title="Curbside delivery."
-            cta={{ label: "Delivery details", to: "/delivery" }}
-          />
-        ),
-        c: (
-          <Tile
-            id="products-quote"
-            fill
-            variant="cta"
-            tone="kraft"
-
-            icon={<HelpCircle />}
-            anchorIndex="04"
-            eyebrow="Quote"
-            title="Build a list in 60 seconds."
-            cta={{ label: "Start a quote", to: "/quote" }}
-          />
-        ),
-      }}
-    />
+      <TileScreen
+        layout="section03"
+        label="Quantity confidence"
+        heading="Quantity confidence"
+        tiles={{
+          hero: (
+            <Tile
+              id="quantity-helper"
+              fill
+              variant="numbered"
+              tone="kraft"
+              layout="anchored"
+              number="01"
+              icon={<Calculator />}
+              eyebrow="Before you order"
+              title="Measure what you can. Abby will confirm the rest."
+              body="Length × width × depth gets you close for mulch, loam, and stone. If you only know the project, send that — the yard can help turn it into yards."
+              cta={{ label: "Start a quote", to: "/quote" }}
+            />
+          ),
+          a: (
+            <Tile
+              id="quantity-depth"
+              fill
+              variant="text"
+              tone="white"
+              layout="anchored"
+              anchorIndex="02"
+              icon={<Ruler />}
+              eyebrow="Common depth"
+              title="Mulch beds usually start at 2–3 inches."
+              body="Freshening an existing bed and building a new bed are not the same order. Tell Abby which one you’re doing."
+            />
+          ),
+          b: (
+            <Tile
+              id="quantity-min"
+              fill
+              variant="stat"
+              tone="brand"
+              layout="anchored"
+              anchorIndex="03"
+              anchorGlyph={<Truck strokeWidth={1.25} />}
+              value="1 yd"
+              label="Delivery minimum"
+              caption="Per drop"
+            />
+          ),
+          c: (
+            <Tile
+              id="quantity-call"
+              fill
+              variant="cta"
+              tone="surface"
+              anchorIndex="04"
+              icon={<Phone />}
+              eyebrow="Nervous about quantity?"
+              title="Call before you commit."
+              body="Too much material is annoying. Too little costs another trip. Ask first."
+              cta={{ label: "508.579.9897", href: "tel:5085799897" }}
+            />
+          ),
+        }}
+      />
+    </>
   );
 }

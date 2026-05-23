@@ -23,6 +23,7 @@ import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
 import {
   AbbyTrustBreak,
+  DecisionPathBreak,
   DeliveryBasicsBreak,
   LocalProofPanel,
   OrderingBreak,
@@ -254,6 +255,7 @@ function HomePage() {
         }}
       />
 
+      <DecisionPathBreak />
       <OrderingBreak />
 
       <TileScreen
