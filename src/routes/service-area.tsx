@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ClipboardList, Home, Phone, Truck } from "lucide-react";
+import { ClipboardList, Home, MapPin, Phone, Truck } from "lucide-react";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
