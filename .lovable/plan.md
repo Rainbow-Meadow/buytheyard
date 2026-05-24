@@ -1,47 +1,51 @@
+# Strip all pages to header + footer only
 
-# Strip every page to hero + one empty placeholder section
+Remove all body content from every route. Keep only the global header and footer (which render via `__root.tsx`). Privacy/legal page is left untouched.
 
-Each route keeps its existing hero band and gets one empty `<section>` scaffold underneath as a build-from spot. Everything else below the hero is deleted, including the imports/helpers that fed those sections.
+## Routes affected
 
-## Routes touched
+Each of these becomes a near-empty route component — no hero, no placeholder section, no JSX content between header and footer:
 
-| Route | Keep | Delete |
-|---|---|---|
-| `index.tsx` | Hero `<section>` (lines ~81–130) | `DecisionPathBreak`, both lower `TileScreen`s, `DeliveryBasicsBreak`, `AbbyTrustBreak`, CTA bar, FEATURED list |
-| `about.tsx` | First hero `<section>` (lines ~70–132) | All 4 sections below it + `Stat` helper |
-| `delivery.tsx` | Hero `<section>` (lines ~32–48) | Lower `TileScreen` (section01) |
-| `service-area.tsx` | Hero `<section>` (lines ~72–88) | Towns `TileScreen` + lower `TileScreen` + `TOWNS` array + `Town` type + JSON-LD that references `TOWNS` (replace with a static empty `areaServed: []` placeholder so head() stays valid) |
-| `wbe.tsx` | First hero `TileScreen` (lines ~34–144) | Lower `<section>` |
-| `contact.tsx` | First hero `TileScreen` (lines ~65–148) | Second `TileScreen` |
-| `quote.tsx` | First hero `TileScreen` only (lines ~188 block, drop the giant form state) | Everything: form, state, validation, the 874-line body. Reduce file to ~80 lines: route + head + a function rendering just the hero TileScreen + placeholder section. Remove all imports the form needed (zod, react-hook-form, all icons except hero ones, etc.). |
-| `products.tsx` | Whole file as-is (already a single grid section — counts as "one section") | nothing |
-| `privacy.tsx` | Whole file (legal text — out of scope) | nothing |
+- `src/routes/index.tsx`
+- `src/routes/about.tsx`
+- `src/routes/delivery.tsx`
+- `src/routes/service-area.tsx`
+- `src/routes/wbe.tsx`
+- `src/routes/contact.tsx`
+- `src/routes/quote.tsx`
+- `src/routes/products.tsx`
 
-## Placeholder section shape
+## Untouched
 
-Identical drop-in on every stripped route, placed directly after the hero:
+- `src/routes/privacy.tsx` — legal page, keep as-is
+- `src/routes/__root.tsx` — header/footer live here, keep as-is
+- All shared components, styles, design tokens
+
+## Shape of each stripped route
 
 ```tsx
-<section aria-label="Section placeholder" className="border-b border-[var(--rule)]">
-  <div className="container mx-auto px-5 md:px-10 py-24 md:py-32">
-    <p className="eyebrow text-zinc-500">Next section</p>
-    <p className="body-sm text-zinc-500 mt-2">Empty — build from here.</p>
-  </div>
-</section>
+import { createFileRoute } from '@tanstack/react-router';
+
+export const Route = createFileRoute('/<path>')({
+  head: () => ({ meta: [{ title: '<Page> — Buy The Yard' }] }),
+  component: Page,
+});
+
+function Page() {
+  return <main aria-label="<Page>" />;
+}
 ```
 
-No tile system, no editorial primitives, no copy — just a marker so the page rhythm doesn't collapse to a single band.
+Each route keeps its own `head()` meta (title + description preserved from current file) so SEO and tab titles don't break. The component renders an empty `<main>` — header and footer from `__root.tsx` still wrap it.
 
 ## Cleanup
 
-- Drop now-unused imports from each touched route (the typecheck will surface them; remove rather than ignore).
-- Do NOT delete `src/components/home/HomeBreaks.tsx`, `src/components/site/editorial/*`, or the FEATURED products list source — they may be reused when the user rebuilds. Just stop importing them.
-- Do NOT touch `Tile.tsx`, `TileScreen.tsx`, styles.css, or any other shared component.
-- `.lovable/plan.md` updated automatically.
+- Drop all now-unused imports from each route file (TileScreen, Tile, icons, editorial primitives, etc.).
+- Do NOT delete any component files — only stop importing them. You'll rebuild from there.
 
 ## Verification
 
-- `rg -n 'DecisionPathBreak|DeliveryBasicsBreak|AbbyTrustBreak' src/routes/` returns no hits.
-- Each route file (except products/privacy) is under ~120 lines.
-- Build passes; no unused-import errors.
-- Visual check at 440px: each page = hero band, then a thin bordered empty band, then footer.
+- `rg "TileScreen|HomeBreaks|editorial" src/routes` returns no hits outside `privacy.tsx` / `__root.tsx`.
+- Every stripped route file is under ~20 lines.
+- Visual check at 440px on `/`, `/about`, `/quote`: header → blank → footer.
+- `/privacy` still renders full legal content.
