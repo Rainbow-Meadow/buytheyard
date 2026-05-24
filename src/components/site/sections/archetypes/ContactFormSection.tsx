@@ -53,7 +53,7 @@ export function ContactFormSection({
   }
 
   const inputCls =
-    "w-full bg-paper border border-ink/20 px-3 py-3 font-barlow text-base focus:outline-none focus:border-ember";
+    "w-full bg-paper border border-ink/20 px-3 py-3 font-barlow text-base focus:outline-none focus:border-ember text-black";
 
   return (
     <Section title={title} tone="paper" rule={false} heightClass={heightClass}>
