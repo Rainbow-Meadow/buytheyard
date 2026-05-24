@@ -41,6 +41,7 @@ function DeliveryPage() {
         imageAlt="Dump truck unloading black mulch at a delivery site"
       />
       <LogisticsSplitSection
+        heightClass="md:h-[calc(40svh-1.6rem)]"
         pickup={{
           heading: "Drive-in Pickup",
           body: "Bring a truck or a trailer — we'll load you up on the spot. No minimum on most products.",
@@ -54,6 +55,7 @@ function DeliveryPage() {
         }}
       />
       <ProcessStepsSection
+        heightClass="md:h-[calc(40svh-1.6rem)]"
         steps={[
           { title: "Pick Your Material", body: "Walk the catalog or call us. We'll help you figure the cubic yards if you're not sure." },
           { title: "Get A Price",        body: "Phone or the quote form — same day. Flat $75 delivery fee anywhere we go." },
@@ -61,6 +63,7 @@ function DeliveryPage() {
         ]}
       />
       <ContactCTASection
+        heightClass="md:h-[calc(20svh-0.8rem)]"
         phone="508.579.9897"
         email="abby@btymaterial.com"
         address={{ line1: "2264 Main St.", line2: "Jefferson, MA 01522" }}
