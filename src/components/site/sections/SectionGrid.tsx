@@ -9,11 +9,13 @@ const COLS: Record<2 | 3 | 4, string> = {
 export function SectionGrid({
   cols = 4,
   children,
+  className = "",
 }: {
   cols?: 2 | 3 | 4;
   children: ReactNode;
+  className?: string;
 }) {
-  return <div className={["grid", COLS[cols]].join(" ")}>{children}</div>;
+  return <div className={["grid", COLS[cols], className].join(" ")}>{children}</div>;
 }
 
 export function SectionGridCell({
