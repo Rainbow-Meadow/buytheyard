@@ -35,3 +35,9 @@ export { default as dumpTruckPouringRedMulch } from "./034_dump_truck_pouring_re
 export { default as btyBurgundyLogo } from "./035_bty_burgundy_logo.jpg";
 export { default as freshMulchBedAlongSuburbanHouse } from "./036_fresh_mulch_bed_along_suburban_house.jpg";
 export { default as wheelbarrowLoadedWithDarkMulch } from "./037_wheelbarrow_loaded_with_dark_mulch.jpg";
+// Real photography sourced from web (Wikimedia Commons + Flickr, CC-BY / CC-BY-SA / PDM)
+export { default as lavaRockCairnsKilauea } from "./038_lava_rock_cairns_kilauea.jpg"; // CC-BY-SA, Wikimedia
+export { default as pileOfCrushedLimestone } from "./039_pile_of_crushed_limestone.jpg"; // CC-BY-SA, geograph.org.uk via Wikimedia
+export { default as screenedTopsoilProcessing } from "./040_screened_topsoil_processing.jpg"; // CC-BY-SA, Wikimedia
+export { default as finishedCompostBin } from "./041_finished_compost_bin.jpg"; // CC-BY-SA, Wikimedia
+export { default as woodChipPile } from "./042_wood_chip_pile.jpg"; // CC-BY-SA, Flickr via Openverse
