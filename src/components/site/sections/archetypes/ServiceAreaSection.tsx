@@ -19,7 +19,7 @@ export function ServiceAreaSection({
 }: ServiceAreaProps) {
   return (
     <Section title={title} tone="paper">
-      <div className="grid grid-cols-1 md:grid-cols-2 min-h-svh md:items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:min-h-[50svh] md:items-center">
         <div className="p-8 md:p-16 border-b md:border-b-0 md:border-r border-soft">
           <DisplayHeading as="h2" size="md" className="mb-6">{heading}</DisplayHeading>
           <p className="font-barlow text-lg opacity-80 mb-8 max-w-md">{body}</p>
