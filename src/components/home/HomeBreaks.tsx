@@ -274,28 +274,23 @@ export function DeliveryBasicsBreak() {
 
 export function LocalProofPanel() {
   return (
-    <article className="relative h-full w-full overflow-hidden rounded-md bg-kraft text-zinc-900 ring-1 ring-zinc-300 p-5 md:p-6">
-      <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
+    <article className="relative h-full w-full overflow-hidden rounded-lg bg-kraft text-zinc-900 ring-1 ring-zinc-200 p-5 md:p-6">
+      <span aria-hidden="true" className="absolute left-0 inset-y-0 w-[1.5px] bg-brand" />
       <div className="relative z-10 flex h-full flex-col justify-between gap-5">
         <div>
-          <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-            <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
-            Local proof
-          </p>
-          <h2 className="display-3 max-w-[12ch] text-balance">Local proof with receipts</h2>
-          <p className="body-sm md:text-base md:leading-[1.6] text-zinc-700 mt-3 max-w-[54ch] text-pretty">
+          <p className="eyebrow text-brand mb-3">Local proof</p>
+          <h2 className="display-4 max-w-[16ch] text-balance">Local proof with receipts</h2>
+          <p className="body-sm text-zinc-700 mt-3 max-w-[54ch] text-pretty">
             Certified, licensed, locally rooted — with real donations and town support to show
             for it.
           </p>
         </div>
-        <div className="grid gap-2.5 md:grid-cols-3">
+        <div className="grid gap-2.5 md:grid-cols-3 auto-rows-fr">
           {proofRows.map((row) => (
-            <div key={row.label} className="rounded-md bg-white/70 ring-1 ring-zinc-300 p-3 md:p-4">
-              <div className="text-brand mb-2 [&>*]:size-5" aria-hidden="true">
-                {row.icon}
-              </div>
-              <p className="eyebrow text-brand mb-1">{row.label}</p>
-              <p className="body-sm text-zinc-800 text-pretty">{row.value}</p>
+            <div key={row.label} className="relative rounded-md bg-white ring-1 ring-zinc-200 p-3 md:p-4 flex flex-col gap-2">
+              <span aria-hidden="true" className="absolute left-0 inset-y-2 w-[1.5px] bg-brand" />
+              <p className="eyebrow text-brand">{row.label}</p>
+              <p className="body-sm text-zinc-800 text-pretty leading-snug">{row.value}</p>
             </div>
           ))}
         </div>
