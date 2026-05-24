@@ -5,14 +5,9 @@ import {
   largePileOfBlackMulch,
   largePileOfRedMulch,
   dumpTruckBedFullOfBrownMulch,
-  grayCrushedStoneWithCoinCloseup,
   tanPeaGravelWithCoinCloseup,
   darkRiverRocksWithGolfBallCloseup,
   reddishBrownLandscapeStoneWithCoinCloseup,
-  whiteMarbleChipsWithCoinCloseup,
-  blueGrayCrushedStoneWithQuarterCloseup,
-  largeGrayCrushedRockWithQuarterCloseup,
-  tanRiverRocksWithQuarterCloseup,
   mixedLandscapeStoneSamplesOnGround,
   largePileOfLightSand,
   paleTanCrushedStoneWithPennyCloseup,
@@ -32,15 +27,9 @@ export const MULCH: CatalogItem[] = [
 ];
 
 export const STONE: CatalogItem[] = [
-  { name: "3/4\" Crushed Stone", description: "Versatile drainage stone for driveways, walkways, and french drains.", price: "$42.00", unit: "per yd", image: grayCrushedStoneWithCoinCloseup },
-  { name: "3/8\" Pea Stone", description: "Smooth, rounded pea gravel. Great for patios, paths, and dog runs.", price: "$48.00", unit: "per yd", image: tanPeaGravelWithCoinCloseup },
-  { name: "1-1/2\" River Stone", description: "Tumbled multi-color river rock. Decorative beds and dry creek features.", price: "$78.00", unit: "per yd", image: darkRiverRocksWithGolfBallCloseup },
-  { name: "Round Brown Stone", description: "Rounded brown landscape stone. A classic warm accent.", price: "$95.00", unit: "per yd", stockNote: "when in stock", image: reddishBrownLandscapeStoneWithCoinCloseup },
-  { name: "Round White Stone", description: "Bright white decorative stone for high-contrast beds and borders.", price: "$110.00", unit: "per yd", image: whiteMarbleChipsWithCoinCloseup },
-  { name: "Crushed Bluestone", description: "Angular blue-gray stone. Sharp lines for modern hardscapes.", price: "$68.00", unit: "per yd", image: blueGrayCrushedStoneWithQuarterCloseup },
-  { name: "Cobblestone Mix", description: "Hand-sized cobbles. Great for edging and accent borders.", price: "$125.00", unit: "per yd", image: largeGrayCrushedRockWithQuarterCloseup },
-  // TODO: replace with real lava rock photo
-  { name: "Lava Rock", description: "Lightweight red volcanic rock. Long-lasting and low-maintenance.", price: "$95.00", unit: "per yd", image: tanRiverRocksWithQuarterCloseup },
+  { name: "1-1/2\" Landscaping Stone", description: "Decorative landscape stone in 1-1/2\" size. Available in brown, blue, and dark gray.", price: "$95.00", unit: "per yd", image: darkRiverRocksWithGolfBallCloseup },
+  { name: "3/4\" Landscaping Stone", description: "Our most versatile size. Available in brown, blue, white, red, purple, dark gray, and light gray.", price: "$95.00", unit: "per yd", image: reddishBrownLandscapeStoneWithCoinCloseup },
+  { name: "3/8\" Landscaping Stone", description: "Smooth, finer-scale decorative stone. Available in brown, blue, dark gray, and light gray.", price: "$95.00", unit: "per yd", image: tanPeaGravelWithCoinCloseup },
 ];
 
 export const ADDITIONAL: CatalogItem[] = [
