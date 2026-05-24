@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Truck } from "lucide-react";
 import { Tile } from "@/components/site/Tile";
-import { TileScreen } from "@/components/site/TileScreen";
 
 export const Route = createFileRoute("/delivery")({
   head: () => ({
