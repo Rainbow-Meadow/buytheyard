@@ -10,17 +10,17 @@ import { workerHoldingBagsOfLandscapeMaterial } from "@/assets/photos";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "Meet Abby Montalto — Buy The Yard | Jefferson, MA" },
+      { title: "Meet Abby Montalto — Buy The Yard · Jefferson, MA" },
       {
         name: "description",
         content:
-          "Meet Abby Montalto, owner of Buy The Yard — a woman-owned, MA WBE-certified materials yard in Jefferson, MA with Central Mass construction roots.",
+          "Abby Montalto runs Buy The Yard on 122A in Jefferson, MA — a WBE-certified materials yard with Central Mass construction roots.",
       },
       { property: "og:title", content: "Meet Abby — Buy The Yard" },
       {
         property: "og:description",
         content:
-          "The story behind Buy The Yard: Abby Montalto, family construction roots, WBE certification, and a Jefferson yard built on practical help.",
+          "Abby Montalto, family construction roots, WBE certification, and a yard on 122A in Jefferson, MA.",
       },
       { property: "og:url", content: "/about" },
     ],
@@ -33,23 +33,23 @@ function AboutPage() {
   return (
     <main aria-label="About" className="font-barlow">
       <HeroSection
-        meta="ABOUT — EST. 2016"
+        meta="ABOUT · EST. 2016"
         heading={<>Meet Abby.<br/>Meet The Yard.</>}
-        body="Buy The Yard is a woman-owned, WBE-certified materials yard in Jefferson, MA. Built on Central Mass construction roots and a customer-first way of working."
+        body="A woman-owned, WBE-certified materials yard on 122A in Jefferson, MA. Built on Central Mass construction roots — and on knowing what people actually need when they pull up with a truck."
         ctaLabel="Visit The Yard"
         ctaTo="/contact"
         image={workerHoldingBagsOfLandscapeMaterial}
         imageAlt="Worker holding bags of landscape material at the yard"
       />
       <OwnerStorySection
-        heading={<>WBE Certified<br/>Woman-Owned</>}
-        body="Founded by Abby Montalto in 2016, Buy The Yard is a certified Woman Business Enterprise by the Commonwealth of Massachusetts. We bring a professional, customer-first approach to a heavy industry."
+        heading={<>Woman-Owned.<br/>WBE Certified.</>}
+        body="Abby Montalto opened Buy The Yard in Jefferson in 2016. Certified Woman Business Enterprise by the Commonwealth of Massachusetts — a woman running a materials yard in a business that doesn't see many."
         badges={["WBE", "MASS"]}
       />
       <TestimonialsSection
         items={[
-          { quote: "The best mulch in Central Mass. Clean, consistent, and delivered exactly where I needed it.", attribution: "MARK S. / RESIDENTIAL" },
-          { quote: "Reliable logistics for our commercial landscape crews. They understand the urgency of site work.", attribution: "GREEN LANDSCAPE INC." },
+          { quote: "Best mulch around. Clean load, dropped right where I marked it.", attribution: "MARK S. · HOLDEN" },
+          { quote: "They get our crews loaded and out fast. Same-day when we need it.", attribution: "GREEN LANDSCAPE INC." },
         ]}
       />
       <ContactCTASection
