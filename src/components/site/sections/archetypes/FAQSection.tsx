@@ -1,20 +1,16 @@
 import { Section } from "../Section";
-import { SectionHeader } from "../SectionHeader";
 
 export interface FAQItem { q: string; a: string }
 
 export function FAQSection({
   title = "FIELD QUESTIONS",
-  heading = "Frequently Asked Questions",
   items,
 }: {
   title?: string;
-  heading?: string;
   items: FAQItem[];
 }) {
   return (
     <Section title={title} tone="paper">
-      <SectionHeader heading={heading} size="md" rule />
       <div className="divide-y divide-soft">
         {items.map((it) => (
           <details key={it.q} className="group">
