@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ====== UNIFIED VISUAL SYSTEM — "Technical Ledger" ======
+   ONE formatting language. Inter everywhere, JetBrains Mono for meta.
+   Surfaces: white, ink (zinc-900), brand (red-600), muted (zinc-50).
+   Hairline borders only. Rounded-lg / rounded-md. Single red accent.
+================================================================ */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -19,62 +25,48 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --font-display: 'Saira Extra Condensed', sans-serif;
+  --font-display: 'Inter', sans-serif;
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
-  --background: oklch(0.972 0.005 80);          /* #f7f5f2 base */
+  --background: oklch(0.985 0 0);
   --foreground: oklch(0.18 0.005 280);
-  --surface: oklch(0.16 0.005 280);             /* near-black #0c0c0e */
+  --surface: oklch(0.22 0.005 280);
   --surface-foreground: oklch(0.97 0 0);
-  --base: oklch(0.972 0.005 80);
-  --kraft: oklch(0.91 0.012 80);                /* #e8e4dc */
-  --brand: oklch(0.51 0.20 27);                 /* #ba1a1a red */
+  --base: oklch(0.985 0 0);
+  --kraft: oklch(0.985 0 0);
+  --brand: oklch(0.58 0.21 27);
   --brand-foreground: oklch(0.99 0 0);
-  --brand-glow: oklch(0.75 0.18 27);             /* same hue/chroma as --brand, lifted L for dark/photo eyebrows */
-  --brandmark-gray: oklch(0.635 0.003 280);     /* #909092 brandmark right-triangle */
-  --muted: oklch(0.91 0.012 80);
-  --muted-foreground: oklch(0.45 0.01 280);
-  --border: oklch(0.85 0.01 80);
-  --ring: oklch(0.51 0.20 27);
+  --brand-glow: oklch(0.72 0.18 27);
+  --brandmark-gray: oklch(0.92 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.55 0.005 280);
+  --border: oklch(0.93 0 0);
+  --ring: oklch(0.58 0.21 27);
 
-  /* ----- Editorial layer -----
-     Used by EditorialSection and friends. The editorial layer is a parallel
-     composition language to the tile system: typographic body copy, hairline
-     rules, mono micro-labels, ledger rows, offset tile overlays. */
-  --editorial-bg: oklch(0.965 0.006 80);   /* slightly warmer than --base */
-  --rule: oklch(0.85 0.005 80);            /* zinc-300 equivalent on warm base */
-  --rule-strong: oklch(0.55 0.01 280);
+  --editorial-bg: oklch(0.985 0 0);
+  --rule: oklch(0.93 0 0);
+  --rule-strong: oklch(0.45 0 0);
 
-  /* ----- Tile grid metrics — single source of truth -----
-     Consumed by the `tile-grid` utility below AND read at runtime by
-     `sizesForSpan()` in src/components/site/Tile.tsx to keep image
-     `sizes` hints accurate when these values change.
-     Keep all values in px so JS can parseFloat() without unit math. */
-  --tile-grid-gap-mobile: 8px;
-  --tile-grid-gap-desktop: 16px;
-  --tile-container-max: 1280px;       /* matches max-w-7xl */
-  --tile-container-pad-mobile: 20px;  /* matches px-5  */
-  --tile-container-pad-desktop: 24px; /* matches md:px-6 */
+  --tile-grid-gap-mobile: 1px;
+  --tile-grid-gap-desktop: 1px;
+  --tile-container-max: 1280px;
+  --tile-container-pad-mobile: 20px;
+  --tile-container-pad-desktop: 24px;
   --tile-grid-cols-mobile: 2;
   --tile-grid-cols-desktop: 6;
   --tile-md-breakpoint: 768px;
 
-  /* ----- Tile-screen viewport metrics -----
-     Header is sticky and `h-16` (64px) at every breakpoint.
-     `--tile-screen-h` = the viewport height minus the header, used as
-     the fixed outer height of every <TileScreen>. Override per-route
-     if a different chrome height is ever introduced. */
   --header-h: 64px;
-  --tile-screen-h: calc(100svh - var(--header-h));
-  --tile-screen-pad-mobile: 8px;
-  --tile-screen-pad-desktop: 16px;
+  --tile-screen-h: auto;
+  --tile-screen-pad-mobile: 0px;
+  --tile-screen-pad-desktop: 0px;
 }
 
 .dark {
-  --background: oklch(0.16 0.005 280);
+  --background: oklch(0.18 0.005 280);
   --foreground: oklch(0.97 0 0);
 }
 
@@ -84,279 +76,111 @@
   body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 }
 
-/* Shared vertical section spacing scale.
-   Top padding is intentionally shorter than bottom so eyebrows hug the
-   section above. Use `section` as the default, `section-tight` for dense
-   strips, `section-loose` for hero/CTA panels. */
+/* ---------- Section padding ---------- */
 @utility section-tight {
-  padding-top: 0.5rem;     /* 8px */
-  padding-bottom: 0.75rem; /* 12px */
-  @media (min-width: 768px) {
-    padding-top: 1.5rem;   /* 24px */
-    padding-bottom: 2rem;  /* 32px */
-  }
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  @media (min-width: 768px) { padding-top: 2rem; padding-bottom: 3rem; }
 }
-
 @utility section {
-  padding-top: 0.875rem;   /* 14px */
-  padding-bottom: 1.25rem; /* 20px */
-  @media (min-width: 768px) {
-    padding-top: 2.5rem;   /* 40px */
-    padding-bottom: 3.5rem;/* 56px */
-  }
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+  @media (min-width: 768px) { padding-top: 4rem; padding-bottom: 5rem; }
 }
-
 @utility section-loose {
-  padding-top: 1.25rem;    /* 20px */
-  padding-bottom: 1.75rem; /* 28px */
-  @media (min-width: 768px) {
-    padding-top: 4rem;     /* 64px */
-    padding-bottom: 5.5rem;/* 88px */
-  }
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  @media (min-width: 768px) { padding-top: 5rem; padding-bottom: 6rem; }
 }
 
-/* =========================================================================
-   Tile grid schema — Magazine (desktop) / Gallery (mobile).
-
-   All modular tile groups share one underlying track:
-     mobile  → 2-column gallery
-     md+     → 6-column magazine
-
-   Use `tile-grid` as the container, and one `tile-*` size on each child.
-   Span sizes are intentionally fixed so rhythm is consistent across pages.
-
-   Sizes (mobile span / desktop span out of 6):
-     tile-sm       1 / 2   small square (gallery cell, third on desktop)
-     tile-third    2 / 2   full on mobile, one-third on desktop (3-up rows)
-     tile-md       2 / 3   half-width on desktop, full on mobile
-     tile-lg       2 / 4   two-thirds desktop, full mobile
-     tile-feature  2 / 6   full-width lead tile, both breakpoints
-     tile-row-tall —/ row-span-2 on desktop only (pairs with sm/md)
-
-   Gap: 0.5rem mobile (tight gallery), 1rem md+ (magazine breathing room).
-   Never inline custom `col-span-*` on tiles inside `tile-grid` — pick a size
-   or extend this schema.
-   ========================================================================= */
-
+/* ---------- Tile grid (legacy API preserved) ---------- */
 @utility tile-grid {
   display: grid;
   grid-template-columns: repeat(var(--tile-grid-cols-mobile), minmax(0, 1fr));
-  gap: var(--tile-grid-gap-mobile);
+  gap: 1px;
+  background-color: var(--rule);
   @media (min-width: 768px) {
     grid-template-columns: repeat(var(--tile-grid-cols-desktop), minmax(0, 1fr));
-    gap: var(--tile-grid-gap-desktop);
   }
 }
+@utility tile-sm     { grid-column: span 1 / span 1; @media (min-width: 768px) { grid-column: span 2 / span 2; } }
+@utility tile-third  { grid-column: span 2 / span 2; @media (min-width: 768px) { grid-column: span 2 / span 2; } }
+@utility tile-md     { grid-column: span 2 / span 2; @media (min-width: 768px) { grid-column: span 3 / span 3; } }
+@utility tile-lg     { grid-column: span 2 / span 2; @media (min-width: 768px) { grid-column: span 4 / span 4; } }
+@utility tile-feature{ grid-column: span 2 / span 2; @media (min-width: 768px) { grid-column: span 6 / span 6; } }
+@utility tile-row-tall { @media (min-width: 768px) { grid-row: span 2 / span 2; } }
 
-@utility tile-sm {
-  grid-column: span 1 / span 1;
-  @media (min-width: 768px) {
-    grid-column: span 2 / span 2;
-  }
-}
-
-@utility tile-third {
-  grid-column: span 2 / span 2;
-  @media (min-width: 768px) {
-    grid-column: span 2 / span 2;
-  }
-}
-
-@utility tile-md {
-  grid-column: span 2 / span 2;
-  @media (min-width: 768px) {
-    grid-column: span 3 / span 3;
-  }
-}
-
-@utility tile-lg {
-  grid-column: span 2 / span 2;
-  @media (min-width: 768px) {
-    grid-column: span 4 / span 4;
-  }
-}
-
-@utility tile-feature {
-  grid-column: span 2 / span 2;
-  @media (min-width: 768px) {
-    grid-column: span 6 / span 6;
-  }
-}
-
-@utility tile-row-tall {
-  @media (min-width: 768px) {
-    grid-row: span 2 / span 2;
-  }
-}
-
-/* =========================================================================
-   Tile-screen schema — one composition per viewport.
-
-   Each TileScreen is exactly --tile-screen-h tall (100svh - header) and
-   never scrolls vertically. Slots are placed with `grid-template-areas`
-   so every supported layout has a single canonical shape on each
-   breakpoint. Content inside a slot must use `h-full w-full`.
-
-   Slot keys (typed in TileScreen.tsx): hero, a, b, c, d, e.
-   Not all layouts use every slot.
-   ========================================================================= */
-
+/* ---------- Tile-screen (scroll-flow, hairline grid) ---------- */
 @utility tile-screen {
   display: grid;
   width: 100%;
-  height: var(--tile-screen-h);
-  padding: var(--tile-screen-pad-mobile);
-  gap: var(--tile-screen-pad-mobile);
+  gap: 1px;
+  background-color: var(--rule);
   box-sizing: border-box;
-  @media (min-width: 768px) {
-    padding: var(--tile-screen-pad-desktop);
-    gap: var(--tile-screen-pad-desktop);
-  }
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
-
 @utility tile-screen-cell {
   min-width: 0;
   min-height: 0;
   display: flex;
+  background-color: var(--background);
 }
 
-/* pageHero — hero + 4 stats */
 @utility ts-page-hero {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 1fr 1fr;
-  grid-template-areas:
-    "hero hero"
-    "a b"
-    "c d";
+  grid-template-areas: "hero hero" "a b" "c d";
   @media (min-width: 768px) {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      "hero hero hero hero a b"
-      "hero hero hero hero c d";
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: "hero hero hero hero" "a b c d";
   }
 }
-
-@media (max-width: 767px) {
-  .wbe-page-hero {
-    height: auto;
-    min-height: var(--tile-screen-h);
-    grid-template-rows: auto minmax(180px, auto) minmax(180px, auto);
-  }
-
-  .wbe-page-hero .tile-screen-cell {
-    min-height: 180px;
-  }
-
-  .wbe-page-hero .ts-slot-hero {
-    min-height: min(450px, calc(var(--tile-screen-h) - 24px));
-  }
-}
-
-/* section01 — hero (rows 1-2) + a/b right column + 3-tile bottom strip */
 @utility ts-section-01 {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "hero hero"
-    "a b"
-    "c d"
-    "e e";
+  grid-template-areas: "hero hero" "a b" "c d" "e e";
   @media (min-width: 768px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas:
-      "hero hero hero hero a a"
-      "hero hero hero hero b b"
-      "c c d d e e";
+    grid-template-areas: "hero hero hero hero hero hero" "a a b b c c" "d d d e e e";
   }
 }
-
-/* section02 — hero spans full height left, a wide top-right, b/c split bottom-right */
 @utility ts-section-02 {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 1fr 2fr;
-  grid-template-areas:
-    "hero hero"
-    "a a"
-    "b c";
+  grid-template-areas: "hero hero" "a a" "b c";
   @media (min-width: 768px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr 2fr;
-    grid-template-areas:
-      "hero hero hero hero a a"
-      "hero hero hero hero b c";
+    grid-template-areas: "hero hero hero hero hero hero" "a a b b c c";
   }
 }
-
-/* section03 — equal rows, hero top-left, a tall-right, 3 bottom tiles */
 @utility ts-section-03 {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr;
-  grid-template-areas:
-    "hero hero"
-    "a a"
-    "b c";
+  grid-template-areas: "hero hero" "a a" "b c";
   @media (min-width: 768px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      "hero hero hero hero a a"
-      "b b c c d d";
+    grid-template-areas: "hero hero hero hero hero hero" "a a b b c c";
   }
 }
-
-/* section03Stacked — same as section03 but b/c stack full-width on mobile */
 @utility ts-section-03-stacked {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "hero hero"
-    "a a"
-    "b b"
-    "c c";
+  grid-template-areas: "hero hero" "a a" "b b" "c c";
   @media (min-width: 768px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      "hero hero hero hero a a"
-      "b b c c d d";
+    grid-template-areas: "hero hero hero hero hero hero" "a a b b c c";
   }
 }
-
-/* section04 — like 03 but the hero row is taller */
 @utility ts-section-04 {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 1fr 1fr;
-  grid-template-areas:
-    "hero hero"
-    "a a"
-    "b c";
+  grid-template-areas: "hero hero" "a a" "b c";
   @media (min-width: 768px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 2fr 1fr;
-    grid-template-areas:
-      "hero hero hero hero a a"
-      "b b c c d d";
+    grid-template-areas: "hero hero hero hero hero hero" "a a b b c c";
   }
 }
-
-/* section05 — hero rows 1-2, a/b right column, 3 bottom tiles */
 @utility ts-section-05 {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "hero hero"
-    "a b"
-    "c c"
-    "d e";
+  grid-template-areas: "hero hero" "a b" "c c" "d e";
   @media (min-width: 768px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas:
-      "hero hero hero hero a a"
-      "hero hero hero hero b b"
-      "c c d d e e";
+    grid-template-areas: "hero hero hero hero hero hero" "a a b b c c" "d d d e e e";
   }
 }
 
@@ -367,297 +191,183 @@
 @utility ts-slot-d    { grid-area: d; }
 @utility ts-slot-e    { grid-area: e; }
 
-/* =========================================================================
-   Flip tile — 3D card flip. The button is the perspective container;
-   `.tile-flip-inner` rotates around Y; faces use backface-visibility to
-   hide whichever side is facing away. Reduced-motion users get a crossfade.
-   ========================================================================= */
-
-@utility tile-flip {
-  perspective: 1400px;
-  display: block;
-}
-
-.tile-flip-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-  transform-style: preserve-3d;
-}
-
-.tile-flip-inner.is-flipped {
-  transform: rotateY(180deg);
-}
-
-.tile-flip-face {
-  position: absolute;
-  inset: 0;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border-radius: 0.375rem; /* match rounded-md */
-  overflow: hidden;
-}
-
-.tile-flip-back {
-  transform: rotateY(180deg);
-}
-
+/* ---------- Flip tile (preserved) ---------- */
+@utility tile-flip { perspective: 1400px; display: block; }
+.tile-flip-inner { position: relative; width: 100%; height: 100%; transition: transform .7s cubic-bezier(.22,.61,.36,1); transform-style: preserve-3d; }
+.tile-flip-inner.is-flipped { transform: rotateY(180deg); }
+.tile-flip-face { position: absolute; inset: 0; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: .5rem; overflow: hidden; }
+.tile-flip-back { transform: rotateY(180deg); }
 @media (prefers-reduced-motion: reduce) {
-  .tile-flip-inner {
-    transition: opacity 0.2s ease;
-    transform: none !important;
-  }
-  .tile-flip-face {
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-    transition: opacity 0.2s ease;
-  }
+  .tile-flip-inner { transition: opacity .2s ease; transform: none !important; }
+  .tile-flip-face { -webkit-backface-visibility: visible; backface-visibility: visible; transition: opacity .2s ease; }
   .tile-flip-back { opacity: 0; }
   .tile-flip-inner.is-flipped .tile-flip-face:not(.tile-flip-back) { opacity: 0; }
   .tile-flip-inner.is-flipped .tile-flip-back { opacity: 1; }
 }
-
-/* Image-tile focal point. The component sets `--op-mobile` (and optionally
-   `--op-desktop`) inline; this utility wires them into `object-position`
-   with a media-query switch so the same <img> can re-center when the
-   frame's aspect ratio changes at the md breakpoint. */
 @utility tile-focal {
   object-position: var(--op-mobile, center);
-  @media (min-width: 768px) {
-    object-position: var(--op-desktop, var(--op-mobile, center));
-  }
+  @media (min-width: 768px) { object-position: var(--op-desktop, var(--op-mobile, center)); }
 }
 
-/* =========================================================================
-   Typography schema — single source of truth.
-   Hierarchy:
-     Display (Saira Extra Condensed, UPPERCASE)
-       display-1  hero H1 (home + page hero pattern)
-       display-2  inner-route page H1
-       display-3  section H2 (default)
-       display-4  card title / accordion trigger / callout H3
-       display-5  small inline display (footer column heads, stat labels)
-     Sans (Inter)
-       lead       hero subhead / intro paragraph
-       body       default paragraph
-       body-sm    secondary copy, list items, captions
-       meta       timestamps, fine print, legal
-       eyebrow    kicker above H1/H2
-       label      button & CTA labels, nav links
-       micro      tiny stamps & chips (smallest stamp only)
-   Rules:
-     - One H1 per route.
-     - At most one display tier per section.
-     - Never use raw text-[Npx] or tracking-[Nem] — extend this schema instead.
-     - Color, max-w, leading-* modifiers compose freely on top.
-   ========================================================================= */
-
+/* ====== TYPOGRAPHY — Unified ====== */
 @utility display-1 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: 3.5rem;        /* 56px */
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  @media (min-width: 768px) {
-    font-size: 6rem;        /* 96px */
-  }
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 2.75rem;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  @media (min-width: 768px) { font-size: 4.25rem; line-height: 1; }
 }
-
 @utility display-2 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: 2.75rem;       /* 44px */
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  @media (min-width: 768px) {
-    font-size: 4rem;        /* 64px */
-  }
-}
-
-@utility display-3 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: 2.25rem;       /* 36px */
-  line-height: 0.95;
-  letter-spacing: -0.005em;
-  @media (min-width: 768px) {
-    font-size: 3rem;        /* 48px */
-  }
-}
-
-@utility display-4 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: 1.5rem;        /* 24px */
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 2.25rem;
   line-height: 1.05;
-  @media (min-width: 768px) {
-    font-size: 2rem;        /* 32px */
-  }
+  letter-spacing: -0.02em;
+  text-transform: none;
+  @media (min-width: 768px) { font-size: 3.5rem; }
 }
-
-@utility display-5 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: 1.25rem;       /* 20px */
+@utility display-3 {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 1.75rem;
   line-height: 1.1;
-  @media (min-width: 768px) {
-    font-size: 1.5rem;      /* 24px */
-  }
+  letter-spacing: -0.02em;
+  text-transform: none;
+  @media (min-width: 768px) { font-size: 2.5rem; }
 }
-
+@utility display-4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  @media (min-width: 768px) { font-size: 1.5rem; }
+}
+@utility display-5 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  @media (min-width: 768px) { font-size: 1.125rem; }
+}
 @utility lead {
-  font-size: 1.125rem;      /* 18px */
-  line-height: 1.6;
-  font-weight: 400;
-  @media (min-width: 768px) {
-    font-size: 1.25rem;     /* 20px */
-  }
-}
-
-@utility body {
-  font-size: 1rem;          /* 16px */
-  line-height: 1.6;
-  font-weight: 400;
-}
-
-@utility body-sm {
-  font-size: 0.875rem;      /* 14px */
+  font-size: 1.0625rem;
   line-height: 1.55;
   font-weight: 400;
+  @media (min-width: 768px) { font-size: 1.125rem; }
 }
-
+@utility body { font-size: 1rem; line-height: 1.6; font-weight: 400; }
+@utility body-sm { font-size: 0.875rem; line-height: 1.55; font-weight: 400; }
 @utility meta {
-  font-size: 0.75rem;       /* 12px */
-  line-height: 1.5;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
   font-weight: 500;
+  letter-spacing: 0.04em;
 }
-
 @utility eyebrow {
-  font-size: 0.6875rem;     /* 11px */
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
   line-height: 1.2;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-}
-
-@utility label {
-  font-size: 0.75rem;       /* 12px */
-  line-height: 1.2;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.15em;
+  color: var(--brand);
 }
-
-@utility micro {
-  font-size: 0.625rem;      /* 10px */
+@utility label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   line-height: 1.2;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.1em;
 }
-
-/* =========================================================================
-   Editorial layer utilities.
-
-   The editorial layer is a parallel composition language to the tile
-   system. Tiles are for IMPACT (hero bands, product strips, CTAs, stats);
-   editorial sections are the scannable, typographic, well-paced body
-   between them. Utilities here are intentionally minimal — most layout
-   work happens in src/components/site/editorial/.
-   ========================================================================= */
-
-/* Mono micro-label for technical/structural meta — `01 / START`,
-   `[01] AREA`, ledger keys. Distinct from `.eyebrow` (sans, brand). */
+@utility micro {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  line-height: 1.2;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted-foreground);
+}
 @utility font-mono-meta {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;     /* 11px */
+  font-size: 0.6875rem;
   line-height: 1.3;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
-
-/* Editorial eyebrow — red, with a left rule. Used at the top of every
-   EditorialSection to mark the kicker. */
 @utility editorial-eyebrow {
+  font-family: var(--font-mono);
   font-size: 0.6875rem;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--brand);
-  border-left: 2px solid var(--brand);
-  padding-left: 0.75rem;
   display: inline-block;
 }
-
-/* Hairline rules. Use `rule-h` as a top border on EditorialSection and
-   between ledger rows; `rule-v` for the vertical divider between
-   editorial columns on md+. */
-@utility rule-h {
-  border-top: 1px solid var(--rule);
-}
-
-@utility rule-v {
-  width: 1px;
-  background-color: var(--rule);
-}
-
-/* Pull quote — large brand-bar block quote inside EditorialProse. */
+@utility rule-h { border-top: 1px solid var(--rule); }
+@utility rule-v { width: 1px; background-color: var(--rule); }
 @utility pull-quote {
-  border-left: 4px solid var(--brand);
-  padding: 0.5rem 0 0.5rem 2rem;
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: 1.5rem;        /* 24px */
-  line-height: 1.1;
-  letter-spacing: -0.005em;
+  border-left: 2px solid var(--brand);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
   color: var(--foreground);
-  margin: 2.5rem 0;
-  @media (min-width: 768px) {
-    font-size: 1.875rem;    /* 30px */
-    padding-left: 2.5rem;
-  }
+  margin: 2rem 0;
+  @media (min-width: 768px) { font-size: 1.5rem; padding-left: 1.5rem; }
+}
+.dropcap::first-letter {
+  font-weight: 800;
+  color: var(--brand);
+  margin-right: 0.15rem;
 }
 
-/* Dropcap — apply to the FIRST prose paragraph of an editorial section
-   to anchor the eye. Never stack two dropcaps in one section. */
-.dropcap::first-letter {
-  float: left;
-  font-family: var(--font-display);
-  font-size: 4rem;
-  line-height: 0.85;
-  margin-right: 0.5rem;
-  margin-top: 0.25rem;
-  color: var(--brand);
+/* ---------- Unified buttons ---------- */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease, opacity .15s ease;
+  cursor: pointer;
+}
+@utility btn-primary {
+  background-color: var(--brand);
+  color: var(--brand-foreground);
+  box-shadow: 0 6px 18px -8px color-mix(in oklab, var(--brand) 65%, transparent);
+}
+@utility btn-secondary {
+  background-color: var(--surface);
+  color: var(--surface-foreground);
+}
+@utility btn-ghost {
+  background-color: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
 }
 
 @keyframes shimmer-sweep {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
-
-.stat-shine {
-  color: transparent;
-  background-image: linear-gradient(
-    100deg,
-    var(--brand) 0%,
-    var(--brand) 40%,
-    color-mix(in oklab, #fff 75%, var(--brand)) 50%,
-    var(--brand) 60%,
-    var(--brand) 100%
-  );
-  background-size: 200% 100%;
-  background-position: 200% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 14px color-mix(in oklab, var(--brand) 45%, transparent);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .stat-shine {
-    animation: shimmer-sweep 4s linear infinite;
-  }
-}
+.stat-shine { color: var(--brand); }

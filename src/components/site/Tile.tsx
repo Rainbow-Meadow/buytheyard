@@ -981,6 +981,12 @@ function FlipTileInner({
 }
 
 export function Tile(block: TileBlock) {
+  // Unified system: collapse all per-variant ornament layouts to the single
+  // "stack" composition. Anchored bars / ghosted glyphs / split eyebrows are
+  // retired in favor of one tile shape used everywhere.
+  if ("layout" in block && block.layout === "anchored") {
+    block = { ...block, layout: "stack" } as TileBlock;
+  }
   const size = block.size ?? "md";
   const tone = block.tone ?? VARIANT_DEFAULT_TONE[block.variant as TileVariant] ?? "kraft";
   const padding = block.padding ?? SIZE_PADDING[size];
