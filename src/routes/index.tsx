@@ -1,13 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  BadgeCheck,
-  CalendarDays,
   Flower2,
   Layers,
   Mountain,
   Phone,
-  ShieldCheck,
   Sprout,
   TreePine,
   Waves,
@@ -81,118 +78,53 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <>
-      <TileScreen
-        layout="pageHero"
-        label="Buy The Yard — bulk materials in Central Mass"
-        tiles={{
-          hero: (
-            <article className="relative h-full w-full overflow-hidden rounded-md ring-1 ring-zinc-800 bg-zinc-950 text-white">
-              <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950 via-zinc-900 to-zinc-800" />
-              <span aria-hidden="true" className="absolute left-0 inset-y-0 w-[1.5px] bg-brand z-10" />
-              <div className="relative z-10 h-full w-full flex items-end md:items-center">
-                <div className="px-5 md:px-10 pb-8 md:pb-0 max-w-3xl">
-                  <p className="eyebrow text-white/70 mb-6">
-                    Est. 2016 · <Link to="/wbe" className="hover:text-brand transition-colors">Woman-owned</Link> · Jefferson, MA
-                  </p>
-                  <h1 className="home-hero-heading display-2 leading-[0.95] text-balance text-white">
-                    Mulch. Loam. Sand. <span className="text-brand">Stone.</span>
-                  </h1>
-                  <p className="lead text-zinc-200 max-w-[54ch] mt-4 text-pretty">
-                    Bulk landscape materials from Abby’s Jefferson yard — pickup or delivery
-                    across Central Mass.
-                  </p>
-                  <div className="mt-6 flex flex-col gap-2 max-w-md md:flex-row md:flex-wrap md:items-center md:gap-3 md:max-w-none">
-                    <Link
-                      to="/products"
-                      className="inline-flex items-center justify-between md:justify-start gap-2 bg-brand text-brand-foreground px-6 h-12 md:h-11 label hover:opacity-90 transition-opacity"
-                    >
-                      Shop materials
-                      <ArrowRight className="size-4" />
-                    </Link>
-                    <div className="flex items-stretch gap-3 md:contents">
-                      <Link
-                        to="/quote"
-                        className="flex-1 md:flex-none inline-flex items-center justify-center md:justify-start gap-2 border border-white/30 hover:border-white text-white px-5 h-12 md:h-11 label hover:bg-white/10 transition-colors"
-                      >
-                        Get a quote
-                      </Link>
-                      <a
-                        href="tel:5085799897"
-                        className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors h-12 md:h-11 px-3"
-                      >
-                        <Phone className="size-4 text-brand" />
-                        508.579.9897
-                      </a>
-                    </div>
-                  </div>
+      <section
+        aria-label="Buy The Yard — bulk materials in Central Mass"
+        className="border-y border-[var(--rule)]"
+      >
+        <article className="relative w-full overflow-hidden bg-zinc-950 text-white min-h-[520px] md:min-h-[600px]">
+          <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950 via-zinc-900 to-zinc-800" />
+          <span aria-hidden="true" className="absolute left-0 inset-y-0 w-[1.5px] bg-brand z-10" />
+          <div className="relative z-10 h-full w-full flex items-end md:items-center min-h-[520px] md:min-h-[600px]">
+            <div className="px-5 md:px-10 pb-8 md:pb-0 max-w-3xl">
+              <p className="eyebrow text-white/70 mb-6">
+                Est. 2016 · <Link to="/wbe" className="hover:text-brand transition-colors">Woman-owned</Link> · Jefferson, MA
+              </p>
+              <h1 className="home-hero-heading display-2 leading-[0.95] text-balance text-white">
+                Mulch. Loam. Sand. <span className="text-brand">Stone.</span>
+              </h1>
+              <p className="lead text-zinc-200 max-w-[54ch] mt-4 text-pretty">
+                Bulk landscape materials from Abby’s Jefferson yard — pickup or delivery
+                across Central Mass.
+              </p>
+              <div className="mt-6 flex flex-col gap-2 max-w-md md:flex-row md:flex-wrap md:items-center md:gap-3 md:max-w-none">
+                <Link
+                  to="/products"
+                  className="inline-flex items-center justify-between md:justify-start gap-2 bg-brand text-brand-foreground px-6 h-12 md:h-11 label hover:opacity-90 transition-opacity"
+                >
+                  Shop materials
+                  <ArrowRight className="size-4" />
+                </Link>
+                <div className="flex items-stretch gap-3 md:contents">
+                  <Link
+                    to="/quote"
+                    className="flex-1 md:flex-none inline-flex items-center justify-center md:justify-start gap-2 border border-white/30 hover:border-white text-white px-5 h-12 md:h-11 label hover:bg-white/10 transition-colors"
+                  >
+                    Get a quote
+                  </Link>
+                  <a
+                    href="tel:5085799897"
+                    className="inline-flex items-center gap-2 label text-white hover:text-brand transition-colors h-12 md:h-11 px-3"
+                  >
+                    <Phone className="size-4 text-brand" />
+                    508.579.9897
+                  </a>
                 </div>
               </div>
-            </article>
-          ),
-          a: (
-            <Tile
-              id="stat-founded"
-              fill
-              variant="stat"
-              layout="anchored"
-              tone="surface"
-              anchorIndex="01"
-              anchorGlyph={<CalendarDays strokeWidth={1.25} />}
-              value="2016"
-              label="Founded"
-              caption="Jefferson yard"
-            />
-          ),
-          b: (
-            <Link
-              to="/wbe"
-              aria-label="What WBE certification means"
-              className="block h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-            >
-              <Tile
-                id="stat-wbe"
-                fill
-                variant="stat"
-                layout="anchored"
-                tone="brand"
-                anchorIndex="02"
-                anchorGlyph={<BadgeCheck strokeWidth={1.25} />}
-                value="WBE"
-                label="Certified woman-owned"
-                caption="Massachusetts →"
-              />
-            </Link>
-          ),
-          c: (
-            <Tile
-              id="stat-licensed"
-              fill
-              variant="stat"
-              layout="anchored"
-              tone="kraft"
-              anchorIndex="03"
-              anchorGlyph={<ShieldCheck strokeWidth={1.25} />}
-              value="Licensed"
-              label="HIC + DOT"
-              caption="MA registered · active carrier"
-            />
-          ),
-          d: (
-            <Tile
-              id="stat-call"
-              fill
-              variant="stat"
-              layout="anchored"
-              tone="surface"
-              anchorIndex="04"
-              anchorGlyph={<Phone strokeWidth={1.25} />}
-              value="Call"
-              label="Fastest way to order"
-              caption="508.579.9897"
-            />
-          ),
-        }}
-      />
+            </div>
+          </div>
+        </article>
+      </section>
 
       <DecisionPathBreak />
 

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Box, Clock, CreditCard, Home, MapPin, Phone, Target, Truck, Warehouse } from "lucide-react";
+import { CreditCard, Home, Phone, Target, Truck, Warehouse } from "lucide-react";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
@@ -29,32 +29,23 @@ export const Route = createFileRoute("/delivery")({
 function DeliveryPage() {
   return (
     <>
-      <TileScreen
-        layout="pageHero"
-        label="Delivery and pickup"
-        heading="Delivery and pickup across Central Massachusetts"
-        headingLevel="h1"
-        tiles={{
-          hero: (
-            <Tile
-              id="delivery-hero"
-              fill
-              variant="cta"
-              tone="surface"
-              layout="anchored"
-              icon={<Truck />}
-              eyebrow="Delivery & pickup"
-              title="Get the material without the surprise."
-              body="Abby confirms the town, quantity, timing, and drop spot before the truck leaves Jefferson."
-              cta={{ label: "Start a quote", to: "/quote" }}
-            />
-          ),
-          a: <Tile id="dlv-stat-radius" fill variant="stat" tone="surface" layout="anchored" anchorIndex="01" anchorGlyph={<MapPin strokeWidth={1.25} />} value="Central" label="Mass delivery" caption="From Jefferson" />,
-          b: <Tile id="dlv-stat-min" fill variant="stat" tone="brand" layout="anchored" anchorIndex="02" anchorGlyph={<Box strokeWidth={1.25} />} value="1 yd" label="Order minimum" caption="Per delivery" />,
-          c: <Tile id="dlv-stat-lead" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<Clock strokeWidth={1.25} />} value="48 hr" label="Best timing" caption="Same-day if route allows" />,
-          d: <Tile id="dlv-stat-drop" fill variant="stat" tone="gray" layout="anchored" anchorIndex="04" anchorGlyph={<Truck strokeWidth={1.25} />} value="Curb" label="Driveway drop" caption="Mark the spot" />,
-        }}
-      />
+      <section aria-label="Delivery and pickup" className="border-y border-[var(--rule)]">
+        <h1 className="sr-only">Delivery and pickup across Central Massachusetts</h1>
+        <div className="min-h-[420px] md:min-h-[480px] flex">
+          <Tile
+            id="delivery-hero"
+            fill
+            variant="cta"
+            tone="surface"
+            layout="anchored"
+            icon={<Truck />}
+            eyebrow="Delivery & pickup"
+            title="Get the material without the surprise."
+            body="Abby confirms the town, quantity, timing, and drop spot before the truck leaves Jefferson."
+            cta={{ label: "Start a quote", to: "/quote" }}
+          />
+        </div>
+      </section>
 
       <TileScreen
         layout="section01"

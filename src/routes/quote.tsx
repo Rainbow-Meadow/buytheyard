@@ -624,28 +624,28 @@ function QuotePage() {
           <Tile
             id="quote-stat-time"
             fill
-            variant="stat"
+            variant="text"
             tone="surface"
             layout="anchored"
             anchorIndex="01"
-            anchorGlyph={<Clock strokeWidth={1.25} />}
-            value="~60s"
-            label="To build a list"
-            caption="Quick + easy"
+            icon={<Clock />}
+            eyebrow="Fast"
+            title="About a minute"
+            body="Build your list, drop your contact info, send. Quick + easy."
           />
         ),
         b: (
           <Tile
             id="quote-stat-owner"
             fill
-            variant="stat"
+            variant="text"
             tone="kraft"
             layout="anchored"
             anchorIndex="02"
-            anchorGlyph={<User strokeWidth={1.25} />}
-            value="1 owner"
-            label="Abby answers"
-            caption="No call center"
+            icon={<User />}
+            eyebrow="One owner"
+            title="Abby answers"
+            body="No call center, no ticket queue — your quote goes straight to her."
           />
         ),
         c: (
