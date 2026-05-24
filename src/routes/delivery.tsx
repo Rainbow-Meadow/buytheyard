@@ -61,7 +61,7 @@ function DeliveryPage() {
       <ProcessStepsSection
         steps={[
           { title: "Pick Your Material", body: "Walk the catalog or call us. We'll help you figure the cubic yards if you're not sure." },
-          { title: "Get A Price",        body: "Phone or the quote form — same day. Flat $75 delivery fee anywhere we go." },,
+          { title: "Get A Price",        body: "Phone or the quote form — same day. Flat $75 delivery fee anywhere we go." },
           { title: "Schedule The Drop",  body: "Confirm the load and tell the driver exactly where you want it. We'll be there." },
         ]}
       />
