@@ -258,14 +258,7 @@ function AboutPage() {
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="grid gap-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
             <figure className="relative min-h-[460px] overflow-hidden rounded-md bg-zinc-950 text-white ring-1 ring-zinc-800 lg:min-h-[620px]">
-              <img
-                src={yardDog}
-                alt="Charlie, the Buy The Yard office manager, watching the lot from the office window"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: "50% 18%" }}
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 to-zinc-950" />
               <figcaption className="absolute inset-x-0 bottom-0 p-5 md:p-7">
                 <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                   <span aria-hidden="true" className="h-0.5 w-7 bg-brand" />
@@ -278,13 +271,7 @@ function AboutPage() {
 
             <div className="grid gap-4">
               <figure className="relative min-h-[280px] overflow-hidden rounded-md bg-zinc-950 text-white ring-1 ring-zinc-800 md:min-h-[360px]">
-                <img
-                  src={yardPatio}
-                  alt="The Buy The Yard sit-and-stay area with Adirondack chairs and OPEN flag"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-zinc-950/35 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 to-zinc-950" />
                 <figcaption className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                   <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
                     <span aria-hidden="true" className="h-0.5 w-7 bg-brand" />
