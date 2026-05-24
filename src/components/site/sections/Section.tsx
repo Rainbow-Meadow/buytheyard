@@ -53,7 +53,7 @@ export function Section({
         >
           <span
             className={[
-              "font-display text-4xl leading-none",
+              "font-bebas text-4xl leading-none",
               accentIndex ? "text-ember" : "",
             ].join(" ")}
           >

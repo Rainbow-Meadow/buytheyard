@@ -13,7 +13,7 @@ export function InlineCTA({
   const cls = "inline-flex items-center group";
   const inner = (
     <>
-      <span className="font-display text-2xl tracking-wide border-b-2 border-current pb-1">
+      <span className="font-bebas text-2xl tracking-wide border-b-2 border-current pb-1">
         {children}
       </span>
       <span className="ml-4 text-2xl transition-transform group-hover:translate-x-2">

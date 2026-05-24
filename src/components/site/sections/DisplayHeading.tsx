@@ -22,7 +22,7 @@ export function DisplayHeading({
   return (
     <Tag
       className={[
-        "font-display uppercase leading-[0.9]",
+        "font-bebas uppercase leading-[0.9]",
         SIZE[size],
         className,
       ].join(" ")}
