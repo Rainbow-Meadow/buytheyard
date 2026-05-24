@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Phone } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { Tile } from "@/components/site/Tile";
 
 export const Route = createFileRoute("/quote")({
