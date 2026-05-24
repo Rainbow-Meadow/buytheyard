@@ -24,7 +24,7 @@ export function GalleryMarqueeSection({
   const loop = [...items, ...items];
   return (
     <Section title={title} tone="paper">
-      <div className="marquee-mask overflow-hidden py-6 md:py-8 md:h-[50svh] flex items-center">
+      <div className="marquee-mask overflow-hidden py-6 md:py-8 md:h-[calc(50svh-2rem)] flex items-center">
         <div
           className="marquee-track gap-px bg-ink"
           style={{ ["--marquee-duration" as string]: SPEED[speed] }}
