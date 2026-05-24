@@ -13,13 +13,9 @@ import {
   Truck,
   Waves,
 } from "lucide-react";
-import heroStorefront from "@/assets/source/hero-storefront-open.webp";
 import { TileScreen } from "@/components/site/TileScreen";
 import { Tile } from "@/components/site/Tile";
 import { products, productSlug } from "@/data/products";
-import featuredHeroYard from "@/assets/featured-hero-yard.webp";
-import communityCtms from "@/assets/source/community-ctms-loam.webp";
-import communityRutland from "@/assets/source/community-rutland-memorial.webp";
 import { FacebookLiveTile } from "@/components/home/FacebookLiveTile";
 import {
   AbbyTrustBreak,
@@ -53,11 +49,8 @@ export const Route = createFileRoute("/")({
           "Mulch, loam, sand, stone, garden center materials, and practical ordering help from Abby's Jefferson yard.",
       },
       { property: "og:url", content: "https://buytheyard.lovable.app/" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
     ],
     links: [
-      { rel: "preload", as: "image", href: heroStorefront, fetchpriority: "high" },
       { rel: "canonical", href: "https://buytheyard.lovable.app/" },
     ],
     scripts: [
@@ -67,7 +60,6 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "LandscapingBusiness",
           name: "Buy The Yard",
-          image: "https://buytheyard.lovable.app/og/og-home.jpg",
           telephone: "+1-508-579-9897",
           email: "abby@btymaterial.com",
           address: {
@@ -99,24 +91,7 @@ function HomePage() {
         tiles={{
           hero: (
             <article className="relative h-full w-full overflow-hidden rounded-md ring-1 ring-zinc-800 bg-zinc-950 text-white">
-              <img
-                src={heroStorefront}
-                alt=""
-                aria-hidden="true"
-                className="md:hidden absolute inset-0 w-full h-full object-cover"
-                fetchPriority="high"
-                decoding="async"
-              />
-              <img
-                src={heroStorefront}
-                alt=""
-                aria-hidden="true"
-                className="hidden md:block absolute inset-0 w-full h-full object-cover"
-                fetchPriority="high"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/90 via-zinc-950/65 to-zinc-950/20" />
-              <div className="md:hidden absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/55 to-zinc-950/25" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950 via-zinc-900 to-zinc-800" />
               <div
                 aria-hidden="true"
                 className="absolute left-0 bottom-16 md:bottom-20 w-1.5 h-56 md:h-72 bg-brand z-10"
@@ -267,18 +242,13 @@ function HomePage() {
             <Tile
               id="feat-hero"
               fill
-              variant="image"
-              src={featuredHeroYard}
-              alt="Piles of mulch, sand, and stone at the Jefferson yard"
-              focal="center"
-              overlay={{
-                eyebrow: "Bulk materials & garden center",
-                title: "Featured materials",
-                body: "Mulch, loam, sand, and stone by the yard — plus seasonal garden center favorites.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Layers />,
-              }}
+              variant="cta"
+              tone="surface"
+              layout="anchored"
+              icon={<Layers />}
+              eyebrow="Bulk materials & garden center"
+              title="Featured materials"
+              body="Mulch, loam, sand, and stone by the yard — plus seasonal garden center favorites."
               cta={{ label: "See the full catalog", to: "/products" }}
             />
           ),
@@ -290,23 +260,18 @@ function HomePage() {
                   key={p.name}
                   id={`feat-${productSlug(p.name)}`}
                   fill
-                  variant="image"
-                  src={p.image!}
-                  alt={p.imageAlt ?? p.name}
-                  focal="center"
-                  overlay={{
-                    eyebrow: p.category,
-                    title: p.name,
-                    align: "bottom-left",
-                    layout: "anchored",
-                    anchorIcon: [
-                      <TreePine />,
-                      <Sprout />,
-                      <Waves />,
-                      <Mountain />,
-                      <Flower2 />,
-                    ][i],
-                  }}
+                  variant="text"
+                  tone={(["kraft", "surface", "white", "gray", "kraft"] as const)[i]}
+                  layout="anchored"
+                  icon={[
+                    <TreePine />,
+                    <Sprout />,
+                    <Waves />,
+                    <Mountain />,
+                    <Flower2 />,
+                  ][i]}
+                  eyebrow={p.category}
+                  title={p.name}
                   details={{
                     shareId: `feat-${productSlug(p.name)}`,
                     eyebrow: p.category,
@@ -333,34 +298,26 @@ function HomePage() {
             <Tile
               id="reviews-ctms"
               fill
-              variant="image"
-              src={communityCtms}
-              alt="Buy The Yard dump truck unloading loam at Central Tree Middle School"
-              focal="center"
-              overlay={{
-                eyebrow: "Community",
-                title: "CTMS · loam donation",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Truck />,
-              }}
+              variant="text"
+              tone="kraft"
+              layout="anchored"
+              icon={<Truck />}
+              eyebrow="Community"
+              title="CTMS · loam donation"
+              body="Loam and mulch donated to Central Tree Middle School."
             />
           ),
           c: (
             <Tile
               id="reviews-rutland"
               fill
-              variant="image"
-              src={communityRutland}
-              alt="Memorial Day flowers at the Rutland Public Safety building"
-              focal="center"
-              overlay={{
-                eyebrow: "Community",
-                title: "Rutland · Memorial Day",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Flower2 />,
-              }}
+              variant="text"
+              tone="surface"
+              layout="anchored"
+              icon={<Flower2 />}
+              eyebrow="Community"
+              title="Rutland · Memorial Day"
+              body="Flowers and flags for the Rutland Public Safety building."
             />
           ),
         }}
