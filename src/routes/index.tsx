@@ -272,12 +272,7 @@ function HomePage() {
                   ][i]}
                   eyebrow={p.category}
                   title={p.name}
-                  details={{
-                    shareId: `feat-${productSlug(p.name)}`,
-                    eyebrow: p.category,
-                    title: p.name,
-                    body: p.description,
-                  }}
+                  body={p.description}
                 />
               ),
             ]),
