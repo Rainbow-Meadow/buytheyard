@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 import { DisplayHeading } from "../DisplayHeading";
 import { MonoLabel } from "../MonoLabel";
 
@@ -20,6 +21,7 @@ export interface ContactFormProps {
   address: { line1: string; line2: string };
   hours?: { label: string; value: string }[];
   heightClass?: string;
+  background?: SectionBackground;
 }
 
 export function ContactFormSection({
@@ -31,6 +33,7 @@ export function ContactFormSection({
   address,
   hours,
   heightClass,
+  background = { kind: "scatter", density: "light", tint: "ink" },
 }: ContactFormProps) {
   const compact = Boolean(heightClass);
   const [submitting, setSubmitting] = useState(false);
@@ -56,7 +59,7 @@ export function ContactFormSection({
     "w-full bg-paper border border-ink/20 px-3 py-3 font-barlow text-base focus:outline-none focus:border-ember text-black";
 
   return (
-    <Section title={title} tone="paper" rule={false} heightClass={heightClass}>
+    <Section title={title} tone="paper" rule={false} heightClass={heightClass} background={background}>
       <div className="grid grid-cols-1 md:grid-cols-5 md:h-full">
         <form
           onSubmit={onSubmit}

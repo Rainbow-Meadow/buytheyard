@@ -1,4 +1,5 @@
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 import { MonoLabel } from "../MonoLabel";
 
 export interface ContactCTAProps {
@@ -10,6 +11,7 @@ export interface ContactCTAProps {
   primaryHref?: string;
   heightClass?: string;
   accentWidth?: string;
+  background?: SectionBackground;
 }
 
 export function ContactCTASection({
@@ -21,9 +23,10 @@ export function ContactCTASection({
   primaryHref = "#",
   heightClass = "md:h-[calc(30svh-1.2rem)]",
   accentWidth = "md:w-1/3",
+  background = { kind: "scatter", density: "regular", tint: "brand" },
 }: ContactCTAProps) {
   return (
-    <Section title={title} tone="paper" rule={false} heightClass={heightClass}>
+    <Section title={title} tone="paper" rule={false} heightClass={heightClass} background={background}>
       <div className="flex flex-col md:flex-row md:h-full">
         <div className="flex-1 p-8 md:py-12 md:px-16 flex flex-col justify-center">
           <div className="flex flex-col md:flex-row gap-12">

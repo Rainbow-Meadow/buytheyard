@@ -1,4 +1,5 @@
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 import { SectionSplit } from "../SectionSplit";
 import { DisplayHeading } from "../DisplayHeading";
 
