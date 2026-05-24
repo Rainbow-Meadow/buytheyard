@@ -4,6 +4,7 @@ import {
   ContactFormSection,
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
+import contactHero from "@/assets/contact-hero.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -32,6 +33,8 @@ function ContactPage() {
         body="Phone's fastest when timing matters. The form lands in the same inbox — send what you need and we'll come back with pricing and a window."
         ctaLabel="Call 508.579.9897"
         ctaHref="tel:5085799897"
+        image={contactHero}
+        imageAlt="The Buy The Yard storefront in Jefferson, MA with flowers, patio furniture, and the open flag"
       />
       <ContactFormSection
         heightClass="md:h-[calc(75svh-3rem)]"
