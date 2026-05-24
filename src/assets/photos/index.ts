@@ -43,3 +43,7 @@ export { default as screenedLoamHandful } from "./042_screened_loam_handful.jpg"
 export { default as masonSandHandful } from "./043_mason_sand_handful.jpg";
 export { default as winterSaltHandful } from "./044_winter_salt_handful.jpg";
 export { default as compostHandful } from "./045_compost_handful.jpg";
+export { default as brownPineMulchHandful } from "./046_brown_pine_mulch_handful.jpg";
+export { default as blackPineMulchHandful } from "./047_black_pine_mulch_handful.jpg";
+export { default as hemlockMixHandful } from "./048_hemlock_mix_handful.jpg";
+export { default as playgroundMulchHandful } from "./049_playground_mulch_handful.jpg";
