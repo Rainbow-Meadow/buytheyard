@@ -16,6 +16,7 @@ import { Route as ServiceAreaRouteImport } from './routes/service-area'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MulchRouteImport } from './routes/mulch'
+import { Route as GardenCenterRouteImport } from './routes/garden-center'
 import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -58,6 +59,11 @@ const MulchRoute = MulchRouteImport.update({
   path: '/mulch',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GardenCenterRoute = GardenCenterRouteImport.update({
+  id: '/garden-center',
+  path: '/garden-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DeliveryRoute = DeliveryRouteImport.update({
   id: '/delivery',
   path: '/delivery',
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/garden-center': typeof GardenCenterRoute
   '/mulch': typeof MulchRoute
   '/privacy': typeof PrivacyRoute
   '/quote': typeof QuoteRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/garden-center': typeof GardenCenterRoute
   '/mulch': typeof MulchRoute
   '/privacy': typeof PrivacyRoute
   '/quote': typeof QuoteRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/garden-center': typeof GardenCenterRoute
   '/mulch': typeof MulchRoute
   '/privacy': typeof PrivacyRoute
   '/quote': typeof QuoteRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contact'
     | '/delivery'
+    | '/garden-center'
     | '/mulch'
     | '/privacy'
     | '/quote'
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contact'
     | '/delivery'
+    | '/garden-center'
     | '/mulch'
     | '/privacy'
     | '/quote'
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contact'
     | '/delivery'
+    | '/garden-center'
     | '/mulch'
     | '/privacy'
     | '/quote'
@@ -190,6 +202,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
   DeliveryRoute: typeof DeliveryRoute
+  GardenCenterRoute: typeof GardenCenterRoute
   MulchRoute: typeof MulchRoute
   PrivacyRoute: typeof PrivacyRoute
   QuoteRoute: typeof QuoteRoute
@@ -250,6 +263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MulchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/garden-center': {
+      id: '/garden-center'
+      path: '/garden-center'
+      fullPath: '/garden-center'
+      preLoaderRoute: typeof GardenCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/delivery': {
       id: '/delivery'
       path: '/delivery'
@@ -302,6 +322,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
   DeliveryRoute: DeliveryRoute,
+  GardenCenterRoute: GardenCenterRoute,
   MulchRoute: MulchRoute,
   PrivacyRoute: PrivacyRoute,
   QuoteRoute: QuoteRoute,

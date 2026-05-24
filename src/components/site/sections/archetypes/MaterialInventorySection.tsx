@@ -3,6 +3,7 @@ import { SectionGrid, SectionGridCell } from "../SectionGrid";
 import { MonoLabel } from "../MonoLabel";
 import { DisplayHeading } from "../DisplayHeading";
 import { Link } from "@tanstack/react-router";
+import { CategoryLineIcon, type CategoryIconName } from "../CategoryLineIcon";
 
 export interface MaterialItem {
   code: string;
@@ -10,6 +11,7 @@ export interface MaterialItem {
   description: string;
   unit: string;
   to?: string;
+  icon?: CategoryIconName;
 }
 
 export function MaterialInventorySection({
@@ -27,6 +29,11 @@ export function MaterialInventorySection({
             {(() => {
               const inner = (
                 <>
+                  {m.icon && (
+                    <div className="mb-8 max-w-[140px]">
+                      <CategoryLineIcon name={m.icon} />
+                    </div>
+                  )}
                   <MonoLabel className="block mb-12">{m.code}</MonoLabel>
                   <DisplayHeading as="h3" size="sm" className="mb-4">{m.name}</DisplayHeading>
                   <p className="font-barlow text-sm opacity-70 mb-6">{m.description}</p>
