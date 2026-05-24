@@ -6,6 +6,7 @@ import {
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
 import { STONE } from "@/data/catalog";
+import { mixedLandscapeStoneSamplesOnGround } from "@/assets/photos";
 
 export const Route = createFileRoute("/stone")({
   head: () => ({
@@ -30,6 +31,8 @@ function StonePage() {
         body="Drainage stone, decorative river rock, bluestone, and specialty accents. We help you pick the right size for the job."
         ctaLabel="Call For Pricing"
         ctaHref="tel:5085799897"
+        image={mixedLandscapeStoneSamplesOnGround}
+        imageAlt="Mixed landscape stone samples laid out on the ground"
       />
       <ProductCatalogSection items={STONE} />
       <CubicYardsCalculatorSection />
