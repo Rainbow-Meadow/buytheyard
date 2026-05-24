@@ -50,12 +50,6 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     body: "Former CTMS student and owner Abby Montalto donated loam and mulch to the school.",
     size: "md",
     tone: "kraft",
-    details: {
-      shareId: "community-ctms",
-      eyebrow: "Central Tree Middle School · Jun 26, 2024",
-      title: "Loam and mulch for CTMS",
-      body: "Thank you to former CTMS Student and owner of Buy The Yard Outdoor Products Abby Montalto for her generosity. Loam has been delivered and mulch is on the way.",
-    },
   },
   {
     id: "community-rutland-memorial",
@@ -65,12 +59,6 @@ const DESKTOP_BLOCKS: TileBlock[] = [
     body: "Buy The Yard joined Wildwood Lawn Care, Sterling Irrigation, and the Patterson Family to dress the public safety building.",
     size: "md",
     tone: "surface",
-    details: {
-      shareId: "community-rutland-memorial",
-      eyebrow: "Rutland Fire Department · May 22, 2020",
-      title: "Memorial Day at the public safety building",
-      body: "Just wanted to say thank you to the following local businesses that have helped out to make the public safety building look amazing for this Memorial Day. Wildwood Lawn Care, Buy The Yard Outdoor Products, Sterling Irrigation, and the Patterson Family.",
-    },
   },
 ];
 
