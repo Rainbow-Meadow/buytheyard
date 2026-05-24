@@ -10,9 +10,9 @@ import { SERVICE_AREA_TOWNS } from "@/data/service-area";
 import { deliveryZonesQueryOptions, zoneToDisplay } from "@/data/catalog";
 import { businessSignAndFlagsAtEntrance } from "@/assets/photos";
 
-const TITLE = "Service Area — Central MA Delivery | Buy The Yard";
+const TITLE = "Service Area — Central Mass Delivery · Buy The Yard";
 const DESCRIPTION =
-  "Bulk mulch, loam, sand & stone delivery from our Jefferson, MA yard to Holden, Worcester, Princeton, Sterling & nearby towns across Central Massachusetts.";
+  "Mulch, stone, sand & loam delivery from the yard on 122A in Jefferson, MA to Holden, Worcester, Princeton, Sterling, and the rest of Central Mass.";
 
 export const Route = createFileRoute("/service-area")({
   head: () => ({
@@ -37,7 +37,7 @@ function ServiceAreaPage() {
       <HeroSection
         meta="SERVICE AREA"
         heading={<>Central Mass<br/>Delivery.</>}
-        body="Based in Jefferson and serving the towns within ~40 minutes of the yard. If your project is just outside our usual zone, call — we still might be able to help."
+        body="Trucks roll out of the Jefferson yard on 122A. If you're inside about 40 minutes of us, we can usually get a load to you same day or next. Just outside that? Call — we'll see what we can do."
         ctaLabel="Call 508.579.9897"
         ctaHref="tel:5085799897"
         image={businessSignAndFlagsAtEntrance}
@@ -45,7 +45,7 @@ function ServiceAreaPage() {
       />
       <ServiceAreaSection
         heading={<>Towns We Deliver To</>}
-        body="We deliver mulch, loam, sand, gravel, and stone across Worcester County. Most orders land within 24–48 hours."
+        body="Mulch, loam, sand, gravel, and stone across Worcester County. Most orders land within 24 to 48 hours."
         phone="508.579.9897"
         towns={[...SERVICE_AREA_TOWNS]}
       />
