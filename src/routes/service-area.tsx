@@ -79,20 +79,13 @@ function ServiceAreaPage() {
             <Tile
               id="sa-hero"
               fill
-              variant="image"
-              src={yardTrucks}
-              alt="Buy The Yard trucks parked at the Jefferson, MA lot"
-              focal="center"
-              loading="eager"
-              fetchPriority="high"
-              overlay={{
-                eyebrow: "Service area",
-                title: "Across Central Mass.",
-                body: "Mulch, loam, sand & stone from Jefferson to your town.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Truck />,
-              }}
+              variant="cta"
+              tone="surface"
+              layout="anchored"
+              icon={<Truck />}
+              eyebrow="Service area"
+              title="Across Central Mass."
+              body="Mulch, loam, sand & stone from Jefferson to your town."
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
@@ -217,17 +210,12 @@ function ServiceAreaPage() {
             <Tile
               id="sa-jefferson"
               fill
-              variant="image"
-              src={loadingTruck}
-              alt="A Buy The Yard truck being loaded at the Jefferson yard"
-              focal="center"
-              overlay={{
-                eyebrow: "Jefferson, MA",
-                title: "Home base · 2264 Main St.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Home />,
-              }}
+              variant="cta"
+              tone="kraft"
+              layout="anchored"
+              icon={<Home />}
+              eyebrow="Jefferson, MA"
+              title="Home base · 2264 Main St."
               cta={{
                 label: "Open in Maps",
                 href: "https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522",

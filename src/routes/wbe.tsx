@@ -47,15 +47,6 @@ function WbePage() {
               <div className="relative z-10 h-full w-full flex items-end md:items-center">
                 <div className="px-5 md:px-10 pb-8 md:pb-0 max-w-3xl">
                   <div className="mb-6 flex items-center gap-4">
-                    <img
-                      src={wbeSeal}
-                      alt="Massachusetts WBE certified seal"
-                      width={160}
-                      height={100}
-                      className="h-14 w-auto object-contain shrink-0"
-                      loading="eager"
-                      decoding="async"
-                    />
                     <p className="eyebrow text-kraft/70 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1">
                       <span className="inline-flex items-center gap-1.5">
                         <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />

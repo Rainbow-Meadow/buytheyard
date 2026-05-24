@@ -39,20 +39,13 @@ function DeliveryPage() {
             <Tile
               id="delivery-hero"
               fill
-              variant="image"
-              src={loadingTruck}
-              alt="Loader filling a delivery truck at the Buy The Yard lot"
-              focal="center"
-              loading="eager"
-              fetchPriority="high"
-              overlay={{
-                eyebrow: "Delivery & pickup",
-                title: "Get the material without the surprise."
-                ,body: "Abby confirms the town, quantity, timing, and drop spot before the truck leaves Jefferson.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Truck />,
-              }}
+              variant="cta"
+              tone="surface"
+              layout="anchored"
+              icon={<Truck />}
+              eyebrow="Delivery & pickup"
+              title="Get the material without the surprise."
+              body="Abby confirms the town, quantity, timing, and drop spot before the truck leaves Jefferson."
               cta={{ label: "Start a quote", to: "/quote" }}
             />
           ),

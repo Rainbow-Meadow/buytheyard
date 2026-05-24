@@ -54,18 +54,13 @@ function PrivacyPage() {
           hero: (
             <Tile
               fill
-              variant="image"
-              src={yardPiles}
-              alt="Yard piles of bulk materials"
-              focal="center"
-              overlay={{
-                eyebrow: "Legal · last updated " + LAST_UPDATED,
-                title: "Privacy & Terms.",
-                body: "Plain-English on the front. Tap a card for the full text.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <FileText />,
-              }}
+              variant="text"
+              tone="surface"
+              layout="anchored"
+              icon={<FileText />}
+              eyebrow={"Legal · last updated " + LAST_UPDATED}
+              title="Privacy & Terms."
+              body="Plain-English on the front. Tap a card for the full text."
             />
           ),
           a: (
