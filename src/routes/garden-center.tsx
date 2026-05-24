@@ -13,10 +13,10 @@ import { coveredGardenCenterFlowerDisplay } from "@/assets/photos";
 export const Route = createFileRoute("/garden-center")({
   head: () => ({
     meta: [
-      { title: "Garden Center — Annuals, Perennials, Mums & Tools | Buy The Yard" },
-      { name: "description", content: "Visit the Buy The Yard garden center in Jefferson, MA for annuals, perennials, hanging baskets, mums, pansies, and hand-picked garden tools and hardware." },
+      { title: "Garden Center — Hanging Baskets, Mums, Annuals · Buy The Yard" },
+      { name: "description", content: "The flower wagon out front of the yard on 122A in Jefferson, MA. Hand-built hanging baskets, annuals, perennials, fall mums, and the tools to plant them." },
       { property: "og:title", content: "Garden Center — Buy The Yard" },
-      { property: "og:description", content: "Annuals, perennials, hanging baskets, mums, and garden tools at the yard in Jefferson, MA." },
+      { property: "og:description", content: "Hand-built hanging baskets, annuals, fall mums, and garden tools on the wagon out front in Jefferson, MA." },
       { property: "og:url", content: "https://buytheyard.lovable.app/garden-center" },
       { property: "og:image", content: "https://buytheyard.lovable.app/og-garden-center.jpg" },
     ],
@@ -26,10 +26,10 @@ export const Route = createFileRoute("/garden-center")({
 });
 
 const SECTIONS: Array<{ code: string; name: string; description: string; note: string }> = [
-  { code: "GC_01", name: "Annuals & Pansies", description: "Bright potted color for porches, patios, and beds. Refreshed weekly through the season.", note: "SPRING – FALL" },
-  { code: "GC_02", name: "Hanging Baskets", description: "Hand-built baskets in mixed varieties. Pickup ready or call ahead to reserve.", note: "MOTHER'S DAY +" },
-  { code: "GC_03", name: "Mums & Perennials", description: "Fall mums in every color and hardy perennials that come back year after year.", note: "FALL HEAVY" },
-  { code: "GC_04", name: "Tools & Hardware", description: "Long-handle tools, leaf blowers, gloves, and the small stuff that finishes the job.", note: "STOCKED YEAR-ROUND" },
+  { code: "GC_01", name: "Annuals & Pansies", description: "Bright potted color for the front steps, the patio, the bed by the mailbox. Refreshed weekly through the season.", note: "SPRING – FALL" },
+  { code: "GC_02", name: "Hanging Baskets", description: "Built by hand on the wagon out front. Full, heavy, ready to hang — call ahead for Mother's Day weekend.", note: "MOTHER'S DAY +" },
+  { code: "GC_03", name: "Mums & Perennials", description: "Fall mums on the hay bales, pumpkins next to them. Hardy perennials that come back every year.", note: "FALL HEAVY" },
+  { code: "GC_04", name: "Tools & Hardware", description: "Shovels, rakes, leaf blowers, gloves, marking paint — the basics you forgot before you headed to the job.", note: "STOCKED YEAR-ROUND" },
 ];
 
 function GardenCenterPage() {
@@ -38,7 +38,7 @@ function GardenCenterPage() {
       <HeroSection
         meta="GARDEN CENTER"
         heading={<>Garden Center.<br/>At The Yard.</>}
-        body="Annuals, perennials, hanging baskets, mums, and the tools to plant them. Walk the yard, pick what you like, take it home today."
+        body="A flower wagon out front of the materials yard. Hand-built hanging baskets, annuals, fall mums on the hay bales, and the tools to plant them. Walk it, pick what you like, take it home."
         ctaLabel="Call The Yard"
         ctaHref="tel:5085799897"
         image={coveredGardenCenterFlowerDisplay}
