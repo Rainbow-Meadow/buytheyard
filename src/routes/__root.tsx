@@ -88,11 +88,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Woman-owned bulk landscape supply yard in Jefferson, MA. Premium mulch, loam, sand, gravel, and specialty stone for pickup or delivery. Call 508-579-9897." },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Buy The Yard" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/vvcbR2pV4ibwPVG7lh30DcetzHa2/social-images/social-1779384638808-FBD6A025-27F1-4025-B672-417CAEE8FD83.webp" },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Buy The Yard — Jefferson, MA landscape supply yard" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/vvcbR2pV4ibwPVG7lh30DcetzHa2/social-images/social-1779384638808-FBD6A025-27F1-4025-B672-417CAEE8FD83.webp" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Buy The Yard — Mulch, Loam, Sand & Stone in Jefferson, MA" },
       { name: "twitter:description", content: "Woman-owned bulk landscape supply yard in Jefferson, MA. Premium mulch, loam, sand, gravel, and specialty stone for pickup or delivery. Call 508-579-9897." },
@@ -120,8 +115,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               url: "https://buytheyard.lovable.app/",
               telephone: "+1-508-579-9897",
               email: "abby@btymaterial.com",
-              image: "https://buytheyard.lovable.app/og/og-home.jpg",
-              logo: "https://buytheyard.lovable.app/brandmark.webp",
               priceRange: "$$",
               address: {
                 "@type": "PostalAddress",
@@ -187,33 +180,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     links: [
-      { rel: "icon", type: "image/webp", href: "/brandmark.webp" },
-      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
-      { rel: "manifest", href: "/site.webmanifest" },
-      // iOS PWA launch images (apple-touch-startup-image)
-      ...[
-        { w: 1024, h: 1366, dpr: 2, file: "2048x2732" }, // iPad Pro 12.9"
-        { w: 834,  h: 1194, dpr: 2, file: "1668x2388" }, // iPad Pro 11"
-        { w: 768,  h: 1024, dpr: 2, file: "1536x2048" }, // iPad 9.7"
-        { w: 430,  h: 932,  dpr: 3, file: "1290x2796" }, // iPhone 15/16 Pro Max
-        { w: 393,  h: 852,  dpr: 3, file: "1179x2556" }, // iPhone 15/16
-        { w: 390,  h: 844,  dpr: 3, file: "1170x2532" }, // iPhone 13/14
-        { w: 375,  h: 812,  dpr: 3, file: "1125x2436" }, // iPhone X/XS/11 Pro
-      ].flatMap(({ w, h, dpr, file }) => {
-        const [pw, ph] = file.split("x");
-        return [
-          {
-            rel: "apple-touch-startup-image",
-            href: `/splash/apple-splash-${pw}x${ph}.png`,
-            media: `(device-width: ${w}px) and (device-height: ${h}px) and (-webkit-device-pixel-ratio: ${dpr}) and (orientation: portrait)`,
-          },
-          {
-            rel: "apple-touch-startup-image",
-            href: `/splash/apple-splash-${ph}x${pw}.png`,
-            media: `(device-width: ${w}px) and (device-height: ${h}px) and (-webkit-device-pixel-ratio: ${dpr}) and (orientation: landscape)`,
-          },
-        ];
-      }),
       {
         rel: "stylesheet",
         href: appCss,
