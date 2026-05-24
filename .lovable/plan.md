@@ -1,29 +1,63 @@
-## Problem
+## Goal
 
-Two issues on `/contact`:
+Carry the homepage's two visual moves into the rest of the site as a typed background system on the `Section` primitive:
 
-1. **Sections don't fit one viewport.** Below the hero, `ContactFormSection` + `ContactCTASection` flow naturally with no height constraint, so the page scrolls.
-2. **Right black accent doesn't align.** The form's dark aside is `md:col-span-2` of a 5-col grid (40% wide). The CTA's dark aside is `md:w-1/3` (~33%). Stacked together they form a stepped rail instead of one continuous black column.
+1. **Photo + paper gradient** — the treatment used on hero and `MaterialInventorySection` cards.
+2. **Spec-sheet scatter marks** — the `+`, `–`, `○`, `◇` registration marks currently living inside `CategoryLineIcon`, lifted out and used as a quiet diagrammatic background pattern.
 
-## Fix
+Hybrid rule (from your choices):
+- **Story bands** (narrative — hero, owner, gallery, service area, testimonials, contact CTA) → faded photo + paper gradient.
+- **Utility bands** (forms, calculators, FAQs, pricing tables, process, catalog) → scatter marks only.
+- **Ink / black bands stay flat.** No treatment. `OwnerStorySection` and `CubicYardsCalculatorSection` keep their current darkness as visual anchors.
 
-### 1. `ContactFormSection` — accept `heightClass`, run in compact mode
-- Add optional `heightClass?: string`. Pass through to `Section` (same pattern as the delivery archetypes).
-- When `heightClass` is set, switch to compact paddings (`md:py-8 md:px-12` instead of `md:p-16`), tighten internal vertical rhythm (heading `mb-4`, body `mb-6`, grid `gap-3 mb-3`, single-input labels `mb-3`, button area `mb-0`), and apply `md:overflow-y-auto` on the form column so the form remains usable if the viewport is small.
-- Right aside stays `md:col-span-2` (40% rail).
+## The background system
 
-### 2. `ContactCTASection` — accept `accentWidth`, align with form rail
-- Add `accentWidth?: string` prop, default `"md:w-1/3"` so all other pages stay pixel-identical.
-- Apply to the dark right column instead of the hard-coded `md:w-1/3`.
+A new `background` prop on `Section`, rendered as an absolutely-positioned layer behind `children` (so all existing archetypes inherit it without per-component rewiring):
 
-### 3. `/contact` route — wire 75 / 25 split + matching rail width
-- `ContactFormSection` → `heightClass="md:h-[calc(75svh-3rem)]"` (75% of one viewport minus 75% of the 4rem header).
-- `ContactCTASection` → `heightClass="md:h-[calc(25svh-1rem)]"` and `accentWidth="md:w-2/5"` so the black accent stacks exactly under the form's `md:col-span-2` aside.
+```ts
+type SectionBackground =
+  | { kind: "none" }
+  | { kind: "photo"; src: string; alt?: string; position?: string; gradient?: "bottom" | "right" | "radial" }
+  | { kind: "scatter"; density?: "light" | "regular" | "dense"; tint?: "ink" | "brand" };
+```
 
-Hero stays one viewport. Form + CTA share the next viewport (75/25). No copy changes. Other routes that use `ContactCTASection` are unaffected because both new props default to current values.
+- `photo`: `<img>` at `opacity-70 object-cover` + a paper-tone gradient overlay matching direction (`from-paper/90 via-paper/55 to-paper/15`). The `position` prop forwards the same `object-[x%_y%]` knob already on `HeroSection`.
+- `scatter`: a tiling SVG pattern lifted from `CategoryLineIcon.Scatter` — same marks, same `currentColor`, rendered at low opacity (`text-ink/10` by default, `text-brand/15` when `tint="brand"` for accent moments). Pattern uses `<pattern>` so density is just a tile-size knob (`light` = 240px, `regular` = 160px, `dense` = 96px). Pinned at `inset-0` and `pointer-events-none`.
+- Rail caption stays on top; existing tone classes still drive base color, so the layer composites cleanly on paper and soft.
+- `ink` and `black` tones ignore `background` — guard inside `Section` so a caller can't accidentally darken an already-dark band.
 
-## Files
+The scatter SVG moves into a new primitive `SectionBackdrop.tsx` next to `Section.tsx`. `CategoryLineIcon` keeps using the same source marks so the icon language and the section pattern stay visibly related.
 
-- `src/components/site/sections/archetypes/ContactFormSection.tsx`
-- `src/components/site/sections/archetypes/ContactCTASection.tsx`
-- `src/routes/contact.tsx`
+## Per-archetype assignment
+
+| Archetype | Tone | Treatment | Notes |
+|---|---|---|---|
+| `HeroSection` | paper | photo (already wired) | refactor to pass through new `background` prop |
+| `MaterialInventorySection` | paper | photo on cards (already) | unchanged |
+| `GalleryMarqueeSection` | paper | scatter (light, ink) | marquee is the photo content — backdrop stays quiet |
+| `TestimonialsSection` | paper | photo (yard wide-shot, optional per page) | accepts new optional `image` prop; falls back to scatter |
+| `ServiceAreaSection` | paper | photo (truck or map-ish wide-shot) | gradient = right, so towns column stays readable |
+| `ContactCTASection` | paper | scatter (regular, brand tint) | brand-tinted marks reinforce the CTA |
+| `ContactFormSection` | paper | scatter (light, ink) | form needs calm; marks only on the left intro column |
+| `ProductCatalogSection` | paper | scatter (regular) | utility |
+| `ProcessStepsSection` | paper | scatter (regular) | utility |
+| `DeliveryPricingSection` | paper | scatter (regular) | utility |
+| `FAQSection` | paper | scatter (light) | calm read |
+| `LogisticsSplitSection` | paper | photo (route/yard shot) | story-leaning; image already implied by the split |
+| `OwnerStorySection` | ink | none | dark anchor |
+| `CubicYardsCalculatorSection` | ink | none | dark anchor |
+
+## Implementation steps
+
+1. **Primitive: `SectionBackdrop.tsx`** — renders the photo+gradient or scatter layer. Pure presentational, no archetype knowledge.
+2. **`Section.tsx`** — accept `background?: SectionBackground`, render `<SectionBackdrop>` as the first child inside the flex row, set `relative` on the section, ignore for `ink`/`black`.
+3. **`CategoryLineIcon.tsx`** — extract `Scatter()` into a named export reused by `SectionBackdrop` so the marks stay literally the same shapes.
+4. **Archetypes** — add an optional `background` (and where useful, `image`) prop and pass through to `Section`. Keep current behavior when caller passes nothing, so untouched pages don't shift.
+5. **Route pages** — wire the assigned treatment into each page (home already has photo on hero + material cards; remaining wiring is per-page, mostly one line per section). For story bands that need a photo, reuse images already in `@/assets/photos`.
+6. **Memory update** — add a `mem://design/section-backgrounds` entry capturing the system (story=photo, utility=scatter, ink stays flat) and reference it in `mem://index.md` Core so future sections inherit the rule.
+
+## Out of scope
+
+- No new photography. We reuse existing assets in `@/assets/photos`. If a page has no good fit, it stays on scatter.
+- No motion on the scatter pattern (no parallax, no drift). It is a quiet diagrammatic constant.
+- No change to ink/black sections, headline sizes, rail caption, or ember-accent rules.
