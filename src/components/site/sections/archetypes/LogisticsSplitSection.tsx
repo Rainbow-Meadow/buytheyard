@@ -12,8 +12,7 @@ export interface LogisticsSplitProps {
 export function LogisticsSplitSection({ title = "PICKUP & DELIVERY", pickup, delivery, heightClass }: LogisticsSplitProps) {
   const compact = Boolean(heightClass);
   return (
-    <Section title={title} tone="paper">
-      <div className={heightClass ? `${heightClass} md:overflow-hidden` : ""}>
+    <Section title={title} tone="paper" heightClass={heightClass}>
       <SectionSplit
         compact={compact}
         left={
@@ -39,7 +38,6 @@ export function LogisticsSplitSection({ title = "PICKUP & DELIVERY", pickup, del
         }
         rightTone="soft"
       />
-      </div>
     </Section>
   );
 }
