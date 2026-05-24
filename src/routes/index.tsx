@@ -60,6 +60,7 @@ function HomePage() {
         ctaTo="/mulch"
         image={dumpTruckDeliveringDarkMulch}
         imageAlt="Buy The Yard truck delivering fresh dark mulch"
+        imagePosition="object-[75%_center]"
       />
       <MaterialInventorySection
         items={[
