@@ -41,7 +41,7 @@ function DeliveryPage() {
         imageAlt="Dump truck unloading black mulch at a delivery site"
       />
       <LogisticsSplitSection
-        heightClass="md:h-[calc(40svh-1.6rem)]"
+        heightClass="md:h-[calc(30svh-1.2rem)]"
         pickup={{
           heading: "Drive-in Pickup",
           body: "Bring a truck or a trailer — we'll load you up on the spot. No minimum on most products.",
@@ -63,7 +63,7 @@ function DeliveryPage() {
         ]}
       />
       <ContactCTASection
-        heightClass="md:h-[calc(20svh-0.8rem)]"
+        heightClass="md:h-[calc(30svh-1.2rem)]"
         phone="508.579.9897"
         email="abby@btymaterial.com"
         address={{ line1: "2264 Main St.", line2: "Jefferson, MA 01522" }}
