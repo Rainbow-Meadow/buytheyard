@@ -8,12 +8,30 @@ export interface LogisticsSplitProps {
   pickup: { heading: string; body: string; specLines: string[] };
   delivery: { heading: string; body: string; ctaLabel: string; ctaHref?: string };
   heightClass?: string;
+  image?: string;
+  imageAlt?: string;
+  imagePosition?: string;
+  background?: SectionBackground;
 }
 
-export function LogisticsSplitSection({ title = "PICKUP & DELIVERY", pickup, delivery, heightClass }: LogisticsSplitProps) {
+export function LogisticsSplitSection({
+  title = "PICKUP & DELIVERY",
+  pickup,
+  delivery,
+  heightClass,
+  image,
+  imageAlt,
+  imagePosition = "object-center",
+  background,
+}: LogisticsSplitProps) {
   const compact = Boolean(heightClass);
+  const bg: SectionBackground =
+    background ??
+    (image
+      ? { kind: "photo", src: image, alt: imageAlt, position: imagePosition, gradient: "bottom" }
+      : { kind: "scatter", density: "regular", tint: "ink" });
   return (
-    <Section title={title} tone="paper" heightClass={heightClass}>
+    <Section title={title} tone="paper" heightClass={heightClass} background={bg}>
       <SectionSplit
         compact={compact}
         left={
