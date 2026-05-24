@@ -143,7 +143,7 @@ function Dashboard() {
           <TabsTrigger value="mulch">Mulch ({catalog.mulch.length})</TabsTrigger>
           <TabsTrigger value="stone">Stone ({catalog.stone.length})</TabsTrigger>
           <TabsTrigger value="additional">
-            Additional ({catalog.additional.length})
+            Sand & Loam ({catalog.additional.length})
           </TabsTrigger>
           <TabsTrigger value="zones">Delivery zones ({zones.length})</TabsTrigger>
         </TabsList>

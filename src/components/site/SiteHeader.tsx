@@ -6,7 +6,7 @@ import { Wordmark } from "@/components/site/Wordmark";
 const NAV = [
   { to: "/mulch", label: "Mulch" },
   { to: "/stone", label: "Stone" },
-  { to: "/additional", label: "Additional" },
+  { to: "/additional", label: "Sand & Loam" },
   { to: "/garden-center", label: "Garden Center" },
   { to: "/delivery", label: "Delivery" },
   { to: "/contact", label: "Contact" },

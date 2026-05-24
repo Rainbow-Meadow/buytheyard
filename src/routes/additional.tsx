@@ -20,8 +20,8 @@ export const Route = createFileRoute("/additional")({
     meta: [
       { title: "Loam, Sand, Gravel & More — Buy The Yard | Jefferson, MA" },
       { name: "description", content: "Screened loam, mason sand, stone dust, gravel, wood chips, compost, and recycled asphalt by the cubic yard. Pickup or delivery across Central MA." },
-      { property: "og:title", content: "Additional Products — Buy The Yard" },
-      { property: "og:description", content: "Loam, sand, gravel, wood chips, compost, and recycled asphalt." },
+      { property: "og:title", content: "Sand & Loam — Buy The Yard" },
+      { property: "og:description", content: "Screened loam, mason sand, stone dust, salt, compost, and more by the cubic yard." },
       { property: "og:url", content: "https://buytheyard.lovable.app/additional" },
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/additional" }],
@@ -37,10 +37,10 @@ function AdditionalPage() {
   const { data: catalog } = useSuspenseQuery(catalogQueryOptions);
   const { data: zones } = useSuspenseQuery(deliveryZonesQueryOptions);
   return (
-    <main aria-label="Additional products" className="font-barlow">
+    <main aria-label="Sand and loam products" className="font-barlow">
       <HeroSection
-        meta="LOAM · SAND · GRAVEL"
-        heading={<>Everything Else<br/>By The Yard</>}
+        meta="LOAM · SAND · STONE DUST"
+        heading={<>Sand & Loam<br/>By The Yard</>}
         body="Screened loam for the lawn, mason sand for the patio, stone dust for the base. The supporting cast that finishes every project."
         ctaLabel="Call For Pricing"
         ctaHref="tel:5085799897"
