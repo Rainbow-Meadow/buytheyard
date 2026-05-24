@@ -12,10 +12,10 @@ import { dumpTruckBedFullOfBrownMulch } from "@/assets/photos";
 export const Route = createFileRoute("/mulch")({
   head: () => ({
     meta: [
-      { title: "Bulk Mulch — Brown, Black, Cedar, Hemlock | Buy The Yard" },
-      { name: "description", content: "Premium double-ground mulch by the yard in Jefferson, MA. Brown, black, cedar, hemlock, and playground mulch. Pickup or delivery across Central Mass." },
+      { title: "Bulk Mulch — Hemlock, Brown, Black, Red · Buy The Yard" },
+      { name: "description", content: "Double-ground mulch by the cubic yard on 122A in Jefferson, MA. Hemlock, brown, black, red, and playground. Pickup or delivery across Central Mass." },
       { property: "og:title", content: "Bulk Mulch — Buy The Yard" },
-      { property: "og:description", content: "Brown, black, cedar, hemlock, and playground mulch by the cubic yard." },
+      { property: "og:description", content: "Hemlock, brown, black, red, and playground mulch by the cubic yard. Loaded at the yard in Jefferson, MA." },
       { property: "og:url", content: "https://buytheyard.lovable.app/mulch" },
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/mulch" }],
@@ -31,7 +31,7 @@ function MulchPage() {
       <HeroSection
         meta="MULCH"
         heading={<>Bulk Mulch<br/>By The Yard</>}
-        body="Double-ground, color-locked mulch in five varieties. Loaded clean and consistent — at the yard or delivered to your driveway."
+        body="Hemlock, brown, black, red, playground. Double-ground and dyed to hold color through August. Pull in with a truck, or we'll drop it in your driveway."
         ctaLabel="Call For Pricing"
         ctaHref="tel:5085799897"
         image={dumpTruckBedFullOfBrownMulch}

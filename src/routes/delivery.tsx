@@ -13,16 +13,16 @@ import { dumpTruckUnloadingBlackMulch } from "@/assets/photos";
 export const Route = createFileRoute("/delivery")({
   head: () => ({
     meta: [
-      { title: "Delivery & Pickup — Central MA | Buy The Yard" },
+      { title: "Delivery & Pickup — Central Mass · Buy The Yard" },
       {
         name: "description",
         content:
-          "Bulk material pickup and curbside delivery from Jefferson, MA. 1-yard minimum, 48 hours is best, driveway or curbline drop only. Call 508-579-9897.",
+          "Pickup and delivery out of the Jefferson yard on 122A. Pull in with a truck or we drop it where you want it — driveway, curbline, job site. Call 508-579-9897.",
       },
       { property: "og:title", content: "Delivery & Pickup — Buy The Yard" },
       {
         property: "og:description",
-        content: "How pickup and delivery work before the truck leaves the Jefferson yard.",
+        content: "How pickup and delivery work before the truck rolls out of the Jefferson yard.",
       },
       { property: "og:url", content: "/delivery" },
     ],
@@ -39,7 +39,7 @@ function DeliveryPage() {
       <HeroSection
         meta="DELIVERY & PICKUP"
         heading={<>Pickup Or<br/>Delivered.</>}
-        body="Bring a truck and we load you on the spot. Or we drop it precisely where you need it — driveway, curbline, or job site."
+        body="Pull in with a truck and we load you up on the spot. Or we run it out and drop it where you want it — driveway, curbline, or job site."
         ctaLabel="Call 508.579.9897"
         ctaHref="tel:5085799897"
         image={dumpTruckUnloadingBlackMulch}
@@ -48,21 +48,21 @@ function DeliveryPage() {
       <LogisticsSplitSection
         pickup={{
           heading: "Drive-in Pickup",
-          body: "Bring your own truck or trailer. We load you up on the spot. No minimum volume for most products.",
+          body: "Bring a truck or a trailer — we'll load you up on the spot. No minimum on most products.",
           specLines: ["LOADING HOURS:", "MON–FRI: 0800 – 1700", "SATURDAY: 0800 – 1500"],
         }}
         delivery={{
           heading: "Site Delivery",
-          body: "Precision dumping at your home or job site. 3-yard minimum. Same-day for orders placed before 2:00 PM EST.",
+          body: "We drop it where you want it — home or job site. 3-yard minimum. Same day on orders placed before 2:00pm.",
           ctaLabel: "Request Delivery",
           ctaHref: "/quote",
         }}
       />
       <ProcessStepsSection
         steps={[
-          { title: "Select Material", body: "Browse our catalog and determine the cubic yardage needed for your project area." },
-          { title: "Get a Quote",     body: "Call or submit a request for current pricing including delivery fees to your specific ZIP code." },
-          { title: "Schedule Drop",   body: "Confirm your order and provide specific dumping instructions for our drivers." },
+          { title: "Pick Your Material", body: "Walk the catalog or call us. We'll help you figure the cubic yards if you're not sure." },
+          { title: "Get A Price",        body: "Phone or the quote form — same day. Pricing includes the delivery fee to your ZIP." },
+          { title: "Schedule The Drop",  body: "Confirm the load and tell the driver exactly where you want it. We'll be there." },
         ]}
       />
       <DeliveryPricingSection zones={zones.map(zoneToDisplay)} />

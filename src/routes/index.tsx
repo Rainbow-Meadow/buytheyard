@@ -31,17 +31,17 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mulch, Loam, Sand & Stone — Jefferson, MA" },
+      { title: "Buy The Yard — Mulch, Stone, Sand & Loam · Jefferson, MA" },
       {
         name: "description",
         content:
-          "Bulk mulch, loam, sand & stone from Buy The Yard in Jefferson, MA. Woman-owned, WBE-certified, and built for pickup or delivery across Central Mass.",
+          "Family-run materials yard on 122A in Jefferson, MA. Mulch, stone, sand, loam, and a flower wagon out front. Pickup or delivery across Central Mass. Call 508-579-9897.",
       },
-      { property: "og:title", content: "Buy The Yard — Bulk Landscape Materials in Jefferson, MA" },
+      { property: "og:title", content: "Buy The Yard — On 122A in Jefferson, MA" },
       {
         property: "og:description",
         content:
-          "Mulch, loam, sand, stone, garden center materials, and practical ordering help from Abby's Jefferson yard.",
+          "Mulch, stone, sand, loam, and a garden center on 122A in Jefferson. Loading trucks for Central Mass since 2016.",
       },
       { property: "og:url", content: "https://buytheyard.lovable.app/" },
     ],
@@ -53,9 +53,9 @@ function HomePage() {
   return (
     <main aria-label="Home" className="font-barlow">
       <HeroSection
-        meta="EST. 2016 — JEFFERSON, MA"
+        meta="JEFFERSON, MA · ON 122A SINCE 2016"
         heading={<>Mulch. Stone.<br/>Sand & Loam.</>}
-        body="Premium mulch, stone, sand & loam, and garden center supplies. Woman-owned and operated. Serving Central Massachusetts with precision delivery."
+        body="A woman-owned yard on 122A in Jefferson. Mulch, stone, sand, loam, and a flower wagon out front. Pull in with a truck, or we drop it where you want it."
         ctaLabel="Shop Mulch"
         ctaTo="/mulch"
         image={dumpTruckDeliveringDarkMulch}
@@ -63,15 +63,15 @@ function HomePage() {
       />
       <MaterialInventorySection
         items={[
-          { code: "CAT_01", name: "Mulch", description: "Double-ground, color-locked mulch. Moisture retention and weed suppression.", unit: "CUBIC YARD", to: "/mulch", icon: "mulch", image: catMulchBg, imageAlt: "Piles of brown, black, and red mulch in concrete bins" },
-          { code: "CAT_02", name: "Stone", description: "Decorative and structural aggregates. Three sizes, multiple colors.", unit: "TON / CY", to: "/stone", icon: "stone", image: catStoneBg, imageAlt: "Piles of gravel and river stone in concrete bins" },
-          { code: "CAT_03", name: "Sand & Loam", description: "Loam, sand, stone dust, salt, compost — the supporting cast.", unit: "CUBIC YARD", to: "/additional", icon: "additional", image: catSandLoamBg, imageAlt: "Piles of sand and dark loam in concrete bins" },
-          { code: "CAT_04", name: "Garden Center", description: "Annuals, perennials, hanging baskets, mums, tools, and hardware.", unit: "AT THE YARD", to: "/garden-center", icon: "garden-center", image: catGardenCenterBg, imageAlt: "Flower wagon under the wooden pergola at the yard" },
+          { code: "CAT_01", name: "Mulch", description: "Hemlock, brown, black, red, playground. Double-ground and dyed to hold color through August.", unit: "CUBIC YARD", to: "/mulch", icon: "mulch", image: catMulchBg, imageAlt: "Piles of brown, black, and red mulch in concrete bins" },
+          { code: "CAT_02", name: "Stone", description: "3/4\" crush for the driveway, pea stone for the path, river rock for the dry creek. Three sizes, plenty of colors.", unit: "TON / CY", to: "/stone", icon: "stone", image: catStoneBg, imageAlt: "Piles of gravel and river stone in concrete bins" },
+          { code: "CAT_03", name: "Sand & Loam", description: "Screened loam for a new lawn, mason sand for the patio, stone dust for the base. The stuff every job needs.", unit: "CUBIC YARD", to: "/additional", icon: "additional", image: catSandLoamBg, imageAlt: "Piles of sand and dark loam in concrete bins" },
+          { code: "CAT_04", name: "Garden Center", description: "Hanging baskets, annuals, mums on the hay bales in the fall, and the tools to plant them. Walk the wagon, pick what you like.", unit: "AT THE YARD", to: "/garden-center", icon: "garden-center", image: catGardenCenterBg, imageAlt: "Flower wagon under the wooden pergola at the yard" },
         ]}
       />
       <OwnerStorySection
-        heading={<>WBE Certified<br/>Woman-Owned</>}
-        body="Founded by Abby in 2016, Buy The Yard is a certified Woman Business Enterprise by the Commonwealth of Massachusetts. We bring a professional, customer-first approach to a heavy industry."
+        heading={<>Woman-Owned.<br/>WBE Certified.</>}
+        body="Buy The Yard opened in Jefferson in 2016 and is certified WBE by the Commonwealth. A woman running a materials yard in a business that doesn't see many — and we like it that way."
         badges={["WBE", "MASS"]}
       />
       <GalleryMarqueeSection
@@ -92,13 +92,13 @@ function HomePage() {
       />
       <TestimonialsSection
         items={[
-          { quote: "The best mulch in Central Mass. Clean, consistent, and delivered exactly where I needed it.", attribution: "MARK S. / RESIDENTIAL" },
-          { quote: "Reliable logistics for our commercial landscape crews. They understand the urgency of site work.", attribution: "GREEN LANDSCAPE INC." },
+          { quote: "Best mulch around. Clean load, dropped right where I marked it.", attribution: "MARK S. · HOLDEN" },
+          { quote: "They get our crews loaded and out fast. Same-day when we need it.", attribution: "GREEN LANDSCAPE INC." },
         ]}
       />
       <ServiceAreaSection
         heading={<>Central Mass<br/>Delivery.</>}
-        body="Based in Jefferson, MA. Serving the towns within ~40 minutes of the yard with same-day or next-day delivery."
+        body="Trucks roll out of the Jefferson yard. If you're inside about 40 minutes of us, we can usually get a load to you same day or next."
         phone="508.579.9897"
         towns={[...SERVICE_AREA_TOWNS]}
       />
