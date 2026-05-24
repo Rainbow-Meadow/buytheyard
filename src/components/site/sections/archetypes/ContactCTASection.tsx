@@ -20,7 +20,7 @@ export function ContactCTASection({
 }: ContactCTAProps) {
   return (
     <Section title={title} tone="paper" rule={false}>
-      <div className="flex flex-col md:flex-row md:min-h-[50svh]">
+      <div className="flex flex-col md:flex-row md:h-[50svh] md:overflow-hidden">
         <div className="flex-1 p-8 md:py-12 md:px-16 flex flex-col justify-center">
           <div className="flex flex-col md:flex-row gap-12">
             <div>

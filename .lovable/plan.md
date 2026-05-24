@@ -1,25 +1,46 @@
-## Problem
+## Goal
 
-The 50svh floor on paired sections is fine — content padding is what's pushing each archetype past its slice and into the next viewport. OwnerStory loses its badges, ContactCTA loses its Order Now button.
+Lock viewport groupings to exact viewport heights so each scroll-stop is one screen, not "at least one screen + overflow". Today every non-hero section uses `md:min-h-[50svh]`, which lets internal content push past the floor and break the intended pairings.
 
-## Fix
+## Viewport groupings (desktop, md+)
 
-De-pad each archetype so its rendered height fits comfortably inside ~50svh on desktop. Horizontal rhythm stays; vertical breathing room is trimmed. Keep hero untouched.
+```text
+Screen 1   Hero                            100svh
+Screen 2   MaterialInventory + OwnerStory  50svh + 50svh
+Screen 3   GalleryMarquee + Testimonials   50svh + 50svh
+Screen 4   ServiceArea + ContactCTA        50svh + 50svh
+```
 
-## File changes (archetypes + grid cell)
+Mobile is unchanged — sections stack at natural content height; absolute heights apply only at `md` and up.
 
-- **MaterialInventorySection.tsx** — tighten internal stack: icon `mb-8` → `mb-6`, code `mb-12` → `mb-6`, headline `mb-4` → `mb-3`, body `mb-6` → `mb-4`. Reduce icon block from `max-w-[140px]` to `max-w-[110px]`.
-- **SectionGrid.tsx (SectionGridCell)** — base padding `p-8` → `p-6 md:p-8` so cards stop eating vertical space on desktop's 50svh slice.
-- **OwnerStorySection.tsx** — wrapper `p-8 md:p-24` → `p-8 md:py-14 md:px-20`. Heading `mb-6` → `mb-5`, body `mb-8` → `mb-6`, badge tiles `h-16 w-16` → `h-14 w-14`.
-- **GalleryMarqueeSection.tsx** — wrapper `py-10 md:py-14` → `py-6 md:py-8`. Figures `md:h-72` → `md:h-64`.
-- **TestimonialsSection.tsx** — wrapper `p-8 md:p-16` → `p-6 md:py-10 md:px-16`. Card inner `p-8` → `p-6 md:p-8`. Quote `mb-4` → `mb-3`.
-- **ServiceAreaSection.tsx** — both columns `p-8 md:p-16` → `p-6 md:py-10 md:px-14`. Headline `mb-6` → `mb-4`, body `mb-8` → `mb-6`. Towns grid `gap-y-3` → `gap-y-2`, `pb-2` → `pb-1.5`.
-- **ContactCTASection.tsx** — left column `p-8 md:p-24` → `p-8 md:py-12 md:px-16`. Right column `p-8 md:p-12` → `p-6 md:py-10 md:px-10`. Order-Now button `mt-12` → `mt-6`, `py-6` → `py-5`.
+## Changes (md+ only, mobile untouched)
 
-No copy, font, palette, or layout structure changes. No min-h adjustments — the existing 50svh floors stay; we're just trimming the ceiling each archetype creates from its own padding.
+Swap `md:min-h-[50svh]` → `md:h-[50svh] md:overflow-hidden` on the outer wrapper of each non-hero archetype, and ensure the inner content centers within that fixed box.
+
+- **MaterialInventorySection.tsx** — `SectionGrid` wrapper: `md:min-h-[50svh]` → `md:h-[50svh]`. Grid cells already fill via the grid; no inner change.
+- **OwnerStorySection.tsx** — wrapper: `md:min-h-[50svh] md:flex md:flex-col md:justify-center` → `md:h-[50svh] md:flex md:flex-col md:justify-center md:overflow-hidden`.
+- **GalleryMarqueeSection.tsx** — wrapper: `md:min-h-[50svh] flex items-center` → `md:h-[50svh] flex items-center md:overflow-hidden` (marquee already clips horizontally; vertical clip is fine).
+- **TestimonialsSection.tsx** — wrapper: `md:min-h-[50svh] md:flex md:flex-col md:justify-center` → `md:h-[50svh] md:flex md:flex-col md:justify-center md:overflow-hidden`.
+- **ServiceAreaSection.tsx** — wrapper grid: `md:min-h-[50svh] md:items-center` → `md:h-[50svh] md:items-center md:overflow-hidden`.
+- **ContactCTASection.tsx** — wrapper: `md:min-h-[50svh]` → `md:h-[50svh] md:overflow-hidden`.
+
+Hero is left at `min-h-svh` (already full viewport, already absolute by intent).
+
+## Why `h-[50svh]` not `min-h-[50svh]`
+
+- `min-h` = floor only. Content > floor → section grows, pair drifts past 100svh, screen 3 starts mid-section.
+- `h-[50svh]` = exact. Pair always sums to one viewport. The recent de-pad pass already shrunk content to fit, so clipping risk is low; `md:overflow-hidden` is a safety net rather than expected behavior.
 
 ## QA
 
-1. At 1586×887 the (material + owner story) pair fits one viewport with WBE/MASS badges visible.
-2. At the same viewport the (service area + contact) pair fits with the Order Now button visible.
-3. Mobile is unaffected by mobile padding choices (kept `p-6` / `p-8` baseline).
+At 1586×887 (current viewport) and 1366×768, scroll-snap each pair:
+1. Screen 1 = Hero only, bottom edge flush.
+2. Screen 2 top = MaterialInventory top, bottom = OwnerStory bottom.
+3. Screen 3 top = Gallery top, bottom = Testimonials bottom.
+4. Screen 4 top = ServiceArea top, bottom = ContactCTA bottom.
+
+If any section's content gets clipped at common desktop heights (≥768), report which one and we'll trim copy/padding inside that single archetype rather than relaxing the lock.
+
+## Out of scope
+
+No copy, palette, typography, layout-structure, or mobile changes. No min-h on hero changes. No scroll-snap CSS added (groupings are visual, not enforced by snap).
