@@ -35,9 +35,9 @@
   --color-ink:   var(--ink);
   --color-black: var(--black);
   --color-ember: var(--ember);
-  --font-industrial-display: 'Bebas Neue', 'Inter', sans-serif;
-  --font-industrial-body: 'Barlow', 'Inter', sans-serif;
-  --font-industrial-mono: 'Space Mono', ui-monospace, monospace;
+  --font-bebas: 'Bebas Neue', 'Inter', sans-serif;
+  --font-barlow: 'Barlow', 'Inter', sans-serif;
+  --font-mono-industrial: 'Space Mono', ui-monospace, monospace;
 }
 
 :root {
