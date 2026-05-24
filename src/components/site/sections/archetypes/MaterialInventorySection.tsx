@@ -25,9 +25,9 @@ export function MaterialInventorySection({
 }) {
   return (
     <Section title={title} tone="paper">
-      <SectionGrid cols={4}>
+      <SectionGrid cols={4} className="md:min-h-svh">
         {items.map((m, i) => (
-          <SectionGridCell key={m.code} last={i === items.length - 1} className="relative overflow-hidden">
+          <SectionGridCell key={m.code} last={i === items.length - 1} className="relative overflow-hidden min-h-[85svh] md:min-h-0 flex flex-col justify-end">
             {m.image && (
               <>
                 <img

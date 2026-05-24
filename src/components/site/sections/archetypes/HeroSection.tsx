@@ -27,7 +27,7 @@ export function HeroSection({
 }: HeroSectionProps) {
   return (
     <Section tone="paper">
-      <div className="relative flex-1 flex flex-col justify-center p-8 md:p-24 min-h-[80vh] overflow-hidden">
+      <div className="relative flex-1 flex flex-col justify-center p-8 md:p-24 min-h-svh overflow-hidden">
         {image && (
           <>
             <img

@@ -12,7 +12,7 @@ export function TestimonialsSection({
 }) {
   return (
     <Section title={title} tone="paper">
-      <div className="p-8 md:p-16">
+      <div className="p-8 md:p-16 min-h-[45svh] flex flex-col justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ink border border-ink">
           {items.map((t) => (
             <div key={t.attribution} className="bg-paper p-8">

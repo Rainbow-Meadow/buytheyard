@@ -20,8 +20,8 @@ export function ContactCTASection({
 }: ContactCTAProps) {
   return (
     <Section title={title} tone="paper" rule={false}>
-      <div className="flex flex-col md:flex-row">
-        <div className="flex-1 p-8 md:p-24">
+      <div className="flex flex-col md:flex-row min-h-[70svh]">
+        <div className="flex-1 p-8 md:p-24 flex flex-col justify-center">
           <div className="flex flex-col md:flex-row gap-12">
             <div>
               <MonoLabel className="mb-2 block opacity-60">Direct Line</MonoLabel>

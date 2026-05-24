@@ -17,7 +17,7 @@ export function OwnerStorySection({
 }: OwnerStoryProps) {
   return (
     <Section title={title} tone="ink">
-      <div className="p-8 md:p-24">
+      <div className="p-8 md:p-24 min-h-[80svh] md:min-h-[85svh] flex flex-col justify-center">
           <DisplayHeading as="h2" size="lg" className="mb-6">{heading}</DisplayHeading>
           <p className="font-barlow text-xl opacity-80 mb-8 max-w-lg">{body}</p>
           <div className="flex gap-4">
