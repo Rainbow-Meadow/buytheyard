@@ -10,7 +10,7 @@ export interface DeliveryZone {
 export function DeliveryPricingSection({
   title = "DELIVERY ZONES",
   heading = "Delivery Pricing",
-  note = "3 cubic yard minimum. Orders under 3 yards add $10. Same-day delivery for orders placed before 2:00 PM EST.",
+  note = "1 CY minimum. Same-day delivery for orders placed before 2:00 PM EST.",
   zones,
 }: {
   title?: string;
