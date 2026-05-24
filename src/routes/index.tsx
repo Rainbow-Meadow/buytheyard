@@ -38,7 +38,7 @@ function HomePage() {
       <HeroSection
         index="01"
         meta="EST. 2016 — JEFFERSON, MA"
-        heading={<>Bulk materials<br/>for the modern landscape.</>}
+        heading={<>Bulk materials.<br/>Modern landscape.</>}
         body="Premium mulch, loam, stone, and sand. Woman-owned and operated. Serving Central Massachusetts with precision delivery."
         ctaLabel="View Inventory"
         ctaTo="/products"

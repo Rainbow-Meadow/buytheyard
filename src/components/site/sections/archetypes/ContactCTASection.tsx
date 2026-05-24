@@ -39,7 +39,7 @@ export function ContactCTASection({
             </div>
             <div>
               <MonoLabel className="mb-2 block opacity-60">Office Email</MonoLabel>
-              <a href={`mailto:${email}`} className="text-2xl font-bebas uppercase break-all">
+              <a href={`mailto:${email}`} className="text-xl md:text-2xl font-bebas uppercase break-words">
                 {email}
               </a>
             </div>
