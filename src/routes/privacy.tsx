@@ -19,8 +19,6 @@ export const Route = createFileRoute("/privacy")({
           "Privacy policy, SMS terms, and website terms of use for Buy The Yard Materials in Jefferson, MA.",
       },
       { property: "og:url", content: "/privacy" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-home.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/privacy" },
