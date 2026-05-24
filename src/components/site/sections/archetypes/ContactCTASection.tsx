@@ -21,8 +21,8 @@ export function ContactCTASection({
   heightClass = "md:h-[calc(30svh-1.2rem)]",
 }: ContactCTAProps) {
   return (
-    <Section title={title} tone="paper" rule={false}>
-      <div className={`flex flex-col md:flex-row md:overflow-hidden ${heightClass}`}>
+    <Section title={title} tone="paper" rule={false} heightClass={heightClass}>
+      <div className="flex flex-col md:flex-row md:h-full">
         <div className="flex-1 p-8 md:py-12 md:px-16 flex flex-col justify-center">
           <div className="flex flex-col md:flex-row gap-12">
             <div>
