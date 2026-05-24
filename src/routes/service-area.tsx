@@ -7,6 +7,7 @@ import {
 } from "@/components/site/sections/archetypes";
 import { SERVICE_AREA_TOWNS } from "@/data/service-area";
 import { DELIVERY_ZONES } from "@/data/catalog";
+import { businessSignAndFlagsAtEntrance } from "@/assets/photos";
 
 const TITLE = "Service Area — Central MA Delivery | Buy The Yard";
 const DESCRIPTION =
@@ -36,6 +37,8 @@ function ServiceAreaPage() {
         body="Based in Jefferson and serving the towns within ~40 minutes of the yard. If your project is just outside our usual zone, call — we still might be able to help."
         ctaLabel="Call 508.579.9897"
         ctaHref="tel:5085799897"
+        image={businessSignAndFlagsAtEntrance}
+        imageAlt="Buy The Yard business sign and flags at the entrance"
       />
       <ServiceAreaSection
         heading={<>Towns We Deliver To</>}

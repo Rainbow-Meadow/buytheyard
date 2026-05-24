@@ -7,6 +7,7 @@ import {
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
 import { DELIVERY_ZONES } from "@/data/catalog";
+import { dumpTruckUnloadingBlackMulch } from "@/assets/photos";
 
 export const Route = createFileRoute("/delivery")({
   head: () => ({
@@ -38,6 +39,8 @@ function DeliveryPage() {
         body="Bring a truck and we load you on the spot. Or we drop it precisely where you need it — driveway, curbline, or job site."
         ctaLabel="Call 508.579.9897"
         ctaHref="tel:5085799897"
+        image={dumpTruckUnloadingBlackMulch}
+        imageAlt="Dump truck unloading black mulch at a delivery site"
       />
       <LogisticsSplitSection
         pickup={{
