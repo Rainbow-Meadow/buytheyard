@@ -47,3 +47,7 @@ export { default as brownPineMulchHandful } from "./046_brown_pine_mulch_handful
 export { default as blackPineMulchHandful } from "./047_black_pine_mulch_handful.jpg";
 export { default as hemlockMixHandful } from "./048_hemlock_mix_handful.jpg";
 export { default as playgroundMulchHandful } from "./049_playground_mulch_handful.jpg";
+export { default as catMulchBg } from "./cat_mulch_bg.png";
+export { default as catStoneBg } from "./cat_stone_bg.png";
+export { default as catSandLoamBg } from "./cat_sand_loam_bg.png";
+export { default as catGardenCenterBg } from "./cat_garden_center_bg.jpeg";
