@@ -14,10 +14,6 @@ import {
   ShieldCheck,
   Truck,
 } from "lucide-react";
-import abbyPortrait from "@/assets/source/abby-portrait.webp";
-import yardPatio from "@/assets/source/yard-banner-5.webp";
-import yardDog from "@/assets/source/yard-dog.webp";
-
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -34,8 +30,6 @@ export const Route = createFileRoute("/about")({
           "The story behind Buy The Yard: Abby Montalto, family construction roots, WBE certification, and a Jefferson yard built on practical help.",
       },
       { property: "og:url", content: "/about" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-about.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-about.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/about" }],
   }),

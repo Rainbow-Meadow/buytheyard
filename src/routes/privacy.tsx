@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FileText, Mail, Phone, ShieldCheck } from "lucide-react";
-import yardPiles from "@/assets/source/yard-piles.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 

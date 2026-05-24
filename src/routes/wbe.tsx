@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BadgeCheck, ClipboardCheck, Building2, HeartHandshake, Phone } from "lucide-react";
-import wbeSeal from "@/assets/source/wbe-seal.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 

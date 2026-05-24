@@ -7,7 +7,6 @@ import {
   Phone,
   Facebook,
 } from "lucide-react";
-import yardPatio from "@/assets/source/contact-hero-welcome.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
@@ -23,8 +22,6 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact — Buy The Yard" },
       { property: "og:description", content: "Phone, address, hours, quote request, and map for the Jefferson yard." },
       { property: "og:url", content: "/contact" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/contact" },
