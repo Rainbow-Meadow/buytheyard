@@ -7,16 +7,16 @@ import {
 export const Route = createFileRoute("/quote")({
   head: () => ({
     meta: [
-      { title: "Get a Quote — Buy The Yard | Jefferson, MA" },
+      { title: "Get A Quote — Buy The Yard · Jefferson, MA" },
       {
         name: "description",
         content:
-          "Build a quote in under a minute. Send it straight to Abby — by email or text. Pickup or delivery in Central MA.",
+          "Tell us what you need and where. Quotes come back same day — by email or text. Pickup or delivery across Central Mass.",
       },
       { property: "og:title", content: "Get a Quote — Buy The Yard" },
       {
         property: "og:description",
-        content: "Tell us what you need. We come back with pricing and a delivery window.",
+        content: "Tell us what you need and where. We come back with pricing and a delivery window — usually same day.",
       },
       { property: "og:url", content: "/quote" },
     ],
@@ -31,7 +31,7 @@ function QuotePage() {
       <HeroSection
         meta="QUOTE REQUEST"
         heading={<>Get A Quote<br/>In A Minute.</>}
-        body="Tell us what you need and where. We come back with pricing and a delivery window — usually same day."
+        body="Tell us what you need and where. We come back with pricing and a window — usually same day, during yard hours."
         ctaLabel="Or Call 508.579.9897"
         ctaHref="tel:5085799897"
       />
