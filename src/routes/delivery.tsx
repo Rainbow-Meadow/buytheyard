@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   HeroSection,
   LogisticsSplitSection,
@@ -6,7 +7,7 @@ import {
   DeliveryPricingSection,
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
-import { DELIVERY_ZONES } from "@/data/catalog";
+import { deliveryZonesQueryOptions, zoneToDisplay } from "@/data/catalog";
 import { dumpTruckUnloadingBlackMulch } from "@/assets/photos";
 
 export const Route = createFileRoute("/delivery")({
@@ -27,10 +28,12 @@ export const Route = createFileRoute("/delivery")({
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/delivery" }],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(deliveryZonesQueryOptions),
   component: DeliveryPage,
 });
 
 function DeliveryPage() {
+  const { data: zones } = useSuspenseQuery(deliveryZonesQueryOptions);
   return (
     <main aria-label="Delivery" className="font-barlow">
       <HeroSection
@@ -62,7 +65,7 @@ function DeliveryPage() {
           { title: "Schedule Drop",   body: "Confirm your order and provide specific dumping instructions for our drivers." },
         ]}
       />
-      <DeliveryPricingSection zones={DELIVERY_ZONES} />
+      <DeliveryPricingSection zones={zones.map(zoneToDisplay)} />
       <ContactCTASection
         phone="508.579.9897"
         email="abby@btymaterial.com"

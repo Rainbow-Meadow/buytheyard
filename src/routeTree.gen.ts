@@ -18,6 +18,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MulchRouteImport } from './routes/mulch'
 import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdditionalRouteImport } from './routes/additional'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -67,6 +68,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdditionalRoute = AdditionalRouteImport.update({
   id: '/additional',
   path: '/additional',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/additional': typeof AdditionalRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
   '/mulch': typeof MulchRoute
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/additional': typeof AdditionalRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
   '/mulch': typeof MulchRoute
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/additional': typeof AdditionalRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
   '/mulch': typeof MulchRoute
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/additional'
+    | '/admin'
     | '/contact'
     | '/delivery'
     | '/mulch'
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/additional'
+    | '/admin'
     | '/contact'
     | '/delivery'
     | '/mulch'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/additional'
+    | '/admin'
     | '/contact'
     | '/delivery'
     | '/mulch'
@@ -175,6 +187,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdditionalRoute: typeof AdditionalRoute
+  AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
   DeliveryRoute: typeof DeliveryRoute
   MulchRoute: typeof MulchRoute
@@ -251,6 +264,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/additional': {
       id: '/additional'
       path: '/additional'
@@ -279,6 +299,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdditionalRoute: AdditionalRoute,
+  AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
   DeliveryRoute: DeliveryRoute,
   MulchRoute: MulchRoute,

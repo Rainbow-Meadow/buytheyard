@@ -1,60 +1,35 @@
+// Catalog and delivery zones are now stored in the database and edited from
+// the /admin dashboard. See `src/lib/catalog.functions.ts` for the read API.
+import { queryOptions } from "@tanstack/react-query";
 import type { CatalogItem } from "@/components/site/sections/archetypes/ProductCatalogSection";
 import type { DeliveryZone } from "@/components/site/sections/archetypes/DeliveryPricingSection";
-import {
-  largePileOfDarkMulch,
-  largePileOfBlackMulch,
-  largePileOfRedMulch,
-  dumpTruckBedFullOfBrownMulch,
-  tanPeaGravelWithCoinCloseup,
-  reddishBrownLandscapeStoneWithCoinCloseup,
-  largePileOfLightSand,
-  paleTanCrushedStoneWithPennyCloseup,
-  lightGrayGravelWithQuarterCloseup,
-  lightGrayCrushedRockWithQuarterCloseup,
-  lavaRockCairnsKilauea,
-  pileOfCrushedLimestone,
-  screenedTopsoilProcessing,
-  finishedCompostBin,
-  woodChipPile,
-} from "@/assets/photos";
+import { getCatalog, getDeliveryZones } from "@/lib/catalog.functions";
+import { formatPrice } from "@/lib/format-price";
+import { resolveImage } from "@/lib/photo-defaults";
+import type { CatalogDTO, DeliveryZoneDTO, ProductDTO } from "@/lib/catalog-types";
 
-// NOTE: Prices are placeholders modeled on regional yard pricing — edit as Buy The Yard confirms.
+export function productToCatalogItem(p: ProductDTO): CatalogItem {
+  return {
+    name: p.name,
+    description: p.description,
+    price: formatPrice(p.priceCents),
+    unit: p.unit,
+    image: resolveImage(p.imageKey),
+  };
+}
 
-export const MULCH: CatalogItem[] = [
-  { name: "Brown Pine Mulch", description: "Classic double-ground brown. Long-lasting color, holds moisture, suppresses weeds.", price: "$42.00", unit: "per yd", image: largePileOfDarkMulch },
-  { name: "Black Pine Mulch", description: "Deep black double-ground. The cleanest contrast against green plantings.", price: "$42.00", unit: "per yd", image: largePileOfBlackMulch },
-  { name: "Hemlock Mix", description: "Premium hemlock blend with a fine texture and a rich, natural brown.", price: "$42.00", unit: "per yd", image: largePileOfRedMulch },
-  { name: "Playground Mulch", description: "Engineered wood fiber. ASTM-tested for fall-zone safety under play sets.", price: "$45.00", unit: "per yd", image: dumpTruckBedFullOfBrownMulch },
-];
+export function zoneToDisplay(z: DeliveryZoneDTO): DeliveryZone {
+  return { town: z.town, fee: formatPrice(z.feeCents).replace(/\.00$/, "") };
+}
 
-export const STONE: CatalogItem[] = [
-  { name: "1-1/2\" Landscaping Stone", description: "Decorative landscape stone in 1-1/2\" size. Available in brown, blue, and dark gray.", price: "$88.00", unit: "per yd", image: pileOfCrushedLimestone },
-  { name: "3/4\" Landscaping Stone", description: "Our most versatile size. Available in brown, blue, white, red, purple, dark gray, and light gray.", price: "$95.00", unit: "per yd", image: reddishBrownLandscapeStoneWithCoinCloseup },
-  { name: "3/8\" Landscaping Stone", description: "Smooth, finer-scale decorative stone. Available in brown, blue, dark gray, and light gray.", price: "$78.00", unit: "per yd", image: tanPeaGravelWithCoinCloseup },
-  { name: "Specialty Stone", description: "Lava rock and decorative accent stone for distinctive beds, borders, and dry features.", price: "$105.00", unit: "per yd", image: lavaRockCairnsKilauea },
-];
+export const catalogQueryOptions = queryOptions({
+  queryKey: ["catalog"],
+  queryFn: () => getCatalog(),
+});
 
-export const ADDITIONAL: CatalogItem[] = [
-  { name: "1/2\" Screened Loam", description: "Premium screened topsoil for lawns, gardens, and grading work.", price: "$32.00", unit: "per yd", image: screenedTopsoilProcessing },
-  { name: "Brick / Mason Sand", description: "Fine, washed sand for masonry, paver setting beds, and play boxes.", price: "$68.00", unit: "per yd", image: largePileOfLightSand },
-  { name: "Stone Dust", description: "Crushed stone fines. Compacts hard — ideal under pavers and stone.", price: "$35.00", unit: "per yd", image: paleTanCrushedStoneWithPennyCloseup },
-  { name: "3/4\" Gravel", description: "Processed gravel for base layers, drainage, and parking pads.", price: "$35.00", unit: "per yd", image: lightGrayGravelWithQuarterCloseup },
-  { name: "Wood Chips", description: "Coarse natural wood chips. Bulk ground cover for trails and beds.", price: "$12.00", unit: "per yd", image: woodChipPile },
-  { name: "Recycled Asphalt", description: "Reclaimed asphalt millings. Affordable, durable driveway surface.", price: "$30.00", unit: "per yd", image: lightGrayCrushedRockWithQuarterCloseup },
-  { name: "Compost", description: "Aged organic compost. Mix into beds or top-dress lawns.", price: "$48.00", unit: "per yd", image: finishedCompostBin },
-];
+export const deliveryZonesQueryOptions = queryOptions({
+  queryKey: ["delivery-zones"],
+  queryFn: () => getDeliveryZones(),
+});
 
-export const DELIVERY_ZONES: DeliveryZone[] = [
-  { town: "Jefferson", fee: "$35" },
-  { town: "Holden", fee: "$45" },
-  { town: "Princeton", fee: "$55" },
-  { town: "Sterling", fee: "$55" },
-  { town: "West Boylston", fee: "$55" },
-  { town: "Rutland", fee: "$60" },
-  { town: "Paxton", fee: "$65" },
-  { town: "Boylston", fee: "$65" },
-  { town: "Clinton", fee: "$75" },
-  { town: "Leominster", fee: "$80" },
-  { town: "Worcester", fee: "$85" },
-  { town: "Shrewsbury", fee: "$90" },
-];
+export type { CatalogDTO, DeliveryZoneDTO, ProductDTO };

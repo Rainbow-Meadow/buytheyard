@@ -14,7 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      delivery_zones: {
+        Row: {
+          created_at: string
+          fee_cents: number
+          id: string
+          sort_order: number
+          town: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          fee_cents?: number
+          id?: string
+          sort_order?: number
+          town: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          fee_cents?: number
+          id?: string
+          sort_order?: number
+          town?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          id: string
+          image_key: string | null
+          name: string
+          price_cents: number
+          sort_order: number
+          unit: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_key?: string | null
+          name: string
+          price_cents?: number
+          sort_order?: number
+          unit?: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_key?: string | null
+          name?: string
+          price_cents?: number
+          sort_order?: number
+          unit?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   HeroSection,
   ProductCatalogSection,
   CubicYardsCalculatorSection,
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
-import { MULCH } from "@/data/catalog";
+import { catalogQueryOptions, productToCatalogItem } from "@/data/catalog";
 import { dumpTruckBedFullOfBrownMulch } from "@/assets/photos";
 
 export const Route = createFileRoute("/mulch")({
@@ -19,10 +20,12 @@ export const Route = createFileRoute("/mulch")({
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/mulch" }],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogQueryOptions),
   component: MulchPage,
 });
 
 function MulchPage() {
+  const { data: catalog } = useSuspenseQuery(catalogQueryOptions);
   return (
     <main aria-label="Mulch" className="font-barlow">
       <HeroSection
@@ -34,7 +37,7 @@ function MulchPage() {
         image={dumpTruckBedFullOfBrownMulch}
         imageAlt="Dump truck bed full of fresh brown mulch"
       />
-      <ProductCatalogSection items={MULCH} />
+      <ProductCatalogSection items={catalog.mulch.map(productToCatalogItem)} />
       <CubicYardsCalculatorSection />
       <ContactCTASection
         phone="508.579.9897"

@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   HeroSection,
   ProductCatalogSection,
   CubicYardsCalculatorSection,
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
-import { STONE } from "@/data/catalog";
+import { catalogQueryOptions, productToCatalogItem } from "@/data/catalog";
 import { mixedLandscapeStoneSamplesOnGround } from "@/assets/photos";
 
 export const Route = createFileRoute("/stone")({
@@ -19,10 +20,12 @@ export const Route = createFileRoute("/stone")({
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/stone" }],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogQueryOptions),
   component: StonePage,
 });
 
 function StonePage() {
+  const { data: catalog } = useSuspenseQuery(catalogQueryOptions);
   return (
     <main aria-label="Stone" className="font-barlow">
       <HeroSection
@@ -34,7 +37,7 @@ function StonePage() {
         image={mixedLandscapeStoneSamplesOnGround}
         imageAlt="Mixed landscape stone samples laid out on the ground"
       />
-      <ProductCatalogSection items={STONE} />
+      <ProductCatalogSection items={catalog.stone.map(productToCatalogItem)} />
       <CubicYardsCalculatorSection />
       <ContactCTASection
         phone="508.579.9897"
