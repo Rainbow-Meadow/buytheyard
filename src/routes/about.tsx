@@ -71,15 +71,7 @@ function AboutPage() {
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
             <article className="relative min-h-[640px] lg:min-h-[720px] overflow-hidden rounded-md bg-zinc-950 text-white ring-1 ring-zinc-800">
-              <img
-                src={abbyPortrait}
-                alt="Abby Montalto, owner of Buy The Yard in Jefferson, MA"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: "50% 28%" }}
-                fetchPriority="high"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/62 to-zinc-950/12" />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black" />
               <span aria-hidden="true" className="absolute left-0 bottom-16 h-64 w-1.5 bg-brand" />
               <div className="relative z-10 flex h-full items-end p-5 md:p-8 lg:p-10">
                 <div className="max-w-3xl">
