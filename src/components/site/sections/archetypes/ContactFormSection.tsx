@@ -63,7 +63,7 @@ export function ContactFormSection({
           className={`md:col-span-3 p-8 ${compact ? "md:py-8 md:px-12 md:overflow-y-auto" : "md:p-16"} border-b md:border-b-0 md:border-r border-soft`}
         >
           <DisplayHeading as="h2" size="md" className={compact ? "mb-4" : "mb-6"}>{heading}</DisplayHeading>
-          {body && <p className={`font-barlow opacity-80 max-w-lg ${compact ? "text-base mb-6" : "text-lg mb-10"}`}>{body}</p>}
+          {body && <p className={`font-barlow opacity-80 max-w-lg ${compact ? "text-base mb-6 text-black" : "text-lg mb-10"}`}>{body}</p>}
           <div className={`grid grid-cols-1 md:grid-cols-2 ${compact ? "gap-3 mb-3" : "gap-4 mb-4"}`}>
             <label className="block">
               <MonoLabel className="block mb-2 opacity-60">First Name *</MonoLabel>
