@@ -4,16 +4,16 @@ import { DisplayHeading } from "../DisplayHeading";
 export interface ProcessStep { title: string; body: string }
 
 export function ProcessStepsSection({
-  index = "04",
+  title = "HOW TO ORDER",
   heading = "Procurement Process",
   steps,
 }: {
-  index?: string | number;
+  title?: string;
   heading?: string;
   steps: ProcessStep[];
 }) {
   return (
-    <Section index={index} tone="paper">
+    <Section title={title} tone="paper">
       <div className="p-8 md:p-16">
         <DisplayHeading as="h2" size="md" className="mb-12">{heading}</DisplayHeading>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">

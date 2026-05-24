@@ -3,14 +3,14 @@ import { SectionSplit } from "../SectionSplit";
 import { DisplayHeading } from "../DisplayHeading";
 
 export interface LogisticsSplitProps {
-  index?: string | number;
+  title?: string;
   pickup: { heading: string; body: string; specLines: string[] };
   delivery: { heading: string; body: string; ctaLabel: string; ctaHref?: string };
 }
 
-export function LogisticsSplitSection({ index = "03", pickup, delivery }: LogisticsSplitProps) {
+export function LogisticsSplitSection({ title = "PICKUP & DELIVERY", pickup, delivery }: LogisticsSplitProps) {
   return (
-    <Section index={index} tone="paper">
+    <Section title={title} tone="paper">
       <SectionSplit
         left={
           <>
