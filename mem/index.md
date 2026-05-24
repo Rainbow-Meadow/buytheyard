@@ -7,3 +7,4 @@ Headlines fit on 1–2 lines; subtext fits on 2–3 lines. Adjust copy or max-w,
 
 ## Memories
 - [Unified visual system](mem://design/unified-system.md) — Tokens, fonts, tile/editorial rules; the only design rulebook.
+- [Nav ↔ landing tiles sync](mem://design/nav-tiles-sync) — Landing category tiles and primary nav must always match (same 4 items, same labels, same order).
