@@ -31,7 +31,7 @@ function StonePage() {
       <HeroSection
         meta="STONE"
         heading={<>Landscaping.<br/>Stone.<br/>By Size.</>}
-        body="3/4\" crush for the driveway, pea stone for the path, river rock for the dry creek. Three sizes, plenty of colors — pick what fits the job."
+        body={`3/4" crush for the driveway, pea stone for the path, river rock for the dry creek. Three sizes, plenty of colors — pick what fits the job.`}
         ctaLabel="Call For Pricing"
         ctaHref="tel:5085799897"
         image={mixedLandscapeStoneSamplesOnGround}
