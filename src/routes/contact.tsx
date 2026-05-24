@@ -34,6 +34,7 @@ function ContactPage() {
         ctaHref="tel:5085799897"
       />
       <ContactFormSection
+        heightClass="md:h-[calc(75svh-3rem)]"
         heading={<>Send A Note</>}
         body="Tell us what you're working on. Quotes get a same-day reply during yard hours."
         email="abby@btymaterial.com"
@@ -46,6 +47,8 @@ function ContactPage() {
         ]}
       />
       <ContactCTASection
+        heightClass="md:h-[calc(25svh-1rem)]"
+        accentWidth="md:w-2/5"
         phone="508.579.9897"
         email="abby@btymaterial.com"
         address={{ line1: "2264 Main St.", line2: "Jefferson, MA 01522" }}
