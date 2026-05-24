@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Box, ClipboardList, Clock, Home, Map as MapIcon, MapPin, Phone, Truck } from "lucide-react";
+import { ClipboardList, Home, Phone, Truck } from "lucide-react";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
@@ -68,33 +68,24 @@ export const Route = createFileRoute("/service-area")({
 function ServiceAreaPage() {
   return (
     <>
-      {/* Screen 1 — pageHero: trucks + service stat tiles */}
-      <TileScreen
-        layout="pageHero"
-        label="Buy The Yard service area"
-        heading="Buy The Yard service area — Central Massachusetts"
-        headingLevel="h1"
-        tiles={{
-          hero: (
-            <Tile
-              id="sa-hero"
-              fill
-              variant="cta"
-              tone="surface"
-              layout="anchored"
-              icon={<Truck />}
-              eyebrow="Service area"
-              title="Across Central Mass."
-              body="Mulch, loam, sand & stone from Jefferson to your town."
-              cta={{ label: "Get a quote", to: "/quote" }}
-            />
-          ),
-          a: <Tile id="sa-stat-towns" fill variant="stat" tone="surface" layout="anchored" anchorIndex="01" anchorGlyph={<MapIcon strokeWidth={1.25} />} value={`${TOWNS.length}`} label="Towns served" caption="Inner + outer ring" />,
-          b: <Tile id="sa-stat-radius" fill variant="stat" tone="brand" layout="anchored" anchorIndex="02" anchorGlyph={<MapPin strokeWidth={1.25} />} value="~25 mi" label="Max delivery radius" caption="From Jefferson" />,
-          c: <Tile id="sa-stat-min" fill variant="stat" tone="kraft" layout="anchored" anchorIndex="03" anchorGlyph={<Box strokeWidth={1.25} />} value="1 yd" label="Order minimum" caption="One yard or more" />,
-          d: <Tile id="sa-stat-lead" fill variant="stat" tone="gray" layout="anchored" anchorIndex="04" anchorGlyph={<Clock strokeWidth={1.25} />} value="~48 hr" label="Typical lead time" caption="Plan ahead" />,
-        }}
-      />
+      {/* Screen 1 — hero */}
+      <section aria-label="Buy The Yard service area" className="border-y border-[var(--rule)]">
+        <h1 className="sr-only">Buy The Yard service area — Central Massachusetts</h1>
+        <div className="min-h-[420px] md:min-h-[480px] flex">
+          <Tile
+            id="sa-hero"
+            fill
+            variant="cta"
+            tone="surface"
+            layout="anchored"
+            icon={<Truck />}
+            eyebrow={`Service area · ${TOWNS.length} towns · ~25 mi radius · 1 yd min`}
+            title="Across Central Mass."
+            body="Mulch, loam, sand & stone from Jefferson to your town."
+            cta={{ label: "Get a quote", to: "/quote" }}
+          />
+        </div>
+      </section>
 
       {/* Screen 2 — section05: where we run (the towns grid) */}
       <TileScreen
