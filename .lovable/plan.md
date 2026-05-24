@@ -1,46 +1,21 @@
-## Goal
+## Problem
 
-Lock viewport groupings to exact viewport heights so each scroll-stop is one screen, not "at least one screen + overflow". Today every non-hero section uses `md:min-h-[50svh]`, which lets internal content push past the floor and break the intended pairings.
+The mulch (and stone / additional) pages render `ProductCatalogSection` as a `lg:grid-cols-3` grid. With 4 products per category, the 4th card wraps to a second row, leaving a big empty cell and pushing the section past one viewport (the screenshot shows the 4th mulch card with empty gray space beside it).
 
-## Viewport groupings (desktop, md+)
+## Change
 
-```text
-Screen 1   Hero                            100svh
-Screen 2   MaterialInventory + OwnerStory  50svh + 50svh
-Screen 3   GalleryMarquee + Testimonials   50svh + 50svh
-Screen 4   ServiceArea + ContactCTA        50svh + 50svh
-```
+Keep all edits inside `src/components/site/sections/archetypes/ProductCatalogSection.tsx`. No route or data changes.
 
-Mobile is unchanged — sections stack at natural content height; absolute heights apply only at `md` and up.
+1. **One-row layout at desktop.** Switch the grid to `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4` so all 4 catalog items sit on a single row (mulch, stone, additional all have 4 items today). At `md` it stays 2x2, at `lg+` it becomes a single row of 4.
 
-## Changes (md+ only, mobile untouched)
+2. **Constrain to one viewport below the header.** Wrap the grid in a container with `md:h-[calc(100svh-4rem)]` (matching the 64px sticky header offset used by the other archetype sections). Mobile keeps natural height so the stacked cards remain scrollable.
 
-Swap `md:min-h-[50svh]` → `md:h-[50svh] md:overflow-hidden` on the outer wrapper of each non-hero archetype, and ensure the inner content centers within that fixed box.
+3. **Flex card so image fills remaining space.** Replace the fixed `aspect-[4/3]` image box with a `flex-1 min-h-0` image container so each card stretches to fill the viewport row instead of overflowing. Text block (title, description, price row) stays at the bottom with `shrink-0`. Image stays `object-cover`.
 
-- **MaterialInventorySection.tsx** — `SectionGrid` wrapper: `md:min-h-[50svh]` → `md:h-[50svh]`. Grid cells already fill via the grid; no inner change.
-- **OwnerStorySection.tsx** — wrapper: `md:min-h-[50svh] md:flex md:flex-col md:justify-center` → `md:h-[50svh] md:flex md:flex-col md:justify-center md:overflow-hidden`.
-- **GalleryMarqueeSection.tsx** — wrapper: `md:min-h-[50svh] flex items-center` → `md:h-[50svh] flex items-center md:overflow-hidden` (marquee already clips horizontally; vertical clip is fine).
-- **TestimonialsSection.tsx** — wrapper: `md:min-h-[50svh] md:flex md:flex-col md:justify-center` → `md:h-[50svh] md:flex md:flex-col md:justify-center md:overflow-hidden`.
-- **ServiceAreaSection.tsx** — wrapper grid: `md:min-h-[50svh] md:items-center` → `md:h-[50svh] md:items-center md:overflow-hidden`.
-- **ContactCTASection.tsx** — wrapper: `md:min-h-[50svh]` → `md:h-[50svh] md:overflow-hidden`.
+4. **Tighter card padding at lg** (`lg:p-6` instead of `lg:p-8`) so 4 cards plus the vertical rail fit comfortably at common 1440-wide viewports without clipping the price row.
 
-Hero is left at `min-h-svh` (already full viewport, already absolute by intent).
+No changes to `Section`, headlines, copy, fonts, tones, or any other archetype. Headline / subtext line limits are unaffected (no copy edits).
 
-## Why `h-[50svh]` not `min-h-[50svh]`
+## Files
 
-- `min-h` = floor only. Content > floor → section grows, pair drifts past 100svh, screen 3 starts mid-section.
-- `h-[50svh]` = exact. Pair always sums to one viewport. The recent de-pad pass already shrunk content to fit, so clipping risk is low; `md:overflow-hidden` is a safety net rather than expected behavior.
-
-## QA
-
-At 1586×887 (current viewport) and 1366×768, scroll-snap each pair:
-1. Screen 1 = Hero only, bottom edge flush.
-2. Screen 2 top = MaterialInventory top, bottom = OwnerStory bottom.
-3. Screen 3 top = Gallery top, bottom = Testimonials bottom.
-4. Screen 4 top = ServiceArea top, bottom = ContactCTA bottom.
-
-If any section's content gets clipped at common desktop heights (≥768), report which one and we'll trim copy/padding inside that single archetype rather than relaxing the lock.
-
-## Out of scope
-
-No copy, palette, typography, layout-structure, or mobile changes. No min-h on hero changes. No scroll-snap CSS added (groupings are visual, not enforced by snap).
+- `src/components/site/sections/archetypes/ProductCatalogSection.tsx`
