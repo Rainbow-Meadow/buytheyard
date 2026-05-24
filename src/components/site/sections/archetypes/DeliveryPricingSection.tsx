@@ -9,8 +9,8 @@ export interface DeliveryZone {
 
 export function DeliveryPricingSection({
   title = "DELIVERY ZONES",
-  heading = "Delivery Pricing",
-  note = "1 CY minimum. Same-day delivery for orders placed before 2:00 PM EST.",
+  heading = "Flat $75 Delivery",
+  note = "One flat $75 delivery fee to any town we serve. Same-day delivery for orders placed before 2:00 PM EST.",
   zones,
 }: {
   title?: string;
