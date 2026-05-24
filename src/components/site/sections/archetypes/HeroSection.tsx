@@ -34,11 +34,11 @@ export function HeroSection({
               src={image}
               alt={imageAlt ?? ""}
               aria-hidden={imageAlt ? undefined : true}
-              className="absolute inset-0 w-full h-full object-cover opacity-40"
+              className="absolute inset-0 w-full h-full object-cover opacity-70"
               loading="eager"
             />
             <div
-              className="absolute inset-0 bg-gradient-to-r from-paper via-paper/85 to-paper/30 md:to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-paper/90 via-paper/55 to-paper/15 md:to-transparent"
               aria-hidden
             />
           </>
