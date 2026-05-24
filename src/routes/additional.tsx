@@ -3,15 +3,12 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   HeroSection,
   ProductCatalogSection,
-  DeliveryPricingSection,
   CubicYardsCalculatorSection,
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
 import {
   catalogQueryOptions,
-  deliveryZonesQueryOptions,
   productToCatalogItem,
-  zoneToDisplay,
 } from "@/data/catalog";
 import { largePileOfLightSand } from "@/assets/photos";
 
@@ -26,16 +23,12 @@ export const Route = createFileRoute("/additional")({
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/additional" }],
   }),
-  loader: ({ context }) => {
-    context.queryClient.ensureQueryData(catalogQueryOptions);
-    context.queryClient.ensureQueryData(deliveryZonesQueryOptions);
-  },
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogQueryOptions),
   component: AdditionalPage,
 });
 
 function AdditionalPage() {
   const { data: catalog } = useSuspenseQuery(catalogQueryOptions);
-  const { data: zones } = useSuspenseQuery(deliveryZonesQueryOptions);
   return (
     <main aria-label="Sand and loam products" className="font-barlow">
       <HeroSection
@@ -48,7 +41,6 @@ function AdditionalPage() {
         imageAlt="Large pile of light washed sand at the yard"
       />
       <ProductCatalogSection items={catalog.additional.map(productToCatalogItem)} />
-      <DeliveryPricingSection zones={zones.map(zoneToDisplay)} />
       <CubicYardsCalculatorSection />
       <ContactCTASection
         phone="508.579.9897"
