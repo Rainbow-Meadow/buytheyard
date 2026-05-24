@@ -1,30 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Flower2,
-  Layers,
-  Mountain,
-  Phone,
-  Sprout,
-  TreePine,
-  Waves,
-} from "lucide-react";
-import { TileScreen } from "@/components/site/TileScreen";
-import { Tile } from "@/components/site/Tile";
-import { products, productSlug } from "@/data/products";
-import {
-  AbbyTrustBreak,
-  DecisionPathBreak,
-  DeliveryBasicsBreak,
-} from "@/components/home/HomeBreaks";
-
-const FEATURED = [
-  "Hemlock Mulch",
-  "Screened Loam",
-  '3/4" Crushed Blue Stone',
-  '3/8" Pea Stone',
-  "Hanging Baskets",
-].map((n) => products.find((p) => p.name === n)!);
+import { ArrowRight, Phone } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -126,74 +101,12 @@ function HomePage() {
         </article>
       </section>
 
-      <DecisionPathBreak />
-
-      <TileScreen
-        layout="section01"
-        label="Featured materials"
-        heading="Featured materials"
-        tiles={{
-          hero: (
-            <Tile
-              id="feat-hero"
-              fill
-              variant="cta"
-              tone="surface"
-              layout="anchored"
-              icon={<Layers />}
-              eyebrow="Bulk materials & garden center"
-              title="Featured materials"
-              body="Mulch, loam, sand, and stone by the yard — plus seasonal garden center favorites."
-              cta={{ label: "See the full catalog", to: "/products" }}
-            />
-          ),
-          ...Object.fromEntries(
-            FEATURED.map((p, i) => [
-              ["a", "b", "c", "d", "e"][i],
-              (
-                <Tile
-                  key={p.name}
-                  id={`feat-${productSlug(p.name)}`}
-                  fill
-                  variant="text"
-                  tone={(["kraft", "surface", "white", "gray", "kraft"] as const)[i]}
-                  layout="anchored"
-                  icon={[
-                    <TreePine />,
-                    <Sprout />,
-                    <Waves />,
-                    <Mountain />,
-                    <Flower2 />,
-                  ][i]}
-                  eyebrow={p.category}
-                  title={p.name}
-                  body={p.description}
-                />
-              ),
-            ]),
-          ),
-        }}
-      />
-
-      <DeliveryBasicsBreak />
-
-      <AbbyTrustBreak />
-
-      <div className="bg-brand text-brand-foreground">
-        <div className="max-w-7xl mx-auto px-5 md:px-6 py-4 flex flex-col items-start gap-3 md:flex-row md:flex-wrap md:items-center md:justify-between">
-          <p className="label">Ready to order? Call Abby.</p>
-          <div className="flex flex-col items-start gap-2 md:flex-row md:flex-wrap md:items-center md:gap-4">
-            <a href="tel:5085799897" className="inline-flex items-center gap-2 label">
-              <Phone className="size-4" />
-              508.579.9897
-              <ArrowRight className="size-4" />
-            </a>
-            <Link to="/quote" className="inline-flex items-center gap-2 label border-b border-current">
-              Send a quote request
-            </Link>
-          </div>
+      <section aria-label="Section placeholder" className="border-b border-[var(--rule)]">
+        <div className="container mx-auto px-5 md:px-10 py-24 md:py-32">
+          <p className="eyebrow text-zinc-500">Next section</p>
+          <p className="body-sm text-zinc-500 mt-2">Empty — build from here.</p>
         </div>
-      </div>
+      </section>
     </>
   );
 }
