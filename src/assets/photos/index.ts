@@ -51,3 +51,7 @@ export { default as catMulchBg } from "./cat_mulch_bg.png";
 export { default as catStoneBg } from "./cat_stone_bg.png";
 export { default as catSandLoamBg } from "./cat_sand_loam_bg.png";
 export { default as catGardenCenterBg } from "./cat_garden_center_bg.jpeg";
+export { default as yellowPotPetunias } from "./050_yellow_pot_petunias.jpeg";
+export { default as pinkYellowHangingBasket } from "./051_pink_yellow_hanging_basket.jpeg";
+export { default as fallMumsPumpkinsHay } from "./052_fall_mums_pumpkins_hay.jpeg";
+export { default as gardenToolsWall } from "./053_garden_tools_wall.jpeg";
