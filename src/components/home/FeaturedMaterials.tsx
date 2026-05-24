@@ -33,7 +33,7 @@ export default function FeaturedMaterials() {
           </div>
           <div className="flex items-center gap-4">
             <Link
-              to="/products"
+              to="/mulch"
               className="inline-flex items-center gap-2 label text-zinc-900 hover:text-brand transition-colors"
             >
               See the full catalog <ArrowRight className="size-4" />
