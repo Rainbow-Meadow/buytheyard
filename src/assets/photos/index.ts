@@ -39,3 +39,7 @@ export { default as largeGrayStoneWithGolfBall } from "./038_large_gray_stone_wi
 export { default as mediumGrayStoneWithQuarter } from "./039_medium_gray_stone_with_quarter.jpg";
 export { default as smallGrayWhiteStoneChipsWithQuarter } from "./040_small_gray_white_stone_chips_with_quarter.jpg";
 export { default as reddishBrownLavaStonePile } from "./041_reddish_brown_lava_stone_pile.jpg";
+export { default as screenedLoamHandful } from "./042_screened_loam_handful.jpg";
+export { default as masonSandHandful } from "./043_mason_sand_handful.jpg";
+export { default as winterSaltHandful } from "./044_winter_salt_handful.jpg";
+export { default as compostHandful } from "./045_compost_handful.jpg";
