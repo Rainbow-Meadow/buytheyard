@@ -34,11 +34,11 @@ export function MaterialInventorySection({
                   src={m.image}
                   alt={m.imageAlt ?? ""}
                   aria-hidden={m.imageAlt ? undefined : true}
-                  className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-cover opacity-70 pointer-events-none"
                   loading="lazy"
                 />
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-paper via-paper/85 to-paper/30 pointer-events-none"
+                  className="absolute inset-0 bg-gradient-to-t from-paper/90 via-paper/55 to-paper/15 pointer-events-none"
                   aria-hidden
                 />
               </>

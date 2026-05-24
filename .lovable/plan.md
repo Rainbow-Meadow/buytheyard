@@ -1,19 +1,15 @@
-# Replace handmade SVGs with real Lucide glyphs
+## Bump category card background visibility
 
-## Goal
-Drop the self-drawn line-art in `CategoryLineIcon.tsx` and use real, professionally drawn glyphs from `lucide-react` (already in the project) for the four landing categories + matching nav usage.
+In `src/components/site/sections/archetypes/MaterialInventorySection.tsx`, the photo behind each Mulch / Stone / Sand & Loam / Garden Center card is currently very faded:
 
-## Icon mapping
-- **mulch** → `Trees` (or `Leaf`) — organic ground cover
-- **stone** → `Mountain` — aggregate / stacked stone feel
-- **sand & loam** (`additional`) → `Shovel`
-- **garden-center** → `Flower2` (or `Sprout`)
+- `img` is at `opacity-40`
+- A heavy paper gradient sits on top: `from-paper via-paper/85 to-paper/30`
 
-Tone: thin stroke (`strokeWidth={1.25}`), `currentColor`, sits inside the existing tile frame at the same size as before. Keep the decorative scatter marks (plus/circle/diamond) since those are part of the editorial frame, not the glyph itself — the user's complaint was about the central self-drawn pictogram, not the surrounding marks. If they'd rather drop the scatter too, easy follow-up.
+### Change
 
-## Files
-- `src/components/site/sections/CategoryLineIcon.tsx` — replace the four inline `<g>` glyph components with Lucide icon renders; keep the public API (`name`, `className`, `CategoryIconName`) unchanged so call sites in `MaterialInventorySection` and `SiteHeader` keep working with no edits.
+- Raise the image opacity from `opacity-40` → `opacity-70`.
+- Lighten the gradient overlay from `from-paper via-paper/85 to-paper/30` → `from-paper/90 via-paper/55 to-paper/15`.
 
-## Out of scope
-- No changes to tile layout, labels, routes, or palette.
-- No new dependencies (Lucide is already installed).
+This keeps the bottom of each card (where the description and unit label sit) readable on paper, while letting the mulch piles / stone / wagon photo come through clearly in the upper two-thirds. The red line icon stays on top.
+
+No other files change.
