@@ -50,7 +50,7 @@ function HomePage() {
     <main aria-label="Home" className="font-barlow">
       <HeroSection
         meta="EST. 2016 — JEFFERSON, MA"
-        heading={<>Mulch. Stone.<br/>Sand & Loam. Garden Center.</>}
+        heading={<>Mulch. Stone.<br/>Sand & Loam.</>}
         body="Premium mulch, stone, sand & loam, and garden center supplies. Woman-owned and operated. Serving Central Massachusetts with precision delivery."
         ctaLabel="Shop Mulch"
         ctaTo="/mulch"
