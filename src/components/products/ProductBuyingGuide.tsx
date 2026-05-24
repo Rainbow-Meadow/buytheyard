@@ -132,12 +132,10 @@ export function ProductBuyingGuide() {
                 <article key={guide.category} className="relative overflow-hidden rounded-md bg-white ring-1 ring-zinc-300">
                   <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
                   <div className="grid gap-0 lg:grid-cols-[0.45fr_0.55fr]">
-                    <div className="relative min-h-[180px] overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-950 lg:min-h-full">
-                      <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                        <div className="mb-4 text-brand [&>*]:size-7" aria-hidden="true">{guide.icon}</div>
-                        <p className="eyebrow text-brand mb-2">{guide.category}</p>
-                        <h3 className="display-5 leading-tight text-balance">{guide.title}</h3>
-                      </div>
+                    <div className="relative overflow-hidden bg-zinc-950 p-5 md:p-6 lg:min-h-full flex flex-col justify-end gap-3 text-white">
+                      <div className="text-brand [&>*]:size-6" aria-hidden="true">{guide.icon}</div>
+                      <p className="eyebrow text-brand">{guide.category}</p>
+                      <h3 className="display-5 leading-tight text-balance">{guide.title}</h3>
                     </div>
                     <div className="p-5 md:p-6">
                       <p className="body-sm text-zinc-700 text-pretty">{guide.plainEnglish}</p>
