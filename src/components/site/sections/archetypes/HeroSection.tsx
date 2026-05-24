@@ -13,6 +13,8 @@ export interface HeroSectionProps {
   /** Optional background photo; rendered behind a paper→transparent gradient for legibility. */
   image?: string;
   imageAlt?: string;
+  /** Tailwind object-position class(es) for the background image. Defaults to center. */
+  imagePosition?: string;
 }
 
 export function HeroSection({
@@ -24,6 +26,7 @@ export function HeroSection({
   ctaHref,
   image,
   imageAlt,
+  imagePosition = "object-center",
 }: HeroSectionProps) {
   return (
     <Section tone="paper">
@@ -34,7 +37,7 @@ export function HeroSection({
               src={image}
               alt={imageAlt ?? ""}
               aria-hidden={imageAlt ? undefined : true}
-              className="absolute inset-0 w-full h-full object-cover opacity-70"
+              className={`absolute inset-0 w-full h-full object-cover opacity-70 ${imagePosition}`}
               loading="eager"
             />
             <div
