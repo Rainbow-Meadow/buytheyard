@@ -2,13 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   HeroSection,
   MaterialInventorySection,
-  LogisticsSplitSection,
-  ProcessStepsSection,
   OwnerStorySection,
   TestimonialsSection,
-  FAQSection,
+  GalleryMarqueeSection,
+  ServiceAreaSection,
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
+import { SERVICE_AREA_TOWNS } from "@/data/service-area";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -37,35 +37,15 @@ function HomePage() {
         meta="EST. 2016 — JEFFERSON, MA"
         heading={<>Mulch. Loam.<br/>Stone. Sand.</>}
         body="Premium mulch, loam, stone, and sand. Woman-owned and operated. Serving Central Massachusetts with precision delivery."
-        ctaLabel="View Inventory"
-        ctaTo="/products"
+        ctaLabel="Shop Mulch"
+        ctaTo="/mulch"
       />
       <MaterialInventorySection
         items={[
-          { code: "CAT_01", name: "Mulch", description: "Double-ground, dyed or natural. Moisture retention and weed suppression.", unit: "CUBIC YARD" },
-          { code: "CAT_02", name: "Loam",  description: "Screened organic soil. High nutrient content for lawn and garden beds.", unit: "CUBIC YARD" },
-          { code: "CAT_03", name: "Stone", description: "Decorative and structural aggregates. Multiple sizes for drainage or paths.", unit: "TON / CY" },
-          { code: "CAT_04", name: "Sand",  description: "Washed beach sand or concrete sand. Perfect for masonry or play areas.", unit: "TON" },
-        ]}
-      />
-      <LogisticsSplitSection
-        pickup={{
-          heading: "Drive-in Pickup",
-          body: "Bring your own truck or trailer. We load you up on the spot. No minimum volume for most products.",
-          specLines: ["LOADING HOURS:", "MON–FRI: 0800 – 1700", "SATURDAY: 0800 – 1500"],
-        }}
-        delivery={{
-          heading: "Site Delivery",
-          body: "Precision dumping at your home or job site. 3-yard minimum. Servicing Jefferson and surrounding towns.",
-          ctaLabel: "Calculate Delivery Fee",
-          ctaHref: "/delivery",
-        }}
-      />
-      <ProcessStepsSection
-        steps={[
-          { title: "Select Material", body: "Browse our catalog and determine the cubic yardage needed for your project area." },
-          { title: "Get a Quote",     body: "Call or submit a request for current pricing including delivery fees to your specific ZIP code." },
-          { title: "Schedule Drop",   body: "Confirm your order and provide specific dumping instructions for our drivers." },
+          { code: "CAT_01", name: "Mulch", description: "Double-ground, dyed or natural. Moisture retention and weed suppression.", unit: "CUBIC YARD", to: "/mulch" },
+          { code: "CAT_02", name: "Loam",  description: "Screened organic soil. High nutrient content for lawn and garden beds.", unit: "CUBIC YARD", to: "/additional" },
+          { code: "CAT_03", name: "Stone", description: "Decorative and structural aggregates. Multiple sizes for drainage or paths.", unit: "TON / CY", to: "/stone" },
+          { code: "CAT_04", name: "Sand",  description: "Washed beach sand or concrete sand. Perfect for masonry or play areas.", unit: "TON", to: "/additional" },
         ]}
       />
       <OwnerStorySection
@@ -73,17 +53,27 @@ function HomePage() {
         body="Founded by Abby in 2016, Buy The Yard is a certified Woman Business Enterprise by the Commonwealth of Massachusetts. We bring a professional, customer-first approach to a heavy industry."
         badges={["WBE", "MASS"]}
       />
+      <GalleryMarqueeSection
+        items={[
+          { alt: "Mulch piles in the yard" },
+          { alt: "Loaded delivery truck" },
+          { alt: "Stone product display" },
+          { alt: "Screened loam mountain" },
+          { alt: "Decorative river stone" },
+          { alt: "Loader at work" },
+        ]}
+      />
       <TestimonialsSection
         items={[
           { quote: "The best mulch in Central Mass. Clean, consistent, and delivered exactly where I needed it.", attribution: "MARK S. / RESIDENTIAL" },
           { quote: "Reliable logistics for our commercial landscape crews. They understand the urgency of site work.", attribution: "GREEN LANDSCAPE INC." },
         ]}
       />
-      <FAQSection
-        items={[
-          { q: "What is your delivery minimum?", a: "We generally require a 3 cubic yard minimum for local deliveries. Smaller quantities are available for pickup at our yard." },
-          { q: "How many yards fit in a standard truck?", a: "A standard pickup truck typically holds 1–2 cubic yards of mulch or 1 yard of heavier materials like stone or loam." },
-        ]}
+      <ServiceAreaSection
+        heading={<>Central Mass<br/>Delivery.</>}
+        body="Based in Jefferson, MA. Serving the towns within ~40 minutes of the yard with same-day or next-day delivery."
+        phone="508.579.9897"
+        towns={[...SERVICE_AREA_TOWNS]}
       />
       <ContactCTASection
         phone="508.579.9897"

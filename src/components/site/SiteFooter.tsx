@@ -178,7 +178,9 @@ export function SiteFooter() {
               <div className="space-y-4">
                 <Eyebrow>Site</Eyebrow>
                 <nav className="grid grid-cols-2 gap-x-4 gap-y-3 justify-items-start">
-                  <Link to="/products" className="label text-kraft/70 hover:text-kraft transition-colors">Products</Link>
+                  <Link to="/mulch" className="label text-kraft/70 hover:text-kraft transition-colors">Mulch</Link>
+                  <Link to="/stone" className="label text-kraft/70 hover:text-kraft transition-colors">Stone</Link>
+                  <Link to="/additional" className="label text-kraft/70 hover:text-kraft transition-colors">Additional</Link>
                   <Link to="/about" className="label text-kraft/70 hover:text-kraft transition-colors">About</Link>
                   <Link to="/delivery" className="label text-kraft/70 hover:text-kraft transition-colors">Delivery</Link>
                   <Link to="/service-area" className="label text-kraft/70 hover:text-kraft transition-colors">Service Area</Link>

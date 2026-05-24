@@ -4,10 +4,10 @@ import { ChevronRight, Menu, Phone, X } from "lucide-react";
 import { Wordmark } from "@/components/site/Wordmark";
 
 const NAV = [
-  { to: "/products", label: "Products" },
-  { to: "/about", label: "About" },
+  { to: "/mulch", label: "Mulch" },
+  { to: "/stone", label: "Stone" },
+  { to: "/additional", label: "Additional" },
   { to: "/delivery", label: "Delivery" },
-  { to: "/quote", label: "Get a Quote" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
