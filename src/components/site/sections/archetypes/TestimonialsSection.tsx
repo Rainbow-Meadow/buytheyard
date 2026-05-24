@@ -12,7 +12,7 @@ export function TestimonialsSection({
 }) {
   return (
     <Section title={title} tone="paper">
-      <div className="p-6 md:py-10 md:px-16 md:h-[50svh] md:flex md:flex-col md:justify-center md:overflow-hidden">
+      <div className="p-6 md:py-10 md:px-16 md:h-[calc(50svh-2rem)] md:flex md:flex-col md:justify-center md:overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ink border border-ink">
           {items.map((t) => (
             <div key={t.attribution} className="bg-paper p-6 md:p-8">

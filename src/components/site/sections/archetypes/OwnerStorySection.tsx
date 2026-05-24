@@ -17,7 +17,7 @@ export function OwnerStorySection({
 }: OwnerStoryProps) {
   return (
     <Section title={title} tone="ink">
-      <div className="p-8 md:py-14 md:px-20 md:h-[50svh] md:flex md:flex-col md:justify-center md:overflow-hidden">
+      <div className="p-8 md:py-14 md:px-20 md:h-[calc(50svh-2rem)] md:flex md:flex-col md:justify-center md:overflow-hidden">
           <DisplayHeading as="h2" size="lg" className="mb-5">{heading}</DisplayHeading>
           <p className="font-barlow text-xl opacity-80 mb-6 max-w-lg">{body}</p>
           <div className="flex gap-4">
