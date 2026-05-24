@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Facebook } from "lucide-react";
-import wbeSeal from "@/assets/source/wbe-seal.webp";
+import { ArrowRight, BadgeCheck, Facebook } from "lucide-react";
 import { YelpLogo } from "@/components/site/YelpLogo";
 import { Wordmark } from "@/components/site/Wordmark";
 import { openCookieSettings } from "@/lib/cookie-consent";
@@ -49,15 +48,7 @@ export function SiteFooter() {
                   to="/wbe"
                   className="group flex items-start gap-4 -m-2 p-2 hover:bg-white/[0.02] transition-colors"
                 >
-                  <img
-                    src={wbeSeal}
-                    alt="Massachusetts WBE certified seal"
-                    width={160}
-                    height={100}
-                    className="h-14 w-auto object-contain shrink-0"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <BadgeCheck className="size-10 text-brand shrink-0" aria-hidden="true" />
                   <div className="space-y-2">
                     <p className="display-5 text-kraft group-hover:text-brand transition-colors">Certified Woman-Owned</p>
                     <p className="body-sm text-kraft/70 max-w-[28ch]">

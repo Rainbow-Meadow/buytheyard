@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Box, ClipboardList, Clock, Home, Map as MapIcon, MapPin, Phone, Truck } from "lucide-react";
-import yardTrucks from "@/assets/source/yard-trucks.webp";
-import loadingTruck from "@/assets/source/loading-truck.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
@@ -42,8 +40,6 @@ export const Route = createFileRoute("/service-area")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: "https://buytheyard.lovable.app/service-area" },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-quote.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-quote.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/service-area" },
@@ -83,20 +79,13 @@ function ServiceAreaPage() {
             <Tile
               id="sa-hero"
               fill
-              variant="image"
-              src={yardTrucks}
-              alt="Buy The Yard trucks parked at the Jefferson, MA lot"
-              focal="center"
-              loading="eager"
-              fetchPriority="high"
-              overlay={{
-                eyebrow: "Service area",
-                title: "Across Central Mass.",
-                body: "Mulch, loam, sand & stone from Jefferson to your town.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Truck />,
-              }}
+              variant="cta"
+              tone="surface"
+              layout="anchored"
+              icon={<Truck />}
+              eyebrow="Service area"
+              title="Across Central Mass."
+              body="Mulch, loam, sand & stone from Jefferson to your town."
               cta={{ label: "Get a quote", to: "/quote" }}
             />
           ),
@@ -221,17 +210,12 @@ function ServiceAreaPage() {
             <Tile
               id="sa-jefferson"
               fill
-              variant="image"
-              src={loadingTruck}
-              alt="A Buy The Yard truck being loaded at the Jefferson yard"
-              focal="center"
-              overlay={{
-                eyebrow: "Jefferson, MA",
-                title: "Home base · 2264 Main St.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Home />,
-              }}
+              variant="cta"
+              tone="kraft"
+              layout="anchored"
+              icon={<Home />}
+              eyebrow="Jefferson, MA"
+              title="Home base · 2264 Main St."
               cta={{
                 label: "Open in Maps",
                 href: "https://maps.google.com/?q=2264+Main+St,+Jefferson,+MA+01522",

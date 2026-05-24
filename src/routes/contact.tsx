@@ -7,7 +7,6 @@ import {
   Phone,
   Facebook,
 } from "lucide-react";
-import yardPatio from "@/assets/source/contact-hero-welcome.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
@@ -23,8 +22,6 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact — Buy The Yard" },
       { property: "og:description", content: "Phone, address, hours, quote request, and map for the Jefferson yard." },
       { property: "og:url", content: "/contact" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-contact.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/contact" },
@@ -75,20 +72,13 @@ function ContactPage() {
             <Tile
               id="contact-hero"
               fill
-              variant="image"
-              src={yardPatio}
-              alt="Buy The Yard crew welcoming customers at the Jefferson, MA yard with OPEN flag and loader"
-              focal="center"
-              loading="eager"
-              fetchPriority="high"
-              overlay={{
-                eyebrow: "Contact",
-                title: "Call when you need a real answer."
-                ,body: "Phone is fastest for price, timing, quantity, and delivery questions. The quote form is best when you already have a material list.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Phone />,
-              }}
+              variant="cta"
+              tone="surface"
+              layout="anchored"
+              icon={<Phone />}
+              eyebrow="Contact"
+              title="Call when you need a real answer."
+              body="Phone is fastest for price, timing, quantity, and delivery questions. The quote form is best when you already have a material list."
               cta={{ label: "Start an online quote", to: "/quote" }}
             />
           ),

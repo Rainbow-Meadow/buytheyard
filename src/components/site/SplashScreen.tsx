@@ -60,13 +60,7 @@ export function SplashScreen() {
       className="fixed inset-0 z-[100] flex items-center justify-center bg-surface transition-opacity motion-reduce:transition-none"
       style={{ opacity: visible ? 1 : 0, transitionDuration: `${FADE_MS}ms` }}
     >
-      <img
-        src="/brandmark.webp"
-        alt=""
-        width={96}
-        height={96}
-        className="h-24 w-24 object-contain"
-      />
+      <p className="display-3 text-kraft tracking-tight">Buy The Yard</p>
     </div>
   );
 }

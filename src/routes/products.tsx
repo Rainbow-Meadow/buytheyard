@@ -20,8 +20,6 @@ export const Route = createFileRoute("/products")({
           "Find the right bulk material, estimate how much you need, and ask Abby before you order.",
       },
       { property: "og:url", content: "/products" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-products.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/products" },

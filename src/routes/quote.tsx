@@ -23,7 +23,6 @@ import {
   User,
 } from "lucide-react";
 import { products, categories } from "@/data/products";
-import quoteYardMaterials from "@/assets/source/yard-piles.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 import {
@@ -55,8 +54,6 @@ export const Route = createFileRoute("/quote")({
         content: "Tell us what you need. We come back with pricing and a delivery window.",
       },
       { property: "og:url", content: "/quote" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-quote.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-quote.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/quote" },
@@ -655,18 +652,13 @@ function QuotePage() {
           <Tile
             id="quote-img"
             fill
-            variant="image"
-            src={quoteYardMaterials}
-            alt="Bulk material piles at the Jefferson yard"
-            focal="center"
-            loading="lazy"
-            overlay={{
-              eyebrow: "Materials",
-              title: "From our yard",
-              align: "bottom-left",
-              layout: "anchored",
-              anchorIcon: <Layers />,
-            }}
+            variant="text"
+            tone="kraft"
+            layout="anchored"
+            icon={<Layers />}
+            eyebrow="Materials"
+            title="From our yard"
+            body="Mulch, loam, sand, gravel, and stone — by the yard, from Jefferson."
           />
         ),
         d: (

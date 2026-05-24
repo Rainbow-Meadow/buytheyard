@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Box, Clock, CreditCard, Home, MapPin, Phone, Target, Truck, Warehouse } from "lucide-react";
-import loadingTruck from "@/assets/source/delivery-hero-truck.webp";
 import { Tile } from "@/components/site/Tile";
 import { TileScreen } from "@/components/site/TileScreen";
 
@@ -19,8 +18,6 @@ export const Route = createFileRoute("/delivery")({
         content: "How pickup and delivery work before the truck leaves the Jefferson yard.",
       },
       { property: "og:url", content: "/delivery" },
-      { property: "og:image", content: "https://buytheyard.lovable.app/og/og-delivery.jpg" },
-      { name: "twitter:image", content: "https://buytheyard.lovable.app/og/og-delivery.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://buytheyard.lovable.app/delivery" },
@@ -42,20 +39,13 @@ function DeliveryPage() {
             <Tile
               id="delivery-hero"
               fill
-              variant="image"
-              src={loadingTruck}
-              alt="Loader filling a delivery truck at the Buy The Yard lot"
-              focal="center"
-              loading="eager"
-              fetchPriority="high"
-              overlay={{
-                eyebrow: "Delivery & pickup",
-                title: "Get the material without the surprise."
-                ,body: "Abby confirms the town, quantity, timing, and drop spot before the truck leaves Jefferson.",
-                align: "bottom-left",
-                layout: "anchored",
-                anchorIcon: <Truck />,
-              }}
+              variant="cta"
+              tone="surface"
+              layout="anchored"
+              icon={<Truck />}
+              eyebrow="Delivery & pickup"
+              title="Get the material without the surprise."
+              body="Abby confirms the town, quantity, timing, and drop spot before the truck leaves Jefferson."
               cta={{ label: "Start a quote", to: "/quote" }}
             />
           ),
