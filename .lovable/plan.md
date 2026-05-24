@@ -1,44 +1,114 @@
 ## Goal
 
-Replace mismatched catalog images with **real photography only** (no AI generation). This includes:
-- Deleting the 4 AI images generated in the previous turn (`038`–`041`)
-- Sourcing real, commercially-licensed photos for all 6 mismatches
+Move the catalog from `src/data/catalog.ts` into Lovable Cloud so you can edit prices, units, descriptions, and photos (and delivery zones) from a password-protected `/admin` dashboard. Public pages read live from the database on each request.
 
-## Sources
+## Database
 
-Use APIs that don't require keys and return CC0 / CC-BY / public domain content:
-1. **Openverse API** (`api.openverse.org/v1/images/`) — already verified working last turn; aggregates Flickr CC, Wikimedia, etc.
-2. **Wikimedia Commons API** — fallback for public-domain originals
+Two tables (plus one storage bucket for photos):
 
-Pexels/Pixabay/Unsplash are JS-rendered without API keys and can't be scraped reliably.
+**`products`**
+- `id` uuid pk
+- `category` text — one of `mulch | stone | additional`
+- `name` text
+- `description` text
+- `price_cents` integer (stored as cents, displayed as `$X.XX`)
+- `unit` text (e.g. `per yd`)
+- `image_path` text — storage path in the `product-photos` bucket (nullable; falls back to a default)
+- `sort_order` integer
+- `created_at`, `updated_at` timestamptz
 
-## Mismatches to replace
+**`delivery_zones`**
+- `id` uuid pk
+- `town` text
+- `fee_cents` integer
+- `sort_order` integer
+- timestamps
 
-| # | Product | Need |
-|---|---|---|
-| 1 | Specialty Stone | Lava rock / volcanic landscaping pebble closeup |
-| 2 | 1-1/2" Landscaping Stone | Angular crushed gray landscape stone |
-| 3 | 1/2" Screened Loam | Pile of dark screened topsoil |
-| 4 | Wood Chips | Pile of natural wood chips / mulch |
-| 5 | Compost | Aged compost / dark organic matter pile |
-| 6 | Recycled Asphalt | Dark asphalt millings (driveway pile or texture) |
+**RLS**: enabled, no public policies. All reads/writes go through server functions using the admin (service-role) client, which bypasses RLS. Public reads are scoped to safe columns only; writes are gated by the admin password.
 
-## Workflow per image
+**Storage**: public bucket `product-photos` so `<img>` tags can load uploaded photos directly by public URL.
 
-1. Query Openverse with several keyword variants, request size info
-2. Filter results to `image_type=photograph` and meaningful resolution (≥ 1200px on long edge)
-3. Download top candidate to `/tmp/`, inspect visually (open via `code--view`)
-4. If it matches the descriptor, copy to `src/assets/photos/0NN_<descriptor>.jpg`; otherwise try next candidate
-5. If no Openverse hit works after ~5 candidates, fall back to Wikimedia Commons direct search
+**Seed**: insert the current 15 products and 12 delivery zones from `src/data/catalog.ts` so nothing visually changes on first load. Existing bundled photos stay in `src/assets/photos` and remain the default image when a product has no uploaded photo.
 
-## File changes
+## Admin auth (shared password)
 
-1. Delete `src/assets/photos/038…041*.jpg` (the AI images)
-2. Add 6 new numbered photos (`038`–`043`) sourced from web
-3. Update `src/assets/photos/index.ts` — remove any AI exports that were never wired, add 6 new exports
-4. Update `src/data/catalog.ts` — swap imports & `image:` fields for the 6 mismatches, remove `// TODO` comments
+- New secret: `ADMIN_PASSWORD` (I'll request it via the secrets tool before building).
+- `POST /api/admin/login` server route compares the submitted password to `process.env.ADMIN_PASSWORD` and, on match, sets a signed encrypted session cookie (`useSession` from `@tanstack/react-start/server`, encrypted with a second secret `ADMIN_SESSION_SECRET`).
+- All admin server functions check `session.data.admin === true` and throw 401 otherwise.
+- `/admin/logout` clears the session.
+- Rate-limit login attempts in-memory per IP (best-effort) and add a short delay on failure.
 
-## Notes
+Note on the trade-off you picked: a shared password is simpler but means anyone with the password is "the admin" — no per-user audit trail and no password recovery beyond rotating the secret. That matches what you asked for; I just want it on record.
 
-- All sourced photos must be CC0, CC-BY, CC-BY-SA, or public domain. I'll capture the source URL and license in a comment in `index.ts` next to each new export so attribution is preserved.
-- If a particular product truly has no acceptable real photo (e.g. asphalt millings closeup is genuinely rare), I'll surface that and ask whether to fall back to a related image (e.g. an asphalt-millings driveway shot) or leave the existing placeholder.
+## Server functions (all in `src/lib/catalog.functions.ts` + `src/lib/admin.functions.ts`)
+
+Public (no auth):
+- `listProducts()` → `{ mulch, stone, additional }`, ordered by `sort_order`
+- `listDeliveryZones()` → ordered by `sort_order`
+
+Admin (require admin session):
+- `upsertProduct(input)` / `deleteProduct(id)` / `reorderProducts(ids[])`
+- `upsertDeliveryZone(input)` / `deleteDeliveryZone(id)` / `reorderDeliveryZones(ids[])`
+- `uploadProductPhoto({ productId, fileBase64, contentType })` → uploads to storage, returns public URL, updates `image_path`
+
+All inputs validated with Zod (length caps, price/unit format, category enum).
+
+## Public site wiring
+
+- `src/data/catalog.ts` becomes a thin re-export of types only; the static arrays are removed.
+- `src/routes/mulch.tsx`, `stone.tsx`, `additional.tsx`, `delivery.tsx`, and `index.tsx` (anywhere catalog data is consumed today) switch to:
+  ```ts
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogQueryOptions)
+  ```
+  with `useSuspenseQuery` in the component. Price is rendered as `$` + `(price_cents/100).toFixed(2)` via a small `formatPrice()` helper. No visual changes.
+- Image resolution: if `image_path` is set → use storage public URL; else → fall back to the currently-bundled asset matched by product name (keeps the existing photos working out of the box).
+
+## Admin dashboard UI
+
+New routes:
+- `/admin/login` — password form
+- `/admin` — protected layout (`_admin` pathless layout that redirects to `/admin/login` when the session cookie is missing)
+- `/admin` index — tabs for **Mulch**, **Stone**, **Additional**, **Delivery zones**
+
+Each product tab shows a table-style list of cards:
+- Inline edit fields for **Name**, **Description**, **Price** (dollar input), **Unit**
+- **Photo**: thumbnail + "Upload new" button (file picker, client-side resize to max 1600px, uploads via `uploadProductPhoto`)
+- **Order**: up/down buttons (writes `sort_order`)
+- **Delete** with confirm
+- "Add product" button at the bottom of each category
+
+Delivery zones tab: same pattern with Town + Fee fields.
+
+Save behavior: each card has its own Save button; on success, invalidate the `catalog` query so the public site picks up changes on next navigation. Toast on success/error.
+
+## Files
+
+New:
+- `src/lib/catalog.functions.ts` — public read fns
+- `src/lib/admin.functions.ts` — admin write fns + auth helpers
+- `src/routes/api/admin/login.ts`, `src/routes/api/admin/logout.ts` — server routes
+- `src/routes/_admin.tsx` — auth-gated layout
+- `src/routes/_admin/admin.tsx` — dashboard with tabs
+- `src/routes/admin.login.tsx` — login form
+- `src/components/admin/ProductEditor.tsx`, `DeliveryZoneEditor.tsx`, `PhotoUploader.tsx`
+- `src/lib/format-price.ts`
+
+Modified:
+- `src/data/catalog.ts` — strip static arrays, keep type re-exports
+- `mulch.tsx`, `stone.tsx`, `additional.tsx`, `delivery.tsx`, `index.tsx` — switch to query loaders
+- `src/start.ts` — no change needed (no protected serverFn requires Supabase user auth)
+
+Migrations:
+- One migration to create tables + RLS + storage bucket + seed
+- (No edits to existing migration files.)
+
+## Secrets I'll request before building
+
+1. `ADMIN_PASSWORD` — the password you'll type at `/admin/login`
+2. `ADMIN_SESSION_SECRET` — random 32+ char string for cookie encryption (I'll suggest one)
+
+## What stays the same
+
+- Visual design, fonts, palette, section system — untouched
+- The bundled photo files remain as defaults; uploading new ones overrides per-product
+- No user accounts or signup added to the public site
