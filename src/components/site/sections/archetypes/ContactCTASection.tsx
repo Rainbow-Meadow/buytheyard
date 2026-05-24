@@ -1,6 +1,5 @@
 import { Section } from "../Section";
 import { MonoLabel } from "../MonoLabel";
-import { DisplayHeading } from "../DisplayHeading";
 
 export interface ContactCTAProps {
   title?: string;
