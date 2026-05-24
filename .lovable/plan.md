@@ -1,47 +1,30 @@
-# Scorched-Earth Image Removal
 
-Strip every image from the repo and every reference from the code. No photos, no brandmark, no favicons, no OG cards, no PWA icons, no splash screens. Components keep their existing text fallbacks.
+# Final polish pass — Technical Ledger v2
 
-## 1. Delete asset files
+Close the remaining gaps from the last pass so every page reads as one system.
 
-- `src/assets/*.webp` (all 18 product/brand/hero/etc. webps)
-- `src/assets/source/*.webp` (all 14 source photos)
-- `src/assets/PHOTO_CREDITS.md`
-- `public/brandmark.webp`
-- `public/favicon.ico`
-- `public/apple-touch-icon.png`
-- `public/icons/*` (and the folder)
-- `public/og/*` (and the folder)
-- `public/splash/*` (and the folder)
+## 1. Fix tile clipping in stat bands
+- `HomeBreaks.tsx` 4-up "Licensed / Insured / WBE / Local" band: shorten labels and let the cell wrap at the hairline (no font-size hacks). Apply same min-height across all 4 cells.
+- Audit other 3/4-up bands (about, delivery, service-area) for the same overflow and normalize.
 
-## 2. Strip image imports + usages in code
+## 2. Header / Wordmark
+- `SiteHeader.tsx` + `Wordmark.tsx`: switch to a single-line lockup (Inter 800, no stacked baseline) so it stops overlapping the hero on mobile (440px).
+- Header gets the same hairline bottom border as every other section; remove any bespoke shadow / red underline.
 
-For each file that imports from `@/assets/...` or references `/icons/`, `/og/`, `/splash/`, `/brandmark`, `/favicon`, `/apple-touch-icon`:
+## 3. Collapse remaining bespoke decorations
+- `HomeBreaks.tsx`: remove custom red bars / dividers, use the standard 1.5px left accent only.
+- `ProductBuyingGuide.tsx`: replace its inline section header + custom rule with `<SectionHeader>` + hairline; body copy through `<Prose>`.
+- `SiteFooter.tsx`: rebuild on the same grid as `<Section>` — eyebrow (mono), hairline, 3-col meta list, single red accent on the brand block. No gradients, no oversized type.
+- `SplashScreen.tsx`: align to ink/surface tokens, drop any leftover kraft tones, single mono progress label.
 
-- **`src/data/products.ts`** — remove all image imports; drop `image`/`imageAlt` from every product. `ProductCard` already renders the text-only fallback when `product.image` is unset.
-- **`src/components/home/CommunityTiles.tsx`** — convert image tiles to text tiles (Tile already supports text/quote variants), or remove the component if no text equivalent makes sense within tile rules. Keep the section using text-only blocks.
-- **`src/components/home/FeaturedMaterials.tsx`, `ReviewsAndCommunity.tsx`, `FaqDialogTile.tsx`, `FacebookSpotlight.tsx`, `FacebookLiveTile.tsx`, `ServiceAreaMapTile.tsx`, `DeliveryAndPricing.tsx`, `HomeBreaks.tsx`** — remove any image imports and replace image tiles with text/quote/headline tiles where used.
-- **Route files** (`index.tsx`, `about.tsx`, `contact.tsx`, `delivery.tsx`, `products.tsx`, `quote.tsx`, `service-area.tsx`, `wbe.tsx`, `privacy.tsx`) — remove asset imports, hero `<img>` elements, OG `og:image` / `twitter:image` meta tags, and any apple-touch / icon links.
-- **`src/routes/__root.tsx`** — remove `<link rel="icon">`, `apple-touch-icon`, manifest icon refs, and any default `og:image`.
-- **`src/components/site/SplashScreen.tsx`, `Wordmark.tsx`, `SiteFooter.tsx`** — remove brandmark image; Wordmark falls back to type-only.
-- **`src/components/products/ProductBuyingGuide.tsx`, `ProductImageGallery.tsx`, `ProductProjectGuide.tsx`** — strip image refs. Delete `ProductImageGallery.tsx` if it has no purpose without images.
-- **`src/components/site/Tile.tsx`** — keep the `variant: "image"` type for now but it will be unused; optionally remove the image branch in a follow-up.
-- **`src/components/ai-elements/prompt-input.tsx`** — remove any image preview/attach references that pulled from assets.
+## 4. Token + utility sweep
+- `rg` for `text-[`, `bg-[#`, `border-[#`, `font-saira`, `kraft`, `brand-foreground`, raw `#d9c5b2` and replace with tokens / utilities.
+- Confirm every heading uses `display-*`, every eyebrow uses `.eyebrow`, every meta line uses `.meta`, every button uses `.btn` / `.btn-ghost`.
 
-## 3. Public manifest + scripts
+## 5. Verify
+- Build passes.
+- Screenshot every route at 440px and 1280px; confirm identical hero shell, section header, tile cell, CTA bar, footer across home / products / delivery / about / contact / quote / service-area / wbe / privacy.
+- `rg` for retired symbols (`OffsetTile`, `FigureCard`, `PullQuote`, `LedgerList`, `EditorialColumns`, `anchored`, `hero-polish`, `tile-mobile`) returns zero hits.
 
-- **`public/site.webmanifest`** — empty the `icons` array (or delete file and remove the `<link rel="manifest">` from `__root.tsx`).
-- **`public/llms.txt`, `public/robots.txt`** — remove any image URLs.
-- **`scripts/gen-icons.mjs`, `scripts/gen-splash.mjs`, `scripts/og.mjs`, `scripts/knockout.mjs`** — delete; they exist only to produce the assets we're removing.
-- **`docs/image-catalog.md`, `docs/photo-shot-guide.md`** — delete.
-
-## 4. Verify
-
-- `rg "@/assets|/assets/source|/icons/|/og/|/splash/|brandmark|apple-touch|favicon|\\.webp|\\.png|\\.jpg"` returns no hits in `src/` or `public/`.
-- Build passes; preview renders with text fallbacks across home, products, about, delivery, contact, service-area, quote, wbe.
-- Browser tab shows no favicon, PWA install shows no icon — expected per "truly everything."
-
-## Notes
-
-- This is irreversible from the repo side; assets would need to be re-uploaded to restore.
-- The brand will visually degrade — no logo image, no favicon, no social share previews. Confirmed intent.
+## Out of scope
+No new content, no new routes, no business-logic changes — presentation only.
