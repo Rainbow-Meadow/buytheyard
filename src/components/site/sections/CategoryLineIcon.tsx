@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { ReactElement, SVGProps } from "react";
 
 export type CategoryIconName = "mulch" | "stone" | "additional" | "garden-center";
 
@@ -107,7 +107,7 @@ function GardenCenter() {
   );
 }
 
-const ICONS: Record<CategoryIconName, () => JSX.Element> = {
+const ICONS: Record<CategoryIconName, () => ReactElement> = {
   mulch: Mulch,
   stone: Stone,
   additional: Additional,
