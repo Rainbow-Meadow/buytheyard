@@ -4,7 +4,6 @@ import { DisplayHeading } from "../DisplayHeading";
 import { InlineCTA } from "../InlineCTA";
 
 export interface HeroSectionProps {
-  title?: string;
   meta: string;
   heading: React.ReactNode;
   body: string;
@@ -14,7 +13,6 @@ export interface HeroSectionProps {
 }
 
 export function HeroSection({
-  title = "JEFFERSON YARD",
   meta,
   heading,
   body,
@@ -23,7 +21,7 @@ export function HeroSection({
   ctaHref,
 }: HeroSectionProps) {
   return (
-    <Section title={title} tone="paper">
+    <Section tone="paper">
       <div className="flex-1 flex flex-col justify-center p-8 md:p-24 min-h-[80vh]">
         <div className="max-w-4xl">
           <MonoLabel accent className="mb-4 block">{meta}</MonoLabel>

@@ -1,35 +1,36 @@
 ## Goal
 
-Replace the numeric rail index (01–08) on every section with a short title label for that section. The numeric chips and the section-header eyebrows go away; the rail becomes the single source of "what section is this."
+Make the section title rail optional and remove it where it just repeats what the band already says.
 
-## What changes
+## Audit
+
+| Section | Rail title | Verdict |
+|---|---|---|
+| Hero | `JEFFERSON YARD` | **Drop rail.** Header already says "BUY THE YARD"; meta says "EST. 2016 — JEFFERSON, MA"; the hero headline carries the band. A vertical label adds noise, not info. |
+| Material Index | `MATERIAL INDEX` | Keep. Only label for the band. |
+| Pickup & Delivery | `PICKUP & DELIVERY` | Keep. Summarizes a split band with two sub-H2s. |
+| How To Order | `HOW TO ORDER` | Keep. Body H2 is "Procurement Process" — rail reframes it in plainer language. |
+| Abby's Story | `ABBY'S STORY` | Keep. Body heading is topic ("WBE Certified / Woman-Owned"), rail names the section. |
+| Customer Field Logs | `CUSTOMER FIELD LOGS` | Keep. Body H2 was removed last turn; rail is the only label. |
+| Field Questions | `FIELD QUESTIONS` | Keep rail, **drop body H2 "Frequently Asked Questions"** — duplicate per current memory rule. |
+| Get a Quote | `GET A QUOTE` | Keep. Body H2 was removed last turn. |
+
+## Changes
 
 **`src/components/site/sections/Section.tsx`**
-- Replace the `index` prop with a required `title: string` prop.
-- Rail renders the title in Bebas Neue, vertically stacked on desktop (`[writing-mode:vertical-rl] rotate-180`) and inline on mobile.
-- Drop `accentIndex` and the secondary `label` rail caption (title replaces both).
-- Keep tone, rule, and the hairline divider behavior unchanged.
+- Make `title` optional. When omitted, render no rail aside at all (band goes edge-to-edge).
+- Keeps tone + rule behavior identical.
 
-**All 8 archetypes in `src/components/site/sections/archetypes/`**
-- Swap `index="0X"` props for `title="…"` defaults that match the rail label shown in the screenshot direction:
-  - Hero → `YARD INTRO`
-  - MaterialInventory → `MATERIAL INDEX`
-  - LogisticsSplit → `PICKUP & DELIVERY`
-  - ProcessSteps → `HOW TO ORDER`
-  - OwnerStory → `ABBY'S STORY`
-  - Testimonials → `CUSTOMER FIELD LOGS`
-  - FAQ → `FIELD QUESTIONS`
-  - ContactCTA → `GET A QUOTE`
-- Remove the in-body eyebrows that duplicated these labels (e.g. Testimonials' "ABBY'S STORY — OUR FOUNDATION" caption, ContactCTA's "READY TO BUILD?" eyebrow) so the rail is the only label.
+**`src/components/site/sections/archetypes/HeroSection.tsx`**
+- Remove `title` prop and default. Render `<Section tone="paper">` with no rail.
 
-**`src/routes/index.tsx`**
-- Drop the `index="0X"` props; rely on each archetype's default `title`. Allow per-instance override via `title="…"` when a page wants a different label.
+**`src/components/site/sections/archetypes/FAQSection.tsx`**
+- Remove the `heading` prop and the `SectionHeader` render. Rail is the only label for the band.
 
 **Memory**
-- Update `mem://design/section-system` to record: rail shows section title (Bebas, vertical on md+), no numeric indices, no ember-accented index, eyebrows no longer duplicate the rail label.
-- Update `mem://index.md` Core line that currently mentions "05/08 index numerals" to reference the title-rail rule instead.
+- Update `mem://design/section-system` and `mem://index.md` Core line: rail title is optional; omit it when the band's own content already names the section (e.g. hero). Body H2 must not duplicate the rail label.
 
 ## Out of scope
 
-- Tone palette, typography scale, hairlines, ember accent usage elsewhere (CTA button, phone, stars) — unchanged.
-- Legacy tile/editorial primitives — untouched.
+- No changes to other archetypes, palette, typography, or hairlines.
+- Route file (`src/routes/index.tsx`) needs no change — Hero already passes no `title`, FAQ already passes no `heading`.

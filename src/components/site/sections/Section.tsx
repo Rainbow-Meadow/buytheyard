@@ -17,7 +17,7 @@ const RAIL_BORDER: Record<SectionTone, string> = {
 };
 
 export interface SectionProps {
-  title: string;
+  title?: string;
   tone?: SectionTone;
   /** Bottom hairline rule. Default true. Last section on page can pass false. */
   rule?: boolean;
@@ -39,17 +39,19 @@ export function Section({
         rule ? `border-b ${railBorder}` : "",
       ].join(" ")}
     >
-      <aside
-        className={[
-          "md:w-24 shrink-0 p-6 flex md:items-start",
-          "border-b md:border-b-0 md:border-r",
-          railBorder,
-        ].join(" ")}
-      >
-        <span className="font-bebas uppercase leading-none tracking-widest text-2xl md:text-3xl md:[writing-mode:vertical-rl] md:rotate-180">
-          {title}
-        </span>
-      </aside>
+      {title && (
+        <aside
+          className={[
+            "md:w-24 shrink-0 p-6 flex md:items-start",
+            "border-b md:border-b-0 md:border-r",
+            railBorder,
+          ].join(" ")}
+        >
+          <span className="font-bebas uppercase leading-none tracking-widest text-2xl md:text-3xl md:[writing-mode:vertical-rl] md:rotate-180">
+            {title}
+          </span>
+        </aside>
+      )}
       <div className="flex-1 min-w-0">{children}</div>
     </section>
   );
