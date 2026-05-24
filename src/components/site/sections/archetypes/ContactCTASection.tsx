@@ -21,7 +21,7 @@ export function ContactCTASection({
   return (
     <Section title={title} tone="paper" rule={false}>
       <div className="flex flex-col md:flex-row md:min-h-[50svh]">
-        <div className="flex-1 p-8 md:p-24 flex flex-col justify-center">
+        <div className="flex-1 p-8 md:py-12 md:px-16 flex flex-col justify-center">
           <div className="flex flex-col md:flex-row gap-12">
             <div>
               <MonoLabel className="mb-2 block opacity-60">Direct Line</MonoLabel>
@@ -38,11 +38,11 @@ export function ContactCTASection({
             </div>
           </div>
         </div>
-        <div className="w-full md:w-1/3 bg-black text-paper p-8 md:p-12 flex flex-col justify-between">
+        <div className="w-full md:w-1/3 bg-black text-paper p-6 md:py-10 md:px-10 flex flex-col justify-between">
           <p className="font-barlow text-sm opacity-60">{address.line1}<br/>{address.line2}</p>
           <a
             href={primaryHref}
-            className="mt-12 block text-center w-full bg-ember text-paper py-6 font-bebas text-3xl tracking-widest hover:brightness-110 transition-all"
+            className="mt-6 block text-center w-full bg-ember text-paper py-5 font-bebas text-3xl tracking-widest hover:brightness-110 transition-all"
           >
             {primaryLabel}
           </a>

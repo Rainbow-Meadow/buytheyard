@@ -30,7 +30,7 @@ export function SectionGridCell({
   return (
     <div
       className={[
-        "p-8 group transition-colors hover:bg-soft",
+        "p-6 md:p-8 group transition-colors hover:bg-soft",
         last ? "" : "border-b md:border-b-0 md:border-r border-soft",
         className,
       ].join(" ")}

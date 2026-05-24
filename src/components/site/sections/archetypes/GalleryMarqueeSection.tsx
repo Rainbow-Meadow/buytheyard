@@ -24,7 +24,7 @@ export function GalleryMarqueeSection({
   const loop = [...items, ...items];
   return (
     <Section title={title} tone="paper">
-      <div className="marquee-mask overflow-hidden py-10 md:py-14 md:min-h-[50svh] flex items-center">
+      <div className="marquee-mask overflow-hidden py-6 md:py-8 md:min-h-[50svh] flex items-center">
         <div
           className="marquee-track gap-px bg-ink"
           style={{ ["--marquee-duration" as string]: SPEED[speed] }}
@@ -33,7 +33,7 @@ export function GalleryMarqueeSection({
             <figure
               key={i}
               aria-hidden={i >= items.length}
-              className="flex-shrink-0 h-56 md:h-72 aspect-[4/3] bg-soft relative overflow-hidden"
+              className="flex-shrink-0 h-56 md:h-64 aspect-[4/3] bg-soft relative overflow-hidden"
             >
               {item.src ? (
                 <img
