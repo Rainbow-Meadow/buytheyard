@@ -59,10 +59,10 @@ function HomePage() {
       />
       <MaterialInventorySection
         items={[
-          { code: "CAT_01", name: "Mulch", description: "Double-ground, dyed or natural. Moisture retention and weed suppression.", unit: "CUBIC YARD", to: "/mulch" },
-          { code: "CAT_02", name: "Loam",  description: "Screened organic soil. High nutrient content for lawn and garden beds.", unit: "CUBIC YARD", to: "/additional" },
-          { code: "CAT_03", name: "Stone", description: "Decorative and structural aggregates. Multiple sizes for drainage or paths.", unit: "TON / CY", to: "/stone" },
-          { code: "CAT_04", name: "Sand",  description: "Washed beach sand or concrete sand. Perfect for masonry or play areas.", unit: "TON", to: "/additional" },
+          { code: "CAT_01", name: "Mulch", description: "Double-ground, color-locked mulch. Moisture retention and weed suppression.", unit: "CUBIC YARD", to: "/mulch", icon: "mulch" },
+          { code: "CAT_02", name: "Stone", description: "Decorative and structural aggregates. Three sizes, multiple colors.", unit: "TON / CY", to: "/stone", icon: "stone" },
+          { code: "CAT_03", name: "Additional", description: "Loam, sand, stone dust, salt, compost — the supporting cast.", unit: "CUBIC YARD", to: "/additional", icon: "additional" },
+          { code: "CAT_04", name: "Garden Center", description: "Annuals, perennials, hanging baskets, mums, tools, and hardware.", unit: "AT THE YARD", to: "/garden-center", icon: "garden-center" },
         ]}
       />
       <OwnerStorySection
