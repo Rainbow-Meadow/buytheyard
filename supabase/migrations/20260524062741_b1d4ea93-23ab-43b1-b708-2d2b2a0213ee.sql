@@ -1,0 +1,1 @@
+UPDATE public.delivery_zones SET fee_cents = 7500;
