@@ -1,8 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { products } from "@/data/products";
-import { ProductCatalogIntro } from "@/components/products/ProductCatalogIntro";
-import { ProductBuyingGuide, ProductQuantityGuide } from "@/components/products/ProductBuyingGuide";
-import { ProductProjectGuide } from "@/components/products/ProductProjectGuide";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -21,53 +17,11 @@ export const Route = createFileRoute("/products")({
       },
       { property: "og:url", content: "/products" },
     ],
-    links: [
-      { rel: "canonical", href: "https://buytheyard.lovable.app/products" },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          name: "Buy The Yard — Materials Catalog",
-          itemListElement: products.map((p, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            item: {
-              "@type": "Product",
-              name: p.name,
-              description: p.description,
-              category: p.category,
-              brand: { "@type": "Brand", name: "Buy The Yard" },
-              offers: {
-                "@type": "Offer",
-                availability: "https://schema.org/InStock",
-                seller: { "@type": "LocalBusiness", name: "Buy The Yard" },
-                priceSpecification: {
-                  "@type": "PriceSpecification",
-                  description: "Call 508-579-9897 for today's price",
-                },
-              },
-            },
-          })),
-        }),
-      },
-    ],
+    links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/products" }],
   }),
   component: ProductsPage,
 });
 
 function ProductsPage() {
-  return (
-    <>
-      <ProductCatalogIntro />
-
-      <ProductBuyingGuide />
-
-      <ProductProjectGuide />
-
-      <ProductQuantityGuide />
-    </>
-  );
+  return <main aria-label="Products" />;
 }
