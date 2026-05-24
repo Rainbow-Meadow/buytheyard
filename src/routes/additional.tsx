@@ -18,10 +18,10 @@ import { largePileOfLightSand } from "@/assets/photos";
 export const Route = createFileRoute("/additional")({
   head: () => ({
     meta: [
-      { title: "Loam, Sand, Gravel & More — Buy The Yard | Jefferson, MA" },
-      { name: "description", content: "Screened loam, mason sand, stone dust, gravel, wood chips, compost, and recycled asphalt by the cubic yard. Pickup or delivery across Central MA." },
+      { title: "Sand & Loam — Screened Loam, Mason Sand, Stone Dust · Buy The Yard" },
+      { name: "description", content: "Screened loam, mason sand, stone dust, compost, salt, and recycled asphalt by the cubic yard. Loaded on 122A in Jefferson, MA. Pickup or delivery across Central Mass." },
       { property: "og:title", content: "Sand & Loam — Buy The Yard" },
-      { property: "og:description", content: "Screened loam, mason sand, stone dust, salt, compost, and more by the cubic yard." },
+      { property: "og:description", content: "Screened loam for the lawn, mason sand for the patio, stone dust for the base. The stuff every job needs, by the cubic yard." },
       { property: "og:url", content: "https://buytheyard.lovable.app/additional" },
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/additional" }],
@@ -41,7 +41,7 @@ function AdditionalPage() {
       <HeroSection
         meta="LOAM · SAND · STONE DUST"
         heading={<>Sand & Loam<br/>By The Yard</>}
-        body="Screened loam for the lawn, mason sand for the patio, stone dust for the base. The supporting cast that finishes every project."
+        body="Screened loam for a new lawn, mason sand for the patio, stone dust under the pavers. The stuff every job needs — loaded clean, no surprises."
         ctaLabel="Call For Pricing"
         ctaHref="tel:5085799897"
         image={largePileOfLightSand}
