@@ -28,10 +28,10 @@ export const MULCH: CatalogItem[] = [
 ];
 
 export const STONE: CatalogItem[] = [
-  { name: "1-1/2\" Landscaping Stone", description: "Decorative landscape stone in 1-1/2\" size. Available in brown, blue, and dark gray.", price: "$95.00", unit: "per yd", image: darkRiverRocksWithGolfBallCloseup },
+  { name: "1-1/2\" Landscaping Stone", description: "Decorative landscape stone in 1-1/2\" size. Available in brown, blue, and dark gray.", price: "$88.00", unit: "per yd", image: darkRiverRocksWithGolfBallCloseup },
   { name: "3/4\" Landscaping Stone", description: "Our most versatile size. Available in brown, blue, white, red, purple, dark gray, and light gray.", price: "$95.00", unit: "per yd", image: reddishBrownLandscapeStoneWithCoinCloseup },
-  { name: "3/8\" Landscaping Stone", description: "Smooth, finer-scale decorative stone. Available in brown, blue, dark gray, and light gray.", price: "$95.00", unit: "per yd", image: tanPeaGravelWithCoinCloseup },
-  { name: "Specialty Stone", description: "Lava rock and decorative accent stone for distinctive beds, borders, and dry features.", price: "$95.00", unit: "per yd", image: whiteMarbleChipsWithCoinCloseup },
+  { name: "3/8\" Landscaping Stone", description: "Smooth, finer-scale decorative stone. Available in brown, blue, dark gray, and light gray.", price: "$78.00", unit: "per yd", image: tanPeaGravelWithCoinCloseup },
+  { name: "Specialty Stone", description: "Lava rock and decorative accent stone for distinctive beds, borders, and dry features.", price: "$105.00", unit: "per yd", image: whiteMarbleChipsWithCoinCloseup },
 ];
 
 export const ADDITIONAL: CatalogItem[] = [
