@@ -6,28 +6,32 @@ export interface LogisticsSplitProps {
   title?: string;
   pickup: { heading: string; body: string; specLines: string[] };
   delivery: { heading: string; body: string; ctaLabel: string; ctaHref?: string };
+  heightClass?: string;
 }
 
-export function LogisticsSplitSection({ title = "PICKUP & DELIVERY", pickup, delivery }: LogisticsSplitProps) {
+export function LogisticsSplitSection({ title = "PICKUP & DELIVERY", pickup, delivery, heightClass }: LogisticsSplitProps) {
+  const compact = Boolean(heightClass);
   return (
     <Section title={title} tone="paper">
+      <div className={heightClass ? `${heightClass} md:overflow-hidden` : ""}>
       <SectionSplit
+        compact={compact}
         left={
           <>
-            <DisplayHeading as="h2" size="md" className="mb-6">{pickup.heading}</DisplayHeading>
-            <p className="font-barlow mb-8 opacity-80">{pickup.body}</p>
-            <div className="bg-ink text-paper p-6 font-mono-industrial text-xs uppercase leading-loose">
+            <DisplayHeading as="h2" size="md" className={compact ? "mb-3" : "mb-6"}>{pickup.heading}</DisplayHeading>
+            <p className={`font-barlow opacity-80 ${compact ? "mb-4 text-sm" : "mb-8"}`}>{pickup.body}</p>
+            <div className={`bg-ink text-paper font-mono-industrial text-xs uppercase ${compact ? "p-4 leading-relaxed" : "p-6 leading-loose"}`}>
               {pickup.specLines.map((l) => <div key={l}>{l}</div>)}
             </div>
           </>
         }
         right={
           <>
-            <DisplayHeading as="h2" size="md" className="mb-6">{delivery.heading}</DisplayHeading>
-            <p className="font-barlow mb-8 opacity-80">{delivery.body}</p>
+            <DisplayHeading as="h2" size="md" className={compact ? "mb-3" : "mb-6"}>{delivery.heading}</DisplayHeading>
+            <p className={`font-barlow opacity-80 ${compact ? "mb-4 text-sm" : "mb-8"}`}>{delivery.body}</p>
             <a
               href={delivery.ctaHref ?? "#"}
-              className="block w-full text-center border-2 border-ink py-4 font-bebas text-xl tracking-widest hover:bg-ink hover:text-paper transition-colors"
+              className={`block w-full text-center border-2 border-ink font-bebas tracking-widest hover:bg-ink hover:text-paper transition-colors ${compact ? "py-3 text-lg" : "py-4 text-xl"}`}
             >
               {delivery.ctaLabel}
             </a>
@@ -35,6 +39,7 @@ export function LogisticsSplitSection({ title = "PICKUP & DELIVERY", pickup, del
         }
         rightTone="soft"
       />
+      </div>
     </Section>
   );
 }
