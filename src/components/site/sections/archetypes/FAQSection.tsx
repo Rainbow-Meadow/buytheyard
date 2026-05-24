@@ -1,16 +1,19 @@
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 
 export interface FAQItem { q: string; a: string }
 
 export function FAQSection({
   title = "FIELD QUESTIONS",
   items,
+  background = { kind: "scatter", density: "light", tint: "ink" },
 }: {
   title?: string;
   items: FAQItem[];
+  background?: SectionBackground;
 }) {
   return (
-    <Section title={title} tone="paper">
+    <Section title={title} tone="paper" background={background}>
       <div className="divide-y divide-soft">
         {items.map((it) => (
           <details key={it.q} className="group">

@@ -1,4 +1,5 @@
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 import { MonoLabel } from "../MonoLabel";
 
 export interface Testimonial { quote: string; attribution: string }
@@ -6,12 +7,14 @@ export interface Testimonial { quote: string; attribution: string }
 export function TestimonialsSection({
   title = "CUSTOMER FIELD LOGS",
   items,
+  background = { kind: "scatter", density: "regular", tint: "ink" },
 }: {
   title?: string;
   items: Testimonial[];
+  background?: SectionBackground;
 }) {
   return (
-    <Section title={title} tone="paper">
+    <Section title={title} tone="paper" background={background}>
       <div className="p-6 md:py-10 md:px-16 md:h-[calc(50svh-2rem)] md:flex md:flex-col md:justify-center md:overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ink border border-ink">
           {items.map((t) => (

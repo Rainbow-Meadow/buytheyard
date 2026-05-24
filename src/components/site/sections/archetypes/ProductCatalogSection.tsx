@@ -1,4 +1,5 @@
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 import { MonoLabel } from "../MonoLabel";
 
 export interface CatalogItem {
@@ -13,12 +14,14 @@ export interface CatalogItem {
 export function ProductCatalogSection({
   title,
   items,
+  background = { kind: "scatter", density: "regular", tint: "ink" },
 }: {
   title?: string;
   items: CatalogItem[];
+  background?: SectionBackground;
 }) {
   return (
-    <Section title={title} tone="paper">
+    <Section title={title} tone="paper" background={background}>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-ink/10 border-y border-ink/10 md:h-[calc(100svh-4rem)]">
         {items.map((it) => (
           <article

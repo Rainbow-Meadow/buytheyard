@@ -1,4 +1,5 @@
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 
 export interface GalleryItem {
   src?: string;

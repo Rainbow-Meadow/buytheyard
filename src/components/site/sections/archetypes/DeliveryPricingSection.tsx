@@ -1,4 +1,5 @@
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 import { DisplayHeading } from "../DisplayHeading";
 import { MonoLabel } from "../MonoLabel";
 
@@ -12,14 +13,16 @@ export function DeliveryPricingSection({
   heading = "Flat $75 Delivery",
   note = "One flat $75 delivery fee to any town we serve. Same-day delivery for orders placed before 2:00 PM EST.",
   zones,
+  background = { kind: "scatter", density: "regular", tint: "ink" },
 }: {
   title?: string;
   heading?: string;
   note?: string;
   zones: DeliveryZone[];
+  background?: SectionBackground;
 }) {
   return (
-    <Section title={title} tone="paper">
+    <Section title={title} tone="paper" background={background}>
       <div className="p-8 md:p-16">
         <DisplayHeading as="h2" size="md" className="mb-4">{heading}</DisplayHeading>
         <p className="font-barlow text-sm opacity-70 mb-10 max-w-2xl">{note}</p>
