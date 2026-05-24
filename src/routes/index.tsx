@@ -61,7 +61,7 @@ function HomePage() {
         items={[
           { code: "CAT_01", name: "Mulch", description: "Double-ground, color-locked mulch. Moisture retention and weed suppression.", unit: "CUBIC YARD", to: "/mulch", icon: "mulch" },
           { code: "CAT_02", name: "Stone", description: "Decorative and structural aggregates. Three sizes, multiple colors.", unit: "TON / CY", to: "/stone", icon: "stone" },
-          { code: "CAT_03", name: "Additional", description: "Loam, sand, stone dust, salt, compost — the supporting cast.", unit: "CUBIC YARD", to: "/additional", icon: "additional" },
+          { code: "CAT_03", name: "Sand & Loam", description: "Loam, sand, stone dust, salt, compost — the supporting cast.", unit: "CUBIC YARD", to: "/additional", icon: "additional" },
           { code: "CAT_04", name: "Garden Center", description: "Annuals, perennials, hanging baskets, mums, tools, and hardware.", unit: "AT THE YARD", to: "/garden-center", icon: "garden-center" },
         ]}
       />
