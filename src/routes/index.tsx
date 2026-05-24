@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   Sprout,
   TreePine,
-  Truck,
   Waves,
 } from "lucide-react";
 import { TileScreen } from "@/components/site/TileScreen";
