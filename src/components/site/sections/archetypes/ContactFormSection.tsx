@@ -19,6 +19,7 @@ export interface ContactFormProps {
   phone: string;
   address: { line1: string; line2: string };
   hours?: { label: string; value: string }[];
+  heightClass?: string;
 }
 
 export function ContactFormSection({
@@ -29,7 +30,9 @@ export function ContactFormSection({
   phone,
   address,
   hours,
+  heightClass,
 }: ContactFormProps) {
+  const compact = Boolean(heightClass);
   const [submitting, setSubmitting] = useState(false);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -53,15 +56,15 @@ export function ContactFormSection({
     "w-full bg-paper border border-ink/20 px-3 py-3 font-barlow text-base focus:outline-none focus:border-ember";
 
   return (
-    <Section title={title} tone="paper" rule={false}>
-      <div className="grid grid-cols-1 md:grid-cols-5">
+    <Section title={title} tone="paper" rule={false} heightClass={heightClass}>
+      <div className="grid grid-cols-1 md:grid-cols-5 md:h-full">
         <form
           onSubmit={onSubmit}
-          className="md:col-span-3 p-8 md:p-16 border-b md:border-b-0 md:border-r border-soft"
+          className={`md:col-span-3 p-8 ${compact ? "md:py-8 md:px-12 md:overflow-y-auto" : "md:p-16"} border-b md:border-b-0 md:border-r border-soft`}
         >
-          <DisplayHeading as="h2" size="md" className="mb-6">{heading}</DisplayHeading>
-          {body && <p className="font-barlow text-lg opacity-80 mb-10 max-w-lg">{body}</p>}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <DisplayHeading as="h2" size="md" className={compact ? "mb-4" : "mb-6"}>{heading}</DisplayHeading>
+          {body && <p className={`font-barlow opacity-80 max-w-lg ${compact ? "text-base mb-6" : "text-lg mb-10"}`}>{body}</p>}
+          <div className={`grid grid-cols-1 md:grid-cols-2 ${compact ? "gap-3 mb-3" : "gap-4 mb-4"}`}>
             <label className="block">
               <MonoLabel className="block mb-2 opacity-60">First Name *</MonoLabel>
               <input name="firstName" required className={inputCls} />
@@ -79,25 +82,25 @@ export function ContactFormSection({
               <input name="email" type="email" required className={inputCls} />
             </label>
           </div>
-          <label className="block mb-4">
+          <label className={`block ${compact ? "mb-3" : "mb-4"}`}>
             <MonoLabel className="block mb-2 opacity-60">Reason</MonoLabel>
             <select name="reason" defaultValue={REASONS[0]} className={inputCls}>
               {REASONS.map((r) => <option key={r} value={r}>{r}</option>)}
             </select>
           </label>
-          <label className="block mb-8">
+          <label className={`block ${compact ? "mb-4" : "mb-8"}`}>
             <MonoLabel className="block mb-2 opacity-60">Message</MonoLabel>
-            <textarea name="message" rows={5} className={inputCls} />
+            <textarea name="message" rows={compact ? 3 : 5} className={inputCls} />
           </label>
           <button
             type="submit"
             disabled={submitting}
-            className="inline-block bg-ember text-paper py-4 px-10 font-bebas text-2xl tracking-widest hover:brightness-110 transition-all disabled:opacity-60"
+            className={`inline-block bg-ember text-paper font-bebas tracking-widest hover:brightness-110 transition-all disabled:opacity-60 ${compact ? "py-3 px-8 text-xl" : "py-4 px-10 text-2xl"}`}
           >
             {submitting ? "Opening Mail…" : "Send Request"}
           </button>
         </form>
-        <aside className="md:col-span-2 bg-black text-paper p-8 md:p-16 flex flex-col gap-10">
+        <aside className={`md:col-span-2 bg-black text-paper p-8 ${compact ? "md:py-8 md:px-12 gap-6 md:overflow-y-auto" : "md:p-16 gap-10"} flex flex-col`}>
           <div>
             <MonoLabel className="block mb-2 opacity-60">Direct Line</MonoLabel>
             <a href={`tel:${phone.replace(/[^0-9+]/g, "")}`}

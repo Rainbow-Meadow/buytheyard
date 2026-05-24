@@ -9,6 +9,7 @@ export interface ContactCTAProps {
   primaryLabel?: string;
   primaryHref?: string;
   heightClass?: string;
+  accentWidth?: string;
 }
 
 export function ContactCTASection({
@@ -19,6 +20,7 @@ export function ContactCTASection({
   primaryLabel = "Order Now",
   primaryHref = "#",
   heightClass = "md:h-[calc(30svh-1.2rem)]",
+  accentWidth = "md:w-1/3",
 }: ContactCTAProps) {
   return (
     <Section title={title} tone="paper" rule={false} heightClass={heightClass}>
@@ -40,7 +42,7 @@ export function ContactCTASection({
             </div>
           </div>
         </div>
-        <div className="w-full md:w-1/3 bg-black text-paper p-6 md:py-10 md:px-10 flex flex-col justify-between">
+        <div className={`w-full ${accentWidth} bg-black text-paper p-6 md:py-10 md:px-10 flex flex-col justify-between`}>
           <p className="font-barlow text-sm opacity-60">{address.line1}<br/>{address.line2}</p>
           <a
             href={primaryHref}
