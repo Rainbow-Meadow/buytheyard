@@ -5,7 +5,6 @@ import {
   largePileOfBlackMulch,
   largePileOfRedMulch,
   dumpTruckBedFullOfBrownMulch,
-  wheelbarrowLoadedWithDarkMulch,
   grayCrushedStoneWithCoinCloseup,
   tanPeaGravelWithCoinCloseup,
   darkRiverRocksWithGolfBallCloseup,
