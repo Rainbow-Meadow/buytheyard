@@ -1,31 +1,29 @@
 ## Problem
 
-The vertical rail title in `Section` has `writing-mode: vertical-rl`, so a long label like "PICKUP & DELIVERY" has a natural height of ~500px. The `heightClass` is currently applied to an inner wrapper around `SectionSplit`, not to the `<section>` itself. Result: the row stretches to fit the rail, but `SectionSplit`'s `md:h-full` still resolves to the inner wrapper's height (~247px at 30svh). The right column (`bg-soft`) ends at 247px while the section continues to ~500px, exposing the Section's `bg-paper` underneath as a band.
+Two issues on `/contact`:
 
-The same issue exists on `ContactCTASection` and `ProcessStepsSection` — currently hidden when both fills happen to be the same paper tone, but the structure is wrong.
+1. **Sections don't fit one viewport.** Below the hero, `ContactFormSection` + `ContactCTASection` flow naturally with no height constraint, so the page scrolls.
+2. **Right black accent doesn't align.** The form's dark aside is `md:col-span-2` of a 5-col grid (40% wide). The CTA's dark aside is `md:w-1/3` (~33%). Stacked together they form a stepped rail instead of one continuous black column.
 
 ## Fix
 
-Hoist height + overflow control into the `Section` primitive itself.
+### 1. `ContactFormSection` — accept `heightClass`, run in compact mode
+- Add optional `heightClass?: string`. Pass through to `Section` (same pattern as the delivery archetypes).
+- When `heightClass` is set, switch to compact paddings (`md:py-8 md:px-12` instead of `md:p-16`), tighten internal vertical rhythm (heading `mb-4`, body `mb-6`, grid `gap-3 mb-3`, single-input labels `mb-3`, button area `mb-0`), and apply `md:overflow-y-auto` on the form column so the form remains usable if the viewport is small.
+- Right aside stays `md:col-span-2` (40% rail).
 
-1. **`src/components/site/sections/Section.tsx`**
-   - Add optional `heightClass?: string` prop. When set, apply it to the outer `<section>` element along with `md:overflow-hidden`, and add `md:overflow-hidden` to the rail `aside` so the rotated rail text clips instead of pushing the row taller.
-   - Children render area (`<div className="flex-1 min-w-0">`) gets `md:h-full` so the children can use `h-full` and actually fill the constrained row.
+### 2. `ContactCTASection` — accept `accentWidth`, align with form rail
+- Add `accentWidth?: string` prop, default `"md:w-1/3"` so all other pages stay pixel-identical.
+- Apply to the dark right column instead of the hard-coded `md:w-1/3`.
 
-2. **`src/components/site/sections/archetypes/LogisticsSplitSection.tsx`**
-   - Drop the inner `<div className={heightClass + " md:overflow-hidden"}>` wrapper. Pass `heightClass` straight to `Section`. `SectionSplit` already uses `md:h-full` so its columns will now stretch to the true row height — `bg-soft` reaches the divider, no band.
+### 3. `/contact` route — wire 75 / 25 split + matching rail width
+- `ContactFormSection` → `heightClass="md:h-[calc(75svh-3rem)]"` (75% of one viewport minus 75% of the 4rem header).
+- `ContactCTASection` → `heightClass="md:h-[calc(25svh-1rem)]"` and `accentWidth="md:w-2/5"` so the black accent stacks exactly under the form's `md:col-span-2` aside.
 
-3. **`src/components/site/sections/archetypes/ProcessStepsSection.tsx`**
-   - Same change: pass `heightClass` to `Section` instead of putting it on the inner padded div. Keep the inner div as `md:h-full md:flex md:flex-col md:justify-center` for centering.
-
-4. **`src/components/site/sections/archetypes/ContactCTASection.tsx`**
-   - Same change: pass `heightClass` to `Section`. Inner row becomes `md:h-full`.
-
-No route changes. No copy or tone changes. The 30/40/30 split on `/delivery` stays exactly the same; ContactCTA's default `md:h-[calc(30svh-1.2rem)]` stays the same for every other page that uses it.
+Hero stays one viewport. Form + CTA share the next viewport (75/25). No copy changes. Other routes that use `ContactCTASection` are unaffected because both new props default to current values.
 
 ## Files
 
-- `src/components/site/sections/Section.tsx`
-- `src/components/site/sections/archetypes/LogisticsSplitSection.tsx`
-- `src/components/site/sections/archetypes/ProcessStepsSection.tsx`
+- `src/components/site/sections/archetypes/ContactFormSection.tsx`
 - `src/components/site/sections/archetypes/ContactCTASection.tsx`
+- `src/routes/contact.tsx`
