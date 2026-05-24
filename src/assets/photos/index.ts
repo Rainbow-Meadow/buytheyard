@@ -35,3 +35,7 @@ export { default as dumpTruckPouringRedMulch } from "./034_dump_truck_pouring_re
 export { default as btyBurgundyLogo } from "./035_bty_burgundy_logo.jpg";
 export { default as freshMulchBedAlongSuburbanHouse } from "./036_fresh_mulch_bed_along_suburban_house.jpg";
 export { default as wheelbarrowLoadedWithDarkMulch } from "./037_wheelbarrow_loaded_with_dark_mulch.jpg";
+export { default as largeGrayStoneWithGolfBall } from "./038_large_gray_stone_with_golf_ball.jpg";
+export { default as mediumGrayStoneWithQuarter } from "./039_medium_gray_stone_with_quarter.jpg";
+export { default as smallGrayWhiteStoneChipsWithQuarter } from "./040_small_gray_white_stone_chips_with_quarter.jpg";
+export { default as reddishBrownLavaStonePile } from "./041_reddish_brown_lava_stone_pile.jpg";
