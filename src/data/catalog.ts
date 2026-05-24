@@ -27,7 +27,6 @@ import {
 export const MULCH: CatalogItem[] = [
   { name: "Brown Pine Mulch", description: "Classic double-ground brown. Long-lasting color, holds moisture, suppresses weeds.", price: "$42.00", unit: "per yd", image: largePileOfDarkMulch },
   { name: "Black Pine Mulch", description: "Deep black double-ground. The cleanest contrast against green plantings.", price: "$42.00", unit: "per yd", image: largePileOfBlackMulch },
-  { name: "Red Cedar Mulch", description: "Naturally aromatic cedar with a warm red tone. Repels insects without dye.", price: "$42.00", unit: "per yd", image: wheelbarrowLoadedWithDarkMulch },
   { name: "Hemlock Mix", description: "Premium hemlock blend with a fine texture and a rich, natural brown.", price: "$42.00", unit: "per yd", image: largePileOfRedMulch },
   { name: "Playground Mulch", description: "Engineered wood fiber. ASTM-tested for fall-zone safety under play sets.", price: "$45.00", unit: "per yd", image: dumpTruckBedFullOfBrownMulch },
 ];
