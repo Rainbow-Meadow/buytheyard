@@ -72,7 +72,6 @@ function HomePage() {
         heading={<>WBE Certified<br/>Woman-Owned</>}
         body="Founded by Abby in 2016, Buy The Yard is a certified Woman Business Enterprise by the Commonwealth of Massachusetts. We bring a professional, customer-first approach to a heavy industry."
         badges={["WBE", "MASS"]}
-        caption="Abby's Story — Our Foundation"
       />
       <TestimonialsSection
         items={[

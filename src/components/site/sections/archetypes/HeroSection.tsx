@@ -14,7 +14,7 @@ export interface HeroSectionProps {
 }
 
 export function HeroSection({
-  title = "YARD INTRO",
+  title = "JEFFERSON YARD",
   meta,
   heading,
   body,

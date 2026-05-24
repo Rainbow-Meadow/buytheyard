@@ -1,5 +1,4 @@
 import { Section } from "../Section";
-import { SectionHeader } from "../SectionHeader";
 import { SectionGrid, SectionGridCell } from "../SectionGrid";
 import { MonoLabel } from "../MonoLabel";
 import { DisplayHeading } from "../DisplayHeading";
@@ -13,16 +12,13 @@ export interface MaterialItem {
 
 export function MaterialInventorySection({
   title = "MATERIAL INDEX",
-  heading = "Material Inventory",
   items,
 }: {
   title?: string;
-  heading?: string;
   items: MaterialItem[];
 }) {
   return (
     <Section title={title} tone="paper">
-      <SectionHeader heading={heading} size="md" rule />
       <SectionGrid cols={4}>
         {items.map((m, i) => (
           <SectionGridCell key={m.code} last={i === items.length - 1}>

@@ -1,10 +1,8 @@
 import { Section } from "../Section";
 import { MonoLabel } from "../MonoLabel";
-import { DisplayHeading } from "../DisplayHeading";
 
 export interface ContactCTAProps {
   title?: string;
-  heading?: string;
   phone: string;
   email: string;
   address: { line1: string; line2: string };
@@ -14,7 +12,6 @@ export interface ContactCTAProps {
 
 export function ContactCTASection({
   title = "GET A QUOTE",
-  heading = "Get a Quote Today",
   phone,
   email,
   address,
@@ -25,7 +22,6 @@ export function ContactCTASection({
     <Section title={title} tone="paper" rule={false}>
       <div className="flex flex-col md:flex-row">
         <div className="flex-1 p-8 md:p-24">
-          <DisplayHeading as="h2" size="xl" className="mb-10">{heading}</DisplayHeading>
           <div className="flex flex-col md:flex-row gap-12">
             <div>
               <MonoLabel className="mb-2 block opacity-60">Direct Line</MonoLabel>

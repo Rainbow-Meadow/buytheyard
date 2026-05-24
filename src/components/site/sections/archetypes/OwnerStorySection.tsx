@@ -7,7 +7,6 @@ export interface OwnerStoryProps {
   heading: React.ReactNode;
   body: string;
   badges: string[];
-  caption?: string;
 }
 
 export function OwnerStorySection({
