@@ -11,10 +11,10 @@ import { mixedLandscapeStoneSamplesOnGround } from "@/assets/photos";
 export const Route = createFileRoute("/stone")({
   head: () => ({
     meta: [
-      { title: "Bulk Stone — Crushed, River, Pea & Decorative | Buy The Yard" },
-      { name: "description", content: "Bulk stone by the yard in Jefferson, MA: 3/4\" crushed, pea stone, river rock, bluestone, cobble, lava rock, and more. Pickup or delivery." },
-      { property: "og:title", content: "Bulk Stone — Buy The Yard" },
-      { property: "og:description", content: "Crushed, decorative, and specialty stone by the cubic yard." },
+      { title: "Landscaping Stone by the Yard — 1-1/2\", 3/4\", 3/8\" | Buy The Yard" },
+      { name: "description", content: "Decorative landscaping stone in Jefferson, MA. Three sizes — 1-1/2\", 3/4\", 3/8\" — in brown, blue, white, red, purple, and gray. Pickup or delivery." },
+      { property: "og:title", content: "Landscaping Stone — Buy The Yard" },
+      { property: "og:description", content: "Decorative landscaping stone in three sizes and multiple colors, sold by the cubic yard." },
       { property: "og:url", content: "https://buytheyard.lovable.app/stone" },
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/stone" }],
@@ -27,8 +27,8 @@ function StonePage() {
     <main aria-label="Stone" className="font-barlow">
       <HeroSection
         meta="STONE"
-        heading={<>Crushed.<br/>Decorative.<br/>Specialty.</>}
-        body="Drainage stone, decorative river rock, bluestone, and specialty accents. We help you pick the right size for the job."
+        heading={<>Landscaping.<br/>Stone.<br/>By Size.</>}
+        body="Three sizes, multiple colors. Pick the scale and shade that fits your beds, borders, and walkways."
         ctaLabel="Call For Pricing"
         ctaHref="tel:5085799897"
         image={mixedLandscapeStoneSamplesOnGround}
