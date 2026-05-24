@@ -1,60 +1,63 @@
-## Follow-up proposal for Abby — easy yes/no, asks for only two things
+## Goal
 
-A tight 3-page PDF with real screenshots of the current preview. Frame it as a one-week follow-up: the site is built, here's what it looks like, here's the price, and the only things needed from you are (1) your current product + price list and (2) Wix access so I can migrate. Includes a quick mention of the simple admin dashboard so she can edit her own catalog and details after launch.
+Right now the home page reads as one continuous scroll with arbitrary cut-offs: hero leaks ~180px of the material grid, the 4-card grid and Abby's story share a screen, gallery + testimonials + service-area rail all crowd one viewport, etc. (See the four screenshots.)
 
-### Deliverable
-`/mnt/documents/Buy_The_Yard_Proposal_v2.pdf` — Paper & Ink palette (#f5f3ee bg, #0d0d0d ink, #c84a1a ember), Helvetica-Bold uppercase for display, Helvetica body. Built with ReportLab.
+Fix by sizing each archetype so it intentionally owns ~one viewport on desktop and ~one viewport on mobile, with deliberate "paired" screens where two short bands share one viewport. No typography or copy changes — sizing/padding only, per the locked design system.
 
-### Real screenshots
-Use `browser--navigate_to_sandbox` + `browser--screenshot` on the live preview at desktop (1440w) and mobile (390w). Capture:
-1. Homepage hero (desktop)
-2. Material Inventory section — 4 category cards (desktop)
-3. A product catalog page like `/mulch` (desktop)
-4. `/quote` builder (desktop)
-5. Mobile shot of homepage hero
-6. `/admin` dashboard (desktop) — proves the self-serve editing claim
+## Scope
 
-Saved to `/tmp/shots/`, embedded by file path.
+Only the section archetypes used on `/` (and reused on other routes) get height + padding adjustments. Compose layer (`src/routes/index.tsx`) is untouched. Composition rules from memory stay intact (no raw `<section>` in routes, Bebas/Barlow/Mono locked, ember stays reserved, rail rules unchanged).
 
-### Page structure (3 pages)
+## Per-viewport target rhythm (home page)
 
-**Page 1 — Quick recap + the offer + the ask**
-- Title: "Buy The Yard — Website Refresh (Follow-up)"
-- One short paragraph: "Following up on last week's proposal. The new site is built and ready to review. To finish and launch, I only need two things from you."
-- Big stat strip: **$2,400 · No deposit · ~2 weeks to launch · 30-day support · Includes an admin dashboard so you can edit products and details yourself**
-- "Two things I need from you" — two clean boxes:
-  1. Your current product list with prices (whatever format — photo, spreadsheet, handwritten, doesn't matter)
-  2. Wix login or temporary admin access so I can migrate the domain and email cleanly
-- One large screenshot below: homepage hero
+Desktop (≥md) — each line = one screen of scroll:
 
-**Page 2 — What's already built (screenshots do the talking)**
-- 2×2 grid of screenshots with one-line captions:
-  - Homepage with category cards
-  - Product catalog page (e.g. Mulch)
-  - Quote builder
-  - Mobile homepage
-- Short right-side bullet list (5 items max): mobile-first, organized catalog, click-to-call, online quote form, service-area pages for local search
+```text
+1. HeroSection                       — 100svh
+2. MaterialInventorySection          — 100svh  (4 cards stretch to fill)
+3. OwnerStorySection                 — 85svh
+4. GalleryMarquee + Testimonials     — 100svh shared (≈55 / 45)
+5. ServiceAreaSection                — 100svh
+6. ContactCTASection                 — 70svh
+```
 
-**Page 3 — Admin dashboard + timeline + sign**
-- Top half: one large screenshot of `/admin` with a short caption — "Edit products, prices, and yard details yourself. No developer needed."
-- Three-row timeline strip:
-  - Week 1 — You send price list + Wix access. I drop in real prices, do the second pass.
-  - Week 2 — Migrate btymaterial.com from Wix, keep email working, launch.
-  - After — 30 days of small fixes included.
-- Terms in 3 short lines: $2,400 total · no deposit · due on handoff (cash, card, or equivalent retail materials)
-- Signature line for Abby + date
-- Footer: Patrick's contact info
+Mobile (<md):
 
-### Tone & length rules
-- No tables longer than 3 rows
-- No paragraph longer than 2 sentences
-- Each page fits one screen
-- Cut every line that doesn't help her say yes
+```text
+Hero               100svh
+Material card 1    ~85svh (cards stack, each owns its screen-ish)
+Material card 2    ~85svh
+…                  (4 cards → 4 screens, intentional)
+OwnerStory         min 80svh
+GalleryMarquee     55svh
+Testimonials       45svh+ (stacked, ≈one screen together)
+ServiceArea        min 100svh (stacks to two-ish columns)
+ContactCTA         min 70svh
+```
 
-### QA
-After generating: `pdftoppm -jpeg -r 150` all 3 pages, view each one, check overflow/clipping/contrast/broken embeds, fix and re-render until clean. Deliver via `<presentation-artifact>`.
+The `svh` unit avoids the iOS URL-bar jump that `vh` causes.
 
-### Technical notes
-- ReportLab Platypus, US Letter, 0.6" margins
-- Screenshots scaled to fit, never stretched
-- No code changes to the app — one-off artifact only
+## Changes by file
+
+All in `src/components/site/sections/archetypes/`. Each change is min-height + padding-rhythm only — no copy, no font, no color, no structural rearrangement.
+
+- **HeroSection.tsx** — bump wrapper from `min-h-[80vh]` to `min-h-svh` (full viewport), keep centered content. Hero stops bleeding into the next section.
+- **MaterialInventorySection.tsx** — pass `min-h-svh` down to the grid wrapper so the 4 cards stretch vertically to fill the screen on md+. On mobile, give each card a `min-h-[85svh]` so the stack reads as four intentional category screens, not a long collage.
+- **OwnerStorySection.tsx** — wrap inner content with `min-h-[85svh] md:min-h-[85svh]` and vertically center; keep current padding.
+- **GalleryMarqueeSection.tsx** — set wrapper to `min-h-[55svh]` on md+, taller figures (`md:h-80`) so it reads as a real band, not a thin strip. Mobile stays compact (`min-h-[45svh]`).
+- **TestimonialsSection.tsx** — set wrapper to `min-h-[45svh]` md+. Together with the gallery above, the pair fills one viewport (≈55 + 45).
+- **ServiceAreaSection.tsx** — wrap the 2-column grid with `min-h-svh` and align content `items-center`. Towns column gets a touch more vertical breathing room.
+- **ContactCTASection.tsx** — wrap with `min-h-[70svh]`. Center the contact column vertically; the black address/CTA block already auto-fills via `flex-col justify-between`.
+
+No new files. No new props. Heights live as Tailwind utility classes on the existing wrappers.
+
+## Side-effect check
+
+These archetypes are reused on `/mulch`, `/stone`, `/additional`, `/garden-center`, `/delivery`, `/service-area`, `/contact`, `/quote`, `/about`. Since the change is `min-h`, content-heavy pages still grow past the minimum and look unaffected; short pages get the same intentional-screen rhythm as the home page. No route file edits required.
+
+## QA (after build mode)
+
+1. Preview at 1440×900, 1280×800, and the user's current 1460×887: each scroll click of Page Down should land on the next section's top, not mid-card.
+2. Preview at 390×844 (iPhone) and 768×1024 (tablet): no awkward 1-card-plus-headline shared screens.
+3. Confirm no archetype overflows its viewport (long-form pages like `/about` still scroll naturally).
+4. Confirm rail labels still align (Section.tsx vertical rail is unchanged).
