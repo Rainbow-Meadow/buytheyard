@@ -109,14 +109,11 @@ export function DecisionPathBreak() {
   return (
     <section aria-labelledby="decision-path-heading" className="section bg-base text-zinc-900">
       <div className="max-w-7xl mx-auto px-5 md:px-6">
-        <div className="relative overflow-hidden rounded-md bg-white ring-1 ring-zinc-300 p-5 md:p-7">
+        <div className="relative overflow-hidden rounded-lg bg-white ring-1 ring-zinc-200 p-5 md:p-7">
           <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
           <div className="grid gap-5 lg:grid-cols-[0.9fr_1.6fr] lg:items-start">
             <div>
-              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-                <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
-                Start here
-              </p>
+              <p className="eyebrow text-brand mb-3">Start here</p>
               <h2 id="decision-path-heading" className="display-3 max-w-[12ch] text-balance">
                 What are you trying to figure out?
               </h2>
@@ -130,15 +127,9 @@ export function DecisionPathBreak() {
                 <Link
                   key={path.title}
                   to={path.to}
-                  className="group relative overflow-hidden rounded-md bg-kraft ring-1 ring-zinc-300 p-4 hover:bg-zinc-100 transition-colors"
+                  className="group relative overflow-hidden rounded-md bg-kraft ring-1 ring-zinc-200 p-4 hover:bg-zinc-100 transition-colors"
                 >
-                  <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none select-none absolute -bottom-4 -right-4 text-zinc-900/[0.04] [&>*]:size-28 [&>*]:stroke-[1.25]"
-                  >
-                    {path.icon}
-                  </span>
+                  <span aria-hidden="true" className="absolute left-0 inset-y-0 w-[1.5px] bg-brand" />
                   <div className="relative z-10">
                     <p className="eyebrow text-brand mb-2 inline-flex items-center gap-2">
                       <span aria-hidden="true" className="text-zinc-500 tabular-nums">
@@ -231,13 +222,10 @@ export function DeliveryBasicsBreak() {
     <section aria-labelledby="delivery-basics-heading" className="section bg-surface text-white">
       <div className="max-w-7xl mx-auto px-5 md:px-6">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.6fr] lg:items-stretch">
-          <div className="relative overflow-hidden rounded-md bg-zinc-950 ring-1 ring-white/10 p-6 md:p-8">
+          <div className="relative overflow-hidden rounded-lg bg-zinc-950 ring-1 ring-white/10 p-6 md:p-8">
             <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
             <div className="relative z-10">
-              <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-                <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
-                Delivery basics
-              </p>
+              <p className="eyebrow text-brand mb-3">Delivery basics</p>
               <h2 id="delivery-basics-heading" className="display-3 max-w-[12ch] text-balance">
                 Know before the truck rolls
               </h2>
@@ -246,17 +234,13 @@ export function DeliveryBasicsBreak() {
                 when the truck pulls in.
               </p>
             </div>
-            <PackageCheck
-              aria-hidden="true"
-              className="absolute -bottom-6 -right-4 size-36 md:size-52 text-white/[0.06] stroke-[1.25]"
-            />
           </div>
 
-          <div className="rounded-md bg-kraft text-zinc-900 ring-1 ring-zinc-300 overflow-hidden">
+          <div className="rounded-lg bg-kraft text-zinc-900 ring-1 ring-zinc-200 overflow-hidden">
             {deliveryBasics.map((item, index) => (
               <div
                 key={item.label}
-                className="grid gap-2 px-5 py-4 md:grid-cols-[180px_1fr] md:gap-6 border-b border-zinc-300 last:border-b-0"
+                className="grid gap-2 px-5 py-4 md:grid-cols-[180px_1fr] md:gap-6 border-b border-zinc-200 last:border-b-0"
               >
                 <p className="eyebrow text-brand inline-flex items-center gap-2">
                   <span aria-hidden="true" className="text-zinc-500">
@@ -290,28 +274,23 @@ export function DeliveryBasicsBreak() {
 
 export function LocalProofPanel() {
   return (
-    <article className="relative h-full w-full overflow-hidden rounded-md bg-kraft text-zinc-900 ring-1 ring-zinc-300 p-5 md:p-6">
-      <span aria-hidden="true" className="absolute left-0 inset-y-0 w-1.5 bg-brand" />
+    <article className="relative h-full w-full overflow-hidden rounded-lg bg-kraft text-zinc-900 ring-1 ring-zinc-200 p-5 md:p-6">
+      <span aria-hidden="true" className="absolute left-0 inset-y-0 w-[1.5px] bg-brand" />
       <div className="relative z-10 flex h-full flex-col justify-between gap-5">
         <div>
-          <p className="eyebrow text-brand mb-3 inline-flex items-center gap-2">
-            <span aria-hidden="true" className="h-0.5 w-6 bg-brand" />
-            Local proof
-          </p>
-          <h2 className="display-3 max-w-[12ch] text-balance">Local proof with receipts</h2>
-          <p className="body-sm md:text-base md:leading-[1.6] text-zinc-700 mt-3 max-w-[54ch] text-pretty">
+          <p className="eyebrow text-brand mb-3">Local proof</p>
+          <h2 className="display-4 max-w-[16ch] text-balance">Local proof with receipts</h2>
+          <p className="body-sm text-zinc-700 mt-3 max-w-[54ch] text-pretty">
             Certified, licensed, locally rooted — with real donations and town support to show
             for it.
           </p>
         </div>
-        <div className="grid gap-2.5 md:grid-cols-3">
+        <div className="grid gap-2.5 md:grid-cols-3 auto-rows-fr">
           {proofRows.map((row) => (
-            <div key={row.label} className="rounded-md bg-white/70 ring-1 ring-zinc-300 p-3 md:p-4">
-              <div className="text-brand mb-2 [&>*]:size-5" aria-hidden="true">
-                {row.icon}
-              </div>
-              <p className="eyebrow text-brand mb-1">{row.label}</p>
-              <p className="body-sm text-zinc-800 text-pretty">{row.value}</p>
+            <div key={row.label} className="relative rounded-md bg-white ring-1 ring-zinc-200 p-3 md:p-4 flex flex-col gap-2">
+              <span aria-hidden="true" className="absolute left-0 inset-y-2 w-[1.5px] bg-brand" />
+              <p className="eyebrow text-brand">{row.label}</p>
+              <p className="body-sm text-zinc-800 text-pretty leading-snug">{row.value}</p>
             </div>
           ))}
         </div>

@@ -16,7 +16,7 @@ type WordmarkProps = {
  */
 export function Wordmark({
   size = "sm",
-  withTagline = true,
+  withTagline = false,
   asLink = false,
   onClick,
   className = "",
@@ -24,22 +24,18 @@ export function Wordmark({
 }: WordmarkProps) {
   const wordCls =
     size === "lg"
-      ? "font-display uppercase text-4xl md:text-5xl leading-none tracking-tight"
-      : "font-display uppercase text-2xl leading-none tracking-tight";
+      ? "font-sans font-extrabold uppercase text-2xl md:text-3xl leading-none tracking-tight"
+      : "font-sans font-extrabold uppercase text-lg leading-none tracking-tight";
 
   const taglineCls =
-    size === "lg"
-      ? variant === "light"
-        ? "mt-2 eyebrow text-white/50"
-        : "mt-2 eyebrow text-kraft/50"
-      : variant === "light"
-        ? "mt-1 text-[8px] uppercase tracking-[0.2em] font-semibold text-white/55"
-        : "mt-1 text-[8px] uppercase tracking-[0.2em] font-semibold text-kraft/55";
+    variant === "light"
+      ? "ml-3 hidden sm:inline eyebrow text-white/40"
+      : "ml-3 hidden sm:inline eyebrow text-kraft/40";
 
   const yardCls = variant === "light" ? "text-white" : "text-brand";
 
   const inner = (
-    <span className={`flex flex-col leading-none ${className}`}>
+    <span className={`inline-flex items-baseline leading-none ${className}`}>
       <span className={`${wordCls} ${variant === "light" ? "text-white" : "text-kraft"}`}>
         Buy The <span className={yardCls}>Yard</span>
       </span>

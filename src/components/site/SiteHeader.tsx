@@ -15,11 +15,11 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-surface border-b border-white/5">
+    <header className="sticky top-0 z-50 bg-surface border-b border-white/10">
       <div className="relative border-l-[1.5px] border-brand">
         <div className="max-w-7xl mx-auto pl-5 pr-3 md:pl-8 md:pr-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-5 md:gap-12">
-            <Wordmark asLink onClick={() => setOpen(false)} withTagline />
+            <Wordmark asLink onClick={() => setOpen(false)} />
             <nav className="hidden md:flex items-center gap-6 lg:gap-8">
               {NAV.map((item) => (
                 <Link
