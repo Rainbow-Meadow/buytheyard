@@ -53,7 +53,7 @@ function DeliveryPage() {
         }}
         delivery={{
           heading: "Site Delivery",
-          body: "We drop it where you want it — home or job site. 3-yard minimum. Same day on orders placed before 2:00pm.",
+          body: "We drop it where you want it — home or job site. 1 CY minimum. Same day on orders placed before 2:00pm.",
           ctaLabel: "Request Delivery",
           ctaHref: "/quote",
         }}
