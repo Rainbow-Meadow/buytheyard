@@ -1,4 +1,5 @@
 export * from "./Section";
+export * from "./SectionBackdrop";
 export * from "./SectionHeader";
 export * from "./SectionBody";
 export * from "./SectionGrid";

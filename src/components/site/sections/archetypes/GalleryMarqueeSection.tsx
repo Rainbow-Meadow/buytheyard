@@ -1,4 +1,5 @@
 import { Section } from "../Section";
+import type { SectionBackground } from "../SectionBackdrop";
 
 export interface GalleryItem {
   src?: string;
@@ -15,15 +16,17 @@ export function GalleryMarqueeSection({
   title,
   items,
   speed = "normal",
+  background = { kind: "scatter", density: "light", tint: "ink" },
 }: {
   title?: string;
   items: GalleryItem[];
   speed?: "slow" | "normal" | "fast";
+  background?: SectionBackground;
 }) {
   // Two copies for a seamless -50% translate loop.
   const loop = [...items, ...items];
   return (
-    <Section title={title} tone="paper">
+    <Section title={title} tone="paper" background={background}>
       <div className="marquee-mask overflow-hidden py-6 md:py-8 md:h-[calc(50svh-2rem)] flex items-center">
         <div
           className="marquee-track gap-px bg-ink"

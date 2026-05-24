@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { SectionBackdrop, type SectionBackground } from "./SectionBackdrop";
 
 export type SectionTone = "paper" | "soft" | "ink" | "black";
 
@@ -23,6 +24,12 @@ export interface SectionProps {
   rule?: boolean;
   /** Optional height constraint applied to the section row (e.g. md:h-[calc(30svh-1.2rem)]). */
   heightClass?: string;
+  /**
+   * Background treatment. Ignored on `ink`/`black` tones — those bands stay flat
+   * as visual anchors. Paper/soft bands accept either a faded photo or the
+   * spec-sheet scatter pattern.
+   */
+  background?: SectionBackground;
   children: ReactNode;
 }
 
@@ -31,23 +38,29 @@ export function Section({
   tone = "paper",
   rule = true,
   heightClass,
+  background,
   children,
 }: SectionProps) {
   const railBorder = RAIL_BORDER[tone];
+  const allowsBackdrop = tone === "paper" || tone === "soft";
+  const bg: SectionBackground = allowsBackdrop && background ? background : { kind: "none" };
+  const showBackdrop = bg.kind !== "none";
   return (
     <section
       className={[
-        "flex flex-col md:flex-row",
+        "relative flex flex-col md:flex-row",
         TONE[tone],
         rule ? `border-b ${railBorder}` : "",
         heightClass ?? "",
         heightClass ? "md:overflow-hidden" : "",
+        showBackdrop ? "overflow-hidden" : "",
       ].join(" ")}
     >
+      {showBackdrop && <SectionBackdrop background={bg} />}
       {title && (
         <aside
           className={[
-            "md:w-24 shrink-0 p-6 flex md:items-start md:overflow-hidden",
+            "relative md:w-24 shrink-0 p-6 flex md:items-start md:overflow-hidden",
             "border-b md:border-b-0 md:border-r",
             railBorder,
           ].join(" ")}
@@ -57,7 +70,7 @@ export function Section({
           </span>
         </aside>
       )}
-      <div className="flex-1 min-w-0 md:h-full">{children}</div>
+      <div className="relative flex-1 min-w-0 md:h-full">{children}</div>
     </section>
   );
 }
