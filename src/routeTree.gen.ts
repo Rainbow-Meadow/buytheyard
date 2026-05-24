@@ -10,19 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WbeRouteImport } from './routes/wbe'
+import { Route as StoneRouteImport } from './routes/stone'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServiceAreaRouteImport } from './routes/service-area'
 import { Route as QuoteRouteImport } from './routes/quote'
-import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as MulchRouteImport } from './routes/mulch'
 import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdditionalRouteImport } from './routes/additional'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WbeRoute = WbeRouteImport.update({
   id: '/wbe',
   path: '/wbe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoneRoute = StoneRouteImport.update({
+  id: '/stone',
+  path: '/stone',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -40,14 +47,14 @@ const QuoteRoute = QuoteRouteImport.update({
   path: '/quote',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsRoute = ProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MulchRoute = MulchRouteImport.update({
+  id: '/mulch',
+  path: '/mulch',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeliveryRoute = DeliveryRouteImport.update({
@@ -58,6 +65,11 @@ const DeliveryRoute = DeliveryRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdditionalRoute = AdditionalRouteImport.update({
+  id: '/additional',
+  path: '/additional',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -74,38 +86,44 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/additional': typeof AdditionalRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/mulch': typeof MulchRoute
   '/privacy': typeof PrivacyRoute
-  '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/stone': typeof StoneRoute
   '/wbe': typeof WbeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/additional': typeof AdditionalRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/mulch': typeof MulchRoute
   '/privacy': typeof PrivacyRoute
-  '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/stone': typeof StoneRoute
   '/wbe': typeof WbeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/additional': typeof AdditionalRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/mulch': typeof MulchRoute
   '/privacy': typeof PrivacyRoute
-  '/products': typeof ProductsRoute
   '/quote': typeof QuoteRoute
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/stone': typeof StoneRoute
   '/wbe': typeof WbeRoute
 }
 export interface FileRouteTypes {
@@ -113,50 +131,58 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/additional'
     | '/contact'
     | '/delivery'
+    | '/mulch'
     | '/privacy'
-    | '/products'
     | '/quote'
     | '/service-area'
     | '/sitemap.xml'
+    | '/stone'
     | '/wbe'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/additional'
     | '/contact'
     | '/delivery'
+    | '/mulch'
     | '/privacy'
-    | '/products'
     | '/quote'
     | '/service-area'
     | '/sitemap.xml'
+    | '/stone'
     | '/wbe'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/additional'
     | '/contact'
     | '/delivery'
+    | '/mulch'
     | '/privacy'
-    | '/products'
     | '/quote'
     | '/service-area'
     | '/sitemap.xml'
+    | '/stone'
     | '/wbe'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdditionalRoute: typeof AdditionalRoute
   ContactRoute: typeof ContactRoute
   DeliveryRoute: typeof DeliveryRoute
+  MulchRoute: typeof MulchRoute
   PrivacyRoute: typeof PrivacyRoute
-  ProductsRoute: typeof ProductsRoute
   QuoteRoute: typeof QuoteRoute
   ServiceAreaRoute: typeof ServiceAreaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StoneRoute: typeof StoneRoute
   WbeRoute: typeof WbeRoute
 }
 
@@ -167,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/wbe'
       fullPath: '/wbe'
       preLoaderRoute: typeof WbeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stone': {
+      id: '/stone'
+      path: '/stone'
+      fullPath: '/stone'
+      preLoaderRoute: typeof StoneRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -190,18 +223,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuoteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products': {
-      id: '/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mulch': {
+      id: '/mulch'
+      path: '/mulch'
+      fullPath: '/mulch'
+      preLoaderRoute: typeof MulchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/delivery': {
@@ -216,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/additional': {
+      id: '/additional'
+      path: '/additional'
+      fullPath: '/additional'
+      preLoaderRoute: typeof AdditionalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -238,15 +278,27 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdditionalRoute: AdditionalRoute,
   ContactRoute: ContactRoute,
   DeliveryRoute: DeliveryRoute,
+  MulchRoute: MulchRoute,
   PrivacyRoute: PrivacyRoute,
-  ProductsRoute: ProductsRoute,
   QuoteRoute: QuoteRoute,
   ServiceAreaRoute: ServiceAreaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StoneRoute: StoneRoute,
   WbeRoute: WbeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
