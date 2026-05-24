@@ -17,12 +17,12 @@ export function OwnerStorySection({
 }: OwnerStoryProps) {
   return (
     <Section title={title} tone="ink">
-      <div className="p-8 md:p-24 md:min-h-[50svh] md:flex md:flex-col md:justify-center">
-          <DisplayHeading as="h2" size="lg" className="mb-6">{heading}</DisplayHeading>
-          <p className="font-barlow text-xl opacity-80 mb-8 max-w-lg">{body}</p>
+      <div className="p-8 md:py-14 md:px-20 md:min-h-[50svh] md:flex md:flex-col md:justify-center">
+          <DisplayHeading as="h2" size="lg" className="mb-5">{heading}</DisplayHeading>
+          <p className="font-barlow text-xl opacity-80 mb-6 max-w-lg">{body}</p>
           <div className="flex gap-4">
             {badges.map((b) => (
-              <div key={b} className="h-16 w-16 border border-paper/20 flex items-center justify-center">
+              <div key={b} className="h-14 w-14 border border-paper/20 flex items-center justify-center">
                 <MonoLabel accent>{b}</MonoLabel>
               </div>
             ))}
