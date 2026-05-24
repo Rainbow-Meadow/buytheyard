@@ -6,6 +6,7 @@ import {
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
 import { MULCH } from "@/data/catalog";
+import { dumpTruckBedFullOfBrownMulch } from "@/assets/photos";
 
 export const Route = createFileRoute("/mulch")({
   head: () => ({
@@ -30,6 +31,8 @@ function MulchPage() {
         body="Double-ground, color-locked mulch in five varieties. Loaded clean and consistent — at the yard or delivered to your driveway."
         ctaLabel="Call For Pricing"
         ctaHref="tel:5085799897"
+        image={dumpTruckBedFullOfBrownMulch}
+        imageAlt="Dump truck bed full of fresh brown mulch"
       />
       <ProductCatalogSection items={MULCH} />
       <CubicYardsCalculatorSection />

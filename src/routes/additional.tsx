@@ -7,6 +7,7 @@ import {
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
 import { ADDITIONAL, DELIVERY_ZONES } from "@/data/catalog";
+import { largePileOfLightSand } from "@/assets/photos";
 
 export const Route = createFileRoute("/additional")({
   head: () => ({
@@ -31,6 +32,8 @@ function AdditionalPage() {
         body="Screened loam for the lawn, mason sand for the patio, stone dust for the base. The supporting cast that finishes every project."
         ctaLabel="Call For Pricing"
         ctaHref="tel:5085799897"
+        image={largePileOfLightSand}
+        imageAlt="Large pile of light washed sand at the yard"
       />
       <ProductCatalogSection items={ADDITIONAL} />
       <DeliveryPricingSection zones={DELIVERY_ZONES} />

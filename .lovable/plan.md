@@ -1,131 +1,77 @@
-## Site audit (Firecrawl)
+# Seed site imagery from uploaded BTY photos
 
-Larry's is a flat 7-page WordPress site — no per-product detail routes, no e-commerce.
+37 real photos were uploaded (`descriptive_jpeg_images.zip`). I'll wire them into the catalog, home marquee, hero, and footer/identity slots — replacing the `bg-soft` placeholders the `ProductCatalogSection` and `GalleryMarqueeSection` currently render.
 
-```text
-/                       Home (hero + 4 cat tiles + supply story + gallery + quote CTA + reviews)
-/mulches                Mulch catalog (5 cards, calculator)
-/stones                 Stone catalog (15 cards, calculator)
-/additional-products    Loam/sand/etc catalog + delivery zone pricing + calculator
-/contact-us             Hours + form
-/privacy-policy
-/sitemap
-```
+## 1. Import + asset hygiene
 
-### Persistent chrome on every page
-- **Top utility bar**: phone (`tel:`) · address (Maps link) · "Request Free Estimate" → `/contact-us`
-- **Sticky header**: logo (→ `/`) + 4 nav links; mobile collapses to a "menu" sheet with the same 4
-- **Footer**: Facebook · address · phone · email (`mailto:`) · duplicated nav · copyright · Privacy + Sitemap
+- Copy all 37 jpegs into `src/assets/photos/` with their existing kebab-case names (keep the `001_` prefixes so reorder is obvious in the file tree).
+- Create `src/assets/photos/index.ts` that re-exports each as a typed ES6 import. This lets data files reference `import { mulchDarkPile } from "@/assets/photos"` instead of inlining 37 import statements per consumer.
+- Do NOT touch the binaries beyond copying — no resize/recompress in this pass. Vite handles hashing + lazy loading.
 
-### Interaction patterns
-- Two CTAs repeated everywhere: phone (call) and "Contact Us" (form). Larry pushes the call.
-- **Product card** = name + description + **Cost: $X.XX per yd** + photo. Title is `<a href="#">` no-op; cards do NOT link to detail pages. Out-of-stock variants append `(when in stock)`.
-- **Cubic Yards Calculator** at the bottom of every catalog page: width / length / thickness + Inches⇄Feet toggle.
-- **Gallery**: 6 images repeated 3× to fake a continuous strip (we will replace with a real marquee — see below).
-- **Testimonials**: short quote + first-name attribution.
-- **Contact form**: First*, Last*, Phone*, Email*, Reason (`<select>`, "Please Select" default), Message.
-- Same-day delivery cutoff (2 PM EST) and 3 yd minimum are inline copy, not separate pages.
+## 2. Catalog mapping (`src/data/catalog.ts`)
 
-### Nesting logic
-Strictly flat. Home shows 4 category icons (Mulches / Stones / Loam-Compost / Aggregates) but Loam-Compost and Aggregates both point to the same `/additional-products` page. Delivery info is folded into `/additional-products`.
+Add an `image` field to each `CatalogItem`. The current `ProductCatalogSection` already renders `it.image` when present.
 
----
+**MULCH (5 items):**
+- Brown Pine Mulch → `023_large_pile_of_dark_mulch.jpg`
+- Black Pine Mulch → `024_large_pile_of_black_mulch.jpg`
+- Red Cedar Mulch → `025_large_pile_of_red_mulch.jpg`
+- Hemlock Mix → `022_dump_truck_bed_full_of_brown_mulch.jpg`
+- Playground Mulch → `037_wheelbarrow_loaded_with_dark_mulch.jpg`
 
-## BTY mapping
+**STONE (8 items):**
+- 3/4" Crushed Stone → `002_gray_crushed_stone_with_coin_closeup.jpg`
+- 3/8" Pea Stone → `010_tan_pea_gravel_with_coin_closeup.jpg`
+- 1-1/2" River Stone → `013_dark_river_rocks_with_golf_ball_closeup.jpg`
+- Round Brown Stone → `006_reddish_brown_landscape_stone_with_coin_closeup.jpg`
+- Round White Stone → `009_white_marble_chips_with_coin_closeup.jpg`
+- Crushed Bluestone → `008_blue_gray_crushed_stone_with_quarter_closeup.jpg`
+- Cobblestone Mix → `005_large_gray_crushed_rock_with_quarter_closeup.jpg`
+- Lava Rock → `003_tan_river_rocks_with_quarter_closeup.jpg` *(no true lava photo in set; closest warm-tone rock)*
 
-### Sitemap (after)
+**ADDITIONAL (7 items):**
+- 1/2" Screened Loam → `016_mixed_landscape_stone_samples_on_ground.jpg` *(closest soil-on-ground shot)*
+- Brick / Mason Sand → `026_large_pile_of_light_sand.jpg`
+- Stone Dust → `012_pale_tan_crushed_stone_with_penny_closeup.jpg`
+- 3/4" Gravel → `004_light_gray_gravel_with_quarter_closeup.jpg`
+- Wood Chips → `015_gray_river_stones_with_golf_ball_closeup.jpg` *(no wood-chip photo — placeholder)*
+- Recycled Asphalt → `007_light_gray_crushed_rock_with_quarter_closeup.jpg`
+- Compost → `011_mixed_gray_and_white_gravel_with_coin_closeup.jpg` *(no compost photo — placeholder)*
 
-```text
-/              Home (8 bands)
-/mulch         Mulch catalog
-/stone         Stone catalog
-/additional    Loam + Sand catalog + delivery zones
-/delivery      Pickup vs delivery deep-dive
-/service-area  Towns served + map
-/about         Owner / company story
-/wbe           WBE certification
-/quote         Quote form
-/contact       Contact form + hours
-/privacy       Legal
-```
+Notes on the 3 imperfect matches (Lava Rock, Wood Chips, Compost): I'll flag each with a `// TODO: replace with real <x> photo` comment so they're easy to swap when actual shots come in.
 
-`/products` is removed (superseded by the three catalog routes).
+## 3. Home gallery marquee (`src/routes/index.tsx`)
 
-### Persistent chrome
-- **`SiteHeader`** nav: **Mulch · Stone · Additional · Delivery · Contact** + phone chip. Mobile sheet mirrors the list.
-- **`SiteFooter`** gets the full Larry block: address (Maps link), phone, email (mailto), social row, duplicated nav, hours summary, Privacy link.
+Replace the existing marquee `items` array with 12 wide/lifestyle shots that read well at `h-56 md:h-72 aspect-[4/3]`:
 
-### Home composition (8 bands)
+`017_landscape_supply_yard_with_flowers_and_material_bins`, `018_covered_garden_center_flower_display`, `021_colorful_hanging_flower_basket_closeup`, `027_outdoor_chrysanthemum_flower_display`, `020_potted_purple_and_yellow_pansies_on_patio`, `029_garden_center_tool_and_hardware_display`, `028_wall_mounted_garden_tools_and_leaf_blowers`, `031_dump_truck_unloading_black_mulch`, `033_wheel_loader_loading_black_mulch_into_dump_truck`, `034_dump_truck_pouring_red_mulch`, `036_fresh_mulch_bed_along_suburban_house`, `019_brown_dog_wearing_harness_looking_out_window` (shop-dog charm beat).
 
-| # | Band | Archetype |
-|---|---|---|
-| 1 | Hero | `HeroSection` (no rail) |
-| 2 | 4 material category cards → catalog routes | `MaterialInventorySection` (Loam + Sand both deep-link to `/additional`, matching Larry's logic) |
-| 3 | Supply story + service-area paragraph + phone CTA | `OwnerStorySection` |
-| 4 | "Our Yard" photo marquee | **NEW** `GalleryMarqueeSection` |
-| 5 | "Request a Free Quote" CTA band | compact `ContactCTASection` → `/quote` |
-| 6 | Testimonials | `TestimonialsSection` |
-| 7 | Service area list | **NEW** `ServiceAreaSection` |
-| 8 | Final contact CTA | `ContactCTASection` |
+## 4. Hero backgrounds
 
-### `GalleryMarqueeSection` (revised — real marquee, not a static strip)
+The current `HeroSection` is text-only on `bg-paper`. I'll add an optional `image?: string` prop (rendered as a low-opacity background behind the ember rail/headline, with a paper→transparent gradient overlay to preserve legibility). Wire:
 
-A horizontally scrolling band that never stops. Props: `title?`, `items: { src; alt }[]`, optional `speed` (`slow | normal | fast`).
+- `/` home → `001_dump_truck_delivering_dark_mulch.jpg`
+- `/mulch` → `022_dump_truck_bed_full_of_brown_mulch.jpg`
+- `/stone` → `016_mixed_landscape_stone_samples_on_ground.jpg`
+- `/additional` → `026_large_pile_of_light_sand.jpg`
+- `/delivery` → `031_dump_truck_unloading_black_mulch.jpg`
+- `/service-area` → `030_business_sign_and_flags_at_entrance.jpg`
+- `/about` → `032_worker_holding_bags_of_landscape_material.jpg`
 
-**Implementation**
+If the hero prop is omitted (contact/quote/wbe/privacy), nothing changes.
 
-- Outer wrapper: `overflow-hidden` + masked left/right edges (`mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent)`) so tiles fade in/out rather than hard-clipping.
-- Track: flexbox row containing the `items` array rendered **twice** back-to-back (NOT 6×3 like Larry). Two copies is the minimum required for a seamless `-50%` loop.
-- Animation: a single `@keyframes marquee-x` defined in `src/styles.css` going `transform: translateX(0)` → `translateX(-50%)`. Applied as `animation: marquee-x var(--marquee-duration) linear infinite`. Duration mapped from the `speed` prop (`slow=60s`, `normal=40s`, `fast=25s`).
-- Tile: fixed-height (`h-56 md:h-72`) hairline-bordered card with `aspect-[4/3]` image, `bg-soft` placeholder until photos are supplied. Tiles use `flex-shrink-0` so the track stays single-row.
-- Pause on hover: `hover:[animation-play-state:paused]` on the track for desktop. Pause-on-focus-within for keyboard users.
-- Accessibility: respects `prefers-reduced-motion` — the animation is disabled and the track switches to `overflow-x-auto` with snap points so the user can swipe/scroll the same images manually.
-- Rendered inside `Section tone="paper"` with no rail title (the visual content speaks for itself per the existing memory rule).
+## 5. Identity
 
-### Other new archetypes (3)
+- `035_bty_burgundy_logo.jpg` → save as `src/assets/photos/bty-logo.jpg`. **Not wired** into header/footer this pass — the current `Wordmark` component is a typographic mark and swapping it is a separate design call. I'll note its availability in the plan output so you can decide.
 
-- **`ServiceAreaSection`** — split: intro + phone CTA left, dense `MonoLabel` town chips right.
-- **`ProductCatalogSection`** — 1/2/3-col card grid; each card has image (4/3, `bg-soft` placeholder), Bebas name, Barlow description, **price** in ember + unit in `MonoLabel`, optional `stockNote` for "(when in stock)".
-- **`ContactFormSection`** — split: form (First*, Last*, Phone*, Email*, Reason `<select>` defaulting to "Please Select", Message) on the left, contact info + hours on `bg-black` on the right. Submits via `mailto:` (no backend yet). Used by `/contact` and `/quote`.
-- **`CubicYardsCalculatorSection`** — width / length / thickness inputs + Inches⇄Feet toggle → live "Cubic Yards Required". `tone="ink"`. Lives on all three catalog routes.
+## 6. Out of scope
 
-### Data files
+- No image cropping, recompression, or `srcSet` generation. Vite hashing only.
+- No lightbox on marquee or catalog tiles.
+- No logo swap in header/footer (see §5).
+- The 3 imperfect matches (Lava Rock, Wood Chips, Compost) stay as flagged placeholders rather than fabricated AI fills.
 
-**`src/data/catalog.ts`** — three typed arrays seeded from Larry's prices as clearly-marked placeholders:
+## Files touched
 
-```ts
-export type CatalogItem = { name; description; price; unit; stockNote?; image? }
-MULCH       // Brown Pine, Black Pine, Red Cedar, Hemlock Mix, Playground — all $42 /yd
-STONE       // 15 stones $42–$125 /yd (round browns marked "when in stock")
-ADDITIONAL  // ½" Loam $32, Brick Sand $68, Stone Dust $35, ¾" Gravel $35, Wood Chips $12, Asphalt $30
-DELIVERY_ZONES  // Charlton $35 → Worcester $85 + "3 yd minimum; under 3 yd adds $10"
-```
-
-**`src/data/service-area.ts`** — Holden, Princeton, Sterling, West Boylston, Rutland, Paxton, Worcester, Leominster, Boylston, Clinton, Hubbardston, Barre, Oakham, Spencer, Auburn, Shrewsbury.
-
-### Route population
-
-| Route | Composition |
-|---|---|
-| `/mulch` | Compact Hero → `ProductCatalogSection items={MULCH}` → `CubicYardsCalculatorSection` → `ContactCTASection` |
-| `/stone` | same, `items={STONE}` |
-| `/additional` | Compact Hero → `ProductCatalogSection items={ADDITIONAL}` → `DeliveryPricingSection` (zones + min-order note) → `CubicYardsCalculatorSection` → `ContactCTASection` |
-| `/delivery` | Hero → `LogisticsSplitSection` → `ProcessStepsSection` → `DeliveryPricingSection` → `ContactCTASection` |
-| `/service-area` | Hero → `ServiceAreaSection` → `ContactCTASection` |
-| `/about` | Hero → `OwnerStorySection` → `TestimonialsSection` → `ContactCTASection` |
-| `/wbe` | Hero → `OwnerStorySection` (WBE-focused) → `ContactCTASection` |
-| `/quote` | Compact Hero → `ContactFormSection` |
-| `/contact` | Compact Hero → `ContactFormSection` (full hours) → `ContactCTASection` |
-
-Every route gets its own `head()` with route-specific title, description, og:title, og:description.
-
-### Memory updates
-- Add `GalleryMarqueeSection`, `ServiceAreaSection`, `ProductCatalogSection`, `ContactFormSection`, `CubicYardsCalculatorSection`, `DeliveryPricingSection` to `mem://design/section-system`.
-- Note the marquee rule: real CSS `translateX` animation with duplicated track, edge mask, pause-on-hover, `prefers-reduced-motion` fallback to horizontal snap-scroll. Never fake it with 3× repeated static grids.
-- Allow ember accent on catalog price labels (Bebas + `text-ember`) — explicit exception to the "ember reserved for CTA/phone/stars" rule.
-
-### Out of scope this pass
-- Real photography — marquee + product cards use `bg-soft` placeholder tiles until images are supplied.
-- Backend form submission — `mailto:` only. Resend connector is already linked at workspace level for a follow-up.
-- Per-product detail pages — Larry doesn't have them; catalog cards are intentionally non-clickable spec cards.
-- Lightbox on marquee tiles.
+- **new**: `src/assets/photos/*.jpg` (37), `src/assets/photos/index.ts`
+- **edit**: `src/data/catalog.ts` (add `image` per item), `src/components/site/sections/archetypes/HeroSection.tsx` (optional `image` prop), `src/routes/index.tsx` (marquee items), `src/routes/{mulch,stone,additional,delivery,service-area,about}.tsx` (hero `image` prop)

@@ -9,6 +9,21 @@ import {
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
 import { SERVICE_AREA_TOWNS } from "@/data/service-area";
+import {
+  dumpTruckDeliveringDarkMulch,
+  landscapeSupplyYardWithFlowersAndMaterialBins,
+  coveredGardenCenterFlowerDisplay,
+  colorfulHangingFlowerBasketCloseup,
+  outdoorChrysanthemumFlowerDisplay,
+  pottedPurpleAndYellowPansiesOnPatio,
+  gardenCenterToolAndHardwareDisplay,
+  wallMountedGardenToolsAndLeafBlowers,
+  dumpTruckUnloadingBlackMulch,
+  wheelLoaderLoadingBlackMulchIntoDumpTruck,
+  dumpTruckPouringRedMulch,
+  freshMulchBedAlongSuburbanHouse,
+  brownDogWearingHarnessLookingOutWindow,
+} from "@/assets/photos";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -39,6 +54,8 @@ function HomePage() {
         body="Premium mulch, loam, stone, and sand. Woman-owned and operated. Serving Central Massachusetts with precision delivery."
         ctaLabel="Shop Mulch"
         ctaTo="/mulch"
+        image={dumpTruckDeliveringDarkMulch}
+        imageAlt="Buy The Yard truck delivering fresh dark mulch"
       />
       <MaterialInventorySection
         items={[
@@ -55,12 +72,18 @@ function HomePage() {
       />
       <GalleryMarqueeSection
         items={[
-          { alt: "Mulch piles in the yard" },
-          { alt: "Loaded delivery truck" },
-          { alt: "Stone product display" },
-          { alt: "Screened loam mountain" },
-          { alt: "Decorative river stone" },
-          { alt: "Loader at work" },
+          { src: landscapeSupplyYardWithFlowersAndMaterialBins, alt: "The Jefferson yard with material bins and flowers" },
+          { src: coveredGardenCenterFlowerDisplay, alt: "Covered garden center flower display" },
+          { src: colorfulHangingFlowerBasketCloseup, alt: "Hand-built hanging flower basket" },
+          { src: outdoorChrysanthemumFlowerDisplay, alt: "Fall mums on display" },
+          { src: pottedPurpleAndYellowPansiesOnPatio, alt: "Potted pansies on the patio" },
+          { src: gardenCenterToolAndHardwareDisplay, alt: "Garden tools and hardware on the wall" },
+          { src: wallMountedGardenToolsAndLeafBlowers, alt: "Long-handle tools and leaf blowers" },
+          { src: dumpTruckUnloadingBlackMulch, alt: "Dump truck unloading black mulch" },
+          { src: wheelLoaderLoadingBlackMulchIntoDumpTruck, alt: "Wheel loader filling a truck with mulch" },
+          { src: dumpTruckPouringRedMulch, alt: "Truck pouring red mulch into a driveway" },
+          { src: freshMulchBedAlongSuburbanHouse, alt: "Fresh mulch bed framing a home" },
+          { src: brownDogWearingHarnessLookingOutWindow, alt: "Shop dog on the job" },
         ]}
       />
       <TestimonialsSection

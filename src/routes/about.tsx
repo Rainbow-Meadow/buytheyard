@@ -5,6 +5,7 @@ import {
   TestimonialsSection,
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
+import { workerHoldingBagsOfLandscapeMaterial } from "@/assets/photos";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -37,6 +38,8 @@ function AboutPage() {
         body="Buy The Yard is a woman-owned, WBE-certified materials yard in Jefferson, MA. Built on Central Mass construction roots and a customer-first way of working."
         ctaLabel="Visit The Yard"
         ctaTo="/contact"
+        image={workerHoldingBagsOfLandscapeMaterial}
+        imageAlt="Worker holding bags of landscape material at the yard"
       />
       <OwnerStorySection
         heading={<>WBE Certified<br/>Woman-Owned</>}

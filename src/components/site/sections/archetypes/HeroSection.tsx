@@ -10,6 +10,9 @@ export interface HeroSectionProps {
   ctaLabel: string;
   ctaTo?: string;
   ctaHref?: string;
+  /** Optional background photo; rendered behind a paper→transparent gradient for legibility. */
+  image?: string;
+  imageAlt?: string;
 }
 
 export function HeroSection({
@@ -19,11 +22,28 @@ export function HeroSection({
   ctaLabel,
   ctaTo,
   ctaHref,
+  image,
+  imageAlt,
 }: HeroSectionProps) {
   return (
     <Section tone="paper">
-      <div className="flex-1 flex flex-col justify-center p-8 md:p-24 min-h-[80vh]">
-        <div className="max-w-4xl">
+      <div className="relative flex-1 flex flex-col justify-center p-8 md:p-24 min-h-[80vh] overflow-hidden">
+        {image && (
+          <>
+            <img
+              src={image}
+              alt={imageAlt ?? ""}
+              aria-hidden={imageAlt ? undefined : true}
+              className="absolute inset-0 w-full h-full object-cover opacity-40"
+              loading="eager"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-r from-paper via-paper/85 to-paper/30 md:to-transparent"
+              aria-hidden
+            />
+          </>
+        )}
+        <div className="relative max-w-4xl">
           <MonoLabel accent className="mb-4 block">{meta}</MonoLabel>
           <DisplayHeading as="h1" size="xxl" className="mb-8">
             {heading}
