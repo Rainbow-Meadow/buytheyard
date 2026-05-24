@@ -23,6 +23,10 @@ import {
   dumpTruckPouringRedMulch,
   freshMulchBedAlongSuburbanHouse,
   brownDogWearingHarnessLookingOutWindow,
+  catMulchBg,
+  catStoneBg,
+  catSandLoamBg,
+  catGardenCenterBg,
 } from "@/assets/photos";
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -59,10 +63,10 @@ function HomePage() {
       />
       <MaterialInventorySection
         items={[
-          { code: "CAT_01", name: "Mulch", description: "Double-ground, color-locked mulch. Moisture retention and weed suppression.", unit: "CUBIC YARD", to: "/mulch", icon: "mulch" },
-          { code: "CAT_02", name: "Stone", description: "Decorative and structural aggregates. Three sizes, multiple colors.", unit: "TON / CY", to: "/stone", icon: "stone" },
-          { code: "CAT_03", name: "Sand & Loam", description: "Loam, sand, stone dust, salt, compost — the supporting cast.", unit: "CUBIC YARD", to: "/additional", icon: "additional" },
-          { code: "CAT_04", name: "Garden Center", description: "Annuals, perennials, hanging baskets, mums, tools, and hardware.", unit: "AT THE YARD", to: "/garden-center", icon: "garden-center" },
+          { code: "CAT_01", name: "Mulch", description: "Double-ground, color-locked mulch. Moisture retention and weed suppression.", unit: "CUBIC YARD", to: "/mulch", icon: "mulch", image: catMulchBg, imageAlt: "Piles of brown, black, and red mulch in concrete bins" },
+          { code: "CAT_02", name: "Stone", description: "Decorative and structural aggregates. Three sizes, multiple colors.", unit: "TON / CY", to: "/stone", icon: "stone", image: catStoneBg, imageAlt: "Piles of gravel and river stone in concrete bins" },
+          { code: "CAT_03", name: "Sand & Loam", description: "Loam, sand, stone dust, salt, compost — the supporting cast.", unit: "CUBIC YARD", to: "/additional", icon: "additional", image: catSandLoamBg, imageAlt: "Piles of sand and dark loam in concrete bins" },
+          { code: "CAT_04", name: "Garden Center", description: "Annuals, perennials, hanging baskets, mums, tools, and hardware.", unit: "AT THE YARD", to: "/garden-center", icon: "garden-center", image: catGardenCenterBg, imageAlt: "Flower wagon under the wooden pergola at the yard" },
         ]}
       />
       <OwnerStorySection
