@@ -17,20 +17,16 @@ const RAIL_BORDER: Record<SectionTone, string> = {
 };
 
 export interface SectionProps {
-  index?: string | number;
-  label?: string;
+  title: string;
   tone?: SectionTone;
-  accentIndex?: boolean;
   /** Bottom hairline rule. Default true. Last section on page can pass false. */
   rule?: boolean;
   children: ReactNode;
 }
 
 export function Section({
-  index,
-  label,
+  title,
   tone = "paper",
-  accentIndex = false,
   rule = true,
   children,
 }: SectionProps) {
@@ -43,29 +39,17 @@ export function Section({
         rule ? `border-b ${railBorder}` : "",
       ].join(" ")}
     >
-      {index !== undefined && (
-        <aside
-          className={[
-            "md:w-24 shrink-0 p-6 flex flex-col justify-between",
-            "border-b md:border-b-0 md:border-r",
-            railBorder,
-          ].join(" ")}
-        >
-          <span
-            className={[
-              "font-bebas text-4xl leading-none",
-              accentIndex ? "text-ember" : "",
-            ].join(" ")}
-          >
-            {typeof index === "number" ? String(index).padStart(2, "0") : index}
-          </span>
-          {label && (
-            <span className="hidden md:block rotate-180 [writing-mode:vertical-lr] text-[10px] tracking-widest uppercase font-mono-industrial opacity-60">
-              {label}
-            </span>
-          )}
-        </aside>
-      )}
+      <aside
+        className={[
+          "md:w-24 shrink-0 p-6 flex md:items-start",
+          "border-b md:border-b-0 md:border-r",
+          railBorder,
+        ].join(" ")}
+      >
+        <span className="font-bebas uppercase leading-none tracking-widest text-2xl md:text-3xl md:[writing-mode:vertical-rl] md:rotate-180">
+          {title}
+        </span>
+      </aside>
       <div className="flex-1 min-w-0">{children}</div>
     </section>
   );
