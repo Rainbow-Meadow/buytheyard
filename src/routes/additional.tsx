@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   HeroSection,
   ProductCatalogSection,
@@ -6,7 +7,12 @@ import {
   CubicYardsCalculatorSection,
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
-import { ADDITIONAL, DELIVERY_ZONES } from "@/data/catalog";
+import {
+  catalogQueryOptions,
+  deliveryZonesQueryOptions,
+  productToCatalogItem,
+  zoneToDisplay,
+} from "@/data/catalog";
 import { largePileOfLightSand } from "@/assets/photos";
 
 export const Route = createFileRoute("/additional")({
@@ -20,10 +26,16 @@ export const Route = createFileRoute("/additional")({
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/additional" }],
   }),
+  loader: ({ context }) => {
+    context.queryClient.ensureQueryData(catalogQueryOptions);
+    context.queryClient.ensureQueryData(deliveryZonesQueryOptions);
+  },
   component: AdditionalPage,
 });
 
 function AdditionalPage() {
+  const { data: catalog } = useSuspenseQuery(catalogQueryOptions);
+  const { data: zones } = useSuspenseQuery(deliveryZonesQueryOptions);
   return (
     <main aria-label="Additional products" className="font-barlow">
       <HeroSection
@@ -35,8 +47,8 @@ function AdditionalPage() {
         image={largePileOfLightSand}
         imageAlt="Large pile of light washed sand at the yard"
       />
-      <ProductCatalogSection items={ADDITIONAL} />
-      <DeliveryPricingSection zones={DELIVERY_ZONES} />
+      <ProductCatalogSection items={catalog.additional.map(productToCatalogItem)} />
+      <DeliveryPricingSection zones={zones.map(zoneToDisplay)} />
       <CubicYardsCalculatorSection />
       <ContactCTASection
         phone="508.579.9897"

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   HeroSection,
   ServiceAreaSection,
@@ -6,7 +7,7 @@ import {
   ContactCTASection,
 } from "@/components/site/sections/archetypes";
 import { SERVICE_AREA_TOWNS } from "@/data/service-area";
-import { DELIVERY_ZONES } from "@/data/catalog";
+import { deliveryZonesQueryOptions, zoneToDisplay } from "@/data/catalog";
 import { businessSignAndFlagsAtEntrance } from "@/assets/photos";
 
 const TITLE = "Service Area — Central MA Delivery | Buy The Yard";
@@ -25,10 +26,12 @@ export const Route = createFileRoute("/service-area")({
     ],
     links: [{ rel: "canonical", href: "https://buytheyard.lovable.app/service-area" }],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(deliveryZonesQueryOptions),
   component: ServiceAreaPage,
 });
 
 function ServiceAreaPage() {
+  const { data: zones } = useSuspenseQuery(deliveryZonesQueryOptions);
   return (
     <main aria-label="Service area" className="font-barlow">
       <HeroSection
@@ -46,7 +49,7 @@ function ServiceAreaPage() {
         phone="508.579.9897"
         towns={[...SERVICE_AREA_TOWNS]}
       />
-      <DeliveryPricingSection zones={DELIVERY_ZONES} />
+      <DeliveryPricingSection zones={zones.map(zoneToDisplay)} />
       <ContactCTASection
         phone="508.579.9897"
         email="abby@btymaterial.com"
