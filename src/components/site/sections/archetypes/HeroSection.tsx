@@ -4,28 +4,26 @@ import { DisplayHeading } from "../DisplayHeading";
 import { InlineCTA } from "../InlineCTA";
 
 export interface HeroSectionProps {
-  index?: string | number;
+  title?: string;
   meta: string;
   heading: React.ReactNode;
   body: string;
   ctaLabel: string;
   ctaTo?: string;
   ctaHref?: string;
-  railLabel?: string;
 }
 
 export function HeroSection({
-  index = "01",
+  title = "YARD INTRO",
   meta,
   heading,
   body,
   ctaLabel,
   ctaTo,
   ctaHref,
-  railLabel = "TECHNICAL SPEC SHEET // 2026",
 }: HeroSectionProps) {
   return (
-    <Section index={index} label={railLabel} tone="paper">
+    <Section title={title} tone="paper">
       <div className="flex-1 flex flex-col justify-center p-8 md:p-24 min-h-[80vh]">
         <div className="max-w-4xl">
           <MonoLabel accent className="mb-4 block">{meta}</MonoLabel>

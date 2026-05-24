@@ -5,16 +5,16 @@ import { MonoLabel } from "../MonoLabel";
 export interface Testimonial { quote: string; attribution: string }
 
 export function TestimonialsSection({
-  index = "06",
+  title = "CUSTOMER FIELD LOGS",
   heading = "Customer Field Logs",
   items,
 }: {
-  index?: string | number;
+  title?: string;
   heading?: string;
   items: Testimonial[];
 }) {
   return (
-    <Section index={index} tone="paper">
+    <Section title={title} tone="paper">
       <div className="p-8 md:p-16">
         <SectionHeader heading={heading} size="md" className="p-0 mb-12" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ink border border-ink">

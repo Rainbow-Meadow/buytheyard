@@ -4,16 +4,16 @@ import { SectionHeader } from "../SectionHeader";
 export interface FAQItem { q: string; a: string }
 
 export function FAQSection({
-  index = "07",
+  title = "FIELD QUESTIONS",
   heading = "Frequently Asked Questions",
   items,
 }: {
-  index?: string | number;
+  title?: string;
   heading?: string;
   items: FAQItem[];
 }) {
   return (
-    <Section index={index} tone="paper">
+    <Section title={title} tone="paper">
       <SectionHeader heading={heading} size="md" rule />
       <div className="divide-y divide-soft">
         {items.map((it) => (

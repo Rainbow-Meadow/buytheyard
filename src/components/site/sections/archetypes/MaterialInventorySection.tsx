@@ -12,16 +12,16 @@ export interface MaterialItem {
 }
 
 export function MaterialInventorySection({
-  index = "02",
+  title = "MATERIAL INDEX",
   heading = "Material Inventory",
   items,
 }: {
-  index?: string | number;
+  title?: string;
   heading?: string;
   items: MaterialItem[];
 }) {
   return (
-    <Section index={index} tone="paper">
+    <Section title={title} tone="paper">
       <SectionHeader heading={heading} size="md" rule />
       <SectionGrid cols={4}>
         {items.map((m, i) => (

@@ -3,8 +3,7 @@ import { MonoLabel } from "../MonoLabel";
 import { DisplayHeading } from "../DisplayHeading";
 
 export interface ContactCTAProps {
-  index?: string | number;
-  eyebrow?: string;
+  title?: string;
   heading?: string;
   phone: string;
   email: string;
@@ -14,8 +13,7 @@ export interface ContactCTAProps {
 }
 
 export function ContactCTASection({
-  index = "08",
-  eyebrow = "Ready To Build?",
+  title = "GET A QUOTE",
   heading = "Get a Quote Today",
   phone,
   email,
@@ -24,10 +22,9 @@ export function ContactCTASection({
   primaryHref = "#",
 }: ContactCTAProps) {
   return (
-    <Section index={index} tone="paper" accentIndex rule={false}>
+    <Section title={title} tone="paper" rule={false}>
       <div className="flex flex-col md:flex-row">
         <div className="flex-1 p-8 md:p-24">
-          <MonoLabel className="mb-4 block">{eyebrow}</MonoLabel>
           <DisplayHeading as="h2" size="xl" className="mb-10">{heading}</DisplayHeading>
           <div className="flex flex-col md:flex-row gap-12">
             <div>
