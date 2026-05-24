@@ -1,4 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  HeroSection,
+  ContactFormSection,
+  ContactCTASection,
+} from "@/components/site/sections/archetypes";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -19,5 +24,33 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  return <main aria-label="Contact" />;
+  return (
+    <main aria-label="Contact" className="font-barlow">
+      <HeroSection
+        meta="CONTACT"
+        heading={<>Talk To Abby.<br/>Same Day.</>}
+        body="Phone is fastest when timing matters. The form lands in the same inbox — send what you need and we'll write back with pricing and a window."
+        ctaLabel="Call 508.579.9897"
+        ctaHref="tel:5085799897"
+      />
+      <ContactFormSection
+        heading={<>Send A Note</>}
+        body="Tell us what you're working on. Quote requests get a same-day reply during yard hours."
+        email="abby@btymaterial.com"
+        phone="508.579.9897"
+        address={{ line1: "2264 Main St.", line2: "Jefferson, MA 01522" }}
+        hours={[
+          { label: "Mon – Fri", value: "8:00am – 5:00pm" },
+          { label: "Saturday", value: "8:00am – 3:00pm" },
+          { label: "Sunday", value: "Closed" },
+        ]}
+      />
+      <ContactCTASection
+        phone="508.579.9897"
+        email="abby@btymaterial.com"
+        address={{ line1: "2264 Main St.", line2: "Jefferson, MA 01522" }}
+        primaryHref="/quote"
+      />
+    </main>
+  );
 }

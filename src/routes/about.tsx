@@ -1,4 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  HeroSection,
+  OwnerStorySection,
+  TestimonialsSection,
+  ContactCTASection,
+} from "@/components/site/sections/archetypes";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -23,5 +29,32 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
-  return <main aria-label="About" />;
+  return (
+    <main aria-label="About" className="font-barlow">
+      <HeroSection
+        meta="ABOUT — EST. 2016"
+        heading={<>Meet Abby.<br/>Meet The Yard.</>}
+        body="Buy The Yard is a woman-owned, WBE-certified materials yard in Jefferson, MA. Built on Central Mass construction roots and a customer-first way of working."
+        ctaLabel="Visit The Yard"
+        ctaTo="/contact"
+      />
+      <OwnerStorySection
+        heading={<>WBE Certified<br/>Woman-Owned</>}
+        body="Founded by Abby Montalto in 2016, Buy The Yard is a certified Woman Business Enterprise by the Commonwealth of Massachusetts. We bring a professional, customer-first approach to a heavy industry."
+        badges={["WBE", "MASS"]}
+      />
+      <TestimonialsSection
+        items={[
+          { quote: "The best mulch in Central Mass. Clean, consistent, and delivered exactly where I needed it.", attribution: "MARK S. / RESIDENTIAL" },
+          { quote: "Reliable logistics for our commercial landscape crews. They understand the urgency of site work.", attribution: "GREEN LANDSCAPE INC." },
+        ]}
+      />
+      <ContactCTASection
+        phone="508.579.9897"
+        email="abby@btymaterial.com"
+        address={{ line1: "2264 Main St.", line2: "Jefferson, MA 01522" }}
+        primaryHref="/quote"
+      />
+    </main>
+  );
 }
