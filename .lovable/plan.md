@@ -1,110 +1,47 @@
+# Scorched-Earth Image Removal
 
-# Sitewide Structuralist Editorial schema
+Strip every image from the repo and every reference from the code. No photos, no brandmark, no favicons, no OG cards, no PWA icons, no splash screens. Components keep their existing text fallbacks.
 
-Today every page is a stack of full-viewport `TileScreen` grids. The selected direction keeps tiles for **impact moments** (hero, products, CTAs, stats, social proof) but threads **editorial passages** between them — multi-column prose, vertical hairline rules, mono micro-labels, offset tile overlays, pull quotes, ledger-style spec rows.
+## 1. Delete asset files
 
-This is a structural change, not a re-skin. It needs new primitives, a token pass, and a page-by-page rebuild.
+- `src/assets/*.webp` (all 18 product/brand/hero/etc. webps)
+- `src/assets/source/*.webp` (all 14 source photos)
+- `src/assets/PHOTO_CREDITS.md`
+- `public/brandmark.webp`
+- `public/favicon.ico`
+- `public/apple-touch-icon.png`
+- `public/icons/*` (and the folder)
+- `public/og/*` (and the folder)
+- `public/splash/*` (and the folder)
 
-## 1. Design tokens (`src/styles.css`)
+## 2. Strip image imports + usages in code
 
-Add to the existing token set — do not replace the tile system tokens.
+For each file that imports from `@/assets/...` or references `/icons/`, `/og/`, `/splash/`, `/brandmark`, `/favicon`, `/apple-touch-icon`:
 
-- `--editorial-bg`: warm off-white (`oklch` equivalent of `#f5f2ed`).
-- `--rule`: zinc-300 hairline color used for column rules and ledger row borders.
-- New utility classes:
-  - `.font-mono-meta` — JetBrains Mono, 0.65–0.75rem, uppercase, wide tracking. For `01 / START`, `[01] AREA`, ledger keys.
-  - `.editorial-eyebrow` — red, left-rule 2px, uppercase micro-label (distinct from the existing tile `.eyebrow` which is centered/anchored).
-  - `.rule-v` / `.rule-h` — 1px column dividers.
-  - `.pull-quote` — large red-bar quote block (border-l-4 brand, condensed type).
-  - `.dropcap` — `:first-letter` lead-paragraph treatment for long-form passages.
-- Load JetBrains Mono via the existing Google Fonts link (one new family).
+- **`src/data/products.ts`** — remove all image imports; drop `image`/`imageAlt` from every product. `ProductCard` already renders the text-only fallback when `product.image` is unset.
+- **`src/components/home/CommunityTiles.tsx`** — convert image tiles to text tiles (Tile already supports text/quote variants), or remove the component if no text equivalent makes sense within tile rules. Keep the section using text-only blocks.
+- **`src/components/home/FeaturedMaterials.tsx`, `ReviewsAndCommunity.tsx`, `FaqDialogTile.tsx`, `FacebookSpotlight.tsx`, `FacebookLiveTile.tsx`, `ServiceAreaMapTile.tsx`, `DeliveryAndPricing.tsx`, `HomeBreaks.tsx`** — remove any image imports and replace image tiles with text/quote/headline tiles where used.
+- **Route files** (`index.tsx`, `about.tsx`, `contact.tsx`, `delivery.tsx`, `products.tsx`, `quote.tsx`, `service-area.tsx`, `wbe.tsx`, `privacy.tsx`) — remove asset imports, hero `<img>` elements, OG `og:image` / `twitter:image` meta tags, and any apple-touch / icon links.
+- **`src/routes/__root.tsx`** — remove `<link rel="icon">`, `apple-touch-icon`, manifest icon refs, and any default `og:image`.
+- **`src/components/site/SplashScreen.tsx`, `Wordmark.tsx`, `SiteFooter.tsx`** — remove brandmark image; Wordmark falls back to type-only.
+- **`src/components/products/ProductBuyingGuide.tsx`, `ProductImageGallery.tsx`, `ProductProjectGuide.tsx`** — strip image refs. Delete `ProductImageGallery.tsx` if it has no purpose without images.
+- **`src/components/site/Tile.tsx`** — keep the `variant: "image"` type for now but it will be unused; optionally remove the image branch in a follow-up.
+- **`src/components/ai-elements/prompt-input.tsx`** — remove any image preview/attach references that pulled from assets.
 
-The existing display/eyebrow/body utilities in the typography schema stay as-is — editorial uses them plus the new mono-meta layer.
+## 3. Public manifest + scripts
 
-## 2. New editorial primitives (`src/components/site/editorial/`)
+- **`public/site.webmanifest`** — empty the `icons` array (or delete file and remove the `<link rel="manifest">` from `__root.tsx`).
+- **`public/llms.txt`, `public/robots.txt`** — remove any image URLs.
+- **`scripts/gen-icons.mjs`, `scripts/gen-splash.mjs`, `scripts/og.mjs`, `scripts/knockout.mjs`** — delete; they exist only to produce the assets we're removing.
+- **`docs/image-catalog.md`, `docs/photo-shot-guide.md`** — delete.
 
-Tile-free composition pieces, all responsive, all token-driven:
+## 4. Verify
 
-- `EditorialSection` — outer wrapper: `max-w-7xl`, top hairline rule, `pt-16 pb-24`, optional eyebrow.
-- `EditorialColumns` — 12-col grid with named slots: `lead` (col-span-4), `body` (col-span-7), with optional vertical rule between. `bodyWide` variant becomes 3/5/3 (lead / prose / sidebar).
-- `EditorialProse` — typographic body container: dropcap on first `<p>`, 18px serif-free body, ample leading, pull-quote support.
-- `PullQuote` — red-bar block quote, condensed type, optional `cite`.
-- `LedgerList` — key/value rows with bottom hairlines and mono keys (used for "Location / Ownership / Service", "Stats at a glance", spec sheets).
-- `OffsetTile` — a single dark tile that sits negatively-translated over an editorial column on `md+`, full-flow on mobile. This is the bridge between the two layers.
-- `FigureCard` — captioned image with mono caption label (`FIGURE 01.A`).
+- `rg "@/assets|/assets/source|/icons/|/og/|/splash/|brandmark|apple-touch|favicon|\\.webp|\\.png|\\.jpg"` returns no hits in `src/` or `public/`.
+- Build passes; preview renders with text fallbacks across home, products, about, delivery, contact, service-area, quote, wbe.
+- Browser tab shows no favicon, PWA install shows no icon — expected per "truly everything."
 
-All primitives use existing semantic tokens; no raw hex.
+## Notes
 
-## 3. Tile system — keep, narrow its job
-
-The `Tile` / `TileScreen` / `TileRules` machinery stays. Its job narrows to **impact bands**:
-
-- `pageHero` — hero+stat tile composition (every route's top fold).
-- A new layout `productGrid4` (or reuse `section02`) for product tile strips.
-- CTA bands ("Call Abby", "Request Quote", "Delivery rules") become 2- or 3-tile compressed bands instead of full-viewport screens.
-
-What goes away from tiles: long explainer screens like "Ordering rhythm", "Built from the yard up", "Quantity confidence", "Local proof". Those become `EditorialSection`s.
-
-No tile primitive is renamed or deleted. `TileScreen` keeps `section01..05` layouts so nothing breaks mid-migration.
-
-## 4. Page rebuilds
-
-Each route gets the same rhythm: **Impact → Editorial → Impact → Editorial → Impact CTA**. No page is purely tiles, no page is purely prose.
-
-### `/` (home)
-1. Hero tile band (existing pageHero — 8/4 split with stat tiles).
-2. **Editorial: "Ordering rhythm"** — 4/1/7 columns, three numbered steps in 2 columns of the right side, dark `OffsetTile` quote overlapping the middle.
-3. Product tile strip — 4 squares, full-width gap-1.
-4. **Editorial: "Built from the yard up"** — 4/5/3, ledger sidebar on left, dropcap prose in the middle, founder FigureCard right.
-5. Closing CTA tile band (phone + quote, 2-up).
-
-### `/products`
-1. Hero tile band (reused).
-2. **Editorial: "Shop by project"** — narrative lead with a `LedgerList` of project types, replacing the current 6-tile "project guides" screen.
-3. Category tile carousel (existing pattern, compressed to one screen).
-4. **Editorial: "Quantity confidence"** — prose explainer with mono spec callouts and an offset `1 yd` stat tile.
-5. CTA band.
-
-### `/about`
-1. Hero tile band.
-2. **Editorial: "Roots"** — replaces the current Roots tile screen entirely. 4/5/3 with founder photo, dropcap prose about Abby + CMSC, ledger of "Year founded / Ownership / Yard / Family business".
-3. PullQuote band.
-4. **Editorial: certifications + community** — LedgerList of WBE / HIC / DOT numbers + a community paragraph.
-5. CTA band.
-
-### `/delivery`, `/service-area`, `/contact`, `/quote`
-Same pattern — keep hero tile + CTA tile bookends, convert mid-page tile screens to `EditorialSection`s with ledger lists for rules, fees, hours, towns. Forms (`/quote`, `/contact`) sit inside an editorial column with a sidebar ledger of "what to include".
-
-## 5. Memory + house-style updates
-
-Existing memories that need to update:
-- `mem://index.md` Core: relax "Tiles follow the Size/Tone/Variant/Action matrix" to "Tile system rules apply inside tile bands; editorial sections do not use tiles."
-- `mem://design/anchored-house-style.md`: scope the "anchored composition language" rule to **tile bands only**. Editorial sections are a parallel composition language with their own primitives.
-- Add `mem://design/editorial-layer.md`: documents `EditorialSection`, columns ratios, mono-meta usage, pull-quote rules, ledger row pattern, dropcap rule (only on first prose paragraph of a section), and the **Impact → Editorial → Impact** page rhythm.
-
-## 6. What does not change
-
-- Brand colors (kraft, zinc-950, red brand), the wordmark, header, footer.
-- Tile component API. Existing tile copy/lengths stay within their cells.
-- Routing, data, server functions, products data.
-- The headline/subtext line-limit rule still applies in both layers.
-
-## 7. Sequencing
-
-```text
-1. tokens + Google Fonts (JetBrains Mono)              — styles.css
-2. editorial primitives in src/components/site/editorial/
-3. home page rebuild                                    — proves the pattern
-4. memory updates                                       — locks the new house style
-5. products + about rebuilds
-6. delivery / service-area / contact / quote rebuilds
-```
-
-Each page rebuild is independently shippable — the tile screens it replaces are deleted only after the editorial section renders cleanly at mobile + desktop.
-
-## Technical notes
-
-- No new dependencies. JetBrains Mono via the existing Fonts link tag in `__root.tsx`.
-- Editorial sections are normal scroll sections — they do NOT use `100svh` viewport locking. Only tile bands keep that behavior.
-- Mobile collapses every multi-column editorial layout to a single column; the offset tile becomes inline.
-- All new files are presentation-only; no server-function or data changes.
+- This is irreversible from the repo side; assets would need to be re-uploaded to restore.
+- The brand will visually degrade — no logo image, no favicon, no social share previews. Confirmed intent.
