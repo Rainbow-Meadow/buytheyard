@@ -29,11 +29,11 @@ const TILE: Record<"light" | "regular" | "dense", number> = {
 
 const GRADIENT: Record<"bottom" | "right" | "radial", string> = {
   bottom:
-    "bg-gradient-to-t from-paper via-paper/85 to-paper/35",
+    "bg-gradient-to-t from-paper/90 via-paper/55 to-paper/15",
   right:
-    "bg-gradient-to-r from-paper via-paper/90 to-paper/40 md:via-paper/75 md:to-paper/10",
+    "bg-gradient-to-r from-paper/90 via-paper/55 to-paper/15 md:to-transparent",
   radial:
-    "bg-[radial-gradient(ellipse_at_center,rgba(245,243,238,0.35)_0%,rgba(245,243,238,0.7)_60%,var(--paper)_100%)]",
+    "bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0)_55%,var(--paper)_100%)]",
 };
 
 /**
