@@ -87,7 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0c0c0e" },
       { title: "Buy The Yard — Mulch, Stone, Sand & Loam · Jefferson, MA" },
-      { name: "description", content: "Woman-owned materials yard on 122A in Jefferson, MA. Mulch, stone, sand, loam, gravel, and a garden center. Pickup or delivery across Central Mass. Call 508-579-9897." },
+      { name: "description", content: "Woman-owned materials yard on 122A in Jefferson, MA. Mulch, stone, sand, loam, gravel, and a garden center. Pickup or delivery across Central Mass." },
       { name: "author", content: "Buy The Yard" },
       { property: "og:title", content: "Buy The Yard — Mulch, Stone, Sand & Loam · Jefferson, MA" },
       { property: "og:description", content: "Woman-owned materials yard on 122A in Jefferson, MA. Mulch, stone, sand, loam, and a garden center. Loading trucks for Central Mass since 2016." },

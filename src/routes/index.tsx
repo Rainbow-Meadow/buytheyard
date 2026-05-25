@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Family-run materials yard on 122A in Jefferson, MA. Mulch, stone, sand, loam, and a flower wagon out front. Pickup or delivery across Central Mass. Call 508-579-9897.",
+          "Family-run materials yard on 122A in Jefferson, MA. Mulch, stone, sand, loam, and a flower wagon out front. Pickup or delivery across Central Mass.",
       },
       { property: "og:title", content: "Buy The Yard — On 122A in Jefferson, MA" },
       {

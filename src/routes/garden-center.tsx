@@ -19,8 +19,8 @@ import {
 export const Route = createFileRoute("/garden-center")({
   head: () => ({
     meta: [
-      { title: "Garden Center — Hanging Baskets, Mums, Annuals · Buy The Yard" },
-      { name: "description", content: "The flower wagon out front of the yard on 122A in Jefferson, MA. Hand-built hanging baskets, annuals, perennials, fall mums, and the tools to plant them." },
+      { title: "Garden Center — Baskets, Mums & Annuals · Buy The Yard" },
+      { name: "description", content: "Flower wagon out front in Jefferson, MA. Hand-built hanging baskets, annuals, perennials, fall mums, and garden tools." },
       { property: "og:title", content: "Garden Center — Buy The Yard" },
       { property: "og:description", content: "Hand-built hanging baskets, annuals, fall mums, and garden tools on the wagon out front in Jefferson, MA." },
       { property: "og:url", content: "https://buytheyard.lovable.app/garden-center" },
