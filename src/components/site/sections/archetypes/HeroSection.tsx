@@ -30,7 +30,7 @@ export function HeroSection({
   imagePosition = "object-center",
 }: HeroSectionProps) {
   const background: SectionBackground = image
-    ? { kind: "photo", src: image, alt: imageAlt, position: imagePosition, gradient: "right" }
+    ? { kind: "photo", src: image, alt: imageAlt, position: imagePosition, gradient: "right", priority: true }
     : { kind: "scatter", density: "regular", tint: "ink" };
   return (
     <Section tone="paper" background={background}>

@@ -12,6 +12,8 @@ export type SectionBackground =
       gradient?: "bottom" | "right" | "radial";
       /** Photo opacity (Tailwind opacity class). Default opacity-70. */
       opacityClass?: string;
+      /** Mark this image as the LCP candidate (eager + high fetchpriority). */
+      priority?: boolean;
     }
   | {
       kind: "scatter";
@@ -73,6 +75,7 @@ export function SectionBackdrop({
     const pos = background.position ?? "object-center";
     const grad = GRADIENT[background.gradient ?? "bottom"];
     const op = background.opacityClass ?? "opacity-70";
+    const priority = background.priority ?? false;
     return (
       <Fragment>
         <img
@@ -80,7 +83,9 @@ export function SectionBackdrop({
           alt={background.alt ?? ""}
           aria-hidden={background.alt ? undefined : true}
           className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${op} ${pos}`}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding={priority ? "sync" : "async"}
         />
         <div
           aria-hidden
