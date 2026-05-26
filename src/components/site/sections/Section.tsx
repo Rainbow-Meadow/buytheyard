@@ -17,6 +17,13 @@ const RAIL_BORDER: Record<SectionTone, string> = {
   black: "border-paper/20",
 };
 
+const RAIL_CHIP: Record<SectionTone, string> = {
+  paper: "bg-ink text-paper",
+  soft: "bg-ink text-paper",
+  ink: "bg-paper text-ink",
+  black: "bg-paper text-ink",
+};
+
 export interface SectionProps {
   title?: string;
   tone?: SectionTone;
@@ -42,6 +49,7 @@ export function Section({
   children,
 }: SectionProps) {
   const railBorder = RAIL_BORDER[tone];
+  const railChip = RAIL_CHIP[tone];
   const allowsBackdrop = tone === "paper" || tone === "soft";
   const bg: SectionBackground = allowsBackdrop && background ? background : { kind: "none" };
   const showBackdrop = bg.kind !== "none";
@@ -65,7 +73,14 @@ export function Section({
             railBorder,
           ].join(" ")}
         >
-          <span className="font-bebas uppercase leading-none tracking-widest text-2xl md:text-3xl md:[writing-mode:vertical-rl] md:rotate-180">
+          <span
+            className={[
+              "inline-flex items-center rounded-full px-3 py-1.5",
+              "font-bebas uppercase leading-none tracking-widest text-2xl md:text-3xl",
+              "md:[writing-mode:vertical-rl] md:rotate-180",
+              railChip,
+            ].join(" ")}
+          >
             {title}
           </span>
         </aside>
