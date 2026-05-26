@@ -34,7 +34,7 @@ export function HeroSection({
     : { kind: "scatter", density: "regular", tint: "ink" };
   return (
     <Section tone="paper" background={background}>
-      <div className="relative flex-1 flex flex-col justify-center p-8 md:p-24 min-h-[calc(100svh-4rem)]">
+      <div className="relative flex-1 flex flex-col justify-end p-8 md:p-24 min-h-[calc(100svh-4rem)]">
         <div className="relative max-w-4xl">
           <MonoLabel accent className="mb-4 block">{meta}</MonoLabel>
           <DisplayHeading as="h1" size="xxl" className="mb-8">
