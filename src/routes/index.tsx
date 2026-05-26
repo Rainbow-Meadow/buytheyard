@@ -27,6 +27,14 @@ import {
   catStoneBg,
   catSandLoamBg,
   catGardenCenterBg,
+  loaderOperatorWithMulchPile,
+  hangingBasketsRoadsideDisplay,
+  btyDeliveryTruckAtYard,
+  pottingSoilUnderGardenTent,
+  redDumpTruckLoadedWithMulch,
+  trailerUnloadingBlackMulchPile,
+  outdoorPatioFurnitureDisplay,
+  sweet100TomatoSeedling,
 } from "@/assets/photos";
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -77,6 +85,14 @@ function HomePage() {
       />
       <GalleryMarqueeSection
         items={[
+          { src: loaderOperatorWithMulchPile, alt: "Owner in the wheel loader cab at the mulch pile" },
+          { src: hangingBasketsRoadsideDisplay, alt: "Hanging flower baskets lined up along 122A" },
+          { src: btyDeliveryTruckAtYard, alt: "BTY delivery truck pulling out of the yard" },
+          { src: pottingSoilUnderGardenTent, alt: "Potting soil and hanging baskets under the garden tent" },
+          { src: redDumpTruckLoadedWithMulch, alt: "Red dump truck loaded with fresh mulch" },
+          { src: trailerUnloadingBlackMulchPile, alt: "Trailer unloading a pile of black mulch" },
+          { src: outdoorPatioFurnitureDisplay, alt: "Outdoor patio furniture set in front of the shop" },
+          { src: sweet100TomatoSeedling, alt: "Sweet 100 tomato seedling from the garden center" },
           { src: landscapeSupplyYardWithFlowersAndMaterialBins, alt: "The Jefferson yard with material bins and flowers" },
           { src: coveredGardenCenterFlowerDisplay, alt: "Covered garden center flower display" },
           { src: colorfulHangingFlowerBasketCloseup, alt: "Hand-built hanging flower basket" },
